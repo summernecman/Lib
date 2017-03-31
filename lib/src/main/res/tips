@@ -1,0 +1,11 @@
+File name suffix	Drawable state
+_normal	(default state)
+_pressed	state_pressed
+_focused	state_focused
+_disabled	state_enabled (false)
+_checked	state_checked
+_selected	state_selected
+_hovered	state_hovered
+_checkable	state_checkable
+_activated	state_activated
+_windowfocused	state_window_focused

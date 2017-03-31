@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@drawable/drawable_dialog_border">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="温馨提示"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="你确定要注销吗?"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:layout_marginTop="10dp"
+        android:background="@color/darkgray"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:id="@+id/ok"
+            android:padding="10dp"
+            android:text="确定"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:textColor="#00BFFF"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:background="@color/darkgray"
+            android:layout_width="1px"
+            android:layout_height="wrap_content" />
+
+        <TextView
+
+            android:id="@+id/cancle"
+            android:padding="10dp"
+            android:text="取消"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:textColor="#00BFFF"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

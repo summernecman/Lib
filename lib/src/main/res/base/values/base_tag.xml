@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="name" type="id" />
+    <item name="groupposition" type="id" />
+    <item name="childposition" type="id" />
+    <item name="position" type="id" />
+    <item name="type" type="id" />
+    <item name="data" type="id" />
+    <item name="uri" type="id" />
+    <item name="a" type="id" />
+    <item name="b" type="id" />
+    <item name="c" type="id" />
+    <item name="d" type="id" />
+    <item name="e" type="id" />
+    <item name="f" type="id" />
+    <item name="g" type="id" />
+</resources>

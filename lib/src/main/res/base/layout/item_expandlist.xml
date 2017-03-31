@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.summer.lib.view.refreshlayout.MaterialRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:isLoadMore="false"
+        app:overlay="false"
+        app:progress_colors="@array/material_colors"
+        app:wave_color="@color/color_base"
+        app:wave_height_type="normal"
+        app:progress_size_type="normal"
+        android:background="@color/color_bg_refresh"
+        app:wave_show="false">
+
+        <ExpandableListView
+            android:background="@color/white"
+            android:id="@+id/expandlistview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.summer.lib.view.refreshlayout.MaterialRefreshLayout>
+</LinearLayout>

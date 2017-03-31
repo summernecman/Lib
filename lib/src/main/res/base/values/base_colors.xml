@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_base">@color/white</color>
+    <color name="color_base_dark">#4CAF50</color>
+    <color name="color_base_statusbar">#76BC55</color>
+    <color name="color_base_bottommenu">#76BC55</color>
+    <color name="color_base_graybg">#EEEEEE</color>
+    <color name="color_base_txt_gray">@color/color_grey_600</color>
+
+    <color name="color_bg_refresh">#333333</color>
+
+    <color name="common_main_color">#ffffff</color>
+
+    <color name="color_dark_red">#f59f9f</color>
+
+    <color name="color_base_nurse">@color/color_light_blue_500</color>
+
+    <color name="color_divide_line">#aaaaaa</color>
+
+    <color name="color_block_back">@color/color_grey_200</color>
+
+</resources>

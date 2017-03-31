@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DashView">
+        <attr name="dashgap" format="dimension" />
+        <attr name="hashwidth" format="dimension" />
+        <attr name="dashcolor" format="reference" />
+    </declare-styleable>
+</resources>

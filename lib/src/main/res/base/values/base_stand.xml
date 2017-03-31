@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="dimen_text_size_stand">16sp</dimen>
+    <dimen name="dimen_ll_paddmar_top_stand">13sp</dimen>
+    <dimen name="dimen_ll_paddmar_bottom_stand">13sp</dimen>
+    <dimen name="dimen_ll_paddmar_left_stand">10sp</dimen>
+    <dimen name="dimen_ll_paddmar_right_stand">10sp</dimen>
+    <dimen name="dimens_base_title">46dp</dimen>
+    <dimen name="dimens_base_bottom">54dp</dimen>
+    <dimen name="dimens_base_item">40dp</dimen>
+    <dimen name="dimen_1">1dp</dimen>
+
+
+    <dimen name="dimen_icon_arraw_height">13sp</dimen>
+    <dimen name="dimen_icon_arraw_width">13sp</dimen>
+
+
+    <color name="color_divide_block">#c8c7cc</color>
+    <color name="color_view_divider">#55303131</color>
+
+
+    <string name="appname">nurse</string>
+
+
+    <integer name="integer_time_long">2000</integer>
+    <integer name="integer_time_short_a">400</integer>
+    <integer name="integer_time_short_300">300</integer>
+    <integer name="integer_time_short">400</integer>
+</resources>

@@ -1,0 +1,31 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
+
+
+    <style name="swdialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+
+
+    <style name="animstyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/anim_push_left_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_push_right_out</item>
+    </style>
+
+    <style name="fadein" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/anim_scale_in_dialog</item>
+        <item name="android:windowExitAnimation">@anim/anim_push_right_out</item>
+    </style>
+
+
+</resources>

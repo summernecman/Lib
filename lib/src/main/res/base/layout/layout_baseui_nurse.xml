@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/frag_base_root">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clickable="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/dimens_base_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/frag_base_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <com.summer.lib.view.base.BottomFinishView
+                    android:id="@+id/finishview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/icon_gou"
+                    android:alpha="0.5"
+                    android:id="@+id/iv_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/frag_base_titlecontainer"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_base_title">
+
+                <include
+                    android:id="@+id/ic_base_title"
+                    layout="@layout/item_title" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

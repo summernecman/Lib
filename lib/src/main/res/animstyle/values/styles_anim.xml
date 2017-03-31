@@ -1,0 +1,13 @@
+<resources>
+
+    <style name="sheetstyle_more" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/anim_trans_up_more</item>
+        <item name="android:windowExitAnimation">@anim/anim_trans_down_more</item>
+    </style>
+
+    <style name="sheetstyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/anim_trans_up</item>
+        <item name="android:windowExitAnimation">@anim/anim_trans_down</item>
+    </style>
+
+</resources>

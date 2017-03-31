@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/frag_base_root">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clickable="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/dimens_base_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/frag_base_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <com.summer.view.refreshlayout.MaterialRefreshLayout
+
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/refresh_boot"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:isLoadMore="false"
+                    app:wave_color="@color/color_base"
+                    app:progress_size_type="normal"
+                    android:background="@drawable/icon_bg_frg"
+                    app:overlay="false"
+                    app:wave_show="false"
+                    app:progress_colors="@array/material_colors"
+                    app:wave_height_type="normal"
+                    app:progress_show_circle_backgroud="false" />
+
+                <com.summer.lib.view.base.BottomFinishView
+                    android:id="@+id/finishview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/icon_gou"
+                    android:alpha="0.5"
+                    android:id="@+id/iv_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/frag_base_titlecontainer"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_base_title">
+
+                <include
+                    android:id="@+id/ic_base_title"
+                    layout="@layout/item_title" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
