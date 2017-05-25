@@ -5,7 +5,7 @@ package com.siweisoft.app.bean.uibean;
 import android.content.Context;
 import android.view.ViewGroup;
 
-import com.summer.lib.R;
+import com.siweisoft.app.R;
 import com.summer.lib.bean.uibean.BaseUIBean;
 
 public class MainUIBean extends BaseUIBean{
@@ -13,6 +13,6 @@ public class MainUIBean extends BaseUIBean{
 
 
     public MainUIBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.layout_baseui_withouttitle);
+        super(context, parent, R.layout.activity_main);
     }
 }

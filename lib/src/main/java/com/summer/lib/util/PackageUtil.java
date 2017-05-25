@@ -47,7 +47,11 @@ public class PackageUtil {
                 List<ApplicationInfo> infoss = new ArrayList<>();
                 switch (type) {
                     case "全部":
-                        infoss.addAll(infos);
+                        for (ApplicationInfo applicationInfo : infos) {
+                            if (context.getPackageManager().getLaunchIntentForPackage(applicationInfo.packageName) != null) {
+                                infoss.add(applicationInfo);
+                            }
+                        }
                         break;
                     case "系统":
                         for (ApplicationInfo applicationInfo : infos) {

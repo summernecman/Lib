@@ -9,7 +9,7 @@ import butterknife.ButterKnife;
 /**
  * Created by ${viwmox} on 2016-06-19.
  */
-public class BaseUIOpe<A extends BaseUIBean> extends BaseOpe {
+public class BaseUIOpe<A extends BaseUIBean> implements BaseOpe {
 
     protected  A uiBean;
 

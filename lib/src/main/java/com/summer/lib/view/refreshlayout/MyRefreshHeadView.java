@@ -38,7 +38,7 @@ public class MyRefreshHeadView extends RelativeLayout implements MaterialHeadLis
 
     private void init(Context context) {
         this.context = context;
-        RelativeLayout.LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         params.addRule(RelativeLayout.CENTER_IN_PARENT);
         view = LayoutInflater.from(context).inflate(R.layout.layout_refresh_head, null);
         addView(view, params);

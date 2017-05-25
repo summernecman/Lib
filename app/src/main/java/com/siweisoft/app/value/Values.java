@@ -5,7 +5,6 @@ package com.siweisoft.app.value;
 import android.graphics.Color;
 
 import com.summer.lib.constant.color.ColorConstant;
-import com.summer.lib.view.chart.linearchat.bean.databean.Value;
 
 public class Values {
 

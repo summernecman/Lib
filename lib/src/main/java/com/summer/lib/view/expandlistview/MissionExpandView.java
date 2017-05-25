@@ -45,7 +45,7 @@ public class MissionExpandView extends RelativeLayout implements AbsListView.OnS
 
         View view = LayoutInflater.from(context).inflate(R.layout.item_expandlist, null);
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandlistview);
-        addView(view, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        addView(view, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         getExpandableListView().setGroupIndicator(null);
         getExpandableListView().setOnScrollListener(this);
@@ -68,7 +68,7 @@ public class MissionExpandView extends RelativeLayout implements AbsListView.OnS
 
     public void setHeadView(Context context, int id) {
         headView = LayoutInflater.from(context).inflate(id, null);
-        addView(headView, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        addView(headView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         headView.setOnClickListener(this);
 
     }

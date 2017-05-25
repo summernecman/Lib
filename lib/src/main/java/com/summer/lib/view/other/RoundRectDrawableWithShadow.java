@@ -104,7 +104,7 @@ public class RoundRectDrawableWithShadow extends Drawable {
         setShadowSize(shadowSize, maxShadowSize);
 
         RoundRectDrawableWithShadow.sRoundRectHelper
-                = new RoundRectDrawableWithShadow.RoundRectHelper() {
+                = new RoundRectHelper() {
             @Override
             public void drawRoundRect(Canvas canvas, RectF bounds, float cornerRadius,
                                       Paint paint) {

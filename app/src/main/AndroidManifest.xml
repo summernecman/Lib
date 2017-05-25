@@ -11,8 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/mytheme">
 
-        <activity android:name=".MainActivity">
-            <intent-filter >
+        <activity android:name=".main.MainActivity">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.HOME"/>
