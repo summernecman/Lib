@@ -18,14 +18,12 @@ import butterknife.Unbinder;
 /**
  * Created by summer on 2016/4/16 0016 16:03.
  */
-public abstract class BaseUIFrag<A extends BaseUIOpe,B extends BaseDAOpe> extends BaseFrg implements View.OnClickListener{
+public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> extends BaseFrg implements View.OnClickListener, View.OnLongClickListener {
 
-
-    Unbinder unbinder;
-
-    BaseOpes<A,B> opes;
 
     protected int index;
+    Unbinder unbinder;
+    BaseOpes<A,B> opes;
 
     public BaseUIFrag() {
 
@@ -73,6 +71,11 @@ public abstract class BaseUIFrag<A extends BaseUIOpe,B extends BaseDAOpe> extend
     @Override
     public void onClick(View v) {
 
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        return true;
     }
 
     public void onResult(int req, Bundle bundle) {

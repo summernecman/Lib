@@ -27,5 +27,6 @@ public class MainActivity extends AppActivity<MainUIOpe,MainDAOpe>{
             ROOTVG.setBackgroundDrawable(WallpaperManager.getInstance(activity).getDrawable());
         }
         getSupportFragmentManager().beginTransaction().add(R.id.ll_base_root,new HomeFrag()).commit();
+
     }
 }

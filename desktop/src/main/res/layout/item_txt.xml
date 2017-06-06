@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+    <com.summer.lib.view.textview.YRTextView
+        android:id="@+id/txt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:lineSpacingExtra="5dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/app"
+        android:text="2323fdf费大幅度发
+fdsfs范德萨发的"
+        android:textScaleX="1.2"
+        android:textSize="14sp" />
+
+</LinearLayout>

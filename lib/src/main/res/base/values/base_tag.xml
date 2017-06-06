@@ -4,6 +4,7 @@
     <item name="groupposition" type="id" />
     <item name="childposition" type="id" />
     <item name="position" type="id" />
+    <item name="context" type="id" />
     <item name="type" type="id" />
     <item name="data" type="id" />
     <item name="uri" type="id" />
