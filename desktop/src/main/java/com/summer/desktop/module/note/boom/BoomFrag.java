@@ -24,7 +24,7 @@ public class BoomFrag extends BaseUIFrag<BoomUIOpe, BoomDAOpe> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getOpes().getUiOpe().init(fragment, this);
+        getOpes().getUiOpe().init(fragment, this, onFinishListener);
     }
 
     @Override

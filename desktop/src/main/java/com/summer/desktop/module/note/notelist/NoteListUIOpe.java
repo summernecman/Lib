@@ -36,7 +36,7 @@ public class NoteListUIOpe extends BaseUIOpe<NewsFragUIBean> {
 
     public void init(Fragment fragment, View.OnClickListener listener, View.OnLongClickListener longClickListener) {
         getUiBean().getRecycle().setLayoutManager(new LinearLayoutManager(context));
-        getUiBean().getRecycle().addItemDecoration(new MyItemDecoration2(context, 1));
+        getUiBean().getRecycle().addItemDecoration(new MyItemDecoration2(context, 3));
         getUiBean().getNotelist().setOnLongClickListener(longClickListener);
         parentNote = (Note) fragment.getArguments().getSerializable("data");
     }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Looper;
 import android.widget.Toast;
 
-
 import com.summer.lib.aplication.LibAplication;
 import com.summer.lib.base.activity.BaseActivity;
 import com.summer.lib.util.LogUtil;
@@ -55,7 +54,7 @@ public class CrashHander implements Thread.UncaughtExceptionHandler {
                 e.printStackTrace();
             }
             uncaughtExceptionHandler.uncaughtException(thread, ex);
-            restart(thread, ex);
+            //restart(thread, ex);
         }
     }
 

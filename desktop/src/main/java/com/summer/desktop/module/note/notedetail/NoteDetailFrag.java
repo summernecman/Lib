@@ -42,7 +42,7 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
                 Toast.makeText(getActivity(), "Clicked " + index, Toast.LENGTH_SHORT).show();
                 switch (index) {
                     case 0:
-                        IntentUtil.getInstance().photoShowFromphone(fragment.getActivity(), 0);
+                        IntentUtil.getInstance().photoShowFromphone(fragment, 0);
                         break;
                     case 1:
                         getOpes().getDaOpe().bean.getData().add(new NoteDetail(NoteDetail.TXT, gson.toJson(new TxtNote("new\\n"))));

@@ -1,11 +1,10 @@
 package com.summer.lib.base.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 
 import com.summer.lib.aplication.LibAplication;
+import com.summer.lib.exception.exception.CrashHander;
 
 
 /**
@@ -13,12 +12,10 @@ import com.summer.lib.aplication.LibAplication;
  * 封装一些常用的activity方法
  * Created by summer on 2016/4/15 0015 16:26.
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends FragmentActivity {
 
-    protected Handler handler = new Handler();
-
+    //方便引用的自身对象
     protected FragmentActivity activity;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +24,6 @@ public class BaseActivity extends AppCompatActivity {
         LibAplication application = (LibAplication) getApplication();
         application.getActivityHashMap().put(getClass().getSimpleName(), activity);
         application.getActivities().add(activity);
-        //  CrashHander.getInstance().init(this);
+        CrashHander.getInstance().init(this);
     }
 }

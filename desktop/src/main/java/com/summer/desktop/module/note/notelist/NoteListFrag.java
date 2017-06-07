@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.GsonNoteBean;
 import com.summer.desktop.bean.dabean.Note;
+import com.summer.desktop.bean.dabean.TitleDABean;
 import com.summer.desktop.module.note.boom.BoomFrag;
 import com.summer.desktop.module.note.noteslist.NotesListFrag;
 import com.summer.desktop.module.note.rename.RenameFrag;
@@ -18,6 +19,8 @@ import com.summer.desktop.util.FragList;
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.interf.OnFinishListener;
 import com.summer.lib.base.ope.BaseOpes;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Random;
 
@@ -51,7 +54,6 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
         bundle.putInt("position", (Integer) v.getTag(R.id.position));
         noteListssFrag.setArguments(bundle);
         FragList.getInstance().add(getActivity(), noteListssFrag);
-
 
     }
 
@@ -141,5 +143,12 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
             }
         });
         return true;
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().post(new TitleDABean(""));
     }
 }

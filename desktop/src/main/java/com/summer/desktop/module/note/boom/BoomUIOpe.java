@@ -12,9 +12,10 @@ import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.uibean.BoomFragUIBean;
+import com.summer.lib.base.interf.OnFinishListener;
 import com.summer.lib.base.ope.BaseUIOpe;
 
-import org.greenrobot.eventbus.EventBus;
+import java.io.Serializable;
 
 public class BoomUIOpe extends BaseUIOpe<BoomFragUIBean> {
 
@@ -24,7 +25,7 @@ public class BoomUIOpe extends BaseUIOpe<BoomFragUIBean> {
     }
 
 
-    public void init(final Fragment fragment, View.OnClickListener onClickListener) {
+    public void init(final Fragment fragment, View.OnClickListener onClickListener, final OnFinishListener onFinishListener) {
         getUiBean().itemView.setOnClickListener(onClickListener);
         getUiBean().getCircleMenu().setMainMenu(Color.parseColor("#CDCDCD"), R.mipmap.ic_launcher_round, R.drawable.app)
                 .addSubMenu(Color.parseColor("#258CFF"), R.drawable.note)
@@ -35,7 +36,9 @@ public class BoomUIOpe extends BaseUIOpe<BoomFragUIBean> {
 
                     @Override
                     public void onMenuSelected(int index) {
-                        EventBus.getDefault().post(new Boom(index));
+                        if (onFinishListener != null) {
+                            onFinishListener.onFinish(index);
+                        }
                     }
 
                 }).setOnMenuStatusChangeListener(new OnMenuStatusChangeListener() {
@@ -61,8 +64,20 @@ public class BoomUIOpe extends BaseUIOpe<BoomFragUIBean> {
 
         public int position;
 
+        public Serializable serializable;
+
+        public String location;
+
         public Boom(int position) {
             this.position = position;
+        }
+
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
         }
     }
 }

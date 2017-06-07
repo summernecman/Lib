@@ -22,11 +22,11 @@ public class MainActivity extends AppActivity<MainUIOpe,MainDAOpe>{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            ROOTVG.setBackground(WallpaperManager.getInstance(activity).getDrawable());
+            ACT_ROOT_VIEW.setBackground(WallpaperManager.getInstance(activity).getDrawable());
         }else{
-            ROOTVG.setBackgroundDrawable(WallpaperManager.getInstance(activity).getDrawable());
+            ACT_ROOT_VIEW.setBackgroundDrawable(WallpaperManager.getInstance(activity).getDrawable());
         }
-        getSupportFragmentManager().beginTransaction().add(R.id.ll_base_root,new HomeFrag()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.act_base_root, new HomeFrag()).commit();
 
     }
 }

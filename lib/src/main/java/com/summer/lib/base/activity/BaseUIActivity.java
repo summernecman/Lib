@@ -6,13 +6,10 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.google.gson.Gson;
 import com.summer.lib.R;
-import com.summer.lib.base.interf.uiinterf.IUICreate;
 import com.summer.lib.base.ope.BaseDAOpe;
 import com.summer.lib.base.ope.BaseOpes;
 import com.summer.lib.base.ope.BaseUIOpe;
-import com.summer.lib.bean.uibean.BaseUIBean;
 import com.summer.lib.constant.color.ColorConstant;
 import com.summer.lib.util.StatusBarUtil;
 
@@ -26,9 +23,7 @@ public abstract class BaseUIActivity<A extends BaseUIOpe,B extends BaseDAOpe> ex
     /**
      * 添加内容界面的容器
      */
-    protected ViewGroup ROOTVG;
-
-    protected Gson gson = new Gson();
+    protected ViewGroup ACT_ROOT_VIEW;
 
     BaseOpes<A,B> opes;
 
@@ -40,9 +35,9 @@ public abstract class BaseUIActivity<A extends BaseUIOpe,B extends BaseDAOpe> ex
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.layout_baseui_withouttitle);
         StatusBarUtil.getInstance().setStatusBarColorResId(activity, ColorConstant.COLOR_STATUS);
-        ROOTVG = (ViewGroup) findViewById(R.id.ll_base_root);
-        if(getOpes().getUiOpe()!=null && getOpes().getUiOpe().getUiBean().itemView!=null){
-            ROOTVG.addView(getOpes().getUiOpe().getUiBean().itemView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        ACT_ROOT_VIEW = (ViewGroup) findViewById(R.id.act_base_root);
+        if(getOpes().getUiOpe()!=null && getOpes().getUiOpe().getUiBean().itemView != null) {
+            ACT_ROOT_VIEW.addView(getOpes().getUiOpe().getUiBean().itemView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
         ButterKnife.bind(activity);
     }
@@ -74,7 +69,7 @@ public abstract class BaseUIActivity<A extends BaseUIOpe,B extends BaseDAOpe> ex
         }
     }
 
-    public ViewGroup getROOTVG() {
-        return ROOTVG;
+    public ViewGroup getACT_ROOT_VIEW() {
+        return ACT_ROOT_VIEW;
     }
 }

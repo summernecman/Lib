@@ -7,8 +7,6 @@ import android.view.View;
 
 import com.summer.lib.R;
 
-import butterknife.OnClick;
-
 /**
  * Created by ${viwmox} on 2016-08-29.
  */
@@ -33,7 +31,9 @@ public abstract class AppRecycleAdapter<T extends RecyclerView.ViewHolder> exten
 
     @Override
     public void onClick(View v) {
-        onClickListener.onClick(v);
+        if (onClickListener != null) {
+            onClickListener.onClick(v);
+        }
     }
 
     public void setOnClickListener(View.OnClickListener onClickListener) {

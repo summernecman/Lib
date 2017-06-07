@@ -8,13 +8,13 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-
-//import com.siweisoft.imga.constant.ValueConstant;
-
+import android.support.v4.app.Fragment;
 
 import com.summer.lib.constant.ValueConstant;
 
 import java.io.File;
+
+//import com.siweisoft.imga.constant.ValueConstant;
 
 /**
  * 跳转
@@ -33,6 +33,9 @@ public class IntentUtil {
         return instance;
     }
 
+    public static Uri getUri() {
+        return uri;
+    }
 
     /**
      * 拍照返回图片
@@ -78,7 +81,6 @@ public class IntentUtil {
         return f;
     }
 
-
     public void IntentTo(Context context, String pkg) {
         PackageInfo packageInfo = null;
         try {
@@ -108,8 +110,10 @@ public class IntentUtil {
         activity.startActivityForResult(getImage, requstCode);
     }
 
-
-    public static Uri getUri() {
-        return uri;
+    public void photoShowFromphone(Fragment fragment, int requstCode) {
+        Intent getImage = new Intent(Intent.ACTION_GET_CONTENT);
+        getImage.addCategory(Intent.CATEGORY_OPENABLE);
+        getImage.setType("image/*");
+        fragment.startActivityForResult(getImage, requstCode);
     }
 }

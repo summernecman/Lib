@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.summer.desktop.bean.dabean.TitleDABean;
 import com.summer.desktop.module.home.main.IPostion;
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.ope.BaseOpes;
@@ -35,7 +36,12 @@ public class NoteMainFrag extends BaseUIFrag<NoteMainUIOpe, NoteMainDAOpe> {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMesage(MessageEvent event) {
-        getOpes().getUiOpe().onclick(event.position, getActivity(), (IPostion) getActivity());
+        getOpes().getUiOpe().onclick(getActivity(), (IPostion) getActivity());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMesage(TitleDABean event) {
+        getOpes().getUiOpe().setTitle();
     }
 
     @Override

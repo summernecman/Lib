@@ -42,7 +42,7 @@ public class NoteMainUIOpe extends BaseUIOpe<MainActUIBean> {
         FragList.getInstance().add(activity, noteListssFrag);
     }
 
-    public void onclick(int position, FragmentActivity activity, IPostion iPostion) {
+    public void onclick(FragmentActivity activity, IPostion iPostion) {
 
         if ((System.currentTimeMillis() - aLong) < 1000) {
             if (iPostion.getNowPostion() % 2 == 1) {
@@ -52,6 +52,13 @@ public class NoteMainUIOpe extends BaseUIOpe<MainActUIBean> {
             aLong = 0;
         }
         aLong = System.currentTimeMillis();
+    }
+
+    public void remove(FragmentActivity activity, IPostion iPostion) {
+        if (iPostion.getNowPostion() % 2 == 1) {
+            Toast.makeText(getApplicationContext(), "double kill", Toast.LENGTH_SHORT).show();
+            FragList.getInstance().removeTop(activity);
+        }
     }
 
 

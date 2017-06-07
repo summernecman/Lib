@@ -3,7 +3,9 @@ package com.summer.desktop.module.home.main;
 //by summer on 2017-06-07.
 
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.summer.desktop.util.FragList;
 import com.summer.lib.base.activity.BaseUIActivity;
 import com.summer.lib.base.ope.BaseOpes;
 import com.summer.lib.view.bottommenu.MessageEvent;
@@ -47,5 +49,13 @@ public class HomeActivity extends BaseUIActivity<HomeUIOpe, HomeDAOpe> implement
     @Override
     public int getNowPostion() {
         return getOpes().getUiOpe().getUiBean().getHomeViewpager().getCurrentItem();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getNowPostion() % 2 == 1) {
+            Toast.makeText(getApplicationContext(), "double kill", Toast.LENGTH_SHORT).show();
+            FragList.getInstance().removeTop(activity);
+        }
     }
 }

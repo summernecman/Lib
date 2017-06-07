@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.summer.lib.R;
 
 import java.io.Serializable;
@@ -27,7 +26,7 @@ public class BaseUIBean extends RecyclerView.ViewHolder implements Serializable 
         super(convertView);
         this.context = context;
         itemView.setTag(this);
-        rootV = itemView.findViewById(R.id.root);
+        rootV = itemView.findViewById(R.id.container);
         ButterKnife.bind(this, itemView);
     }
 
@@ -35,7 +34,7 @@ public class BaseUIBean extends RecyclerView.ViewHolder implements Serializable 
         super(parent==null?LayoutInflater.from(context).inflate(convertViewId,null):LayoutInflater.from(context).inflate(convertViewId, parent, false));
         this.context = context;
         itemView.setTag(this);
-        rootV = itemView.findViewById(R.id.root);
+        rootV = itemView.findViewById(R.id.container);
         ButterKnife.bind(this, itemView);
     }
 
