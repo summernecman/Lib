@@ -18,7 +18,7 @@ public class ImageItemUIBean extends BaseUIBean {
     ImageView image;
 
     public ImageItemUIBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.item_image);
+        super(context, parent, R.layout.item_note_image);
     }
 
     public ImageView getImage() {

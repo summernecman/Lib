@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label,android:theme">
-        <activity android:name=".module.main.MainActivity">
+        <activity android:name=".module.home.main.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -18,7 +18,7 @@ public class RootActUIBean extends BaseUIBean {
     LinearLayout r;
 
     public RootActUIBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.act_root);
+        super(context, parent, R.layout.act_note_root);
     }
 
     public LinearLayout getR() {

@@ -17,7 +17,7 @@ public class TxtItemUIBean extends BaseUIBean {
     YRTextView txt;
 
     public TxtItemUIBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.item_txt);
+        super(context, parent, R.layout.item_note_txt);
     }
 
     public YRTextView getTxt() {

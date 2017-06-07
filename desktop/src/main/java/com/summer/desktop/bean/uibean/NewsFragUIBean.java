@@ -21,7 +21,7 @@ public class NewsFragUIBean extends BaseUIBean {
     RelativeLayout notelist;
 
     public NewsFragUIBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.frag_news);
+        super(context, parent, R.layout.frag_note_news);
     }
 
     public RecyclerView getRecycle() {

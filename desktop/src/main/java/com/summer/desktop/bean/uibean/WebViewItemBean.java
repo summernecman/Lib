@@ -21,7 +21,7 @@ public class WebViewItemBean extends BaseUIBean {
     TextView textView;
 
     public WebViewItemBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.item_webview);
+        super(context, parent, R.layout.item_note_webview);
     }
 
     public WebView getWebview() {

@@ -18,6 +18,6 @@ public class MenuFragUIBean extends BaseUIBean {
     TextView text;
 
     public MenuFragUIBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.frag_menu);
+        super(context, parent, R.layout.frag_note_menu);
     }
 }

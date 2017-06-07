@@ -14,11 +14,11 @@ import butterknife.BindView;
 public class MainFragUIBean extends BaseUIBean {
 
 
-    @BindView(R.id.container)
+    @BindView(R.id.main_viewpager)
     ViewPager container;
 
     public MainFragUIBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.frag_main);
+        super(context, parent, R.layout.frag_note_main);
     }
 
     public ViewPager getContainer() {

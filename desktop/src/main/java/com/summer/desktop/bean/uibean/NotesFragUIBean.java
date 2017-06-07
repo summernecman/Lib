@@ -18,7 +18,7 @@ public class NotesFragUIBean extends BaseUIBean {
     ViewPager container;
 
     public NotesFragUIBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.frag_notes);
+        super(context, parent, R.layout.frag_note_notes);
     }
 
     public ViewPager getContainer() {

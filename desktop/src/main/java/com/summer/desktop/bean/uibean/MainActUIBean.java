@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.summer.desktop.R;
 import com.summer.lib.bean.uibean.BaseUIBean;
-import com.summer.lib.view.bottommenu.BottomItemView;
 
 import butterknife.BindView;
 
@@ -20,11 +19,9 @@ public class MainActUIBean extends BaseUIBean {
     TextView toptitle;
     @BindView(R.id.root)
     RelativeLayout root;
-    @BindView(R.id.viewpager)
-    BottomItemView viewpager;
 
     public MainActUIBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.act_main);
+        super(context, parent, R.layout.act_note_main);
     }
 
     public TextView getToptitle() {
@@ -33,9 +30,5 @@ public class MainActUIBean extends BaseUIBean {
 
     public RelativeLayout getRoot() {
         return root;
-    }
-
-    public BottomItemView getViewpager() {
-        return viewpager;
     }
 }

@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.summer.desktop.bean.dabean.NoteDetail;
-import com.summer.desktop.module.notedetail.NoteDetailAdapter;
+import com.summer.desktop.module.note.notedetail.NoteDetailAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;

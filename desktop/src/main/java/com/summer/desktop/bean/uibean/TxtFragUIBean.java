@@ -21,7 +21,7 @@ public class TxtFragUIBean extends BaseUIBean {
     BoomMenuButton bmb;
 
     public TxtFragUIBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.frag_txt);
+        super(context, parent, R.layout.frag_note_txt);
     }
 
     public LinearLayout getTxtroot() {

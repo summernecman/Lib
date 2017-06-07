@@ -23,7 +23,7 @@ public class NoteItemUIBean extends BaseUIBean {
     TextView date;
 
     public NoteItemUIBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.item_note);
+        super(context, parent, R.layout.item_note_note);
     }
 
     public ImageView getImage() {

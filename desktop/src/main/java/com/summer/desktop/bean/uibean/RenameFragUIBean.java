@@ -21,7 +21,7 @@ public class RenameFragUIBean extends BaseUIBean {
     ImageView delete;
 
     public RenameFragUIBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.frag_rename);
+        super(context, parent, R.layout.frag_note_rename);
     }
 
     public EditText getTxt() {

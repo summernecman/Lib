@@ -21,7 +21,7 @@ public class BoomFragUIBean extends BaseUIBean {
     RelativeLayout boomfrag;
 
     public BoomFragUIBean(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.frag_boom);
+        super(context, parent, R.layout.frag_note_boom);
     }
 
     public RelativeLayout getBoomfrag() {
