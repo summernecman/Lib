@@ -57,4 +57,12 @@ public class AppsFrag extends BaseUIFrag<AppsUIOpe, AppsDAOpe> {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getOpes().getDaOpe().saveSort();
+    }
+
+
 }

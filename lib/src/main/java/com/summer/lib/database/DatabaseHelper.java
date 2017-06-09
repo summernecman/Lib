@@ -24,6 +24,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private DBListener dbListener;
 
+    public DatabaseHelper(Context context, String databaseName, SQLiteDatabase.CursorFactory factory, int databaseVersion) {
+        super(context, databaseName, factory, databaseVersion);
+    }
+
     private DatabaseHelper(Context context) {
         super(context, TABLE_NAME, null, 2);
     }

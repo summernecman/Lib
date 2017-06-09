@@ -20,7 +20,7 @@ public class AppsUIOpe extends BaseUIOpe<AppsFragUIBean> {
     public void initList(ArrayList<AppDBBean> appDBBeen) {
         getUiBean().init();
         getUiBean().loadData(new AppsAdapter(context, appDBBeen));
-        getUiBean().move();
+        getUiBean().move(appDBBeen);
     }
 
 

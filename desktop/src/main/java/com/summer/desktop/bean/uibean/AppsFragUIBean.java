@@ -9,9 +9,13 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.ViewGroup;
 
 import com.summer.desktop.R;
+import com.summer.desktop.bean.dbbean.AppDBBean;
 import com.summer.lib.base.adapter.AppRecycleAdapter;
 import com.summer.lib.bean.uibean.BaseUIBean;
 import com.summer.lib.view.ItemDecoration.MyItemDecoration;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 import butterknife.BindView;
 
@@ -34,7 +38,7 @@ public class AppsFragUIBean extends BaseUIBean {
         getAppRecycle().setAdapter(adapter);
     }
 
-    public void move() {
+    public void move(final ArrayList<AppDBBean> appDBBeen) {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
             @Override
             public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
@@ -56,12 +60,18 @@ public class AppsFragUIBean extends BaseUIBean {
                 int toPosition = target.getAdapterPosition();//得到目标ViewHolder的position
                 if (fromPosition < toPosition) {
                     for (int i = fromPosition; i < toPosition; i++) {
-                        //Collections.swap(results, i, i + 1);
+                        Collections.swap(appDBBeen, i, i + 1);
                     }
+//                    for (int i = fromPosition; i < toPosition; i++) {
+//                        appDBBeen.get(i).setPosition(i);
+//                    }
                 } else {
                     for (int i = fromPosition; i > toPosition; i--) {
-                        //Collections.swap(results, i, i - 1);
+                        Collections.swap(appDBBeen, i, i - 1);
                     }
+//                    for (int i = fromPosition; i > toPosition; i--) {
+//                        appDBBeen.get(i).setPosition(i);
+//                    }
                 }
                 recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
                 return true;

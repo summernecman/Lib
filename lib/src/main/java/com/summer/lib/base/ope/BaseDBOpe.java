@@ -25,4 +25,14 @@ public class BaseDBOpe<T> {
             e.printStackTrace();
         }
     }
+
+    public BaseDBOpe(Context context, DatabaseHelper helper, T t) {
+        this.context = context;
+        this.helper = helper;
+        try {
+            daoOpe = helper.getDao(t.getClass());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -56,6 +56,8 @@ public class HomeActivity extends BaseUIActivity<HomeUIOpe, HomeDAOpe> implement
         if (getNowPostion() % 2 == 1) {
             Toast.makeText(getApplicationContext(), "double kill", Toast.LENGTH_SHORT).show();
             FragList.getInstance().removeTop(activity);
+        } else {
+            super.onBackPressed();
         }
     }
 }

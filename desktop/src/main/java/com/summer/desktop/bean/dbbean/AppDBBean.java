@@ -17,6 +17,7 @@ public class AppDBBean extends BaseDbBean {
     public static final String APPNAME = "appName";
     public static final String PACKAGENAME = "packageName";
     public static final String ICONPATH = "iconPath";
+    public static final String POSITION = "position";
     @DatabaseField(columnName = GROUPNAME)
     private String groupName;
     @DatabaseField(columnName = APPNAME)
@@ -25,6 +26,8 @@ public class AppDBBean extends BaseDbBean {
     private String packageName;
     @DatabaseField(columnName = ICONPATH)
     private String iconPath;
+    @DatabaseField(columnName = POSITION)
+    private Integer position;
 
     private Drawable icon;
 
@@ -75,5 +78,13 @@ public class AppDBBean extends BaseDbBean {
 
     public void setIconPath(String iconPath) {
         this.iconPath = iconPath;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 }

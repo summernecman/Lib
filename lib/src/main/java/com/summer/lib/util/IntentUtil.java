@@ -82,6 +82,9 @@ public class IntentUtil {
     }
 
     public void IntentTo(Context context, String pkg) {
+        if (context == null || pkg == null) {
+            return;
+        }
         PackageInfo packageInfo = null;
         try {
             packageInfo = context.getPackageManager().getPackageInfo(pkg, 0);
