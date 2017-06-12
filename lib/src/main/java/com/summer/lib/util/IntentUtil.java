@@ -10,9 +10,11 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 
+import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.summer.lib.constant.ValueConstant;
 
 import java.io.File;
+import java.util.ArrayList;
 
 //import com.siweisoft.imga.constant.ValueConstant;
 
@@ -119,4 +121,37 @@ public class IntentUtil {
         getImage.setType("image/*");
         fragment.startActivityForResult(getImage, requstCode);
     }
+
+    public void photosShowFromphone(Fragment fragment, int requstCode) {
+        Intent intent = new Intent(fragment.getContext(), ImageGridActivity.class);
+        intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, false); // 是否是直接打开相机
+        fragment.startActivityForResult(intent, ValueConstant.CODE_REQUSET);
+    }
+
+    public void share(Fragment fragment, ArrayList<String> str) {
+        ArrayList<Uri> imageUris = new ArrayList<Uri>();
+        for (int i = 0; i < imageUris.size(); i++) {
+            Uri imageUri = Uri.fromFile(new File(str.get(i)));
+            imageUris.add(imageUri);
+        }
+
+        Intent intent3 = new Intent();
+        intent3.setAction(Intent.ACTION_SEND_MULTIPLE);
+        intent3.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
+        intent3.setType("image/*");
+        fragment.startActivity(Intent.createChooser(intent3, "share"));
+    }
+
+    public void shareImage(Fragment fragment, String str) {
+        Intent intent2 = new Intent(Intent.ACTION_SEND);
+        Uri uri = Uri.fromFile(new File(str));
+        intent2.putExtra(Intent.EXTRA_STREAM, uri);
+        intent2.setType("image/*");
+        fragment.startActivity(Intent.createChooser(intent2, "share"));
+    }
+
+
+
+
+
 }

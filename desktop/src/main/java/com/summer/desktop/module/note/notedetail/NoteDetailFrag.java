@@ -5,15 +5,20 @@ package com.summer.desktop.module.note.notedetail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Toast;
 
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
+import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.BoomMsg;
 import com.summer.desktop.bean.dabean.NoteDetail;
 import com.summer.desktop.bean.dabean.TxtNote;
+import com.summer.desktop.module.note.circlemenu.CircleMenuFrag;
 import com.summer.lib.base.fragment.BaseUIFrag;
+import com.summer.lib.base.interf.OnFinishListener;
 import com.summer.lib.base.ope.BaseOpes;
+import com.summer.lib.bean.databean.EventBean;
 import com.summer.lib.util.IntentUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -22,8 +27,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import static com.summer.desktop.util.ViewCreater.gson;
 
-public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe> {
-
+public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe> implements OnFinishListener {
 
     @Override
     public BaseOpes<NoteDetailUIOpe, NoteDetailDAOpe> createOpes() {
@@ -34,19 +38,18 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getOpes().getDaOpe().init(fragment);
-        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean);
+        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean, this);
         getOpes().getUiOpe().init(fragment, getOpes().getDaOpe().bean, new OnBMClickListener() {
             @Override
             public void onBoomButtonClick(int index) {
-                // When the boom-button corresponding this builder is clicked.
                 Toast.makeText(getActivity(), "Clicked " + index, Toast.LENGTH_SHORT).show();
                 switch (index) {
                     case 0:
-                        IntentUtil.getInstance().photoShowFromphone(fragment, 0);
+                        IntentUtil.getInstance().photosShowFromphone(fragment, 0);
                         break;
                     case 1:
                         getOpes().getDaOpe().bean.getData().add(new NoteDetail(NoteDetail.TXT, gson.toJson(new TxtNote("new\\n"))));
-                        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean);
+                        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean, NoteDetailFrag.this);
                         break;
                     case 3:
 //                        control.dc.bean.getData().add(new NoteDetail(NoteDetail.LINK,gson.toJson(new LinkNote("http://www.baidu.com"))));
@@ -60,26 +63,23 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onboom(BoomMsg boomMsg) {
         getOpes().getDaOpe().bean.getData().remove(boomMsg.postion);
-        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean);
+        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean, this);
     }
 
+
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         int[] ints = new int[]{0};
         getOpes().getDaOpe().update(ints, getOpes().getDaOpe().bean, getOpes().getDaOpe().note);
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -89,6 +89,21 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
             return;
         }
         getOpes().getDaOpe().onresult(data, getOpes().getDaOpe().bean);
-        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean);
+        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean, this);
+    }
+
+    @Override
+    public void onFinish(final Object o) {
+        final CircleMenuFrag circleMenuFrag = new CircleMenuFrag();
+        FragmentTransaction transaction = fragment.getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.root, circleMenuFrag);
+        transaction.commit();
+        circleMenuFrag.setOnFinishListener(new OnFinishListener() {
+            @Override
+            public void onFinish(Object b) {
+                getOpes().getDaOpe().dealItemLongClick(fragment, (EventBean) o, (int) b);
+
+            }
+        });
     }
 }

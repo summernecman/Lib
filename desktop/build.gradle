@@ -39,6 +39,7 @@ dependencies {
     //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
     compile 'cn.bmob.android:http-legacy:1.0'
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.lzy.widget:imagepicker:0.5.5'
     compile project(':lib')
 }
 repositories {

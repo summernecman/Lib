@@ -1,4 +1,4 @@
-package com.summer.desktop.module.note.boom;
+package com.summer.desktop.module.note.circlemenu;
 
 //by summer on 2017-06-06.
 
@@ -12,13 +12,13 @@ import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.interf.OnFinishListener;
 import com.summer.lib.base.ope.BaseOpes;
 
-public class BoomFrag extends BaseUIFrag<BoomUIOpe, BoomDAOpe> {
+public class CircleMenuFrag extends BaseUIFrag<CircleMenuUIOpe, CricleMenuDAOpe> {
 
     OnFinishListener onFinishListener;
 
     @Override
-    public BaseOpes<BoomUIOpe, BoomDAOpe> createOpes() {
-        return new BaseOpes<>(new BoomUIOpe(activity), new BoomDAOpe(activity));
+    public BaseOpes<CircleMenuUIOpe, CricleMenuDAOpe> createOpes() {
+        return new BaseOpes<>(new CircleMenuUIOpe(activity), new CricleMenuDAOpe(activity));
     }
 
     @Override
@@ -31,7 +31,7 @@ public class BoomFrag extends BaseUIFrag<BoomUIOpe, BoomDAOpe> {
     public void onClick(View v) {
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.anim_push_left_in, R.anim.anim_push_right_out);
-        transaction.remove(BoomFrag.this);
+        transaction.remove(CircleMenuFrag.this);
         transaction.commit();
     }
 

@@ -12,7 +12,6 @@ import com.summer.desktop.R;
 import com.summer.desktop.bean.dbbean.AppDBBean;
 import com.summer.lib.base.adapter.AppRecycleAdapter;
 import com.summer.lib.bean.uibean.BaseUIBean;
-import com.summer.lib.view.ItemDecoration.MyItemDecoration;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +30,7 @@ public class AppsFragUIBean extends BaseUIBean {
 
     public void init() {
         getAppRecycle().setLayoutManager(new GridLayoutManager(context, 4));
-        getAppRecycle().addItemDecoration(new MyItemDecoration(context, 2));
+        //getAppRecycle().addItemDecoration(new MyItemDecoration(context, 2));
     }
 
     public void loadData(AppRecycleAdapter adapter) {

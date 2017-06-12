@@ -12,6 +12,7 @@ import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.bean.uibean.NewsFragUIBean;
 import com.summer.lib.base.ope.BaseUIOpe;
 import com.summer.lib.view.ItemDecoration.MyItemDecoration2;
+import com.summer.lib.view.refreshlayout.MaterialRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +35,12 @@ public class NoteListUIOpe extends BaseUIOpe<NewsFragUIBean> {
         super(context, new NewsFragUIBean(context, null));
     }
 
-    public void init(Fragment fragment, View.OnClickListener listener, View.OnLongClickListener longClickListener) {
+    public void init(Fragment fragment, View.OnClickListener listener, View.OnLongClickListener longClickListener, MaterialRefreshListener refreshListener) {
         getUiBean().getRecycle().setLayoutManager(new LinearLayoutManager(context));
         getUiBean().getRecycle().addItemDecoration(new MyItemDecoration2(context, 3));
         getUiBean().getNotelist().setOnLongClickListener(longClickListener);
         parentNote = (Note) fragment.getArguments().getSerializable("data");
+        getUiBean().getRefresh().setMaterialRefreshListener(refreshListener);
     }
 
     public void getData(final View.OnClickListener listener, final View.OnLongClickListener onLongClickListener) {

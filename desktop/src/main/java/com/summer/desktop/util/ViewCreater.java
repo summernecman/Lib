@@ -25,6 +25,7 @@ public class ViewCreater {
     public static View create(Context context, ArrayList<NoteDetail> data) {
 
         RecyclerView recyclerView = new RecyclerView(context);
+        recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         recyclerView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         if (data == null) {
@@ -32,28 +33,6 @@ public class ViewCreater {
         }
         recyclerView.setAdapter(new NoteDetailAdapter(context, data));
         attachToItemTouch(recyclerView, data);
-//        for (int i = 0; i < data.size(); i++) {
-//            switch (data.get(i).getType()) {
-//                case NoteDetail.IMAGE:
-//                    ImageView imageView = new ImageView(context);
-//                    imageView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//                    imageView.setScaleType(ImageView.ScaleType.CENTER);
-//                    ImageNote imageNote = gson.fromJson(data.get(i).getData(),ImageNote.class);
-//                    Glide.with(context).asBitmap().load(imageNote.getSrc()).into(imageView);
-//                    //ImageLoader.getInstance().displayImage(imageNote.getSrc(),imageView);
-//                    linearLayout.addView(imageView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//                    imageView.setTag(R.id.position, i);
-//                    break;
-//                case NoteDetail.TXT:
-//                    EditText textView = new EditText(context);
-//                    textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//                    linearLayout.addView(textView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//                    TxtNote txtNote = gson.fromJson(data.get(i).getData(),TxtNote.class);
-//                    textView.setText(txtNote.getTxt());
-//                    textView.setTag(R.id.position, i);
-//                    break;
-//            }
-//        }
         return recyclerView;
 
     }

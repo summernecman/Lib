@@ -12,7 +12,7 @@ import com.summer.lib.bean.uibean.BaseUIBean;
 
 import butterknife.BindView;
 
-public class BoomFragUIBean extends BaseUIBean {
+public class CirlceMenuFragUIBean extends BaseUIBean {
 
 
     @BindView(R.id.circle_menu)
@@ -20,7 +20,7 @@ public class BoomFragUIBean extends BaseUIBean {
     @BindView(R.id.boomfrag)
     RelativeLayout boomfrag;
 
-    public BoomFragUIBean(Context context, ViewGroup parent) {
+    public CirlceMenuFragUIBean(Context context, ViewGroup parent) {
         super(context, parent, R.layout.frag_note_boom);
     }
 

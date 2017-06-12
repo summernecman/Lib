@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 
 import com.summer.desktop.R;
 import com.summer.lib.bean.uibean.BaseUIBean;
+import com.summer.lib.view.other.AppMaterialRefreshLayout;
 
 import butterknife.BindView;
 
@@ -19,6 +20,8 @@ public class NewsFragUIBean extends BaseUIBean {
     RecyclerView recycle;
     @BindView(R.id.notelist)
     RelativeLayout notelist;
+    @BindView(R.id.refresh)
+    AppMaterialRefreshLayout refresh;
 
     public NewsFragUIBean(Context context, ViewGroup parent) {
         super(context, parent, R.layout.frag_note_news);
@@ -30,5 +33,9 @@ public class NewsFragUIBean extends BaseUIBean {
 
     public RelativeLayout getNotelist() {
         return notelist;
+    }
+
+    public AppMaterialRefreshLayout getRefresh() {
+        return refresh;
     }
 }

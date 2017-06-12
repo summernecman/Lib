@@ -3,7 +3,6 @@ package com.summer.desktop.module.home.main;
 //by summer on 2017-06-07.
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.summer.desktop.util.FragList;
 import com.summer.lib.base.activity.BaseUIActivity;
@@ -54,10 +53,10 @@ public class HomeActivity extends BaseUIActivity<HomeUIOpe, HomeDAOpe> implement
     @Override
     public void onBackPressed() {
         if (getNowPostion() % 2 == 1) {
-            Toast.makeText(getApplicationContext(), "double kill", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "double kill", Toast.LENGTH_SHORT).show();
             FragList.getInstance().removeTop(activity);
         } else {
-            super.onBackPressed();
+            //super.onBackPressed();
         }
     }
 }

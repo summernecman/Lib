@@ -4,21 +4,24 @@ package com.summer.desktop.module.note.notedetail;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
-import com.summer.desktop.R;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
 import com.summer.desktop.bean.dabean.GsonNoteBean;
 import com.summer.desktop.bean.dabean.ImageNote;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.bean.dabean.NoteDetail;
 import com.summer.lib.base.ope.BaseDAOpe;
+import com.summer.lib.bean.databean.EventBean;
+import com.summer.lib.util.GsonUtil;
+import com.summer.lib.util.IntentUtil;
 import com.summer.lib.util.LogUtil;
 import com.summer.lib.util.NullUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import cn.bmob.v3.datatype.BmobFile;
@@ -50,7 +53,7 @@ public class NoteDetailDAOpe extends BaseDAOpe {
     }
 
     public void update(final int[] i, final GsonNoteBean bean, final Note note) {
-        if (bean.getData() == null || bean.getData().size() == 0) {
+        if (bean.getData() == null) {
             return;
         }
         if (i[0] == 0) {
@@ -76,9 +79,12 @@ public class NoteDetailDAOpe extends BaseDAOpe {
             });
             return;
         }
+        if (bean.getData().size() == 0) {
+            return;
+        }
         if (bean.getData().get(i[0]).getType().equals(NoteDetail.IMAGE)) {
             final ImageNote imageNote = gson.fromJson(bean.getData().get(i[0]).getData(), ImageNote.class);
-            if (NullUtil.isStrEmpty(imageNote.getSrc())) {
+            if (NullUtil.isStrEmpty(imageNote.getSrc()) && !NullUtil.isStrEmpty(imageNote.getLocalSrc())) {
                 java.io.File file = new java.io.File(imageNote.getLocalSrc().substring("file://".length(), imageNote.getLocalSrc().length()));
                 file.exists();
                 final BmobFile bmobFile = new BmobFile(file);
@@ -110,19 +116,46 @@ public class NoteDetailDAOpe extends BaseDAOpe {
     }
 
     public void onresult(Intent data, GsonNoteBean bean) {
-        if (ed != null && bean.getData() != null && bean.getData().size() > 0) {
-            int i = (int) ed.getTag(R.id.position);
-            java.io.File file = new java.io.File(data.getDataString().substring("file://".length(), data.getDataString().length()));
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            Bitmap bitmap = BitmapFactory.decodeFile(file.getPath(), options);
-            bean.getData().add(i, new NoteDetail(NoteDetail.IMAGE, gson.toJson(new ImageNote(data.getDataString(), options.outWidth, options.outHeight))));
-        } else {
-            java.io.File file = new java.io.File(data.getDataString().substring("file://".length(), data.getDataString().length()));
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            Bitmap bitmap = BitmapFactory.decodeFile(file.getPath(), options);
-            bean.getData().add(new NoteDetail(NoteDetail.IMAGE, gson.toJson(new ImageNote(data.getDataString(), options.outWidth, options.outHeight))));
+        if (data == null) {
+            return;
+        }
+        ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+        for (int i = 0; images != null && i < images.size(); i++) {
+            bean.getData().add(new NoteDetail(NoteDetail.IMAGE, gson.toJson(new ImageNote("file://" + images.get(i).path, images.get(i).width, images.get(i).height))));
+        }
+//        if (ed != null && bean.getData() != null && bean.getData().size() > 0) {
+//            int i = (int) ed.getTag(R.id.position);
+//            java.io.File file = new java.io.File(data.getDataString().substring("file://".length(), data.getDataString().length()));
+//            BitmapFactory.Options options = new BitmapFactory.Options();
+//            options.inJustDecodeBounds = true;
+//            Bitmap bitmap = BitmapFactory.decodeFile(file.getPath(), options);
+//            bean.getData().add(i, new NoteDetail(NoteDetail.IMAGE, gson.toJson(new ImageNote(data.getDataString(), options.outWidth, options.outHeight))));
+//        } else {
+//            java.io.File file = new java.io.File(data.getDataString().substring("file://".length(), data.getDataString().length()));
+//            BitmapFactory.Options options = new BitmapFactory.Options();
+//            options.inJustDecodeBounds = true;
+//            Bitmap bitmap = BitmapFactory.decodeFile(file.getPath(), options);
+//            bean.getData().add(new NoteDetail(NoteDetail.IMAGE, gson.toJson(new ImageNote(data.getDataString(), options.outWidth, options.outHeight))));
+//        }
+    }
+
+    public void dealItemLongClick(Fragment fragment, EventBean msg, int index) {
+        switch (index) {
+            case 0:
+                ArrayList<NoteDetail> data1 = (ArrayList<NoteDetail>) msg.msg;
+                int position1 = (int) msg.msg2;
+                ImageNote imageNote = GsonUtil.getInstance().fromJson(data1.get(position1).getData(), ImageNote.class);
+                String url = imageNote.getLocalSrc().substring("file://".length(), imageNote.getLocalSrc().length());
+                File file = new File(url);
+                LogUtil.E(url + "------" + file.exists());
+                IntentUtil.getInstance().shareImage(fragment, file.getPath());
+                break;
+            case 2:
+                ArrayList<NoteDetail> data = (ArrayList<NoteDetail>) msg.msg;
+                int position = (int) msg.msg2;
+                data.remove(position);
+                msg.onFinish();
+                break;
         }
     }
 }

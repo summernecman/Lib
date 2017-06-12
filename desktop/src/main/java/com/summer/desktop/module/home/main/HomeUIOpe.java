@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 
 import com.summer.desktop.bean.uibean.MainHomeUIBean;
 import com.summer.lib.base.ope.BaseUIOpe;
+import com.summer.lib.util.LogUtil;
 import com.summer.lib.view.bottommenu.BottomItemView;
 
 public class HomeUIOpe extends BaseUIOpe<MainHomeUIBean> {
@@ -27,7 +28,10 @@ public class HomeUIOpe extends BaseUIOpe<MainHomeUIBean> {
 
             @Override
             public void onPageSelected(int position) {
-                getUiBean().getBottomViewpager().setCurrentItem(10 + position);
+                if ((getUiBean().getBottomViewpager().getCurrentItem() % 2) != position) {
+                    getUiBean().getBottomViewpager().setCurrentItem(getUiBean().getBottomViewpager().getCurrentItem() + position * 2 - 1);
+                    LogUtil.E("getBottomViewpager" + (getUiBean().getBottomViewpager().getCurrentItem() + position * 2 - 1));
+                }
             }
 
             @Override
@@ -39,6 +43,26 @@ public class HomeUIOpe extends BaseUIOpe<MainHomeUIBean> {
 
     public void initBottom() {
         getUiBean().getBottomViewpager().setAdapter(new BottomItemView.MenuAdapter(context));
+        getUiBean().getBottomViewpager().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position % 2 != getUiBean().getHomeViewpager().getCurrentItem()) {
+                    getUiBean().getHomeViewpager().setCurrentItem(position % 2);
+                    LogUtil.E("getHomeViewpager" + position % 2);
+                }
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     public void selectPager(int position) {

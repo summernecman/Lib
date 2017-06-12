@@ -23,6 +23,8 @@ import com.summer.desktop.bean.dabean.LinkNote;
 import com.summer.desktop.bean.dabean.NoteDetail;
 import com.summer.desktop.bean.dabean.TxtNote;
 import com.summer.desktop.util.GlideApp;
+import com.summer.lib.base.interf.OnFinishListener;
+import com.summer.lib.bean.databean.EventBean;
 import com.summer.lib.util.LogUtil;
 import com.summer.lib.util.ScreenUtil;
 
@@ -40,7 +42,7 @@ public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLo
 
     Gson gson = new Gson();
 
-    View.OnLongClickListener onLongClickListener;
+    OnFinishListener onFinishListener;
 
     public NoteDetailAdapter(Context context, ArrayList<NoteDetail> data) {
         this.context = context;
@@ -88,14 +90,13 @@ public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLo
                 if (imageNote.getLocalSrc() != null && imageNote.getLocalSrc().startsWith("file://")) {
                     File file = new File(imageNote.getLocalSrc().substring("file://".length(), imageNote.getLocalSrc().length()));
                     if (file.exists()) {
-                        //ImageLoader.getInstance().displayImage(imageNote.getLocalSrc(),imageHolder.imageView);
-                        GlideApp.with(context).asBitmap().error(R.drawable.app).placeholder(R.drawable.app).load(imageNote.getLocalSrc()).encodeQuality(10).into(imageHolder.imageView);
+                        GlideApp.with(context).load(imageNote.getLocalSrc()).placeholder(R.drawable.app).encodeQuality(10).into(imageHolder.imageView);
                     } else {
-                        GlideApp.with(context).asBitmap().error(R.drawable.app).placeholder(R.drawable.app).diskCacheStrategy(DiskCacheStrategy.ALL).encodeQuality(10).load(imageNote.getSrc()).into(imageHolder.imageView);
+                        // GlideApp.with(context).load(imageNote.getLocalSrc()).placeholder(R.drawable.app).diskCacheStrategy(DiskCacheStrategy.ALL).encodeQuality(10).into(imageHolder.imageView);
+                        GlideApp.with(context).load(imageNote.getLocalSrc()).into(imageHolder.imageView);
                     }
                 } else {
-                    //ImageLoader.getInstance().displayImage(imageNote.getSrc(),imageHolder.imageView);
-                    GlideApp.with(context).asBitmap().error(R.drawable.app).placeholder(R.drawable.app).diskCacheStrategy(DiskCacheStrategy.ALL).encodeQuality(10).load(imageNote.getSrc()).into(imageHolder.imageView);
+                    GlideApp.with(context).load(imageNote.getLocalSrc()).placeholder(R.drawable.app).diskCacheStrategy(DiskCacheStrategy.ALL).encodeQuality(10).into(imageHolder.imageView);
                 }
                 imageHolder.itemView.setTag(R.id.position, position);
                 imageHolder.itemView.setTag(R.id.data, data.get(position));
@@ -147,14 +148,22 @@ public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLo
 
     @Override
     public boolean onLongClick(View v) {
-        if (onLongClickListener != null) {
-            onLongClickListener.onLongClick(v);
+        EventBean eventBean = new EventBean() {
+            @Override
+            public void onFinish() {
+                notifyDataSetChanged();
+            }
+        };
+        if (onFinishListener != null) {
+            eventBean.msg = data;
+            eventBean.msg2 = v.getTag(R.id.position);
+            onFinishListener.onFinish(eventBean);
         }
         return true;
     }
 
-    public void setOnLongClickListener(View.OnLongClickListener onLongClickListener) {
-        this.onLongClickListener = onLongClickListener;
+    public void setOnFinishListener(OnFinishListener onFinishListener) {
+        this.onFinishListener = onFinishListener;
     }
 
     public static class ImageHolder extends RecyclerView.ViewHolder {

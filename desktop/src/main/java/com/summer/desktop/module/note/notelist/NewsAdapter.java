@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.summer.desktop.R;
@@ -42,8 +43,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> im
         holder.itemView.setOnLongClickListener(this);
         holder.itemView.setTag(R.id.position, position);
         holder.itemView.setTag(R.id.data, notes.get(position));
-        holder.textView.setText(notes.get(position).getType() + "  " + notes.get(position).getName());
-        holder.dateTV.setText(notes.get(position).getUpdatedAt() + "  " + notes.get(position).getCreatedAt());
+        holder.textView.setText(notes.get(position).getName());
+        holder.dateTV.setText(notes.get(position).getCreatedAt());
+        if (notes.get(position).getType().equals(Note.NOTE)) {
+            holder.imgIV.setImageResource(R.drawable.note);
+        } else {
+            holder.imgIV.setImageResource(R.drawable.notebook);
+        }
     }
 
     @Override
@@ -81,6 +87,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> im
 
         @BindView(R.id.date)
         TextView dateTV;
+
+        @BindView(R.id.image)
+        ImageView imgIV;
 
         public NewsHolder(View itemView) {
             super(itemView);

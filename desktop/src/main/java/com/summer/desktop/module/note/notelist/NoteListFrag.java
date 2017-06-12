@@ -9,24 +9,21 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.summer.desktop.R;
-import com.summer.desktop.bean.dabean.GsonNoteBean;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.bean.dabean.TitleDABean;
-import com.summer.desktop.module.note.boom.BoomFrag;
+import com.summer.desktop.module.note.circlemenu.CircleMenuFrag;
 import com.summer.desktop.module.note.noteslist.NotesListFrag;
 import com.summer.desktop.module.note.rename.RenameFrag;
 import com.summer.desktop.util.FragList;
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.interf.OnFinishListener;
 import com.summer.lib.base.ope.BaseOpes;
+import com.summer.lib.view.refreshlayout.MaterialRefreshLayout;
+import com.summer.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.Random;
-
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.SaveListener;
-import cn.bmob.v3.listener.UpdateListener;
 
 public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
 
@@ -41,13 +38,18 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getOpes().getUiOpe().init(fragment, this, this);
-        getOpes().getUiOpe().getData(this, this);
+        getOpes().getUiOpe().init(fragment, this, this, new MaterialRefreshListenerAdpter() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
+                materialRefreshLayout.finishRefresh();
+            }
+        });
+        getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
     }
 
     @Override
     public void onClick(View v) {
-
         NotesListFrag noteListssFrag = new NotesListFrag();
         Bundle bundle = new Bundle();
         bundle.putSerializable("data", getOpes().getUiOpe().notes);
@@ -59,51 +61,39 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
 
     @Override
     public boolean onLongClick(final View v) {
-        BoomFrag boomFrag = new BoomFrag();
+        CircleMenuFrag circleMenuFrag = new CircleMenuFrag();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.root, boomFrag);
+        transaction.add(R.id.root, circleMenuFrag);
         transaction.commit();
-        boomFrag.setOnFinishListener(new OnFinishListener() {
+        final Note note1 = (Note) v.getTag(R.id.data);
+        circleMenuFrag.setOnFinishListener(new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 int index = (int) o;
-                final Note[] note = new Note[1];
                 switch (index) {
                     case 0:
                         //note
-                        note[0] = new Note(Note.NOTE, "新建笔记" + random.nextFloat() * 100);
-                        note[0].setData(gson.toJson(new GsonNoteBean()));
-                        note[0].setParentId(getOpes().getUiOpe().parentNote.getObjectId());
-                        note[0].save(new SaveListener<String>() {
-
+                        getOpes().getDaOpe().createNote(getOpes().getUiOpe().parentNote.getObjectId(), new OnFinishListener() {
                             @Override
-                            public void done(String objectId, BmobException e) {
+                            public void onFinish(Object o) {
                                 getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
                             }
                         });
                         break;
                     case 1:
-                        note[0] = new Note(Note.NOTEBOOK, "新建笔记本" + random.nextFloat() * 100);
-                        note[0].setParentId(getOpes().getUiOpe().parentNote.getObjectId());
-                        note[0].save(new SaveListener<String>() {
-
+                        //notebook
+                        getOpes().getDaOpe().createNoteBook(getOpes().getUiOpe().parentNote.getObjectId(), new OnFinishListener() {
                             @Override
-                            public void done(String objectId, BmobException e) {
+                            public void onFinish(Object o) {
                                 getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
                             }
                         });
-                        //notebook
                         break;
                     case 2:
                         //delete
-                        if (v.getTag(R.id.data) == null) {
-                            break;
-                        }
-                        note[0] = new Note();
-                        note[0].setObjectId(((Note) (v.getTag(R.id.data))).getObjectId());
-                        note[0].delete(new UpdateListener() {
+                        getOpes().getDaOpe().deleteNote(note1, new OnFinishListener() {
                             @Override
-                            public void done(BmobException e) {
+                            public void onFinish(Object o) {
                                 getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
                             }
                         });
@@ -118,27 +108,15 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
                         renameFrag.setOnfinish(new OnFinishListener() {
                             @Override
                             public void onFinish(Object o) {
-                                String s = (String) o;
-                                if (s.equals("")) {
-                                    return;
-                                }
-                                note[0] = new Note();
-                                note[0].setObjectId(((Note) (v.getTag(R.id.data))).getObjectId());
-                                note[0].setName(s);
-                                note[0].update(new UpdateListener() {
+                                getOpes().getDaOpe().renameNote((String) o, note1, new OnFinishListener() {
                                     @Override
-                                    public void done(BmobException e) {
+                                    public void onFinish(Object o) {
                                         getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
                                     }
                                 });
                             }
                         });
                         break;
-                }
-                if (index > 2) {
-
-                } else {
-
                 }
             }
         });

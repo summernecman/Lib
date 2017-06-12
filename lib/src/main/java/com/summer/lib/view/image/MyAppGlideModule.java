@@ -1,4 +1,4 @@
-package com.summer.desktop.util;
+package com.summer.lib.view.image;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.bumptech.glide.module.AppGlideModule;
 
 @GlideModule
-public final class MyAppGlideModule extends AppGlideModule {
+public class MyAppGlideModule extends AppGlideModule {
 
     @Override
     public void applyOptions(Context context, GlideBuilder builder) {

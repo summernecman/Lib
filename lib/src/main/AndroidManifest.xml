@@ -52,7 +52,9 @@
         android:theme="@style/AppTheme">
 
         <activity android:name="com.summer.lib.view.zxing.activity.CaptureActivity" />
-
+        <activity
+            android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
+            android:theme="@style/ImagePickerThemeFullScreen" />
         --------------------------------------------------------------------------------------------
     </application>
 </manifest>
