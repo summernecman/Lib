@@ -12,15 +12,11 @@ import com.summer.lib.constant.ValueConstant;
  * Created by ${viwmox} on 2016-06-15.
  */
 public class ScreenUtil {
-    private static ScreenUtil instance;
-
     public static float w;
-
     public static float mw;
-
     public static float h;
-
     public static float sbh;
+    private static ScreenUtil instance;
 
     public static ScreenUtil getInstance() {
         if (instance == null) {
@@ -50,7 +46,7 @@ public class ScreenUtil {
 
     }
 
-    public float getStatusBarHeight(Activity activity) {
+    public float getStatusBarHeight(Context activity) {
         sbh = ValueConstant.DIMEN_1 * 20;
         //获取status_bar_height资源的ID
         int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");

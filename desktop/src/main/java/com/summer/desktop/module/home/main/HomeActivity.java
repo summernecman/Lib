@@ -3,9 +3,11 @@ package com.summer.desktop.module.home.main;
 //by summer on 2017-06-07.
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.summer.desktop.util.FragList;
 import com.summer.lib.base.activity.BaseUIActivity;
+import com.summer.lib.base.listener.DoubleClickListener;
 import com.summer.lib.base.ope.BaseOpes;
 import com.summer.lib.view.bottommenu.MessageEvent;
 
@@ -13,7 +15,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class HomeActivity extends BaseUIActivity<HomeUIOpe, HomeDAOpe> implements IPostion {
+public class HomeActivity extends BaseUIActivity<HomeUIOpe, HomeDAOpe> implements IPostion, DoubleClickListener {
 
 
     @Override
@@ -25,7 +27,7 @@ public class HomeActivity extends BaseUIActivity<HomeUIOpe, HomeDAOpe> implement
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getOpes().getUiOpe().initViewPager(activity);
-        getOpes().getUiOpe().initBottom();
+        getOpes().getUiOpe().initBottom(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -52,11 +54,16 @@ public class HomeActivity extends BaseUIActivity<HomeUIOpe, HomeDAOpe> implement
 
     @Override
     public void onBackPressed() {
-        if (getNowPostion() % 2 == 1) {
+        if (getNowPostion() % 3 == 2) {
             //Toast.makeText(getApplicationContext(), "double kill", Toast.LENGTH_SHORT).show();
             FragList.getInstance().removeTop(activity);
         } else {
             //super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onDouble(View view) {
+        onBackPressed();
     }
 }

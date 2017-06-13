@@ -9,6 +9,8 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.summer.lib.R;
+import com.summer.lib.constant.ValueConstant;
 import com.summer.lib.util.ScreenUtil;
 import com.summer.lib.view.image.ImagePickerLoader;
 
@@ -44,7 +46,8 @@ public class LibAplication extends Application {
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config.build());
         ScreenUtil.getInstance().getScreenSize(getApplicationContext());
-
+        ScreenUtil.getInstance().getStatusBarHeight(getApplicationContext());
+        ValueConstant.DIMEN_1 = (int) getResources().getDimension(R.dimen.dimen_1);
 
         ImagePicker imagePicker = ImagePicker.getInstance();
         imagePicker.setImageLoader(new ImagePickerLoader());   //设置图片加载器

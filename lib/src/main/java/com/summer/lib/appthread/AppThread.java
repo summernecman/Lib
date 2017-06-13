@@ -9,15 +9,10 @@ import com.summer.lib.base.interf.OnNetFinishWithObjInter;
 public class AppThread extends Thread {
 
     private static AppThread instance;
-
-    public boolean stop = true;
-
-    public boolean pause = true;
-
-    public long sleepTime = 6000;
-
     private static OnNetFinishWithObjInter o;
-
+    public boolean stop = true;
+    public boolean pause = true;
+    public long sleepTime = 60000;
     int count = 0;
 
     private AppThread() {

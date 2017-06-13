@@ -2,7 +2,6 @@ package com.summer.lib.util.data;
 
 import android.annotation.SuppressLint;
 
-
 import com.summer.lib.util.LogUtil;
 
 import java.text.ParseException;
@@ -616,5 +615,19 @@ public class DateFormatUtil {
             e.printStackTrace();
             return "";
         }
+    }
+
+    public static int getHour(long timemillins) {
+        Date date = new Date(timemillins);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.HOUR_OF_DAY);
+    }
+
+    public static int getMinute(long timemillins) {
+        Date date = new Date(timemillins);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.MINUTE);
     }
 }

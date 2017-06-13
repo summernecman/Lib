@@ -30,6 +30,13 @@
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:theme="@style/ImagePickerThemeFullScreen" />
+
+        <service android:name="com.summer.lib.service.main.AppService">
+            <intent-filter>
+                <action android:name="com.summer.lib.service.main.AppService" />
+            </intent-filter>
+        </service>
+        <receiver android:name=".module.day.main.DayFrag$DayBroadCase" />
     </application>
 
 </manifest>

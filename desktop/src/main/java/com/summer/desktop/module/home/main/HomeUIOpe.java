@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
 import com.summer.desktop.bean.uibean.MainHomeUIBean;
+import com.summer.lib.base.listener.DoubleClickListener;
 import com.summer.lib.base.ope.BaseUIOpe;
 import com.summer.lib.util.LogUtil;
 import com.summer.lib.view.bottommenu.BottomItemView;
@@ -20,6 +21,7 @@ public class HomeUIOpe extends BaseUIOpe<MainHomeUIBean> {
 
     public void initViewPager(FragmentActivity activity) {
         getUiBean().getHomeViewpager().setAdapter(new homeMainAdapter(activity.getSupportFragmentManager()));
+        getUiBean().getHomeViewpager().setOffscreenPageLimit(3);
         getUiBean().getHomeViewpager().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -28,9 +30,11 @@ public class HomeUIOpe extends BaseUIOpe<MainHomeUIBean> {
 
             @Override
             public void onPageSelected(int position) {
-                if ((getUiBean().getBottomViewpager().getCurrentItem() % 2) != position) {
-                    getUiBean().getBottomViewpager().setCurrentItem(getUiBean().getBottomViewpager().getCurrentItem() + position * 2 - 1);
-                    LogUtil.E("getBottomViewpager" + (getUiBean().getBottomViewpager().getCurrentItem() + position * 2 - 1));
+                int c = getUiBean().getBottomViewpager().getCurrentItem();
+                int n = (c / 3) * 3;
+                if (((c + 2) % 3) != position) {
+                    getUiBean().getBottomViewpager().setCurrentItem(n + position + 1);
+                    LogUtil.E("2" + position);
                 }
             }
 
@@ -41,7 +45,7 @@ public class HomeUIOpe extends BaseUIOpe<MainHomeUIBean> {
         });
     }
 
-    public void initBottom() {
+    public void initBottom(DoubleClickListener doubleClickListener) {
         getUiBean().getBottomViewpager().setAdapter(new BottomItemView.MenuAdapter(context));
         getUiBean().getBottomViewpager().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -51,9 +55,9 @@ public class HomeUIOpe extends BaseUIOpe<MainHomeUIBean> {
 
             @Override
             public void onPageSelected(int position) {
-                if (position % 2 != getUiBean().getHomeViewpager().getCurrentItem()) {
-                    getUiBean().getHomeViewpager().setCurrentItem(position % 2);
-                    LogUtil.E("getHomeViewpager" + position % 2);
+                if ((position + 2) % 3 != getUiBean().getHomeViewpager().getCurrentItem()) {
+                    getUiBean().getHomeViewpager().setCurrentItem((position + 2) % 3);
+                    LogUtil.E("1" + position);
                 }
 
             }
@@ -63,6 +67,7 @@ public class HomeUIOpe extends BaseUIOpe<MainHomeUIBean> {
 
             }
         });
+        ((BottomItemView.MenuAdapter) getUiBean().getBottomViewpager().getAdapter()).setDoubleClickListener(doubleClickListener);
     }
 
     public void selectPager(int position) {

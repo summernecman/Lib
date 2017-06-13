@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.summer.lib.R;
+import com.summer.lib.base.listener.DoubleClickListener;
 
 public class BottomItemView extends ViewPager {
 
@@ -51,8 +52,11 @@ public class BottomItemView extends ViewPager {
 
         Context context;
 
-        int[] images = new int[]{R.drawable.ic_launcher_round, R.drawable.ic_note};
+        int[] images = new int[]{R.drawable.icon, R.drawable.ic_launcher_round, R.drawable.ic_note};
 
+        long time = 0;
+
+        DoubleClickListener doubleClickListener;
 
         public MenuAdapter(Context context) {
             this.context = context;
@@ -76,11 +80,11 @@ public class BottomItemView extends ViewPager {
             View view = LayoutInflater.from(context).inflate(R.layout.frag_menu, container, false);
             TextView textView = (TextView) view.findViewById(R.id.text);
             ImageView imageView = (ImageView) view.findViewById(R.id.iv_menu);
-            imageView.setImageResource(images[position % 2]);
+            imageView.setImageResource(images[position % 3]);
             textView.setText(position + "");
             container.addView(view);
             view.setOnClickListener(this);
-            view.setTag(R.id.data, position);
+            view.setTag(R.id.position, position);
             view.setTag(R.id.context, context);
             return view;
         }
@@ -98,9 +102,17 @@ public class BottomItemView extends ViewPager {
 
         @Override
         public void onClick(View v) {
-//            MessageEvent messageEvent = new MessageEvent();
-//            messageEvent.position = (int) v.getTag(R.id.data);
-//            EventBus.getDefault().post(messageEvent);
+            if ((System.currentTimeMillis() - time) <= 1000) {
+                if (doubleClickListener != null) {
+                    doubleClickListener.onDouble(v);
+                    time = 0;
+                }
+            }
+            time = System.currentTimeMillis();
+        }
+
+        public void setDoubleClickListener(DoubleClickListener doubleClickListener) {
+            this.doubleClickListener = doubleClickListener;
         }
     }
 

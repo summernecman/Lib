@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import com.summer.lib.appthread.AppThread;
 import com.summer.lib.base.interf.OnNetFinishWithObjInter;
 import com.summer.lib.constant.ValueConstant;
+import com.summer.lib.util.LogUtil;
 
 
 /**
@@ -15,6 +16,8 @@ import com.summer.lib.constant.ValueConstant;
  */
 public class AppService extends Service {
 
+
+    int index = -1;
 
     @Override
     public void onCreate() {
@@ -33,6 +36,7 @@ public class AppService extends Service {
             public void onNetFinish(Object o) {
                 int i = (int) o;
                 //isThisParentHaveChild(NoteBookID.BASE_PARENT_ID, name);
+                LogUtil.E(getPackageName());
                 Intent intent1 = new Intent(getPackageName() + ValueConstant.ACITON_GLOB_CAST);
                 intent1.putExtra(ValueConstant.DATA_DATA, i);
                 sendBroadcast(intent1);
@@ -40,9 +44,6 @@ public class AppService extends Service {
         }).init().start();
         return super.onStartCommand(intent, flags, startId);
     }
-
-    int index = -1;
-
 
     @Nullable
     @Override

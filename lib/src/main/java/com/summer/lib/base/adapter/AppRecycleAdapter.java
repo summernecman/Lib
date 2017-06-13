@@ -10,7 +10,7 @@ import com.summer.lib.R;
 /**
  * Created by ${viwmox} on 2016-08-29.
  */
-public abstract class AppRecycleAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T> implements View.OnClickListener {
+public abstract class AppRecycleAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T> implements View.OnClickListener, View.OnLongClickListener {
 
     protected Context context;
 
@@ -38,5 +38,10 @@ public abstract class AppRecycleAdapter<T extends RecyclerView.ViewHolder> exten
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        return false;
     }
 }
