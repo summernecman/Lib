@@ -7,7 +7,7 @@
         android:id="@+id/toptitle"
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:background="#FF4081"
+        android:background="@color/color_blue_300"
         android:orientation="vertical" />
 
 

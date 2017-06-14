@@ -9,13 +9,16 @@ import com.summer.desktop.bean.dabean.Note;
 import com.summer.lib.base.interf.OnFinishListener;
 import com.summer.lib.base.ope.BaseDAOpe;
 import com.summer.lib.util.GsonUtil;
+import com.summer.lib.util.LogUtil;
 import com.summer.lib.util.RandomUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.DeleteBatchListener;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
@@ -31,7 +34,24 @@ public class NoteListDAOpe extends BaseDAOpe {
 
     public void createNote(String parentid, final OnFinishListener onFinishListener) {
         Note note = new Note(Note.NOTE, "新建笔记" + RandomUtil.getInstance().nextFloat() * 100);
-        note.setData(GsonUtil.getInstance().toJson(new GsonNoteBean()));
+        GsonNoteBean gsonNoteBean = new GsonNoteBean();
+        gsonNoteBean.setType(GsonNoteBean.TYPE_NOTE);
+        note.setData(GsonUtil.getInstance().toJson(gsonNoteBean));
+        note.setParentId(parentid);
+        note.save(new SaveListener<String>() {
+
+            @Override
+            public void done(String objectId, BmobException e) {
+                onFinishListener.onFinish(objectId);
+            }
+        });
+    }
+
+    public void createGallery(String parentid, final OnFinishListener onFinishListener) {
+        Note note = new Note(Note.NOTE, "相册集" + RandomUtil.getInstance().nextFloat() * 100);
+        GsonNoteBean gsonNoteBean = new GsonNoteBean();
+        gsonNoteBean.setType(GsonNoteBean.TYPE_GALLERY);
+        note.setData(GsonUtil.getInstance().toJson(gsonNoteBean));
         note.setParentId(parentid);
         note.save(new SaveListener<String>() {
 
@@ -126,6 +146,26 @@ public class NoteListDAOpe extends BaseDAOpe {
             @Override
             public void done(BmobException e) {
                 onFinishListener.onFinish(e);
+            }
+        });
+    }
+
+
+    public void deleteFile(String[] urls) {
+        //此url必须是上传文件成功之后通过bmobFile.getUrl()方法获取的。
+        BmobFile.deleteBatch(urls, new DeleteBatchListener() {
+
+            @Override
+            public void done(String[] failUrls, BmobException e) {
+                if (e == null) {
+                    LogUtil.E("全部删除成功");
+                } else {
+                    if (failUrls != null) {
+                        LogUtil.E(("删除失败个数：" + failUrls.length + "," + e.toString()));
+                    } else {
+                        LogUtil.E(("全部文件删除失败：" + e.getErrorCode() + "," + e.toString()));
+                    }
+                }
             }
         });
     }

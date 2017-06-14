@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.summer.desktop.R;
+import com.summer.desktop.bean.dabean.GsonNoteBean;
 import com.summer.desktop.bean.dabean.ImageNote;
 import com.summer.desktop.bean.dabean.LinkNote;
 import com.summer.desktop.bean.dabean.NoteDetail;
@@ -44,9 +45,12 @@ public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLo
 
     OnFinishListener onFinishListener;
 
-    public NoteDetailAdapter(Context context, ArrayList<NoteDetail> data) {
+    GsonNoteBean bean;
+
+    public NoteDetailAdapter(Context context, GsonNoteBean bean) {
         this.context = context;
-        this.data = data;
+        this.data = bean.getData();
+        this.bean = bean;
     }
 
     @Override
@@ -84,9 +88,15 @@ public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLo
             case 0:
                 ImageHolder imageHolder = (ImageHolder) holder;
                 ImageNote imageNote = gson.fromJson(data.get(position).getData(), ImageNote.class);
-                imageHolder.itemView.getLayoutParams().width = (int) ScreenUtil.w;
-                imageHolder.itemView.getLayoutParams().height = (int) (ScreenUtil.w * imageNote.getHeight() / imageNote.getWidth());
-                imageHolder.itemView.requestLayout();
+                switch (bean.getType()) {
+                    case GsonNoteBean.TYPE_GALLERY:
+                        break;
+                    default:
+                        imageHolder.itemView.getLayoutParams().width = (int) ScreenUtil.w;
+                        imageHolder.itemView.getLayoutParams().height = (int) (ScreenUtil.w * imageNote.getHeight() / imageNote.getWidth());
+                        imageHolder.itemView.requestLayout();
+                        break;
+                }
                 if (imageNote.getLocalSrc() != null && imageNote.getLocalSrc().startsWith("file://")) {
                     File file = new File(imageNote.getLocalSrc().substring("file://".length(), imageNote.getLocalSrc().length()));
                     if (file.exists()) {

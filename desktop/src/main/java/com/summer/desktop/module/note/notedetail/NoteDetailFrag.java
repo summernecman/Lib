@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.BoomMsg;
+import com.summer.desktop.bean.dabean.GsonNoteBean;
 import com.summer.desktop.bean.dabean.NoteDetail;
 import com.summer.desktop.bean.dabean.TxtNote;
 import com.summer.desktop.module.note.circlemenu.CircleMenuFrag;
@@ -48,8 +49,15 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
                         IntentUtil.getInstance().photosShowFromphone(fragment, 0);
                         break;
                     case 1:
-                        getOpes().getDaOpe().bean.getData().add(new NoteDetail(NoteDetail.TXT, gson.toJson(new TxtNote("new\\n"))));
-                        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean, NoteDetailFrag.this);
+                        switch (getOpes().getDaOpe().bean.getType()) {
+                            case GsonNoteBean.TYPE_GALLERY:
+
+                                break;
+                            default:
+                                getOpes().getDaOpe().bean.getData().add(new NoteDetail(NoteDetail.TXT, gson.toJson(new TxtNote("new\\n"))));
+                                getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean, NoteDetailFrag.this);
+                                break;
+                        }
                         break;
                     case 3:
 //                        control.dc.bean.getData().add(new NoteDetail(NoteDetail.LINK,gson.toJson(new LinkNote("http://www.baidu.com"))));

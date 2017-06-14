@@ -116,6 +116,14 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
                                 });
                             }
                         });
+                    case 4:
+                        //note
+                        getOpes().getDaOpe().createGallery(getOpes().getUiOpe().parentNote.getObjectId(), new OnFinishListener() {
+                            @Override
+                            public void onFinish(Object o) {
+                                getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
+                            }
+                        });
                         break;
                 }
             }

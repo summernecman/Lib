@@ -32,6 +32,7 @@ public class CircleMenuUIOpe extends BaseUIOpe<CirlceMenuFragUIBean> {
                 .addSubMenu(Color.parseColor("#258CFF"), R.drawable.notebook)
                 .addSubMenu(Color.parseColor("#30A400"), R.drawable.delete)
                 .addSubMenu(Color.parseColor("#FF4B32"), R.drawable.rename)
+                .addSubMenu(Color.parseColor("#FF4B32"), R.drawable.insert_image)
                 .setOnMenuSelectedListener(new OnMenuSelectedListener() {
 
                     @Override

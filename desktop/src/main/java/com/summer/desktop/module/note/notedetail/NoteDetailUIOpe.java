@@ -29,7 +29,7 @@ public class NoteDetailUIOpe extends BaseUIOpe<TxtFragUIBean> {
             RecyclerView recyclerView = (RecyclerView) getUiBean().getTxtroot().getChildAt(0);
             ((NoteDetailAdapter) recyclerView.getAdapter()).notifyDataSetChanged();
         } else {
-            RecyclerView recyclerView = (RecyclerView) ViewCreater.create(context, bean.getData());
+            RecyclerView recyclerView = (RecyclerView) ViewCreater.create(context, bean);
             getUiBean().getTxtroot().addView(recyclerView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             ((NoteDetailAdapter) recyclerView.getAdapter()).setOnFinishListener(onFinishListener);
         }

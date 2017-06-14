@@ -15,7 +15,7 @@ public class ColorConstant {
     /**
      * 状态栏颜色
      */
-    public static int COLOR_STATUS = R.color.color_bg_refresh;
+    public static int COLOR_STATUS = R.color.color_blue_300;
 
 
     public static int COLOR_BOTTOMENU = R.color.color_base_bottommenu;

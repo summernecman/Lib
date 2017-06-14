@@ -3,6 +3,7 @@ package com.summer.desktop.util;
 //by summer on 2017-05-25.
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
+import com.summer.desktop.bean.dabean.GsonNoteBean;
 import com.summer.desktop.bean.dabean.NoteDetail;
 import com.summer.desktop.module.note.notedetail.NoteDetailAdapter;
 
@@ -22,17 +24,25 @@ public class ViewCreater {
     public static Gson gson = new Gson();
 
 
-    public static View create(Context context, ArrayList<NoteDetail> data) {
+    public static View create(Context context, GsonNoteBean bean) {
 
         RecyclerView recyclerView = new RecyclerView(context);
         recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         recyclerView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        if (data == null) {
+
+        switch (bean.getType()) {
+            case GsonNoteBean.TYPE_GALLERY:
+                recyclerView.setLayoutManager(new GridLayoutManager(context, 3));
+                break;
+            default:
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                break;
+        }
+        if (bean.getData() == null) {
             return recyclerView;
         }
-        recyclerView.setAdapter(new NoteDetailAdapter(context, data));
-        attachToItemTouch(recyclerView, data);
+        recyclerView.setAdapter(new NoteDetailAdapter(context, bean));
+        attachToItemTouch(recyclerView, bean.getData());
         return recyclerView;
 
     }

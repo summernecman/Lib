@@ -24,6 +24,7 @@
     <com.summer.lib.view.bottommenu.BottomItemView
         android:id="@+id/bottom_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:background="@color/color_blue_300" />
 </LinearLayout>
 </RelativeLayout>

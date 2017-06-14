@@ -7,8 +7,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_margin="5dp"
-        android:orientation="vertical">
+        android:background="@drawable/drawable_press_black_while"
+        android:orientation="vertical"
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
