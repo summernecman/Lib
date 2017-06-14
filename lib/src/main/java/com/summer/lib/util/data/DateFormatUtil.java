@@ -630,4 +630,18 @@ public class DateFormatUtil {
         calendar.setTime(date);
         return calendar.get(Calendar.MINUTE);
     }
+
+    @SuppressLint("SimpleDateFormat")
+    public static String yyyyMMdd_HHmmss_to_yyyyMMdd_HHmm(String strD) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = format.parse(strD);
+            format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            return format.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
 }

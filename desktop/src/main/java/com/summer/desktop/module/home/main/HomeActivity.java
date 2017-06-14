@@ -5,6 +5,7 @@ package com.summer.desktop.module.home.main;
 import android.os.Bundle;
 import android.view.View;
 
+import com.summer.desktop.R;
 import com.summer.desktop.util.FragList;
 import com.summer.lib.base.activity.BaseUIActivity;
 import com.summer.lib.base.listener.DoubleClickListener;
@@ -15,7 +16,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class HomeActivity extends BaseUIActivity<HomeUIOpe, HomeDAOpe> implements IPostion, DoubleClickListener {
+public class HomeActivity extends BaseUIActivity<HomeUIOpe, HomeDAOpe> implements IPostion, DoubleClickListener, View.OnClickListener {
 
 
     @Override
@@ -27,7 +28,7 @@ public class HomeActivity extends BaseUIActivity<HomeUIOpe, HomeDAOpe> implement
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getOpes().getUiOpe().initViewPager(activity);
-        getOpes().getUiOpe().initBottom(this);
+        getOpes().getUiOpe().initBottom(this, this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -65,5 +66,13 @@ public class HomeActivity extends BaseUIActivity<HomeUIOpe, HomeDAOpe> implement
     @Override
     public void onDouble(View view) {
         onBackPressed();
+    }
+
+    @Override
+    public void onClick(View v) {
+        int position = (int) v.getTag(R.id.position);
+        if ((position - 2) >= 0) {
+            getOpes().getUiOpe().getUiBean().getBottomViewpager().setCurrentItem((position - 2));
+        }
     }
 }

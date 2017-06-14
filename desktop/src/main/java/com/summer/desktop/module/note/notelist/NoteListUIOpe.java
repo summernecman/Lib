@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.bean.uibean.NewsFragUIBean;
 import com.summer.lib.base.ope.BaseUIOpe;
+import com.summer.lib.util.system.HandleUtil;
 import com.summer.lib.view.ItemDecoration.MyItemDecoration2;
 import com.summer.lib.view.refreshlayout.MaterialRefreshListener;
 
@@ -44,22 +45,27 @@ public class NoteListUIOpe extends BaseUIOpe<NewsFragUIBean> {
     }
 
     public void getData(final View.OnClickListener listener, final View.OnLongClickListener onLongClickListener) {
-        if (parentNote != null) {
-            BmobQuery<Note> query = new BmobQuery<Note>();
-            //查询playerName叫“比目”的数据
-            query.addWhereEqualTo("parentId", parentNote.getObjectId());
-            //返回50条数据，如果不加上这条语句，默认返回10条数据
-            query.setLimit(50);
-            //执行查询方法
-            query.findObjects(new FindListener<Note>() {
-                @Override
-                public void done(List<Note> object, BmobException e) {
-                    notes = (ArrayList<Note>) object;
-                    getUiBean().getRecycle().setAdapter(new NewsAdapter(context, notes));
-                    ((NewsAdapter) getUiBean().getRecycle().getAdapter()).setOnClickListener(listener);
-                    ((NewsAdapter) getUiBean().getRecycle().getAdapter()).setOnLongClickListener(onLongClickListener);
+        HandleUtil.getInstance().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (parentNote != null) {
+                    BmobQuery<Note> query = new BmobQuery<Note>();
+                    //查询playerName叫“比目”的数据
+                    query.addWhereEqualTo("parentId", parentNote.getObjectId());
+                    //返回50条数据，如果不加上这条语句，默认返回10条数据
+                    query.setLimit(50);
+                    //执行查询方法
+                    query.findObjects(new FindListener<Note>() {
+                        @Override
+                        public void done(List<Note> object, BmobException e) {
+                            notes = (ArrayList<Note>) object;
+                            getUiBean().getRecycle().setAdapter(new NewsAdapter(context, notes));
+                            ((NewsAdapter) getUiBean().getRecycle().getAdapter()).setOnClickListener(listener);
+                            ((NewsAdapter) getUiBean().getRecycle().getAdapter()).setOnLongClickListener(onLongClickListener);
+                        }
+                    });
                 }
-            });
-        }
+            }
+        }, 300);
     }
 }

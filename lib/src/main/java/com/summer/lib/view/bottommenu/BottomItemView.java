@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.summer.lib.R;
 import com.summer.lib.base.listener.DoubleClickListener;
@@ -58,6 +57,8 @@ public class BottomItemView extends ViewPager {
 
         DoubleClickListener doubleClickListener;
 
+        OnClickListener onClickListener;
+
         public MenuAdapter(Context context) {
             this.context = context;
         }
@@ -78,10 +79,8 @@ public class BottomItemView extends ViewPager {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View view = LayoutInflater.from(context).inflate(R.layout.frag_menu, container, false);
-            TextView textView = (TextView) view.findViewById(R.id.text);
             ImageView imageView = (ImageView) view.findViewById(R.id.iv_menu);
             imageView.setImageResource(images[position % 3]);
-            textView.setText(position + "");
             container.addView(view);
             view.setOnClickListener(this);
             view.setTag(R.id.position, position);
@@ -108,7 +107,14 @@ public class BottomItemView extends ViewPager {
                     time = 0;
                 }
             }
+            if (onClickListener != null) {
+                onClickListener.onClick(v);
+            }
             time = System.currentTimeMillis();
+        }
+
+        public void setOnClickListener(OnClickListener onClickListener) {
+            this.onClickListener = onClickListener;
         }
 
         public void setDoubleClickListener(DoubleClickListener doubleClickListener) {

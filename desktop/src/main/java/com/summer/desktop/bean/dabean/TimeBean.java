@@ -20,5 +20,11 @@ public class TimeBean {
     }
 
     public TimeBean() {
+
+    }
+
+    @Override
+    public String toString() {
+        return sh + ":" + sm + "--" + eh + ":" + em;
     }
 }

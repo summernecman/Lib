@@ -5,6 +5,7 @@ package com.summer.desktop.module.home.main;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.summer.desktop.bean.uibean.MainHomeUIBean;
 import com.summer.lib.base.listener.DoubleClickListener;
@@ -18,6 +19,7 @@ public class HomeUIOpe extends BaseUIOpe<MainHomeUIBean> {
     public HomeUIOpe(Context context) {
         super(context, new MainHomeUIBean(context, null));
     }
+
 
     public void initViewPager(FragmentActivity activity) {
         getUiBean().getHomeViewpager().setAdapter(new homeMainAdapter(activity.getSupportFragmentManager()));
@@ -45,8 +47,11 @@ public class HomeUIOpe extends BaseUIOpe<MainHomeUIBean> {
         });
     }
 
-    public void initBottom(DoubleClickListener doubleClickListener) {
+    public void initBottom(DoubleClickListener doubleClickListener, View.OnClickListener listener) {
         getUiBean().getBottomViewpager().setAdapter(new BottomItemView.MenuAdapter(context));
+        getUiBean().getBottomViewpager().setOffscreenPageLimit(7);
+        getUiBean().getBottomViewpager().setCurrentItem(1000);
+        ((BottomItemView.MenuAdapter) getUiBean().getBottomViewpager().getAdapter()).setOnClickListener(listener);
         getUiBean().getBottomViewpager().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

@@ -18,14 +18,15 @@
         app:wave_show="false">
 
         <RelativeLayout
-    android:id="@+id/notelist"
+            android:id="@+id/notelist"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
+        android:layout_height="wrap_content"
+
         android:overScrollMode="never" />
 
         </RelativeLayout>

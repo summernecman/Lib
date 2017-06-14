@@ -90,13 +90,16 @@ public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLo
                 if (imageNote.getLocalSrc() != null && imageNote.getLocalSrc().startsWith("file://")) {
                     File file = new File(imageNote.getLocalSrc().substring("file://".length(), imageNote.getLocalSrc().length()));
                     if (file.exists()) {
-                        GlideApp.with(context).load(imageNote.getLocalSrc()).placeholder(R.drawable.app).encodeQuality(10).into(imageHolder.imageView);
+                        GlideApp.with(context).load(imageNote.getLocalSrc()).placeholder(R.drawable.app).encodeQuality(100).into(imageHolder.imageView);
+                        //com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(imageNote.getLocalSrc(),imageHolder.imageView);
                     } else {
                         // GlideApp.with(context).load(imageNote.getLocalSrc()).placeholder(R.drawable.app).diskCacheStrategy(DiskCacheStrategy.ALL).encodeQuality(10).into(imageHolder.imageView);
                         GlideApp.with(context).load(imageNote.getLocalSrc()).into(imageHolder.imageView);
+                        //com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(imageNote.getLocalSrc(),imageHolder.imageView);
                     }
                 } else {
-                    GlideApp.with(context).load(imageNote.getLocalSrc()).placeholder(R.drawable.app).diskCacheStrategy(DiskCacheStrategy.ALL).encodeQuality(10).into(imageHolder.imageView);
+                    GlideApp.with(context).load(imageNote.getSrc()).placeholder(R.drawable.app).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageHolder.imageView);
+                    //com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(imageNote.getSrc(),imageHolder.imageView);
                 }
                 imageHolder.itemView.setTag(R.id.position, position);
                 imageHolder.itemView.setTag(R.id.data, data.get(position));

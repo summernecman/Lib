@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.summer.desktop.bean.dabean.TitleDABean;
 import com.summer.desktop.util.TitleUtil;
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.ope.BaseOpes;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class NotesListFrag extends BaseUIFrag<NotesListUIOpe, NotesListDAOpe> {
     @Override
@@ -26,5 +29,6 @@ public class NotesListFrag extends BaseUIFrag<NotesListUIOpe, NotesListDAOpe> {
     public void onDestroy() {
         super.onDestroy();
         TitleUtil.getInstance().getName().remove(TitleUtil.getInstance().getName().get(TitleUtil.getInstance().getName().size() - 1));
+        EventBus.getDefault().post(new TitleDABean(""));
     }
 }

@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.TimeBean;
+import com.summer.desktop.module.day.dayview.DayView;
 import com.summer.desktop.module.note.circlemenu.CircleMenuFrag;
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.interf.OnFinishListener;
@@ -22,8 +23,9 @@ import com.summer.lib.util.data.DateFormatUtil;
 import com.summer.lib.util.file.TimePickUtil;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class DayFrag extends BaseUIFrag<DayMainUIOpe, DayMainDAOpe> {
+public class DayFrag extends BaseUIFrag<DayMainUIOpe, DayMainDAOpe> implements DayView.OnlongClickWithHM {
 
     @Override
     public BaseOpes<DayMainUIOpe, DayMainDAOpe> createOpes() {
@@ -46,8 +48,9 @@ public class DayFrag extends BaseUIFrag<DayMainUIOpe, DayMainDAOpe> {
         super.onDestroy();
     }
 
+
     @Override
-    public boolean onLongClick(View v) {
+    public void onLongClick(View v, final int h, final int m) {
         CircleMenuFrag circleMenuFrag = new CircleMenuFrag();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.homeroot, circleMenuFrag);
@@ -60,26 +63,46 @@ public class DayFrag extends BaseUIFrag<DayMainUIOpe, DayMainDAOpe> {
                         TimePickUtil.getInstance().showTimePickDialogHMHM(activity, getFragmentManager(), new TimePickUtil.TimeDate() {
                             @Override
                             public void getTimeData(ArrayList<Long> time) {
-                                getOpes().getDaOpe().getTimes().add(new TimeBean(DateFormatUtil.getHour(time.get(0)), DateFormatUtil.getMinute(time.get(0)), DateFormatUtil.getHour(time.get(1)), DateFormatUtil.getMinute(time.get(1))));
+                                final TimeBean timeBean = new TimeBean(DateFormatUtil.getHour(time.get(0)), DateFormatUtil.getMinute(time.get(0)), DateFormatUtil.getHour(time.get(1)), DateFormatUtil.getMinute(time.get(1)));
+                                getOpes().getDaOpe().getTimes().add(timeBean);
                                 getOpes().getUiOpe().addTimes(getOpes().getDaOpe().getTimes());
+                                getOpes().getDaOpe().getNoteListDAOpe().createTodayNote("0",
+                                        new String[]{
+                                                Calendar.getInstance().get(Calendar.YEAR) + "年",
+                                                (Calendar.getInstance().get(Calendar.MONTH) + 1) + "月",
+                                                Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "日"},
+                                        timeBean.toString(),
+                                        new OnFinishListener() {
+                                            @Override
+                                            public void onFinish(Object o) {
+                                                getOpes().getDaOpe().getData().put(timeBean.toString(), (String) o);
+                                            }
+                                        });
                             }
                         });
                         break;
                     case 1:
                         break;
                     case 2:
+                        getOpes().getUiOpe().deleteTime(h, m);
+                        break;
+                    case 3:
+                        String area = getOpes().getUiOpe().getUiBean().getDayview().getArea(h, m);
+                        if (getOpes().getDaOpe().getData().get(area) != null) {
+                            getOpes().getUiOpe().goToNote(activity, getOpes().getDaOpe().getData().get(area));
+                        }
                         break;
                 }
             }
         });
-        return true;
     }
 
     public class DayBroadCase extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            getOpes().getUiOpe().getUiBean().getRecycle().getAdapter().notifyDataSetChanged();
+            //getOpes().getUiOpe().getUiBean().getRecycle().getAdapter().notifyDataSetChanged();
+            getOpes().getUiOpe().getUiBean().getDayview().invalidate();
         }
     }
 }

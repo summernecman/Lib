@@ -63,7 +63,7 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
     public boolean onLongClick(final View v) {
         CircleMenuFrag circleMenuFrag = new CircleMenuFrag();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.root, circleMenuFrag);
+        transaction.add(R.id.homeroot, circleMenuFrag);
         transaction.commit();
         final Note note1 = (Note) v.getTag(R.id.data);
         circleMenuFrag.setOnFinishListener(new OnFinishListener() {

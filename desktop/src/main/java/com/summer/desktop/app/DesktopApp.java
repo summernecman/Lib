@@ -20,5 +20,11 @@ public class DesktopApp extends LibAplication {
         Bmob.initialize(this, "a372099e1546f084af11ba4cfc1b8439");
         Intent intent = new Intent(this, AppService.class);
         startService(intent);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Glide.get(getApplicationContext()).clearDiskCache();
+            }
+        }).start();
     }
 }

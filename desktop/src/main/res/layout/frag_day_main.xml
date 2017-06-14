@@ -4,8 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle"
+    <!--    &lt;!&ndash;<android.support.v7.widget.RecyclerView&ndash;&gt;
+            &lt;!&ndash;android:id="@+id/recycle"&ndash;&gt;
+            &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;
+            &lt;!&ndash;android:layout_height="match_parent" />-->-->
+
+    <com.summer.desktop.module.day.dayview.DayView
+        android:id="@+id/dayview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

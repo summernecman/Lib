@@ -12,7 +12,7 @@ public class AppThread extends Thread {
     private static OnNetFinishWithObjInter o;
     public boolean stop = true;
     public boolean pause = true;
-    public long sleepTime = 60000;
+    public long sleepTime = 20000;
     int count = 0;
 
     private AppThread() {
