@@ -127,7 +127,7 @@ public class DayFrag extends BaseUIFrag<DayMainUIOpe, DayMainDAOpe> implements D
         @Override
         public void onReceive(Context context, Intent intent) {
             //getOpes().getUiOpe().getUiBean().getRecycle().getAdapter().notifyDataSetChanged();
-            getOpes().getUiOpe().getUiBean().getDayview().invalidate();
+            getOpes().getUiOpe().getUiBean().getDayview().refresh();
         }
     }
 }

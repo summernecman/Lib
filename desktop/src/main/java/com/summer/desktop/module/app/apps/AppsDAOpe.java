@@ -67,6 +67,10 @@ public class AppsDAOpe extends BaseDAOpe {
         }
     }
 
+    public void clearData() {
+        appsDBOpe.clear();
+    }
+
     public void saveSort() {
 
         boolean should = false;

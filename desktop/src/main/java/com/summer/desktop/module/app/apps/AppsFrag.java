@@ -12,6 +12,7 @@ import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.interf.OnFinishListener;
 import com.summer.lib.base.ope.BaseOpes;
 import com.summer.lib.util.IntentUtil;
+import com.summer.lib.util.NullUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -43,6 +44,16 @@ public class AppsFrag extends BaseUIFrag<AppsUIOpe, AppsDAOpe> {
             return;
         }
         AppDBBean appDBBean = (AppDBBean) msg.msg;
+        if (appDBBean.getAppName().equals("刷新") && NullUtil.isStrEmpty(appDBBean.getPackageName())) {
+            getOpes().getDaOpe().clearData();
+            getOpes().getDaOpe().getApps(new OnFinishListener() {
+                @Override
+                public void onFinish(Object o) {
+                    getOpes().getUiOpe().initList((ArrayList<AppDBBean>) o);
+                }
+            });
+            return;
+        }
         IntentUtil.getInstance().IntentTo(activity, appDBBean.getPackageName());
     }
 

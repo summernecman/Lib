@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLongClickListener {
+public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLongClickListener, View.OnClickListener {
 
     Context context;
 
@@ -46,6 +46,8 @@ public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLo
     OnFinishListener onFinishListener;
 
     GsonNoteBean bean;
+
+    View.OnClickListener onClickListener;
 
     public NoteDetailAdapter(Context context, GsonNoteBean bean) {
         this.context = context;
@@ -113,7 +115,9 @@ public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLo
                 }
                 imageHolder.itemView.setTag(R.id.position, position);
                 imageHolder.itemView.setTag(R.id.data, data.get(position));
+                imageHolder.itemView.setTag(R.id.data1, data);
                 imageHolder.itemView.setOnLongClickListener(this);
+                imageHolder.itemView.setOnClickListener(this);
                 break;
             case 1:
                 final TxtHolder txtHolder = (TxtHolder) holder;
@@ -177,6 +181,17 @@ public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLo
 
     public void setOnFinishListener(OnFinishListener onFinishListener) {
         this.onFinishListener = onFinishListener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (onClickListener != null) {
+            onClickListener.onClick(v);
+        }
+    }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
     public static class ImageHolder extends RecyclerView.ViewHolder {

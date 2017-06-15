@@ -286,6 +286,11 @@ public class DayView extends View {
         this.longClickListener = longClickListener;
     }
 
+    public void refresh() {
+        initData();
+        invalidate();
+    }
+
     public interface OnlongClickWithHM {
         public void onLongClick(View v, int h, int m);
     }

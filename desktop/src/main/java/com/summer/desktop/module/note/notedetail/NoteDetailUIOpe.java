@@ -5,6 +5,7 @@ package com.summer.desktop.module.note.notedetail;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -24,7 +25,7 @@ public class NoteDetailUIOpe extends BaseUIOpe<TxtFragUIBean> {
     }
 
 
-    public void getData(final Fragment fragment, GsonNoteBean bean, OnFinishListener onFinishListener) {
+    public void getData(final Fragment fragment, GsonNoteBean bean, OnFinishListener onFinishListener, View.OnClickListener listener) {
         if (getUiBean().getTxtroot().getChildCount() != 0) {
             RecyclerView recyclerView = (RecyclerView) getUiBean().getTxtroot().getChildAt(0);
             ((NoteDetailAdapter) recyclerView.getAdapter()).notifyDataSetChanged();
@@ -32,6 +33,7 @@ public class NoteDetailUIOpe extends BaseUIOpe<TxtFragUIBean> {
             RecyclerView recyclerView = (RecyclerView) ViewCreater.create(context, bean);
             getUiBean().getTxtroot().addView(recyclerView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             ((NoteDetailAdapter) recyclerView.getAdapter()).setOnFinishListener(onFinishListener);
+            ((NoteDetailAdapter) recyclerView.getAdapter()).setOnClickListener(listener);
         }
     }
 
