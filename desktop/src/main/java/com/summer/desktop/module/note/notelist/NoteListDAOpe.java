@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.summer.desktop.bean.dabean.GsonNoteBean;
 import com.summer.desktop.bean.dabean.Note;
+import com.summer.desktop.bean.dabean.TimeBean;
 import com.summer.lib.base.interf.OnFinishListener;
 import com.summer.lib.base.ope.BaseDAOpe;
 import com.summer.lib.util.GsonUtil;
@@ -62,18 +63,40 @@ public class NoteListDAOpe extends BaseDAOpe {
         });
     }
 
-    public void createTodayNote(final String parentid, String[] name, final String finalname, final OnFinishListener onFinishListener) {
+    public void createTodayNote(final TimeBean timeBean, final String parentid, String[] name, final String finalname, final OnFinishListener onFinishListener) {
         i = -1;
         todayNoteBookExist(parentid, name, new OnFinishListener() {
             @Override
             public void onFinish(final Object o) {
                 Note note = new Note(Note.NOTE, finalname);
-                note.setData(GsonUtil.getInstance().toJson(new GsonNoteBean()));
+                GsonNoteBean gsonNoteBean = new GsonNoteBean();
+                gsonNoteBean.setType(GsonNoteBean.TYPE_NOTE_DAY);
+                gsonNoteBean.setTimeDetail(GsonUtil.getInstance().toJson(timeBean));
+                note.setData(GsonUtil.getInstance().toJson(gsonNoteBean));
                 note.setParentId((String) o);
                 note.save(new SaveListener<String>() {
                     @Override
                     public void done(String objectId, BmobException e) {
                         onFinishListener.onFinish((String) o);
+                    }
+                });
+            }
+        });
+    }
+
+
+    public void getTodayNotes(final String parentid, String[] name, final OnFinishListener onFinishListener) {
+        i = -1;
+        todayNoteBookExist(parentid, name, new OnFinishListener() {
+            @Override
+            public void onFinish(final Object o) {
+                BmobQuery<Note> query = new BmobQuery<Note>();
+                query.addWhereEqualTo("parentId", (String) o);
+                query.findObjects(new FindListener<Note>() {
+                    @Override
+                    public void done(List<Note> list, BmobException e) {
+                        Object[] objects = new Object[]{o, list};
+                        onFinishListener.onFinish(objects);
                     }
                 });
             }

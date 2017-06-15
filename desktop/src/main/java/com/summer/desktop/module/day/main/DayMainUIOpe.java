@@ -38,7 +38,6 @@ public class DayMainUIOpe extends BaseUIOpe<DayMainUIBean> {
 //        dayMainAdapter.setTimes(times);
 //        dayMainAdapter.notifyDataSetChanged();
         getUiBean().getDayview().setTimes(times);
-        getUiBean().getDayview().invalidate();
     }
 
     public void deleteTime(int h, int m) {

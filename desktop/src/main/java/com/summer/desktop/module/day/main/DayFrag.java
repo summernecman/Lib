@@ -40,7 +40,19 @@ public class DayFrag extends BaseUIFrag<DayMainUIOpe, DayMainDAOpe> implements D
         IntentFilter filter = new IntentFilter();
         filter.addAction(activity.getPackageName() + ValueConstant.ACITON_GLOB_CAST);
         activity.registerReceiver(receiver, filter);
-
+        getOpes().getDaOpe().getTodayNotes(new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                Object[] o1 = (Object[]) o;
+                ArrayList<TimeBean> times = (ArrayList<TimeBean>) o1[1];
+                getOpes().getDaOpe().getTimes().clear();
+                getOpes().getDaOpe().getTimes().addAll(times);
+                getOpes().getUiOpe().addTimes(getOpes().getDaOpe().getTimes());
+                for (int i = 0; i < times.size(); i++) {
+                    getOpes().getDaOpe().getData().put(times.get(i).toString(), (String) o1[0]);
+                }
+            }
+        });
     }
 
     @Override
@@ -66,12 +78,12 @@ public class DayFrag extends BaseUIFrag<DayMainUIOpe, DayMainDAOpe> implements D
                                 final TimeBean timeBean = new TimeBean(DateFormatUtil.getHour(time.get(0)), DateFormatUtil.getMinute(time.get(0)), DateFormatUtil.getHour(time.get(1)), DateFormatUtil.getMinute(time.get(1)));
                                 getOpes().getDaOpe().getTimes().add(timeBean);
                                 getOpes().getUiOpe().addTimes(getOpes().getDaOpe().getTimes());
-                                getOpes().getDaOpe().getNoteListDAOpe().createTodayNote("0",
+                                getOpes().getDaOpe().getNoteListDAOpe().createTodayNote(timeBean, "0",
                                         new String[]{
                                                 Calendar.getInstance().get(Calendar.YEAR) + "年",
                                                 (Calendar.getInstance().get(Calendar.MONTH) + 1) + "月",
                                                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "日"},
-                                        timeBean.toString(),
+                                        timeBean.text,
                                         new OnFinishListener() {
                                             @Override
                                             public void onFinish(Object o) {
@@ -82,6 +94,19 @@ public class DayFrag extends BaseUIFrag<DayMainUIOpe, DayMainDAOpe> implements D
                         });
                         break;
                     case 1:
+                        getOpes().getDaOpe().getTodayNotes(new OnFinishListener() {
+                            @Override
+                            public void onFinish(Object o) {
+                                Object[] o1 = (Object[]) o;
+                                ArrayList<TimeBean> times = (ArrayList<TimeBean>) o1[1];
+                                getOpes().getDaOpe().getTimes().clear();
+                                getOpes().getDaOpe().getTimes().addAll(times);
+                                getOpes().getUiOpe().addTimes(getOpes().getDaOpe().getTimes());
+                                for (int i = 0; i < times.size(); i++) {
+                                    getOpes().getDaOpe().getData().put(times.get(i).toString(), (String) o1[0]);
+                                }
+                            }
+                        });
                         break;
                     case 2:
                         getOpes().getUiOpe().deleteTime(h, m);

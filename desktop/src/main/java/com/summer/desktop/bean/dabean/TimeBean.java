@@ -12,6 +12,9 @@ public class TimeBean {
 
     public int em;
 
+    public String text = "新建时段";
+
+
     public TimeBean(int sh, int sm, int eh, int em) {
         this.sh = sh;
         this.sm = sm;
@@ -25,6 +28,6 @@ public class TimeBean {
 
     @Override
     public String toString() {
-        return sh + ":" + sm + "--" + eh + ":" + em;
+        return sh + ":" + sm + "--" + eh + ":" + em + "---" + text;
     }
 }

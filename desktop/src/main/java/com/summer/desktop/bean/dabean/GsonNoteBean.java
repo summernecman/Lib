@@ -10,8 +10,12 @@ public class GsonNoteBean extends BaseDABean {
 
     public static final String TYPE_NOTE = "type_note";
     public static final String TYPE_GALLERY = "type_gallery";
+    public static final String TYPE_NOTE_DAY = "type_note_day";
     ArrayList<NoteDetail> data = new ArrayList<>();
     private String type = TYPE_NOTE;
+
+    private String timeDetail;
+
 
     public ArrayList<NoteDetail> getData() {
         return data;
@@ -27,5 +31,13 @@ public class GsonNoteBean extends BaseDABean {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getTimeDetail() {
+        return timeDetail;
+    }
+
+    public void setTimeDetail(String timeDetail) {
+        this.timeDetail = timeDetail;
     }
 }

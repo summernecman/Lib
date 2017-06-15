@@ -26,4 +26,5 @@ public class MinuteDAOpe extends BaseDAOpe {
     public int nowM() {
         return (Calendar.getInstance().get(Calendar.MINUTE));
     }
+
 }
