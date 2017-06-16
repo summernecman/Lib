@@ -6,21 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.summer.desktop.bean.dabean.TitleDABean;
-import com.summer.desktop.module.home.main.IPostion;
 import com.summer.lib.base.fragment.BaseUIFrag;
-import com.summer.lib.base.ope.BaseOpes;
 import com.summer.lib.view.bottommenu.MessageEvent;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 public class NoteMainFrag extends BaseUIFrag<NoteMainUIOpe, NoteMainDAOpe> {
-    @Override
-    public BaseOpes<NoteMainUIOpe, NoteMainDAOpe> createOpes() {
-        return new BaseOpes<>(new NoteMainUIOpe(activity), new NoteMainDAOpe(activity));
-    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -34,25 +23,9 @@ public class NoteMainFrag extends BaseUIFrag<NoteMainUIOpe, NoteMainDAOpe> {
         getOpes().getUiOpe().clear();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMesage(MessageEvent event) {
-        getOpes().getUiOpe().onclick(getActivity(), (IPostion) getActivity());
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMesage(TitleDABean event) {
+    @Override
+    public void dealMesage(MessageEvent event) {
+        super.dealMesage(event);
         getOpes().getUiOpe().setTitle();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
     }
 }

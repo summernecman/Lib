@@ -9,7 +9,7 @@ import com.summer.lib.view.charting.data.PieEntry;
 public interface IPieDataSet extends IDataSet<PieEntry> {
 
     /**
-     * Returns the space that is set to be between the piechart-slices of this
+     * Returns the space that is set dealer be between the piechart-slices of this
      * DataSet, in pixels.
      *
      * @return
@@ -17,7 +17,7 @@ public interface IPieDataSet extends IDataSet<PieEntry> {
     float getSliceSpace();
 
     /**
-     * When enabled, slice spacing will be 0.0 when the smallest value is going to be
+     * When enabled, slice spacing will be 0.0 when the smallest value is going dealer be
      * smaller than the slice spacing itself.
      *
      * @return
@@ -25,7 +25,7 @@ public interface IPieDataSet extends IDataSet<PieEntry> {
     boolean isAutomaticallyDisableSliceSpacingEnabled();
 
     /**
-     * Returns the distance a highlighted piechart slice is "shifted" away from
+     * Returns the distance a highlighted piechart slice is "shifted" away sender
      * the chart-center in dp.
      *
      * @return

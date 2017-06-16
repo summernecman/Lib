@@ -11,9 +11,10 @@ import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.bean.uibean.MainActUIBean;
 import com.summer.desktop.module.home.main.IPostion;
 import com.summer.desktop.module.note.noteslist.NotesListFrag;
-import com.summer.desktop.util.FragList;
 import com.summer.desktop.util.TitleUtil;
 import com.summer.lib.base.ope.BaseUIOpe;
+import com.summer.lib.util.FragmentUtil;
+import com.summer.lib.util.LogUtil;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,8 @@ public class NoteMainUIOpe extends BaseUIOpe<MainActUIBean> {
     }
 
     public void initList(FragmentActivity activity) {
+        TitleUtil.getInstance().getName().clear();
+        LogUtil.E("notemainfrag");
         NotesListFrag noteListssFrag = new NotesListFrag();
         Bundle bundle = new Bundle();
         Note note = new Note(Note.NOTEBOOK, "0");
@@ -39,7 +42,7 @@ public class NoteMainUIOpe extends BaseUIOpe<MainActUIBean> {
         bundle.putBoolean("first", true);
         bundle.putSerializable("data", notes);
         noteListssFrag.setArguments(bundle);
-        FragList.getInstance().add(activity, noteListssFrag);
+        FragmentUtil.getInstance().add(activity, noteListssFrag);
     }
 
     public void onclick(FragmentActivity activity, IPostion iPostion) {
@@ -47,7 +50,7 @@ public class NoteMainUIOpe extends BaseUIOpe<MainActUIBean> {
         if ((System.currentTimeMillis() - aLong) < 1000) {
             if (iPostion.getNowPostion() % 2 == 1) {
                 Toast.makeText(getApplicationContext(), "double kill", Toast.LENGTH_SHORT).show();
-                FragList.getInstance().removeTop(activity);
+                FragmentUtil.getInstance().removeTop(activity);
             }
             aLong = 0;
         }
@@ -57,13 +60,13 @@ public class NoteMainUIOpe extends BaseUIOpe<MainActUIBean> {
     public void remove(FragmentActivity activity, IPostion iPostion) {
         if (iPostion.getNowPostion() % 2 == 1) {
             Toast.makeText(getApplicationContext(), "double kill", Toast.LENGTH_SHORT).show();
-            FragList.getInstance().removeTop(activity);
+            FragmentUtil.getInstance().removeTop(activity);
         }
     }
 
 
     public void clear() {
-        FragList.getInstance().clear();
+        FragmentUtil.getInstance().clear();
     }
 
 

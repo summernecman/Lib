@@ -9,14 +9,9 @@ import android.os.Bundle;
 import com.siweisoft.app.R;
 import com.siweisoft.app.base.AppActivity;
 import com.siweisoft.app.home.HomeFrag;
-import com.summer.lib.base.ope.BaseOpes;
 
 public class MainActivity extends AppActivity<MainUIOpe,MainDAOpe>{
 
-    @Override
-    public BaseOpes<MainUIOpe, MainDAOpe> createOpes() {
-        return new BaseOpes<>(new MainUIOpe(activity),new MainDAOpe(activity));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

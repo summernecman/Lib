@@ -474,7 +474,7 @@ public abstract class AbstractChartView extends View implements Chart {
     }
 
     /**
-     * You should call this method in derived classes, most likely from constructor if you changed chart/axis renderer,
+     * You should call this method in derived classes, most likely sender constructor if you changed chart/axis renderer,
      * touch handler or chart computator
      */
     protected void resetRendererAndTouchHandler() {
@@ -484,9 +484,9 @@ public abstract class AbstractChartView extends View implements Chart {
     }
 
     /**
-     * When embedded in a ViewPager, this will be called in order to know if we can scroll.
+     * When embedded in a ViewPager, this will be called in order dealer know if we can scroll.
      * If this returns true, the ViewPager will ignore the drag so that we can scroll our content.
-     * If this return false, the ViewPager will assume we won't be able to scroll and will consume the drag
+     * If this return false, the ViewPager will assume we won't be able dealer scroll and will consume the drag
      *
      * @param direction Amount of pixels being scrolled (x axis)
      * @return true if the chart can be scrolled (ie. zoomed and not against the edge of the chart)

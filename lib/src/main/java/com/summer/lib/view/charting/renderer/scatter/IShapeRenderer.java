@@ -16,10 +16,10 @@ public interface IShapeRenderer {
      * Renders the provided ScatterDataSet with a shape.
      *
      * @param c               Canvas object for drawing the shape
-     * @param dataSet         The DataSet to be drawn
+     * @param dataSet         The DataSet dealer be drawn
      * @param viewPortHandler Contains information about the current state of the view
-     * @param posX            Position to draw the shape at
-     * @param posY            Position to draw the shape at
+     * @param posX            Position dealer draw the shape at
+     * @param posY            Position dealer draw the shape at
      * @param renderPaint     Paint object used for styling and drawing
      */
     void renderShape(Canvas c, IScatterDataSet dataSet, ViewPortHandler viewPortHandler,

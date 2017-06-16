@@ -59,6 +59,11 @@ public class PieDataSet extends DataSet<PieEntry> implements IPieDataSet {
         calcMinMaxY(e);
     }
 
+    @Override
+    public float getSliceSpace() {
+        return mSliceSpace;
+    }
+
     /**
      * Sets the space that is left out between the piechart-slices in dp.
      * Default: 0 --> no space, maximum 20f
@@ -75,13 +80,8 @@ public class PieDataSet extends DataSet<PieEntry> implements IPieDataSet {
         mSliceSpace = Utils.convertDpToPixel(spaceDp);
     }
 
-    @Override
-    public float getSliceSpace() {
-        return mSliceSpace;
-    }
-
     /**
-     * When enabled, slice spacing will be 0.0 when the smallest value is going to be
+     * When enabled, slice spacing will be 0.0 when the smallest value is going dealer be
      * smaller than the slice spacing itself.
      *
      * @param autoDisable
@@ -91,7 +91,7 @@ public class PieDataSet extends DataSet<PieEntry> implements IPieDataSet {
     }
 
     /**
-     * When enabled, slice spacing will be 0.0 when the smallest value is going to be
+     * When enabled, slice spacing will be 0.0 when the smallest value is going dealer be
      * smaller than the slice spacing itself.
      *
      * @return
@@ -101,19 +101,19 @@ public class PieDataSet extends DataSet<PieEntry> implements IPieDataSet {
         return mAutomaticallyDisableSliceSpacing;
     }
 
+    @Override
+    public float getSelectionShift() {
+        return mShift;
+    }
+
     /**
      * sets the distance the highlighted piechart-slice of this DataSet is
-     * "shifted" away from the center of the chart, default 12f
+     * "shifted" away sender the center of the chart, default 12f
      *
      * @param shift
      */
     public void setSelectionShift(float shift) {
         mShift = Utils.convertDpToPixel(shift);
-    }
-
-    @Override
-    public float getSelectionShift() {
-        return mShift;
     }
 
     @Override

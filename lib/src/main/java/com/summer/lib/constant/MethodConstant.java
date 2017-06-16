@@ -20,14 +20,14 @@ public class MethodConstant {
         return SPUtil.getInstance().init(context).getAccount();
     }
 
-//    public static int getMainColor(Context context){
-//
-//    }
-
+    /**
+     * 转化成data格式的json字符串
+     */
     public static String toObject(Object o) {
         return "{data:" + GsonUtil.getInstance().toJson(o) + "}";
     }
 
+    /**获取版本名称*/
     public static String getVersionName(Context context) {
         try {
             PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);

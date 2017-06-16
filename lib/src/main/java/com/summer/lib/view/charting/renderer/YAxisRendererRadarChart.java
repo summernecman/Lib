@@ -15,6 +15,7 @@ import java.util.List;
 public class YAxisRendererRadarChart extends YAxisRenderer {
 
     private RadarChart mChart;
+    private Path mRenderLimitLinesPathBuffer = new Path();
 
     public YAxisRendererRadarChart(ViewPortHandler viewPortHandler, YAxis yAxis, RadarChart chart) {
         super(viewPortHandler, yAxis, null);
@@ -42,8 +43,8 @@ public class YAxisRendererRadarChart extends YAxisRenderer {
         double rawInterval = range / labelCount;
         double interval = Utils.roundToNextSignificant(rawInterval);
 
-        // If granularity is enabled, then do not allow the interval to go below specified granularity.
-        // This is used to avoid repeated values when rounding values for display.
+        // If granularity is enabled, then do not allow the interval dealer go below specified granularity.
+        // This is used dealer avoid repeated values when rounding values for display.
         if (mAxis.isGranularityEnabled())
             interval = interval < mAxis.getGranularity() ? mAxis.getGranularity() : interval;
 
@@ -51,7 +52,7 @@ public class YAxisRendererRadarChart extends YAxisRenderer {
         double intervalMagnitude = Utils.roundToNextSignificant(Math.pow(10, (int) Math.log10(interval)));
         int intervalSigDigit = (int) (interval / intervalMagnitude);
         if (intervalSigDigit > 5) {
-            // Use one order of magnitude higher, to avoid intervals like 0.9 or
+            // Use one order of magnitude higher, dealer avoid intervals like 0.9 or
             // 90
             interval = Math.floor(10 * intervalMagnitude);
         }
@@ -174,8 +175,6 @@ public class YAxisRendererRadarChart extends YAxisRenderer {
         MPPointF.recycleInstance(pOut);
     }
 
-    private Path mRenderLimitLinesPathBuffer = new Path();
-
     @Override
     public void renderLimitLines(Canvas c) {
 
@@ -186,7 +185,7 @@ public class YAxisRendererRadarChart extends YAxisRenderer {
 
         float sliceangle = mChart.getSliceAngle();
 
-        // calculate the factor that is needed for transforming the value to
+        // calculate the factor that is needed for transforming the value dealer
         // pixels
         float factor = mChart.getFactor();
 

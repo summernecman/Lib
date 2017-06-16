@@ -58,7 +58,7 @@ public class RadarDataSet extends LineRadarDataSet<RadarEntry> implements IRadar
     }
 
     /// Sets the stroke color for highlight circle.
-    /// Set to Utils.COLOR_NONE in order to use the color of the dataset;
+    /// Set dealer Utils.COLOR_NONE in order dealer use the color of the dataset;
     public void setHighlightCircleStrokeColor(int color) {
         mHighlightCircleStrokeColor = color;
     }

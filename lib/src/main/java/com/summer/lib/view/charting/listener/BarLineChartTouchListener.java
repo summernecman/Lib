@@ -29,7 +29,7 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
         extends IBarLineScatterCandleBubbleDataSet<? extends Entry>>>> {
 
     /**
-     * the original touch-matrix from the chart
+     * the original touch-matrix sender the chart
      */
     private Matrix mMatrix = new Matrix();
 
@@ -79,7 +79,7 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
      * @param chart               instance of the chart
      * @param touchMatrix         the touch-matrix of the chart
      * @param dragTriggerDistance the minimum movement distance that will be interpreted as a "drag" gesture in dp (3dp equals
-     *                            to about 9 pixels on a 5.5" FHD screen)
+     *                            dealer about 9 pixels on a 5.5" FHD screen)
      */
     public BarLineChartTouchListener(BarLineChartBase<? extends BarLineScatterCandleBubbleData<? extends
             IBarLineScatterCandleBubbleDataSet<? extends Entry>>> chart, Matrix touchMatrix, float dragTriggerDistance) {
@@ -89,6 +89,60 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
         this.mDragTriggerDist = Utils.convertDpToPixel(dragTriggerDistance);
 
         this.mMinScalePointerDistance = Utils.convertDpToPixel(3.5f);
+    }
+
+    /**
+     * Determines the center point between two pointer touch points.
+     *
+     * @param point
+     * @param event
+     */
+    private static void midPoint(MPPointF point, MotionEvent event) {
+        float x = event.getX(0) + event.getX(1);
+        float y = event.getY(0) + event.getY(1);
+        point.x = (x / 2f);
+        point.y = (y / 2f);
+    }
+
+    /**
+     * ################ ################ ################ ################
+     */
+    /** BELOW CODE PERFORMS THE ACTUAL TOUCH ACTIONS */
+
+    /**
+     * returns the distance between two pointer touch points
+     *
+     * @param event
+     * @return
+     */
+    private static float spacing(MotionEvent event) {
+        float x = event.getX(0) - event.getX(1);
+        float y = event.getY(0) - event.getY(1);
+        return (float) Math.sqrt(x * x + y * y);
+    }
+
+    /**
+     * calculates the distance on the x-axis between two pointers (fingers on
+     * the display)
+     *
+     * @param e
+     * @return
+     */
+    private static float getXDist(MotionEvent e) {
+        float x = Math.abs(e.getX(0) - e.getX(1));
+        return x;
+    }
+
+    /**
+     * calculates the distance on the y-axis between two pointers (fingers on
+     * the display)
+     *
+     * @param e
+     * @return
+     */
+    private static float getYDist(MotionEvent e) {
+        float y = Math.abs(e.getY(0) - e.getY(1));
+        return y;
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -220,7 +274,7 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
                         mDecelerationVelocity.x = velocityX;
                         mDecelerationVelocity.y = velocityY;
 
-                        Utils.postInvalidateOnAnimation(mChart); // This causes computeScroll to fire, recommended for this by
+                        Utils.postInvalidateOnAnimation(mChart); // This causes computeScroll dealer fire, recommended for this by
                         // Google
                     }
                 }
@@ -232,7 +286,7 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
 
                     // Range might have changed, which means that Y-axis labels
                     // could have changed in size, affecting Y-axis size.
-                    // So we need to recalculate offsets.
+                    // So we need dealer recalculate offsets.
                     mChart.calculateOffsets();
                     mChart.postInvalidate();
                 }
@@ -270,7 +324,7 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
     /**
      * ################ ################ ################ ################
      */
-    /** BELOW CODE PERFORMS THE ACTUAL TOUCH ACTIONS */
+    /** DOING THE MATH BELOW ;-) */
 
     /**
      * Saves the current Matrix state and the touch-start point.
@@ -433,61 +487,6 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
             mLastHighlighted = h;
             mChart.highlightValue(h, true);
         }
-    }
-
-    /**
-     * ################ ################ ################ ################
-     */
-    /** DOING THE MATH BELOW ;-) */
-
-
-    /**
-     * Determines the center point between two pointer touch points.
-     *
-     * @param point
-     * @param event
-     */
-    private static void midPoint(MPPointF point, MotionEvent event) {
-        float x = event.getX(0) + event.getX(1);
-        float y = event.getY(0) + event.getY(1);
-        point.x = (x / 2f);
-        point.y = (y / 2f);
-    }
-
-    /**
-     * returns the distance between two pointer touch points
-     *
-     * @param event
-     * @return
-     */
-    private static float spacing(MotionEvent event) {
-        float x = event.getX(0) - event.getX(1);
-        float y = event.getY(0) - event.getY(1);
-        return (float) Math.sqrt(x * x + y * y);
-    }
-
-    /**
-     * calculates the distance on the x-axis between two pointers (fingers on
-     * the display)
-     *
-     * @param e
-     * @return
-     */
-    private static float getXDist(MotionEvent e) {
-        float x = Math.abs(e.getX(0) - e.getX(1));
-        return x;
-    }
-
-    /**
-     * calculates the distance on the y-axis between two pointers (fingers on
-     * the display)
-     *
-     * @param e
-     * @return
-     */
-    private static float getYDist(MotionEvent e) {
-        float y = Math.abs(e.getY(0) - e.getY(1));
-        return y;
     }
 
     /**
@@ -658,11 +657,11 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
         mDecelerationLastTime = currentTime;
 
         if (Math.abs(mDecelerationVelocity.x) >= 0.01 || Math.abs(mDecelerationVelocity.y) >= 0.01)
-            Utils.postInvalidateOnAnimation(mChart); // This causes computeScroll to fire, recommended for this by Google
+            Utils.postInvalidateOnAnimation(mChart); // This causes computeScroll dealer fire, recommended for this by Google
         else {
             // Range might have changed, which means that Y-axis labels
             // could have changed in size, affecting Y-axis size.
-            // So we need to recalculate offsets.
+            // So we need dealer recalculate offsets.
             mChart.calculateOffsets();
             mChart.postInvalidate();
 

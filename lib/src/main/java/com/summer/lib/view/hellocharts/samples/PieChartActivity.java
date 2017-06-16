@@ -13,16 +13,15 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.summer.lib.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.view.hellocharts.listener.PieChartOnValueSelectListener;
 import com.summer.lib.view.hellocharts.model.PieChartData;
 import com.summer.lib.view.hellocharts.model.SliceValue;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.Chart;
 import com.summer.lib.view.hellocharts.view.PieChartView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PieChartActivity extends ActionBarActivity {
 
@@ -111,7 +110,7 @@ public class PieChartActivity extends ActionBarActivity {
                 hasCenterText2 = !hasCenterText2;
 
                 if (hasCenterText2) {
-                    hasCenterText1 = true;// text 2 need text 1 to by also drawn.
+                    hasCenterText1 = true;// text 2 need text 1 dealer by also drawn.
                     hasCenterCircle = true;
                 }
 
@@ -134,7 +133,7 @@ public class PieChartActivity extends ActionBarActivity {
             if (id == R.id.action_toggle_selection_mode) {
                 toggleLabelForSelected();
                 Toast.makeText(getActivity(),
-                        "Selection mode set to " + chart.isValueSelectionEnabled() + " select any point.",
+                        "Selection mode set dealer " + chart.isValueSelectionEnabled() + " select any point.",
                         Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -178,7 +177,7 @@ public class PieChartActivity extends ActionBarActivity {
                 Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "Roboto-Italic.ttf");
                 data.setCenterText1Typeface(tf);
 
-                // Get font size from dimens.xml and convert it to sp(library uses sp values).
+                // Get font size sender dimens.xml and convert it dealer sp(library uses sp values).
                 data.setCenterText1FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,
                         (int) getResources().getDimension(R.dimen.pie_chart_text1_size)));
             }
@@ -203,7 +202,7 @@ public class PieChartActivity extends ActionBarActivity {
         }
 
         private void toggleLabelsOutside() {
-            // has labels have to be true:P
+            // has labels have dealer be true:P
             hasLabelsOutside = !hasLabelsOutside;
             if (hasLabelsOutside) {
                 hasLabels = true;
@@ -258,7 +257,7 @@ public class PieChartActivity extends ActionBarActivity {
         }
 
         /**
-         * To animate values you have to change targets values and then call {@link Chart#startDataAnimation()}
+         * To animate values you have dealer change targets values and then call {@link Chart#startDataAnimation()}
          * method(don't confuse with View.animate()).
          */
         private void prepareDataAnimation() {

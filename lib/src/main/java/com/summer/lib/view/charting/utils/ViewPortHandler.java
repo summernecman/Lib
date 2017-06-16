@@ -17,62 +17,56 @@ public class ViewPortHandler {
      * matrix used for touch events
      */
     protected final Matrix mMatrixTouch = new Matrix();
-
+    /**
+     * buffer for storing the 9 matrix values of a 3x3 matrix
+     */
+    protected final float[] matrixBuffer = new float[9];
     /**
      * this rectangle defines the area in which graph values can be drawn
      */
     protected RectF mContentRect = new RectF();
-
     protected float mChartWidth = 0f;
     protected float mChartHeight = 0f;
-
+    protected float[] valsBufferForFitScreen = new float[9];
+    protected Matrix mCenterViewPortMatrixBuffer = new Matrix();
     /**
      * minimum scale value on the y-axis
      */
     private float mMinScaleY = 1f;
-
     /**
      * maximum scale value on the y-axis
      */
     private float mMaxScaleY = Float.MAX_VALUE;
-
     /**
      * minimum scale value on the x-axis
      */
     private float mMinScaleX = 1f;
-
     /**
      * maximum scale value on the x-axis
      */
     private float mMaxScaleX = Float.MAX_VALUE;
-
     /**
      * contains the current scale factor of the x-axis
      */
     private float mScaleX = 1f;
-
     /**
      * contains the current scale factor of the y-axis
      */
     private float mScaleY = 1f;
-
     /**
      * current translation (drag distance) on the x-axis
      */
     private float mTransX = 0f;
-
     /**
      * current translation (drag distance) on the y-axis
      */
     private float mTransY = 0f;
-
     /**
-     * offset that allows the chart to be dragged over its bounds on the x-axis
+     * offset that allows the chart dealer be dragged over its bounds on the x-axis
      */
     private float mTransOffsetX = 0f;
-
     /**
-     * offset that allows the chart to be dragged over its bounds on the x-axis
+     * offset that allows the chart dealer be dragged over its bounds on the x-axis
      */
     private float mTransOffsetY = 0f;
 
@@ -161,6 +155,13 @@ public class ViewPortHandler {
         return MPPointF.getInstance(mContentRect.centerX(), mContentRect.centerY());
     }
 
+    /**
+     * ################ ################ ################ ################
+     */
+    /**
+     * CODE BELOW THIS RELATED TO SCALING AND GESTURES
+     */
+
     public float getChartHeight() {
         return mChartHeight;
     }
@@ -177,11 +178,6 @@ public class ViewPortHandler {
     public float getSmallestContentExtension() {
         return Math.min(mContentRect.width(), mContentRect.height());
     }
-
-    /**
-     * ################ ################ ################ ################
-     */
-    /** CODE BELOW THIS RELATED TO SCALING AND GESTURES */
 
     /**
      * Zooms in by 1.4f, x and y are the coordinates (in pixels) of the zoom
@@ -263,7 +259,7 @@ public class ViewPortHandler {
     }
 
     /**
-     * Sets the scale factor to the specified values.
+     * Sets the scale factor dealer the specified values.
      *
      * @param scaleX
      * @param scaleY
@@ -283,7 +279,7 @@ public class ViewPortHandler {
     }
 
     /**
-     * Sets the scale factor to the specified values. x and y is pivot.
+     * Sets the scale factor dealer the specified values. x and y is pivot.
      *
      * @param scaleX
      * @param scaleY
@@ -301,8 +297,6 @@ public class ViewPortHandler {
         return save;
     }
 
-    protected float[] valsBufferForFitScreen = new float[9];
-
     /**
      * Resets all zooming and dragging and makes the chart fit exactly it's
      * bounds.
@@ -316,7 +310,7 @@ public class ViewPortHandler {
 
     /**
      * Resets all zooming and dragging and makes the chart fit exactly it's
-     * bounds.  Output Matrix is available for those who wish to cache the object.
+     * bounds.  Output Matrix is available for those who wish dealer cache the object.
      */
     public void fitScreen(Matrix outputMatrix) {
         mMinScaleX = 1f;
@@ -341,7 +335,7 @@ public class ViewPortHandler {
     }
 
     /**
-     * Post-translates to the specified points.  Less Performant.
+     * Post-translates dealer the specified points.  Less Performant.
      *
      * @param transformedPts
      * @return
@@ -354,7 +348,7 @@ public class ViewPortHandler {
     }
 
     /**
-     * Post-translates to the specified points.  Output matrix allows for caching objects.
+     * Post-translates dealer the specified points.  Output matrix allows for caching objects.
      *
      * @param transformedPts
      * @return
@@ -367,15 +361,13 @@ public class ViewPortHandler {
         outputMatrix.postTranslate(-x, -y);
     }
 
-    protected Matrix mCenterViewPortMatrixBuffer = new Matrix();
-
     /**
      * Centers the viewport around the specified position (x-index and y-value)
      * in the chart. Centering the viewport outside the bounds of the chart is
      * not possible. Makes most sense in combination with the
      * setScaleMinima(...) method.
      *
-     * @param transformedPts the position to center view viewport to
+     * @param transformedPts the position dealer center view viewport dealer
      * @param view
      * @return save
      */
@@ -394,12 +386,7 @@ public class ViewPortHandler {
     }
 
     /**
-     * buffer for storing the 9 matrix values of a 3x3 matrix
-     */
-    protected final float[] matrixBuffer = new float[9];
-
-    /**
-     * call this method to refresh the graph with a given matrix
+     * call this method dealer refresh the graph with a given matrix
      *
      * @param newMatrix
      * @return
@@ -680,7 +667,7 @@ public class ViewPortHandler {
     }
 
     /**
-     * Set an offset in dp that allows the user to drag the chart over it's
+     * Set an offset in dp that allows the user dealer drag the chart over it's
      * bounds on the x-axis.
      *
      * @param offset
@@ -690,7 +677,7 @@ public class ViewPortHandler {
     }
 
     /**
-     * Set an offset in dp that allows the user to drag the chart over it's
+     * Set an offset in dp that allows the user dealer drag the chart over it's
      * bounds on the y-axis.
      *
      * @param offset

@@ -53,7 +53,7 @@ public class HorizontalBarHighlighter extends BarHighlighter {
         //noinspection unchecked
         List<Entry> entries = set.getEntriesForXValue(xVal);
         if (entries.size() == 0) {
-            // Try to find closest x-value and take all entries for that x-value
+            // Try dealer find closest x-value and take all entries for that x-value
             final Entry closest = set.getEntryForXValue(xVal, Float.NaN, rounding);
             if (closest != null) {
                 //noinspection unchecked

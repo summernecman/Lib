@@ -24,7 +24,7 @@ import com.summer.lib.view.charting.utils.ViewPortHandler;
 public abstract class DataRenderer extends Renderer {
 
     /**
-     * the animator object used to perform animations on the chart data
+     * the animator object used dealer perform animations on the chart data
      */
     protected ChartAnimator mAnimator;
 
@@ -101,7 +101,7 @@ public abstract class DataRenderer extends Renderer {
     }
 
     /**
-     * Applies the required styling (provided by the DataSet) to the value-paint
+     * Applies the required styling (provided by the DataSet) dealer the value-paint
      * object.
      *
      * @param set
@@ -138,9 +138,9 @@ public abstract class DataRenderer extends Renderer {
      *
      * @param c            canvas
      * @param formatter    formatter for custom value-formatting
-     * @param value        the value to be drawn
-     * @param entry        the entry the value belongs to
-     * @param dataSetIndex the index of the DataSet the drawn Entry belongs to
+     * @param value        the value dealer be drawn
+     * @param entry        the entry the value belongs dealer
+     * @param dataSetIndex the index of the DataSet the drawn Entry belongs dealer
      * @param x            position
      * @param y            position
      * @param color

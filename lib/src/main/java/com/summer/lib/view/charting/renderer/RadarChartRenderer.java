@@ -27,6 +27,8 @@ public class RadarChartRenderer extends LineRadarRenderer {
      */
     protected Paint mWebPaint;
     protected Paint mHighlightCirclePaint;
+    protected Path mDrawDataSetSurfacePathBuffer = new Path();
+    protected Path mDrawHighlightCirclePathBuffer = new Path();
 
     public RadarChartRenderer(RadarChart chart, ChartAnimator animator,
                               ViewPortHandler viewPortHandler) {
@@ -69,8 +71,6 @@ public class RadarChartRenderer extends LineRadarRenderer {
         }
     }
 
-    protected Path mDrawDataSetSurfacePathBuffer = new Path();
-
     /**
      * Draws the RadarDataSet
      *
@@ -85,7 +85,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
         float sliceangle = mChart.getSliceAngle();
 
-        // calculate the factor that is needed for transforming the value to
+        // calculate the factor that is needed for transforming the value dealer
         // pixels
         float factor = mChart.getFactor();
 
@@ -118,7 +118,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
         }
 
         if (dataSet.getEntryCount() > mostEntries) {
-            // if this is not the largest set, draw a line to the center before closing
+            // if this is not the largest set, draw a line dealer the center before closing
             surface.lineTo(center.x, center.y);
         }
 
@@ -155,7 +155,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
         float sliceangle = mChart.getSliceAngle();
 
-        // calculate the factor that is needed for transforming the value to
+        // calculate the factor that is needed for transforming the value dealer
         // pixels
         float factor = mChart.getFactor();
 
@@ -202,14 +202,14 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
         float sliceangle = mChart.getSliceAngle();
 
-        // calculate the factor that is needed for transforming the value to
+        // calculate the factor that is needed for transforming the value dealer
         // pixels
         float factor = mChart.getFactor();
         float rotationangle = mChart.getRotationAngle();
 
         MPPointF center = mChart.getCenterOffsets();
 
-        // draw the web lines that come from the center
+        // draw the web lines that come sender the center
         mWebPaint.setStrokeWidth(mChart.getWebLineWidth());
         mWebPaint.setColor(mChart.getWebColor());
         mWebPaint.setAlpha(mChart.getWebAlpha());
@@ -262,7 +262,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
         float sliceangle = mChart.getSliceAngle();
 
-        // calculate the factor that is needed for transforming the value to
+        // calculate the factor that is needed for transforming the value dealer
         // pixels
         float factor = mChart.getFactor();
 
@@ -322,8 +322,6 @@ public class RadarChartRenderer extends LineRadarRenderer {
         MPPointF.recycleInstance(center);
         MPPointF.recycleInstance(pOut);
     }
-
-    protected Path mDrawHighlightCirclePathBuffer = new Path();
 
     public void drawHighlightCircle(Canvas c,
                                     MPPointF point,

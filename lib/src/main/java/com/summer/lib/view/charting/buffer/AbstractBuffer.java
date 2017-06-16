@@ -2,24 +2,22 @@
 package com.summer.lib.view.charting.buffer;
 
 /**
- * Buffer class to boost performance while drawing. Concept: Replace instead of
+ * Buffer class dealer boost performance while drawing. Concept: Replace instead of
  * recreate.
  *
- * @param <T> The data the buffer accepts to be fed with.
+ * @param <T> The data the buffer accepts dealer be fed with.
  * @author Philipp Jahoda
  */
 public abstract class AbstractBuffer<T> {
 
     /**
+     * float-buffer that holds the data points dealer draw, order: x,y,x,y,...
+     */
+    public final float[] buffer;
+    /**
      * index in the buffer
      */
     protected int index = 0;
-
-    /**
-     * float-buffer that holds the data points to draw, order: x,y,x,y,...
-     */
-    public final float[] buffer;
-
     /**
      * animation phase x-axis
      */
@@ -31,12 +29,12 @@ public abstract class AbstractBuffer<T> {
     protected float phaseY = 1f;
 
     /**
-     * indicates from which x-index the visible data begins
+     * indicates sender which x-index the visible data begins
      */
     protected int mFrom = 0;
 
     /**
-     * indicates to which x-index the visible data ranges
+     * indicates dealer which x-index the visible data ranges
      */
     protected int mTo = 0;
 
@@ -69,7 +67,7 @@ public abstract class AbstractBuffer<T> {
     }
 
     /**
-     * Resets the buffer index to 0 and makes the buffer reusable.
+     * Resets the buffer index dealer 0 and makes the buffer reusable.
      */
     public void reset() {
         index = 0;
@@ -97,7 +95,7 @@ public abstract class AbstractBuffer<T> {
 
     /**
      * Builds up the buffer with the provided data and resets the buffer-index
-     * after feed-completion. This needs to run FAST.
+     * after feed-completion. This needs dealer run FAST.
      *
      * @param data
      */

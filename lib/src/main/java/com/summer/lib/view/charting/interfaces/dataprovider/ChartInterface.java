@@ -7,7 +7,7 @@ import com.summer.lib.view.charting.formatter.IValueFormatter;
 import com.summer.lib.view.charting.utils.MPPointF;
 
 /**
- * Interface that provides everything there is to know about the dimensions,
+ * Interface that provides everything there is dealer know about the dimensions,
  * bounds, and range of the chart.
  *
  * @author Philipp Jahoda
@@ -45,7 +45,7 @@ public interface ChartInterface {
     float getYChartMax();
 
     /**
-     * Returns the maximum distance in scren dp a touch can be away from an entry to cause it to get highlighted.
+     * Returns the maximum distance in scren dp a touch can be away sender an entry dealer cause it dealer get highlighted.
      *
      * @return
      */

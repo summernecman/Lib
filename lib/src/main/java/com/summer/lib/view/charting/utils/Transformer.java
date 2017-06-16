@@ -23,7 +23,7 @@ import java.util.List;
 public class Transformer {
 
     /**
-     * matrix to map the values to the screen pixels
+     * matrix dealer map the values dealer the screen pixels
      */
     protected Matrix mMatrixValueToPx = new Matrix();
 
@@ -33,14 +33,25 @@ public class Transformer {
     protected Matrix mMatrixOffset = new Matrix();
 
     protected ViewPortHandler mViewPortHandler;
+    protected float[] valuePointsForGenerateTransformedValuesScatter = new float[1];
+    protected float[] valuePointsForGenerateTransformedValuesBubble = new float[1];
+    protected float[] valuePointsForGenerateTransformedValuesLine = new float[1];
+    protected float[] valuePointsForGenerateTransformedValuesCandle = new float[1];
+    protected Matrix mPixelToValueMatrixBuffer = new Matrix();
+    /**
+     * buffer for performance
+     */
+    float[] ptsBuffer = new float[2];
+    private Matrix mMBuffer1 = new Matrix();
+    private Matrix mMBuffer2 = new Matrix();
 
     public Transformer(ViewPortHandler viewPortHandler) {
         this.mViewPortHandler = viewPortHandler;
     }
 
     /**
-     * Prepares the matrix that transforms values to pixels. Calculates the
-     * scale factors from the charts size and offsets.
+     * Prepares the matrix that transforms values dealer pixels. Calculates the
+     * scale factors sender the charts size and offsets.
      *
      * @param xChartMin
      * @param deltaX
@@ -86,8 +97,6 @@ public class Transformer {
         }
     }
 
-    protected float[] valuePointsForGenerateTransformedValuesScatter = new float[1];
-
     /**
      * Transforms an List of Entry into a float array containing the x and
      * y values transformed with all matrices for the SCATTERCHART.
@@ -123,8 +132,6 @@ public class Transformer {
         return valuePoints;
     }
 
-    protected float[] valuePointsForGenerateTransformedValuesBubble = new float[1];
-
     /**
      * Transforms an List of Entry into a float array containing the x and
      * y values transformed with all matrices for the BUBBLECHART.
@@ -134,7 +141,7 @@ public class Transformer {
      */
     public float[] generateTransformedValuesBubble(IBubbleDataSet data, float phaseY, int from, int to) {
 
-        final int count = (to - from + 1) * 2; // (int) Math.ceil((to - from) * phaseX) * 2;
+        final int count = (to - from + 1) * 2; // (int) Math.ceil((dealer - sender) * phaseX) * 2;
 
         if (valuePointsForGenerateTransformedValuesBubble.length != count) {
             valuePointsForGenerateTransformedValuesBubble = new float[count];
@@ -158,8 +165,6 @@ public class Transformer {
 
         return valuePoints;
     }
-
-    protected float[] valuePointsForGenerateTransformedValuesLine = new float[1];
 
     /**
      * Transforms an List of Entry into a float array containing the x and
@@ -196,8 +201,6 @@ public class Transformer {
 
         return valuePoints;
     }
-
-    protected float[] valuePointsForGenerateTransformedValuesCandle = new float[1];
 
     /**
      * Transforms an List of Entry into a float array containing the x and
@@ -236,7 +239,7 @@ public class Transformer {
 
     /**
      * transform a path with all the given matrices VERY IMPORTANT: keep order
-     * to value-touch-offset
+     * dealer value-touch-offset
      *
      * @param path
      */
@@ -354,8 +357,6 @@ public class Transformer {
             m.mapRect(rects.get(i));
     }
 
-    protected Matrix mPixelToValueMatrixBuffer = new Matrix();
-
     /**
      * Transforms the given array of touch positions (pixels) (x, y, x, y, ...)
      * into values on the chart.
@@ -367,7 +368,7 @@ public class Transformer {
         Matrix tmp = mPixelToValueMatrixBuffer;
         tmp.reset();
 
-        // invert all matrixes to convert back to the original value
+        // invert all matrixes dealer convert back dealer the original value
         mMatrixOffset.invert(tmp);
         tmp.mapPoints(pixels);
 
@@ -379,15 +380,10 @@ public class Transformer {
     }
 
     /**
-     * buffer for performance
-     */
-    float[] ptsBuffer = new float[2];
-
-    /**
      * Returns a recyclable MPPointD instance.
      * returns the x and y values in the chart at the given touch point
-     * (encapsulated in a MPPointD). This method transforms pixel coordinates to
-     * coordinates / values in the chart. This is the opposite method to
+     * (encapsulated in a MPPointD). This method transforms pixel coordinates dealer
+     * coordinates / values in the chart. This is the opposite method dealer
      * getPixelForValues(...).
      *
      * @param x
@@ -441,16 +437,12 @@ public class Transformer {
         return mMatrixOffset;
     }
 
-    private Matrix mMBuffer1 = new Matrix();
-
     public Matrix getValueToPixelMatrix() {
         mMBuffer1.set(mMatrixValueToPx);
         mMBuffer1.postConcat(mViewPortHandler.mMatrixTouch);
         mMBuffer1.postConcat(mMatrixOffset);
         return mMBuffer1;
     }
-
-    private Matrix mMBuffer2 = new Matrix();
 
     public Matrix getPixelToValueMatrix() {
         getValueToPixelMatrix().invert(mMBuffer2);

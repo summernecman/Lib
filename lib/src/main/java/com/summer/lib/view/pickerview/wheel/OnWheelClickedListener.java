@@ -8,7 +8,7 @@ package com.summer.lib.view.pickerview.wheel;
  */
 public interface OnWheelClickedListener {
     /**
-     * Callback method to be invoked when current item clicked
+     * Callback method dealer be invoked when current item clicked
      *
      * @param wheel     the wheel view
      * @param itemIndex the index of clicked item

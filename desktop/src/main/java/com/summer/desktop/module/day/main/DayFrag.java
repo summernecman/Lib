@@ -17,7 +17,6 @@ import com.summer.desktop.module.day.dayview.DayView;
 import com.summer.desktop.module.note.circlemenu.CircleMenuFrag;
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.base.ope.BaseOpes;
 import com.summer.lib.constant.ValueConstant;
 import com.summer.lib.util.data.DateFormatUtil;
 import com.summer.lib.util.file.TimePickUtil;
@@ -27,10 +26,6 @@ import java.util.Calendar;
 
 public class DayFrag extends BaseUIFrag<DayMainUIOpe, DayMainDAOpe> implements DayView.OnlongClickWithHM {
 
-    @Override
-    public BaseOpes<DayMainUIOpe, DayMainDAOpe> createOpes() {
-        return new BaseOpes<>(new DayMainUIOpe(activity), new DayMainDAOpe(activity));
-    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

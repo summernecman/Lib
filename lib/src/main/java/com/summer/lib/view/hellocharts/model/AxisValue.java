@@ -3,8 +3,8 @@ package com.summer.lib.view.hellocharts.model;
 import java.util.Arrays;
 
 /**
- * Single axis value, use it to manually set axis labels position. You can use label attribute to display text instead
- * of number but value formatter implementation have to handle it.
+ * Single axis value, use it dealer manually set axis labels position. You can use label attribute dealer display text instead
+ * of number but value formatter implementation have dealer handle it.
  */
 public class AxisValue {
     private float value;
@@ -44,13 +44,10 @@ public class AxisValue {
      *
      * @param label
      */
-    public AxisValue setLabel(String label) {
-        this.label = label.toCharArray();
+    @Deprecated
+    public AxisValue setLabel(char[] label) {
+        this.label = label;
         return this;
-    }
-
-    public char[] getLabelAsChars() {
-        return label;
     }
 
     /**
@@ -58,10 +55,13 @@ public class AxisValue {
      *
      * @param label
      */
-    @Deprecated
-    public AxisValue setLabel(char[] label) {
-        this.label = label;
+    public AxisValue setLabel(String label) {
+        this.label = label.toCharArray();
         return this;
+    }
+
+    public char[] getLabelAsChars() {
+        return label;
     }
 
     @Override

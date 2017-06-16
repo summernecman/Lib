@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.summer.lib.aplication.LibAplication;
-import com.summer.lib.exception.exception.CrashHander;
+import com.summer.lib.util.LogUtil;
 
 
 /**
@@ -21,9 +21,12 @@ public class BaseActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this;
-        LibAplication application = (LibAplication) getApplication();
-        application.getActivityHashMap().put(getClass().getSimpleName(), activity);
-        application.getActivities().add(activity);
-        CrashHander.getInstance().init(this);
+        if (getApplication() instanceof LibAplication) {
+            LibAplication application = (LibAplication) getApplication();
+            application.getActMap().put(getClass().getSimpleName(), activity);
+            application.getActs().add(activity);
+        } else {
+            LogUtil.E("你的application最好继承LibAplication以便享有方便的方法");
+        }
     }
 }

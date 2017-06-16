@@ -1,12 +1,11 @@
 package com.summer.lib.util;
 
-import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 import com.summer.lib.R;
-import com.summer.lib.base.fragment.BaseUIFrag;
 
 import java.util.ArrayList;
 
@@ -16,7 +15,11 @@ import java.util.ArrayList;
  */
 public class FragmentUtil {
 
-    private static FragmentUtil instance;
+    public static FragmentUtil instance;
+
+    public static ArrayList<Fragment> fragments = new ArrayList<>();
+
+    Handler handler = new Handler();
 
     public static FragmentUtil getInstance() {
         if (instance == null) {
@@ -25,82 +28,59 @@ public class FragmentUtil {
         return instance;
     }
 
-    public void addToContaier(FragmentActivity activity, ArrayList<Fragment> fragments, int resid) {
-        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        for (int i = 0; i < fragments.size(); i++) {
-            transaction.add(resid, fragments.get(i));
-        }
-        try {
+    public void add(final FragmentActivity fragmentActivity, Fragment now) {
+        if (fragments != null && fragments.size() > 0) {
+            Fragment fragment = fragments.get(fragments.size() - 1);
+            fragments.add(now);
+            FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
+            transaction.hide(fragment);
+            transaction.add(R.id.root, now);
             transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public void addToContaier(FragmentActivity activity, Fragment fragment, int resid) {
-        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
-        transaction.add(resid, fragment, fragment.getClass().getSimpleName());
-        transaction.commit();
-    }
-
-
-    public void addToContaierWithOutAnim(FragmentActivity activity, Fragment fragment, int resid) {
-        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.add(resid, fragment, fragment.getClass().getSimpleName());
-        try {
-            transaction.addToBackStack(fragment.getClass().getSimpleName());
+        } else {
+            fragments.add(now);
+            FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
+            transaction.add(R.id.root, now);
             transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
-    public void addToContaier(FragmentActivity activity, Fragment thisf, Fragment nextf, int resid) {
-        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
-        transaction.hide(thisf);
-        transaction.add(resid, nextf, nextf.getClass().getSimpleName());
-        transaction.commit();
-    }
 
-    public void addToContaier(FragmentActivity activity, Fragment fragment, int resid, String tag) {
-        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.anim_push_left_in, R.anim.anim_push_right_out);
-        transaction.add(resid, fragment, tag);
-        try {
+    public void removeTop(final FragmentActivity fragmentActivity) {
+        if (fragments != null && fragments.size() > 1) {
+            final Fragment now = fragments.get(fragments.size() - 1);
+            final Fragment old = fragments.get(fragments.size() - 2);
+            FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.anim_push_left_in, R.anim.anim_push_right_out);
+            transaction.hide(now);
+            transaction.show(old);
             transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
+            fragments.remove(now);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+                    transaction.remove(now);
+                    transaction.commit();
+                }
+            }, 500);
         }
+
+
     }
 
-
-    public void removeFrag(FragmentActivity activity, Fragment thisf, String tag) {
-        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.anim_push_left_in, R.anim.anim_push_right_out);
-        transaction.remove(thisf);
-        if (activity.getSupportFragmentManager().findFragmentByTag(tag) != null) {
-            transaction.show(activity.getSupportFragmentManager().findFragmentByTag(tag));
-        }
-
-        transaction.commit();
+    public void clear() {
+        fragments.clear();
     }
 
-
-    public void removeFrag(FragmentActivity activity, Fragment thisf, String tag, Bundle bundle) {
-        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.anim_push_left_in, R.anim.anim_push_right_out);
-        transaction.remove(thisf);
-        if (activity.getSupportFragmentManager().findFragmentByTag(tag) != null) {
-            if (activity.getSupportFragmentManager().findFragmentByTag(tag) instanceof BaseUIFrag) {
-                BaseUIFrag drawerLayoutFrag = (BaseUIFrag) activity.getSupportFragmentManager().findFragmentByTag(tag);
-                drawerLayoutFrag.onResult(-1, bundle);
-            }
-            transaction.show(activity.getSupportFragmentManager().findFragmentByTag(tag));
+    public void initClear(FragmentActivity fragmentActivity) {
+        clear();
+        ArrayList<Fragment> fragments = (ArrayList<Fragment>) fragmentActivity.getSupportFragmentManager().getFragments();
+        FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+        for (int i = 0; fragments != null && i < fragments.size(); i++) {
+            transaction.remove(fragments.get(i));
         }
-
         transaction.commit();
     }
 

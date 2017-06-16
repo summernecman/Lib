@@ -23,6 +23,7 @@ import java.util.List;
 public class XAxisRendererHorizontalBarChart extends XAxisRenderer {
 
     protected BarChart mChart;
+    protected Path mRenderLimitLinesPathBuffer = new Path();
 
     public XAxisRendererHorizontalBarChart(ViewPortHandler viewPortHandler, XAxis xAxis,
                                            Transformer trans, BarChart chart) {
@@ -207,10 +208,8 @@ public class XAxisRendererHorizontalBarChart extends XAxisRenderer {
         }
     }
 
-    protected Path mRenderLimitLinesPathBuffer = new Path();
-
     /**
-     * Draws the LimitLines associated with this axis to the screen.
+     * Draws the LimitLines associated with this axis dealer the screen.
      * This is the standard YAxis renderer using the XAxis limit lines.
      *
      * @param c

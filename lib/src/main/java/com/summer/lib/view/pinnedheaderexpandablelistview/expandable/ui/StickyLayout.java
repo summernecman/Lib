@@ -5,12 +5,12 @@
  * https://github.com/singwhatiwanna
  * http://blog.csdn.net/singwhatiwanna
  * <p>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
+ * Permission is hereby granted, free of charge, dealer any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), dealer deal
  * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * dealer use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and dealer permit persons dealer whom the Software is
+ * furnished dealer do so, subject dealer the following conditions:
  * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
@@ -40,25 +40,19 @@ import java.util.NoSuchElementException;
 
 
 public class StickyLayout extends LinearLayout {
+    public static final int STATUS_EXPANDED = 1;
+    public static final int STATUS_COLLAPSED = 2;
     private static final String TAG = "StickyLayout";
     private static final boolean DEBUG = true;
-
-    public interface OnGiveUpTouchEventListener {
-        boolean giveUpTouchEvent(MotionEvent event);
-    }
-
+    // 用来控制滑动角度，仅当角度a满足如下条件才进行滑动：tan a = deltaX / deltaY > 2
+    private static final int TAN = 2;
     private View mHeader;
     private View mContent;
     private OnGiveUpTouchEventListener mGiveUpTouchEventListener;
-
     // header的高度  单位：px
     private int mOriginalHeaderHeight;
     private int mHeaderHeight;
-
     private int mStatus = STATUS_EXPANDED;
-    public static final int STATUS_EXPANDED = 1;
-    public static final int STATUS_COLLAPSED = 2;
-
     private int mTouchSlop;
 
     // 分别记录上次滑动的坐标
@@ -68,14 +62,9 @@ public class StickyLayout extends LinearLayout {
     // 分别记录上次滑动的坐标(onInterceptTouchEvent)
     private int mLastXIntercept = 0;
     private int mLastYIntercept = 0;
-
-    // 用来控制滑动角度，仅当角度a满足如下条件才进行滑动：tan a = deltaX / deltaY > 2
-    private static final int TAN = 2;
-
     private boolean mIsSticky = true;
     private boolean mInitDataSucceed = false;
     private boolean mDisallowInterceptTouchEventOnHeader = true;
-
     public StickyLayout(Context context) {
         super(context);
     }
@@ -259,6 +248,10 @@ public class StickyLayout extends LinearLayout {
         setHeaderHeight(height);
     }
 
+    public int getHeaderHeight() {
+        return mHeaderHeight;
+    }
+
     public void setHeaderHeight(int height) {
         if (!mInitDataSucceed) {
             initData();
@@ -290,16 +283,16 @@ public class StickyLayout extends LinearLayout {
         }
     }
 
-    public int getHeaderHeight() {
-        return mHeaderHeight;
-    }
-
     public void setSticky(boolean isSticky) {
         mIsSticky = isSticky;
     }
 
     public void requestDisallowInterceptTouchEventOnHeader(boolean disallowIntercept) {
         mDisallowInterceptTouchEventOnHeader = disallowIntercept;
+    }
+
+    public interface OnGiveUpTouchEventListener {
+        boolean giveUpTouchEvent(MotionEvent event);
     }
 
 }

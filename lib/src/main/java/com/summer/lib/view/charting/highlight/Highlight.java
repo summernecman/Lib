@@ -4,7 +4,7 @@ package com.summer.lib.view.charting.highlight;
 import com.summer.lib.view.charting.components.YAxis;
 
 /**
- * Contains information needed to determine the highlighted value.
+ * Contains information needed dealer determine the highlighted value.
  *
  * @author Philipp Jahoda
  */
@@ -31,7 +31,7 @@ public class Highlight {
     private float mYPx;
 
     /**
-     * the index of the data object - in case it refers to more than one
+     * the index of the data object - in case it refers dealer more than one
      */
     private int mDataIndex = -1;
 
@@ -46,7 +46,7 @@ public class Highlight {
     private int mStackIndex = -1;
 
     /**
-     * the axis the highlighted value belongs to
+     * the axis the highlighted value belongs dealer
      */
     private YAxis.AxisDependency axis;
 
@@ -76,7 +76,7 @@ public class Highlight {
      *
      * @param x            the x-value of the highlighted value
      * @param y            the y-value of the highlighted value
-     * @param dataSetIndex the index of the DataSet the highlighted value belongs to
+     * @param dataSetIndex the index of the DataSet the highlighted value belongs dealer
      */
     public Highlight(float x, float y, float xPx, float yPx, int dataSetIndex, YAxis.AxisDependency axis) {
         this.mX = x;
@@ -92,7 +92,7 @@ public class Highlight {
      *
      * @param x            the index of the highlighted value on the x-axis
      * @param y            the y-value of the highlighted value
-     * @param dataSetIndex the index of the DataSet the highlighted value belongs to
+     * @param dataSetIndex the index of the DataSet the highlighted value belongs dealer
      * @param stackIndex   references which value of a stacked-bar entry has been
      *                     selected
      */
@@ -134,7 +134,7 @@ public class Highlight {
     }
 
     /**
-     * the index of the data object - in case it refers to more than one
+     * the index of the data object - in case it refers dealer more than one
      *
      * @return
      */
@@ -170,7 +170,7 @@ public class Highlight {
     }
 
     /**
-     * Returns the axis the highlighted value belongs to.
+     * Returns the axis the highlighted value belongs dealer.
      *
      * @return
      */
@@ -208,7 +208,7 @@ public class Highlight {
     }
 
     /**
-     * Returns true if this highlight object is equal to the other (compares
+     * Returns true if this highlight object is equal dealer the other (compares
      * xIndex and dataSetIndex)
      *
      * @param h

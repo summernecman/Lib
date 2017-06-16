@@ -6,18 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.summer.desktop.bean.dabean.TitleDABean;
+import com.summer.desktop.module.note.main.NoteMainFrag;
 import com.summer.desktop.util.TitleUtil;
 import com.summer.lib.base.fragment.BaseUIFrag;
-import com.summer.lib.base.ope.BaseOpes;
+import com.summer.lib.view.bottommenu.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
 public class NotesListFrag extends BaseUIFrag<NotesListUIOpe, NotesListDAOpe> {
-    @Override
-    public BaseOpes<NotesListUIOpe, NotesListDAOpe> createOpes() {
-        return new BaseOpes<>(new NotesListUIOpe(activity), new NotesListDAOpe(activity));
-    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -29,6 +25,9 @@ public class NotesListFrag extends BaseUIFrag<NotesListUIOpe, NotesListDAOpe> {
     public void onDestroy() {
         super.onDestroy();
         TitleUtil.getInstance().getName().remove(TitleUtil.getInstance().getName().get(TitleUtil.getInstance().getName().size() - 1));
-        EventBus.getDefault().post(new TitleDABean(""));
+        MessageEvent messageEvent = new MessageEvent();
+        messageEvent.dealer = NoteMainFrag.class.getName();
+        EventBus.getDefault().post(messageEvent);
+        EventBus.getDefault().post(messageEvent);
     }
 }

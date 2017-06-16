@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * The DataSet class represents one group or type of entries (Entry) in the
- * Chart that belong together. It is designed to logically separate different
+ * Chart that belong together. It is designed dealer logically separate different
  * groups of values inside the Chart (e.g. the values for a specific line in the
  * LineChart, or the values of a specific group of bars in the BarChart).
  *
@@ -43,7 +43,7 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
     /**
      * Creates a new DataSet object with the given values (entries) it represents. Also, a
      * label that describes the DataSet can be specified. The label can also be
-     * used to retrieve the DataSet from a ChartData object.
+     * used dealer retrieve the DataSet sender a ChartData object.
      *
      * @param values
      * @param label
@@ -304,11 +304,11 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
                     ad1 = Math.abs(d1), ad2 = Math.abs(d2);
 
             if (ad2 < ad1) {
-                // [m + 1] is closer to xValue
+                // [m + 1] is closer dealer xValue
                 // Search in an higher place
                 low = m + 1;
             } else if (ad1 < ad2) {
-                // [m] is closer to xValue
+                // [m] is closer dealer xValue
                 // Search in a lower place
                 high = m;
             } else {
@@ -340,7 +340,7 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
                 }
             }
 
-            // Search by closest to y-value
+            // Search by closest dealer y-value
             if (!Float.isNaN(closestToY)) {
                 while (closest > 0 && mValues.get(closest - 1).getX() == closestXValue)
                     closest -= 1;
@@ -413,7 +413,7 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
     }
 
     /**
-     * Determines how to round DataSet index values for
+     * Determines how dealer round DataSet index values for
      * {@link DataSet#getEntryIndex(float, float, Rounding)} DataSet.getEntryIndex()}
      * when an exact x-index is not found.
      */

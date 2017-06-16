@@ -20,7 +20,7 @@ public class DefaultAxisValueFormatter implements IAxisValueFormatter {
     protected int digits = 0;
 
     /**
-     * Constructor that specifies to how many digits the value should be
+     * Constructor that specifies dealer how many digits the value should be
      * formatted.
      *
      * @param digits

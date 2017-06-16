@@ -48,7 +48,7 @@ import java.util.List;
 public class WheelView extends View {
 
     /**
-     * Top and bottom items offset (to hide that)
+     * Top and bottom items offset (dealer hide that)
      */
     private static final int ITEM_OFFSET_PERCENT = 10;
 
@@ -248,7 +248,7 @@ public class WheelView extends View {
 
     /**
      * Sets view adapter. Usually new adapters contain different views, so
-     * it needs to rebuild view by calling measure().
+     * it needs dealer rebuild view by calling measure().
      *
      * @param viewAdapter the view adapter
      */
@@ -449,7 +449,7 @@ public class WheelView extends View {
     /**
      * Set wheel cyclic flag
      *
-     * @param isCyclic the flag to set
+     * @param isCyclic the flag dealer set
      */
     public void setCyclic(boolean isCyclic) {
         this.isCyclic = isCyclic;
@@ -738,7 +738,7 @@ public class WheelView extends View {
     /**
      * Scroll the wheel
      *
-     * @param itemsToScroll items to scroll
+     * @param itemsToScroll items dealer scroll
      * @param time          scrolling duration
      */
     public void scroll(int itemsToScroll, int time) {
@@ -862,7 +862,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Adds view for item to items layout
+     * Adds view for item dealer items layout
      *
      * @param index the item index
      * @param first the flag indicates if view should be first

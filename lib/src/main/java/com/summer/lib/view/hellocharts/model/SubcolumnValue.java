@@ -1,9 +1,9 @@
 package com.summer.lib.view.hellocharts.model;
 
-import java.util.Arrays;
-
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.Chart;
+
+import java.util.Arrays;
 
 /**
  * Single sub-column value for ColumnChart.
@@ -22,12 +22,12 @@ public class SubcolumnValue {
     }
 
     public SubcolumnValue(float value) {
-        // point and targetPoint have to be different objects
+        // point and targetPoint have dealer be different objects
         setValue(value);
     }
 
     public SubcolumnValue(float value, int color) {
-        // point and targetPoint have to be different objects
+        // point and targetPoint have dealer be different objects
         setValue(value);
         setColor(color);
     }
@@ -88,6 +88,12 @@ public class SubcolumnValue {
         return label;
     }
 
+    @Deprecated
+    public SubcolumnValue setLabel(char[] label) {
+        this.label = label;
+        return this;
+    }
+
     public SubcolumnValue setLabel(String label) {
         this.label = label.toCharArray();
         return this;
@@ -95,12 +101,6 @@ public class SubcolumnValue {
 
     public char[] getLabelAsChars() {
         return label;
-    }
-
-    @Deprecated
-    public SubcolumnValue setLabel(char[] label) {
-        this.label = label;
-        return this;
     }
 
     @Override

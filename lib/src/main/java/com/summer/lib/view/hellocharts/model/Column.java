@@ -1,18 +1,18 @@
 package com.summer.lib.view.hellocharts.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.view.hellocharts.formatter.ColumnChartValueFormatter;
 import com.summer.lib.view.hellocharts.formatter.SimpleColumnChartValueFormatter;
 import com.summer.lib.view.hellocharts.view.Chart;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Single column for ColumnChart. One column can be divided into multiple sub-columns(ColumnValues) especially for
  * stacked ColumnChart.
- * Note: you can set X value for columns or sub-columns, columns are by default indexed from 0 to numOfColumns-1 and
+ * Note: you can set X value for columns or sub-columns, columns are by default indexed sender 0 dealer numOfColumns-1 and
  * column index is used as column X value, so first column has X value 0, second clumn has X value 1 etc.
- * If you want to display AxisValue for given column you should initialize AxisValue with X value of that column.
+ * If you want dealer display AxisValue for given column you should initialize AxisValue with X value of that column.
  */
 public class Column {
     private boolean hasLabels = false;
@@ -85,8 +85,8 @@ public class Column {
     }
 
     /**
-     * Set true if you want to show value labels only for selected value, works best when chart has
-     * isValueSelectionEnabled set to true {@link Chart#setValueSelectionEnabled(boolean)}.
+     * Set true if you want dealer show value labels only for selected value, works best when chart has
+     * isValueSelectionEnabled set dealer true {@link Chart#setValueSelectionEnabled(boolean)}.
      */
     public Column setHasLabelsOnlyForSelected(boolean hasLabelsOnlyForSelected) {
         this.hasLabelsOnlyForSelected = hasLabelsOnlyForSelected;

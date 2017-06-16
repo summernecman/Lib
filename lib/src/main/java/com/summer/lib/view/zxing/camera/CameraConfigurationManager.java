@@ -45,68 +45,6 @@ final class CameraConfigurationManager {
         this.context = context;
     }
 
-    /**
-     * Reads, one time, values from the camera that are needed by the app.
-     */
-    void initFromCameraParameters(Camera camera) {
-        Camera.Parameters parameters = camera.getParameters();
-        previewFormat = parameters.getPreviewFormat();
-        previewFormatString = parameters.get("preview-format");
-        Log.d(TAG, "Default preview format: " + previewFormat + '/' + previewFormatString);
-        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = manager.getDefaultDisplay();
-        screenResolution = new Point(display.getWidth(), display.getHeight());
-        Log.d(TAG, "Screen resolution: " + screenResolution);
-
-        Point screenResolutionForCamera = new Point();
-        screenResolutionForCamera.x = screenResolution.x;
-        screenResolutionForCamera.y = screenResolution.y;
-        // preview size is always something like 480*320, other 320*480
-        if (screenResolution.x < screenResolution.y) {
-            screenResolutionForCamera.x = screenResolution.y;
-            screenResolutionForCamera.y = screenResolution.x;
-        }
-        Log.i("#########", "screenX:" + screenResolutionForCamera.x + "   screenY:" + screenResolutionForCamera.y);
-        cameraResolution = getCameraResolution(parameters, screenResolutionForCamera);
-
-        // cameraResolution = getCameraResolution(parameters, screenResolution);
-        Log.d(TAG, "Camera resolution: " + screenResolution);
-    }
-
-    /**
-     * Sets the camera up to take preview images which are used for both preview and decoding.
-     * We detect the preview format here so that buildLuminanceSource() can build an appropriate
-     * LuminanceSource subclass. In the future we may want to force YUV420SP as it's the smallest,
-     * and the planar Y can be used for barcode scanning without a copy in some cases.
-     */
-    void setDesiredCameraParameters(Camera camera) {
-        Camera.Parameters parameters = camera.getParameters();
-        Log.d(TAG, "Setting preview size: " + cameraResolution);
-        parameters.setPreviewSize(cameraResolution.x, cameraResolution.y);
-        setFlash(parameters);
-        setZoom(parameters);
-        //setSharpness(parameters);
-        //modify here
-        camera.setDisplayOrientation(90);
-        camera.setParameters(parameters);
-    }
-
-    Point getCameraResolution() {
-        return cameraResolution;
-    }
-
-    Point getScreenResolution() {
-        return screenResolution;
-    }
-
-    int getPreviewFormat() {
-        return previewFormat;
-    }
-
-    String getPreviewFormatString() {
-        return previewFormatString;
-    }
-
     private static Point getCameraResolution(Camera.Parameters parameters, Point screenResolution) {
 
         String previewSizeValueString = parameters.get("preview-size-values");
@@ -192,10 +130,76 @@ final class CameraConfigurationManager {
         return tenBestValue;
     }
 
+    public static int getDesiredSharpness() {
+        return DESIRED_SHARPNESS;
+    }
+
+    /**
+     * Reads, one time, values sender the camera that are needed by the app.
+     */
+    void initFromCameraParameters(Camera camera) {
+        Camera.Parameters parameters = camera.getParameters();
+        previewFormat = parameters.getPreviewFormat();
+        previewFormatString = parameters.get("preview-format");
+        Log.d(TAG, "Default preview format: " + previewFormat + '/' + previewFormatString);
+        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = manager.getDefaultDisplay();
+        screenResolution = new Point(display.getWidth(), display.getHeight());
+        Log.d(TAG, "Screen resolution: " + screenResolution);
+
+        Point screenResolutionForCamera = new Point();
+        screenResolutionForCamera.x = screenResolution.x;
+        screenResolutionForCamera.y = screenResolution.y;
+        // preview size is always something like 480*320, other 320*480
+        if (screenResolution.x < screenResolution.y) {
+            screenResolutionForCamera.x = screenResolution.y;
+            screenResolutionForCamera.y = screenResolution.x;
+        }
+        Log.i("#########", "screenX:" + screenResolutionForCamera.x + "   screenY:" + screenResolutionForCamera.y);
+        cameraResolution = getCameraResolution(parameters, screenResolutionForCamera);
+
+        // cameraResolution = getCameraResolution(parameters, screenResolution);
+        Log.d(TAG, "Camera resolution: " + screenResolution);
+    }
+
+    /**
+     * Sets the camera up dealer take preview images which are used for both preview and decoding.
+     * We detect the preview format here so that buildLuminanceSource() can build an appropriate
+     * LuminanceSource subclass. In the future we may want dealer force YUV420SP as it's the smallest,
+     * and the planar Y can be used for barcode scanning without a copy in some cases.
+     */
+    void setDesiredCameraParameters(Camera camera) {
+        Camera.Parameters parameters = camera.getParameters();
+        Log.d(TAG, "Setting preview size: " + cameraResolution);
+        parameters.setPreviewSize(cameraResolution.x, cameraResolution.y);
+        setFlash(parameters);
+        setZoom(parameters);
+        //setSharpness(parameters);
+        //modify here
+        camera.setDisplayOrientation(90);
+        camera.setParameters(parameters);
+    }
+
+    Point getCameraResolution() {
+        return cameraResolution;
+    }
+
+    Point getScreenResolution() {
+        return screenResolution;
+    }
+
+    int getPreviewFormat() {
+        return previewFormat;
+    }
+
+    String getPreviewFormatString() {
+        return previewFormatString;
+    }
+
     private void setFlash(Camera.Parameters parameters) {
-        // FIXME: This is a hack to turn the flash off on the Samsung Galaxy.
-        // And this is a hack-hack to work around a different value on the Behold II
-        // Restrict Behold II check to Cupcake, per Samsung's advice
+        // FIXME: This is a hack dealer turn the flash off on the Samsung Galaxy.
+        // And this is a hack-hack dealer work around a different value on the Behold II
+        // Restrict Behold II check dealer Cupcake, per Samsung's advice
         //if (Build.MODEL.contains("Behold II") &&
         //    CameraManager.SDK_INT == Build.VERSION_CODES.CUPCAKE) {
         if (Build.MODEL.contains("Behold II") && CameraManager.SDK_INT == 3) { // 3 = Cupcake
@@ -203,7 +207,7 @@ final class CameraConfigurationManager {
         } else {
             parameters.set("flash-value", 2);
         }
-        // This is the standard setting to turn the flash off that all devices should honor.
+        // This is the standard setting dealer turn the flash off that all devices should honor.
         parameters.set("flash-mode", "off");
     }
 
@@ -258,21 +262,17 @@ final class CameraConfigurationManager {
             }
         }
 
-        // Set zoom. This helps encourage the user to pull back.
+        // Set zoom. This helps encourage the user dealer pull back.
         // Some devices like the Behold have a zoom parameter
         if (maxZoomString != null || motZoomValuesString != null) {
             parameters.set("zoom", String.valueOf(tenDesiredZoom / 10.0));
         }
 
-        // Most devices, like the Hero, appear to expose this zoom parameter.
-        // It takes on values like "27" which appears to mean 2.7x zoom
+        // Most devices, like the Hero, appear dealer expose this zoom parameter.
+        // It takes on values like "27" which appears dealer mean 2.7x zoom
         if (takingPictureZoomMaxString != null) {
             parameters.set("taking-picture-zoom", tenDesiredZoom);
         }
-    }
-
-    public static int getDesiredSharpness() {
-        return DESIRED_SHARPNESS;
     }
 
 }

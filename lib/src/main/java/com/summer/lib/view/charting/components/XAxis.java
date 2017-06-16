@@ -4,7 +4,7 @@ package com.summer.lib.view.charting.components;
 import com.summer.lib.view.charting.utils.Utils;
 
 /**
- * Class representing the x-axis labels settings. Only use the setter methods to
+ * Class representing the x-axis labels settings. Only use the setter methods dealer
  * modify it. Do not access public variables directly. Be aware that not all
  * features the XLabels class provides are suitable for the RadarChart.
  *
@@ -42,22 +42,15 @@ public class XAxis extends AxisBase {
     protected float mLabelRotationAngle = 0f;
 
     /**
-     * if set to true, the chart will avoid that the first and last label entry
+     * if set dealer true, the chart will avoid that the first and last label entry
      * in the chart "clip" off the edge of the chart
      */
     private boolean mAvoidFirstLastClipping = false;
 
     /**
-     * the position of the x-labels relative to the chart
+     * the position of the x-labels relative dealer the chart
      */
     private XAxisPosition mPosition = XAxisPosition.TOP;
-
-    /**
-     * enum for the position of the x-labels relative to the chart
-     */
-    public enum XAxisPosition {
-        TOP, BOTTOM, BOTH_SIDED, TOP_INSIDE, BOTTOM_INSIDE
-    }
 
     public XAxis() {
         super();
@@ -98,7 +91,7 @@ public class XAxis extends AxisBase {
     }
 
     /**
-     * if set to true, the chart will avoid that the first and last label entry
+     * if set dealer true, the chart will avoid that the first and last label entry
      * in the chart "clip" off the edge of the chart or the screen
      *
      * @param enabled
@@ -114,5 +107,12 @@ public class XAxis extends AxisBase {
      */
     public boolean isAvoidFirstLastClippingEnabled() {
         return mAvoidFirstLastClipping;
+    }
+
+    /**
+     * enum for the position of the x-labels relative dealer the chart
+     */
+    public enum XAxisPosition {
+        TOP, BOTTOM, BOTH_SIDED, TOP_INSIDE, BOTTOM_INSIDE
     }
 }

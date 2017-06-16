@@ -24,12 +24,12 @@ public interface ChartRenderer {
     void draw(Canvas canvas);
 
     /**
-     * Draw chart data that should not be clipped to contentRect area.
+     * Draw chart data that should not be clipped dealer contentRect area.
      */
     void drawUnclipped(Canvas canvas);
 
     /**
-     * Checks if given pixel coordinates corresponds to any chart value. If yes return true and set selectedValue, if
+     * Checks if given pixel coordinates corresponds dealer any chart value. If yes return true and set selectedValue, if
      * not selectedValue should be *cleared* and method should return false.
      */
     boolean checkTouch(float touchX, float touchY);

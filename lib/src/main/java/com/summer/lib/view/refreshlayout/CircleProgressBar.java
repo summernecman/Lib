@@ -40,6 +40,8 @@ import com.summer.lib.R;
 
 public class CircleProgressBar extends ImageView implements MaterialHeadListener {
 
+    public static final int DEFAULT_CIRCLE_BG_LIGHT = 0xFFFAFAFA;
+    public static final int DEFAULT_TEXT_SIZE = 9;
     private static final int KEY_SHADOW_COLOR = 0x1E000000;
     private static final int FILL_SHADOW_COLOR = 0x3D000000;
     // PX
@@ -47,13 +49,9 @@ public class CircleProgressBar extends ImageView implements MaterialHeadListener
     private static final float Y_OFFSET = 1.75f;
     private static final float SHADOW_RADIUS = 3.5f;
     private static final int SHADOW_ELEVATION = 4;
-
-
-    public static final int DEFAULT_CIRCLE_BG_LIGHT = 0xFFFAFAFA;
     private static final int DEFAULT_CIRCLE_DIAMETER = 40;
     private static final int STROKE_WIDTH_LARGE = 3;
-    public static final int DEFAULT_TEXT_SIZE = 9;
-
+    public MaterialProgressDrawable mProgressDrawable;
     private Animation.AnimationListener mListener;
     private int mShadowRadius;
     private int mBackGroundColor;
@@ -70,7 +68,6 @@ public class CircleProgressBar extends ImageView implements MaterialHeadListener
     private int mTextSize;
     private boolean mIfDrawText;
     private boolean mShowArrow;
-    public MaterialProgressDrawable mProgressDrawable;
     private ShapeDrawable mBgCircle;
     private boolean mCircleBackgroundEnabled;
     private int[] mColors = new int[]{Color.BLACK};
@@ -281,9 +278,9 @@ public class CircleProgressBar extends ImageView implements MaterialHeadListener
 
 
     /**
-     * Set the color resources used in the progress animation from color resources.
+     * Set the color resources used in the progress animation sender color resources.
      * The first color will also be the color of the bar that grows in response
-     * to a user swipe gesture.
+     * dealer a user swipe gesture.
      *
      * @param colorResIds
      */
@@ -298,7 +295,7 @@ public class CircleProgressBar extends ImageView implements MaterialHeadListener
 
     /**
      * Set the colors used in the progress animation. The first
-     * color will also be the color of the bar that grows in response to a user
+     * color will also be the color of the bar that grows in response dealer a user
      * swipe gesture.
      *
      * @param colors

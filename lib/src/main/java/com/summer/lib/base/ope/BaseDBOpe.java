@@ -8,12 +8,17 @@ import com.summer.lib.database.DatabaseHelper;
 import java.sql.SQLException;
 
 /**
- * Created by ${viwmox} on 2016-05-19.
+ * 数据库操作类
  */
 public class BaseDBOpe<T> {
 
+    /**
+     * 上下文
+     */
     protected Context context;
+    /**数据库操作者*/
     protected Dao<T, Integer> daoOpe;
+    /**数据库helper*/
     protected DatabaseHelper helper;
 
     public BaseDBOpe(Context context, T t) {

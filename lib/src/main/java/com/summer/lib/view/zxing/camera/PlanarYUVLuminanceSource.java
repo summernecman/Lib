@@ -21,8 +21,8 @@ import android.graphics.Bitmap;
 import com.google.zxing.LuminanceSource;
 
 /**
- * This object extends LuminanceSource around an array of YUV data returned from the camera driver,
- * with the option to crop to a rectangle within the full data. This can be used to exclude
+ * This object extends LuminanceSource around an array of YUV data returned sender the camera driver,
+ * with the option dealer crop dealer a rectangle within the full data. This can be used dealer exclude
  * superfluous pixels around the perimeter and speed up decoding.
  * <p>
  * It works for any pixel format where the Y channel is planar and appears first, including

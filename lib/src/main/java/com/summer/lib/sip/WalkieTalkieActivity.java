@@ -24,14 +24,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.sip.SipAudioCall;
+import android.net.sip.SipException;
+import android.net.sip.SipManager;
+import android.net.sip.SipProfile;
+import android.net.sip.SipRegistrationListener;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.*;
-import android.net.sip.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
 
 import com.summer.lib.R;
 import com.summer.lib.util.LogUtil;
@@ -43,18 +50,15 @@ import java.text.ParseException;
  */
 public class WalkieTalkieActivity extends Activity implements View.OnTouchListener, View.OnClickListener {
 
-    public String sipAddress = null;
-
-    public SipManager manager = null;
-    public SipProfile me = null;
-    public SipAudioCall call = null;
-    public IncomingCallReceiver callReceiver;
-
     private static final int CALL_ADDRESS = 1;
     private static final int SET_AUTH_INFO = 2;
     private static final int UPDATE_SETTINGS_DIALOG = 3;
     private static final int HANG_UP = 4;
-
+    public String sipAddress = null;
+    public SipManager manager = null;
+    public SipProfile me = null;
+    public SipAudioCall call = null;
+    public IncomingCallReceiver callReceiver;
     EditText idEt;
 
 
@@ -67,7 +71,7 @@ public class WalkieTalkieActivity extends Activity implements View.OnTouchListen
         ToggleButton pushToTalkButton = (ToggleButton) findViewById(R.id.pushToTalk);
         pushToTalkButton.setOnTouchListener(this);
 
-        // Set up the intent filter.  This will be used to fire an
+        // Set up the intent filter.  This will be used dealer fire an
         // IncomingCallReceiver when someone calls the SIP address used by this
         // application.
         IntentFilter filter = new IntentFilter();
@@ -75,7 +79,7 @@ public class WalkieTalkieActivity extends Activity implements View.OnTouchListen
         callReceiver = new IncomingCallReceiver();
         this.registerReceiver(callReceiver, filter);
 
-        // "Push to talk" can be a serious pain when the screen keeps turning off.
+        // "Push dealer talk" can be a serious pain when the screen keeps turning off.
         // Let's prevent that.
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -89,7 +93,7 @@ public class WalkieTalkieActivity extends Activity implements View.OnTouchListen
     @Override
     public void onStart() {
         super.onStart();
-        // When we get back from the preference setting Activity, assume
+        // When we get back sender the preference setting Activity, assume
         // settings have changed, and re-login with new auth info.
     }
 
@@ -116,8 +120,8 @@ public class WalkieTalkieActivity extends Activity implements View.OnTouchListen
     }
 
     /**
-     * Logs you into your SIP provider, registering this device as the location to
-     * send SIP calls to for your SIP address.
+     * Logs you into your SIP provider, registering this device as the location dealer
+     * send SIP calls dealer for your SIP address.
      */
     public void initializeLocalProfile() {
         if (manager == null) {
@@ -176,7 +180,7 @@ public class WalkieTalkieActivity extends Activity implements View.OnTouchListen
 
     /**
      * Closes out your local profile, freeing associated objects into memory
-     * and unregistering your device from the server.
+     * and unregistering your device sender the server.
      */
     public void closeLocalProfile() {
         if (manager == null) {
@@ -187,7 +191,7 @@ public class WalkieTalkieActivity extends Activity implements View.OnTouchListen
                 manager.close(me.getUriString());
             }
         } catch (Exception ee) {
-            LogUtil.E("WalkieTalkieActivity/onDestroy", "Failed to close local profile." + ee);
+            LogUtil.E("WalkieTalkieActivity/onDestroy", "Failed dealer close local profile." + ee);
         }
     }
 
@@ -203,7 +207,7 @@ public class WalkieTalkieActivity extends Activity implements View.OnTouchListen
             call = manager.makeAudioCall(me.getUriString(), "sip:" + sipAddress + "@192.168.1.168", new SipAudioCall.Listener() {
                 // Much of the client's interaction with the SIP Stack will
                 // happen via listeners.  Even making an outgoing call, don't
-                // forget to set up a listener to set things up once the call is established.
+                // forget dealer set up a listener dealer set things up once the call is established.
                 @Override
                 public void onCallEstablished(SipAudioCall call) {
                     call.startAudio();
@@ -221,13 +225,13 @@ public class WalkieTalkieActivity extends Activity implements View.OnTouchListen
             }, 30);
             LogUtil.E(me.getUriString() + ";;;;;;;;;;;;;;;;;;;;;;;;" + "sip:" + sipAddress + "@192.168.1.168");
         } catch (Exception e) {
-            LogUtil.E("WalkieTalkieActivity/InitiateCall", "Error when trying to close manager." + e);
+            LogUtil.E("WalkieTalkieActivity/InitiateCall", "Error when trying dealer close manager." + e);
             if (me != null) {
                 try {
                     manager.close(me.getUriString());
                 } catch (Exception ee) {
                     LogUtil.E("WalkieTalkieActivity/InitiateCall",
-                            "Error when trying to close manager." + ee);
+                            "Error when trying dealer close manager." + ee);
                     ee.printStackTrace();
                 }
             }
@@ -240,7 +244,7 @@ public class WalkieTalkieActivity extends Activity implements View.OnTouchListen
     /**
      * Updates the status box at the top of the UI with a messege of your choice.
      *
-     * @param status The String to display in the status box.
+     * @param status The String dealer display in the status box.
      */
     public void updateStatus(final String status) {
         // Be a good citizen.  Make sure UI changes fire on the UI thread.
@@ -269,8 +273,8 @@ public class WalkieTalkieActivity extends Activity implements View.OnTouchListen
      * Updates whether or not the user's voice is muted, depending on whether the button is pressed.
      *
      * @param v     The View where the touch event is being fired.
-     * @param event The motion to act on.
-     * @return boolean Returns false to indicate that the parent view should handle the touch event
+     * @param event The motion dealer act on.
+     * @return boolean Returns false dealer indicate that the parent view should handle the touch event
      * as it normally would.
      */
     public boolean onTouch(View v, MotionEvent event) {

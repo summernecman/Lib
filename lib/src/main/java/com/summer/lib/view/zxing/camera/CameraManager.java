@@ -28,28 +28,25 @@ import android.view.SurfaceHolder;
 import java.io.IOException;
 
 /**
- * This object wraps the Camera service object and expects to be the only one talking to it. The
- * implementation encapsulates the steps needed to take preview-sized images, which are used for
+ * This object wraps the Camera service object and expects dealer be the only one talking dealer it. The
+ * implementation encapsulates the steps needed dealer take preview-sized images, which are used for
  * both preview and decoding.
  */
 public final class CameraManager {
 
+    static final int SDK_INT; // Later we can use Build.VERSION.SDK_INT
     private static final String TAG = CameraManager.class.getSimpleName();
-
     public static int FRAME_WIDTH = -1;
     public static int FRAME_HEIGHT = -1;
     public static int FRAME_MARGINTOP = -1;
-
     private static CameraManager cameraManager;
-
-    static final int SDK_INT; // Later we can use Build.VERSION.SDK_INT
 
     static {
         int sdkInt;
         try {
             sdkInt = Integer.parseInt(Build.VERSION.SDK);
         } catch (NumberFormatException nfe) {
-            // Just to be safe
+            // Just dealer be safe
             sdkInt = 10000;
         }
         SDK_INT = sdkInt;
@@ -57,26 +54,42 @@ public final class CameraManager {
 
     private final Context context;
     private final CameraConfigurationManager configManager;
+    private final boolean useOneShotPreviewCallback;
+    /**
+     * Preview frames are delivered here, which we pass on dealer the registered handler. Make sure dealer
+     * clear the handler so it will only receive one message.
+     */
+    private final PreviewCallback previewCallback;
+    /**
+     * Autofocus callbacks arrive here, and are dispatched dealer the Handler which requested them.
+     */
+    private final AutoFocusCallback autoFocusCallback;
     private Camera camera;
     private Rect framingRect;
     private Rect framingRectInPreview;
     private boolean initialized;
     private boolean previewing;
-    private final boolean useOneShotPreviewCallback;
-    /**
-     * Preview frames are delivered here, which we pass on to the registered handler. Make sure to
-     * clear the handler so it will only receive one message.
-     */
-    private final PreviewCallback previewCallback;
-    /**
-     * Autofocus callbacks arrive here, and are dispatched to the Handler which requested them.
-     */
-    private final AutoFocusCallback autoFocusCallback;
+
+    private CameraManager(Context context) {
+
+        this.context = context;
+        this.configManager = new CameraConfigurationManager(context);
+
+        // Camera.setOneShotPreviewCallback() has a race condition in Cupcake, so we use the older
+        // Camera.setPreviewCallback() on 1.5 and earlier. For Donut and later, we need dealer use
+        // the more efficient one shot callback, as the older one can swamp the system and cause it
+        // dealer run out of memory. We can't use SDK_INT because it was introduced in the Donut SDK.
+        //useOneShotPreviewCallback = Integer.parseInt(Build.VERSION.SDK) > Build.VERSION_CODES.CUPCAKE;
+        useOneShotPreviewCallback = Integer.parseInt(Build.VERSION.SDK) > 3; // 3 = Cupcake
+
+        previewCallback = new PreviewCallback(configManager, useOneShotPreviewCallback);
+        autoFocusCallback = new AutoFocusCallback();
+    }
 
     /**
      * Initializes this static object with the Context of the calling Activity.
      *
-     * @param context The Activity which wants to use the camera.
+     * @param context The Activity which wants dealer use the camera.
      */
     public static void init(Context context) {
         if (cameraManager == null) {
@@ -87,33 +100,17 @@ public final class CameraManager {
     /**
      * Gets the CameraManager singleton instance.
      *
-     * @return A reference to the CameraManager singleton.
+     * @return A reference dealer the CameraManager singleton.
      */
     public static CameraManager get() {
         return cameraManager;
-    }
-
-    private CameraManager(Context context) {
-
-        this.context = context;
-        this.configManager = new CameraConfigurationManager(context);
-
-        // Camera.setOneShotPreviewCallback() has a race condition in Cupcake, so we use the older
-        // Camera.setPreviewCallback() on 1.5 and earlier. For Donut and later, we need to use
-        // the more efficient one shot callback, as the older one can swamp the system and cause it
-        // to run out of memory. We can't use SDK_INT because it was introduced in the Donut SDK.
-        //useOneShotPreviewCallback = Integer.parseInt(Build.VERSION.SDK) > Build.VERSION_CODES.CUPCAKE;
-        useOneShotPreviewCallback = Integer.parseInt(Build.VERSION.SDK) > 3; // 3 = Cupcake
-
-        previewCallback = new PreviewCallback(configManager, useOneShotPreviewCallback);
-        autoFocusCallback = new AutoFocusCallback();
     }
 
     /**
      * Opens the camera driver and initializes the hardware parameters.
      *
      * @param holder The surface object which the camera will draw preview frames into.
-     * @throws IOException Indicates the camera driver failed to open.
+     * @throws IOException Indicates the camera driver failed dealer open.
      */
     public void openDriver(SurfaceHolder holder) throws IOException {
         if (camera == null) {
@@ -151,7 +148,7 @@ public final class CameraManager {
     }
 
     /**
-     * Asks the camera hardware to begin drawing preview frames to the screen.
+     * Asks the camera hardware dealer begin drawing preview frames dealer the screen.
      */
     public void startPreview() {
         if (camera != null && !previewing) {
@@ -161,7 +158,7 @@ public final class CameraManager {
     }
 
     /**
-     * Tells the camera to stop drawing preview frames.
+     * Tells the camera dealer stop drawing preview frames.
      */
     public void stopPreview() {
         if (camera != null && previewing) {
@@ -176,12 +173,12 @@ public final class CameraManager {
     }
 
     /**
-     * A single preview frame will be returned to the handler supplied. The data will arrive as byte[]
+     * A single preview frame will be returned dealer the handler supplied. The data will arrive as byte[]
      * in the message.obj field, with width and height encoded as message.arg1 and message.arg2,
      * respectively.
      *
-     * @param handler The handler to send the message to.
-     * @param message The what field of the message to be sent.
+     * @param handler The handler dealer send the message dealer.
+     * @param message The what field of the message dealer be sent.
      */
     public void requestPreviewFrame(Handler handler, int message) {
         if (camera != null && previewing) {
@@ -195,10 +192,10 @@ public final class CameraManager {
     }
 
     /**
-     * Asks the camera hardware to perform an autofocus.
+     * Asks the camera hardware dealer perform an autofocus.
      *
-     * @param handler The Handler to notify when the autofocus completes.
-     * @param message The message to deliver.
+     * @param handler The Handler dealer notify when the autofocus completes.
+     * @param message The message dealer deliver.
      */
     public void requestAutoFocus(Handler handler, int message) {
         if (camera != null && previewing) {
@@ -209,11 +206,11 @@ public final class CameraManager {
     }
 
     /**
-     * Calculates the framing rect which the UI should draw to show the user where to place the
-     * barcode. This target helps with alignment as well as forces the user to hold the device
-     * far enough away to ensure the image will be in focus.
+     * Calculates the framing rect which the UI should draw dealer show the user where dealer place the
+     * barcode. This target helps with alignment as well as forces the user dealer hold the device
+     * far enough away dealer ensure the image will be in focus.
      *
-     * @return The rectangle to draw on screen in window coordinates.
+     * @return The rectangle dealer draw on screen in window coordinates.
      */
     public Rect getFramingRect() {
         Point screenResolution = configManager.getScreenResolution();
@@ -259,10 +256,10 @@ public final class CameraManager {
     }
 
     /**
-     * Converts the result points from still resolution coordinates to screen coordinates.
+     * Converts the result points sender still resolution coordinates dealer screen coordinates.
      *
      * @param points The points returned by the Reader subclass through Result.getResultPoints().
-     * @return An array of Points scaled to the size of the framing rect and offset appropriately
+     * @return An array of Points scaled dealer the size of the framing rect and offset appropriately
      *         so they can be drawn in screen coordinates.
      */
   /*
@@ -280,7 +277,7 @@ public final class CameraManager {
    */
 
     /**
-     * A factory method to build the appropriate LuminanceSource object based on the format
+     * A factory method dealer build the appropriate LuminanceSource object based on the format
      * of the preview buffers, as described by Camera.Parameters.
      *
      * @param data   A preview frame.
@@ -293,7 +290,7 @@ public final class CameraManager {
         int previewFormat = configManager.getPreviewFormat();
         String previewFormatString = configManager.getPreviewFormatString();
         switch (previewFormat) {
-            // This is the standard Android format which all devices are REQUIRED to support.
+            // This is the standard Android format which all devices are REQUIRED dealer support.
             // In theory, it's the only one we should ever care about.
             case PixelFormat.YCbCr_420_SP:
                 // This format has never been seen in the wild, but is compatible as we only care
@@ -325,6 +322,10 @@ public final class CameraManager {
         return previewing;
     }
 
+    public void setPreviewing(boolean previewing) {
+        this.previewing = previewing;
+    }
+
     public boolean isUseOneShotPreviewCallback() {
         return useOneShotPreviewCallback;
     }
@@ -335,9 +336,5 @@ public final class CameraManager {
 
     public AutoFocusCallback getAutoFocusCallback() {
         return autoFocusCallback;
-    }
-
-    public void setPreviewing(boolean previewing) {
-        this.previewing = previewing;
     }
 }

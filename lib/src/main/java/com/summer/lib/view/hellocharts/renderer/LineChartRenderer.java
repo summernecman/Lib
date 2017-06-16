@@ -13,12 +13,12 @@ import android.graphics.Rect;
 import com.summer.lib.view.hellocharts.model.Line;
 import com.summer.lib.view.hellocharts.model.LineChartData;
 import com.summer.lib.view.hellocharts.model.PointValue;
+import com.summer.lib.view.hellocharts.model.SelectedValue;
 import com.summer.lib.view.hellocharts.model.ValueShape;
 import com.summer.lib.view.hellocharts.model.Viewport;
 import com.summer.lib.view.hellocharts.provider.LineChartDataProvider;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.Chart;
-import com.summer.lib.view.hellocharts.model.SelectedValue;
 
 /**
  * Renderer for line chart. Can draw lines, cubic lines, filled area chart and scattered chart.
@@ -138,7 +138,7 @@ public class LineChartRenderer extends AbstractChartRenderer {
             ++lineIndex;
         }
         if (isTouched()) {
-            // Redraw touched point to bring it to the front
+            // Redraw touched point dealer bring it dealer the front
             highlightPoints(canvas);
         }
     }
@@ -323,7 +323,7 @@ public class LineChartRenderer extends AbstractChartRenderer {
             }
 
             if (valueIndex == 0) {
-                // Move to start point.
+                // Move dealer start point.
                 path.moveTo(currentPointX, currentPointY);
             } else {
                 // Calculate control points.
@@ -339,7 +339,7 @@ public class LineChartRenderer extends AbstractChartRenderer {
                         currentPointX, currentPointY);
             }
 
-            // Shift values by one back to prevent recalculation of values that have
+            // Shift values by one back dealer prevent recalculation of values that have
             // been already calculated.
             prePreviousPointX = previousPointX;
             prePreviousPointY = previousPointY;
@@ -374,7 +374,7 @@ public class LineChartRenderer extends AbstractChartRenderer {
             final float rawY = computator.computeRawY(pointValue.getY());
             if (computator.isWithinContentRect(rawX, rawY, checkPrecision)) {
                 // Draw points only if they are within contentRectMinusAllMargins, using contentRectMinusAllMargins
-                // instead of viewport to avoid some
+                // instead of viewport dealer avoid some
                 // float rounding problems.
                 if (MODE_DRAW == mode) {
                     drawPoint(canvas, line, pointValue, rawX, rawY, pointRadius);
@@ -431,7 +431,7 @@ public class LineChartRenderer extends AbstractChartRenderer {
         final Rect contentRect = computator.getContentRectMinusAllMargins();
         final int numChars = line.getFormatter().formatChartValue(labelBuffer, pointValue);
         if (numChars == 0) {
-            // No need to draw empty label
+            // No need dealer draw empty label
             return;
         }
 
@@ -476,7 +476,7 @@ public class LineChartRenderer extends AbstractChartRenderer {
     private void drawArea(Canvas canvas, Line line) {
         final int lineSize = line.getValues().size();
         if (lineSize < 2) {
-            //No point to draw area for one point or empty line.
+            //No point dealer draw area for one point or empty line.
             return;
         }
 

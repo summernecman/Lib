@@ -4,9 +4,13 @@ public class MessageEvent {
 
     public int position;
 
-    public String from;
+    public String sender;
 
-    public String to;
+    public String dealer;//sender
+
+    public Object data;
+
+    public Object id;
 
 
 }

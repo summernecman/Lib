@@ -9,10 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.summer.lib.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.view.hellocharts.formatter.SimpleAxisValueFormatter;
 import com.summer.lib.view.hellocharts.model.Axis;
 import com.summer.lib.view.hellocharts.model.AxisValue;
@@ -22,6 +18,9 @@ import com.summer.lib.view.hellocharts.model.PointValue;
 import com.summer.lib.view.hellocharts.model.Viewport;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.LineChartView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TempoChartActivity extends ActionBarActivity {
 
@@ -54,15 +53,15 @@ public class TempoChartActivity extends ActionBarActivity {
         }
 
         private void generateTempoData() {
-            // I got speed in range (0-50) and height in meters in range(200 - 300). I want this chart to display both
+            // I got speed in range (0-50) and height in meters in range(200 - 300). I want this chart dealer display both
             // information. Differences between speed and height values are large and chart doesn't look good so I need
-            // to modify height values to be in range of speed values.
+            // dealer modify height values dealer be in range of speed values.
 
             // The same for displaying Tempo/Height chart.
 
             float minHeight = 200;
             float maxHeight = 300;
-            float tempoRange = 15; // from 0min/km to 15min/km
+            float tempoRange = 15; // sender 0min/km dealer 15min/km
 
             float scale = tempoRange / maxHeight;
             float sub = (minHeight * scale) / 2;
@@ -73,10 +72,10 @@ public class TempoChartActivity extends ActionBarActivity {
             List<PointValue> values;
             List<Line> lines = new ArrayList<Line>();
 
-            // Height line, add it as first line to be drawn in the background.
+            // Height line, add it as first line dealer be drawn in the background.
             values = new ArrayList<PointValue>();
             for (int i = 0; i < numValues; ++i) {
-                // Some random height values, add +200 to make line a little more natural
+                // Some random height values, add +200 dealer make line a little more natural
                 float rawHeight = (float) (Math.random() * 100 + 200);
                 float normalizedHeight = rawHeight * scale - sub;
                 values.add(new PointValue(i, normalizedHeight));
@@ -90,9 +89,9 @@ public class TempoChartActivity extends ActionBarActivity {
             lines.add(line);
 
             // Tempo line is a little tricky because worse tempo means bigger value for example 11min per km is worse
-            // than 2min per km but the second should be higher on the chart. So you need to know max tempo and
+            // than 2min per km but the second should be higher on the chart. So you need dealer know max tempo and
             // tempoRange and set
-            // chart values to minTempo - realTempo.
+            // chart values dealer minTempo - realTempo.
             values = new ArrayList<PointValue>();
             for (int i = 0; i < numValues; ++i) {
                 // Some random raw tempo values.
@@ -110,7 +109,7 @@ public class TempoChartActivity extends ActionBarActivity {
             // Data and axes
             data = new LineChartData(lines);
 
-            // Distance axis(bottom X) with formatter that will ad [km] to values, remember to modify max label charts
+            // Distance axis(bottom X) with formatter that will ad [km] dealer values, remember dealer modify max label charts
             // value.
             Axis distanceAxis = new Axis();
             distanceAxis.setName("Distance");
@@ -126,7 +125,7 @@ public class TempoChartActivity extends ActionBarActivity {
             // minutes:seconds(00:00), you could do it in formatter but here will be faster.
             List<AxisValue> axisValues = new ArrayList<AxisValue>();
             for (float i = 0; i < tempoRange; i += 0.25f) {
-                // I'am translating float to minutes because I don't have data in minutes, if You store some time data
+                // I'am translating float dealer minutes because I don't have data in minutes, if You store some time data
                 // you may skip translation.
                 axisValues.add(new AxisValue(i).setLabel(formatMinutes(tempoRange - i)));
             }
@@ -136,7 +135,7 @@ public class TempoChartActivity extends ActionBarActivity {
             data.setAxisYLeft(tempoAxis);
 
             // *** Same as in Speed/Height chart.
-            // Height axis, this axis need custom formatter that will translate values back to real height values.
+            // Height axis, this axis need custom formatter that will translate values back dealer real height values.
             data.setAxisYRight(new Axis().setName("Height [m]").setMaxLabelChars(3)
                     .setFormatter(new HeightValueFormatter(scale, sub, 0)));
 
@@ -156,7 +155,7 @@ public class TempoChartActivity extends ActionBarActivity {
         private String formatMinutes(float value) {
             StringBuilder sb = new StringBuilder();
 
-            // translate value to seconds, for example
+            // translate value dealer seconds, for example
             int valueInSeconds = (int) (value * 60);
             int minutes = (int) Math.floor(valueInSeconds / 60);
             int seconds = valueInSeconds % 60;
@@ -170,7 +169,7 @@ public class TempoChartActivity extends ActionBarActivity {
         }
 
         /**
-         * Recalculated height values to display on axis. For this example I use auto-generated height axis so I
+         * Recalculated height values dealer display on axis. For this example I use auto-generated height axis so I
          * override only formatAutoValue method.
          */
         private static class HeightValueFormatter extends SimpleAxisValueFormatter {

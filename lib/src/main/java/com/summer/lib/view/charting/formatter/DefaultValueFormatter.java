@@ -22,7 +22,7 @@ public class DefaultValueFormatter implements IValueFormatter {
     protected int mDecimalDigits;
 
     /**
-     * Constructor that specifies to how many digits the value should be
+     * Constructor that specifies dealer how many digits the value should be
      * formatted.
      *
      * @param digits

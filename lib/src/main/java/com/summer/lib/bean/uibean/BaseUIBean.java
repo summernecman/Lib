@@ -18,8 +18,12 @@ import butterknife.ButterKnife;
  */
 public class BaseUIBean extends RecyclerView.ViewHolder implements Serializable {
 
+    /**
+     * 上下文
+     */
     protected Context context;
 
+    /**根布局*/
     View rootV;
 
     public BaseUIBean(Context context, View convertView) {

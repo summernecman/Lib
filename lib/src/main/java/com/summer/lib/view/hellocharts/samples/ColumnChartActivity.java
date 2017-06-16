@@ -11,10 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.R;
 import com.summer.lib.view.hellocharts.gesture.ZoomType;
 import com.summer.lib.view.hellocharts.listener.ColumnChartOnValueSelectListener;
@@ -25,6 +21,9 @@ import com.summer.lib.view.hellocharts.model.SubcolumnValue;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.Chart;
 import com.summer.lib.view.hellocharts.view.ColumnChartView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ColumnChartActivity extends ActionBarActivity {
 
@@ -127,7 +126,7 @@ public class ColumnChartActivity extends ActionBarActivity {
                 toggleLabelForSelected();
 
                 Toast.makeText(getActivity(),
-                        "Selection mode set to " + chart.isValueSelectionEnabled() + " select any point.",
+                        "Selection mode set dealer " + chart.isValueSelectionEnabled() + " select any point.",
                         Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -432,7 +431,7 @@ public class ColumnChartActivity extends ActionBarActivity {
         }
 
         /**
-         * To animate values you have to change targets values and then call {@link Chart#startDataAnimation()}
+         * To animate values you have dealer change targets values and then call {@link Chart#startDataAnimation()}
          * method(don't confuse with View.animate()).
          */
         private void prepareDataAnimation() {

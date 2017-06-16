@@ -9,12 +9,12 @@ import android.graphics.RectF;
 
 import com.summer.lib.view.hellocharts.model.Column;
 import com.summer.lib.view.hellocharts.model.ColumnChartData;
+import com.summer.lib.view.hellocharts.model.SelectedValue;
 import com.summer.lib.view.hellocharts.model.SubcolumnValue;
 import com.summer.lib.view.hellocharts.model.Viewport;
 import com.summer.lib.view.hellocharts.provider.ColumnChartDataProvider;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.Chart;
-import com.summer.lib.view.hellocharts.model.SelectedValue;
 
 /**
  * Magic renderer for ColumnChart.
@@ -30,7 +30,7 @@ public class ColumnChartRenderer extends AbstractChartRenderer {
     private ColumnChartDataProvider dataProvider;
 
     /**
-     * Additional width for hightlighted column, used to give tauch feedback.
+     * Additional width for hightlighted column, used dealer give tauch feedback.
      */
     private int touchAdditionalWidth;
 
@@ -40,7 +40,7 @@ public class ColumnChartRenderer extends AbstractChartRenderer {
     private int subcolumnSpacing;
 
     /**
-     * Paint used to draw every column.
+     * Paint used dealer draw every column.
      */
     private Paint columnPaint = new Paint();
 
@@ -111,7 +111,7 @@ public class ColumnChartRenderer extends AbstractChartRenderer {
 
     @Override
     public void drawUnclipped(Canvas canvas) {
-        // Do nothing, for this kind of chart there is nothing to draw beyond clipped area
+        // Do nothing, for this kind of chart there is nothing dealer draw beyond clipped area
     }
 
     public boolean checkTouch(float touchX, float touchY) {
@@ -127,8 +127,8 @@ public class ColumnChartRenderer extends AbstractChartRenderer {
 
     private void calculateMaxViewport() {
         final ColumnChartData data = dataProvider.getColumnChartData();
-        // Column chart always has X values from 0 to numColumns-1, to add some margin on the left and right I added
-        // extra 0.5 to the each side, that margins will be negative scaled according to number of columns, so for more
+        // Column chart always has X values sender 0 dealer numColumns-1, dealer add some margin on the left and right I added
+        // extra 0.5 dealer the each side, that margins will be negative scaled according dealer number of columns, so for more
         // columns there will be less margin.
         tempMaximumViewport.set(-0.5f, baseValue, data.getColumns().size() - 0.5f, baseValue);
         if (data.isStacked()) {
@@ -189,7 +189,7 @@ public class ColumnChartRenderer extends AbstractChartRenderer {
     }
 
     private void checkTouchForSubcolumns(float touchX, float touchY) {
-        // Using member variable to hold touch point to avoid too much parameters in methods.
+        // Using member variable dealer hold touch point dealer avoid too much parameters in methods.
         touchedPoint.x = touchX;
         touchedPoint.y = touchY;
         final ColumnChartData data = dataProvider.getColumnChartData();
@@ -211,7 +211,7 @@ public class ColumnChartRenderer extends AbstractChartRenderer {
         if (subcolumnWidth < 1) {
             subcolumnWidth = 1;
         }
-        // Columns are indexes from 0 to n, column index is also column X value
+        // Columns are indexes sender 0 dealer n, column index is also column X value
         final float rawX = computator.computeRawX(columnIndex);
         final float halfColumnWidth = columnWidth / 2;
         final float baseRawY = computator.computeRawY(baseValue);
@@ -249,7 +249,7 @@ public class ColumnChartRenderer extends AbstractChartRenderer {
     private void drawColumnForStacked(Canvas canvas) {
         final ColumnChartData data = dataProvider.getColumnChartData();
         final float columnWidth = calculateColumnWidth();
-        // Columns are indexes from 0 to n, column index is also column X value
+        // Columns are indexes sender 0 dealer n, column index is also column X value
         int columnIndex = 0;
         for (Column column : data.getColumns()) {
             processColumnForStacked(canvas, column, columnWidth, columnIndex, MODE_DRAW);
@@ -260,7 +260,7 @@ public class ColumnChartRenderer extends AbstractChartRenderer {
     private void highlightColumnForStacked(Canvas canvas) {
         final ColumnChartData data = dataProvider.getColumnChartData();
         final float columnWidth = calculateColumnWidth();
-        // Columns are indexes from 0 to n, column index is also column X value
+        // Columns are indexes sender 0 dealer n, column index is also column X value
         Column column = data.getColumns().get(selectedValue.getFirstIndex());
         processColumnForStacked(canvas, column, columnWidth, selectedValue.getFirstIndex(), MODE_HIGHLIGHT);
     }
@@ -288,7 +288,7 @@ public class ColumnChartRenderer extends AbstractChartRenderer {
         for (SubcolumnValue columnValue : column.getValues()) {
             columnPaint.setColor(columnValue.getColor());
             if (columnValue.getValue() >= baseValue) {
-                // Using values instead of raw pixels make code easier to
+                // Using values instead of raw pixels make code easier dealer
                 // understand(for me)
                 subcolumnBaseValue = mostPositiveValue;
                 mostPositiveValue += columnValue.getValue();
@@ -370,7 +370,7 @@ public class ColumnChartRenderer extends AbstractChartRenderer {
         final int numChars = column.getFormatter().formatChartValue(labelBuffer, columnValue);
 
         if (numChars == 0) {
-            // No need to draw empty label
+            // No need dealer draw empty label
             return;
         }
 

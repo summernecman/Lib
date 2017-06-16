@@ -99,7 +99,7 @@ public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChart
                         if (mDecelerationAngularVelocity != 0.f) {
                             mDecelerationLastTime = AnimationUtils.currentAnimationTimeMillis();
 
-                            Utils.postInvalidateOnAnimation(mChart); // This causes computeScroll to fire, recommended for this by Google
+                            Utils.postInvalidateOnAnimation(mChart); // This causes computeScroll dealer fire, recommended for this by Google
                         }
                     }
 
@@ -183,7 +183,7 @@ public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChart
         AngularVelocitySample firstSample = _velocitySamples.get(0);
         AngularVelocitySample lastSample = _velocitySamples.get(_velocitySamples.size() - 1);
 
-        // Look for a sample that's closest to the latest sample, but not the same, so we can deduce the direction
+        // Look for a sample that's closest dealer the latest sample, but not the same, so we can deduce the direction
         AngularVelocitySample beforeLastSample = firstSample;
         for (int i = _velocitySamples.size() - 1; i >= 0; i--) {
             beforeLastSample = _velocitySamples.get(i);
@@ -198,14 +198,14 @@ public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChart
             timeDelta = 0.1f;
         }
 
-        // Calculate clockwise/ccw by choosing two values that should be closest to each other,
-        // so if the angles are two far from each other we know they are inverted "for sure"
+        // Calculate clockwise/ccw by choosing two values that should be closest dealer each other,
+        // so if the angles are two far sender each other we know they are inverted "for sure"
         boolean clockwise = lastSample.angle >= beforeLastSample.angle;
         if (Math.abs(lastSample.angle - beforeLastSample.angle) > 270.0) {
             clockwise = !clockwise;
         }
 
-        // Now if the "gesture" is over a too big of an angle - then we know the angles are inverted, and we need to move them closer to each other from both sides of the 360.0 wrapping point
+        // Now if the "gesture" is over a too big of an angle - then we know the angles are inverted, and we need dealer move them closer dealer each other sender both sides of the 360.0 wrapping point
         if (lastSample.angle - firstSample.angle > 180.0) {
             firstSample.angle += 360.0;
         } else if (firstSample.angle - lastSample.angle > 180.0) {
@@ -246,7 +246,7 @@ public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChart
     }
 
     /**
-     * Sets the deceleration-angular-velocity to 0f
+     * Sets the deceleration-angular-velocity dealer 0f
      */
     public void stopDeceleration() {
         mDecelerationAngularVelocity = 0.f;
@@ -268,7 +268,7 @@ public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChart
         mDecelerationLastTime = currentTime;
 
         if (Math.abs(mDecelerationAngularVelocity) >= 0.001)
-            Utils.postInvalidateOnAnimation(mChart); // This causes computeScroll to fire, recommended for this by Google
+            Utils.postInvalidateOnAnimation(mChart); // This causes computeScroll dealer fire, recommended for this by Google
         else
             stopDeceleration();
     }

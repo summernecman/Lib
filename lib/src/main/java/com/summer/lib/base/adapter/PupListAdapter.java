@@ -6,28 +6,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.summer.lib.R;
-import com.summer.lib.bean.uibean.PupListUIBean;
 import com.summer.lib.base.interf.view.OnAppItemClickListener;
+import com.summer.lib.bean.uibean.PupListUIBean;
 import com.summer.lib.util.StringUtil;
 
 import java.util.ArrayList;
 
 /**
- * Created by ${viwmox} on 2016-11-14.
+ * 下拉菜单的适配器基类
  */
 public class PupListAdapter extends AppRecycleAdapter {
 
+    /**
+     * 下拉菜单文字
+     */
     String[] strings;
-
+    /**菜单item点击事件*/
     OnAppItemClickListener onAppItemClickListener;
 
     public PupListAdapter(Context context, String[] strings) {
         super(context);
         this.strings = strings;
     }
-
-
-    ArrayList<String> ss = new ArrayList<>();
 
     public PupListAdapter(Context context, ArrayList<String> ss) {
         super(context);

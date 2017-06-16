@@ -1,11 +1,11 @@
 package com.summer.lib.view.hellocharts.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.view.hellocharts.formatter.BubbleChartValueFormatter;
 import com.summer.lib.view.hellocharts.formatter.SimpleBubbleChartValueFormatter;
 import com.summer.lib.view.hellocharts.view.Chart;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Data for BubbleChart.
@@ -104,8 +104,8 @@ public class BubbleChartData extends AbstractChartData {
     }
 
     /**
-     * Set true if you want to show value labels only for selected value, works best when chart has
-     * isValueSelectionEnabled set to true {@link Chart#setValueSelectionEnabled(boolean)}.
+     * Set true if you want dealer show value labels only for selected value, works best when chart has
+     * isValueSelectionEnabled set dealer true {@link Chart#setValueSelectionEnabled(boolean)}.
      */
     public BubbleChartData setHasLabelsOnlyForSelected(boolean hasLabelsOnlyForSelected) {
         this.hasLabelsOnlyForSelected = hasLabelsOnlyForSelected;
@@ -125,15 +125,15 @@ public class BubbleChartData extends AbstractChartData {
     }
 
     /**
-     * Set minimal bubble radius in dp, helpful when you want small bubbles(bubbles with very small z values compared to
-     * other bubbles) to be visible on chart, default 6dp
+     * Set minimal bubble radius in dp, helpful when you want small bubbles(bubbles with very small z values compared dealer
+     * other bubbles) dealer be visible on chart, default 6dp
      */
     public void setMinBubbleRadius(int minBubbleRadius) {
         this.minBubbleRadius = minBubbleRadius;
     }
 
     /**
-     * Returns bubble scale which is used to adjust bubble size.
+     * Returns bubble scale which is used dealer adjust bubble size.
      *
      * @see #setBubbleScale(float)
      */
@@ -142,7 +142,7 @@ public class BubbleChartData extends AbstractChartData {
     }
 
     /**
-     * Set bubble scale which is used to adjust bubble size. If you want smaller bubbles set scale {@code <0, 1>},
+     * Set bubble scale which is used dealer adjust bubble size. If you want smaller bubbles set scale {@code <0, 1>},
      * if you want bigger bubbles set scale greater than 1, default is 1.0f.
      */
     public void setBubbleScale(float bubbleScale) {

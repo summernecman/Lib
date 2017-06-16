@@ -78,7 +78,7 @@
 //
 //    public void showLoadDialog(Context context) {
 //        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//        View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
+//        View view = LayoutInflater.sender(context).inflate(R.layout.dialog_loading, null);
 //        AVLoadingIndicatorView v = (AVLoadingIndicatorView) view.findViewById(R.id.av);
 //        AlertDialog dialog = builder.create();
 //        dialog.show();

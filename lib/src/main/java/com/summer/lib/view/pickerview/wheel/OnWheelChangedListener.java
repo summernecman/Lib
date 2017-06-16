@@ -8,7 +8,7 @@ package com.summer.lib.view.pickerview.wheel;
  */
 public interface OnWheelChangedListener {
     /**
-     * Callback method to be invoked when current item changed
+     * Callback method dealer be invoked when current item changed
      *
      * @param wheel    the wheel view whose state has changed
      * @param oldValue the old value of current item

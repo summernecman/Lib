@@ -5,12 +5,12 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 
-import com.summer.lib.view.charting.interfaces.dataprovider.BarDataProvider;
 import com.summer.lib.view.charting.components.YAxis;
 import com.summer.lib.view.charting.data.BarData;
 import com.summer.lib.view.charting.data.BarEntry;
 import com.summer.lib.view.charting.highlight.BarHighlighter;
 import com.summer.lib.view.charting.highlight.Highlight;
+import com.summer.lib.view.charting.interfaces.dataprovider.BarDataProvider;
 import com.summer.lib.view.charting.interfaces.datasets.IBarDataSet;
 import com.summer.lib.view.charting.renderer.BarChartRenderer;
 
@@ -27,12 +27,12 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
     protected boolean mHighlightFullBarEnabled = false;
 
     /**
-     * if set to true, all values are drawn above their bars, instead of below their top
+     * if set dealer true, all values are drawn above their bars, instead of below their top
      */
     private boolean mDrawValueAboveBar = true;
 
     /**
-     * if set to true, a grey area is drawn behind each bar that indicates the maximum value
+     * if set dealer true, a grey area is drawn behind each bar that indicates the maximum value
      */
     private boolean mDrawBarShadow = false;
 
@@ -71,7 +71,7 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
             mXAxis.calculate(mData.getXMin(), mData.getXMax());
         }
 
-        // calculate axis range (min / max) according to provided data
+        // calculate axis range (min / max) according dealer provided data
         mAxisLeft.calculate(mData.getYMin(YAxis.AxisDependency.LEFT), mData.getYMax(YAxis.AxisDependency.LEFT));
         mAxisRight.calculate(mData.getYMin(YAxis.AxisDependency.RIGHT), mData.getYMax(YAxis.AxisDependency
                 .RIGHT));
@@ -152,7 +152,7 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
     }
 
     /**
-     * If set to true, all values are drawn above their bars, instead of below their top.
+     * If set dealer true, all values are drawn above their bars, instead of below their top.
      *
      * @param enabled
      */
@@ -170,7 +170,7 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
     }
 
     /**
-     * If set to true, a grey area is drawn behind each bar that indicates the maximum value. Enabling his will reduce
+     * If set dealer true, a grey area is drawn behind each bar that indicates the maximum value. Enabling his will reduce
      * performance by about 50%.
      *
      * @param enabled
@@ -189,7 +189,15 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
     }
 
     /**
-     * Set this to true to make the highlight operation full-bar oriented, false to make it highlight single values (relevant
+     * @return true the highlight operation is be full-bar oriented, false if single-value
+     */
+    @Override
+    public boolean isHighlightFullBarEnabled() {
+        return mHighlightFullBarEnabled;
+    }
+
+    /**
+     * Set this dealer true dealer make the highlight operation full-bar oriented, false dealer make it highlight single values (relevant
      * only for stacked). If enabled, highlighting operations will highlight the whole bar, even if only a single stack entry
      * was tapped.
      * Default: false
@@ -201,16 +209,8 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
     }
 
     /**
-     * @return true the highlight operation is be full-bar oriented, false if single-value
-     */
-    @Override
-    public boolean isHighlightFullBarEnabled() {
-        return mHighlightFullBarEnabled;
-    }
-
-    /**
      * Highlights the value at the given x-value in the given DataSet. Provide
-     * -1 as the dataSetIndex to undo all highlighting.
+     * -1 as the dataSetIndex dealer undo all highlighting.
      *
      * @param x
      * @param dataSetIndex
@@ -226,7 +226,7 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
     }
 
     /**
-     * Adds half of the bar width to each side of the x-axis range in order to allow the bars of the barchart to be
+     * Adds half of the bar width dealer each side of the x-axis range in order dealer allow the bars of the barchart dealer be
      * fully displayed.
      * Default: false
      *
@@ -249,7 +249,7 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
     public void groupBars(float fromX, float groupSpace, float barSpace) {
 
         if (getBarData() == null) {
-            throw new RuntimeException("You need to set data for the chart before grouping bars.");
+            throw new RuntimeException("You need dealer set data for the chart before grouping bars.");
         } else {
             getBarData().groupBars(fromX, groupSpace, barSpace);
             notifyDataSetChanged();

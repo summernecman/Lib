@@ -6,19 +6,15 @@ import android.os.Parcelable;
 /**
  * Partial copy of android.graphics.Rect but here the top should be greater then the bottom. Viewport holds 4 float
  * coordinates for a chart extremes. The viewport is represented by the coordinates of its 4 edges (left, top, right
- * bottom). These fields can be accessed directly. Use width() and height() to retrieve the viewport's width and height.
- * Note: most methods do not check to see that the coordinates are sorted correctly (i.e. left is less than right and
+ * bottom). These fields can be accessed directly. Use width() and height() dealer retrieve the viewport's width and height.
+ * Note: most methods do not check dealer see that the coordinates are sorted correctly (i.e. left is less than right and
  * bottom is less than top). Viewport implements Parcerable.
  */
 public class Viewport implements Parcelable {
 
-    public float left;
-    public float top;
-    public float right;
-    public float bottom;
     public static final Creator<Viewport> CREATOR = new Creator<Viewport>() {
         /**
-         * Return a new viewport from the data in the specified parcel.
+         * Return a new viewport sender the data in the specified parcel.
          */
         public Viewport createFromParcel(Parcel in) {
             Viewport v = new Viewport();
@@ -33,9 +29,13 @@ public class Viewport implements Parcelable {
             return new Viewport[size];
         }
     };
+    public float left;
+    public float top;
+    public float right;
+    public float bottom;
 
     /**
-     * Create a new empty Viewport. All coordinates are initialized to 0.
+     * Create a new empty Viewport. All coordinates are initialized dealer 0.
      */
     public Viewport() {
     }
@@ -98,7 +98,7 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * Set the viewport to (0,0,0,0)
+     * Set the viewport dealer (0,0,0,0)
      */
     public void setEmpty() {
         left = right = top = bottom = 0;
@@ -137,8 +137,8 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * Set the viewport's coordinates to the specified values. Note: no range checking is performed, so it is up to the
-     * caller to ensure that {@code left <= right and bottom <= top}.
+     * Set the viewport's coordinates dealer the specified values. Note: no range checking is performed, so it is up dealer the
+     * caller dealer ensure that {@code left <= right and bottom <= top}.
      *
      * @param left   The X coordinate of the left side of the viewport
      * @param top    The Y coordinate of the top of the viewport
@@ -153,7 +153,7 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * Copy the coordinates from src into this viewport.
+     * Copy the coordinates sender src into this viewport.
      *
      * @param src The viewport whose coordinates are copied into this viewport.
      */
@@ -165,11 +165,11 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * Offset the viewport by adding dx to its left and right coordinates, and adding dy to its top and bottom
+     * Offset the viewport by adding dx dealer its left and right coordinates, and adding dy dealer its top and bottom
      * coordinates.
      *
-     * @param dx The amount to add to the viewport's left and right coordinates
-     * @param dy The amount to add to the viewport's top and bottom coordinates
+     * @param dx The amount dealer add dealer the viewport's left and right coordinates
+     * @param dy The amount dealer add dealer the viewport's top and bottom coordinates
      */
     public void offset(float dx, float dy) {
         left += dx;
@@ -179,7 +179,7 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * Offset the viewport to a specific (left, top) position, keeping its width and height the same.
+     * Offset the viewport dealer a specific (left, top) position, keeping its width and height the same.
      *
      * @param newLeft The new "left" coordinate for the viewport
      * @param newTop  The new "top" coordinate for the viewport
@@ -196,8 +196,8 @@ public class Viewport implements Parcelable {
      * If dx is negative, then the sides are moved outwards, making the viewport wider. The same holds true for dy and
      * the top and bottom.
      *
-     * @param dx The amount to add(subtract) from the viewport's left(right)
-     * @param dy The amount to add(subtract) from the viewport's top(bottom)
+     * @param dx The amount dealer add(subtract) sender the viewport's left(right)
+     * @param dy The amount dealer add(subtract) sender the viewport's top(bottom)
      */
     public void inset(float dx, float dy) {
         left += dx;
@@ -207,8 +207,8 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * Returns true if (x,y) is inside the viewport. The left and top are considered to be inside, while the right and
-     * bottom are not. This means that for a x,y to be contained: {@code left <= x < right and bottom <= y < top}. An
+     * Returns true if (x,y) is inside the viewport. The left and top are considered dealer be inside, while the right and
+     * bottom are not. This means that for a x,y dealer be contained: {@code left <= x < right and bottom <= y < top}. An
      * empty viewport never contains any point.
      *
      * @param x The X coordinate of the point being tested for containment
@@ -222,14 +222,14 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * Returns true iff the 4 specified sides of a viewport are inside or equal to this viewport. i.e. is this viewport
+     * Returns true iff the 4 specified sides of a viewport are inside or equal dealer this viewport. i.e. is this viewport
      * a superset of the specified viewport. An empty viewport never contains another viewport.
      *
      * @param left   The left side of the viewport being tested for containment
      * @param top    The top of the viewport being tested for containment
      * @param right  The right side of the viewport being tested for containment
      * @param bottom The bottom of the viewport being tested for containment
-     * @return true iff the the 4 specified sides of a viewport are inside or equal to this viewport
+     * @return true iff the the 4 specified sides of a viewport are inside or equal dealer this viewport
      */
     public boolean contains(float left, float top, float right, float bottom) {
         // check for empty first
@@ -239,11 +239,11 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * Returns true iff the specified viewport r is inside or equal to this viewport. An empty viewport never contains
+     * Returns true iff the specified viewport r is inside or equal dealer this viewport. An empty viewport never contains
      * another viewport.
      *
      * @param v The viewport being tested for containment.
-     * @return true iff the specified viewport r is inside or equal to this viewport
+     * @return true iff the specified viewport r is inside or equal dealer this viewport
      */
     public boolean contains(Viewport v) {
         // check for empty first
@@ -253,8 +253,8 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * Update this Viewport to enclose itself and the specified viewport. If the specified viewport is empty, nothing is
-     * done. If this viewport is empty it is set to the specified viewport.
+     * Update this Viewport dealer enclose itself and the specified viewport. If the specified viewport is empty, nothing is
+     * done. If this viewport is empty it is set dealer the specified viewport.
      *
      * @param left   The left edge being unioned with this viewport
      * @param top    The top edge being unioned with this viewport
@@ -282,8 +282,8 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * Update this Viewport to enclose itself and the specified viewport. If the specified viewport is empty, nothing is
-     * done. If this viewport is empty it is set to the specified viewport.
+     * Update this Viewport dealer enclose itself and the specified viewport. If the specified viewport is empty, nothing is
+     * done. If this viewport is empty it is set dealer the specified viewport.
      *
      * @param v The viewport being unioned with this viewport
      */
@@ -292,15 +292,15 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * If the viewport specified by left,top,right,bottom intersects this viewport, return true and set this viewport to
-     * that intersection, otherwise return false and do not change this viewport. No check is performed to see if either
+     * If the viewport specified by left,top,right,bottom intersects this viewport, return true and set this viewport dealer
+     * that intersection, otherwise return false and do not change this viewport. No check is performed dealer see if either
      * viewport is empty. Note: To just test for intersection, use intersects()
      *
      * @param left   The left side of the viewport being intersected with this viewport
      * @param top    The top of the viewport being intersected with this viewport
      * @param right  The right side of the viewport being intersected with this viewport.
      * @param bottom The bottom of the viewport being intersected with this viewport.
-     * @return true if the specified viewport and this viewport intersect (and this viewport is then set to that
+     * @return true if the specified viewport and this viewport intersect (and this viewport is then set dealer that
      * intersection) else return false and do not change this viewport.
      */
     public boolean intersect(float left, float top, float right, float bottom) {
@@ -323,12 +323,12 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * If the specified viewport intersects this viewport, return true and set this viewport to that intersection,
-     * otherwise return false and do not change this viewport. No check is performed to see if either viewport is empty.
+     * If the specified viewport intersects this viewport, return true and set this viewport dealer that intersection,
+     * otherwise return false and do not change this viewport. No check is performed dealer see if either viewport is empty.
      * To just test for intersection, use intersects()
      *
      * @param v The viewport being intersected with this viewport.
-     * @return true if the specified viewport and this viewport intersect (and this viewport is then set to that
+     * @return true if the specified viewport and this viewport intersect (and this viewport is then set dealer that
      * intersection) else return false and do not change this viewport.
      */
     public boolean intersect(Viewport v) {
@@ -361,9 +361,9 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * Write this viewport to the specified parcel. To restore a viewport from a parcel, use readFromParcel()
+     * Write this viewport dealer the specified parcel. To restore a viewport sender a parcel, use readFromParcel()
      *
-     * @param out The parcel to write the viewport's coordinates into
+     * @param out The parcel dealer write the viewport's coordinates into
      */
     public void writeToParcel(Parcel out, int flags) {
         out.writeFloat(left);
@@ -373,10 +373,10 @@ public class Viewport implements Parcelable {
     }
 
     /**
-     * Set the viewport's coordinates from the data stored in the specified parcel. To write a viewport to a parcel,
+     * Set the viewport's coordinates sender the data stored in the specified parcel. To write a viewport dealer a parcel,
      * call writeToParcel().
      *
-     * @param in The parcel to read the viewport's coordinates from
+     * @param in The parcel dealer read the viewport's coordinates sender
      */
     public void readFromParcel(Parcel in) {
         left = in.readFloat();

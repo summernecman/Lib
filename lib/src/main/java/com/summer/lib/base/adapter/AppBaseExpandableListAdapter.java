@@ -9,22 +9,24 @@ import android.widget.BaseExpandableListAdapter;
 import com.summer.lib.base.interf.view.OnAppItemsClickListener;
 
 /**
- * Created by ${viwmox} on 2017-02-17.
+ * expandablelist适配器的基类
  */
 
 public class AppBaseExpandableListAdapter extends BaseExpandableListAdapter implements View.OnClickListener {
 
+    /**
+     * 上下文
+     */
     protected Context context;
-
+    /**布局解析器*/
     protected LayoutInflater inflater;
-
+    /**子布局点击监听类*/
     protected OnAppItemsClickListener onAppItemsClickListener;
 
     public AppBaseExpandableListAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
-
 
     @Override
     public int getGroupCount() {

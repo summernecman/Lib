@@ -5,8 +5,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 
-
-import com.summer.lib.base.interf.OnNetFinishWithObjInter;
+import com.summer.lib.base.interf.OnFinishWithObjI;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,19 +16,13 @@ import java.util.List;
  */
 public class PackageUtil {
 
-    private static PackageUtil instance;
-
     public static final int FLAG_SYSTEM = 0;
-
     public static final int FLAG_ALL = -1;
-
     public static final int FLAG_USER = 1;
-
     public static final int FLAG_FREQUENT = 2;
-
     public static final int FLAG_COMMON = 3;
-
     public static final int FLAG_NULL = 4;
+    private static PackageUtil instance;
 
     public static PackageUtil getInstance() {
         if (instance == null) {
@@ -38,7 +31,7 @@ public class PackageUtil {
         return instance;
     }
 
-    public void getPackageInfoList(final Context context, final String type, final OnNetFinishWithObjInter onNetFinishWithObjInter) {
+    public void getPackageInfoList(final Context context, final String type, final OnFinishWithObjI onFinishWithObjI) {
         new AsyncTask<String, Integer, List<ApplicationInfo>>() {
             @Override
             protected List<ApplicationInfo> doInBackground(String... params) {
@@ -73,14 +66,14 @@ public class PackageUtil {
 
             @Override
             protected void onPostExecute(List<ApplicationInfo> applicationInfos) {
-                if (onNetFinishWithObjInter != null) {
-                    onNetFinishWithObjInter.onNetFinish(applicationInfos);
+                if (onFinishWithObjI != null) {
+                    onFinishWithObjI.onNetFinish(applicationInfos);
                 }
             }
         }.execute();
     }
 
-    public void getPackageApplicationInfo(final Context context, final List<String> packageNames, final OnNetFinishWithObjInter onNetFinishWithObjInter) {
+    public void getPackageApplicationInfo(final Context context, final List<String> packageNames, final OnFinishWithObjI onFinishWithObjI) {
 
         final List<ApplicationInfo> applicationInfos = new ArrayList<>();
         new AsyncTask<String, String, List<ApplicationInfo>>() {
@@ -101,8 +94,8 @@ public class PackageUtil {
 
             @Override
             protected void onPostExecute(List<ApplicationInfo> applicationInfos) {
-                if (onNetFinishWithObjInter != null) {
-                    onNetFinishWithObjInter.onNetFinish(applicationInfos);
+                if (onFinishWithObjI != null) {
+                    onFinishWithObjI.onNetFinish(applicationInfos);
                 }
             }
         }.execute();

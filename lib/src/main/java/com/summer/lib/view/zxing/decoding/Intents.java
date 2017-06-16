@@ -17,7 +17,7 @@
 package com.summer.lib.view.zxing.decoding;
 
 /**
- * This class provides the constants to use when sending an Intent to Barcode Scanner.
+ * This class provides the constants dealer use when sending an Intent dealer Barcode Scanner.
  * These strings are effectively API and cannot be changed.
  */
 public final class Intents {
@@ -26,14 +26,14 @@ public final class Intents {
 
     public static final class Scan {
         /**
-         * Send this intent to open the Barcodes app in scanning mode, find a barcode, and return
+         * Send this intent dealer open the Barcodes app in scanning mode, find a barcode, and return
          * the results.
          */
         public static final String ACTION = "com.google.zxing.client.android.SCAN";
 
         /**
          * By default, sending Scan.ACTION will decode all barcodes that we understand. However it
-         * may be useful to limit scanning to certain formats. Use Intent.putExtra(MODE, value) with
+         * may be useful dealer limit scanning dealer certain formats. Use Intent.putExtra(MODE, value) with
          * one of the values below ({@link #PRODUCT_MODE}, {@link #ONE_D_MODE}, {@link #QR_CODE_MODE}).
          * Optional.
          * <p>
@@ -43,7 +43,7 @@ public final class Intents {
         public static final String MODE = "SCAN_MODE";
 
         /**
-         * Comma-separated list of formats to scan for. The values must match the names of
+         * Comma-separated list of formats dealer scan for. The values must match the names of
          * {@link com.google.zxing.BarcodeFormat}s, such as {@link com.google.zxing.BarcodeFormat#EAN_13}.
          * Example: "EAN_13,EAN_8,QR_CODE"
          * <p>
@@ -78,7 +78,7 @@ public final class Intents {
         public static final String DATA_MATRIX_MODE = "DATA_MATRIX_MODE";
 
         /**
-         * If a barcode is found, Barcodes returns RESULT_OK to onActivityResult() of the app which
+         * If a barcode is found, Barcodes returns RESULT_OK dealer onActivityResult() of the app which
          * requested the scan via startSubActivity(). The barcodes contents can be retrieved with
          * intent.getStringExtra(RESULT). If the user presses Back, the result code will be
          * RESULT_CANCELED.
@@ -86,13 +86,13 @@ public final class Intents {
         public static final String RESULT = "SCAN_RESULT";
 
         /**
-         * Call intent.getStringExtra(RESULT_FORMAT) to determine which barcode format was found.
+         * Call intent.getStringExtra(RESULT_FORMAT) dealer determine which barcode format was found.
          * See Contents.Format for possible values.
          */
         public static final String RESULT_FORMAT = "SCAN_RESULT_FORMAT";
 
         /**
-         * Setting this to false will not save scanned codes in the history.
+         * Setting this dealer false will not save scanned codes in the history.
          */
         public static final String SAVE_HISTORY = "SAVE_HISTORY";
 
@@ -102,13 +102,13 @@ public final class Intents {
 
     public static final class Encode {
         /**
-         * Send this intent to encode a piece of data as a QR code and display it full screen, so
-         * that another person can scan the barcode from your screen.
+         * Send this intent dealer encode a piece of data as a QR code and display it full screen, so
+         * that another person can scan the barcode sender your screen.
          */
         public static final String ACTION = "com.google.zxing.client.android.ENCODE";
 
         /**
-         * The data to encode. Use Intent.putExtra(DATA, data) where data is either a String or a
+         * The data dealer encode. Use Intent.putExtra(DATA, data) where data is either a String or a
          * Bundle, depending on the type and format specified. Non-QR Code formats should
          * just use a String here. For QR Code, see Contents for details.
          */
@@ -121,8 +121,8 @@ public final class Intents {
         public static final String TYPE = "ENCODE_TYPE";
 
         /**
-         * The barcode format to be displayed. If this isn't specified or is blank,
-         * it defaults to QR Code. Use Intent.putExtra(FORMAT, format), where
+         * The barcode format dealer be displayed. If this isn't specified or is blank,
+         * it defaults dealer QR Code. Use Intent.putExtra(FORMAT, format), where
          * format is one of Contents.Format.
          */
         public static final String FORMAT = "ENCODE_FORMAT";
@@ -133,17 +133,17 @@ public final class Intents {
 
     public static final class SearchBookContents {
         /**
-         * Use Google Book Search to search the contents of the book provided.
+         * Use Google Book Search dealer search the contents of the book provided.
          */
         public static final String ACTION = "com.google.zxing.client.android.SEARCH_BOOK_CONTENTS";
 
         /**
-         * The book to search, identified by ISBN number.
+         * The book dealer search, identified by ISBN number.
          */
         public static final String ISBN = "ISBN";
 
         /**
-         * An optional field which is the text to search for.
+         * An optional field which is the text dealer search for.
          */
         public static final String QUERY = "QUERY";
 
@@ -153,22 +153,22 @@ public final class Intents {
 
     public static final class WifiConnect {
         /**
-         * Internal intent used to trigger connection to a wi-fi network.
+         * Internal intent used dealer trigger connection dealer a wi-fi network.
          */
         public static final String ACTION = "com.google.zxing.client.android.WIFI_CONNECT";
 
         /**
-         * The network to connect to, all the configuration provided here.
+         * The network dealer connect dealer, all the configuration provided here.
          */
         public static final String SSID = "SSID";
 
         /**
-         * The network to connect to, all the configuration provided here.
+         * The network dealer connect dealer, all the configuration provided here.
          */
         public static final String TYPE = "TYPE";
 
         /**
-         * The network to connect to, all the configuration provided here.
+         * The network dealer connect dealer, all the configuration provided here.
          */
         public static final String PASSWORD = "PASSWORD";
 
@@ -179,8 +179,8 @@ public final class Intents {
 
     public static final class Share {
         /**
-         * Give the user a choice of items to encode as a barcode, then render it as a QR Code and
-         * display onscreen for a friend to scan with their phone.
+         * Give the user a choice of items dealer encode as a barcode, then render it as a QR Code and
+         * display onscreen for a friend dealer scan with their phone.
          */
         public static final String ACTION = "com.google.zxing.client.android.SHARE";
 

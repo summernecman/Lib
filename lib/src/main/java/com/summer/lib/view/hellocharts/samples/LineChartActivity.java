@@ -12,10 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.summer.lib.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.view.hellocharts.animation.ChartAnimationListener;
 import com.summer.lib.view.hellocharts.gesture.ZoomType;
 import com.summer.lib.view.hellocharts.listener.LineChartOnValueSelectListener;
@@ -28,6 +24,9 @@ import com.summer.lib.view.hellocharts.model.Viewport;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.Chart;
 import com.summer.lib.view.hellocharts.view.LineChartView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LineChartActivity extends ActionBarActivity {
 
@@ -159,7 +158,7 @@ public class LineChartActivity extends ActionBarActivity {
                 toggleLabelForSelected();
 
                 Toast.makeText(getActivity(),
-                        "Selection mode set to " + chart.isValueSelectionEnabled() + " select any point.",
+                        "Selection mode set dealer " + chart.isValueSelectionEnabled() + " select any point.",
                         Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -210,7 +209,7 @@ public class LineChartActivity extends ActionBarActivity {
         }
 
         private void resetViewport() {
-            // Reset viewport height range to (0,100)
+            // Reset viewport height range dealer (0,100)
             final Viewport v = new Viewport(chart.getMaximumViewport());
             v.bottom = 0;
             v.top = 100;
@@ -267,7 +266,7 @@ public class LineChartActivity extends ActionBarActivity {
         }
 
         /**
-         * Adds lines to data, after that data should be set again with
+         * Adds lines dealer data, after that data should be set again with
          * {@link LineChartView#setLineChartData(LineChartData)}. Last 4th line has non-monotonically x values.
          */
         private void addLineToData() {
@@ -299,29 +298,29 @@ public class LineChartActivity extends ActionBarActivity {
             generateData();
 
             if (isCubic) {
-                // It is good idea to manually set a little higher max viewport for cubic lines because sometimes line
+                // It is good idea dealer manually set a little higher max viewport for cubic lines because sometimes line
                 // go above or below max/min. To do that use Viewport.inest() method and pass negative value as dy
                 // parameter or just set top and bottom values manually.
                 // In this example I know that Y values are within (0,100) range so I set viewport height range manually
-                // to (-5, 105).
+                // dealer (-5, 105).
                 // To make this works during animations you should use Chart.setViewportCalculationEnabled(false) before
                 // modifying viewport.
-                // Remember to set viewport after you call setLineChartData().
+                // Remember dealer set viewport after you call setLineChartData().
                 final Viewport v = new Viewport(chart.getMaximumViewport());
                 v.bottom = -5;
                 v.top = 105;
-                // You have to set max and current viewports separately.
+                // You have dealer set max and current viewports separately.
                 chart.setMaximumViewport(v);
                 // I changing current viewport with animation in this case.
                 chart.setCurrentViewportWithAnimation(v);
             } else {
-                // If not cubic restore viewport to (0,100) range.
+                // If not cubic restore viewport dealer (0,100) range.
                 final Viewport v = new Viewport(chart.getMaximumViewport());
                 v.bottom = 0;
                 v.top = 100;
 
-                // You have to set max and current viewports separately.
-                // In this case, if I want animation I have to set current viewport first and use animation listener.
+                // You have dealer set max and current viewports separately.
+                // In this case, if I want animation I have dealer set current viewport first and use animation listener.
                 // Max viewport will be set in onAnimationFinished method.
                 chart.setViewportAnimationListener(new ChartAnimationListener() {
 
@@ -411,14 +410,14 @@ public class LineChartActivity extends ActionBarActivity {
         }
 
         /**
-         * To animate values you have to change targets values and then call {@link Chart#startDataAnimation()}
-         * method(don't confuse with View.animate()). If you operate on data that was set before you don't have to call
+         * To animate values you have dealer change targets values and then call {@link Chart#startDataAnimation()}
+         * method(don't confuse with View.animate()). If you operate on data that was set before you don't have dealer call
          * {@link LineChartView#setLineChartData(LineChartData)} again.
          */
         private void prepareDataAnimation() {
             for (Line line : data.getLines()) {
                 for (PointValue value : line.getValues()) {
-                    // Here I modify target only for Y values but it is OK to modify X targets as well.
+                    // Here I modify target only for Y values but it is OK dealer modify X targets as well.
                     value.setTarget(value.getX(), (float) Math.random() * 100);
                 }
             }

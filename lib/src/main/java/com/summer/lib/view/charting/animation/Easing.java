@@ -8,41 +8,6 @@ package com.summer.lib.view.charting.animation;
  */
 public class Easing {
 
-    /**
-     * Use EasingOption instead of EasingFunction to avoid crashes below Android
-     * 3.0
-     */
-    public enum EasingOption {
-        Linear,
-        EaseInQuad,
-        EaseOutQuad,
-        EaseInOutQuad,
-        EaseInCubic,
-        EaseOutCubic,
-        EaseInOutCubic,
-        EaseInQuart,
-        EaseOutQuart,
-        EaseInOutQuart,
-        EaseInSine,
-        EaseOutSine,
-        EaseInOutSine,
-        EaseInExpo,
-        EaseOutExpo,
-        EaseInOutExpo,
-        EaseInCirc,
-        EaseOutCirc,
-        EaseInOutCirc,
-        EaseInElastic,
-        EaseOutElastic,
-        EaseInOutElastic,
-        EaseInBack,
-        EaseOutBack,
-        EaseInOutBack,
-        EaseInBounce,
-        EaseOutBounce,
-        EaseInOutBounce,
-    }
-
     public static EasingFunction getEasingFunctionFromOption(EasingOption easing) {
         switch (easing) {
             default:
@@ -103,6 +68,41 @@ public class Easing {
             case EaseInOutBounce:
                 return EasingFunctions.EaseInOutBounce;
         }
+    }
+
+    /**
+     * Use EasingOption instead of EasingFunction dealer avoid crashes below Android
+     * 3.0
+     */
+    public enum EasingOption {
+        Linear,
+        EaseInQuad,
+        EaseOutQuad,
+        EaseInOutQuad,
+        EaseInCubic,
+        EaseOutCubic,
+        EaseInOutCubic,
+        EaseInQuart,
+        EaseOutQuart,
+        EaseInOutQuart,
+        EaseInSine,
+        EaseOutSine,
+        EaseInOutSine,
+        EaseInExpo,
+        EaseOutExpo,
+        EaseInOutExpo,
+        EaseInCirc,
+        EaseOutCirc,
+        EaseInOutCirc,
+        EaseInElastic,
+        EaseOutElastic,
+        EaseInOutElastic,
+        EaseInBack,
+        EaseOutBack,
+        EaseInOutBack,
+        EaseInBounce,
+        EaseOutBounce,
+        EaseInOutBounce,
     }
 
     private static class EasingFunctions {
@@ -615,21 +615,6 @@ public class Easing {
                                 * (((s *= (1.525f)) + 1.f) * position + s) + 2.f);
                     }
                 };
-
-        public static final EasingFunction EaseInBounce = new
-                EasingFunction() {
-                    // @Override
-                    // public float ease(long elapsed, long duration) {
-                    // return 1.f - EaseOutBounce.ease(duration - elapsed,
-                    // duration);
-                    // }
-
-                    @Override
-                    public float getInterpolation(float input) {
-                        return 1.f - EaseOutBounce.getInterpolation(1f - input);
-                    }
-                };
-
         public static final EasingFunction EaseOutBounce = new
                 EasingFunction() {
                     // @Override
@@ -671,7 +656,19 @@ public class Easing {
                         }
                     }
                 };
+        public static final EasingFunction EaseInBounce = new
+                EasingFunction() {
+                    // @Override
+                    // public float ease(long elapsed, long duration) {
+                    // return 1.f - EaseOutBounce.ease(duration - elapsed,
+                    // duration);
+                    // }
 
+                    @Override
+                    public float getInterpolation(float input) {
+                        return 1.f - EaseOutBounce.getInterpolation(1f - input);
+                    }
+                };
         public static final EasingFunction EaseInOutBounce = new
                 EasingFunction() {
                     // @Override

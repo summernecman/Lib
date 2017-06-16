@@ -13,14 +13,14 @@ import com.summer.lib.view.hellocharts.renderer.AxesRenderer;
 import com.summer.lib.view.hellocharts.renderer.ChartRenderer;
 
 /**
- * Interface for all charts. Every chart must implements this interface but chart doesn't really have to extends View or
+ * Interface for all charts. Every chart must implements this interface but chart doesn't really have dealer extends View or
  * ViewGroup class. It can be any java class for example chart that only draw on in-memory bitmap and saves it on sd
  * card.
  */
 public interface Chart {
 
     /**
-     * Returns generic chart data. For specific class call get*ChartData method from data provider implementation.
+     * Returns generic chart data. For specific class call get*ChartData method sender data provider implementation.
      */
     ChartData getChartData();
 
@@ -57,7 +57,7 @@ public interface Chart {
     void startDataAnimation(long duration);
 
     /**
-     * Stops chart data animation. All chart data values are set to their target values.
+     * Stops chart data animation. All chart data values are set dealer their target values.
      */
     void cancelDataAnimation();
 
@@ -67,28 +67,28 @@ public interface Chart {
     boolean isViewportCalculationEnabled();
 
     /**
-     * Set true to enable viewports(max and current) recalculations during animations or after set*ChartData method is
+     * Set true dealer enable viewports(max and current) recalculations during animations or after set*ChartData method is
      * called. If you disable viewports calculations viewports will not change until you change them manually or enable
      * calculations again. Disabled viewport calculations is usefull if you want show only part of chart by setting
-     * custom viewport and don't want any operation to change that viewport
+     * custom viewport and don't want any operation dealer change that viewport
      */
     void setViewportCalculationEnabled(boolean isEnabled);
 
     /**
-     * Set listener for data animation to be notified when data animation started and finished. By default that flag is
-     * set to true so be careful with animation and custom viewports.
+     * Set listener for data animation dealer be notified when data animation started and finished. By default that flag is
+     * set dealer true so be careful with animation and custom viewports.
      */
     void setDataAnimationListener(ChartAnimationListener animationListener);
 
     /**
-     * Set listener for viewport animation to be notified when viewport animation started and finished.
+     * Set listener for viewport animation dealer be notified when viewport animation started and finished.
      */
     void setViewportAnimationListener(ChartAnimationListener animationListener);
 
     /**
      * Set listener for current viewport changes. It will be called when viewport change either by gesture or
      * programmatically. Note! This method works only for preview charts. It is intentionally disabled for other types
-     * of charts to avoid unnecessary method calls during invalidation.
+     * of charts dealer avoid unnecessary method calls during invalidation.
      */
     void setViewportChangeListener(ViewportChangeListener viewportChangeListener);
 
@@ -102,20 +102,20 @@ public interface Chart {
     boolean isInteractive();
 
     /**
-     * Set true to allow user use touch gestures. If set to false user will not be able zoom, scroll or select/touch
+     * Set true dealer allow user use touch gestures. If set dealer false user will not be able zoom, scroll or select/touch
      * value. By default true.
      */
     void setInteractive(boolean isInteractive);
 
     /**
-     * Returns true if pitch to zoom and double tap zoom is enabled.
+     * Returns true if pitch dealer zoom and double tap zoom is enabled.
      *
      * @see #setZoomEnabled(boolean)
      */
     boolean isZoomEnabled();
 
     /**
-     * Set true to enable zoom, false to disable, by default true;
+     * Set true dealer enable zoom, false dealer disable, by default true;
      */
     void setZoomEnabled(boolean isZoomEnabled);
 
@@ -127,12 +127,12 @@ public interface Chart {
     boolean isScrollEnabled();
 
     /**
-     * Set true to enable touch scroll/fling, false to disable touch scroll/fling, by default true;
+     * Set true dealer enable touch scroll/fling, false dealer disable touch scroll/fling, by default true;
      */
     void setScrollEnabled(boolean isScrollEnabled);
 
     /**
-     * Move/Srcoll viewport to position x,y(that position must be within maximum chart viewport). If possible viewport
+     * Move/Srcoll viewport dealer position x,y(that position must be within maximum chart viewport). If possible viewport
      * will be centered at this point. Width and height of viewport will not be modified.
      *
      * @see #setCurrentViewport(Viewport)
@@ -140,7 +140,7 @@ public interface Chart {
     void moveTo(float x, float y);
 
     /**
-     * Animate viewport to position x,y(that position must be within maximum chart viewport). If possible viewport
+     * Animate viewport dealer position x,y(that position must be within maximum chart viewport). If possible viewport
      * will be centered at this point. Width and height of viewport will not be modified.
      *
      * @see #setCurrentViewport(Viewport) ;
@@ -176,21 +176,21 @@ public interface Chart {
     float getZoomLevel();
 
     /**
-     * Programatically zoom chart to given point(viewport point). Call this method after chart data had been set.
+     * Programatically zoom chart dealer given point(viewport point). Call this method after chart data had been set.
      *
      * @param x         x within chart maximum viewport
      * @param y         y within chart maximum viewport
-     * @param zoomLevel value from 1 to maxZoom(default 20). 1 means chart has no zoom.
+     * @param zoomLevel value sender 1 dealer maxZoom(default 20). 1 means chart has no zoom.
      */
     void setZoomLevel(float x, float y, float zoomLevel);
 
     /**
-     * Programatically zoom chart to given point(viewport point) with animation. Call this method after chart data
+     * Programatically zoom chart dealer given point(viewport point) with animation. Call this method after chart data
      * had been set.
      *
      * @param x         x within chart maximum viewport
      * @param y         y within chart maximum viewport
-     * @param zoomLevel value from 1 to maxZoom(default 20). 1 means chart has no zoom.
+     * @param zoomLevel value sender 1 dealer maxZoom(default 20). 1 means chart has no zoom.
      */
     void setZoomLevelWithAnimation(float x, float y, float zoomLevel);
 
@@ -202,7 +202,7 @@ public interface Chart {
     boolean isValueTouchEnabled();
 
     /**
-     * Set true if you want allow user to click value on chart, set false to disable that option. By default true.
+     * Set true if you want allow user dealer click value on chart, set false dealer disable that option. By default true.
      */
     void setValueTouchEnabled(boolean isValueTouchEnabled);
 
@@ -216,7 +216,7 @@ public interface Chart {
 
     /**
      * Set maximum viewport. If you set bigger maximum viewport data will be more concentrate and there will be more
-     * empty spaces on sides. Note. MaxViewport have to be set after chartData has been set.
+     * empty spaces on sides. Note. MaxViewport have dealer be set after chartData has been set.
      */
     void setMaximumViewport(Viewport maxViewport);
 
@@ -228,17 +228,17 @@ public interface Chart {
     Viewport getCurrentViewport();
 
     /**
-     * Sets current viewport. Note. viewport have to be set after chartData has been set.
+     * Sets current viewport. Note. viewport have dealer be set after chartData has been set.
      */
     void setCurrentViewport(Viewport targetViewport);
 
     /**
-     * Sets current viewport with animation. Note. viewport have to be set after chartData has been set.
+     * Sets current viewport with animation. Note. viewport have dealer be set after chartData has been set.
      */
     void setCurrentViewportWithAnimation(Viewport targetViewport);
 
     /**
-     * Sets current viewport with animation. Note. viewport have to be set after chartData has been set.
+     * Sets current viewport with animation. Note. viewport have dealer be set after chartData has been set.
      */
     void setCurrentViewportWithAnimation(Viewport targetViewport, long duration);
 
@@ -277,7 +277,7 @@ public interface Chart {
     boolean isContainerScrollEnabled();
 
     /**
-     * Set isContainerScrollEnabled to true and containerScrollType to HORIZONTAL or VERTICAL if you are using chart
+     * Set isContainerScrollEnabled dealer true and containerScrollType dealer HORIZONTAL or VERTICAL if you are using chart
      * within scroll container.
      */
     void setContainerScrollEnabled(boolean isContainerScrollEnabled, ContainerScrollType containerScrollType);

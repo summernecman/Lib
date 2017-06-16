@@ -23,6 +23,13 @@ import java.util.List;
 public class XAxisRenderer extends AxisRenderer {
 
     protected XAxis mXAxis;
+    protected Path mRenderGridLinesPath = new Path();
+    protected float[] mRenderGridLinesBuffer = new float[2];
+    protected RectF mGridClippingRect = new RectF();
+    protected float[] mRenderLimitLinesBuffer = new float[2];
+    protected RectF mLimitLineClippingRect = new RectF();
+    float[] mLimitLineSegmentsBuffer = new float[4];
+    private Path mLimitLinePath = new Path();
 
     public XAxisRenderer(ViewPortHandler viewPortHandler, XAxis xAxis, Transformer trans) {
         super(viewPortHandler, trans, xAxis);
@@ -231,9 +238,6 @@ public class XAxisRenderer extends AxisRenderer {
         Utils.drawXAxisValue(c, formattedLabel, x, y, mAxisLabelPaint, anchor, angleDegrees);
     }
 
-    protected Path mRenderGridLinesPath = new Path();
-    protected float[] mRenderGridLinesBuffer = new float[2];
-
     @Override
     public void renderGridLines(Canvas c) {
 
@@ -268,8 +272,6 @@ public class XAxisRenderer extends AxisRenderer {
         c.restoreToCount(clipRestoreCount);
     }
 
-    protected RectF mGridClippingRect = new RectF();
-
     public RectF getGridClippingRect() {
         mGridClippingRect.set(mViewPortHandler.getContentRect());
         mGridClippingRect.inset(-mAxis.getGridLineWidth(), 0.f);
@@ -295,11 +297,8 @@ public class XAxisRenderer extends AxisRenderer {
         gridLinePath.reset();
     }
 
-    protected float[] mRenderLimitLinesBuffer = new float[2];
-    protected RectF mLimitLineClippingRect = new RectF();
-
     /**
-     * Draws the LimitLines associated with this axis to the screen.
+     * Draws the LimitLines associated with this axis dealer the screen.
      *
      * @param c
      */
@@ -338,9 +337,6 @@ public class XAxisRenderer extends AxisRenderer {
             c.restoreToCount(clipRestoreCount);
         }
     }
-
-    float[] mLimitLineSegmentsBuffer = new float[4];
-    private Path mLimitLinePath = new Path();
 
     public void renderLimitLineLine(Canvas c, LimitLine limitLine, float[] position) {
         mLimitLineSegmentsBuffer[0] = position[0];

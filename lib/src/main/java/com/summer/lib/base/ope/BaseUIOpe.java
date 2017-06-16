@@ -7,10 +7,13 @@ import com.summer.lib.bean.uibean.BaseUIBean;
 import butterknife.ButterKnife;
 
 /**
- * Created by ${viwmox} on 2016-06-19.
+ * ui处理操作者 处理对象 uibean fragment view
  */
 public class BaseUIOpe<A extends BaseUIBean> implements BaseOpe {
 
+    /**
+     * ui布局类
+     */
     protected  A uiBean;
 
     protected Context context;

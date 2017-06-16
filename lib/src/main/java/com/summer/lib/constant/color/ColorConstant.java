@@ -3,7 +3,7 @@ package com.summer.lib.constant.color;
 import com.summer.lib.R;
 
 /**
- * Created by ${viwmox} on 2016-10-18.
+ * 颜色常量
  */
 public class ColorConstant {
 
@@ -12,9 +12,7 @@ public class ColorConstant {
      */
     public static int COLOR_BASE = R.color.color_base;
 
-    /**
-     * 状态栏颜色
-     */
+    /**状态栏颜色*/
     public static int COLOR_STATUS = R.color.color_blue_300;
 
 

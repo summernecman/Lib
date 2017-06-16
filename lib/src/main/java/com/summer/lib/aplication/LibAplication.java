@@ -11,6 +11,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.summer.lib.R;
 import com.summer.lib.constant.ValueConstant;
+import com.summer.lib.exception.exception.CrashHander;
 import com.summer.lib.util.ScreenUtil;
 import com.summer.lib.view.image.ImagePickerLoader;
 
@@ -27,28 +28,50 @@ public class LibAplication extends Application {
     /**
      * 键值对存储activity
      */
-    HashMap<String, Activity> activityHashMap = new HashMap<>();
+    HashMap<String, Activity> actMap = new HashMap<>();
     /**列表存储activity*/
-    ArrayList<Activity> activities = new ArrayList<>();
-
+    ArrayList<Activity> acts = new ArrayList<>();
 
     @Override
     public void onCreate() {
         super.onCreate();
+        initApplication();
+    }
+
+    /**
+     * 初始化application设置
+     */
+    protected void initApplication() {
+        initImageLoader();
+        initSysConfig();
+        initImagePicker();
+        initCrash();
+    }
+
+    /**
+     * 初始化图片加载了imageloader
+     */
+    public void initImageLoader(){
         ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(this);
         config.threadPriority(Thread.NORM_PRIORITY - 2);
         config.denyCacheImageMultipleSizesInMemory();
         config.diskCacheFileNameGenerator(new Md5FileNameGenerator());
         config.diskCacheSize(50 * 1024 * 1024); // 50 MiB
         config.tasksProcessingOrder(QueueProcessingType.LIFO);
-        config.writeDebugLogs(); // Remove for release app
-
-        // Initialize ImageLoader with configuration.
+        config.writeDebugLogs();
+        //Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config.build());
+    }
+
+    /**初始化系统常量*/
+    public void initSysConfig(){
         ScreenUtil.getInstance().getScreenSize(getApplicationContext());
         ScreenUtil.getInstance().getStatusBarHeight(getApplicationContext());
         ValueConstant.DIMEN_1 = (int) getResources().getDimension(R.dimen.dimen_1);
+    }
 
+    /**初始化图片加载了imagepicker图片选择器*/
+    public void initImagePicker(){
         ImagePicker imagePicker = ImagePicker.getInstance();
         imagePicker.setImageLoader(new ImagePickerLoader());   //设置图片加载器
         imagePicker.setShowCamera(true);  //显示拍照按钮
@@ -62,23 +85,29 @@ public class LibAplication extends Application {
         imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
     }
 
+    /**
+     * 系统报错处理
+     */
+    public void initCrash() {
+        CrashHander.getInstance().init(this);
+    }
 
-    /**退出结束所有界面*/
+    /**
+     * 退出结束所有界面
+     */
     public void exit() {
-        Iterator iterator = activityHashMap.keySet().iterator();
+        Iterator iterator = actMap.keySet().iterator();
         while (iterator.hasNext()) {
-            activityHashMap.get(iterator.next()).finish();
+            actMap.get(iterator.next()).finish();
         }
-        activityHashMap.clear();
-        System.gc();
+        actMap.clear();
     }
 
-
-    public HashMap<String, Activity> getActivityHashMap() {
-        return activityHashMap;
+    public HashMap<String, Activity> getActMap() {
+        return actMap;
     }
 
-    public ArrayList<Activity> getActivities() {
-        return activities;
+    public ArrayList<Activity> getActs() {
+        return acts;
     }
 }

@@ -7,7 +7,7 @@
 
        http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing, software
+  Unless required by applicable law or agreed dealer in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
@@ -16,8 +16,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:orientation="vertical"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
         <TextView
             android:id="@+id/sipLabel"
@@ -27,65 +27,65 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ToggleButton
-            android:layout_height="400dp"
-            android:layout_width="400dp"
             android:id="@+id/pushToTalk"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
 
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:layout_marginTop="-20dp"
             android:background="@drawable/btn_record"
             android:textOff=""
-            android:textOn=""
-            android:layout_marginTop="-20dp" />
+            android:textOn="" />
 
     <EditText
         android:id="@+id/id"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" />
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_weight="1"
-            android:text="init"
             android:id="@+id/init"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/gray"
             android:gravity="center"
-            android:background="@color/gray" />
+            android:text="init" />
 
         <TextView
-            android:layout_weight="1"
-            android:text="call"
             android:id="@+id/call"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/gray"
             android:gravity="center"
-            android:background="@color/gray" />
+            android:text="call" />
 
         <TextView
-            android:layout_weight="1"
-            android:text="edit"
             android:id="@+id/edit"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/gray"
             android:gravity="center"
-            android:background="@color/gray" />
+            android:text="edit" />
 
         <TextView
-            android:layout_weight="1"
-            android:text="end"
             android:id="@+id/end"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/gray"
             android:gravity="center"
-            android:background="@color/gray" />
+            android:text="end" />
 
 
     </LinearLayout>

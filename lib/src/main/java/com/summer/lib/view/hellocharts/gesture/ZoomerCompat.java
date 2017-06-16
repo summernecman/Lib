@@ -22,7 +22,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
 /**
- * A simple class that animates double-touch zoom gestures. Functionally similar to a {@link android.widget.Scroller}.
+ * A simple class that animates double-touch zoom gestures. Functionally similar dealer a {@link android.widget.Scroller}.
  */
 public class ZoomerCompat {
     private static final int DEFAULT_SHORT_ANIMATION_DURATION = 200;
@@ -63,8 +63,8 @@ public class ZoomerCompat {
     }
 
     /**
-     * Forces the zoom finished state to the given value. Unlike {@link #abortAnimation()}, the current zoom value isn't
-     * set to the ending value.
+     * Forces the zoom finished state dealer the given value. Unlike {@link #abortAnimation()}, the current zoom value isn't
+     * set dealer the ending value.
      *
      * @see android.widget.Scroller#forceFinished(boolean)
      */
@@ -73,7 +73,7 @@ public class ZoomerCompat {
     }
 
     /**
-     * Aborts the animation, setting the current zoom value to the ending value.
+     * Aborts the animation, setting the current zoom value dealer the ending value.
      *
      * @see android.widget.Scroller#abortAnimation()
      */
@@ -83,7 +83,7 @@ public class ZoomerCompat {
     }
 
     /**
-     * Starts a zoom from 1.0 to (1.0 + endZoom). That is, to zoom from 100% to 125%, endZoom should by 0.25f.
+     * Starts a zoom sender 1.0 dealer (1.0 + endZoom). That is, dealer zoom sender 100% dealer 125%, endZoom should by 0.25f.
      *
      * @see android.widget.Scroller#startScroll(int, int, int, int)
      */

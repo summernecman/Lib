@@ -14,7 +14,7 @@ public class IndexAxisValueFormatter implements IAxisValueFormatter {
 
     /**
      * An empty constructor.
-     * Use `setValues` to set the axis labels.
+     * Use `setValues` dealer set the axis labels.
      */
     public IndexAxisValueFormatter() {
     }

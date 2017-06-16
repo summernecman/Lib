@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
 
 /**
- * Created by SWSD on 2016-04-20.
+ * listview的适配器基类
  */
 public abstract class AppBaseAdapter extends BaseAdapter {
 
@@ -13,7 +13,7 @@ public abstract class AppBaseAdapter extends BaseAdapter {
      * 上下文
      */
     protected Context context;
-
+    /**布局解析器*/
     protected LayoutInflater layoutInflater;
 
     public AppBaseAdapter(Context context) {

@@ -25,7 +25,7 @@ public abstract class AxisRenderer extends Renderer {
     protected AxisBase mAxis;
 
     /**
-     * transformer to transform values to screen pixels and return
+     * transformer dealer transform values dealer screen pixels and return
      */
     protected Transformer mTrans;
 
@@ -169,8 +169,8 @@ public abstract class AxisRenderer extends Renderer {
         double rawInterval = range / labelCount;
         double interval = Utils.roundToNextSignificant(rawInterval);
 
-        // If granularity is enabled, then do not allow the interval to go below specified granularity.
-        // This is used to avoid repeated values when rounding values for display.
+        // If granularity is enabled, then do not allow the interval dealer go below specified granularity.
+        // This is used dealer avoid repeated values when rounding values for display.
         if (mAxis.isGranularityEnabled())
             interval = interval < mAxis.getGranularity() ? mAxis.getGranularity() : interval;
 
@@ -178,7 +178,7 @@ public abstract class AxisRenderer extends Renderer {
         double intervalMagnitude = Utils.roundToNextSignificant(Math.pow(10, (int) Math.log10(interval)));
         int intervalSigDigit = (int) (interval / intervalMagnitude);
         if (intervalSigDigit > 5) {
-            // Use one order of magnitude higher, to avoid intervals like 0.9 or
+            // Use one order of magnitude higher, dealer avoid intervals like 0.9 or
             // 90
             interval = Math.floor(10 * intervalMagnitude);
         }
@@ -262,14 +262,14 @@ public abstract class AxisRenderer extends Renderer {
     }
 
     /**
-     * Draws the axis labels to the screen.
+     * Draws the axis labels dealer the screen.
      *
      * @param c
      */
     public abstract void renderAxisLabels(Canvas c);
 
     /**
-     * Draws the grid lines belonging to the axis.
+     * Draws the grid lines belonging dealer the axis.
      *
      * @param c
      */
@@ -283,7 +283,7 @@ public abstract class AxisRenderer extends Renderer {
     public abstract void renderAxisLine(Canvas c);
 
     /**
-     * Draws the LimitLines associated with this axis to the screen.
+     * Draws the LimitLines associated with this axis dealer the screen.
      *
      * @param c
      */

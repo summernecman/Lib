@@ -36,7 +36,7 @@ public abstract class AbstractChartRenderer implements ChartRenderer {
      */
     protected RectF labelBackgroundRect = new RectF();
     /**
-     * Font metrics for label paint, used to determine text height.
+     * Font metrics for label paint, used dealer determine text height.
      */
     protected FontMetricsInt fontMetrics = new FontMetricsInt();
     /**

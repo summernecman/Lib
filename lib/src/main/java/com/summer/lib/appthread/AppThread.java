@@ -1,7 +1,7 @@
 package com.summer.lib.appthread;
 
 
-import com.summer.lib.base.interf.OnNetFinishWithObjInter;
+import com.summer.lib.base.interf.OnFinishWithObjI;
 
 /**
  * Created by ${viwmox} on 2016-07-22.
@@ -9,7 +9,7 @@ import com.summer.lib.base.interf.OnNetFinishWithObjInter;
 public class AppThread extends Thread {
 
     private static AppThread instance;
-    private static OnNetFinishWithObjInter o;
+    private static OnFinishWithObjI o;
     public boolean stop = true;
     public boolean pause = true;
     public long sleepTime = 20000;
@@ -19,7 +19,7 @@ public class AppThread extends Thread {
 
     }
 
-    public static AppThread getInstance(OnNetFinishWithObjInter o) {
+    public static AppThread getInstance(OnFinishWithObjI o) {
         AppThread.o = o;
         if (instance == null) {
             instance = new AppThread();

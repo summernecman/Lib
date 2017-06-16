@@ -11,10 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.R;
 import com.summer.lib.view.hellocharts.gesture.ZoomType;
 import com.summer.lib.view.hellocharts.listener.BubbleChartOnValueSelectListener;
@@ -25,6 +21,9 @@ import com.summer.lib.view.hellocharts.model.ValueShape;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.BubbleChartView;
 import com.summer.lib.view.hellocharts.view.Chart;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BubbleChartActivity extends ActionBarActivity {
 
@@ -109,7 +108,7 @@ public class BubbleChartActivity extends ActionBarActivity {
             if (id == R.id.action_toggle_selection_mode) {
                 toggleLabelForSelected();
                 Toast.makeText(getActivity(),
-                        "Selection mode set to " + chart.isValueSelectionEnabled() + " select any point.",
+                        "Selection mode set dealer " + chart.isValueSelectionEnabled() + " select any point.",
                         Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -221,7 +220,7 @@ public class BubbleChartActivity extends ActionBarActivity {
         }
 
         /**
-         * To animate values you have to change targets values and then call {@link Chart#startDataAnimation()}
+         * To animate values you have dealer change targets values and then call {@link Chart#startDataAnimation()}
          * method(don't confuse with View.animate()).
          */
         private void prepareDataAnimation() {

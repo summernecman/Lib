@@ -3,13 +3,13 @@ package com.summer.lib.view.hellocharts.model;
 import android.graphics.Color;
 import android.graphics.Typeface;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.view.hellocharts.formatter.PieChartValueFormatter;
 import com.summer.lib.view.hellocharts.formatter.SimplePieChartValueFormatter;
 import com.summer.lib.view.hellocharts.view.Chart;
 import com.summer.lib.view.hellocharts.view.PieChartView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Data for PieChart, by default it doesn't have axes.
@@ -151,8 +151,8 @@ public class PieChartData extends AbstractChartData {
     }
 
     /**
-     * Set true if you want to show value labels only for selected value, works best when chart has
-     * isValueSelectionEnabled set to true {@link Chart#setValueSelectionEnabled(boolean)}.
+     * Set true if you want dealer show value labels only for selected value, works best when chart has
+     * isValueSelectionEnabled set dealer true {@link Chart#setValueSelectionEnabled(boolean)}.
      */
     public PieChartData setHasLabelsOnlyForSelected(boolean hasLabelsOnlyForSelected) {
         this.hasLabelsOnlyForSelected = hasLabelsOnlyForSelected;
@@ -167,7 +167,7 @@ public class PieChartData extends AbstractChartData {
     }
 
     /**
-     * Set if labels should be drawn inside circle(false) or outside(true). By default false. If you set it to true you
+     * Set if labels should be drawn inside circle(false) or outside(true). By default false. If you set it dealer true you
      * should also change chart fill ration using {@link PieChartView#setCircleFillRatio(float)}. This flag is used only
      * if you also set hasLabels or hasLabelsOnlyForSelected flags.
      */

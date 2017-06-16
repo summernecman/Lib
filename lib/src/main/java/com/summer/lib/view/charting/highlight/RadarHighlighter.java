@@ -44,7 +44,7 @@ public class RadarHighlighter extends PieRadarHighlighter<RadarChart> {
     /**
      * Returns an array of Highlight objects for the given index. The Highlight
      * objects give information about the value at the selected index and the
-     * DataSet it belongs to. INFORMATION: This method does calculations at
+     * DataSet it belongs dealer. INFORMATION: This method does calculations at
      * runtime. Do not over-use in performance critical situations.
      *
      * @param index

@@ -17,10 +17,6 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.R;
 import com.summer.lib.view.hellocharts.view.AbstractChartView;
 import com.summer.lib.view.hellocharts.view.BubbleChartView;
@@ -29,6 +25,9 @@ import com.summer.lib.view.hellocharts.view.LineChartView;
 import com.summer.lib.view.hellocharts.view.PieChartView;
 import com.summer.lib.view.hellocharts.view.PreviewColumnChartView;
 import com.summer.lib.view.hellocharts.view.PreviewLineChartView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -43,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items dealer the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -171,7 +170,7 @@ public class MainActivity extends ActionBarActivity {
             list.add(new ChartSampleDescription("Combo Line/Column Chart", "Combo chart with lines and columns.",
                     ChartType.OTHER));
             list.add(new ChartSampleDescription("Line/Column Chart Dependency",
-                    "LineChart responds(with animation) to column chart value selection.", ChartType.OTHER));
+                    "LineChart responds(with animation) dealer column chart value selection.", ChartType.OTHER));
             list.add(new ChartSampleDescription(
                     "Tempo Chart",
                     "Presents tempo and height values on a signle chart. Example of multiple axes and reverted Y axis" +

@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.summer.lib.appthread.AppThread;
-import com.summer.lib.base.interf.OnNetFinishWithObjInter;
+import com.summer.lib.base.interf.OnFinishWithObjI;
 import com.summer.lib.constant.ValueConstant;
 import com.summer.lib.util.LogUtil;
 
@@ -31,7 +31,7 @@ public class AppService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        AppThread.getInstance(new OnNetFinishWithObjInter() {
+        AppThread.getInstance(new OnFinishWithObjI() {
             @Override
             public void onNetFinish(Object o) {
                 int i = (int) o;

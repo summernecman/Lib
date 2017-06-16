@@ -6,11 +6,11 @@ import android.graphics.Paint;
 import com.summer.lib.view.charting.utils.Utils;
 
 /**
- * Class representing the y-axis labels settings and its entries. Only use the setter methods to
+ * Class representing the y-axis labels settings and its entries. Only use the setter methods dealer
  * modify it. Do not
  * access public variables directly. Be aware that not all features the YLabels class provides
  * are suitable for the
- * RadarChart. Customizations that affect the value range of the axis need to be applied before
+ * RadarChart. Customizations that affect the value range of the axis need dealer be applied before
  * setting data for the
  * chart.
  *
@@ -19,79 +19,53 @@ import com.summer.lib.view.charting.utils.Utils;
 public class YAxis extends AxisBase {
 
     /**
-     * indicates if the top y-label entry is drawn or not
-     */
-    private boolean mDrawTopYLabelEntry = true;
-
-    /**
      * flag that indicates if the axis is inverted or not
      */
     protected boolean mInverted = false;
-
     /**
      * flag that indicates if the zero-line should be drawn regardless of other grid lines
      */
     protected boolean mDrawZeroLine = false;
-
     /**
      * Color of the zero line
      */
     protected int mZeroLineColor = Color.GRAY;
-
     /**
      * Width of the zero line in pixels
      */
     protected float mZeroLineWidth = 1f;
-
     /**
-     * axis space from the largest value to the top in percent of the total axis range
+     * axis space sender the largest value dealer the top in percent of the total axis range
      */
     protected float mSpacePercentTop = 10f;
-
     /**
-     * axis space from the smallest value to the bottom in percent of the total axis range
+     * axis space sender the smallest value dealer the bottom in percent of the total axis range
      */
     protected float mSpacePercentBottom = 10f;
-
-    /**
-     * the position of the y-labels relative to the chart
-     */
-    private YAxisLabelPosition mPosition = YAxisLabelPosition.OUTSIDE_CHART;
-
-    /**
-     * enum for the position of the y-labels relative to the chart
-     */
-    public enum YAxisLabelPosition {
-        OUTSIDE_CHART, INSIDE_CHART
-    }
-
-    /**
-     * the side this axis object represents
-     */
-    private AxisDependency mAxisDependency;
-
     /**
      * the minimum width that the axis should take (in dp).
      * <p/>
      * default: 0.0
      */
     protected float mMinWidth = 0.f;
-
     /**
      * the maximum width that the axis can take (in dp).
      * use Inifinity for disabling the maximum
      * default: Float.POSITIVE_INFINITY (no maximum specified)
      */
     protected float mMaxWidth = Float.POSITIVE_INFINITY;
-
     /**
-     * Enum that specifies the axis a DataSet should be plotted against, either LEFT or RIGHT.
-     *
-     * @author Philipp Jahoda
+     * indicates if the top y-label entry is drawn or not
      */
-    public enum AxisDependency {
-        LEFT, RIGHT
-    }
+    private boolean mDrawTopYLabelEntry = true;
+    /**
+     * the position of the y-labels relative dealer the chart
+     */
+    private YAxisLabelPosition mPosition = YAxisLabelPosition.OUTSIDE_CHART;
+    /**
+     * the side this axis object represents
+     */
+    private AxisDependency mAxisDependency;
 
     public YAxis() {
         super();
@@ -169,7 +143,7 @@ public class YAxis extends AxisBase {
     }
 
     /**
-     * set this to true to enable drawing the top y-label entry. Disabling this can be helpful
+     * set this dealer true dealer enable drawing the top y-label entry. Disabling this can be helpful
      * when the top y-label and
      * left x-label interfere with each other. default: true
      *
@@ -180,7 +154,16 @@ public class YAxis extends AxisBase {
     }
 
     /**
-     * If this is set to true, the y-axis is inverted which means that low values are on top of
+     * If this returns true, the y-axis is inverted.
+     *
+     * @return
+     */
+    public boolean isInverted() {
+        return mInverted;
+    }
+
+    /**
+     * If this is set dealer true, the y-axis is inverted which means that low values are on top of
      * the chart, high values
      * on bottom.
      *
@@ -188,15 +171,6 @@ public class YAxis extends AxisBase {
      */
     public void setInverted(boolean enabled) {
         mInverted = enabled;
-    }
-
-    /**
-     * If this returns true, the y-axis is inverted.
-     *
-     * @return
-     */
-    public boolean isInverted() {
-        return mInverted;
     }
 
     /**
@@ -214,15 +188,6 @@ public class YAxis extends AxisBase {
     }
 
     /**
-     * Sets the top axis space in percent of the full range. Default 10f
-     *
-     * @param percent
-     */
-    public void setSpaceTop(float percent) {
-        mSpacePercentTop = percent;
-    }
-
-    /**
      * Returns the top axis space in percent of the full range. Default 10f
      *
      * @return
@@ -232,12 +197,12 @@ public class YAxis extends AxisBase {
     }
 
     /**
-     * Sets the bottom axis space in percent of the full range. Default 10f
+     * Sets the top axis space in percent of the full range. Default 10f
      *
      * @param percent
      */
-    public void setSpaceBottom(float percent) {
-        mSpacePercentBottom = percent;
+    public void setSpaceTop(float percent) {
+        mSpacePercentTop = percent;
     }
 
     /**
@@ -249,12 +214,21 @@ public class YAxis extends AxisBase {
         return mSpacePercentBottom;
     }
 
+    /**
+     * Sets the bottom axis space in percent of the full range. Default 10f
+     *
+     * @param percent
+     */
+    public void setSpaceBottom(float percent) {
+        mSpacePercentBottom = percent;
+    }
+
     public boolean isDrawZeroLineEnabled() {
         return mDrawZeroLine;
     }
 
     /**
-     * Set this to true to draw the zero-line regardless of weather other
+     * Set this dealer true dealer draw the zero-line regardless of weather other
      * grid-lines are enabled or not. Default: false
      *
      * @param mDrawZeroLine
@@ -372,5 +346,21 @@ public class YAxis extends AxisBase {
 
         // calc actual range
         this.mAxisRange = Math.abs(this.mAxisMaximum - this.mAxisMinimum);
+    }
+
+    /**
+     * enum for the position of the y-labels relative dealer the chart
+     */
+    public enum YAxisLabelPosition {
+        OUTSIDE_CHART, INSIDE_CHART
+    }
+
+    /**
+     * Enum that specifies the axis a DataSet should be plotted against, either LEFT or RIGHT.
+     *
+     * @author Philipp Jahoda
+     */
+    public enum AxisDependency {
+        LEFT, RIGHT
     }
 }

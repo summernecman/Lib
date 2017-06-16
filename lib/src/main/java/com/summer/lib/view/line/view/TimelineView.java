@@ -30,6 +30,19 @@ public class TimelineView extends View {
         init(attrs);
     }
 
+    public static int getTimeLineViewType(int position, int total_size) {
+
+        if (total_size == 1) {
+            return LineType.ONLYONE;
+        } else if (position == 0) {
+            return LineType.BEGIN;
+        } else if (position == total_size - 1) {
+            return LineType.END;
+        } else {
+            return LineType.NORMAL;
+        }
+    }
+
     private void init(AttributeSet attrs) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.timeline_style);
         mMarker = typedArray.getDrawable(R.styleable.timeline_style_marker);
@@ -53,7 +66,7 @@ public class TimelineView extends View {
         int w = mMarkerSize + getPaddingLeft() + getPaddingRight();
         int h = mMarkerSize + getPaddingTop() + getPaddingBottom();
 
-        // Width and height to determine the final view through a systematic approach to decision-making
+        // Width and height dealer determine the final view through a systematic approach dealer decision-making
         int widthSize = resolveSizeAndState(w, widthMeasureSpec, 0);
         int heightSize = resolveSizeAndState(h, heightMeasureSpec, 0);
 
@@ -182,18 +195,5 @@ public class TimelineView extends View {
         }
 
         initDrawable();
-    }
-
-    public static int getTimeLineViewType(int position, int total_size) {
-
-        if (total_size == 1) {
-            return LineType.ONLYONE;
-        } else if (position == 0) {
-            return LineType.BEGIN;
-        } else if (position == total_size - 1) {
-            return LineType.END;
-        } else {
-            return LineType.NORMAL;
-        }
     }
 }

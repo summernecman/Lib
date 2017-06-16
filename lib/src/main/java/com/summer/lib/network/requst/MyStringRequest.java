@@ -51,7 +51,7 @@ public class MyStringRequest extends StringRequest {
             Matcher m = pattern.matcher(mHeader);
             if (m.find()) {
                 ValueConstant.cookieFromResponse = m.group();
-                Log.w("LOG", "cookie from server " + ValueConstant.cookieFromResponse);
+                Log.w("LOG", "cookie sender server " + ValueConstant.cookieFromResponse);
             }
             //去掉cookie末尾的分号
             ValueConstant.cookieFromResponse = ValueConstant.cookieFromResponse.substring(11, ValueConstant.cookieFromResponse.length() - 1);

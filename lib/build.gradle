@@ -4,15 +4,17 @@ apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+    //android 6.0 之后 取消支持 Apache HTTP 客户端，要继续使用 Apache HTTP API，您必须先在 build.gradle 文件中声明以下编译时依赖项：
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
+        //:主要是用于版本升级所用，是INT类型的
         versionCode 1
+        //这个是我们常说明的版本号，由三部分组成<major>.<minor>.<point>,该值是个字符串，可以显示给用户
         versionName "1.0"
-
+        //单元测试
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
     buildTypes {
         release {
@@ -21,7 +23,7 @@ android {
         }
     }
 
-
+    //自定义资源目录
     sourceSets {
         main {
             res.srcDirs = [
@@ -49,6 +51,7 @@ android {
                     'src/main/res/bottom',
                     'src/main/res/time',
             ]
+
             jniLibs.srcDirs = [
                     'libDir',
             ]
@@ -66,7 +69,6 @@ dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-//    compile 'com.github.chrisbanes:PhotoView:1.2.6'
     compile 'com.jakewharton:butterknife:8.5.1'
     compile 'com.github.florent37:viewanimator:1.0.5'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'

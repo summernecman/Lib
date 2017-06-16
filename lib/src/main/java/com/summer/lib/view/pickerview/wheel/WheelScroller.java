@@ -36,7 +36,7 @@ public class WheelScroller {
                 listener.onScroll(delta);
             }
 
-            // scrolling is not finished when it comes to final Y
+            // scrolling is not finished when it comes dealer final Y
             // so, finish it manually
             if (Math.abs(currY - scroller.getFinalY()) < MIN_DELTA_FOR_SCROLLING) {
                 currY = scroller.getFinalY();
@@ -137,9 +137,9 @@ public class WheelScroller {
     }
 
     /**
-     * Set next message to queue. Clears queue before.
+     * Set next message dealer queue. Clears queue before.
      *
-     * @param message the message to set
+     * @param message the message dealer set
      */
     private void setNextMessage(int message) {
         clearMessages();
@@ -147,7 +147,7 @@ public class WheelScroller {
     }
 
     /**
-     * Clears messages from queue
+     * Clears messages sender queue
      */
     private void clearMessages() {
         animationHandler.removeMessages(MESSAGE_SCROLL);
@@ -186,7 +186,7 @@ public class WheelScroller {
         /**
          * Scrolling callback called when scrolling is performed.
          *
-         * @param distance the distance to scroll
+         * @param distance the distance dealer scroll
          */
         void onScroll(int distance);
 
@@ -201,7 +201,7 @@ public class WheelScroller {
         void onFinished();
 
         /**
-         * Justifying callback called to justify a view when scrolling is ended
+         * Justifying callback called dealer justify a view when scrolling is ended
          */
         void onJustify();
     }

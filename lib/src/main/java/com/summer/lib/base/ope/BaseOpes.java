@@ -8,8 +8,11 @@ import java.io.Serializable;
 
 public class BaseOpes<A extends BaseUIOpe, B extends BaseDAOpe> implements Serializable {
 
+    /**
+     * 操作者
+     */
     A uiOpe;
-
+    /**数据操作者*/
     B daOpe;
 
     public BaseOpes(A uiOpe, B daOpe) {

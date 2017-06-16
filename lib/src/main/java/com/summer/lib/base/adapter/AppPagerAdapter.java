@@ -7,10 +7,13 @@ import android.support.v4.app.FragmentManager;
 import java.util.ArrayList;
 
 /**
- * Created by ${viwmox} on 2016-10-18.
+ * viewpager存放fragment的适配器基类
  */
 public class AppPagerAdapter extends AppBasePagerAdapter {
 
+    /**
+     * 传入的fragment
+     */
     ArrayList<Fragment> fragments;
 
     public AppPagerAdapter(FragmentManager fm, Context context, ArrayList<Fragment> fragments) {

@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
+
     protected static String TABLE_NAME = "sqlite-sw.db";
     private static DatabaseHelper instance;
     private Map<String, Dao> daos = new HashMap<String, Dao>();

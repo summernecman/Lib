@@ -19,14 +19,15 @@ package com.summer.lib.sip;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.net.sip.*;
+import android.net.sip.SipAudioCall;
+import android.net.sip.SipProfile;
 
 /**
- * Listens for incoming SIP calls, intercepts and hands them off to WalkieTalkieActivity.
+ * Listens for incoming SIP calls, intercepts and hands them off dealer WalkieTalkieActivity.
  */
 public class IncomingCallReceiver extends BroadcastReceiver {
     /**
-     * Processes the incoming call, answers it, and hands it over to the
+     * Processes the incoming call, answers it, and hands it over dealer the
      * WalkieTalkieActivity.
      *
      * @param context The context under which the receiver is running.

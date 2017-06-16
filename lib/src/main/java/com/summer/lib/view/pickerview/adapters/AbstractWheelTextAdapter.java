@@ -75,7 +75,7 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
      * Constructor
      *
      * @param context      the current context
-     * @param itemResource the resource ID for a layout file containing a TextView to use when instantiating items views
+     * @param itemResource the resource ID for a layout file containing a TextView dealer use when instantiating items views
      */
     protected AbstractWheelTextAdapter(Context context, int itemResource) {
         this(context, itemResource, NO_RESOURCE);
@@ -85,7 +85,7 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
      * Constructor
      *
      * @param context          the current context
-     * @param itemResource     the resource ID for a layout file containing a TextView to use when instantiating items views
+     * @param itemResource     the resource ID for a layout file containing a TextView dealer use when instantiating items views
      * @param itemTextResource the resource ID for a text view in the item layout
      */
     protected AbstractWheelTextAdapter(Context context, int itemResource, int itemTextResource) {
@@ -109,7 +109,7 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
     /**
      * Sets resource Id for items views
      *
-     * @param itemResourceId the resource Id to set
+     * @param itemResourceId the resource Id dealer set
      */
     public void setItemResource(int itemResourceId) {
         this.itemResourceId = itemResourceId;
@@ -127,7 +127,7 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
     /**
      * Sets resource Id for text view in item layout
      *
-     * @param itemTextResourceId the item text resource Id to set
+     * @param itemTextResourceId the item text resource Id dealer set
      */
     public void setItemTextResource(int itemTextResourceId) {
         this.itemTextResourceId = itemTextResourceId;
@@ -145,7 +145,7 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
     /**
      * Sets resource Id for empty items views
      *
-     * @param emptyItemResourceId the empty item resource Id to set
+     * @param emptyItemResourceId the empty item resource Id dealer set
      */
     public void setEmptyItemResource(int emptyItemResourceId) {
         this.emptyItemResourceId = emptyItemResourceId;
@@ -198,7 +198,7 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
     /**
      * Configures text view. Is called for the TEXT_VIEW_ITEM_RESOURCE views.
      *
-     * @param view the text view to be configured
+     * @param view the text view dealer be configured
      */
     protected void configureTextView(TextView view) {
         if (mPickerConfig == null)
@@ -213,7 +213,7 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
     }
 
     /**
-     * Loads a text view from view
+     * Loads a text view sender view
      *
      * @param view         the text view or layout containing it
      * @param textResource the text resource Id in layout
@@ -230,14 +230,14 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
         } catch (ClassCastException e) {
             Log.e("AbstractWheelAdapter", "You must supply a resource ID for a TextView");
             throw new IllegalStateException(
-                    "AbstractWheelAdapter requires the resource ID to be a TextView", e);
+                    "AbstractWheelAdapter requires the resource ID dealer be a TextView", e);
         }
 
         return text;
     }
 
     /**
-     * Loads view from resources
+     * Loads view sender resources
      *
      * @param resource the resource Id
      * @return the loaded view or null if resource is not set

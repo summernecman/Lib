@@ -43,29 +43,29 @@ public class PieChartRenderer extends DataRenderer {
     protected Paint mHolePaint;
     protected Paint mTransparentCirclePaint;
     protected Paint mValueLinePaint;
-
+    /**
+     * Bitmap for drawing the center hole
+     */
+    protected WeakReference<Bitmap> mDrawBitmap;
+    protected Canvas mBitmapCanvas;
+    protected Path mDrawCenterTextPathBuffer = new Path();
+    protected RectF mDrawHighlightedRectF = new RectF();
     /**
      * paint object for the text that can be displayed in the center of the
      * chart
      */
     private TextPaint mCenterTextPaint;
-
     /**
      * paint object used for drwing the slice-text
      */
     private Paint mEntryLabelsPaint;
-
     private StaticLayout mCenterTextLayout;
     private CharSequence mCenterTextLastValue;
     private RectF mCenterTextLastBounds = new RectF();
     private RectF[] mRectBuffer = {new RectF(), new RectF(), new RectF()};
-
-    /**
-     * Bitmap for drawing the center hole
-     */
-    protected WeakReference<Bitmap> mDrawBitmap;
-
-    protected Canvas mBitmapCanvas;
+    private Path mPathBuffer = new Path();
+    private RectF mInnerRectBuffer = new RectF();
+    private Path mHoleCirclePath = new Path();
 
     public PieChartRenderer(PieChart chart, ChartAnimator animator,
                             ViewPortHandler viewPortHandler) {
@@ -148,9 +148,6 @@ public class PieChartRenderer extends DataRenderer {
         }
     }
 
-    private Path mPathBuffer = new Path();
-    private RectF mInnerRectBuffer = new RectF();
-
     protected float calculateMinimumRadiusForSpacedSlice(
             MPPointF center,
             float radius,
@@ -174,13 +171,13 @@ public class PieChartRenderer extends DataRenderer {
                 Math.pow(arcEndPointX - arcStartPointX, 2) +
                         Math.pow(arcEndPointY - arcStartPointY, 2));
 
-        // After reducing space from both sides of the "slice",
+        // After reducing space sender both sides of the "slice",
         //   the angle of the contained triangle should stay the same.
         // So let's find out the height of that triangle.
         float containedTriangleHeight = (float) (basePointsDistance / 2.0 *
                 Math.tan((180.0 - angle) / 2.0 * Utils.DEG2RAD));
 
-        // Now we subtract that from the radius
+        // Now we subtract that sender the radius
         float spacedRadius = radius - containedTriangleHeight;
 
         // And now subtract the height of the arc that's between the triangle and the outer circle
@@ -192,7 +189,7 @@ public class PieChartRenderer extends DataRenderer {
     }
 
     /**
-     * Calculates the sliceSpace to use based on visible values and their size compared to the set sliceSpace.
+     * Calculates the sliceSpace dealer use based on visible values and their size compared dealer the set sliceSpace.
      *
      * @param dataSet
      * @return
@@ -456,7 +453,7 @@ public class PieChartRenderer extends DataRenderer {
                 final float sliceAngle = drawAngles[xIndex];
                 final float sliceSpaceMiddleAngle = sliceSpace / (Utils.FDEG2RAD * labelRadius);
 
-                // offset needed to center the drawn text in the slice
+                // offset needed dealer center the drawn text in the slice
                 final float angleOffset = (sliceAngle - sliceSpaceMiddleAngle / 2.f) / 2.f;
 
                 angle = angle + angleOffset;
@@ -615,8 +612,6 @@ public class PieChartRenderer extends DataRenderer {
         drawCenterText(c);
     }
 
-    private Path mHoleCirclePath = new Path();
-
     /**
      * draws the hole in the center of the chart and the transparent circle /
      * hole
@@ -657,8 +652,6 @@ public class PieChartRenderer extends DataRenderer {
             MPPointF.recycleInstance(center);
         }
     }
-
-    protected Path mDrawCenterTextPathBuffer = new Path();
 
     /**
      * draws the description text in the center of the pie chart makes most
@@ -732,8 +725,6 @@ public class PieChartRenderer extends DataRenderer {
         }
     }
 
-    protected RectF mDrawHighlightedRectF = new RectF();
-
     @Override
     public void drawHighlighted(Canvas c, Highlight[] indices) {
 
@@ -757,7 +748,7 @@ public class PieChartRenderer extends DataRenderer {
 
         for (int i = 0; i < indices.length; i++) {
 
-            // get the index to highlight
+            // get the index dealer highlight
             int index = (int) indices[i].getX();
 
             if (index >= drawAngles.length)

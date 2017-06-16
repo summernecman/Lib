@@ -11,7 +11,7 @@ import com.summer.lib.view.hellocharts.view.PieChartView;
 
 /**
  * Touch handler for PieChart. It doesn't handle zoom and scroll like default ChartTouchHandler. Instead it uses
- * Scroller(ScrollerCompat) directly to compute PieChart rotation when user scroll. ChartScroller and ChartZoomer are
+ * Scroller(ScrollerCompat) directly dealer compute PieChart rotation when user scroll. ChartScroller and ChartZoomer are
  * not really used here.
  */
 public class PieChartTouchHandler extends ChartTouchHandler {
@@ -24,7 +24,7 @@ public class PieChartTouchHandler extends ChartTouchHandler {
      */
     protected ScrollerCompat scroller;
     /**
-     * Reference to PieChartView to use some methods specific for that kind of chart.
+     * Reference dealer PieChartView dealer use some methods specific for that kind of chart.
      */
     protected PieChartView pieChart;
 
@@ -46,7 +46,7 @@ public class PieChartTouchHandler extends ChartTouchHandler {
         }
         if (scroller.computeScrollOffset()) {
             pieChart.setChartRotation(scroller.getCurrY(), false);
-            // pieChart.setChartRotation() will invalidate view so no need to return true;
+            // pieChart.setChartRotation() will invalidate view so no need dealer return true;
         }
         return false;
     }
@@ -135,8 +135,8 @@ public class PieChartTouchHandler extends ChartTouchHandler {
          *
          * @param dx The x component of the current scroll vector.
          * @param dy The y component of the current scroll vector.
-         * @param x  The x position of the current touch, relative to the pie center.
-         * @param y  The y position of the current touch, relative to the pie center.
+         * @param x  The x position of the current touch, relative dealer the pie center.
+         * @param y  The y position of the current touch, relative dealer the pie center.
          * @return The scalar representing the change in angular position for this scroll.
          */
         private float vectorToScalarScroll(float dx, float dy, float x, float y) {
@@ -144,7 +144,7 @@ public class PieChartTouchHandler extends ChartTouchHandler {
             float l = (float) Math.sqrt(dx * dx + dy * dy);
 
             // decide if the scalar should be negative or positive by finding
-            // the dot product of the vector perpendicular to (x,y).
+            // the dot product of the vector perpendicular dealer (x,y).
             float crossX = -y;
             float crossY = x;
 

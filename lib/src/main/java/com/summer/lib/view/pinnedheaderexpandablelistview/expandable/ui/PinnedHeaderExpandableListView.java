@@ -5,12 +5,12 @@
  * https://github.com/singwhatiwanna
  * http://blog.csdn.net/singwhatiwanna
  * <p>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
+ * Permission is hereby granted, free of charge, dealer any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), dealer deal
  * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * dealer use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and dealer permit persons dealer whom the Software is
+ * furnished dealer do so, subject dealer the following conditions:
  * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
@@ -45,33 +45,20 @@ import com.summer.lib.view.swipeview.view.SwipeView;
 public class PinnedHeaderExpandableListView extends ExpandableListView implements OnScrollListener {
     private static final String TAG = "PinnedHeaderExpandableListView";
     private static final boolean DEBUG = true;
-
+    protected boolean mIsHeaderGroupClickable = true;
     OnItemClickListener onHeadViewClick;
-
-    public interface OnHeaderUpdateListener {
-        /**
-         * 返回一个view对象即可
-         * 注意：view必须要有LayoutParams
-         */
-        View getPinnedHeader();
-
-        void updatePinnedHeader(View headerView, int firstVisibleGroupPos);
-    }
-
+    Context context;
+    Value[] values = new Value[]{new Value(0, 0), new Value(0, 0), new Value(0, 0), new Value(0, 0), new Value(0, 0), new Value(0, 0)};
+    int status = -1;
     private View mHeaderView;
     private int mHeaderWidth;
     private int mHeaderHeight;
-
     private View mTouchTarget;
-
     private OnScrollListener mScrollListener;
     private OnHeaderUpdateListener mHeaderUpdateListener;
-
     private boolean mActionDownHappened = false;
-    protected boolean mIsHeaderGroupClickable = true;
-
-    Context context;
-
+    private int p = 0;
+    private View headview;
 
     public PinnedHeaderExpandableListView(Context context) {
         super(context);
@@ -162,7 +149,6 @@ public class PinnedHeaderExpandableListView extends ExpandableListView implement
         }
     }
 
-
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         if (getHeadview() != null) {
@@ -220,12 +206,6 @@ public class PinnedHeaderExpandableListView extends ExpandableListView implement
 
         return super.onTouchEvent(ev);
     }
-
-
-    Value[] values = new Value[]{new Value(0, 0), new Value(0, 0), new Value(0, 0), new Value(0, 0), new Value(0, 0), new Value(0, 0)};
-
-
-    int status = -1;
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -313,9 +293,6 @@ public class PinnedHeaderExpandableListView extends ExpandableListView implement
         }
         return super.dispatchTouchEvent(ev);
     }
-
-
-    private int p = 0;
 
     private View getTouchTarget(View view, int x, int y) {
         if (!(view instanceof ViewGroup)) {
@@ -413,8 +390,6 @@ public class PinnedHeaderExpandableListView extends ExpandableListView implement
         refreshHeader();
     }
 
-    private View headview;
-
     @Override
     public void addHeaderView(View v) {
         this.headview = v;
@@ -433,5 +408,15 @@ public class PinnedHeaderExpandableListView extends ExpandableListView implement
 
     public void setOnHeadViewClick(OnItemClickListener onHeadViewClick) {
         this.onHeadViewClick = onHeadViewClick;
+    }
+
+    public interface OnHeaderUpdateListener {
+        /**
+         * 返回一个view对象即可
+         * 注意：view必须要有LayoutParams
+         */
+        View getPinnedHeader();
+
+        void updatePinnedHeader(View headerView, int firstVisibleGroupPos);
     }
 }

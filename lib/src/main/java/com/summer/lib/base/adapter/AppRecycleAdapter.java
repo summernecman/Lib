@@ -8,14 +8,17 @@ import android.view.View;
 import com.summer.lib.R;
 
 /**
- * Created by ${viwmox} on 2016-08-29.
+ * recycleview适配器的基类
  */
 public abstract class AppRecycleAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T> implements View.OnClickListener, View.OnLongClickListener {
 
+    /**
+     * 上下文
+     */
     protected Context context;
-
+    /**布局解析器*/
     protected LayoutInflater layoutInflater;
-
+    /**item点击事件*/
     View.OnClickListener onClickListener;
 
     public AppRecycleAdapter(Context context) {

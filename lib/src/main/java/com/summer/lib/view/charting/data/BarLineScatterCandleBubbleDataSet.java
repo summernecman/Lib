@@ -23,19 +23,19 @@ public abstract class BarLineScatterCandleBubbleDataSet<T extends Entry> extends
         super(yVals, label);
     }
 
+    @Override
+    public int getHighLightColor() {
+        return mHighLightColor;
+    }
+
     /**
      * Sets the color that is used for drawing the highlight indicators. Dont
-     * forget to resolve the color using getResources().getColor(...) or
+     * forget dealer resolve the color using getResources().getColor(...) or
      * Color.rgb(...).
      *
      * @param color
      */
     public void setHighLightColor(int color) {
         mHighLightColor = color;
-    }
-
-    @Override
-    public int getHighLightColor() {
-        return mHighLightColor;
     }
 }

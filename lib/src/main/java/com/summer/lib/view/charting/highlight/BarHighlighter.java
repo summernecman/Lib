@@ -46,7 +46,7 @@ public class BarHighlighter extends ChartHighlighter<BarDataProvider> {
      * This method creates the Highlight object that also indicates which value of a stacked BarEntry has been
      * selected.
      *
-     * @param high the Highlight to work with looking for stacked values
+     * @param high the Highlight dealer work with looking for stacked values
      * @param set
      * @param xVal
      * @param yVal
@@ -90,7 +90,7 @@ public class BarHighlighter extends ChartHighlighter<BarDataProvider> {
     }
 
     /**
-     * Returns the index of the closest value inside the values array / ranges (stacked barchart) to the value
+     * Returns the index of the closest value inside the values array / ranges (stacked barchart) dealer the value
      * given as
      * a parameter.
      *

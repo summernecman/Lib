@@ -2,22 +2,22 @@ package com.summer.lib.base.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 
 /**
- * Created by ${viwmox} on 2016-11-10.
+ * fragment布局基类
  */
 public class BaseFrg extends Fragment {
 
+    /**
+     * fragment对应的activity的引用
+     */
     protected FragmentActivity activity;
-
+    /**布局加载器*/
     protected LayoutInflater layoutInflater;
-
-    protected Handler handler = new Handler();
-
+    /**fragment自身的引用*/
     protected Fragment fragment;
 
     @Override

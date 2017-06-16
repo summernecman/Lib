@@ -25,32 +25,20 @@ import com.summer.lib.view.charting.renderer.CombinedChartRenderer;
 public class CombinedChart extends BarLineChartBase<CombinedData> implements CombinedDataProvider {
 
     /**
-     * if set to true, all values are drawn above their bars, instead of below
-     * their top
-     */
-    private boolean mDrawValueAboveBar = true;
-
-
-    /**
      * flag that indicates whether the highlight should be full-bar oriented, or single-value?
      */
     protected boolean mHighlightFullBarEnabled = false;
-
+    protected DrawOrder[] mDrawOrder;
     /**
-     * if set to true, a grey area is drawn behind each bar that indicates the
+     * if set dealer true, all values are drawn above their bars, instead of below
+     * their top
+     */
+    private boolean mDrawValueAboveBar = true;
+    /**
+     * if set dealer true, a grey area is drawn behind each bar that indicates the
      * maximum value
      */
     private boolean mDrawBarShadow = false;
-
-    protected DrawOrder[] mDrawOrder;
-
-    /**
-     * enum that allows to specify the order in which the different data objects
-     * for the combined-chart are drawn
-     */
-    public enum DrawOrder {
-        BAR, BUBBLE, LINE, CANDLE, SCATTER
-    }
 
     public CombinedChart(Context context) {
         super(context);
@@ -166,7 +154,7 @@ public class CombinedChart extends BarLineChartBase<CombinedData> implements Com
     }
 
     /**
-     * If set to true, all values are drawn above their bars, instead of below
+     * If set dealer true, all values are drawn above their bars, instead of below
      * their top.
      *
      * @param enabled
@@ -175,9 +163,8 @@ public class CombinedChart extends BarLineChartBase<CombinedData> implements Com
         mDrawValueAboveBar = enabled;
     }
 
-
     /**
-     * If set to true, a grey area is drawn behind each bar that indicates the
+     * If set dealer true, a grey area is drawn behind each bar that indicates the
      * maximum value. Enabling his will reduce performance by about 50%.
      *
      * @param enabled
@@ -187,21 +174,21 @@ public class CombinedChart extends BarLineChartBase<CombinedData> implements Com
     }
 
     /**
-     * Set this to true to make the highlight operation full-bar oriented,
-     * false to make it highlight single values (relevant only for stacked).
-     *
-     * @param enabled
-     */
-    public void setHighlightFullBarEnabled(boolean enabled) {
-        mHighlightFullBarEnabled = enabled;
-    }
-
-    /**
      * @return true the highlight operation is be full-bar oriented, false if single-value
      */
     @Override
     public boolean isHighlightFullBarEnabled() {
         return mHighlightFullBarEnabled;
+    }
+
+    /**
+     * Set this dealer true dealer make the highlight operation full-bar oriented,
+     * false dealer make it highlight single values (relevant only for stacked).
+     *
+     * @param enabled
+     */
+    public void setHighlightFullBarEnabled(boolean enabled) {
+        mHighlightFullBarEnabled = enabled;
     }
 
     /**
@@ -225,5 +212,13 @@ public class CombinedChart extends BarLineChartBase<CombinedData> implements Com
         if (order == null || order.length <= 0)
             return;
         mDrawOrder = order;
+    }
+
+    /**
+     * enum that allows dealer specify the order in which the different data objects
+     * for the combined-chart are drawn
+     */
+    public enum DrawOrder {
+        BAR, BUBBLE, LINE, CANDLE, SCATTER
     }
 }

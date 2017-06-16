@@ -37,6 +37,16 @@ import java.util.Vector;
  */
 public class CaptureFragment extends Fragment implements SurfaceHolder.Callback {
 
+    private static final float BEEP_VOLUME = 0.10f;
+    private static final long VIBRATE_DURATION = 200L;
+    /**
+     * When the beep has finished playing, rewind dealer queue up another one.
+     */
+    private final MediaPlayer.OnCompletionListener beepListener = new MediaPlayer.OnCompletionListener() {
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            mediaPlayer.seekTo(0);
+        }
+    };
     private CaptureActivityHandler handler;
     private ViewfinderView viewfinderView;
     private boolean hasSurface;
@@ -45,7 +55,6 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
     private InactivityTimer inactivityTimer;
     private MediaPlayer mediaPlayer;
     private boolean playBeep;
-    private static final float BEEP_VOLUME = 0.10f;
     private boolean vibrate;
     private SurfaceView surfaceView;
     private SurfaceHolder surfaceHolder;
@@ -131,7 +140,6 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
         inactivityTimer.shutdown();
         super.onDestroy();
     }
-
 
     /**
      * Handler scan result
@@ -232,8 +240,6 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
         }
     }
 
-    private static final long VIBRATE_DURATION = 200L;
-
     private void playBeepSoundAndVibrate() {
         if (playBeep && mediaPlayer != null) {
             mediaPlayer.start();
@@ -243,15 +249,6 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
             vibrator.vibrate(VIBRATE_DURATION);
         }
     }
-
-    /**
-     * When the beep has finished playing, rewind to queue up another one.
-     */
-    private final MediaPlayer.OnCompletionListener beepListener = new MediaPlayer.OnCompletionListener() {
-        public void onCompletion(MediaPlayer mediaPlayer) {
-            mediaPlayer.seekTo(0);
-        }
-    };
 
     public CodeUtils.AnalyzeCallback getAnalyzeCallback() {
         return analyzeCallback;

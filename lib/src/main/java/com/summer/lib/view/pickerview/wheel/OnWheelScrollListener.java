@@ -21,14 +21,14 @@ package com.summer.lib.view.pickerview.wheel;
  */
 public interface OnWheelScrollListener {
     /**
-     * Callback method to be invoked when scrolling started.
+     * Callback method dealer be invoked when scrolling started.
      *
      * @param wheel the wheel view whose state has changed.
      */
     void onScrollingStarted(WheelView wheel);
 
     /**
-     * Callback method to be invoked when scrolling ended.
+     * Callback method dealer be invoked when scrolling ended.
      *
      * @param wheel the wheel view whose state has changed.
      */

@@ -6,15 +6,14 @@ import android.util.AttributeSet;
 import android.util.Log;
 
 import com.summer.lib.BuildConfig;
-import com.summer.lib.view.hellocharts.renderer.PreviewLineChartRenderer;
-
 import com.summer.lib.view.hellocharts.computator.PreviewChartComputator;
 import com.summer.lib.view.hellocharts.gesture.PreviewChartTouchHandler;
 import com.summer.lib.view.hellocharts.model.LineChartData;
+import com.summer.lib.view.hellocharts.renderer.PreviewLineChartRenderer;
 
 /**
  * Preview chart that can be used as overview for other LineChart. When you change Viewport of this chart, visible area
- * of other chart will change. For that you need also to use
+ * of other chart will change. For that you need also dealer use
  *
  * @author Leszek Wach
  */

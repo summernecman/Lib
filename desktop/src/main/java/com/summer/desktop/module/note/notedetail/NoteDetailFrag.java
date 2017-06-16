@@ -11,25 +11,19 @@ import android.widget.Toast;
 
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.summer.desktop.R;
-import com.summer.desktop.bean.dabean.BoomMsg;
 import com.summer.desktop.bean.dabean.GsonNoteBean;
 import com.summer.desktop.bean.dabean.ImageNote;
 import com.summer.desktop.bean.dabean.NoteDetail;
 import com.summer.desktop.bean.dabean.TxtNote;
 import com.summer.desktop.module.note.circlemenu.CircleMenuFrag;
-import com.summer.desktop.util.FragList;
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.base.ope.BaseOpes;
 import com.summer.lib.bean.databean.EventBean;
 import com.summer.lib.constant.ValueConstant;
+import com.summer.lib.util.FragmentUtil;
 import com.summer.lib.util.GsonUtil;
 import com.summer.lib.util.IntentUtil;
 import com.summer.lib.view.image.imagepager.ImagePagerFrag;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -38,10 +32,6 @@ import static com.summer.desktop.util.ViewCreater.gson;
 
 public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe> implements OnFinishListener {
 
-    @Override
-    public BaseOpes<NoteDetailUIOpe, NoteDetailDAOpe> createOpes() {
-        return new BaseOpes<>(new NoteDetailUIOpe(activity), new NoteDetailDAOpe(activity));
-    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -76,17 +66,16 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
         });
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onboom(BoomMsg boomMsg) {
-        getOpes().getDaOpe().bean.getData().remove(boomMsg.postion);
-        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean, this, NoteDetailFrag.this);
-    }
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onboom(BoomMsg boomMsg) {
+//        getOpes().getDaOpe().bean.getData().remove(boomMsg.postion);
+//        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean, this, NoteDetailFrag.this);
+//    }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
     }
 
 
@@ -95,7 +84,6 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
         super.onDestroy();
         int[] ints = new int[]{0};
         getOpes().getDaOpe().update(ints, getOpes().getDaOpe().bean, getOpes().getDaOpe().note);
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -150,7 +138,7 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
         bundle.putSerializable(ValueConstant.DATA_DATA, strings);
         bundle.putSerializable(ValueConstant.DATA_POSITION, postion);
         pagerFrag.setArguments(bundle);
-        FragList.getInstance().add(getActivity(), pagerFrag);
+        FragmentUtil.getInstance().add(getActivity(), pagerFrag);
 
     }
 }

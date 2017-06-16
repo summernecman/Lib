@@ -12,10 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.summer.lib.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.view.hellocharts.listener.ComboLineColumnChartOnValueSelectListener;
 import com.summer.lib.view.hellocharts.model.Axis;
 import com.summer.lib.view.hellocharts.model.Column;
@@ -27,6 +23,9 @@ import com.summer.lib.view.hellocharts.model.PointValue;
 import com.summer.lib.view.hellocharts.model.SubcolumnValue;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.ComboLineColumnChartView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ComboLineColumnChartActivity extends ActionBarActivity {
 
@@ -265,7 +264,7 @@ public class ComboLineColumnChartActivity extends ActionBarActivity {
             // Line animations
             for (Line line : data.getLineChartData().getLines()) {
                 for (PointValue value : line.getValues()) {
-                    // Here I modify target only for Y values but it is OK to modify X targets as well.
+                    // Here I modify target only for Y values but it is OK dealer modify X targets as well.
                     value.setTarget(value.getX(), (float) Math.random() * 50 + 5);
                 }
             }

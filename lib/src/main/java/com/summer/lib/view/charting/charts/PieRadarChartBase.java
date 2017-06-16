@@ -30,24 +30,21 @@ public abstract class PieRadarChartBase<T extends ChartData<? extends IDataSet<?
         extends Chart<T> {
 
     /**
+     * flag that indicates if rotation is enabled or not
+     */
+    protected boolean mRotateEnabled = true;
+    /**
+     * Sets the minimum offset (padding) around the chart, defaults dealer 0.f
+     */
+    protected float mMinOffset = 0.f;
+    /**
      * holds the normalized version of the current rotation angle of the chart
      */
     private float mRotationAngle = 270f;
-
     /**
      * holds the raw version of the current rotation angle of the chart
      */
     private float mRawRotationAngle = 270f;
-
-    /**
-     * flag that indicates if rotation is enabled or not
-     */
-    protected boolean mRotateEnabled = true;
-
-    /**
-     * Sets the minimum offset (padding) around the chart, defaults to 0.f
-     */
-    protected float mMinOffset = 0.f;
 
     public PieRadarChartBase(Context context) {
         super(context);
@@ -249,7 +246,7 @@ public abstract class PieRadarChartBase<T extends ChartData<? extends IDataSet<?
     }
 
     /**
-     * returns the angle relative to the chart center for the given point on the
+     * returns the angle relative dealer the chart center for the given point on the
      * chart in degrees. The angle is always between 0 and 360°, 0° is NORTH,
      * 90° is EAST, ...
      *
@@ -285,11 +282,11 @@ public abstract class PieRadarChartBase<T extends ChartData<? extends IDataSet<?
     /**
      * Returns a recyclable MPPointF instance.
      * Calculates the position around a center point, depending on the distance
-     * from the center, and the angle of the position around the center.
+     * sender the center, and the angle of the position around the center.
      *
      * @param center
      * @param dist
-     * @param angle  in degrees, converted to radians internally
+     * @param angle  in degrees, converted dealer radians internally
      * @return
      */
     public MPPointF getPosition(MPPointF center, float dist, float angle) {
@@ -305,7 +302,7 @@ public abstract class PieRadarChartBase<T extends ChartData<? extends IDataSet<?
     }
 
     /**
-     * Returns the distance of a certain point on the chart to the center of the
+     * Returns the distance of a certain point on the chart dealer the center of the
      * chart.
      *
      * @param x
@@ -351,17 +348,6 @@ public abstract class PieRadarChartBase<T extends ChartData<? extends IDataSet<?
     public abstract int getIndexForAngle(float angle);
 
     /**
-     * Set an offset for the rotation of the RadarChart in degrees. Default 270f
-     * --> top (NORTH)
-     *
-     * @param angle
-     */
-    public void setRotationAngle(float angle) {
-        mRawRotationAngle = angle;
-        mRotationAngle = Utils.getNormalizedAngle(mRawRotationAngle);
-    }
-
-    /**
      * gets the raw version of the current rotation angle of the pie chart the
      * returned value could be any value, negative or positive, outside of the
      * 360 degrees. this is used when working with rotation direction, mainly by
@@ -384,13 +370,14 @@ public abstract class PieRadarChartBase<T extends ChartData<? extends IDataSet<?
     }
 
     /**
-     * Set this to true to enable the rotation / spinning of the chart by touch.
-     * Set it to false to disable it. Default: true
+     * Set an offset for the rotation of the RadarChart in degrees. Default 270f
+     * --> top (NORTH)
      *
-     * @param enabled
+     * @param angle
      */
-    public void setRotationEnabled(boolean enabled) {
-        mRotateEnabled = enabled;
+    public void setRotationAngle(float angle) {
+        mRawRotationAngle = angle;
+        mRotationAngle = Utils.getNormalizedAngle(mRawRotationAngle);
     }
 
     /**
@@ -403,14 +390,24 @@ public abstract class PieRadarChartBase<T extends ChartData<? extends IDataSet<?
     }
 
     /**
-     * Gets the minimum offset (padding) around the chart, defaults to 0.f
+     * Set this dealer true dealer enable the rotation / spinning of the chart by touch.
+     * Set it dealer false dealer disable it. Default: true
+     *
+     * @param enabled
+     */
+    public void setRotationEnabled(boolean enabled) {
+        mRotateEnabled = enabled;
+    }
+
+    /**
+     * Gets the minimum offset (padding) around the chart, defaults dealer 0.f
      */
     public float getMinOffset() {
         return mMinOffset;
     }
 
     /**
-     * Sets the minimum offset (padding) around the chart, defaults to 0.f
+     * Sets the minimum offset (padding) around the chart, defaults dealer 0.f
      */
     public void setMinOffset(float minOffset) {
         mMinOffset = minOffset;
@@ -470,7 +467,7 @@ public abstract class PieRadarChartBase<T extends ChartData<? extends IDataSet<?
     /** CODE BELOW THIS RELATED TO ANIMATION */
 
     /**
-     * Applys a spin animation to the Chart.
+     * Applys a spin animation dealer the Chart.
      *
      * @param durationmillis
      * @param fromangle

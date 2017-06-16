@@ -10,14 +10,14 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.Note;
-import com.summer.desktop.bean.dabean.TitleDABean;
 import com.summer.desktop.module.note.circlemenu.CircleMenuFrag;
+import com.summer.desktop.module.note.main.NoteMainFrag;
 import com.summer.desktop.module.note.noteslist.NotesListFrag;
 import com.summer.desktop.module.note.rename.RenameFrag;
-import com.summer.desktop.util.FragList;
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.base.ope.BaseOpes;
+import com.summer.lib.util.FragmentUtil;
+import com.summer.lib.view.bottommenu.MessageEvent;
 import com.summer.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.summer.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 
@@ -30,10 +30,6 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
     Random random = new Random();
     Gson gson = new Gson();
 
-    @Override
-    public BaseOpes<NoteListUIOpe, NoteListDAOpe> createOpes() {
-        return new BaseOpes<>(new NoteListUIOpe(activity), new NoteListDAOpe(activity));
-    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -48,16 +44,6 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
         getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
     }
 
-    @Override
-    public void onClick(View v) {
-        NotesListFrag noteListssFrag = new NotesListFrag();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("data", getOpes().getUiOpe().notes);
-        bundle.putInt("position", (Integer) v.getTag(R.id.position));
-        noteListssFrag.setArguments(bundle);
-        FragList.getInstance().add(getActivity(), noteListssFrag);
-
-    }
 
     @Override
     public boolean onLongClick(final View v) {
@@ -104,7 +90,7 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
                             break;
                         }
                         RenameFrag renameFrag = new RenameFrag();
-                        FragList.getInstance().add(getActivity(), renameFrag);
+                        FragmentUtil.getInstance().add(getActivity(), renameFrag);
                         renameFrag.setOnfinish(new OnFinishListener() {
                             @Override
                             public void onFinish(Object o) {
@@ -132,10 +118,25 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
         return true;
     }
 
+    @Override
+    public void dealMesage(MessageEvent event) {
+        super.dealMesage(event);
+        if (event.sender.equals(NewsAdapter.class.getName()) && getOpes().getUiOpe().parentNote.getObjectId().equals(event.id)) {
+            View v = (View) event.data;
+            NotesListFrag noteListssFrag = new NotesListFrag();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("data", getOpes().getUiOpe().notes);
+            bundle.putInt("position", (Integer) v.getTag(R.id.position));
+            noteListssFrag.setArguments(bundle);
+            FragmentUtil.getInstance().add(getActivity(), noteListssFrag);
+        }
+    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().post(new TitleDABean(""));
+        MessageEvent messageEvent = new MessageEvent();
+        messageEvent.dealer = NoteMainFrag.class.getName();
+        EventBus.getDefault().post(messageEvent);
     }
 }

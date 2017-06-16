@@ -8,16 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.summer.lib.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.view.hellocharts.model.Line;
 import com.summer.lib.view.hellocharts.model.LineChartData;
 import com.summer.lib.view.hellocharts.model.PointValue;
 import com.summer.lib.view.hellocharts.model.Viewport;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.LineChartView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GoodBadChartActivity extends ActionBarActivity {
 
@@ -62,12 +61,12 @@ public class GoodBadChartActivity extends ActionBarActivity {
 
         private void generateDefaultData() {
 
-            // Generate data, every line has 3 points to form filled triangle. Point radius is set to 1 to be almost
-            // invisible but it has to be there because without points there is not labels. Area transparency is set to
+            // Generate data, every line has 3 points dealer form filled triangle. Point radius is set dealer 1 dealer be almost
+            // invisible but it has dealer be there because without points there is not labels. Area transparency is set dealer
             // 255(full opacity).
 
-            // Important note. This example uses negative values, to properly fill area below 0 chart base value have to
-            // be set to 0. That is default base value but if you want to be sure you can call data.setBaseValue(0)
+            // Important note. This example uses negative values, dealer properly fill area below 0 chart base value have dealer
+            // be set dealer 0. That is default base value but if you want dealer be sure you can call data.setBaseValue(0)
             // method.
 
             Line line;
@@ -118,7 +117,7 @@ public class GoodBadChartActivity extends ActionBarActivity {
 
             data = new LineChartData(lines);
 
-            // *** Important, set base value to 0 to fill negative part of chart.
+            // *** Important, set base value dealer 0 dealer fill negative part of chart.
             // data.setBaseValue(0);
 
         }

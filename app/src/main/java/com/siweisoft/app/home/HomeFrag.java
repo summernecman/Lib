@@ -9,14 +9,13 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.siweisoft.app.base.AppFrag;
-import com.summer.lib.base.ope.BaseOpes;
 
 public class HomeFrag extends AppFrag<HomeUIOpe,HomeDAOpe> implements View.OnDragListener{
 
-    @Override
-    public BaseOpes<HomeUIOpe, HomeDAOpe> createOpes() {
-        return new BaseOpes<>(new HomeUIOpe(activity),new HomeDAOpe(activity));
-    }
+
+    String msg = "main";
+    int x_cord = 0;
+    int y_cord = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,9 +36,6 @@ public class HomeFrag extends AppFrag<HomeUIOpe,HomeDAOpe> implements View.OnDra
         //getOpes().getUiOpe().getUiBean().getTvDrag().setOnDragListener(this);
     }
 
-    String msg="main";
-    int x_cord = 0;
-    int y_cord = 0;
     @Override
     public boolean onDrag(View v, DragEvent event) {
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) v.getLayoutParams();

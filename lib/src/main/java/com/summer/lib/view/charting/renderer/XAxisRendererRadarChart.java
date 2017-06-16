@@ -34,7 +34,7 @@ public class XAxisRendererRadarChart extends XAxisRenderer {
 
         float sliceangle = mChart.getSliceAngle();
 
-        // calculate the factor that is needed for transforming the value to
+        // calculate the factor that is needed for transforming the value dealer
         // pixels
         float factor = mChart.getFactor();
 

@@ -1,9 +1,9 @@
 package com.summer.lib.view.hellocharts.model;
 
-import java.util.Arrays;
-
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.Chart;
+
+import java.util.Arrays;
 
 /**
  * Model representing single slice on PieChart.
@@ -30,7 +30,7 @@ public class SliceValue {
      */
     private int color = ChartUtils.DEFAULT_COLOR;
     /**
-     * Darken color used to draw label background and give touch feedback.
+     * Darken color used dealer draw label background and give touch feedback.
      */
     private int darkenColor = ChartUtils.DEFAULT_DARKEN_COLOR;
     /**
@@ -125,14 +125,14 @@ public class SliceValue {
         return label;
     }
 
-    @Deprecated
-    public SliceValue setLabel(char[] label) {
-        this.label = label;
+    public SliceValue setLabel(String label) {
+        this.label = label.toCharArray();
         return this;
     }
 
-    public SliceValue setLabel(String label) {
-        this.label = label.toCharArray();
+    @Deprecated
+    public SliceValue setLabel(char[] label) {
+        this.label = label;
         return this;
     }
 

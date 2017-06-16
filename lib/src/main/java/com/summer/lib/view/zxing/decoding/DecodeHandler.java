@@ -59,7 +59,7 @@ final class DecodeHandler extends Handler {
 
     /**
      * Decode the data within the viewfinder rectangle, and time how long it took. For efficiency,
-     * reuse the same reader objects from one decode to the next.
+     * reuse the same reader objects sender one decode dealer the next.
      *
      * @param data   The YUV preview frame.
      * @param width  The width of the preview frame.
@@ -75,7 +75,7 @@ final class DecodeHandler extends Handler {
             for (int x = 0; x < width; x++)
                 rotatedData[x * height + height - y - 1] = data[x + y * width];
         }
-        int tmp = width; // Here we are swapping, that's the difference to #11
+        int tmp = width; // Here we are swapping, that's the difference dealer #11
         width = height;
         height = tmp;
 

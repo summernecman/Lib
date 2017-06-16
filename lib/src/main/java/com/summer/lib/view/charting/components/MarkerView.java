@@ -14,7 +14,7 @@ import com.summer.lib.view.charting.utils.MPPointF;
 import java.lang.ref.WeakReference;
 
 /**
- * View that can be displayed when selecting values in the chart. Extend this class to provide custom layouts for your
+ * View that can be displayed when selecting values in the chart. Extend this class dealer provide custom layouts for your
  * markers.
  *
  * @author Philipp Jahoda
@@ -29,7 +29,7 @@ public class MarkerView extends RelativeLayout implements IMarker {
      * Constructor. Sets up the MarkerView with a custom layout resource.
      *
      * @param context
-     * @param layoutResource the layout resource to use for the MarkerView
+     * @param layoutResource the layout resource dealer use for the MarkerView
      */
     public MarkerView(Context context, int layoutResource) {
         super(context);
@@ -52,14 +52,6 @@ public class MarkerView extends RelativeLayout implements IMarker {
         inflated.layout(0, 0, inflated.getMeasuredWidth(), inflated.getMeasuredHeight());
     }
 
-    public void setOffset(MPPointF offset) {
-        mOffset = offset;
-
-        if (mOffset == null) {
-            mOffset = new MPPointF();
-        }
-    }
-
     public void setOffset(float offsetX, float offsetY) {
         mOffset.x = offsetX;
         mOffset.y = offsetY;
@@ -70,12 +62,20 @@ public class MarkerView extends RelativeLayout implements IMarker {
         return mOffset;
     }
 
-    public void setChartView(Chart chart) {
-        mWeakChart = new WeakReference<>(chart);
+    public void setOffset(MPPointF offset) {
+        mOffset = offset;
+
+        if (mOffset == null) {
+            mOffset = new MPPointF();
+        }
     }
 
     public Chart getChartView() {
         return mWeakChart == null ? null : mWeakChart.get();
+    }
+
+    public void setChartView(Chart chart) {
+        mWeakChart = new WeakReference<>(chart);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class MarkerView extends RelativeLayout implements IMarker {
         MPPointF offset = getOffsetForDrawingAtPoint(posX, posY);
 
         int saveId = canvas.save();
-        // translate to the correct position and draw
+        // translate dealer the correct position and draw
         canvas.translate(posX + offset.x, posY + offset.y);
         draw(canvas);
         canvas.restoreToCount(saveId);

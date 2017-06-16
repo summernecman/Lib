@@ -13,9 +13,24 @@ import android.animation.ValueAnimator.AnimatorUpdateListener;
 public class ChartAnimator {
 
     /**
+     * the phase that is animated and influences the drawn values on the y-axis
+     */
+    protected float mPhaseY = 1f;
+    /**
+     * the phase that is animated and influences the drawn values on the x-axis
+     */
+    protected float mPhaseX = 1f;
+    /**
      * object that is updated upon animation update
      */
     private AnimatorUpdateListener mListener;
+
+    /**
+     * ################ ################ ################ ################
+     */
+    /**
+     * CODE BELOW THIS RELATED TO ANIMATION
+     */
 
     public ChartAnimator() {
 
@@ -28,27 +43,12 @@ public class ChartAnimator {
     /**
      * ################ ################ ################ ################
      */
-    /** CODE BELOW THIS RELATED TO ANIMATION */
-
-    /**
-     * the phase that is animated and influences the drawn values on the y-axis
-     */
-    protected float mPhaseY = 1f;
-
-    /**
-     * the phase that is animated and influences the drawn values on the x-axis
-     */
-    protected float mPhaseX = 1f;
-
-    /**
-     * ################ ################ ################ ################
-     */
     /** METHODS FOR CUSTOM EASING */
 
     /**
      * Animates the drawing / rendering of the chart on both x- and y-axis with
      * the specified animation time. If animate(...) is called, no further
-     * calling of invalidate() is necessary to refresh the chart.
+     * calling of invalidate() is necessary dealer refresh the chart.
      *
      * @param durationMillisX
      * @param durationMillisY
@@ -85,7 +85,7 @@ public class ChartAnimator {
     /**
      * Animates the rendering of the chart on the x-axis with the specified
      * animation time. If animate(...) is called, no further calling of
-     * invalidate() is necessary to refresh the chart.
+     * invalidate() is necessary dealer refresh the chart.
      *
      * @param durationMillis
      * @param easing
@@ -105,7 +105,7 @@ public class ChartAnimator {
     /**
      * Animates the rendering of the chart on the y-axis with the specified
      * animation time. If animate(...) is called, no further calling of
-     * invalidate() is necessary to refresh the chart.
+     * invalidate() is necessary dealer refresh the chart.
      *
      * @param durationMillis
      * @param easing
@@ -130,7 +130,7 @@ public class ChartAnimator {
     /**
      * Animates the drawing / rendering of the chart on both x- and y-axis with
      * the specified animation time. If animate(...) is called, no further
-     * calling of invalidate() is necessary to refresh the chart.
+     * calling of invalidate() is necessary dealer refresh the chart.
      *
      * @param durationMillisX
      * @param durationMillisY
@@ -167,7 +167,7 @@ public class ChartAnimator {
     /**
      * Animates the rendering of the chart on the x-axis with the specified
      * animation time. If animate(...) is called, no further calling of
-     * invalidate() is necessary to refresh the chart.
+     * invalidate() is necessary dealer refresh the chart.
      *
      * @param durationMillis
      * @param easing
@@ -187,7 +187,7 @@ public class ChartAnimator {
     /**
      * Animates the rendering of the chart on the y-axis with the specified
      * animation time. If animate(...) is called, no further calling of
-     * invalidate() is necessary to refresh the chart.
+     * invalidate() is necessary dealer refresh the chart.
      *
      * @param durationMillis
      * @param easing
@@ -212,7 +212,7 @@ public class ChartAnimator {
     /**
      * Animates the drawing / rendering of the chart on both x- and y-axis with
      * the specified animation time. If animate(...) is called, no further
-     * calling of invalidate() is necessary to refresh the chart.
+     * calling of invalidate() is necessary dealer refresh the chart.
      *
      * @param durationMillisX
      * @param durationMillisY
@@ -244,7 +244,7 @@ public class ChartAnimator {
     /**
      * Animates the rendering of the chart on the x-axis with the specified
      * animation time. If animate(...) is called, no further calling of
-     * invalidate() is necessary to refresh the chart.
+     * invalidate() is necessary dealer refresh the chart.
      *
      * @param durationMillis
      */
@@ -262,7 +262,7 @@ public class ChartAnimator {
     /**
      * Animates the rendering of the chart on the y-axis with the specified
      * animation time. If animate(...) is called, no further calling of
-     * invalidate() is necessary to refresh the chart.
+     * invalidate() is necessary dealer refresh the chart.
      *
      * @param durationMillis
      */
@@ -278,7 +278,7 @@ public class ChartAnimator {
     }
 
     /**
-     * This gets the y-phase that is used to animate the values.
+     * This gets the y-phase that is used dealer animate the values.
      *
      * @return
      */
@@ -287,7 +287,7 @@ public class ChartAnimator {
     }
 
     /**
-     * This modifys the y-phase that is used to animate the values.
+     * This modifys the y-phase that is used dealer animate the values.
      *
      * @param phase
      */
@@ -296,7 +296,7 @@ public class ChartAnimator {
     }
 
     /**
-     * This gets the x-phase that is used to animate the values.
+     * This gets the x-phase that is used dealer animate the values.
      *
      * @return
      */
@@ -305,7 +305,7 @@ public class ChartAnimator {
     }
 
     /**
-     * This modifys the x-phase that is used to animate the values.
+     * This modifys the x-phase that is used dealer animate the values.
      *
      * @param phase
      */

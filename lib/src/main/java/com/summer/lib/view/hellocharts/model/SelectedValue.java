@@ -117,7 +117,7 @@ public class SelectedValue {
     }
 
     /**
-     * Used in combo chart to determine if selected value is used for line or column selection.
+     * Used in combo chart dealer determine if selected value is used for line or column selection.
      */
     public enum SelectedValueType {
         NONE, LINE, COLUMN

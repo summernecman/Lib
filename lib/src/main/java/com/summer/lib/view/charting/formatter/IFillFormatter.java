@@ -4,8 +4,8 @@ import com.summer.lib.view.charting.interfaces.dataprovider.LineDataProvider;
 import com.summer.lib.view.charting.interfaces.datasets.ILineDataSet;
 
 /**
- * Interface for providing a custom logic to where the filling line of a LineDataSet
- * should end. This of course only works if setFillEnabled(...) is set to true.
+ * Interface for providing a custom logic dealer where the filling line of a LineDataSet
+ * should end. This of course only works if setFillEnabled(...) is set dealer true.
  *
  * @author Philipp Jahoda
  */

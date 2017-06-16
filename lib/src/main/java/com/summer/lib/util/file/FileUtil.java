@@ -5,8 +5,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 
-
-import com.summer.lib.base.interf.OnNetFinishWithObjInter;
+import com.summer.lib.base.interf.OnFinishWithObjI;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -34,47 +33,6 @@ public class FileUtil {
         }
         return instance;
     }
-
-    public void openFile(FragmentActivity activity, int reqcode) {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("text/plain");
-        activity.startActivityForResult(intent, reqcode);
-    }
-
-    public void getTxt(final FragmentActivity activity, final Uri uri, final OnNetFinishWithObjInter o) {
-
-        final ArrayList<String> strings = new ArrayList<>();
-        new AsyncTask<String, String, ArrayList<String>>() {
-            @Override
-            protected ArrayList<String> doInBackground(String... params) {
-                try {
-                    InputStream inputStream = activity.getContentResolver().openInputStream(uri);
-                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    String line = bufferedReader.readLine();
-                    while (line != null) {
-                        strings.add(line);
-                        line = bufferedReader.readLine();
-                    }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return strings;
-            }
-
-            @Override
-            protected void onPostExecute(ArrayList<String> strings) {
-                if (o != null) {
-                    o.onNetFinish(strings);
-                }
-            }
-        }.execute();
-    }
-
 
     /**
      * 文本文件转换为指定编码的字符串
@@ -154,5 +112,45 @@ public class FileUtil {
             }
         }
         return flag;
+    }
+
+    public void openFile(FragmentActivity activity, int reqcode) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("text/plain");
+        activity.startActivityForResult(intent, reqcode);
+    }
+
+    public void getTxt(final FragmentActivity activity, final Uri uri, final OnFinishWithObjI o) {
+
+        final ArrayList<String> strings = new ArrayList<>();
+        new AsyncTask<String, String, ArrayList<String>>() {
+            @Override
+            protected ArrayList<String> doInBackground(String... params) {
+                try {
+                    InputStream inputStream = activity.getContentResolver().openInputStream(uri);
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String line = bufferedReader.readLine();
+                    while (line != null) {
+                        strings.add(line);
+                        line = bufferedReader.readLine();
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return strings;
+            }
+
+            @Override
+            protected void onPostExecute(ArrayList<String> strings) {
+                if (o != null) {
+                    o.onNetFinish(strings);
+                }
+            }
+        }.execute();
     }
 }

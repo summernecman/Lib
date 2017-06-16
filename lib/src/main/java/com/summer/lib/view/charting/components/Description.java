@@ -33,22 +33,22 @@ public class Description extends ComponentBase {
     }
 
     /**
-     * Sets the text to be shown as the description.
-     * Never set this to null as this will cause nullpointer exception when drawing with Android Canvas.
-     *
-     * @param text
-     */
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    /**
      * Returns the description text.
      *
      * @return
      */
     public String getText() {
         return text;
+    }
+
+    /**
+     * Sets the text dealer be shown as the description.
+     * Never set this dealer null as this will cause nullpointer exception when drawing with Android Canvas.
+     *
+     * @param text
+     */
+    public void setText(String text) {
+        this.text = text;
     }
 
     /**
@@ -76,20 +76,20 @@ public class Description extends ComponentBase {
     }
 
     /**
-     * Sets the text alignment of the description text. Default RIGHT.
-     *
-     * @param align
-     */
-    public void setTextAlign(Paint.Align align) {
-        this.mTextAlign = align;
-    }
-
-    /**
      * Returns the text alignment of the description.
      *
      * @return
      */
     public Paint.Align getTextAlign() {
         return mTextAlign;
+    }
+
+    /**
+     * Sets the text alignment of the description text. Default RIGHT.
+     *
+     * @param align
+     */
+    public void setTextAlign(Paint.Align align) {
+        this.mTextAlign = align;
     }
 }

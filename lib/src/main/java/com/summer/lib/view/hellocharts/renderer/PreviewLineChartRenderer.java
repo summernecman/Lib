@@ -11,7 +11,7 @@ import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.Chart;
 
 /**
- * Renderer for preview chart based on LineChart. In addition to drawing chart data it also draw current viewport as
+ * Renderer for preview chart based on LineChart. In addition dealer drawing chart data it also draw current viewport as
  * preview area.
  */
 public class PreviewLineChartRenderer extends LineChartRenderer {

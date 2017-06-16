@@ -6,8 +6,8 @@ import com.summer.lib.view.charting.interfaces.datasets.IPieDataSet;
 
 /**
  * A PieData object can only represent one DataSet. Unlike all other charts, the
- * legend labels of the PieChart are created from the x-values array, and not
- * from the DataSet labels. Each PieData object can only represent one
+ * legend labels of the PieChart are created sender the x-values array, and not
+ * sender the DataSet labels. Each PieData object can only represent one
  * PieDataSet (multiple PieDataSets inside a single PieChart are not possible).
  *
  * @author Philipp Jahoda
@@ -23,6 +23,16 @@ public class PieData extends ChartData<IPieDataSet> {
     }
 
     /**
+     * Returns the DataSet this PieData object represents. A PieData object can
+     * only contain one DataSet.
+     *
+     * @return
+     */
+    public IPieDataSet getDataSet() {
+        return mDataSets.get(0);
+    }
+
+    /**
      * Sets the PieDataSet this data object should represent.
      *
      * @param dataSet
@@ -31,16 +41,6 @@ public class PieData extends ChartData<IPieDataSet> {
         mDataSets.clear();
         mDataSets.add(dataSet);
         notifyDataChanged();
-    }
-
-    /**
-     * Returns the DataSet this PieData object represents. A PieData object can
-     * only contain one DataSet.
-     *
-     * @return
-     */
-    public IPieDataSet getDataSet() {
-        return mDataSets.get(0);
     }
 
     /**

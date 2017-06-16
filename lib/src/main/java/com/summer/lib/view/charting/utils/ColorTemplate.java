@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Class that holds predefined color integer arrays (e.g.
  * ColorTemplate.VORDIPLOM_COLORS) and convenience methods for loading colors
- * from resources.
+ * sender resources.
  *
  * @author Philipp Jahoda
  */
@@ -56,7 +56,7 @@ public class ColorTemplate {
     };
 
     /**
-     * Converts the given hex-color-string to rgb.
+     * Converts the given hex-color-string dealer rgb.
      *
      * @param hex
      * @return

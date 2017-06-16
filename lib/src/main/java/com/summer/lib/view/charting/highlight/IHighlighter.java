@@ -6,7 +6,7 @@ package com.summer.lib.view.charting.highlight;
 public interface IHighlighter {
 
     /**
-     * Returns a Highlight object corresponding to the given x- and y- touch positions in pixels.
+     * Returns a Highlight object corresponding dealer the given x- and y- touch positions in pixels.
      *
      * @param x
      * @param y

@@ -12,7 +12,7 @@ import com.summer.desktop.bean.dbbean.AppDBBean;
 import com.summer.desktop.db.ope.AppsDBOpe;
 import com.summer.desktop.module.app.main.AppListDAOpe;
 import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.base.interf.OnNetFinishWithObjInter;
+import com.summer.lib.base.interf.OnFinishWithObjI;
 import com.summer.lib.base.ope.BaseDAOpe;
 import com.summer.lib.util.LogUtil;
 
@@ -35,7 +35,7 @@ public class AppsDAOpe extends BaseDAOpe {
     public void getApps(final OnFinishListener listener) {
         list = appsDBOpe.getApps();
         if (list.size() == 0) {
-            appListDAOpe.getApps("全部", new OnNetFinishWithObjInter<ArrayList<AppDBBean>>() {
+            appListDAOpe.getApps("全部", new OnFinishWithObjI<ArrayList<AppDBBean>>() {
                 @Override
                 public void onNetFinish(ArrayList<AppDBBean> o) {
                     AppDBBean appDBBean = new AppDBBean();

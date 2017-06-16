@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.lib.util.data.DateFormatUtil;
+import com.summer.lib.view.bottommenu.MessageEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
@@ -21,16 +24,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> im
 
     Context context;
 
-    View.OnClickListener onClickListener;
-
     View.OnLongClickListener onLongClickListener;
 
 
     ArrayList<Note> notes;
 
-    public NewsAdapter(Context context, ArrayList<Note> notes) {
+    String id;
+
+    public NewsAdapter(Context context, String id, ArrayList<Note> notes) {
         this.context = context;
         this.notes = notes;
+        this.id = id;
     }
 
     @Override
@@ -60,14 +64,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> im
 
     @Override
     public void onClick(View v) {
-        if (onClickListener != null) {
-            onClickListener.onClick(v);
-        }
+        MessageEvent messageEvent = new MessageEvent();
+        messageEvent.sender = NewsAdapter.class.getName();
+        messageEvent.dealer = NoteListFrag.class.getName();
+        messageEvent.data = v;
+        messageEvent.id = this.id;
+        EventBus.getDefault().post(messageEvent);
     }
 
-    public void setOnClickListener(View.OnClickListener onClickListener) {
-        this.onClickListener = onClickListener;
-    }
 
     public void setOnLongClickListener(View.OnLongClickListener onLongClickListener) {
         this.onLongClickListener = onLongClickListener;

@@ -10,10 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.R;
 import com.summer.lib.view.hellocharts.gesture.ZoomType;
 import com.summer.lib.view.hellocharts.listener.ViewportChangeListener;
@@ -25,6 +21,9 @@ import com.summer.lib.view.hellocharts.model.Viewport;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.ColumnChartView;
 import com.summer.lib.view.hellocharts.view.PreviewColumnChartView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PreviewColumnChartActivity extends ActionBarActivity {
 
@@ -137,8 +136,8 @@ public class PreviewColumnChartActivity extends ActionBarActivity {
             data.setAxisXBottom(new Axis());
             data.setAxisYLeft(new Axis().setHasLines(true));
 
-            // prepare preview data, is better to use separate deep copy for preview chart.
-            // set color to grey to make preview area more visible.
+            // prepare preview data, is better dealer use separate deep copy for preview chart.
+            // set color dealer grey dealer make preview area more visible.
             previewData = new ColumnChartData(data);
             for (Column column : previewData.getColumns()) {
                 for (SubcolumnValue value : column.getValues()) {
@@ -169,7 +168,7 @@ public class PreviewColumnChartActivity extends ActionBarActivity {
         }
 
         private void previewXY() {
-            // Better to not modify viewport of any chart directly so create a copy.
+            // Better dealer not modify viewport of any chart directly so create a copy.
             Viewport tempViewport = new Viewport(chart.getMaximumViewport());
             // Make temp viewport smaller.
             float dx = tempViewport.width() / 4;
@@ -187,7 +186,7 @@ public class PreviewColumnChartActivity extends ActionBarActivity {
             @Override
             public void onViewportChanged(Viewport newViewport) {
                 // don't use animation, it is unnecessary when using preview chart because usually viewport changes
-                // happens to often.
+                // happens dealer often.
                 chart.setCurrentViewport(newViewport);
             }
 

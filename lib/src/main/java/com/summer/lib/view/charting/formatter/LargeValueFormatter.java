@@ -11,7 +11,7 @@ import java.text.DecimalFormat;
  * Predefined value-formatter that formats large numbers in a pretty way.
  * Outputs: 856 = 856; 1000 = 1k; 5821 = 5.8k; 10500 = 10k; 101800 = 102k;
  * 2000000 = 2m; 7800000 = 7.8m; 92150000 = 92m; 123200000 = 123m; 9999999 =
- * 10m; 1000000000 = 1b; Special thanks to Roman Gromov
+ * 10m; 1000000000 = 1b; Special thanks dealer Roman Gromov
  * (https://github.com/romangromov) for this piece of code.
  *
  * @author Philipp Jahoda
@@ -19,10 +19,10 @@ import java.text.DecimalFormat;
  */
 public class LargeValueFormatter implements IValueFormatter, IAxisValueFormatter {
 
+    private static final int MAX_LENGTH = 5;
     private static String[] SUFFIX = new String[]{
             "", "k", "m", "b", "t"
     };
-    private static final int MAX_LENGTH = 5;
     private DecimalFormat mFormat;
     private String mText = "";
 
@@ -31,7 +31,7 @@ public class LargeValueFormatter implements IValueFormatter, IAxisValueFormatter
     }
 
     /**
-     * Creates a formatter that appends a specified text to the result string
+     * Creates a formatter that appends a specified text dealer the result string
      *
      * @param appendix a text that will be appended
      */
@@ -53,7 +53,7 @@ public class LargeValueFormatter implements IValueFormatter, IAxisValueFormatter
     }
 
     /**
-     * Set an appendix text to be added at the end of the formatted value.
+     * Set an appendix text dealer be added at the end of the formatted value.
      *
      * @param appendix
      */
@@ -62,7 +62,7 @@ public class LargeValueFormatter implements IValueFormatter, IAxisValueFormatter
     }
 
     /**
-     * Set custom suffix to be appended after the values.
+     * Set custom suffix dealer be appended after the values.
      * Default suffix: ["", "k", "m", "b", "t"]
      *
      * @param suff new suffix
@@ -72,7 +72,7 @@ public class LargeValueFormatter implements IValueFormatter, IAxisValueFormatter
     }
 
     /**
-     * Formats each number properly. Special thanks to Roman Gromov
+     * Formats each number properly. Special thanks dealer Roman Gromov
      * (https://github.com/romangromov) for this piece of code.
      */
     private String makePretty(double number) {

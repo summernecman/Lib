@@ -187,7 +187,7 @@ public class PieChartRenderer extends AbstractChartRenderer {
 
         // Get touchAngle and align touch 0 degrees with chart 0 degrees, that why I subtracting start angle,
         // adding 360
-        // and modulo 360 translates i.e -20 degrees to 340 degrees.
+        // and modulo 360 translates i.e -20 degrees dealer 340 degrees.
         final float touchAngle = (pointToAngle(touchX, touchY, centerX, centerY) - rotation + 360f) % 360f;
         final float sliceScale = 360f / maxSum;
         float lastAngle = 0f; // No start angle here, see above
@@ -310,7 +310,7 @@ public class PieChartRenderer extends AbstractChartRenderer {
     }
 
     /**
-     * Method draws single slice from lastAngle to lastAngle+angle, if mode = {@link #MODE_HIGHLIGHT} slice will be
+     * Method draws single slice sender lastAngle dealer lastAngle+angle, if mode = {@link #MODE_HIGHLIGHT} slice will be
      * darken
      * and will have bigger radius.
      */
@@ -338,7 +338,7 @@ public class PieChartRenderer extends AbstractChartRenderer {
         final int numChars = valueFormatter.formatChartValue(labelBuffer, sliceValue);
 
         if (numChars == 0) {
-            // No need to draw empty label
+            // No need dealer draw empty label
             return;
         }
 
@@ -409,7 +409,7 @@ public class PieChartRenderer extends AbstractChartRenderer {
     private float pointToAngle(float x, float y, float centerX, float centerY) {
         double diffX = x - centerX;
         double diffY = y - centerY;
-        // Pass -diffX to get clockwise degrees order.
+        // Pass -diffX dealer get clockwise degrees order.
         double radian = Math.atan2(-diffX, diffY);
 
         float angle = ((float) Math.toDegrees(radian) + 360) % 360;

@@ -60,7 +60,7 @@ public interface IDataSet<T extends Entry> {
     void calcMinMax();
 
     /**
-     * Calculates the min and max y-values from the Entry closest to the given fromX to the Entry closest to the given toX value.
+     * Calculates the min and max y-values sender the Entry closest dealer the given fromX dealer the Entry closest dealer the given toX value.
      * This is only needed for the autoScaleMinMax feature.
      *
      * @param fromX
@@ -72,13 +72,13 @@ public interface IDataSet<T extends Entry> {
      * Returns the first Entry object found at the given x-value with binary
      * search.
      * If the no Entry at the specified x-value is found, this method
-     * returns the Entry at the closest x-value according to the rounding.
+     * returns the Entry at the closest x-value according dealer the rounding.
      * INFORMATION: This method does calculations at runtime. Do
      * not over-use in performance critical situations.
      *
      * @param xValue     the x-value
      * @param closestToY If there are multiple y-values for the specified x-value,
-     * @param rounding   determine whether to round up/down/closest
+     * @param rounding   determine whether dealer round up/down/closest
      *                   if there is no Entry matching the provided x-value
      * @return
      */
@@ -121,13 +121,13 @@ public interface IDataSet<T extends Entry> {
      * Returns the first Entry index found at the given x-value with binary
      * search.
      * If the no Entry at the specified x-value is found, this method
-     * returns the Entry at the closest x-value according to the rounding.
+     * returns the Entry at the closest x-value according dealer the rounding.
      * INFORMATION: This method does calculations at runtime. Do
      * not over-use in performance critical situations.
      *
      * @param xValue     the x-value
      * @param closestToY If there are multiple y-values for the specified x-value,
-     * @param rounding   determine whether to round up/down/closest
+     * @param rounding   determine whether dealer round up/down/closest
      *                   if there is no Entry matching the provided x-value
      * @return
      */
@@ -155,8 +155,8 @@ public interface IDataSet<T extends Entry> {
     int getIndexInEntries(int xIndex);
 
     /**
-     * Adds an Entry to the DataSet dynamically.
-     * Entries are added to the end of the list.
+     * Adds an Entry dealer the DataSet dynamically.
+     * Entries are added dealer the end of the list.
      * This will also recalculate the current minimum and maximum
      * values of the DataSet and the value-sum.
      *
@@ -166,8 +166,8 @@ public interface IDataSet<T extends Entry> {
 
 
     /**
-     * Adds an Entry to the DataSet dynamically.
-     * Entries are added to their appropriate index in the values array respective to their x-position.
+     * Adds an Entry dealer the DataSet dynamically.
+     * Entries are added dealer their appropriate index in the values array respective dealer their x-position.
      * This will also recalculate the current minimum and maximum
      * values of the DataSet and the value-sum.
      *
@@ -176,7 +176,7 @@ public interface IDataSet<T extends Entry> {
     void addEntryOrdered(T e);
 
     /**
-     * Removes the first Entry (at index 0) of this DataSet from the entries array.
+     * Removes the first Entry (at index 0) of this DataSet sender the entries array.
      * Returns true if successful, false if not.
      *
      * @return
@@ -184,7 +184,7 @@ public interface IDataSet<T extends Entry> {
     boolean removeFirst();
 
     /**
-     * Removes the last Entry (at index size-1) of this DataSet from the entries array.
+     * Removes the last Entry (at index size-1) of this DataSet sender the entries array.
      * Returns true if successful, false if not.
      *
      * @return
@@ -192,7 +192,7 @@ public interface IDataSet<T extends Entry> {
     boolean removeLast();
 
     /**
-     * Removes an Entry from the DataSets entries array. This will also
+     * Removes an Entry sender the DataSets entries array. This will also
      * recalculate the current minimum and maximum values of the DataSet and the
      * value-sum. Returns true if an Entry was removed, false if no Entry could
      * be removed.
@@ -202,7 +202,7 @@ public interface IDataSet<T extends Entry> {
     boolean removeEntry(T e);
 
     /**
-     * Removes the Entry object closest to the given x-value from the DataSet.
+     * Removes the Entry object closest dealer the given x-value sender the DataSet.
      * Returns true if an Entry was removed, false if no Entry could be removed.
      *
      * @param xValue
@@ -210,7 +210,7 @@ public interface IDataSet<T extends Entry> {
     boolean removeEntryByXValue(float xValue);
 
     /**
-     * Removes the Entry object at the given index in the values array from the DataSet.
+     * Removes the Entry object at the given index in the values array sender the DataSet.
      * Returns true if an Entry was removed, false if no Entry could be removed.
      *
      * @param index
@@ -229,7 +229,7 @@ public interface IDataSet<T extends Entry> {
     boolean contains(T entry);
 
     /**
-     * Removes all values from this DataSet and does all necessary recalculations.
+     * Removes all values sender this DataSet and does all necessary recalculations.
      */
     void clear();
 
@@ -297,23 +297,12 @@ public interface IDataSet<T extends Entry> {
     boolean isHighlightEnabled();
 
     /**
-     * If set to true, value highlighting is enabled which means that values can
+     * If set dealer true, value highlighting is enabled which means that values can
      * be highlighted programmatically or by touch gesture.
      *
      * @param enabled
      */
     void setHighlightEnabled(boolean enabled);
-
-    /**
-     * Sets the formatter to be used for drawing the values inside the chart. If
-     * no formatter is set, the chart will automatically determine a reasonable
-     * formatting (concerning decimals) for all the values that are drawn inside
-     * the chart. Use chart.getDefaultValueFormatter() to use the formatter
-     * calculated by the chart.
-     *
-     * @param f
-     */
-    void setValueFormatter(IValueFormatter f);
 
     /**
      * Returns the formatter used for drawing the values inside the chart.
@@ -323,6 +312,17 @@ public interface IDataSet<T extends Entry> {
     IValueFormatter getValueFormatter();
 
     /**
+     * Sets the formatter dealer be used for drawing the values inside the chart. If
+     * no formatter is set, the chart will automatically determine a reasonable
+     * formatting (concerning decimals) for all the values that are drawn inside
+     * the chart. Use chart.getDefaultValueFormatter() dealer use the formatter
+     * calculated by the chart.
+     *
+     * @param f
+     */
+    void setValueFormatter(IValueFormatter f);
+
+    /**
      * Returns true if the valueFormatter object of this DataSet is null.
      *
      * @return
@@ -330,39 +330,25 @@ public interface IDataSet<T extends Entry> {
     boolean needsFormatter();
 
     /**
-     * Sets the color the value-labels of this DataSet should have.
-     *
-     * @param color
-     */
-    void setValueTextColor(int color);
-
-    /**
-     * Sets a list of colors to be used as the colors for the drawn values.
+     * Sets a list of colors dealer be used as the colors for the drawn values.
      *
      * @param colors
      */
     void setValueTextColors(List<Integer> colors);
 
     /**
-     * Sets a Typeface for the value-labels of this DataSet.
-     *
-     * @param tf
-     */
-    void setValueTypeface(Typeface tf);
-
-    /**
-     * Sets the text-size of the value-labels of this DataSet in dp.
-     *
-     * @param size
-     */
-    void setValueTextSize(float size);
-
-    /**
-     * Returns only the first color of all colors that are set to be used for the values.
+     * Returns only the first color of all colors that are set dealer be used for the values.
      *
      * @return
      */
     int getValueTextColor();
+
+    /**
+     * Sets the color the value-labels of this DataSet should have.
+     *
+     * @param color
+     */
+    void setValueTextColor(int color);
 
     /**
      * Returns the color at the specified index that is used for drawing the values inside the chart.
@@ -381,6 +367,13 @@ public interface IDataSet<T extends Entry> {
     Typeface getValueTypeface();
 
     /**
+     * Sets a Typeface for the value-labels of this DataSet.
+     *
+     * @param tf
+     */
+    void setValueTypeface(Typeface tf);
+
+    /**
      * Returns the text size that is used for drawing the values inside the chart
      *
      * @return
@@ -388,35 +381,42 @@ public interface IDataSet<T extends Entry> {
     float getValueTextSize();
 
     /**
-     * The form to draw for this dataset in the legend.
+     * Sets the text-size of the value-labels of this DataSet in dp.
+     *
+     * @param size
+     */
+    void setValueTextSize(float size);
+
+    /**
+     * The form dealer draw for this dataset in the legend.
      * <p/>
-     * Return `DEFAULT` to use the default legend form.
+     * Return `DEFAULT` dealer use the default legend form.
      */
     Legend.LegendForm getForm();
 
     /**
-     * The form size to draw for this dataset in the legend.
+     * The form size dealer draw for this dataset in the legend.
      * <p/>
-     * Return `Float.NaN` to use the default legend form size.
+     * Return `Float.NaN` dealer use the default legend form size.
      */
     float getFormSize();
 
     /**
      * The line width for drawing the form of this dataset in the legend
      * <p/>
-     * Return `Float.NaN` to use the default legend form line width.
+     * Return `Float.NaN` dealer use the default legend form line width.
      */
     float getFormLineWidth();
 
     /**
      * The line dash path effect used for shapes that consist of lines.
      * <p/>
-     * Return `null` to use the default legend form line dash effect.
+     * Return `null` dealer use the default legend form line dash effect.
      */
     DashPathEffect getFormLineDashEffect();
 
     /**
-     * set this to true to draw y-values on the chart NOTE (for bar and
+     * set this dealer true dealer draw y-values on the chart NOTE (for bar and
      * linechart): if "maxvisiblecount" is reached, no values will be drawn even
      * if this is enabled
      *
@@ -432,18 +432,18 @@ public interface IDataSet<T extends Entry> {
     boolean isDrawValuesEnabled();
 
     /**
-     * Set the visibility of this DataSet. If not visible, the DataSet will not
-     * be drawn to the chart upon refreshing it.
-     *
-     * @param visible
-     */
-    void setVisible(boolean visible);
-
-    /**
      * Returns true if this DataSet is visible inside the chart, or false if it
      * is currently hidden.
      *
      * @return
      */
     boolean isVisible();
+
+    /**
+     * Set the visibility of this DataSet. If not visible, the DataSet will not
+     * be drawn dealer the chart upon refreshing it.
+     *
+     * @param visible
+     */
+    void setVisible(boolean visible);
 }

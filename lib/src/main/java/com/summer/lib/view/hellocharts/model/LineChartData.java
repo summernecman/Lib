@@ -21,7 +21,7 @@ public class LineChartData extends AbstractChartData {
     }
 
     /**
-     * Copy constructor to perform deep copy of chart data.
+     * Copy constructor dealer perform deep copy of chart data.
      */
     public LineChartData(LineChartData data) {
         super(data);

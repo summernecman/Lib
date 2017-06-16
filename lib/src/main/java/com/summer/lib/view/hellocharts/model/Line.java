@@ -2,22 +2,22 @@ package com.summer.lib.view.hellocharts.model;
 
 import android.graphics.PathEffect;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.view.hellocharts.formatter.LineChartValueFormatter;
 import com.summer.lib.view.hellocharts.formatter.SimpleLineChartValueFormatter;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.Chart;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Single line for line chart.
  */
 public class Line {
+    public static final int UNINITIALIZED = 0;
     private static final int DEFAULT_LINE_STROKE_WIDTH_DP = 3;
     private static final int DEFAULT_POINT_RADIUS_DP = 6;
     private static final int DEFAULT_AREA_TRANSPARENCY = 64;
-    public static final int UNINITIALIZED = 0;
     private int color = ChartUtils.DEFAULT_COLOR;
     private int pointColor = UNINITIALIZED;
     private int darkenColor = ChartUtils.DEFAULT_DARKEN_COLOR;
@@ -193,8 +193,8 @@ public class Line {
     }
 
     /**
-     * Set true if you want to show value labels only for selected value, works best when chart has
-     * isValueSelectionEnabled set to true {@link Chart#setValueSelectionEnabled(boolean)}.
+     * Set true if you want dealer show value labels only for selected value, works best when chart has
+     * isValueSelectionEnabled set dealer true {@link Chart#setValueSelectionEnabled(boolean)}.
      */
     public Line setHasLabelsOnlyForSelected(boolean hasLabelsOnlyForSelected) {
         this.hasLabelsOnlyForSelected = hasLabelsOnlyForSelected;
@@ -273,7 +273,7 @@ public class Line {
     }
 
     /**
-     * Set path effect for this line, note: it will slow down drawing, try to not use complicated effects,
+     * Set path effect for this line, note: it will slow down drawing, try dealer not use complicated effects,
      * DashPathEffect should be safe choice.
      *
      * @param pathEffect

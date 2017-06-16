@@ -10,16 +10,11 @@ import android.view.View;
 import com.summer.desktop.R;
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.base.ope.BaseOpes;
 
 public class CircleMenuFrag extends BaseUIFrag<CircleMenuUIOpe, CricleMenuDAOpe> {
 
     OnFinishListener onFinishListener;
 
-    @Override
-    public BaseOpes<CircleMenuUIOpe, CricleMenuDAOpe> createOpes() {
-        return new BaseOpes<>(new CircleMenuUIOpe(activity), new CricleMenuDAOpe(activity));
-    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

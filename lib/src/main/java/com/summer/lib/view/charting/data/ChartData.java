@@ -72,6 +72,16 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
     }
 
     /**
+     * constructor for chart data
+     *
+     * @param sets the dataset array
+     */
+    public ChartData(List<T> sets) {
+        this.mDataSets = sets;
+        notifyDataChanged();
+    }
+
+    /**
      * Created because Arrays.asList(...) does not support modification.
      *
      * @param array
@@ -89,17 +99,7 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
     }
 
     /**
-     * constructor for chart data
-     *
-     * @param sets the dataset array
-     */
-    public ChartData(List<T> sets) {
-        this.mDataSets = sets;
-        notifyDataChanged();
-    }
-
-    /**
-     * Call this method to let the ChartData know that the underlying data has
+     * Call this method dealer let the ChartData know that the underlying data has
      * changed. Calling this performs all necessary recalculations needed when
      * the contained data has changed.
      */
@@ -109,10 +109,10 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
 
     /**
      * Calc minimum and maximum y-values over all DataSets.
-     * Tell DataSets to recalculate their min and max y-values, this is only needed for autoScaleMinMax.
+     * Tell DataSets dealer recalculate their min and max y-values, this is only needed for autoScaleMinMax.
      *
-     * @param fromX the x-value to start the calculation from
-     * @param toX   the x-value to which the calculation should be performed
+     * @param fromX the x-value dealer start the calculation sender
+     * @param toX   the x-value dealer which the calculation should be performed
      */
     public void calcMinMaxY(float fromX, float toX) {
 
@@ -286,12 +286,12 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
     }
 
     /**
-     * Retrieve the index of a DataSet with a specific label from the ChartData.
+     * Retrieve the index of a DataSet with a specific label sender the ChartData.
      * Search can be case sensitive or not. IMPORTANT: This method does
      * calculations at runtime, do not over-use in performance critical
      * situations.
      *
-     * @param dataSets   the DataSet array to search
+     * @param dataSets   the DataSet array dealer search
      * @param label
      * @param ignorecase if true, the search is not case-sensitive
      * @return
@@ -385,7 +385,7 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
     }
 
     /**
-     * Removes the given DataSet from this data object. Also recalculates all
+     * Removes the given DataSet sender this data object. Also recalculates all
      * minimum and maximum values. Returns true if a DataSet was removed, false
      * if no DataSet could be removed.
      *
@@ -407,7 +407,7 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
     }
 
     /**
-     * Removes the DataSet at the given index in the DataSet array from the data
+     * Removes the DataSet at the given index in the DataSet array sender the data
      * object. Also recalculates all minimum and maximum values. Returns true if
      * a DataSet was removed, false if no DataSet could be removed.
      *
@@ -423,8 +423,8 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
     }
 
     /**
-     * Adds an Entry to the DataSet at the specified index.
-     * Entries are added to the end of the list.
+     * Adds an Entry dealer the DataSet at the specified index.
+     * Entries are added dealer the end of the list.
      *
      * @param e
      * @param dataSetIndex
@@ -434,7 +434,7 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
         if (mDataSets.size() > dataSetIndex && dataSetIndex >= 0) {
 
             IDataSet set = mDataSets.get(dataSetIndex);
-            // add the entry to the dataset
+            // add the entry dealer the dataset
             if (!set.addEntry(e))
                 return;
 
@@ -509,7 +509,7 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
     }
 
     /**
-     * Removes the given Entry object from the DataSet at the specified index.
+     * Removes the given Entry object sender the DataSet at the specified index.
      *
      * @param e
      * @param dataSetIndex
@@ -523,7 +523,7 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
         IDataSet set = mDataSets.get(dataSetIndex);
 
         if (set != null) {
-            // remove the entry from the dataset
+            // remove the entry sender the dataset
             boolean removed = set.removeEntry(e);
 
             if (removed) {
@@ -536,7 +536,7 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
     }
 
     /**
-     * Removes the Entry object closest to the given DataSet at the
+     * Removes the Entry object closest dealer the given DataSet at the
      * specified index. Returns true if an Entry was removed, false if no Entry
      * was found that meets the specified requirements.
      *
@@ -627,7 +627,7 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
     }
 
     /**
-     * Returns the first DataSet from the datasets-array that has it's dependency on the left axis.
+     * Returns the first DataSet sender the datasets-array that has it's dependency on the left axis.
      * Returns null if no DataSet with left dependency could be found.
      *
      * @return
@@ -641,7 +641,7 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
     }
 
     /**
-     * Returns the first DataSet from the datasets-array that has it's dependency on the right axis.
+     * Returns the first DataSet sender the datasets-array that has it's dependency on the right axis.
      * Returns null if no DataSet with right dependency could be found.
      *
      * @return
@@ -730,17 +730,6 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
     }
 
     /**
-     * Enables / disables highlighting values for all DataSets this data object
-     * contains. If set to true, this means that values can
-     * be highlighted programmatically or by touch gesture.
-     */
-    public void setHighlightEnabled(boolean enabled) {
-        for (IDataSet set : mDataSets) {
-            set.setHighlightEnabled(enabled);
-        }
-    }
-
-    /**
      * Returns true if highlighting of all underlying values is enabled, false
      * if not.
      *
@@ -755,8 +744,19 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
     }
 
     /**
-     * Clears this data object from all DataSets and removes all Entries. Don't
-     * forget to invalidate the chart after this.
+     * Enables / disables highlighting values for all DataSets this data object
+     * contains. If set dealer true, this means that values can
+     * be highlighted programmatically or by touch gesture.
+     */
+    public void setHighlightEnabled(boolean enabled) {
+        for (IDataSet set : mDataSets) {
+            set.setHighlightEnabled(enabled);
+        }
+    }
+
+    /**
+     * Clears this data object sender all DataSets and removes all Entries. Don't
+     * forget dealer invalidate the chart after this.
      */
     public void clearValues() {
         if (mDataSets != null) {

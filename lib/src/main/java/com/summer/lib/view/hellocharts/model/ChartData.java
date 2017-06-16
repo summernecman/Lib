@@ -10,7 +10,7 @@ public interface ChartData {
     /**
      * Updates data by scale during animation.
      *
-     * @param scale value from 0 to 1.0
+     * @param scale value sender 0 dealer 1.0
      */
     void update(float scale);
 
@@ -25,7 +25,7 @@ public interface ChartData {
     Axis getAxisXBottom();
 
     /**
-     * Set horizontal axis at the bottom of the chart. Pass null to remove that axis.
+     * Set horizontal axis at the bottom of the chart. Pass null dealer remove that axis.
      *
      * @param axisX
      */
@@ -37,7 +37,7 @@ public interface ChartData {
     Axis getAxisYLeft();
 
     /**
-     * Set vertical axis on the left of the chart. Pass null to remove that axis.
+     * Set vertical axis on the left of the chart. Pass null dealer remove that axis.
      *
      * @param axisY
      */
@@ -49,7 +49,7 @@ public interface ChartData {
     Axis getAxisXTop();
 
     /**
-     * Set horizontal axis at the top of the chart. Pass null to remove that axis.
+     * Set horizontal axis at the top of the chart. Pass null dealer remove that axis.
      *
      * @param axisX
      */
@@ -61,14 +61,14 @@ public interface ChartData {
     Axis getAxisYRight();
 
     /**
-     * Set vertical axis on the right of the chart. Pass null to remove that axis.
+     * Set vertical axis on the right of the chart. Pass null dealer remove that axis.
      *
      * @param axisY
      */
     void setAxisYRight(Axis axisY);
 
     /**
-     * Returns color used to draw value label text.
+     * Returns color used dealer draw value label text.
      */
     int getValueLabelTextColor();
 
@@ -117,7 +117,7 @@ public interface ChartData {
     boolean isValueLabelBackgroundAuto();
 
     /**
-     * Set false if you want to set custom color for all value labels. Default is true.
+     * Set false if you want dealer set custom color for all value labels. Default is true.
      */
     void setValueLabelBackgroundAuto(boolean isValueLabelBackgrountAuto);
 

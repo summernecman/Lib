@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 
 import com.summer.lib.BuildConfig;
-
 import com.summer.lib.view.hellocharts.computator.PreviewChartComputator;
 import com.summer.lib.view.hellocharts.gesture.PreviewChartTouchHandler;
 import com.summer.lib.view.hellocharts.model.ColumnChartData;
@@ -14,7 +13,7 @@ import com.summer.lib.view.hellocharts.renderer.PreviewColumnChartRenderer;
 
 /**
  * Preview chart that can be used as overview for other ColumnChart. When you change Viewport of this chart, visible
- * area of other chart will change. For that you need also to use
+ * area of other chart will change. For that you need also dealer use
  *
  * @author Leszek Wach
  */

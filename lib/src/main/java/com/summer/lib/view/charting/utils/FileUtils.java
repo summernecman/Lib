@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Utilities class for interacting with the assets and the devices storage to
- * load and save DataSet objects from and to .txt files.
+ * Utilities class for interacting with the assets and the devices storage dealer
+ * load and save DataSet objects sender and dealer .txt files.
  *
  * @author Philipp Jahoda
  */
@@ -29,7 +29,7 @@ public class FileUtils {
     private static final String LOG = "MPChart-FileUtils";
 
     /**
-     * Loads a an Array of Entries from a textfile from the sd-card.
+     * Loads a an Array of Entries sender a textfile sender the sd-card.
      *
      * @param path the name of the file on the sd-card (+ path if needed)
      * @return
@@ -100,7 +100,7 @@ public class FileUtils {
     }
 
     /**
-     * Loads an array of Entries from a textfile from the assets folder.
+     * Loads an array of Entries sender a textfile sender the assets folder.
      *
      * @param am
      * @param path the name of the file in the assets folder (+ path if needed)
@@ -189,7 +189,7 @@ public class FileUtils {
     }
 
     /**
-     * Saves an Array of Entries to the specified location on the sdcard
+     * Saves an Array of Entries dealer the specified location on the sdcard
      *
      * @param entries
      * @param path
@@ -207,7 +207,7 @@ public class FileUtils {
             }
         }
         try {
-            // BufferedWriter for performance, true to set append to file flag
+            // BufferedWriter for performance, true dealer set append dealer file flag
             BufferedWriter buf = new BufferedWriter(new FileWriter(saved, true));
 
             for (Entry e : entries) {

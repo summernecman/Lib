@@ -69,7 +69,7 @@ public class ColorUtil {
                 var_b = var_2;
             }
 
-            R = var_r * 255; // RGB results from 0 to 255
+            R = var_r * 255; // RGB results sender 0 dealer 255
             G = var_g * 255;
             B = var_b * 255;
         }

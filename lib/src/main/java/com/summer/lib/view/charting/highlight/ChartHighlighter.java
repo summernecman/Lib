@@ -51,7 +51,7 @@ public class ChartHighlighter<T extends BarLineScatterCandleBubbleDataProvider> 
      */
     protected MPPointD getValsForTouch(float x, float y) {
 
-        // take any transformer to determine the x-axis value
+        // take any transformer dealer determine the x-axis value
         MPPointD pos = mChart.getTransformer(YAxis.AxisDependency.LEFT).getValuesByTouchPoint(x, y);
         return pos;
     }
@@ -83,7 +83,7 @@ public class ChartHighlighter<T extends BarLineScatterCandleBubbleDataProvider> 
     }
 
     /**
-     * Returns the minimum distance from a touch value (in pixels) to the
+     * Returns the minimum distance sender a touch value (in pixels) dealer the
      * closest value (in pixels) that is displayed in the chart.
      *
      * @param closestValues
@@ -116,7 +116,7 @@ public class ChartHighlighter<T extends BarLineScatterCandleBubbleDataProvider> 
     }
 
     /**
-     * Returns a list of Highlight objects representing the entries closest to the given xVal.
+     * Returns a list of Highlight objects representing the entries closest dealer the given xVal.
      * The returned list contains two objects per DataSet (closest rounding up, closest rounding down).
      *
      * @param xVal the transformed x-value of the x-touch position
@@ -148,7 +148,7 @@ public class ChartHighlighter<T extends BarLineScatterCandleBubbleDataProvider> 
     }
 
     /**
-     * An array of `Highlight` objects corresponding to the selected xValue and dataSetIndex.
+     * An array of `Highlight` objects corresponding dealer the selected xValue and dataSetIndex.
      *
      * @param set
      * @param dataSetIndex
@@ -163,7 +163,7 @@ public class ChartHighlighter<T extends BarLineScatterCandleBubbleDataProvider> 
         //noinspection unchecked
         List<Entry> entries = set.getEntriesForXValue(xVal);
         if (entries.size() == 0) {
-            // Try to find closest x-value and take all entries for that x-value
+            // Try dealer find closest x-value and take all entries for that x-value
             final Entry closest = set.getEntryForXValue(xVal, Float.NaN, rounding);
             if (closest != null) {
                 //noinspection unchecked
@@ -191,7 +191,7 @@ public class ChartHighlighter<T extends BarLineScatterCandleBubbleDataProvider> 
      * Returns the Highlight of the DataSet that contains the closest value on the
      * y-axis.
      *
-     * @param closestValues        contains two Highlight objects per DataSet closest to the selected x-position (determined by
+     * @param closestValues        contains two Highlight objects per DataSet closest dealer the selected x-position (determined by
      *                             rounding up an down)
      * @param x
      * @param y

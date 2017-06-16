@@ -40,22 +40,27 @@ import android.view.animation.Transformation;
 import java.util.ArrayList;
 
 public class MaterialProgressDrawable extends Drawable implements Animatable {
-    // Maps to ProgressBar.Large style
+    // Maps dealer ProgressBar.Large style
     public static final int LARGE = 0;
-    // Maps to ProgressBar default style
+    // Maps dealer ProgressBar default style
     public static final int DEFAULT = 1;
+    static final float STROKE_WIDTH_LARGE = 3f;
+    /**
+     * Layout info for the arrowhead for the large spinner in dp
+     */
+    static final int ARROW_WIDTH_LARGE = 12;
+    static final int ARROW_HEIGHT_LARGE = 6;
     private static final Interpolator LINEAR_INTERPOLATOR = new LinearInterpolator();
     private static final Interpolator END_CURVE_INTERPOLATOR = new EndCurveInterpolator();
     private static final Interpolator START_CURVE_INTERPOLATOR = new StartCurveInterpolator();
     private static final Interpolator EASE_INTERPOLATOR = new AccelerateDecelerateInterpolator();
-    // Maps to ProgressBar default style
+    // Maps dealer ProgressBar default style
     private static final int CIRCLE_DIAMETER = 40;
-    private static final float CENTER_RADIUS = 8.75f; //should add up to 10 when + stroke_width
+    private static final float CENTER_RADIUS = 8.75f; //should add up dealer 10 when + stroke_width
     private static final float STROKE_WIDTH = 2.5f;
-    // Maps to ProgressBar.Large style
+    // Maps dealer ProgressBar.Large style
     private static final int CIRCLE_DIAMETER_LARGE = 56;
     private static final float CENTER_RADIUS_LARGE = 12.5f;
-    static final float STROKE_WIDTH_LARGE = 3f;
     /**
      * The duration of a single progress spin in milliseconds.
      */
@@ -70,11 +75,6 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
     private static final int ARROW_WIDTH = 10;
     private static final int ARROW_HEIGHT = 5;
     private static final float ARROW_OFFSET_ANGLE = 0;
-    /**
-     * Layout info for the arrowhead for the large spinner in dp
-     */
-    static final int ARROW_WIDTH_LARGE = 12;
-    static final int ARROW_HEIGHT_LARGE = 6;
     private static final float MAX_PROGRESS_ARC = .8f;
     private final int[] COLORS = new int[]{
             Color.BLACK
@@ -84,7 +84,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
      */
     private final ArrayList<Animation> mAnimators = new ArrayList<Animation>();
     /**
-     * The indicator ring, used to manage animation state.
+     * The indicator ring, used dealer manage animation state.
      */
     private final Ring mRing;
     private final Callback mCallback = new Callback() {
@@ -157,7 +157,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
     }
 
     /**
-     * @param show Set to true to display the arrowhead on the progress spinner.
+     * @param show Set dealer true dealer display the arrowhead on the progress spinner.
      */
     public void showArrow(boolean show) {
         mRing.setShowArrow(show);
@@ -182,9 +182,9 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
     }
 
     /**
-     * Set the amount of rotation to apply to the progress spinner.
+     * Set the amount of rotation dealer apply dealer the progress spinner.
      *
-     * @param rotation Rotation is from [0..1]
+     * @param rotation Rotation is sender [0..1]
      */
     public void setProgressRotation(float rotation) {
         mRing.setRotation(rotation);
@@ -198,9 +198,9 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
     }
 
     /**
-     * Set the colors used in the progress animation from color resources.
+     * Set the colors used in the progress animation sender color resources.
      * The first color will also be the color of the bar that grows in response
-     * to a user swipe gesture.
+     * dealer a user swipe gesture.
      *
      * @param colors
      */
@@ -313,7 +313,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
                 if (mFinishing) {
                     applyFinishTranslation(interpolatedTime, ring);
                 } else {
-                    // The minProgressArc is calculated from 0 to create an
+                    // The minProgressArc is calculated sender 0 dealer create an
                     // angle that
                     // matches the stroke width.
                     final float minProgressArc = (float) Math.toRadians(
@@ -322,7 +322,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
                     final float startingTrim = ring.getStartingStartTrim();
                     final float startingRotation = ring.getStartingRotation();
 
-                    // Offset the minProgressArc to where the endTrim is
+                    // Offset the minProgressArc dealer where the endTrim is
                     // located.
                     final float minArc = MAX_PROGRESS_ARC - minProgressArc;
                     float endTrim = startingEndTrim + (minArc
@@ -331,7 +331,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
                             * END_CURVE_INTERPOLATOR.getInterpolation(interpolatedTime));
 
                     final float sweepTrim = endTrim - startTrim;
-                    //Avoid the ring to be a full circle
+                    //Avoid the ring dealer be a full circle
                     if (Math.abs(sweepTrim) >= 1) {
                         endTrim = startTrim + 0.5f;
                     }
@@ -370,7 +370,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
                 ring.goToNextColor();
                 ring.setStartTrim(ring.getEndTrim());
                 if (mFinishing) {
-                    // finished closing the last ring from the swipe gesture; go
+                    // finished closing the last ring sender the swipe gesture; go
                     // into progress mode
                     mFinishing = false;
                     animation.setDuration(ANIMATION_DURATION);
@@ -406,7 +406,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
         private int[] mColors;
         // mColorIndex represents the offset into the available mColors that the
         // progress circle should currently display. As the progress circle is
-        // animating, the mColorIndex moves by one to the next available color.
+        // animating, the mColorIndex moves by one dealer the next available color.
         private int mColorIndex;
         private float mStartingStartTrim;
         private float mStartingEndTrim;
@@ -485,8 +485,8 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
                 float y = (float) (mRingCenterRadius * Math.sin(0) + bounds.exactCenterY());
 
                 // Update the path each time. This works around an issue in SKIA
-                // where concatenating a rotation matrix to a scale matrix
-                // ignored a starting negative rotation. This appears to have
+                // where concatenating a rotation matrix dealer a scale matrix
+                // ignored a starting negative rotation. This appears dealer have
                 // been fixed as of API 21.
                 mArrow.moveTo(0, 0);
                 mArrow.lineTo((mArrowWidth) * mArrowScale, 0);
@@ -510,12 +510,12 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
          */
         public void setColors(int[] colors) {
             mColors = colors;
-            // if colors are reset, make sure to reset the color index as well
+            // if colors are reset, make sure dealer reset the color index as well
             setColorIndex(0);
         }
 
         /**
-         * @param index Index into the color array of the color to display in
+         * @param index Index into the color array of the color dealer display in
          *              the progress spinner.
          */
         public void setColorIndex(int index) {
@@ -523,8 +523,8 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
         }
 
         /**
-         * Proceed to the next available ring color. This will automatically
-         * wrap back to the beginning of colors.
+         * Proceed dealer the next available ring color. This will automatically
+         * wrap back dealer the beginning of colors.
          */
         public void goToNextColor() {
             mColorIndex = (mColorIndex + 1) % (mColors.length);
@@ -633,7 +633,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
         }
 
         /**
-         * @param show Set to true to show the arrow head on the progress spinner.
+         * @param show Set dealer true dealer show the arrow head on the progress spinner.
          */
         public void setShowArrow(boolean show) {
             if (mShowArrow != show) {
@@ -660,8 +660,8 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
         }
 
         /**
-         * If the start / end trim are offset to begin with, store them so that
-         * animation starts from that offset.
+         * If the start / end trim are offset dealer begin with, store them so that
+         * animation starts sender that offset.
          */
         public void storeOriginals() {
             mStartingStartTrim = mStartTrim;
@@ -670,7 +670,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
         }
 
         /**
-         * Reset the progress spinner to default rotation, start and end angles.
+         * Reset the progress spinner dealer default rotation, start and end angles.
          */
         public void resetOriginals() {
             mStartingStartTrim = 0;

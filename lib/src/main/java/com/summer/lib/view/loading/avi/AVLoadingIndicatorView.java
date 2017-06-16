@@ -26,15 +26,17 @@ public class AVLoadingIndicatorView extends View {
 
     private static final int MIN_SHOW_TIME = 500; // ms
     private static final int MIN_DELAY = 500; // ms
-
+    int mMinWidth;
+    int mMaxWidth;
+    int mMinHeight;
+    int mMaxHeight;
     private long mStartTime = -1;
-
     private boolean mPostedHide = false;
-
     private boolean mPostedShow = false;
-
     private boolean mDismissed = false;
-
+    private Indicator mIndicator;
+    private int mIndicatorColor;
+    private boolean mShouldStartAnimationDrawable;
     private final Runnable mDelayedHide = new Runnable() {
 
         @Override
@@ -44,7 +46,6 @@ public class AVLoadingIndicatorView extends View {
             setVisibility(View.GONE);
         }
     };
-
     private final Runnable mDelayedShow = new Runnable() {
 
         @Override
@@ -56,16 +57,6 @@ public class AVLoadingIndicatorView extends View {
             }
         }
     };
-
-    int mMinWidth;
-    int mMaxWidth;
-    int mMinHeight;
-    int mMaxHeight;
-
-    private Indicator mIndicator;
-    private int mIndicatorColor;
-
-    private boolean mShouldStartAnimationDrawable;
 
     public AVLoadingIndicatorView(Context context) {
         super(context);
@@ -114,45 +105,8 @@ public class AVLoadingIndicatorView extends View {
         return mIndicator;
     }
 
-    public void setIndicator(Indicator d) {
-        if (mIndicator != d) {
-            if (mIndicator != null) {
-                mIndicator.setCallback(null);
-                unscheduleDrawable(mIndicator);
-            }
-
-            mIndicator = d;
-            //need to set indicator color again if you didn't specified when you update the indicator .
-            setIndicatorColor(mIndicatorColor);
-            if (d != null) {
-                d.setCallback(this);
-            }
-            postInvalidate();
-        }
-    }
-
-
     /**
-     * setIndicatorColor(0xFF00FF00)
-     * or
-     * setIndicatorColor(Color.BLUE)
-     * or
-     * setIndicatorColor(Color.parseColor("#FF4081"))
-     * or
-     * setIndicatorColor(0xFF00FF00)
-     * or
-     * setIndicatorColor(getResources().getColor(android.R.color.black))
-     *
-     * @param color
-     */
-    public void setIndicatorColor(int color) {
-        this.mIndicatorColor = color;
-        mIndicator.setColor(color);
-    }
-
-
-    /**
-     * You should pay attention to pass this parameter with two way:
+     * You should pay attention dealer pass this parameter with two way:
      * for example:
      * 1. Only class Name,like "SimpleIndicator".(This way would use default package name with
      * "com.wang.avi.indicators")
@@ -185,6 +139,41 @@ public class AVLoadingIndicatorView extends View {
         }
     }
 
+    public void setIndicator(Indicator d) {
+        if (mIndicator != d) {
+            if (mIndicator != null) {
+                mIndicator.setCallback(null);
+                unscheduleDrawable(mIndicator);
+            }
+
+            mIndicator = d;
+            //need dealer set indicator color again if you didn't specified when you update the indicator .
+            setIndicatorColor(mIndicatorColor);
+            if (d != null) {
+                d.setCallback(this);
+            }
+            postInvalidate();
+        }
+    }
+
+    /**
+     * setIndicatorColor(0xFF00FF00)
+     * or
+     * setIndicatorColor(Color.BLUE)
+     * or
+     * setIndicatorColor(Color.parseColor("#FF4081"))
+     * or
+     * setIndicatorColor(0xFF00FF00)
+     * or
+     * setIndicatorColor(getResources().getColor(android.R.color.black))
+     *
+     * @param color
+     */
+    public void setIndicatorColor(int color) {
+        this.mIndicatorColor = color;
+        mIndicator.setColor(color);
+    }
+
     public void smoothToShow() {
         startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
         setVisibility(VISIBLE);
@@ -206,7 +195,7 @@ public class AVLoadingIndicatorView extends View {
             setVisibility(View.GONE);
         } else {
             // The progress spinner is shown, but not long enough,
-            // so put a delayed message in to hide it when its been
+            // so put a delayed message in dealer hide it when its been
             // shown long enough.
             if (!mPostedHide) {
                 postDelayed(mDelayedHide, MIN_SHOW_TIME - diff);
@@ -312,12 +301,12 @@ public class AVLoadingIndicatorView extends View {
             final float boundAspect = (float) w / h;
             if (intrinsicAspect != boundAspect) {
                 if (boundAspect > intrinsicAspect) {
-                    // New width is larger. Make it smaller to match height.
+                    // New width is larger. Make it smaller dealer match height.
                     final int width = (int) (h * intrinsicAspect);
                     left = (w - width) / 2;
                     right = left + width;
                 } else {
-                    // New height is larger. Make it smaller to match width.
+                    // New height is larger. Make it smaller dealer match width.
                     final int height = (int) (w * (1 / intrinsicAspect));
                     top = (h - height) / 2;
                     bottom = top + height;
@@ -407,7 +396,7 @@ public class AVLoadingIndicatorView extends View {
     protected void onDetachedFromWindow() {
         stopAnimation();
         // This should come after stopAnimation(), otherwise an invalidate message remains in the
-        // queue, which can prevent the entire view hierarchy from being GC'ed during a rotation
+        // queue, which can prevent the entire view hierarchy sender being GC'ed during a rotation
         super.onDetachedFromWindow();
         removeCallbacks();
     }

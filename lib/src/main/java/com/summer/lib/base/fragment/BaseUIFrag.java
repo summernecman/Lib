@@ -1,5 +1,6 @@
 package com.summer.lib.base.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,6 +12,16 @@ import com.summer.lib.base.ope.BaseDAOpe;
 import com.summer.lib.base.ope.BaseOpes;
 import com.summer.lib.base.ope.BaseUIOpe;
 import com.summer.lib.constant.ValueConstant;
+import com.summer.lib.util.LogUtil;
+import com.summer.lib.view.bottommenu.MessageEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -20,14 +31,19 @@ import butterknife.Unbinder;
  */
 public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> extends BaseFrg implements View.OnClickListener, View.OnLongClickListener {
 
-
+    /**
+     * fragment所属的层次
+     */
     protected int index;
+
     Unbinder unbinder;
+    /**fragment的操作类*/
     BaseOpes<A,B> opes;
 
     public BaseUIFrag() {
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,18 +71,34 @@ public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> exten
         super.onDestroyView();
     }
 
+    /**重新此方法获取布局文件*/
     public int getLayoutID() {
         return R.layout.layout_baseui;
     }
 
+    /**获取操作类*/
     public BaseOpes<A, B> getOpes() {
-        if(opes==null){
-            opes = createOpes();
+        if (opes == null) {
+            Class<A> a = (Class<A>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+            Class<B> b = (Class<B>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+            try {
+                Constructor<A> ac = a.getConstructor(Context.class);
+                Constructor<B> bc = b.getConstructor(Context.class);
+                A aa = ac.newInstance(activity);
+                B bb = bc.newInstance(activity);
+                opes = new BaseOpes<>(aa, bb);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (java.lang.InstantiationException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
         }
         return opes;
     }
-
-    public abstract BaseOpes<A, B>  createOpes();
 
     @Override
     public void onClick(View v) {
@@ -80,5 +112,25 @@ public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> exten
 
     public void onResult(int req, Bundle bundle) {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void dealMesage(MessageEvent event) {
+        LogUtil.E(event.dealer + ":" + getClass().getName());
+        if (!event.dealer.equals(getClass().getName())) {
+            return;
+        }
     }
 }

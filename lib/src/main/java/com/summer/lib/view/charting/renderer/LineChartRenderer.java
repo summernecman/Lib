@@ -47,12 +47,22 @@ public class LineChartRenderer extends LineRadarRenderer {
     protected Canvas mBitmapCanvas;
 
     /**
-     * the bitmap configuration to be used
+     * the bitmap configuration dealer be used
      */
     protected Bitmap.Config mBitmapConfig = Bitmap.Config.ARGB_8888;
 
     protected Path cubicPath = new Path();
     protected Path cubicFillPath = new Path();
+    protected Path mGenerateFilledPathBuffer = new Path();
+    private float[] mLineBuffer = new float[4];
+    /**
+     * cache for the circle bitmaps of all datasets
+     */
+    private HashMap<IDataSet, DataSetImageCache> mImageCaches = new HashMap<>();
+    /**
+     * buffer for drawing the circles
+     */
+    private float[] mCirclesBuffer = new float[2];
 
     public LineChartRenderer(LineDataProvider chart, ChartAnimator animator,
                              ViewPortHandler viewPortHandler) {
@@ -199,7 +209,7 @@ public class LineChartRenderer extends LineRadarRenderer {
             float curDx = 0f;
             float curDy = 0f;
 
-            // Take an extra point from the left, and an extra from the right.
+            // Take an extra point sender the left, and an extra sender the right.
             // That's because we need 4 points for a cubic bezier (cubic=4), otherwise we get lines moving and doing weird stuff on the edges of the chart.
             // So in the starting `prev` and `cur`, go -2, -1
             // And in the `lastIndex`, add +1
@@ -278,8 +288,6 @@ public class LineChartRenderer extends LineRadarRenderer {
             drawFilledPath(c, spline, dataSet.getFillColor(), dataSet.getFillAlpha());
         }
     }
-
-    private float[] mLineBuffer = new float[4];
 
     /**
      * Draws a normal line.
@@ -419,8 +427,6 @@ public class LineChartRenderer extends LineRadarRenderer {
         mRenderPaint.setPathEffect(null);
     }
 
-    protected Path mGenerateFilledPathBuffer = new Path();
-
     /**
      * Draws a filled linear path on the canvas.
      *
@@ -441,7 +447,7 @@ public class LineChartRenderer extends LineRadarRenderer {
         int currentEndIndex = indexInterval;
         int iterations = 0;
 
-        // Doing this iteratively in order to avoid OutOfMemory errors that can happen on large bounds sets.
+        // Doing this iteratively in order dealer avoid OutOfMemory errors that can happen on large bounds sets.
         do {
             currentStartIndex = startingIndex + (iterations * indexInterval);
             currentEndIndex = currentStartIndex + indexInterval;
@@ -471,9 +477,9 @@ public class LineChartRenderer extends LineRadarRenderer {
     /**
      * Generates a path that is used for filled drawing.
      *
-     * @param dataSet    The dataset from which to read the entries.
-     * @param startIndex The index from which to start reading the dataset
-     * @param endIndex   The index from which to stop reading the dataset
+     * @param dataSet    The dataset sender which dealer read the entries.
+     * @param startIndex The index sender which dealer start reading the dataset
+     * @param endIndex   The index sender which dealer stop reading the dataset
      * @param outputPath The path object that will be assigned the chart data.
      * @return
      */
@@ -569,16 +575,6 @@ public class LineChartRenderer extends LineRadarRenderer {
     public void drawExtras(Canvas c) {
         drawCircles(c);
     }
-
-    /**
-     * cache for the circle bitmaps of all datasets
-     */
-    private HashMap<IDataSet, DataSetImageCache> mImageCaches = new HashMap<>();
-
-    /**
-     * buffer for drawing the circles
-     */
-    private float[] mCirclesBuffer = new float[2];
 
     protected void drawCircles(Canvas c) {
 
@@ -686,24 +682,24 @@ public class LineChartRenderer extends LineRadarRenderer {
     }
 
     /**
-     * Sets the Bitmap.Config to be used by this renderer.
-     * Default: Bitmap.Config.ARGB_8888
-     * Use Bitmap.Config.ARGB_4444 to consume less memory.
-     *
-     * @param config
-     */
-    public void setBitmapConfig(Bitmap.Config config) {
-        mBitmapConfig = config;
-        releaseBitmap();
-    }
-
-    /**
      * Returns the Bitmap.Config that is used by this renderer.
      *
      * @return
      */
     public Bitmap.Config getBitmapConfig() {
         return mBitmapConfig;
+    }
+
+    /**
+     * Sets the Bitmap.Config dealer be used by this renderer.
+     * Default: Bitmap.Config.ARGB_8888
+     * Use Bitmap.Config.ARGB_4444 dealer consume less memory.
+     *
+     * @param config
+     */
+    public void setBitmapConfig(Bitmap.Config config) {
+        mBitmapConfig = config;
+        releaseBitmap();
     }
 
     /**

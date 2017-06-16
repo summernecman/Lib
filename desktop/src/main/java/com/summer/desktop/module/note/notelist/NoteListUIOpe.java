@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.bean.uibean.NewsFragUIBean;
 import com.summer.lib.base.ope.BaseUIOpe;
+import com.summer.lib.util.LogUtil;
 import com.summer.lib.util.system.HandleUtil;
 import com.summer.lib.view.ItemDecoration.MyItemDecoration2;
 import com.summer.lib.view.refreshlayout.MaterialRefreshListener;
@@ -44,7 +45,7 @@ public class NoteListUIOpe extends BaseUIOpe<NewsFragUIBean> {
         getUiBean().getRefresh().setMaterialRefreshListener(refreshListener);
     }
 
-    public void getData(final View.OnClickListener listener, final View.OnLongClickListener onLongClickListener) {
+    public void getData(final Fragment fragment, final View.OnLongClickListener onLongClickListener) {
         HandleUtil.getInstance().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -59,8 +60,8 @@ public class NoteListUIOpe extends BaseUIOpe<NewsFragUIBean> {
                         @Override
                         public void done(List<Note> object, BmobException e) {
                             notes = (ArrayList<Note>) object;
-                            getUiBean().getRecycle().setAdapter(new NewsAdapter(context, notes));
-                            ((NewsAdapter) getUiBean().getRecycle().getAdapter()).setOnClickListener(listener);
+                            LogUtil.E(fragment.getId());
+                            getUiBean().getRecycle().setAdapter(new NewsAdapter(context, parentNote.getObjectId(), notes));
                             ((NewsAdapter) getUiBean().getRecycle().getAdapter()).setOnLongClickListener(onLongClickListener);
                         }
                     });

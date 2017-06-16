@@ -7,17 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.summer.lib.base.fragment.BaseUIFrag;
-import com.summer.lib.base.ope.BaseOpes;
 import com.summer.lib.constant.ValueConstant;
 
 import java.util.ArrayList;
 
 public class ImagePagerFrag extends BaseUIFrag<ImagePagerUIOpe, ImagePagerDAOpe> {
 
-    @Override
-    public BaseOpes<ImagePagerUIOpe, ImagePagerDAOpe> createOpes() {
-        return new BaseOpes<>(new ImagePagerUIOpe(activity), new ImagePagerDAOpe(activity));
-    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

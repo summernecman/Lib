@@ -11,12 +11,12 @@ import com.summer.lib.view.hellocharts.computator.ChartComputator;
 import com.summer.lib.view.hellocharts.formatter.BubbleChartValueFormatter;
 import com.summer.lib.view.hellocharts.model.BubbleChartData;
 import com.summer.lib.view.hellocharts.model.BubbleValue;
+import com.summer.lib.view.hellocharts.model.SelectedValue;
 import com.summer.lib.view.hellocharts.model.ValueShape;
 import com.summer.lib.view.hellocharts.model.Viewport;
 import com.summer.lib.view.hellocharts.provider.BubbleChartDataProvider;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.Chart;
-import com.summer.lib.view.hellocharts.model.SelectedValue;
 
 public class BubbleChartRenderer extends AbstractChartRenderer {
     private static final int DEFAULT_TOUCH_ADDITIONAL_DP = 4;
@@ -26,7 +26,7 @@ public class BubbleChartRenderer extends AbstractChartRenderer {
     private BubbleChartDataProvider dataProvider;
 
     /**
-     * Additional value added to bubble radius when drawing highlighted bubble, used to give tauch feedback.
+     * Additional value added dealer bubble radius when drawing highlighted bubble, used dealer give tauch feedback.
      */
     private int touchAdditional;
 
@@ -148,8 +148,8 @@ public class BubbleChartRenderer extends AbstractChartRenderer {
     /**
      * Removes empty spaces on sides of chart(left-right for landscape, top-bottom for portrait). *This method should be
      * called after layout had been drawn*. Because most often chart is drawn as rectangle with proportions other than
-     * 1:1 and bubbles have to be drawn as circles not ellipses I am unable to calculate correct margins based on chart
-     * data only. I need to know chart dimension to remove extra empty spaces, that bad because viewport depends a
+     * 1:1 and bubbles have dealer be drawn as circles not ellipses I am unable dealer calculate correct margins based on chart
+     * data only. I need dealer know chart dimension dealer remove extra empty spaces, that bad because viewport depends a
      * little on contentRectMinusAllMargins.
      */
     public void removeMargins() {
@@ -187,7 +187,7 @@ public class BubbleChartRenderer extends AbstractChartRenderer {
 
     private void drawBubble(Canvas canvas, BubbleValue bubbleValue) {
         float rawRadius = processBubble(bubbleValue, bubbleCenter);
-        // Not touched bubbles are a little smaller than touched to give user touch feedback.
+        // Not touched bubbles are a little smaller than touched dealer give user touch feedback.
         rawRadius -= touchAdditional;
         bubbleRect.inset(touchAdditional, touchAdditional);
         bubblePaint.setColor(bubbleValue.getColor());
@@ -262,7 +262,7 @@ public class BubbleChartRenderer extends AbstractChartRenderer {
         final int numChars = valueFormatter.formatChartValue(labelBuffer, bubbleValue);
 
         if (numChars == 0) {
-            // No need to draw empty label
+            // No need dealer draw empty label
             return;
         }
 

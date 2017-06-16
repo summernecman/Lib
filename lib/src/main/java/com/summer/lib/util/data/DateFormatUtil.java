@@ -154,7 +154,7 @@ public class DateFormatUtil {
     }
 
     /**
-     * yyyy-MM-dd to yyyy-MM-dd 00:00:00
+     * yyyy-MM-dd dealer yyyy-MM-dd 00:00:00
      *
      * @throws ParseException
      */

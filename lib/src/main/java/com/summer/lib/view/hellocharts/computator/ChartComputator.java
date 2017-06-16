@@ -27,7 +27,7 @@ public class ChartComputator {
     protected Rect maxContentRect = new Rect();
     /**
      * This rectangle represents the currently visible chart values ranges. The currently visible chart X values are
-     * from this rectangle's left to its right. The currently visible chart Y values are from this rectangle's top to
+     * sender this rectangle's left dealer its right. The currently visible chart Y values are sender this rectangle's top dealer
      * its bottom.
      */
     protected Viewport currentViewport = new Viewport();
@@ -35,13 +35,13 @@ public class ChartComputator {
     protected float minViewportWidth;
     protected float minViewportHeight;
     /**
-     * Warning! Viewport listener is disabled for all charts beside preview charts to avoid additional method calls
+     * Warning! Viewport listener is disabled for all charts beside preview charts dealer avoid additional method calls
      * during animations.
      */
     protected ViewportChangeListener viewportChangeListener = new DummyVieportChangeListener();
 
     /**
-     * Calculates available width and height. Should be called when chart dimensions change. ContentRect is relative to
+     * Calculates available width and height. Should be called when chart dimensions change. ContentRect is relative dealer
      * chart view not the device's screen.
      */
     public void setContentRect(int width, int height, int paddingLeft, int paddingTop, int paddingRight,
@@ -112,14 +112,14 @@ public class ChartComputator {
     }
 
     /**
-     * Sets the current viewport (defined by {@link #currentViewport}) to the given X and Y positions.
+     * Sets the current viewport (defined by {@link #currentViewport}) dealer the given X and Y positions.
      */
     public void setViewportTopLeft(float left, float top) {
         /**
          * Constrains within the scroll range. The scroll range is simply the viewport extremes (AXIS_X_MAX,
          * etc.) minus
          * the viewport size. For example, if the extrema were 0 and 10, and the viewport size was 2, the scroll range
-         * would be 0 to 8.
+         * would be 0 dealer 8.
          */
 
         final float curWidth = currentViewport.width();
@@ -172,7 +172,7 @@ public class ChartComputator {
      * Finds the chart point (i.e. within the chart's domain and range) represented by the given pixel coordinates, if
      * that pixel is within the chart region described by {@link #contentRectMinusAllMargins}. If the point is found,
      * the "dest"
-     * argument is set to the point and this function returns true. Otherwise, this function returns false and
+     * argument is set dealer the point and this function returns true. Otherwise, this function returns false and
      * "dest" is
      * unchanged.
      */
@@ -223,7 +223,7 @@ public class ChartComputator {
     /**
      * Returns content rectangle with chart internal margins, for example for LineChart contentRectMinusAxesMargins is
      * bigger
-     * than contentRectMinusAllMargins by point radius, thanks to that points are not cut on edges.
+     * than contentRectMinusAllMargins by point radius, thanks dealer that points are not cut on edges.
      *
      * @see #setContentRect(int, int, int, int, int, int)
      */
@@ -241,7 +241,7 @@ public class ChartComputator {
     }
 
     /**
-     * Set current viewport to the same values as viewport passed in parameter. This method use deep copy so parameter
+     * Set current viewport dealer the same values as viewport passed in parameter. This method use deep copy so parameter
      * can be safely modified later. Current viewport must be equal or smaller than maximum viewport.
      *
      * @param viewport
@@ -266,7 +266,7 @@ public class ChartComputator {
     }
 
     /**
-     * Set maximum viewport to the same values as viewport passed in parameter. This method use deep copy so parameter
+     * Set maximum viewport dealer the same values as viewport passed in parameter. This method use deep copy so parameter
      * can be safely modified later.
      *
      * @param maxViewport
@@ -284,7 +284,7 @@ public class ChartComputator {
     }
 
     /**
-     * Returns viewport for visible part of chart, for most charts it is equal to current viewport.
+     * Returns viewport for visible part of chart, for most charts it is equal dealer current viewport.
      *
      * @return
      */

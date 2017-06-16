@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 
 import com.summer.lib.BuildConfig;
-
 import com.summer.lib.view.hellocharts.listener.BubbleChartOnValueSelectListener;
 import com.summer.lib.view.hellocharts.listener.DummyBubbleChartOnValueSelectListener;
 import com.summer.lib.view.hellocharts.model.BubbleChartData;
@@ -91,7 +90,7 @@ public class BubbleChartView extends AbstractChartView implements BubbleChartDat
     }
 
     /**
-     * Removes empty spaces, top-bottom for portrait orientation and left-right for landscape. This method has to be
+     * Removes empty spaces, top-bottom for portrait orientation and left-right for landscape. This method has dealer be
      * called after view View#onSizeChanged() method is called and chart data is set. This method may be inaccurate.
      *
      * @see BubbleChartRenderer#removeMargins()

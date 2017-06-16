@@ -32,7 +32,7 @@ public abstract class AbstractChartData implements ChartData {
     /**
      * If {@link #isValueLabelBackgroundEnabled} is true and {@link #isValueLabelBackgrountAuto} is false each label
      * will have background rectangle and that rectangle will be filled with this color. Helpful if you want all labels
-     * to have the same background color.
+     * dealer have the same background color.
      */
     protected int valueLabelBackgroundColor = ChartUtils.darkenColor(ChartUtils.DEFAULT_DARKEN_COLOR);
 

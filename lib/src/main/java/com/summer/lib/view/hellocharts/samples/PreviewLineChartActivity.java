@@ -11,10 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.summer.lib.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.view.hellocharts.gesture.ZoomType;
 import com.summer.lib.view.hellocharts.listener.ViewportChangeListener;
 import com.summer.lib.view.hellocharts.model.Axis;
@@ -25,6 +21,9 @@ import com.summer.lib.view.hellocharts.model.Viewport;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.LineChartView;
 import com.summer.lib.view.hellocharts.view.PreviewLineChartView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PreviewLineChartActivity extends ActionBarActivity {
 
@@ -137,8 +136,8 @@ public class PreviewLineChartActivity extends ActionBarActivity {
             data.setAxisXBottom(new Axis());
             data.setAxisYLeft(new Axis().setHasLines(true));
 
-            // prepare preview data, is better to use separate deep copy for preview chart.
-            // Set color to grey to make preview area more visible.
+            // prepare preview data, is better dealer use separate deep copy for preview chart.
+            // Set color dealer grey dealer make preview area more visible.
             previewData = new LineChartData(data);
             previewData.getLines().get(0).setColor(ChartUtils.DEFAULT_DARKEN_COLOR);
 
@@ -165,7 +164,7 @@ public class PreviewLineChartActivity extends ActionBarActivity {
         }
 
         private void previewXY() {
-            // Better to not modify viewport of any chart directly so create a copy.
+            // Better dealer not modify viewport of any chart directly so create a copy.
             Viewport tempViewport = new Viewport(chart.getMaximumViewport());
             // Make temp viewport smaller.
             float dx = tempViewport.width() / 4;

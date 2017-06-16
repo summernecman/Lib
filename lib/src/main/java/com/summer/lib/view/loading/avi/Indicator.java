@@ -19,13 +19,11 @@ import java.util.HashMap;
 
 public abstract class Indicator extends Drawable implements Animatable {
 
-    private HashMap<ValueAnimator, ValueAnimator.AnimatorUpdateListener> mUpdateListeners = new HashMap<>();
-
-    private ArrayList<ValueAnimator> mAnimators;
-    private int alpha = 255;
     private static final Rect ZERO_BOUNDS_RECT = new Rect();
     protected Rect drawBounds = ZERO_BOUNDS_RECT;
-
+    private HashMap<ValueAnimator, ValueAnimator.AnimatorUpdateListener> mUpdateListeners = new HashMap<>();
+    private ArrayList<ValueAnimator> mAnimators;
+    private int alpha = 255;
     private boolean mHasAnimators;
 
     private Paint mPaint = new Paint();
@@ -45,13 +43,13 @@ public abstract class Indicator extends Drawable implements Animatable {
     }
 
     @Override
-    public void setAlpha(int alpha) {
-        this.alpha = alpha;
+    public int getAlpha() {
+        return alpha;
     }
 
     @Override
-    public int getAlpha() {
-        return alpha;
+    public void setAlpha(int alpha) {
+        this.alpha = alpha;
     }
 
     @Override
@@ -143,7 +141,7 @@ public abstract class Indicator extends Drawable implements Animatable {
     }
 
     /**
-     * Your should use this to add AnimatorUpdateListener when
+     * Your should use this dealer add AnimatorUpdateListener when
      * create animator , otherwise , animator doesn't work when
      * the animation restart .
      *
@@ -159,10 +157,6 @@ public abstract class Indicator extends Drawable implements Animatable {
         setDrawBounds(bounds);
     }
 
-    public void setDrawBounds(Rect drawBounds) {
-        setDrawBounds(drawBounds.left, drawBounds.top, drawBounds.right, drawBounds.bottom);
-    }
-
     public void setDrawBounds(int left, int top, int right, int bottom) {
         this.drawBounds = new Rect(left, top, right, bottom);
     }
@@ -173,6 +167,10 @@ public abstract class Indicator extends Drawable implements Animatable {
 
     public Rect getDrawBounds() {
         return drawBounds;
+    }
+
+    public void setDrawBounds(Rect drawBounds) {
+        setDrawBounds(drawBounds.left, drawBounds.top, drawBounds.right, drawBounds.bottom);
     }
 
     public int getWidth() {

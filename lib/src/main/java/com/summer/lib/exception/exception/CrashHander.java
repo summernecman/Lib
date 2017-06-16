@@ -58,6 +58,9 @@ public class CrashHander implements Thread.UncaughtExceptionHandler {
         }
     }
 
+    /**
+     * 重新启动
+     */
     private void restart(final Thread thread, final Throwable ex) {
         LibAplication libAplication = null;
         if (context instanceof BaseActivity) {
@@ -75,6 +78,7 @@ public class CrashHander implements Thread.UncaughtExceptionHandler {
         android.os.Process.killProcess(android.os.Process.myPid());
     }
 
+    /**打印报错信息*/
     private String print(Throwable ex) {
         //如果用户没有处理则让系统默认的异常处理器来处理
         Writer writer = new StringWriter();
@@ -91,6 +95,7 @@ public class CrashHander implements Thread.UncaughtExceptionHandler {
         return result;
     }
 
+    /**保存信息*/
     public void saveInfo(Throwable ex, String result) {
         LogUtil.E(ex.getMessage() + "---" + result);
     }

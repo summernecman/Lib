@@ -5,12 +5,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
- * Created by ${viwmox} on 2016-04-27.
+ *viewpager适配器的基类
  */
 public abstract class AppBasePagerAdapter extends FragmentStatePagerAdapter {
 
+    /**
+     * 上下文
+     */
     protected Context context;
-
 
     public AppBasePagerAdapter(FragmentManager fm, Context context) {
         super(fm);

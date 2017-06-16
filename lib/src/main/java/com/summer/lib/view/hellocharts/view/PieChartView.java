@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.summer.lib.BuildConfig;
-
 import com.summer.lib.view.hellocharts.animation.PieChartRotationAnimator;
 import com.summer.lib.view.hellocharts.animation.PieChartRotationAnimatorV14;
 import com.summer.lib.view.hellocharts.animation.PieChartRotationAnimatorV8;
@@ -25,8 +24,8 @@ import com.summer.lib.view.hellocharts.renderer.PieChartRenderer;
 
 /**
  * PieChart is a little different than others charts. It doesn't have axes. It doesn't support viewport so changing
- * viewport wont work. Instead it support "Circle Oval". Pinch-to-Zoom and double tap zoom wont work either. Instead of
- * scroll there is chart rotation if isChartRotationEnabled is set to true. PieChart looks the best when it has the same
+ * viewport wont work. Instead it support "Circle Oval". Pinch-dealer-Zoom and double tap zoom wont work either. Instead of
+ * scroll there is chart rotation if isChartRotationEnabled is set dealer true. PieChart looks the best when it has the same
  * width and height, drawing chart on rectangle with proportions other than 1:1 will left some empty spaces.
  *
  * @author Leszek Wach
@@ -114,9 +113,9 @@ public class PieChartView extends AbstractChartView implements PieChartDataProvi
     }
 
     /**
-     * Use this to change pie chart area. Because by default CircleOval is calculated onSizeChanged() you must call this
-     * method after size of PieChartView is calculated. In most cases it will probably be easier to use
-     * {@link #setCircleFillRatio(float)} to change chart area or just use view padding.
+     * Use this dealer change pie chart area. Because by default CircleOval is calculated onSizeChanged() you must call this
+     * method after size of PieChartView is calculated. In most cases it will probably be easier dealer use
+     * {@link #setCircleFillRatio(float)} dealer change chart area or just use view padding.
      */
     public void setCircleOval(RectF orginCircleOval) {
         pieChartRenderer.setCircleOval(orginCircleOval);
@@ -158,7 +157,7 @@ public class PieChartView extends AbstractChartView implements PieChartDataProvi
     }
 
     /**
-     * Set false if you don't wont the chart to be rotated by touch gesture. Rotating programmatically will still work.
+     * Set false if you don't wont the chart dealer be rotated by touch gesture. Rotating programmatically will still work.
      *
      * @param isRotationEnabled
      */

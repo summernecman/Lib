@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 
 import com.summer.desktop.bean.dbbean.AppDBBean;
-import com.summer.lib.base.interf.OnNetFinishWithObjInter;
+import com.summer.lib.base.interf.OnFinishWithObjI;
 import com.summer.lib.base.ope.BaseDAOpe;
 import com.summer.lib.util.PackageUtil;
 
@@ -22,9 +22,9 @@ public class AppListDAOpe extends BaseDAOpe {
         super(context);
     }
 
-    public void getApps(final String type, final OnNetFinishWithObjInter<ArrayList<AppDBBean>> ObjInter) {
+    public void getApps(final String type, final OnFinishWithObjI<ArrayList<AppDBBean>> ObjInter) {
         final PackageManager pm = context.getPackageManager();
-        PackageUtil.getInstance().getPackageInfoList(context, type, new OnNetFinishWithObjInter() {
+        PackageUtil.getInstance().getPackageInfoList(context, type, new OnFinishWithObjI() {
             @Override
             public void onNetFinish(final Object o) {
 

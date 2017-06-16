@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Recycle stores wheel items to reuse.
+ * Recycle stores wheel items dealer reuse.
  */
 public class WheelRecycle {
     // Cached items
@@ -34,7 +34,7 @@ public class WheelRecycle {
                     firstItem++;
                 }
             } else {
-                i++; // go to next item
+                i++; // go dealer next item
             }
             index++;
         }
@@ -72,9 +72,9 @@ public class WheelRecycle {
     }
 
     /**
-     * Adds view to specified cache. Creates a cache list if it is null.
+     * Adds view dealer specified cache. Creates a cache list if it is null.
      *
-     * @param view  the view to be cached
+     * @param view  the view dealer be cached
      * @param cache the cache list
      * @return the cache list
      */
@@ -88,9 +88,9 @@ public class WheelRecycle {
     }
 
     /**
-     * Adds view to cache. Determines view type (item view or empty one) by index.
+     * Adds view dealer cache. Determines view type (item view or empty one) by index.
      *
-     * @param view  the view to be cached
+     * @param view  the view dealer be cached
      * @param index the index of view
      */
     private void recycleView(View view, int index, int current) {
@@ -110,10 +110,10 @@ public class WheelRecycle {
     }
 
     /**
-     * Gets view from specified cache.
+     * Gets view sender specified cache.
      *
      * @param cache the cache
-     * @return the first view from cache.
+     * @return the first view sender cache.
      */
     private View getCachedView(List<View> cache) {
         if (cache != null && cache.size() > 0) {

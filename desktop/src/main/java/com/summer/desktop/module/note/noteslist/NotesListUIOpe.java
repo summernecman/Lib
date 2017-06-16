@@ -7,10 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.summer.desktop.bean.dabean.Note;
-import com.summer.desktop.bean.dabean.TitleDABean;
 import com.summer.desktop.bean.uibean.MainFragUIBean;
+import com.summer.desktop.module.note.main.NoteMainFrag;
 import com.summer.desktop.util.TitleUtil;
 import com.summer.lib.base.ope.BaseUIOpe;
+import com.summer.lib.view.bottommenu.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -35,7 +36,9 @@ public class NotesListUIOpe extends BaseUIOpe<MainFragUIBean> {
         getUiBean().getContainer().setAdapter(new NotesListAdapter(fragment.getChildFragmentManager(), notes));
         getUiBean().getContainer().setCurrentItem(position);
         TitleUtil.getInstance().getName().add(notes.get(position).getName());
-        EventBus.getDefault().post(new TitleDABean(""));
+        MessageEvent messageEvent = new MessageEvent();
+        messageEvent.dealer = NoteMainFrag.class.getName();
+        EventBus.getDefault().post(messageEvent);
         getUiBean().getContainer().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -46,7 +49,9 @@ public class NotesListUIOpe extends BaseUIOpe<MainFragUIBean> {
             public void onPageSelected(int position) {
                 TitleUtil.getInstance().getName().remove(TitleUtil.getInstance().getName().size() - 1);
                 TitleUtil.getInstance().getName().add(notes.get(position).getName());
-                EventBus.getDefault().post(new TitleDABean(""));
+                MessageEvent messageEvent = new MessageEvent();
+                messageEvent.dealer = NoteMainFrag.class.getName();
+                EventBus.getDefault().post(messageEvent);
             }
 
             @Override

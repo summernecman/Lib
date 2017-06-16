@@ -12,8 +12,8 @@ import com.summer.desktop.bean.uibean.DayMainUIBean;
 import com.summer.desktop.module.day.dayview.DayView;
 import com.summer.desktop.module.home.main.HomeActivity;
 import com.summer.desktop.module.note.noteslist.NotesListFrag;
-import com.summer.desktop.util.FragList;
 import com.summer.lib.base.ope.BaseUIOpe;
+import com.summer.lib.util.FragmentUtil;
 
 import java.util.ArrayList;
 
@@ -55,7 +55,7 @@ public class DayMainUIOpe extends BaseUIOpe<DayMainUIBean> {
         bundle.putBoolean("first", true);
         bundle.putSerializable("data", notes);
         noteListssFrag.setArguments(bundle);
-        FragList.getInstance().add(activity, noteListssFrag);
+        FragmentUtil.getInstance().add(activity, noteListssFrag);
         if (activity instanceof HomeActivity) {
             HomeActivity homeActivity = (HomeActivity) activity;
             homeActivity.getOpes().getUiOpe().getUiBean().getHomeViewpager().setCurrentItem(2);

@@ -36,17 +36,16 @@ public class MaterialRefreshLayout extends FrameLayout {
     private final static int hIGHER_HEAD_HEIGHT = 40;
     private final static int BIG_PROGRESS_SIZE = 60;
     private final static int PROGRESS_STOKE_WIDTH = 2;
-
+    protected float mWaveHeight;
+    protected float mHeadHeight;
+    protected boolean isRefreshing;
     private MaterialHeaderView mMaterialHeaderView;
     private MaterialFooterView mMaterialFooterView;
     private SunLayout mSunLayout;
     private boolean isOverlay;
     private int waveType;
     private int waveColor;
-    protected float mWaveHeight;
-    protected float mHeadHeight;
     private View mChildView;
-    protected boolean isRefreshing;
     private float mTouchY;
     private float mCurrentY;
     private DecelerateInterpolator decelerateInterpolator;
@@ -493,7 +492,7 @@ public class MaterialRefreshLayout extends FrameLayout {
     }
 
     /**
-     * @return Whether it is possible for the child view of this dialog_load to
+     * @return Whether it is possible for the child view of this dialog_load dealer
      * scroll up. Override this if the child view is a custom view.
      */
     public boolean canChildScrollUp() {

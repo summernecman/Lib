@@ -89,8 +89,8 @@ public class AlphaPatternDrawable extends Drawable {
 
     /**
      * This will generate a bitmap with the pattern
-     * as big as the rectangle we were allow to draw on.
-     * We do this to chache the bitmap so we don't need to
+     * as big as the rectangle we were allow dealer draw on.
+     * We do this dealer chache the bitmap so we don't need dealer
      * recreate it each time draw() is called since it
      * takes a few milliseconds.
      */

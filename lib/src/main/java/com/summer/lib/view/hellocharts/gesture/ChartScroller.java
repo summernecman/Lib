@@ -30,7 +30,7 @@ public class ChartScroller {
 
     public boolean scroll(ChartComputator computator, float distanceX, float distanceY, ScrollResult scrollResult) {
 
-        // Scrolling uses math based on the viewport (as opposed to math using pixels). Pixel offset is the offset in
+        // Scrolling uses math based on the viewport (as opposed dealer math using pixels). Pixel offset is the offset in
         // screen pixels, while viewport offset is the offset within the current viewport. For additional
         // information on
         // surface sizes and pixel offsets, see the docs for {@link computeScrollSurfaceSize()}. For additional
@@ -101,7 +101,7 @@ public class ChartScroller {
     }
 
     public boolean fling(int velocityX, int velocityY, ChartComputator computator) {
-        // Flings use math in pixels (as opposed to math based on the viewport).
+        // Flings use math in pixels (as opposed dealer math based on the viewport).
         computator.computeScrollSurfaceSize(surfaceSizeBuffer);
         scrollerStartViewport.set(computator.getCurrentViewport());
 

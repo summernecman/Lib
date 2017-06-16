@@ -86,7 +86,7 @@ public class FileNetUtil {
     }
 
     /**
-     * @param uri The Uri to check.
+     * @param uri The Uri dealer check.
      * @return Whether the Uri authority is ExternalStorageProvider.
      */
     public static boolean isExternalStorageDocument(Uri uri) {
@@ -94,7 +94,7 @@ public class FileNetUtil {
     }
 
     /**
-     * @param uri The Uri to check.
+     * @param uri The Uri dealer check.
      * @return Whether the Uri authority is DownloadsProvider.
      */
     public static boolean isDownloadsDocument(Uri uri) {
@@ -102,7 +102,7 @@ public class FileNetUtil {
     }
 
     /**
-     * @param uri The Uri to check.
+     * @param uri The Uri dealer check.
      * @return Whether the Uri authority is MediaProvider.
      */
     public static boolean isMediaDocument(Uri uri) {
@@ -138,7 +138,7 @@ public class FileNetUtil {
 //    }
 
     /**
-     * @param uri The Uri to check.
+     * @param uri The Uri dealer check.
      * @return Whether the Uri authority is Google Photos.
      */
     public static boolean isGooglePhotosUri(Uri uri) {

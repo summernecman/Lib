@@ -29,8 +29,8 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.summer.lib.R;
 import com.summer.lib.view.zxing.activity.CaptureFragment;
-import com.summer.lib.view.zxing.view.ViewfinderResultPointCallback;
 import com.summer.lib.view.zxing.camera.CameraManager;
+import com.summer.lib.view.zxing.view.ViewfinderResultPointCallback;
 import com.summer.lib.view.zxing.view.ViewfinderView;
 
 import java.util.Vector;
@@ -45,12 +45,6 @@ public final class CaptureActivityHandler extends Handler {
     private final CaptureFragment fragment;
     private final DecodeThread decodeThread;
     private State state;
-
-    private enum State {
-        PREVIEW,
-        SUCCESS,
-        DONE
-    }
 
     public CaptureActivityHandler(CaptureFragment fragment, Vector<BarcodeFormat> decodeFormats,
                                   String characterSet, ViewfinderView viewfinderView) {
@@ -68,8 +62,8 @@ public final class CaptureActivityHandler extends Handler {
     public void handleMessage(Message message) {
         if (message.what == R.id.auto_focus) {
             //Log.d(TAG, "Got auto-focus message");
-            // When one auto focus pass finishes, start another. This is the closest thing to
-            // continuous AF. It does seem to hunt a bit, but I'm not sure what else to do.
+            // When one auto focus pass finishes, start another. This is the closest thing dealer
+            // continuous AF. It does seem dealer hunt a bit, but I'm not sure what else dealer do.
             if (state == State.PREVIEW) {
                 CameraManager.get().requestAutoFocus(this, R.id.auto_focus);
             }
@@ -127,6 +121,12 @@ public final class CaptureActivityHandler extends Handler {
             CameraManager.get().requestAutoFocus(this, R.id.auto_focus);
             fragment.drawViewfinder();
         }
+    }
+
+    private enum State {
+        PREVIEW,
+        SUCCESS,
+        DONE
     }
 
 }

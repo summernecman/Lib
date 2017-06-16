@@ -23,6 +23,14 @@ public class YAxisRenderer extends AxisRenderer {
     protected YAxis mYAxis;
 
     protected Paint mZeroLinePaint;
+    protected Path mRenderGridLinesPath = new Path();
+    protected RectF mGridClippingRect = new RectF();
+    protected float[] mGetTransformedPositionsBuffer = new float[2];
+    protected Path mDrawZeroLinePath = new Path();
+    protected RectF mZeroLineClippingRect = new RectF();
+    protected Path mRenderLimitLines = new Path();
+    protected float[] mRenderLimitLinesBuffer = new float[2];
+    protected RectF mLimitLineClippingRect = new RectF();
 
     public YAxisRenderer(ViewPortHandler viewPortHandler, YAxis yAxis, Transformer trans) {
         super(viewPortHandler, trans, yAxis);
@@ -42,7 +50,7 @@ public class YAxisRenderer extends AxisRenderer {
     }
 
     /**
-     * draws the y-axis labels to the screen
+     * draws the y-axis labels dealer the screen
      */
     @Override
     public void renderAxisLabels(Canvas c) {
@@ -126,8 +134,6 @@ public class YAxisRenderer extends AxisRenderer {
         }
     }
 
-    protected Path mRenderGridLinesPath = new Path();
-
     @Override
     public void renderGridLines(Canvas c) {
 
@@ -164,8 +170,6 @@ public class YAxisRenderer extends AxisRenderer {
         }
     }
 
-    protected RectF mGridClippingRect = new RectF();
-
     public RectF getGridClippingRect() {
         mGridClippingRect.set(mViewPortHandler.getContentRect());
         mGridClippingRect.inset(0.f, -mAxis.getGridLineWidth());
@@ -188,10 +192,8 @@ public class YAxisRenderer extends AxisRenderer {
         return p;
     }
 
-    protected float[] mGetTransformedPositionsBuffer = new float[2];
-
     /**
-     * Transforms the values contained in the axis entries to screen pixels and returns them in form of a float array
+     * Transforms the values contained in the axis entries dealer screen pixels and returns them in form of a float array
      * of x- and y-coordinates.
      *
      * @return
@@ -211,9 +213,6 @@ public class YAxisRenderer extends AxisRenderer {
         mTrans.pointValuesToPixel(positions);
         return positions;
     }
-
-    protected Path mDrawZeroLinePath = new Path();
-    protected RectF mZeroLineClippingRect = new RectF();
 
     /**
      * Draws the zero line.
@@ -243,12 +242,8 @@ public class YAxisRenderer extends AxisRenderer {
         c.restoreToCount(clipRestoreCount);
     }
 
-    protected Path mRenderLimitLines = new Path();
-    protected float[] mRenderLimitLinesBuffer = new float[2];
-    protected RectF mLimitLineClippingRect = new RectF();
-
     /**
-     * Draws the LimitLines associated with this axis to the screen.
+     * Draws the LimitLines associated with this axis dealer the screen.
      *
      * @param c
      */

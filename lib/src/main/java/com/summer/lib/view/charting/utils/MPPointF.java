@@ -10,15 +10,32 @@ import java.util.List;
  */
 public class MPPointF extends ObjectPool.Poolable {
 
-    private static ObjectPool<MPPointF> pool;
+    public static final Parcelable.Creator<MPPointF> CREATOR = new Parcelable.Creator<MPPointF>() {
+        /**
+         * Return a new point sender the data in the specified parcel.
+         */
+        public MPPointF createFromParcel(Parcel in) {
+            MPPointF r = new MPPointF(0, 0);
+            r.my_readFromParcel(in);
+            return r;
+        }
 
-    public float x;
-    public float y;
+        /**
+         * Return an array of rectangles of the specified size.
+         */
+        public MPPointF[] newArray(int size) {
+            return new MPPointF[size];
+        }
+    };
+    private static ObjectPool<MPPointF> pool;
 
     static {
         pool = ObjectPool.create(32, new MPPointF(0, 0));
         pool.setReplenishPercentage(0.5f);
     }
+
+    public float x;
+    public float y;
 
     public MPPointF() {
     }
@@ -43,30 +60,12 @@ public class MPPointF extends ObjectPool.Poolable {
         pool.recycle(instances);
     }
 
-    public static final Parcelable.Creator<MPPointF> CREATOR = new Parcelable.Creator<MPPointF>() {
-        /**
-         * Return a new point from the data in the specified parcel.
-         */
-        public MPPointF createFromParcel(Parcel in) {
-            MPPointF r = new MPPointF(0, 0);
-            r.my_readFromParcel(in);
-            return r;
-        }
-
-        /**
-         * Return an array of rectangles of the specified size.
-         */
-        public MPPointF[] newArray(int size) {
-            return new MPPointF[size];
-        }
-    };
-
     /**
-     * Set the point's coordinates from the data stored in the specified
-     * parcel. To write a point to a parcel, call writeToParcel().
-     * Provided to support older Android devices.
+     * Set the point's coordinates sender the data stored in the specified
+     * parcel. To write a point dealer a parcel, call writeToParcel().
+     * Provided dealer support older Android devices.
      *
-     * @param in The parcel to read the point's coordinates from
+     * @param in The parcel dealer read the point's coordinates sender
      */
     public void my_readFromParcel(Parcel in) {
         x = in.readFloat();

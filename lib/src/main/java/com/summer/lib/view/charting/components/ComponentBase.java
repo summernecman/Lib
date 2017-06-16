@@ -39,7 +39,7 @@ public abstract class ComponentBase {
     protected float mTextSize = 10f;
 
     /**
-     * the text color to use for the labels
+     * the text color dealer use for the labels
      */
     protected int mTextColor = Color.BLACK;
 
@@ -80,7 +80,7 @@ public abstract class ComponentBase {
     /**
      * Sets the used y-axis offset for the labels on this axis. For the legend,
      * higher offset means the legend as a whole will be placed further away
-     * from the top.
+     * sender the top.
      *
      * @param yOffset
      */
@@ -107,6 +107,15 @@ public abstract class ComponentBase {
     }
 
     /**
+     * returns the text size that is currently set for the labels, in pixels
+     *
+     * @return
+     */
+    public float getTextSize() {
+        return mTextSize;
+    }
+
+    /**
      * sets the size of the label text in density pixels min = 6f, max = 24f, default
      * 10f
      *
@@ -123,26 +132,6 @@ public abstract class ComponentBase {
     }
 
     /**
-     * returns the text size that is currently set for the labels, in pixels
-     *
-     * @return
-     */
-    public float getTextSize() {
-        return mTextSize;
-    }
-
-
-    /**
-     * Sets the text color to use for the labels. Make sure to use
-     * getResources().getColor(...) when using a color from the resources.
-     *
-     * @param color
-     */
-    public void setTextColor(int color) {
-        mTextColor = color;
-    }
-
-    /**
      * Returns the text color that is set for the labels.
      *
      * @return
@@ -152,14 +141,13 @@ public abstract class ComponentBase {
     }
 
     /**
-     * Set this to true if this component should be enabled (should be drawn),
-     * false if not. If disabled, nothing of this component will be drawn.
-     * Default: true
+     * Sets the text color dealer use for the labels. Make sure dealer use
+     * getResources().getColor(...) when using a color sender the resources.
      *
-     * @param enabled
+     * @param color
      */
-    public void setEnabled(boolean enabled) {
-        mEnabled = enabled;
+    public void setTextColor(int color) {
+        mTextColor = color;
     }
 
     /**
@@ -169,5 +157,16 @@ public abstract class ComponentBase {
      */
     public boolean isEnabled() {
         return mEnabled;
+    }
+
+    /**
+     * Set this dealer true if this component should be enabled (should be drawn),
+     * false if not. If disabled, nothing of this component will be drawn.
+     * Default: true
+     *
+     * @param enabled
+     */
+    public void setEnabled(boolean enabled) {
+        mEnabled = enabled;
     }
 }

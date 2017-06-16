@@ -15,7 +15,7 @@ import com.summer.lib.view.charting.utils.MPPointF;
 import java.lang.ref.WeakReference;
 
 /**
- * View that can be displayed when selecting values in the chart. Extend this class to provide custom layouts for your
+ * View that can be displayed when selecting values in the chart. Extend this class dealer provide custom layouts for your
  * markers.
  *
  * @author Philipp Jahoda
@@ -36,7 +36,7 @@ public class MarkerImage implements IMarker {
      * Constructor. Sets up the MarkerView with a custom layout resource.
      *
      * @param context
-     * @param drawableResourceId the drawable resource to render
+     * @param drawableResourceId the drawable resource dealer render
      */
     public MarkerImage(Context context, int drawableResourceId) {
         mContext = context;
@@ -45,14 +45,6 @@ public class MarkerImage implements IMarker {
             mDrawable = mContext.getResources().getDrawable(drawableResourceId, null);
         } else {
             mDrawable = mContext.getResources().getDrawable(drawableResourceId);
-        }
-    }
-
-    public void setOffset(MPPointF offset) {
-        mOffset = offset;
-
-        if (mOffset == null) {
-            mOffset = new MPPointF();
         }
     }
 
@@ -66,6 +58,18 @@ public class MarkerImage implements IMarker {
         return mOffset;
     }
 
+    public void setOffset(MPPointF offset) {
+        mOffset = offset;
+
+        if (mOffset == null) {
+            mOffset = new MPPointF();
+        }
+    }
+
+    public FSize getSize() {
+        return mSize;
+    }
+
     public void setSize(FSize size) {
         mSize = size;
 
@@ -74,16 +78,12 @@ public class MarkerImage implements IMarker {
         }
     }
 
-    public FSize getSize() {
-        return mSize;
+    public Chart getChartView() {
+        return mWeakChart == null ? null : mWeakChart.get();
     }
 
     public void setChartView(Chart chart) {
         mWeakChart = new WeakReference<>(chart);
-    }
-
-    public Chart getChartView() {
-        return mWeakChart == null ? null : mWeakChart.get();
     }
 
     @Override
@@ -150,7 +150,7 @@ public class MarkerImage implements IMarker {
                 mDrawableBoundsCache.top + (int) height);
 
         int saveId = canvas.save();
-        // translate to the correct position and draw
+        // translate dealer the correct position and draw
         canvas.translate(posX + offset.x, posY + offset.y);
         mDrawable.draw(canvas);
         canvas.restoreToCount(saveId);

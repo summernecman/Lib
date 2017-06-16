@@ -40,6 +40,10 @@ public class LegendRenderer extends Renderer {
      * the legend object this renderer renders
      */
     protected Legend mLegend;
+    protected List<LegendEntry> computedEntries = new ArrayList<>(16);
+    protected Paint.FontMetrics legendFontMetrics = new Paint.FontMetrics();
+    private Path mLineFormPath = new Path();
+
 
     public LegendRenderer(ViewPortHandler viewPortHandler, Legend legend) {
         super(viewPortHandler);
@@ -71,9 +75,6 @@ public class LegendRenderer extends Renderer {
     public Paint getFormPaint() {
         return mLegendFormPaint;
     }
-
-
-    protected List<LegendEntry> computedEntries = new ArrayList<>(16);
 
     /**
      * Prepares the legend and calculates all needed forms, labels and colors.
@@ -185,7 +186,7 @@ public class LegendRenderer extends Renderer {
                         // if multiple colors are set for a DataSet, group them
                         if (j < clrs.size() - 1 && j < entryCount - 1) {
                             label = null;
-                        } else { // add label to the last entry
+                        } else { // add label dealer the last entry
                             label = data.getDataSetByIndex(i).getLabel();
                         }
 
@@ -219,8 +220,6 @@ public class LegendRenderer extends Renderer {
         // calculate all dimensions of the mLegend
         mLegend.calculateDimensions(mLegendLabelPaint, mViewPortHandler);
     }
-
-    protected Paint.FontMetrics legendFontMetrics = new Paint.FontMetrics();
 
     public void renderLegend(Canvas c) {
 
@@ -465,16 +464,14 @@ public class LegendRenderer extends Renderer {
         }
     }
 
-    private Path mLineFormPath = new Path();
-
     /**
      * Draws the Legend-form at the given position with the color at the given
      * index.
      *
-     * @param c      canvas to draw with
+     * @param c      canvas dealer draw with
      * @param x      position
      * @param y      position
-     * @param entry  the entry to render
+     * @param entry  the entry dealer render
      * @param legend the legend context
      */
     protected void drawForm(
@@ -548,10 +545,10 @@ public class LegendRenderer extends Renderer {
     /**
      * Draws the provided label at the given position.
      *
-     * @param c     canvas to draw with
+     * @param c     canvas dealer draw with
      * @param x
      * @param y
-     * @param label the label to draw
+     * @param label the label dealer draw
      */
     protected void drawLabel(Canvas c, float x, float y, String label) {
         c.drawText(label, x, y, mLegendLabelPaint);

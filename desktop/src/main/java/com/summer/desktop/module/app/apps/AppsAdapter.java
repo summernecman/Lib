@@ -5,11 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.summer.desktop.R;
-import com.summer.desktop.bean.dabean.Msg;
 import com.summer.desktop.bean.dbbean.AppDBBean;
 import com.summer.desktop.bean.uibean.AppItemUIBean;
 import com.summer.lib.base.adapter.AppRecycleAdapter;
 import com.summer.lib.util.LogUtil;
+import com.summer.lib.view.bottommenu.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -49,9 +49,10 @@ public class AppsAdapter extends AppRecycleAdapter<AppItemUIBean> {
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        Msg msg = new Msg();
-        msg.type = AppsAdapter.class.getName();
-        msg.msg = v.getTag(R.id.data);
-        EventBus.getDefault().post(msg);
+        MessageEvent messageEvent = new MessageEvent();
+        messageEvent.dealer = AppsFrag.class.getName();
+        messageEvent.sender = AppsAdapter.class.getName();
+        messageEvent.data = v.getTag(R.id.data);
+        EventBus.getDefault().post(messageEvent);
     }
 }

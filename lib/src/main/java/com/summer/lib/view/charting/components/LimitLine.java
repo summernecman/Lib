@@ -37,7 +37,7 @@ public class LimitLine extends ComponentBase {
     private Paint.Style mTextStyle = Paint.Style.FILL_AND_STROKE;
 
     /**
-     * label string that is drawn next to the limit line
+     * label string that is drawn next dealer the limit line
      */
     private String mLabel = "";
 
@@ -50,13 +50,6 @@ public class LimitLine extends ComponentBase {
      * indicates the position of the LimitLine label
      */
     private LimitLabelPosition mLabelPosition = LimitLabelPosition.RIGHT_TOP;
-
-    /**
-     * enum that indicates the position of the LimitLine label
-     */
-    public enum LimitLabelPosition {
-        LEFT_TOP, LEFT_BOTTOM, RIGHT_TOP, RIGHT_BOTTOM
-    }
 
     /**
      * Constructor with limit.
@@ -90,6 +83,15 @@ public class LimitLine extends ComponentBase {
     }
 
     /**
+     * returns the width of limit line
+     *
+     * @return
+     */
+    public float getLineWidth() {
+        return mLineWidth;
+    }
+
+    /**
      * set the line width of the chart (min = 0.2f, max = 12f); default 2f NOTE:
      * thinner line == better performance, thicker line == worse performance
      *
@@ -105,25 +107,6 @@ public class LimitLine extends ComponentBase {
     }
 
     /**
-     * returns the width of limit line
-     *
-     * @return
-     */
-    public float getLineWidth() {
-        return mLineWidth;
-    }
-
-    /**
-     * Sets the linecolor for this LimitLine. Make sure to use
-     * getResources().getColor(...)
-     *
-     * @param color
-     */
-    public void setLineColor(int color) {
-        mLineColor = color;
-    }
-
-    /**
      * Returns the color that is used for this LimitLine
      *
      * @return
@@ -133,7 +116,17 @@ public class LimitLine extends ComponentBase {
     }
 
     /**
-     * Enables the line to be drawn in dashed mode, e.g. like this "- - - - - -"
+     * Sets the linecolor for this LimitLine. Make sure dealer use
+     * getResources().getColor(...)
+     *
+     * @param color
+     */
+    public void setLineColor(int color) {
+        mLineColor = color;
+    }
+
+    /**
+     * Enables the line dealer be drawn in dashed mode, e.g. like this "- - - - - -"
      *
      * @param lineLength  the length of the line pieces
      * @param spaceLength the length of space inbetween the pieces
@@ -146,7 +139,7 @@ public class LimitLine extends ComponentBase {
     }
 
     /**
-     * Disables the line to be drawn in dashed mode.
+     * Disables the line dealer be drawn in dashed mode.
      */
     public void disableDashedLine() {
         mDashPathEffect = null;
@@ -172,7 +165,16 @@ public class LimitLine extends ComponentBase {
     }
 
     /**
-     * Sets the color of the value-text that is drawn next to the LimitLine.
+     * Returns the color of the value-text that is drawn next dealer the LimitLine.
+     *
+     * @return
+     */
+    public Paint.Style getTextStyle() {
+        return mTextStyle;
+    }
+
+    /**
+     * Sets the color of the value-text that is drawn next dealer the LimitLine.
      * Default: Paint.Style.FILL_AND_STROKE
      *
      * @param style
@@ -182,12 +184,12 @@ public class LimitLine extends ComponentBase {
     }
 
     /**
-     * Returns the color of the value-text that is drawn next to the LimitLine.
+     * Returns the position of the LimitLine label (value).
      *
      * @return
      */
-    public Paint.Style getTextStyle() {
-        return mTextStyle;
+    public LimitLabelPosition getLabelPosition() {
+        return mLabelPosition;
     }
 
     /**
@@ -201,16 +203,16 @@ public class LimitLine extends ComponentBase {
     }
 
     /**
-     * Returns the position of the LimitLine label (value).
+     * Returns the label that is drawn next dealer the limit line.
      *
      * @return
      */
-    public LimitLabelPosition getLabelPosition() {
-        return mLabelPosition;
+    public String getLabel() {
+        return mLabel;
     }
 
     /**
-     * Sets the label that is drawn next to the limit line. Provide "" if no
+     * Sets the label that is drawn next dealer the limit line. Provide "" if no
      * label is required.
      *
      * @param label
@@ -220,11 +222,9 @@ public class LimitLine extends ComponentBase {
     }
 
     /**
-     * Returns the label that is drawn next to the limit line.
-     *
-     * @return
+     * enum that indicates the position of the LimitLine label
      */
-    public String getLabel() {
-        return mLabel;
+    public enum LimitLabelPosition {
+        LEFT_TOP, LEFT_BOTTOM, RIGHT_TOP, RIGHT_BOTTOM
     }
 }

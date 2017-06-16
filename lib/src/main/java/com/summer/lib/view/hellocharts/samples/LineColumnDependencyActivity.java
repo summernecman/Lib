@@ -8,10 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.summer.lib.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.summer.lib.view.hellocharts.gesture.ZoomType;
 import com.summer.lib.view.hellocharts.listener.ColumnChartOnValueSelectListener;
 import com.summer.lib.view.hellocharts.model.Axis;
@@ -26,6 +22,9 @@ import com.summer.lib.view.hellocharts.model.Viewport;
 import com.summer.lib.view.hellocharts.util.ChartUtils;
 import com.summer.lib.view.hellocharts.view.ColumnChartView;
 import com.summer.lib.view.hellocharts.view.LineChartView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LineColumnDependencyActivity extends ActionBarActivity {
 
@@ -105,7 +104,7 @@ public class LineColumnDependencyActivity extends ActionBarActivity {
             // Set value touch listener that will trigger changes for chartTop.
             chartBottom.setOnValueTouchListener(new ValueTouchListener());
 
-            // Set selection mode to keep selected month column highlighted.
+            // Set selection mode dealer keep selected month column highlighted.
             chartBottom.setValueSelectionEnabled(true);
 
             chartBottom.setZoomType(ZoomType.HORIZONTAL);
@@ -150,10 +149,10 @@ public class LineColumnDependencyActivity extends ActionBarActivity {
 
             chartTop.setLineChartData(lineData);
 
-            // For build-up animation you have to disable viewport recalculation.
+            // For build-up animation you have dealer disable viewport recalculation.
             chartTop.setViewportCalculationEnabled(false);
 
-            // And set initial max viewport and current viewport- remember to set viewports after data.
+            // And set initial max viewport and current viewport- remember dealer set viewports after data.
             Viewport v = new Viewport(0, 110, 6, 0);
             chartTop.setMaximumViewport(v);
             chartTop.setCurrentViewport(v);

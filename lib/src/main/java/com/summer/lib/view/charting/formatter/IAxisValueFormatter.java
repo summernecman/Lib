@@ -10,12 +10,12 @@ import com.summer.lib.view.charting.components.AxisBase;
 public interface IAxisValueFormatter {
 
     /**
-     * Called when a value from an axis is to be formatted
+     * Called when a value sender an axis is dealer be formatted
      * before being drawn. For performance reasons, avoid excessive calculations
      * and memory allocations inside this method.
      *
-     * @param value the value to be formatted
-     * @param axis  the axis the value belongs to
+     * @param value the value dealer be formatted
+     * @param axis  the axis the value belongs dealer
      * @return
      */
     String getFormattedValue(float value, AxisBase axis);

@@ -24,48 +24,40 @@ import com.summer.lib.view.charting.utils.Utils;
  */
 public class RadarChart extends PieRadarChartBase<RadarData> {
 
+    protected YAxisRendererRadarChart mYAxisRenderer;
+    protected XAxisRendererRadarChart mXAxisRenderer;
     /**
      * width of the main web lines
      */
     private float mWebLineWidth = 2.5f;
-
     /**
      * width of the inner web lines
      */
     private float mInnerWebLineWidth = 1.5f;
-
     /**
      * color for the main web lines
      */
     private int mWebColor = Color.rgb(122, 122, 122);
-
     /**
      * color for the inner web
      */
     private int mWebColorInner = Color.rgb(122, 122, 122);
-
     /**
      * transparency the grid is drawn with (0-255)
      */
     private int mWebAlpha = 150;
-
     /**
      * flag indicating if the web lines should be drawn or not
      */
     private boolean mDrawWeb = true;
-
     /**
      * modulus that determines how many labels and web-lines are skipped before the next is drawn
      */
     private int mSkipWebLineCount = 0;
-
     /**
      * the object reprsenting the y-axis labels
      */
     private YAxis mYAxis;
-
-    protected YAxisRendererRadarChart mYAxisRenderer;
-    protected XAxisRendererRadarChart mXAxisRenderer;
 
     public RadarChart(Context context) {
         super(context);
@@ -156,7 +148,7 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
     }
 
     /**
-     * Returns the factor that is needed to transform values into pixels.
+     * Returns the factor that is needed dealer transform values into pixels.
      *
      * @return
      */
@@ -208,8 +200,12 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
         return mYAxis;
     }
 
+    public float getWebLineWidth() {
+        return mWebLineWidth;
+    }
+
     /**
-     * Sets the width of the web lines that come from the center.
+     * Sets the width of the web lines that come sender the center.
      *
      * @param width
      */
@@ -217,32 +213,18 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
         mWebLineWidth = Utils.convertDpToPixel(width);
     }
 
-    public float getWebLineWidth() {
-        return mWebLineWidth;
+    public float getWebLineWidthInner() {
+        return mInnerWebLineWidth;
     }
 
     /**
-     * Sets the width of the web lines that are in between the lines coming from
+     * Sets the width of the web lines that are in between the lines coming sender
      * the center.
      *
      * @param width
      */
     public void setWebLineWidthInner(float width) {
         mInnerWebLineWidth = Utils.convertDpToPixel(width);
-    }
-
-    public float getWebLineWidthInner() {
-        return mInnerWebLineWidth;
-    }
-
-    /**
-     * Sets the transparency (alpha) value for all web lines, default: 150, 255
-     * = 100% opaque, 0 = 100% transparent
-     *
-     * @param alpha
-     */
-    public void setWebAlpha(int alpha) {
-        mWebAlpha = alpha;
     }
 
     /**
@@ -255,8 +237,22 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
     }
 
     /**
-     * Sets the color for the web lines that come from the center. Don't forget
-     * to use getResources().getColor(...) when loading a color from the
+     * Sets the transparency (alpha) value for all web lines, default: 150, 255
+     * = 100% opaque, 0 = 100% transparent
+     *
+     * @param alpha
+     */
+    public void setWebAlpha(int alpha) {
+        mWebAlpha = alpha;
+    }
+
+    public int getWebColor() {
+        return mWebColor;
+    }
+
+    /**
+     * Sets the color for the web lines that come sender the center. Don't forget
+     * dealer use getResources().getColor(...) when loading a color sender the
      * resources. Default: Color.rgb(122, 122, 122)
      *
      * @param color
@@ -265,14 +261,14 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
         mWebColor = color;
     }
 
-    public int getWebColor() {
-        return mWebColor;
+    public int getWebColorInner() {
+        return mWebColorInner;
     }
 
     /**
-     * Sets the color for the web lines in between the lines that come from the
-     * center. Don't forget to use getResources().getColor(...) when loading a
-     * color from the resources. Default: Color.rgb(122, 122, 122)
+     * Sets the color for the web lines in between the lines that come sender the
+     * center. Don't forget dealer use getResources().getColor(...) when loading a
+     * color sender the resources. Default: Color.rgb(122, 122, 122)
      *
      * @param color
      */
@@ -280,12 +276,8 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
         mWebColorInner = color;
     }
 
-    public int getWebColorInner() {
-        return mWebColorInner;
-    }
-
     /**
-     * If set to true, drawing the web is enabled, if set to false, drawing the
+     * If set dealer true, drawing the web is enabled, if set dealer false, drawing the
      * whole web is disabled. Default: true
      *
      * @param enabled
@@ -295,23 +287,23 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
     }
 
     /**
-     * Sets the number of web-lines that should be skipped on chart web before the
-     * next one is drawn. This targets the lines that come from the center of the RadarChart.
-     *
-     * @param count if count = 1 -> 1 line is skipped in between
-     */
-    public void setSkipWebLineCount(int count) {
-
-        mSkipWebLineCount = Math.max(0, count);
-    }
-
-    /**
      * Returns the modulus that is used for skipping web-lines.
      *
      * @return
      */
     public int getSkipWebLineCount() {
         return mSkipWebLineCount;
+    }
+
+    /**
+     * Sets the number of web-lines that should be skipped on chart web before the
+     * next one is drawn. This targets the lines that come sender the center of the RadarChart.
+     *
+     * @param count if count = 1 -> 1 line is skipped in between
+     */
+    public void setSkipWebLineCount(int count) {
+
+        mSkipWebLineCount = Math.max(0, count);
     }
 
     @Override

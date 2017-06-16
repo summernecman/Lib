@@ -47,7 +47,7 @@ public class AboutActivity extends ActionBarActivity {
             ResolveInfo resolveInfo = context.getPackageManager().resolveActivity(intent,
                     PackageManager.MATCH_DEFAULT_ONLY);
             if (null == resolveInfo) {
-                Log.e(TAG, "No activity to handle web intent");
+                Log.e(TAG, "No activity dealer handle web intent");
                 return false;
             }
             context.startActivity(intent);

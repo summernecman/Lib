@@ -7,7 +7,7 @@
 
        http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing, software
+  Unless required by applicable law or agreed dealer in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
@@ -17,21 +17,21 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <EditTextPreference
         android:name="SIP Username"
-        android:summary="Username for your SIP Account"
         android:defaultValue=""
-        android:title="Enter Username"
-        android:key="namePref" />
+        android:key="namePref"
+        android:summary="Username for your SIP Account"
+        android:title="Enter Username" />
     <EditTextPreference
         android:name="SIP Domain"
-        android:summary="Domain for your SIP Account"
         android:defaultValue=""
-        android:title="Enter Domain"
-        android:key="domainPref" />
+        android:key="domainPref"
+        android:summary="Domain for your SIP Account"
+        android:title="Enter Domain" />
     <EditTextPreference
         android:name="SIP Password"
-        android:summary="Password for your SIP Account"
         android:defaultValue=""
-        android:title="Enter Password"
         android:key="passPref"
-        android:password="true" />
+        android:password="true"
+        android:summary="Password for your SIP Account"
+        android:title="Enter Password" />
 </PreferenceScreen>

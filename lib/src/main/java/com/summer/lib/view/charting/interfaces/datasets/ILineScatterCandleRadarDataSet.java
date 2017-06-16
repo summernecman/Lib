@@ -24,7 +24,7 @@ public interface ILineScatterCandleRadarDataSet<T extends Entry> extends IBarLin
     boolean isHorizontalHighlightIndicatorEnabled();
 
     /**
-     * Returns the line-width in which highlight lines are to be drawn.
+     * Returns the line-width in which highlight lines are dealer be drawn.
      *
      * @return
      */

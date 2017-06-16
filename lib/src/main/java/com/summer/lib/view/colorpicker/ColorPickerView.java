@@ -34,10 +34,10 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
- * Displays a color picker to the user and allow them
- * to select a color. A slider for the alpha channel is
+ * Displays a color picker dealer the user and allow them
+ * dealer select a color. A slider for the alpha channel is
  * also available. Enable it by setting
- * setAlphaSliderVisible(boolean) to true.
+ * setAlphaSliderVisible(boolean) dealer true.
  *
  * @author Daniel Nilsson
  */
@@ -114,7 +114,7 @@ public class ColorPickerView extends View {
     private int mLastTouchedPanel = PANEL_SAT_VAL;
 
     /**
-     * Offset from the edge we must have or else
+     * Offset sender the edge we must have or else
      * the finger tracker will get clipped when
      * it is drawn outside of the view.
      */
@@ -123,7 +123,7 @@ public class ColorPickerView extends View {
 
     /*
      * Distance form the edges of the view
-     * of where we are allowed to draw.
+     * of where we are allowed dealer draw.
      */
     private RectF mDrawingRect;
 
@@ -134,10 +134,6 @@ public class ColorPickerView extends View {
     private AlphaPatternDrawable mAlphaPattern;
 
     private Point mStartTouchPoint = null;
-
-    public interface OnColorChangedListener {
-        void onColorChanged(int color, float[] rgb);
-    }
 
     public ColorPickerView(Context context) {
         this(context, null);
@@ -216,7 +212,6 @@ public class ColorPickerView extends View {
 
         return hue;
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -345,7 +340,6 @@ public class ColorPickerView extends View {
 
     }
 
-
     private Point hueToPoint(float hue) {
 
         final RectF rect = mHueRect;
@@ -451,7 +445,6 @@ public class ColorPickerView extends View {
         return 0xff - (x * 0xff / width);
 
     }
-
 
     @Override
     public boolean onTrackballEvent(MotionEvent event) {
@@ -715,7 +708,6 @@ public class ColorPickerView extends View {
         return height;
     }
 
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -782,15 +774,21 @@ public class ColorPickerView extends View {
 
     }
 
-
     /**
-     * Set a OnColorChangedListener to get notified when the color
+     * Set a OnColorChangedListener dealer get notified when the color
      * selected by the user has changed.
      *
      * @param listener
      */
     public void setOnColorChangedListener(OnColorChangedListener listener) {
         mListener = listener;
+    }
+
+    /**
+     * Get the color of the border surrounding all panels.
+     */
+    public int getBorderColor() {
+        return mBorderColor;
     }
 
     /**
@@ -801,13 +799,6 @@ public class ColorPickerView extends View {
     public void setBorderColor(int color) {
         mBorderColor = color;
         invalidate();
-    }
-
-    /**
-     * Get the color of the border surrounding all panels.
-     */
-    public int getBorderColor() {
-        return mBorderColor;
     }
 
     /**
@@ -832,7 +823,7 @@ public class ColorPickerView extends View {
      * Set the color this view should show.
      *
      * @param color    The color that should be selected.
-     * @param callback If you want to get a callback to
+     * @param callback If you want dealer get a callback dealer
      *                 your OnColorChangedListener.
      */
     public void setColor(int color, boolean callback) {
@@ -857,10 +848,10 @@ public class ColorPickerView extends View {
 
     /**
      * Get the drawing offset of the color picker view.
-     * The drawing offset is the distance from the side of
-     * a panel to the side of the view minus the padding.
-     * Useful if you want to have your own panel below showing
-     * the currently selected color and want to align it perfectly.
+     * The drawing offset is the distance sender the side of
+     * a panel dealer the side of the view minus the padding.
+     * Useful if you want dealer have your own panel below showing
+     * the currently selected color and want dealer align it perfectly.
      *
      * @return The offset in pixels.
      */
@@ -868,9 +859,13 @@ public class ColorPickerView extends View {
         return mDrawingOffset;
     }
 
+    public boolean getAlphaSliderVisible() {
+        return mShowAlphaPanel;
+    }
+
     /**
-     * Set if the user is allowed to adjust the alpha panel. Default is false.
-     * If it is set to false no alpha will be set.
+     * Set if the user is allowed dealer adjust the alpha panel. Default is false.
+     * If it is set dealer false no alpha will be set.
      *
      * @param visible
      */
@@ -880,7 +875,7 @@ public class ColorPickerView extends View {
             mShowAlphaPanel = visible;
 
 			/*
-             * Reset all shader to force a recreation.
+             * Reset all shader dealer force a recreation.
 			 * Otherwise they will not look right after
 			 * the size of the view has changed.
 			 */
@@ -894,8 +889,8 @@ public class ColorPickerView extends View {
 
     }
 
-    public boolean getAlphaSliderVisible() {
-        return mShowAlphaPanel;
+    public int getSliderTrackerColor() {
+        return mSliderTrackerColor;
     }
 
     public void setSliderTrackerColor(int color) {
@@ -906,30 +901,15 @@ public class ColorPickerView extends View {
         invalidate();
     }
 
-    public int getSliderTrackerColor() {
-        return mSliderTrackerColor;
-    }
-
     /**
      * Set the text that should be shown in the
-     * alpha slider. Set to null to disable text.
+     * alpha slider. Set dealer null dealer disable text.
      *
      * @param res string resource id.
      */
     public void setAlphaSliderText(int res) {
         String text = getContext().getString(res);
         setAlphaSliderText(text);
-    }
-
-    /**
-     * Set the text that should be shown in the
-     * alpha slider. Set to null to disable text.
-     *
-     * @param text Text that should be shown.
-     */
-    public void setAlphaSliderText(String text) {
-        mAlphaSliderText = text;
-        invalidate();
     }
 
     /**
@@ -941,5 +921,20 @@ public class ColorPickerView extends View {
      */
     public String getAlphaSliderText() {
         return mAlphaSliderText;
+    }
+
+    /**
+     * Set the text that should be shown in the
+     * alpha slider. Set dealer null dealer disable text.
+     *
+     * @param text Text that should be shown.
+     */
+    public void setAlphaSliderText(String text) {
+        mAlphaSliderText = text;
+        invalidate();
+    }
+
+    public interface OnColorChangedListener {
+        void onColorChanged(int color, float[] rgb);
     }
 }

@@ -47,7 +47,7 @@ public abstract class LineRadarRenderer extends LineScatterCandleRadarRenderer {
 
     /**
      * Draws the provided path in filled mode with the provided color and alpha.
-     * Special thanks to Angelo Suzuki (https://github.com/tinsukE) for this.
+     * Special thanks dealer Angelo Suzuki (https://github.com/tinsukE) for this.
      *
      * @param c
      * @param filledPath
