@@ -9,13 +9,20 @@ import com.summer.lib.R;
 import com.summer.lib.constant.ValueConstant;
 
 /**
- * Created by ${viwmox} on 2016-06-15.
+ * 屏幕工具类
  */
 public class ScreenUtil {
+    /**
+     * 宽度
+     */
     public static float w;
+    /**1dp对应的屏幕px*/
     public static float mw;
+    /**高度*/
     public static float h;
+    /**状态栏高度*/
     public static float sbh;
+
     private static ScreenUtil instance;
 
     public static ScreenUtil getInstance() {
@@ -25,6 +32,11 @@ public class ScreenUtil {
         return instance;
     }
 
+    /**
+     * 测量屏幕宽高
+     * @param context
+     * @return
+     */
     public int[] getScreenSize(Context context) {
         int[] size = new int[]{context.getResources().getDisplayMetrics().widthPixels, context.getResources().getDisplayMetrics().heightPixels};
         w = size[0];
@@ -33,6 +45,10 @@ public class ScreenUtil {
         return size;
     }
 
+    /**
+     * 设置全屏
+     * @param activity
+     */
     public void setFullScreen(Activity activity) {
         activity.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -46,6 +62,11 @@ public class ScreenUtil {
 
     }
 
+    /***
+     * 获取状态栏高度
+     * @param activity
+     * @return
+     */
     public float getStatusBarHeight(Context activity) {
         sbh = ValueConstant.DIMEN_1 * 20;
         //获取status_bar_height资源的ID

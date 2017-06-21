@@ -12,5 +12,12 @@ public class MessageEvent {
 
     public Object id;
 
+    public MessageEvent() {
+    }
 
+    public MessageEvent(String sender, String dealer, Object data) {
+        this.sender = sender;
+        this.dealer = dealer;
+        this.data = data;
+    }
 }

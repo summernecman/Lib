@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.siweisoft.app.base.AppFrag;
 
-public class HomeFrag extends AppFrag<HomeUIOpe,HomeDAOpe> implements View.OnDragListener{
+public class HomeFrag extends AppFrag<HomeUIBean, HomeDAOpe> implements View.OnDragListener {
 
 
     String msg = "main";
@@ -20,20 +20,20 @@ public class HomeFrag extends AppFrag<HomeUIOpe,HomeDAOpe> implements View.OnDra
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getOpes().getDaOpe().getApps(new OnFinishListener() {
+//        getOpes().getDa().getApps(new OnFinishListener() {
 //            @Override
 //            public void onFinish(Object o) {
-//                getOpes().getUiOpe().setApps((ArrayList<AppDBBean>) o);
+//                getOpes().getUi().setApps((ArrayList<AppDBBean>) o);
 //            }
 //        });
-        getOpes().getUiOpe().getUiBean().getTvDrag().setOnLongClickListener(new View.OnLongClickListener() {
+        getOpes().getUi().getUiBean().getTvDrag().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                getOpes().getUiOpe().getUiBean().getTvDrag().startDrag(null,new View.DragShadowBuilder(),getOpes().getUiOpe().getUiBean().getTvDrag().getDrawable(),0);
+                getOpes().getUi().getUiBean().getTvDrag().startDrag(null, new View.DragShadowBuilder(), getOpes().getUi().getUiBean().getTvDrag().getDrawable(), 0);
                 return true;
             }
         });
-        //getOpes().getUiOpe().getUiBean().getTvDrag().setOnDragListener(this);
+        //getOpes().getUi().getUiBean().getTvDrag().setOnDragListener(this);
     }
 
     @Override

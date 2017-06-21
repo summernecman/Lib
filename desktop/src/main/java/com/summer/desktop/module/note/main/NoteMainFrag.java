@@ -14,18 +14,18 @@ public class NoteMainFrag extends BaseUIFrag<NoteMainUIOpe, NoteMainDAOpe> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getOpes().getUiOpe().initList(activity);
+        getOpes().getUi().initList(activity);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getOpes().getUiOpe().clear();
+        getOpes().getUi().clear();
     }
 
     @Override
     public void dealMesage(MessageEvent event) {
         super.dealMesage(event);
-        getOpes().getUiOpe().setTitle();
+        getOpes().getUi().setTitle();
     }
 }

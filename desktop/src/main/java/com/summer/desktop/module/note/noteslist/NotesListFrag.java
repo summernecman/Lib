@@ -18,7 +18,7 @@ public class NotesListFrag extends BaseUIFrag<NotesListUIOpe, NotesListDAOpe> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getOpes().getUiOpe().initpager(this);
+        getOpes().getUi().initpager(this);
     }
 
     @Override

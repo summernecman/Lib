@@ -3,7 +3,7 @@ package com.summer.lib.util;
 import java.util.Random;
 
 /**
- * Created by ${viwmox} on 2016-10-20.
+ * 随机数工具
  */
 public class RandomUtil {
 

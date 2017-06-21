@@ -15,7 +15,7 @@ import com.summer.desktop.bean.dabean.GsonNoteBean;
 import com.summer.desktop.bean.dabean.ImageNote;
 import com.summer.desktop.bean.dabean.NoteDetail;
 import com.summer.desktop.bean.dabean.TxtNote;
-import com.summer.desktop.module.note.circlemenu.CircleMenuFrag;
+import com.summer.desktop.module.circlemenu.CircleMenuFrag;
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.interf.OnFinishListener;
 import com.summer.lib.bean.databean.EventBean;
@@ -28,7 +28,6 @@ import com.summer.lib.view.image.imagepager.ImagePagerFrag;
 import java.io.File;
 import java.util.ArrayList;
 
-import static com.summer.desktop.util.ViewCreater.gson;
 
 public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe> implements OnFinishListener {
 
@@ -36,9 +35,9 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getOpes().getDaOpe().init(fragment);
-        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean, this, this);
-        getOpes().getUiOpe().init(fragment, getOpes().getDaOpe().bean, new OnBMClickListener() {
+        getOpes().getDa().init(fragment);
+        getOpes().getUi().getData(fragment, getOpes().getDa().bean, this, this);
+        getOpes().getUi().init(fragment, getOpes().getDa().bean, new OnBMClickListener() {
             @Override
             public void onBoomButtonClick(int index) {
                 Toast.makeText(getActivity(), "Clicked " + index, Toast.LENGTH_SHORT).show();
@@ -47,13 +46,13 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
                         IntentUtil.getInstance().photosShowFromphone(fragment, 0);
                         break;
                     case 1:
-                        switch (getOpes().getDaOpe().bean.getType()) {
+                        switch (getOpes().getDa().bean.getType()) {
                             case GsonNoteBean.TYPE_GALLERY:
 
                                 break;
                             default:
-                                getOpes().getDaOpe().bean.getData().add(new NoteDetail(NoteDetail.TXT, gson.toJson(new TxtNote("new\\n"))));
-                                getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean, NoteDetailFrag.this, NoteDetailFrag.this);
+                                getOpes().getDa().bean.getData().add(new NoteDetail(NoteDetail.TXT, GsonUtil.getInstance().toJson(new TxtNote("new\\n"))));
+                                getOpes().getUi().getData(fragment, getOpes().getDa().bean, NoteDetailFrag.this, NoteDetailFrag.this);
                                 break;
                         }
                         break;
@@ -83,7 +82,7 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
     public void onDestroy() {
         super.onDestroy();
         int[] ints = new int[]{0};
-        getOpes().getDaOpe().update(ints, getOpes().getDaOpe().bean, getOpes().getDaOpe().note);
+        getOpes().getDa().update(ints, getOpes().getDa().bean, getOpes().getDa().note);
     }
 
     @Override
@@ -92,8 +91,8 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
         if (data == null) {
             return;
         }
-        getOpes().getDaOpe().onresult(data, getOpes().getDaOpe().bean);
-        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean, this, NoteDetailFrag.this);
+        getOpes().getDa().onresult(data, getOpes().getDa().bean);
+        getOpes().getUi().getData(fragment, getOpes().getDa().bean, this, NoteDetailFrag.this);
     }
 
     @Override
@@ -105,7 +104,7 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
         circleMenuFrag.setOnFinishListener(new OnFinishListener() {
             @Override
             public void onFinish(Object b) {
-                getOpes().getDaOpe().dealItemLongClick(fragment, (EventBean) o, (int) b);
+                getOpes().getDa().dealItemLongClick(fragment, (EventBean) o, (int) b);
 
             }
         });

@@ -15,7 +15,7 @@ import com.summer.lib.view.bottomdialogmenuview.BottomDialogMenuView;
 //import com.siweisoft.imga.R;
 
 /**
- * Created by ${viwmox} on 2016-05-19.
+ * 底部弹出框菜单
  */
 public class SheetDialogUtil {
 
@@ -29,6 +29,13 @@ public class SheetDialogUtil {
         return instance;
     }
 
+    /**
+     * 弹出菜单
+     *
+     * @param activity
+     * @param view
+     * @param onClickListener
+     */
     public void showBottomSheet(Context activity, View view, View.OnClickListener onClickListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         dialog = builder.create();
@@ -56,7 +63,13 @@ public class SheetDialogUtil {
         }
     }
 
-
+    /**
+     * 弹出菜单
+     * @param activity
+     * @param view
+     * @param style
+     * @param onClickListener
+     */
     public void showBottomSheet(Context activity, View view, int style, View.OnClickListener onClickListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         dialog = builder.create();
@@ -85,7 +98,11 @@ public class SheetDialogUtil {
         }
     }
 
-
+    /**
+     * 弹出菜单
+     * @param activity
+     * @param view
+     */
     public void showBottomSheet(Context activity, View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         dialog = builder.create();
@@ -100,6 +117,9 @@ public class SheetDialogUtil {
 //        view.setLayoutParams(params);
     }
 
+    /**
+     * 取消弹出菜单
+     */
     public void dismess() {
         if (dialog != null) {
             dialog.dismiss();

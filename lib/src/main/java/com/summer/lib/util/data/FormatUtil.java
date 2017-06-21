@@ -1,7 +1,7 @@
 package com.summer.lib.util.data;
 
 /**
- * Created by ${viwmox} on 2016-05-05.
+ * 数据类型转换
  */
 public class FormatUtil {
 
@@ -14,6 +14,9 @@ public class FormatUtil {
         return instance;
     }
 
+    /**
+     * 将str-->float
+     */
     public float getFloat(String str) {
 
         if (str == null) {
@@ -27,6 +30,7 @@ public class FormatUtil {
         return 0f;
     }
 
+    /**将str-->int*/
     public int getInt(String str) {
 
         if (str == null) {

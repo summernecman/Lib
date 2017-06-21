@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.summer.lib.R;
 import com.summer.lib.base.ope.BaseDAOpe;
 import com.summer.lib.base.ope.BaseOpes;
-import com.summer.lib.base.ope.BaseUIOpe;
+import com.summer.lib.base.ope.BaseUIBean;
 import com.summer.lib.constant.ValueConstant;
 import com.summer.lib.util.LogUtil;
 import com.summer.lib.view.bottommenu.MessageEvent;
@@ -29,7 +29,7 @@ import butterknife.Unbinder;
 /**
  * Created by summer on 2016/4/16 0016 16:03.
  */
-public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> extends BaseFrg implements View.OnClickListener, View.OnLongClickListener {
+public abstract class BaseUIFrag<A extends BaseUIBean, B extends BaseDAOpe> extends BaseFrg implements View.OnClickListener, View.OnLongClickListener {
 
     /**
      * fragment所属的层次
@@ -52,8 +52,8 @@ public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> exten
         }
         View group = inflater.inflate(getLayoutID(), null);
         ViewGroup parent = (ViewGroup) group.findViewById(R.id.container);
-        if(getOpes().getUiOpe()!=null && getOpes().getUiOpe().getUiBean().itemView!=null){
-            parent.addView(getOpes().getUiOpe().getUiBean().itemView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        if (getOpes().getUi() != null && getOpes().getUi().getViewDataBinding().getRoot() != null) {
+            parent.addView(getOpes().getUi().getViewDataBinding().getRoot(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
         unbinder = ButterKnife.bind(this, group);
         return group;
@@ -126,6 +126,9 @@ public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> exten
         EventBus.getDefault().unregister(this);
     }
 
+    /**
+     * 消息总线处理
+     */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void dealMesage(MessageEvent event) {
         LogUtil.E(event.dealer + ":" + getClass().getName());

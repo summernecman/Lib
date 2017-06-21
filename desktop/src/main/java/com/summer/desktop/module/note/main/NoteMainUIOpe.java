@@ -8,11 +8,11 @@ import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 import com.summer.desktop.bean.dabean.Note;
-import com.summer.desktop.bean.uibean.MainActUIBean;
+import com.summer.desktop.databinding.FragNoteMainBinding;
 import com.summer.desktop.module.home.main.IPostion;
 import com.summer.desktop.module.note.noteslist.NotesListFrag;
 import com.summer.desktop.util.TitleUtil;
-import com.summer.lib.base.ope.BaseUIOpe;
+import com.summer.lib.base.ope.BaseUIBean;
 import com.summer.lib.util.FragmentUtil;
 import com.summer.lib.util.LogUtil;
 
@@ -20,15 +20,15 @@ import java.util.ArrayList;
 
 import static cn.bmob.v3.Bmob.getApplicationContext;
 
-public class NoteMainUIOpe extends BaseUIOpe<MainActUIBean> {
+public class NoteMainUIOpe extends BaseUIBean<FragNoteMainBinding> {
 
 
     long aLong = 0;
 
-
     public NoteMainUIOpe(Context context) {
-        super(context, new MainActUIBean(context, null));
+        super(context);
     }
+
 
     public void initList(FragmentActivity activity) {
         TitleUtil.getInstance().getName().clear();
@@ -75,6 +75,7 @@ public class NoteMainUIOpe extends BaseUIOpe<MainActUIBean> {
         for (int i = 0; i < TitleUtil.getInstance().getName().size(); i++) {
             ss += TitleUtil.getInstance().getName().get(i) + "/";
         }
-        getUiBean().getToptitle().setText(ss);
+        LogUtil.E(ss);
+        viewDataBinding.textView.setText(ss);
     }
 }

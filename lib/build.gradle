@@ -57,6 +57,14 @@ android {
             ]
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
+
+    dexOptions {
+        jumboMode true
+    }
 }
 
 dependencies {

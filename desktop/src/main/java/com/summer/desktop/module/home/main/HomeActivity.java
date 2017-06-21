@@ -10,19 +10,20 @@ import com.summer.lib.base.activity.BaseUIActivity;
 import com.summer.lib.base.listener.DoubleClickListener;
 import com.summer.lib.util.FragmentUtil;
 
-public class HomeActivity extends BaseUIActivity<HomeUIOpe, HomeDAOpe> implements IPostion, DoubleClickListener, View.OnClickListener {
+public class HomeActivity extends BaseUIActivity<HomeUIBean, HomeDAOpe> implements IPostion, DoubleClickListener, View.OnClickListener {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getOpes().getUiOpe().init(this, this, this);
+        FragmentUtil.getInstance().initClear(activity);
+        getOpes().getUi().init(this, this, this);
     }
 
 
     @Override
     public int getNowPostion() {
-        return getOpes().getUiOpe().getUiBean().getHomeViewpager().getCurrentItem();
+        return getOpes().getUi().getViewDataBinding().homeViewpager.getCurrentItem();
     }
 
     @Override
@@ -44,7 +45,7 @@ public class HomeActivity extends BaseUIActivity<HomeUIOpe, HomeDAOpe> implement
     public void onClick(View v) {
         int position = (int) v.getTag(R.id.position);
         if ((position - 2) >= 0) {
-            getOpes().getUiOpe().getUiBean().getBottomViewpager().setCurrentItem((position - 2));
+            getOpes().getUi().getViewDataBinding().bottomViewpager.setCurrentItem((position - 2));
         }
     }
 }

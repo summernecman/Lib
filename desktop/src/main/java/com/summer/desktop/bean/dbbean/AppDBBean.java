@@ -32,6 +32,7 @@ public class AppDBBean extends BaseDbBean {
     private Drawable icon;
 
     public AppDBBean() {
+
     }
 
     public AppDBBean(String groupName, String appName, String packageName) {

@@ -6,33 +6,33 @@ import java.io.Serializable;
  * Created by ${viwmox} on 2016-12-21.
  */
 
-public class BaseOpes<A extends BaseUIOpe, B extends BaseDAOpe> implements Serializable {
+public class BaseOpes<A extends BaseUIBean, B extends BaseDAOpe> implements Serializable {
 
     /**
      * 操作者
      */
-    A uiOpe;
+    A ui;
     /**数据操作者*/
-    B daOpe;
+    B da;
 
-    public BaseOpes(A uiOpe, B daOpe) {
-        this.uiOpe = uiOpe;
-        this.daOpe = daOpe;
+    public BaseOpes(A ui, B da) {
+        this.ui = ui;
+        this.da = da;
     }
 
-    public B getDaOpe() {
-        return daOpe;
+    public B getDa() {
+        return da;
     }
 
-    public void setDaOpe(B daOpe) {
-        this.daOpe = daOpe;
+    public void setDa(B da) {
+        this.da = da;
     }
 
-    public A getUiOpe() {
-        return uiOpe;
+    public A getUi() {
+        return ui;
     }
 
-    public void setUiOpe(A uiOpe) {
-        this.uiOpe = uiOpe;
+    public void setUi(A ui) {
+        this.ui = ui;
     }
 }

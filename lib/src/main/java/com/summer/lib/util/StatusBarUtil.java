@@ -9,7 +9,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 
 /**
- * Created by ${viwmox} on 2016-06-13.
+ * 状态栏工具
  */
 public class StatusBarUtil {
 
@@ -22,6 +22,12 @@ public class StatusBarUtil {
         return instance;
     }
 
+    /**
+     * 从resid设置状态栏的颜色
+     *
+     * @param activity
+     * @param resId
+     */
     public void setStatusBarColorResId(Activity activity, int resId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window win = activity.getWindow();
@@ -36,6 +42,11 @@ public class StatusBarUtil {
         tintManager.setStatusBarTintResource(resId);
     }
 
+    /**
+     * 从颜色资源设置状态栏的颜色
+     * @param activity
+     * @param color
+     */
     public void setStatusBarColor(Activity activity, int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window win = activity.getWindow();

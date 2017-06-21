@@ -21,7 +21,7 @@ public class RenameFrag extends BaseUIFrag<ReNameUIOpe, RenameDAOpe> {
     public void onClick(View v) {
         FragmentUtil.getInstance().removeTop(getActivity());
         if (onfinish != null) {
-            onfinish.onFinish(getOpes().getUiOpe().getUiBean().getTxt().getText().toString());
+            onfinish.onFinish(getOpes().getUi().viewDataBinding.txt.getText().toString());
         }
     }
 

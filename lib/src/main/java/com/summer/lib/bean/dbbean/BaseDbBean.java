@@ -1,13 +1,14 @@
 package com.summer.lib.bean.dbbean;
 
 import com.j256.ormlite.field.DatabaseField;
+import com.summer.lib.bean.BaseBean;
 
 import java.io.Serializable;
 
 /**
  * Created by ${viwmox} on 2016-05-19.
  */
-public class BaseDbBean implements Serializable {
+public class BaseDbBean extends BaseBean implements Serializable {
 
 
     public static final String ID = "id";

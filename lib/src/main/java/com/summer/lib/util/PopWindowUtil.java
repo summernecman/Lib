@@ -10,12 +10,17 @@ import com.summer.lib.R;
 
 
 /**
- * Created by ${viwmox} on 2016-06-20.
+ * popup窗口工具
  */
 public class PopWindowUtil {
+
     private static PopWindowUtil instance;
 
     private PopupWindow popupWindow;
+
+    private PopWindowUtil() {
+
+    }
 
     public static PopWindowUtil getInstance() {
         if (instance == null) {
@@ -24,10 +29,14 @@ public class PopWindowUtil {
         return instance;
     }
 
-    private PopWindowUtil() {
-
-    }
-
+    /**
+     * 显示窗口
+     *
+     * @param context
+     * @param view
+     * @param parent
+     * @return
+     */
     public View showWindow(Context context, View view, View parent) {
 
 
@@ -41,9 +50,15 @@ public class PopWindowUtil {
         return view;
     }
 
+    /**
+     * 显示窗口
+     * @param context
+     * @param view
+     * @param parent
+     * @param onClickListener
+     * @return
+     */
     public View showWindow(Context context, View view, View parent, View.OnClickListener onClickListener) {
-
-
         popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setTouchable(true);
 
@@ -58,6 +73,9 @@ public class PopWindowUtil {
         return view;
     }
 
+    /**
+     * 取消窗口
+     */
     public void dismiss() {
         if (popupWindow != null) {
             popupWindow.dismiss();

@@ -85,7 +85,7 @@ public class NoteDetailDAOpe extends BaseDAOpe {
         if (bean.getData().get(i[0]).getType().equals(NoteDetail.IMAGE)) {
             final ImageNote imageNote = gson.fromJson(bean.getData().get(i[0]).getData(), ImageNote.class);
             if (NullUtil.isStrEmpty(imageNote.getSrc()) && !NullUtil.isStrEmpty(imageNote.getLocalSrc())) {
-                java.io.File file = new java.io.File(imageNote.getLocalSrc().substring("file://".length(), imageNote.getLocalSrc().length()));
+                File file = new File(imageNote.getLocalSrc().substring("file://".length(), imageNote.getLocalSrc().length()));
                 file.exists();
                 final BmobFile bmobFile = new BmobFile(file);
                 bmobFile.uploadblock(new UploadFileListener() {
@@ -123,20 +123,6 @@ public class NoteDetailDAOpe extends BaseDAOpe {
         for (int i = 0; images != null && i < images.size(); i++) {
             bean.getData().add(new NoteDetail(NoteDetail.IMAGE, gson.toJson(new ImageNote("file://" + images.get(i).path, images.get(i).width, images.get(i).height))));
         }
-//        if (ed != null && bean.getData() != null && bean.getData().size() > 0) {
-//            int i = (int) ed.getTag(R.id.position);
-//            java.io.File file = new java.io.File(data.getDataString().substring("file://".length(), data.getDataString().length()));
-//            BitmapFactory.Options options = new BitmapFactory.Options();
-//            options.inJustDecodeBounds = true;
-//            Bitmap bitmap = BitmapFactory.decodeFile(file.getPath(), options);
-//            bean.getData().add(i, new NoteDetail(NoteDetail.IMAGE, gson.toJson(new ImageNote(data.getDataString(), options.outWidth, options.outHeight))));
-//        } else {
-//            java.io.File file = new java.io.File(data.getDataString().substring("file://".length(), data.getDataString().length()));
-//            BitmapFactory.Options options = new BitmapFactory.Options();
-//            options.inJustDecodeBounds = true;
-//            Bitmap bitmap = BitmapFactory.decodeFile(file.getPath(), options);
-//            bean.getData().add(new NoteDetail(NoteDetail.IMAGE, gson.toJson(new ImageNote(data.getDataString(), options.outWidth, options.outHeight))));
-//        }
     }
 
     public void dealItemLongClick(Fragment fragment, EventBean msg, int index) {

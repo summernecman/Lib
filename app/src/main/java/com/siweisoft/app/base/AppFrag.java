@@ -4,9 +4,9 @@ package com.siweisoft.app.base;
 
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.ope.BaseDAOpe;
-import com.summer.lib.base.ope.BaseUIOpe;
+import com.summer.lib.base.ope.BaseUIBean;
 
-public abstract class AppFrag<A extends BaseUIOpe,B extends BaseDAOpe> extends BaseUIFrag<A,B>{
+public abstract class AppFrag<A extends BaseUIBean, B extends BaseDAOpe> extends BaseUIFrag<A, B> {
 
 
 }

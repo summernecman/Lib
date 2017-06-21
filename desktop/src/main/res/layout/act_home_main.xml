@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="home"
+            type="String" />
+    </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/homeroot"
     android:layout_width="match_parent"
@@ -28,3 +36,4 @@
         android:background="@color/color_blue_300" />
 </LinearLayout>
 </RelativeLayout>
+</layout>

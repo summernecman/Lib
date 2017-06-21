@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout>
 
-    <!--    &lt;!&ndash;<android.support.v7.widget.RecyclerView&ndash;&gt;
-            &lt;!&ndash;android:id="@+id/recycle"&ndash;&gt;
-            &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;
-            &lt;!&ndash;android:layout_height="match_parent" />-->-->
-
-    <com.summer.desktop.module.day.dayview.DayView
-        android:id="@+id/dayview"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--    &lt;!&ndash;<android.support.v7.widget.RecyclerView&ndash;&gt;
+                &lt;!&ndash;android:id="@+id/recycle"&ndash;&gt;
+                &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;
+                &lt;!&ndash;android:layout_height="match_parent" />-->-->
+
+        <com.summer.desktop.module.day.DayView
+            android:id="@+id/dayview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</layout>

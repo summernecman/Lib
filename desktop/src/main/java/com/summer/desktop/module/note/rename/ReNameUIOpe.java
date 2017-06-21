@@ -4,12 +4,12 @@ package com.summer.desktop.module.note.rename;
 
 import android.content.Context;
 
-import com.summer.desktop.bean.uibean.RenameFragUIBean;
-import com.summer.lib.base.ope.BaseUIOpe;
+import com.summer.desktop.databinding.FragNoteRenameBinding;
+import com.summer.lib.base.ope.BaseUIBean;
 
-public class ReNameUIOpe extends BaseUIOpe<RenameFragUIBean> {
+public class ReNameUIOpe extends BaseUIBean<FragNoteRenameBinding> {
 
     public ReNameUIOpe(Context context) {
-        super(context, new RenameFragUIBean(context, null));
+        super(context);
     }
 }

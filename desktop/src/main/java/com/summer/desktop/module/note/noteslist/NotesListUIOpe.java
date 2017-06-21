@@ -7,39 +7,39 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.summer.desktop.bean.dabean.Note;
-import com.summer.desktop.bean.uibean.MainFragUIBean;
+import com.summer.desktop.databinding.FragNoteMainBinding;
 import com.summer.desktop.module.note.main.NoteMainFrag;
 import com.summer.desktop.util.TitleUtil;
-import com.summer.lib.base.ope.BaseUIOpe;
+import com.summer.lib.base.ope.BaseUIBean;
 import com.summer.lib.view.bottommenu.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
-public class NotesListUIOpe extends BaseUIOpe<MainFragUIBean> {
+public class NotesListUIOpe extends BaseUIBean<FragNoteMainBinding> {
 
     ArrayList<Note> notes;
 
     int position = 0;
 
-
     public NotesListUIOpe(Context context) {
-        super(context, new MainFragUIBean(context, null));
+        super(context);
     }
+
 
     public void initpager(final Fragment fragment) {
         if (fragment.getArguments() != null && fragment.getArguments().getSerializable("data") != null) {
             notes = (ArrayList<Note>) fragment.getArguments().getSerializable("data");
             position = fragment.getArguments().getInt("position");
         }
-        getUiBean().getContainer().setAdapter(new NotesListAdapter(fragment.getChildFragmentManager(), notes));
-        getUiBean().getContainer().setCurrentItem(position);
+        viewDataBinding.mainViewpager.setAdapter(new NotesListAdapter(fragment.getChildFragmentManager(), notes));
+        viewDataBinding.mainViewpager.setCurrentItem(position);
         TitleUtil.getInstance().getName().add(notes.get(position).getName());
         MessageEvent messageEvent = new MessageEvent();
         messageEvent.dealer = NoteMainFrag.class.getName();
         EventBus.getDefault().post(messageEvent);
-        getUiBean().getContainer().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewDataBinding.mainViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 

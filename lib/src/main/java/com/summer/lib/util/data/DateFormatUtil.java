@@ -1,7 +1,5 @@
 package com.summer.lib.util.data;
 
-import android.annotation.SuppressLint;
-
 import com.summer.lib.util.LogUtil;
 
 import java.text.ParseException;
@@ -11,197 +9,44 @@ import java.util.Date;
 
 public class DateFormatUtil {
 
+    public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
-    public static String getNowyyyyMMddHHmmss() {
+    public static final String MM_DD_HH_MM_SS = "MM-dd HH:mm:ss";
+
+    public static final String DD_HH_MM_SS = "dd HH:mm:ss";
+
+    public static final String HH_MM_SS = "HH:mm:ss";
+
+    public static final String MM_SS = "mm:ss";
+
+    public static final String YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
+
+    public static final String YYYY_MM_DD_HH = "yyyy-MM-dd HH";
+
+    public static final String YYYY_MM_DD = "yyyy-MM-dd";
+
+    public static final String YEAR = "yyyy";
+    public static final String MONTH = "MM";
+    public static final String DAY = "dd";
+    public static final String HOUR = "HH";
+    public static final String MINUTE = "mm";
+    public static final String SECOND = "ss";
+
+
+    public static String getNowStr(String dateFormat) {
         Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat(dateFormat);
         return format.format(date);
     }
 
-    public static String getTodayYYYYMMDD() {
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    public static String getdDateStr(String dateFormat, Date date) {
+        SimpleDateFormat format = new SimpleDateFormat(dateFormat);
         return format.format(date);
     }
 
-    public static String getTodayYearYYYY() {
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy年");
-        return format.format(date);
-    }
-
-    public static String getTodayMonYYYY() {
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat format = new SimpleDateFormat("MM月");
-        return format.format(date);
-    }
-
-    public static String getTodayYYYYMMDD2() {
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-        return format.format(date);
-    }
-
-
-    /**
-     * 把日期转换成年月日格式
-     *
-     * @param date
-     * @return
-     */
-    @SuppressLint("SimpleDateFormat")
-    public static String convent_yyyyMMdd(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        return format.format(date);
-    }
-
-    /**
-     * 年月日小时没有空格
-     *
-     * @param date
-     * @return
-     */
-    @SuppressLint("SimpleDateFormat")
-    public static String convent_yyyyMMddHH(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHH");
-        return format.format(date);
-    }
-
-    public static String convent_MMddHHMM(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat(" MM-dd HH:mm");
-        return format.format(date);
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    public static String convent_yyyyMMddHHMM(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        return format.format(date);
-    }
-
-    /**
-     * 把日期转黄成月日格式
-     *
-     * @param date
-     * @return
-     */
-    @SuppressLint("SimpleDateFormat")
-    public static String convent_MMdd(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("MM-dd");
-        return format.format(date);
-    }
-
-    /**
-     * 把日期转换成时分格式
-     *
-     * @param date
-     * @return
-     */
-    @SuppressLint("SimpleDateFormat")
-    public static String convent_HHmm(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        return format.format(date);
-    }
-
-    /**
-     * 把日期转换成年月日时分秒格式
-     *
-     * @param date
-     * @return
-     */
-    @SuppressLint("SimpleDateFormat")
-    public static String convent_yyyyMMddHHmmss(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return format.format(date);
-    }
-
-    /**
-     * 年月日时分秒没有分隔�?
-     *
-     * @param date
-     * @return
-     */
-    public static String convent_YYYYMMddHHmmss(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-        return format.format(date);
-    }
-
-    /**
-     * 把日期转换成时分秒格式
-     *
-     * @param date
-     * @return
-     */
-    public static String convent_HHmmss(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
-        return format.format(date);
-    }
-
-
-    public static String convent_YYYYMMDD(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        return format.format(date);
-    }
-
-    /**
-     * 把日期转换成24时分秒格式
-     *
-     * @param date
-     * @return
-     */
-    public static String convent_HH24mmss(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-        return format.format(date);
-    }
-
-    /**
-     * yyyy-MM-dd dealer yyyy-MM-dd 00:00:00
-     *
-     * @throws ParseException
-     */
-    public static Date convent_yyyyMMdd000000(String strD)
-            throws ParseException {
-        strD = strD.trim();
-        strD += " 00:00:00";
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return format.parse(strD);
-    }
-
-    /**
-     * 把yyyy-MM-dd HH:mm:ss格式的字符串转换为日期
-     *
-     * @param strD
-     * @return
-     * @throws ParseException
-     */
-    public static Date convent_yyyyMMddHHmmss(String strD)
-            throws ParseException {
-        strD = strD.trim();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return format.parse(strD);
-    }
-
-    public static Calendar convent_yyyyMMddHHmmssCalendar(String strD) throws ParseException {
-        strD = strD.trim();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(format.parse(strD));
-        return calendar;
-    }
-
-
-    public static String getnowTime() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return format.format(new Date());
-    }
-
-    public static String getnowTimeYYYYMMdd() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        return format.format(new Date());
-    }
-
-    public static String getnowTimeHHmm() {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        return format.format(new Date());
+    public static Date getStrDate(String time, String dateFormat) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat(dateFormat);
+        return format.parse(time);
     }
 
     public static String getbefore7TimeYYYYMMdd() {
@@ -221,157 +66,10 @@ public class DateFormatUtil {
     }
 
     public static int getnowMinTotal() {
-
         return Calendar.getInstance().get(Calendar.HOUR_OF_DAY) * 60 + Calendar.getInstance().get(Calendar.MINUTE);
     }
 
-    /**
-     * 把yyyy-MM-dd HH:mm格式的字符串转换为日期
-     *
-     * @param strD
-     * @return
-     * @throws ParseException
-     */
-    @SuppressLint("SimpleDateFormat")
-    public static Date convent_yyyyMMddHHmm(String strD) throws ParseException {
-        strD = strD.trim();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        return format.parse(strD);
-    }
 
-    /**
-     * 把yyyy-MM-dd格式的字符串转换为日期
-     *
-     * @param strD
-     * @return
-     * @throws ParseException
-     */
-    @SuppressLint("SimpleDateFormat")
-    public static Date convent_yyyyMMdd(String strD) throws ParseException {
-        strD = strD.trim();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        return format.parse(strD);
-    }
-
-    /**
-     * 把yyyyMMddHHmmss格式的字符串转换为日期
-     *
-     * @param strD
-     * @return
-     * @throws ParseException
-     */
-    public static Date convent_yyyyMMddHHmmss_nospilt(String strD)
-            throws ParseException {
-        strD = strD.trim();
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-        return format.parse(strD);
-    }
-
-    /**
-     * 把yyyy-MM-dd HH:mm格式的字符串转换为字符串HH:mm
-     *
-     * @param strD
-     * @return
-     * @throws ParseException
-     */
-    @SuppressLint("SimpleDateFormat")
-    public static String convent_HHmm(String strD) throws ParseException {
-        strD = strD.trim();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date date = format.parse(strD);
-        format = new SimpleDateFormat("HH:mm");
-        String str = format.format(date);
-        return str;
-    }
-
-    /**
-     * 把yyyy-MM-dd HH:mm:ss格式的字符串转换为字符串yyyy-MM-dd
-     */
-    public static String convent_ddHHmmstr(String str) throws Exception {
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = format.parse(str);
-            format = new SimpleDateFormat("d日H点m分");
-            return format.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-
-    /**
-     * 把yyyy-MM-dd HH:mm:ss格式的字符串转换为字符串yyyy-MM-dd
-     */
-    public static String convent_YYYYMMDDStr(String str) {
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = format.parse(str);
-            format = new SimpleDateFormat("yyyy年M月d日");
-            return format.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    /**
-     * 把yyyy-MM-dd HH:mm:ss格式的字符串转换为字符串yyyy-MM-dd
-     */
-    public static String convent_YYYYMMDD2Str(String str) {
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = format.parse(str);
-            format = new SimpleDateFormat("yyyy/M/d");
-            return format.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    public static String convent_YYYY_MM_DDStr(String str) {
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = format.parse(str);
-            format = new SimpleDateFormat("yyyy-M-d");
-            return format.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-
-    /**
-     * 把yyyy-MM-dd HH:mm:ss格式的字符串转换为字符串yyyy-MM-dd
-     */
-    public static String convent_MMStr(String str) {
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = format.parse(str);
-            format = new SimpleDateFormat("M");
-            return format.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    /**
-     * 把yyyy-MM-dd HH:mm:ss格式的字符串转换为字符串yyyy-MM-dd
-     */
-    public static String convent_DDStr(String str) {
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = format.parse(str);
-            format = new SimpleDateFormat("d");
-            return format.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
 
     public static String getTimeDistance(String startTime, String endTime) {
         try {
@@ -480,10 +178,9 @@ public class DateFormatUtil {
         } else if (current.after(tomorrow) && current.before(afterTomorrow)) {
             return "明天";
         } else {
-            return convent_DDStr(time) + "号";
+            return "号";
         }
     }
-
 
     public static int getDay(int year, int month) {
         int day = 30;
@@ -553,31 +250,6 @@ public class DateFormatUtil {
         return y + "-" + m + "-" + d + "  " + h + ":" + mm;
     }
 
-    public static String getMMDDHHMM(String str) {
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = format.parse(str);
-            format = new SimpleDateFormat("MM-dd HH:mm");
-            return format.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    public static String getYYYYMMdd(String str) {
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = format.parse(str);
-            format = new SimpleDateFormat("yyyy-MM-dd");
-            return format.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-
     public static boolean isTodayMMDDHHMM(String str) {
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -604,19 +276,6 @@ public class DateFormatUtil {
                 && day == today.get(Calendar.DAY_OF_MONTH);
     }
 
-
-    public static String convent_MMDDStr(String str) {
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = format.parse(str);
-            format = new SimpleDateFormat("M月d日");
-            return format.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
     public static int getHour(long timemillins) {
         Date date = new Date(timemillins);
         Calendar calendar = Calendar.getInstance();
@@ -629,19 +288,6 @@ public class DateFormatUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.MINUTE);
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    public static String yyyyMMdd_HHmmss_to_yyyyMMdd_HHmm(String strD) {
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = format.parse(strD);
-            format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            return format.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "";
-        }
     }
 
 }

@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import com.summer.lib.R;
 import com.summer.lib.base.ope.BaseDAOpe;
 import com.summer.lib.base.ope.BaseOpes;
-import com.summer.lib.base.ope.BaseUIOpe;
+import com.summer.lib.base.ope.BaseUIBean;
 import com.summer.lib.constant.color.ColorConstant;
 import com.summer.lib.util.LogUtil;
 import com.summer.lib.util.StatusBarUtil;
@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
 /**
  * Created by summer on 2016/4/16 0016 11:51.
  */
-public abstract class BaseUIActivity<A extends BaseUIOpe,B extends BaseDAOpe> extends BaseActivity {
+public abstract class BaseUIActivity<A extends BaseUIBean, B extends BaseDAOpe> extends BaseActivity {
 
     /**
      * 添加内容界面的容器
@@ -47,8 +47,8 @@ public abstract class BaseUIActivity<A extends BaseUIOpe,B extends BaseDAOpe> ex
         setContentView(R.layout.layout_baseui_withouttitle);
         StatusBarUtil.getInstance().setStatusBarColorResId(activity, ColorConstant.COLOR_STATUS);
         ACT_ROOT_VIEW = (ViewGroup) findViewById(R.id.act_base_root);
-        if(getOpes().getUiOpe()!=null && getOpes().getUiOpe().getUiBean().itemView != null) {
-            ACT_ROOT_VIEW.addView(getOpes().getUiOpe().getUiBean().itemView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        if (getOpes().getUi() != null && getOpes().getUi().getViewDataBinding().getRoot() != null) {
+            ACT_ROOT_VIEW.addView(getOpes().getUi().getViewDataBinding().getRoot(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
         ButterKnife.bind(activity);
     }

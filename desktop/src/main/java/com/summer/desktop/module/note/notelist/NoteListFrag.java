@@ -10,7 +10,7 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.Note;
-import com.summer.desktop.module.note.circlemenu.CircleMenuFrag;
+import com.summer.desktop.module.circlemenu.CircleMenuFrag;
 import com.summer.desktop.module.note.main.NoteMainFrag;
 import com.summer.desktop.module.note.noteslist.NotesListFrag;
 import com.summer.desktop.module.note.rename.RenameFrag;
@@ -34,14 +34,14 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getOpes().getUiOpe().init(fragment, this, this, new MaterialRefreshListenerAdpter() {
+        getOpes().getUi().init(fragment, this, this, new MaterialRefreshListenerAdpter() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
-                getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
+                getOpes().getUi().getData(NoteListFrag.this, NoteListFrag.this);
                 materialRefreshLayout.finishRefresh();
             }
         });
-        getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
+        getOpes().getUi().getData(NoteListFrag.this, NoteListFrag.this);
     }
 
 
@@ -59,28 +59,28 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
                 switch (index) {
                     case 0:
                         //note
-                        getOpes().getDaOpe().createNote(getOpes().getUiOpe().parentNote.getObjectId(), new OnFinishListener() {
+                        getOpes().getDa().createNote(getOpes().getUi().parentNote.getObjectId(), new OnFinishListener() {
                             @Override
                             public void onFinish(Object o) {
-                                getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
+                                getOpes().getUi().getData(NoteListFrag.this, NoteListFrag.this);
                             }
                         });
                         break;
                     case 1:
                         //notebook
-                        getOpes().getDaOpe().createNoteBook(getOpes().getUiOpe().parentNote.getObjectId(), new OnFinishListener() {
+                        getOpes().getDa().createNoteBook(getOpes().getUi().parentNote.getObjectId(), new OnFinishListener() {
                             @Override
                             public void onFinish(Object o) {
-                                getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
+                                getOpes().getUi().getData(NoteListFrag.this, NoteListFrag.this);
                             }
                         });
                         break;
                     case 2:
                         //delete
-                        getOpes().getDaOpe().deleteNote(note1, new OnFinishListener() {
+                        getOpes().getDa().deleteNote(note1, new OnFinishListener() {
                             @Override
                             public void onFinish(Object o) {
-                                getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
+                                getOpes().getUi().getData(NoteListFrag.this, NoteListFrag.this);
                             }
                         });
                         break;
@@ -94,10 +94,10 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
                         renameFrag.setOnfinish(new OnFinishListener() {
                             @Override
                             public void onFinish(Object o) {
-                                getOpes().getDaOpe().renameNote((String) o, note1, new OnFinishListener() {
+                                getOpes().getDa().renameNote((String) o, note1, new OnFinishListener() {
                                     @Override
                                     public void onFinish(Object o) {
-                                        getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
+                                        getOpes().getUi().getData(NoteListFrag.this, NoteListFrag.this);
                                     }
                                 });
                             }
@@ -105,10 +105,10 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
                         break;
                     case 4:
                         //note
-                        getOpes().getDaOpe().createGallery(getOpes().getUiOpe().parentNote.getObjectId(), new OnFinishListener() {
+                        getOpes().getDa().createGallery(getOpes().getUi().parentNote.getObjectId(), new OnFinishListener() {
                             @Override
                             public void onFinish(Object o) {
-                                getOpes().getUiOpe().getData(NoteListFrag.this, NoteListFrag.this);
+                                getOpes().getUi().getData(NoteListFrag.this, NoteListFrag.this);
                             }
                         });
                         break;
@@ -121,11 +121,11 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
     @Override
     public void dealMesage(MessageEvent event) {
         super.dealMesage(event);
-        if (event.sender.equals(NewsAdapter.class.getName()) && getOpes().getUiOpe().parentNote.getObjectId().equals(event.id)) {
+        if (NewsAdapter.class.getName().equals(event.sender) && getOpes().getUi().parentNote.getObjectId().equals(event.id)) {
             View v = (View) event.data;
             NotesListFrag noteListssFrag = new NotesListFrag();
             Bundle bundle = new Bundle();
-            bundle.putSerializable("data", getOpes().getUiOpe().notes);
+            bundle.putSerializable("data", getOpes().getUi().notes);
             bundle.putInt("position", (Integer) v.getTag(R.id.position));
             noteListssFrag.setArguments(bundle);
             FragmentUtil.getInstance().add(getActivity(), noteListssFrag);

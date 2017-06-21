@@ -9,8 +9,8 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.summer.desktop.bean.dabean.Note;
-import com.summer.desktop.bean.uibean.NewsFragUIBean;
-import com.summer.lib.base.ope.BaseUIOpe;
+import com.summer.desktop.databinding.FragNoteNewsBinding;
+import com.summer.lib.base.ope.BaseUIBean;
 import com.summer.lib.util.LogUtil;
 import com.summer.lib.util.system.HandleUtil;
 import com.summer.lib.view.ItemDecoration.MyItemDecoration2;
@@ -23,7 +23,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
-public class NoteListUIOpe extends BaseUIOpe<NewsFragUIBean> {
+public class NoteListUIOpe extends BaseUIBean<FragNoteNewsBinding> {
 
 
     ArrayList<Note> notes = new ArrayList<>();
@@ -32,17 +32,17 @@ public class NoteListUIOpe extends BaseUIOpe<NewsFragUIBean> {
 
     Gson gson = new Gson();
 
-
     public NoteListUIOpe(Context context) {
-        super(context, new NewsFragUIBean(context, null));
+        super(context);
     }
 
+
     public void init(Fragment fragment, View.OnClickListener listener, View.OnLongClickListener longClickListener, MaterialRefreshListener refreshListener) {
-        getUiBean().getRecycle().setLayoutManager(new LinearLayoutManager(context));
-        getUiBean().getRecycle().addItemDecoration(new MyItemDecoration2(context, 3));
-        getUiBean().getNotelist().setOnLongClickListener(longClickListener);
+        viewDataBinding.recycle.setLayoutManager(new LinearLayoutManager(context));
+        viewDataBinding.recycle.addItemDecoration(new MyItemDecoration2(context, 3));
+        viewDataBinding.notelist.setOnLongClickListener(longClickListener);
         parentNote = (Note) fragment.getArguments().getSerializable("data");
-        getUiBean().getRefresh().setMaterialRefreshListener(refreshListener);
+        viewDataBinding.refresh.setMaterialRefreshListener(refreshListener);
     }
 
     public void getData(final Fragment fragment, final View.OnLongClickListener onLongClickListener) {
@@ -61,8 +61,8 @@ public class NoteListUIOpe extends BaseUIOpe<NewsFragUIBean> {
                         public void done(List<Note> object, BmobException e) {
                             notes = (ArrayList<Note>) object;
                             LogUtil.E(fragment.getId());
-                            getUiBean().getRecycle().setAdapter(new NewsAdapter(context, parentNote.getObjectId(), notes));
-                            ((NewsAdapter) getUiBean().getRecycle().getAdapter()).setOnLongClickListener(onLongClickListener);
+                            viewDataBinding.recycle.setAdapter(new NewsAdapter(context, parentNote.getObjectId(), notes));
+                            ((NewsAdapter) viewDataBinding.recycle.getAdapter()).setOnLongClickListener(onLongClickListener);
                         }
                     });
                 }
