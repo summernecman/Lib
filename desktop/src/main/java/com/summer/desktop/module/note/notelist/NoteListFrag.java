@@ -4,16 +4,17 @@ package com.summer.desktop.module.note.notelist;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
-import com.google.gson.Gson;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.module.circlemenu.CircleMenuFrag;
-import com.summer.desktop.module.note.main.NoteMainFrag;
-import com.summer.desktop.module.note.noteslist.NotesListFrag;
+import com.summer.desktop.module.home.main.HomeActivity;
+import com.summer.desktop.module.note.noteslist.NoteViewPagerFrag;
 import com.summer.desktop.module.note.rename.RenameFrag;
+import com.summer.lib.base.adapter.AppPagerAdapter;
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.interf.OnFinishListener;
 import com.summer.lib.util.FragmentUtil;
@@ -21,14 +22,7 @@ import com.summer.lib.view.bottommenu.MessageEvent;
 import com.summer.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.summer.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 
-import org.greenrobot.eventbus.EventBus;
-
-import java.util.Random;
-
 public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
-
-    Random random = new Random();
-    Gson gson = new Gson();
 
 
     @Override
@@ -90,7 +84,7 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
                             break;
                         }
                         RenameFrag renameFrag = new RenameFrag();
-                        FragmentUtil.getInstance().add(getActivity(), renameFrag);
+                        FragmentUtil.getInstance().add(getActivity(), R.id.root_note, renameFrag);
                         renameFrag.setOnfinish(new OnFinishListener() {
                             @Override
                             public void onFinish(Object o) {
@@ -123,20 +117,20 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
         super.dealMesage(event);
         if (NewsAdapter.class.getName().equals(event.sender) && getOpes().getUi().parentNote.getObjectId().equals(event.id)) {
             View v = (View) event.data;
-            NotesListFrag noteListssFrag = new NotesListFrag();
+            NoteViewPagerFrag noteListssFrag = new NoteViewPagerFrag();
             Bundle bundle = new Bundle();
             bundle.putSerializable("data", getOpes().getUi().notes);
             bundle.putInt("position", (Integer) v.getTag(R.id.position));
             noteListssFrag.setArguments(bundle);
-            FragmentUtil.getInstance().add(getActivity(), noteListssFrag);
+            HomeActivity homeActivity = (HomeActivity) getActivity();
+            Fragment fragment = ((AppPagerAdapter) homeActivity.getOpes().getUi().viewDataBinding.homeViewpager.getAdapter()).getItem(2);
+            FragmentUtil.getInstance().add(getActivity(), R.id.root_note, noteListssFrag);
+
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        MessageEvent messageEvent = new MessageEvent();
-        messageEvent.dealer = NoteMainFrag.class.getName();
-        EventBus.getDefault().post(messageEvent);
     }
 }

@@ -28,20 +28,56 @@ public class FragmentUtil {
         return instance;
     }
 
-    public void add(final FragmentActivity fragmentActivity, Fragment now) {
+//    public void add(final FragmentActivity fragmentActivity, Fragment now) {
+//        if (fragments != null && fragments.size() > 0) {
+//            Fragment fragment = fragments.get(fragments.size() - 1);
+//            fragments.add(now);
+//            FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+//            transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
+//            transaction.hide(fragment);
+//            transaction.add(R.id.root, now);
+//            transaction.commit();
+//        } else {
+//            fragments.add(now);
+//            FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+//            transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
+//            transaction.add(R.id.root, now);
+//            transaction.commit();
+//        }
+//    }
+
+    public void add(final FragmentActivity fragmentActivity, int id, Fragment now) {
         if (fragments != null && fragments.size() > 0) {
             Fragment fragment = fragments.get(fragments.size() - 1);
             fragments.add(now);
             FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
             transaction.hide(fragment);
-            transaction.add(R.id.root, now);
+            transaction.add(id, now);
             transaction.commit();
         } else {
             fragments.add(now);
             FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
-            transaction.add(R.id.root, now);
+            transaction.add(id, now);
+            transaction.commit();
+        }
+    }
+
+    public void add(final Fragment f, int id, Fragment now) {
+        if (fragments != null && fragments.size() > 0) {
+            Fragment fragment = fragments.get(fragments.size() - 1);
+            fragments.add(now);
+            FragmentTransaction transaction = f.getChildFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
+            transaction.hide(fragment);
+            transaction.add(id, now);
+            transaction.commit();
+        } else {
+            fragments.add(now);
+            FragmentTransaction transaction = f.getChildFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
+            transaction.add(id, now);
             transaction.commit();
         }
     }
@@ -49,8 +85,10 @@ public class FragmentUtil {
 
     public void removeTop(final FragmentActivity fragmentActivity) {
         if (fragments != null && fragments.size() > 1) {
+            LogUtil.E("befroe");
             final Fragment now = fragments.get(fragments.size() - 1);
             final Fragment old = fragments.get(fragments.size() - 2);
+            LogUtil.E("after");
             FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.anim_push_left_in, R.anim.anim_push_right_out);
             transaction.hide(now);

@@ -14,9 +14,12 @@ import android.view.View;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.TimeBean;
 import com.summer.desktop.module.circlemenu.CircleMenuFrag;
+import com.summer.desktop.module.note.rename.RenameFrag;
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.interf.OnFinishListener;
 import com.summer.lib.constant.ValueConstant;
+import com.summer.lib.util.FragmentUtil;
+import com.summer.lib.util.NullUtil;
 import com.summer.lib.util.data.DateFormatUtil;
 import com.summer.lib.util.file.TimePickUtil;
 
@@ -40,7 +43,7 @@ public class DayFrag extends BaseUIFrag<DayMainUIOpe, DayMainDAOpe> implements D
                 Object[] o1 = (Object[]) o;
                 ArrayList<TimeBean> times = (ArrayList<TimeBean>) o1[1];
                 getOpes().getDa().getTimes().clear();
-                getOpes().getDa().getTimes().addAll(times);
+                getOpes().getDa().initTimeBean(times);
                 getOpes().getUi().addTimes(getOpes().getDa().getTimes());
                 for (int i = 0; i < times.size(); i++) {
                     getOpes().getDa().getData().put(times.get(i).toString(), (String) o1[0]);
@@ -94,7 +97,7 @@ public class DayFrag extends BaseUIFrag<DayMainUIOpe, DayMainDAOpe> implements D
                                 Object[] o1 = (Object[]) o;
                                 ArrayList<TimeBean> times = (ArrayList<TimeBean>) o1[1];
                                 getOpes().getDa().getTimes().clear();
-                                getOpes().getDa().getTimes().addAll(times);
+                                getOpes().getDa().initTimeBean(times);
                                 getOpes().getUi().addTimes(getOpes().getDa().getTimes());
                                 for (int i = 0; i < times.size(); i++) {
                                     getOpes().getDa().getData().put(times.get(i).toString(), (String) o1[0]);
@@ -103,13 +106,50 @@ public class DayFrag extends BaseUIFrag<DayMainUIOpe, DayMainDAOpe> implements D
                         });
                         break;
                     case 2:
+                        getOpes().getDa().getDayDBOpe().delete(getOpes().getUi().viewDataBinding.dayview.getArea(h, m));
                         getOpes().getUi().deleteTime(h, m);
                         break;
                     case 3:
-                        String area = getOpes().getUi().viewDataBinding.dayview.getArea(h, m);
-                        if (getOpes().getDa().getData().get(area) != null) {
-                            getOpes().getUi().goToNote(activity, getOpes().getDa().getData().get(area));
+                        final String area = getOpes().getUi().viewDataBinding.dayview.getArea(h, m);
+                        if (NullUtil.isStrEmpty(area)) {
+                            break;
                         }
+                        if (!area.startsWith(TimeBean.TYPE_EVERYDAY)) {
+                            getOpes().getUi().goToNote(activity, getOpes().getDa().getData().get(area));
+                        } else {
+                            RenameFrag renameFrag = new RenameFrag();
+                            FragmentUtil.getInstance().add(getActivity(), R.id.root_day, renameFrag);
+                            renameFrag.setOnfinish(new OnFinishListener() {
+                                @Override
+                                public void onFinish(Object o) {
+                                    getOpes().getDa().dayDBOpe.updateName(area, (String) o);
+                                    getOpes().getDa().getTodayNotes(new OnFinishListener() {
+                                        @Override
+                                        public void onFinish(Object o) {
+                                            Object[] o1 = (Object[]) o;
+                                            ArrayList<TimeBean> times = (ArrayList<TimeBean>) o1[1];
+                                            getOpes().getDa().getTimes().clear();
+                                            getOpes().getDa().initTimeBean(times);
+                                            getOpes().getUi().addTimes(getOpes().getDa().getTimes());
+                                            for (int i = 0; i < times.size(); i++) {
+                                                getOpes().getDa().getData().put(times.get(i).toString(), (String) o1[0]);
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                        break;
+                    case 4:
+                        TimePickUtil.getInstance().showTimePickDialogHMHM(activity, getFragmentManager(), new TimePickUtil.TimeDate() {
+                            @Override
+                            public void getTimeData(ArrayList<Long> time) {
+                                final TimeBean timeBean = new TimeBean(DateFormatUtil.getHour(time.get(0)), DateFormatUtil.getMinute(time.get(0)), DateFormatUtil.getHour(time.get(1)), DateFormatUtil.getMinute(time.get(1)), TimeBean.TYPE_EVERYDAY);
+                                getOpes().getDa().getTimes().add(timeBean);
+                                getOpes().getUi().addTimes(getOpes().getDa().getTimes());
+                                getOpes().getDa().getDayDBOpe().add(timeBean);
+                            }
+                        });
                         break;
                 }
             }

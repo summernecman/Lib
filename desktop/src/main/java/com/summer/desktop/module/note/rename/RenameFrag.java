@@ -15,8 +15,6 @@ public class RenameFrag extends BaseUIFrag<ReNameUIOpe, RenameDAOpe> {
 
     OnFinishListener onfinish;
 
-
-
     @OnClick({R.id.delete})
     public void onClick(View v) {
         FragmentUtil.getInstance().removeTop(getActivity());

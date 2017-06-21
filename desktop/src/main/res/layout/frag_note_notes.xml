@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-
     <data>
-
         <variable
             name="notenots"
             type="String" />
@@ -12,18 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:background="#FF4081">
-
-        </LinearLayout>
-
         <android.support.v4.view.ViewPager
-            android:id="@+id/container"
+            android:id="@+id/vp_notes"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="25dp" />
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 </layout>

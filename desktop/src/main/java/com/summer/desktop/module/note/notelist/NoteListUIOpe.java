@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
-import com.google.gson.Gson;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.databinding.FragNoteNewsBinding;
 import com.summer.lib.base.ope.BaseUIBean;
@@ -30,7 +29,6 @@ public class NoteListUIOpe extends BaseUIBean<FragNoteNewsBinding> {
 
     Note parentNote;
 
-    Gson gson = new Gson();
 
     public NoteListUIOpe(Context context) {
         super(context);

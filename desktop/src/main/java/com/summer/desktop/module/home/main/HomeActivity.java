@@ -17,7 +17,7 @@ public class HomeActivity extends BaseUIActivity<HomeUIBean, HomeDAOpe> implemen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FragmentUtil.getInstance().initClear(activity);
-        getOpes().getUi().init(this, this, this);
+        getOpes().getUi().init(getOpes().getDa().getFragment(), this, this, this);
     }
 
 

@@ -18,6 +18,8 @@ import java.util.HashMap;
 
 public class DayMainDAOpe extends BaseDAOpe {
 
+    DayDBOpe dayDBOpe;
+
     MinuteDAOpe minuteDAOpe;
 
     NoteListDAOpe noteListDAOpe;
@@ -30,6 +32,7 @@ public class DayMainDAOpe extends BaseDAOpe {
         super(context);
         minuteDAOpe = new MinuteDAOpe(context);
         noteListDAOpe = new NoteListDAOpe(context);
+        dayDBOpe = new DayDBOpe(context);
     }
 
     public MinuteDAOpe getMinuteDAOpe() {
@@ -46,6 +49,18 @@ public class DayMainDAOpe extends BaseDAOpe {
 
     public HashMap<String, String> getData() {
         return data;
+    }
+
+    public DayDBOpe getDayDBOpe() {
+        return dayDBOpe;
+    }
+
+    public ArrayList<TimeBean> initTimeBean(ArrayList<TimeBean> t) {
+        ArrayList<TimeBean> timeBeen = (ArrayList<TimeBean>) getDayDBOpe().getList();
+        getTimes().clear();
+        getTimes().addAll(timeBeen);
+        getTimes().addAll(t);
+        return getTimes();
     }
 
     public void getTodayNotes(final OnFinishListener listener) {

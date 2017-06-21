@@ -7,25 +7,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.Toast;
 
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.GsonNoteBean;
-import com.summer.desktop.bean.dabean.ImageNote;
 import com.summer.desktop.bean.dabean.NoteDetail;
 import com.summer.desktop.bean.dabean.TxtNote;
 import com.summer.desktop.module.circlemenu.CircleMenuFrag;
 import com.summer.lib.base.fragment.BaseUIFrag;
 import com.summer.lib.base.interf.OnFinishListener;
 import com.summer.lib.bean.databean.EventBean;
-import com.summer.lib.constant.ValueConstant;
-import com.summer.lib.util.FragmentUtil;
 import com.summer.lib.util.GsonUtil;
 import com.summer.lib.util.IntentUtil;
-import com.summer.lib.view.image.imagepager.ImagePagerFrag;
 
-import java.io.File;
 import java.util.ArrayList;
 
 
@@ -40,7 +34,6 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
         getOpes().getUi().init(fragment, getOpes().getDa().bean, new OnBMClickListener() {
             @Override
             public void onBoomButtonClick(int index) {
-                Toast.makeText(getActivity(), "Clicked " + index, Toast.LENGTH_SHORT).show();
                 switch (index) {
                     case 0:
                         IntentUtil.getInstance().photosShowFromphone(fragment, 0);
@@ -65,24 +58,11 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
         });
     }
 
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void onboom(BoomMsg boomMsg) {
-//        getOpes().getDaOpe().bean.getData().remove(boomMsg.postion);
-//        getOpes().getUiOpe().getData(fragment, getOpes().getDaOpe().bean, this, NoteDetailFrag.this);
-//    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        int[] ints = new int[]{0};
-        getOpes().getDa().update(ints, getOpes().getDa().bean, getOpes().getDa().note);
+        getOpes().getDa().initUpade(getOpes().getDa().bean, getOpes().getDa().note);
     }
 
     @Override
@@ -112,32 +92,6 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
 
     @Override
     public void onClick(View v) {
-        ArrayList<NoteDetail> data = (ArrayList<NoteDetail>) v.getTag(R.id.data1);
-        int postion = (int) v.getTag(R.id.position);
-        ArrayList<String> strings = new ArrayList<>();
-        for (int i = 0; i < data.size(); i++) {
-            if (data.get(i).getType().equals(NoteDetail.IMAGE)) {
-                ImageNote imageNote = GsonUtil.getInstance().fromJson(data.get(i).getData(), ImageNote.class);
-                String url = "";
-                if (imageNote.getLocalSrc() != null && imageNote.getLocalSrc().startsWith("file://")) {
-                    File file = new File(imageNote.getLocalSrc().substring("file://".length(), imageNote.getLocalSrc().length()));
-                    if (file.exists()) {
-                        url = imageNote.getLocalSrc();
-                    } else {
-                        url = imageNote.getSrc();
-                    }
-                } else {
-                    url = imageNote.getSrc();
-                }
-                strings.add(url);
-            }
-        }
-        ImagePagerFrag pagerFrag = new ImagePagerFrag();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(ValueConstant.DATA_DATA, strings);
-        bundle.putSerializable(ValueConstant.DATA_POSITION, postion);
-        pagerFrag.setArguments(bundle);
-        FragmentUtil.getInstance().add(getActivity(), pagerFrag);
-
+        getOpes().getUi().goToImagesViewPager(fragment, getOpes().getDa().initImageUrl((ArrayList<NoteDetail>) v.getTag(R.id.data1)), (int) v.getTag(R.id.position));
     }
 }

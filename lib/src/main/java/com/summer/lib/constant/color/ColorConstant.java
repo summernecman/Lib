@@ -19,4 +19,15 @@ public class ColorConstant {
     public static int COLOR_BOTTOMENU = R.color.color_base_bottommenu;
 
 
+    public static int[] colors = new int[]{
+            R.color.yellow,
+            R.color.lightgreen,
+            R.color.plum,
+            R.color.sandybrown,
+            R.color.powderblue,
+            R.color.greenyellow,
+            R.color.lightskyblue,
+    };
+
+
 }

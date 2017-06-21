@@ -13,11 +13,11 @@ import com.summer.desktop.module.note.notelist.NoteListFrag;
 
 import java.util.ArrayList;
 
-public class NotesListAdapter extends FragmentStatePagerAdapter {
+public class NoteViewPagerAdapter extends FragmentStatePagerAdapter {
 
     ArrayList<Note> notes;
 
-    public NotesListAdapter(FragmentManager fm, ArrayList<Note> notes) {
+    public NoteViewPagerAdapter(FragmentManager fm, ArrayList<Note> notes) {
         super(fm);
         this.notes = notes;
     }

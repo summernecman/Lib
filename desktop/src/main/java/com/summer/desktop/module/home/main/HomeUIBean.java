@@ -9,9 +9,6 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 
 import com.summer.desktop.databinding.ActHomeMainBinding;
-import com.summer.desktop.module.app.AppItemsFrag;
-import com.summer.desktop.module.day.DayFrag;
-import com.summer.desktop.module.note.main.NoteMainFrag;
 import com.summer.lib.base.adapter.AppPagerAdapter;
 import com.summer.lib.base.interf.view.OnPageChangeAdapterI;
 import com.summer.lib.base.listener.DoubleClickListener;
@@ -27,19 +24,15 @@ public class HomeUIBean extends BaseUIBean<ActHomeMainBinding> {
         super(context);
     }
 
-    public void init(FragmentActivity activity, DoubleClickListener doubleClickListener, View.OnClickListener listener) {
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(new DayFrag());
-        fragments.add(new AppItemsFrag());
-        fragments.add(new NoteMainFrag());
-        initHomeViewPager(new AppPagerAdapter(activity.getSupportFragmentManager(), activity, fragments));
+    public void init(ArrayList<Fragment> list, FragmentActivity activity, DoubleClickListener doubleClickListener, View.OnClickListener listener) {
+        initHomeViewPager(new AppPagerAdapter(activity.getSupportFragmentManager(), activity, list));
         initBottom(new BottomItemView.MenuAdapter(activity), doubleClickListener, listener);
         ((BottomItemView.MenuAdapter) viewDataBinding.bottomViewpager.getAdapter()).setDoubleClickListener(doubleClickListener);
     }
 
     public void initHomeViewPager(PagerAdapter adapter) {
         viewDataBinding.homeViewpager.setAdapter(adapter);
-        viewDataBinding.homeViewpager.setOffscreenPageLimit(3);
+        viewDataBinding.homeViewpager.setOffscreenPageLimit(adapter.getCount());
         viewDataBinding.homeViewpager.addOnPageChangeListener(new OnPageChangeAdapterI() {
             @Override
             public void onPageSelected(int position) {

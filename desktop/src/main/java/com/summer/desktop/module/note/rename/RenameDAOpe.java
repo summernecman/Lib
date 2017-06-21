@@ -7,6 +7,7 @@ import android.content.Context;
 import com.summer.lib.base.ope.BaseDAOpe;
 
 public class RenameDAOpe extends BaseDAOpe {
+
     public RenameDAOpe(Context context) {
         super(context);
     }

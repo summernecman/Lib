@@ -52,6 +52,11 @@ public class NoteDetailDAOpe extends BaseDAOpe {
         }
     }
 
+    public void initUpade(final GsonNoteBean bean, final Note note) {
+        int[] ints = new int[]{0};
+        update(ints, bean, note);
+    }
+
     public void update(final int[] i, final GsonNoteBean bean, final Note note) {
         if (bean.getData() == null) {
             return;
@@ -143,5 +148,27 @@ public class NoteDetailDAOpe extends BaseDAOpe {
                 msg.onFinish();
                 break;
         }
+    }
+
+    public ArrayList<String> initImageUrl(ArrayList<NoteDetail> data) {
+        ArrayList<String> strings = new ArrayList<>();
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).getType().equals(NoteDetail.IMAGE)) {
+                ImageNote imageNote = GsonUtil.getInstance().fromJson(data.get(i).getData(), ImageNote.class);
+                String url = "";
+                if (imageNote.getLocalSrc() != null && imageNote.getLocalSrc().startsWith("file://")) {
+                    File file = new File(imageNote.getLocalSrc().substring("file://".length(), imageNote.getLocalSrc().length()));
+                    if (file.exists()) {
+                        url = imageNote.getLocalSrc();
+                    } else {
+                        url = imageNote.getSrc();
+                    }
+                } else {
+                    url = imageNote.getSrc();
+                }
+                strings.add(url);
+            }
+        }
+        return strings;
     }
 }

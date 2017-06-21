@@ -20,4 +20,15 @@ public class MessageEvent {
         this.dealer = dealer;
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "MessageEvent{" +
+                "position=" + position +
+                ", sender='" + sender + '\'' +
+                ", dealer='" + dealer + '\'' +
+                ", data=" + data +
+                ", id=" + id +
+                '}';
+    }
 }
