@@ -32,9 +32,9 @@ import cn.bmob.v3.listener.UploadFileListener;
 public class NoteDetailDAOpe extends BaseDAOpe {
 
 
-    GsonNoteBean bean;
-
     Note note;
+
+    GsonNoteBean bean;
 
     Gson gson = new Gson();
     EditText ed;

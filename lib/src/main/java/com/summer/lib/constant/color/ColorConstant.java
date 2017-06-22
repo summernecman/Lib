@@ -27,6 +27,14 @@ public class ColorConstant {
             R.color.powderblue,
             R.color.greenyellow,
             R.color.lightskyblue,
+            R.color.mediumslateblue,
+            R.color.olivedrab,
+            R.color.chocolate,
+            R.color.silver,
+            R.color.lightseagreen,
+            R.color.violet,
+            R.color.rosybrown,
+            R.color.palevioletred,
     };
 
 

@@ -35,4 +35,24 @@ public class MinuteRect {
         this.h = h;
         this.w = w;
     }
+
+    public float[] getCenter() {
+        return new float[]{(left + right) / 2, (top + bottom) / 2};
+    }
+
+    public float[] getLeftMid() {
+        return new float[]{left, (top + bottom) / 2};
+    }
+
+    public float[] getRightMid() {
+        return new float[]{right, (top + bottom) / 2};
+    }
+
+    public float[] getTopMid() {
+        return new float[]{(left + right) / 2, top};
+    }
+
+    public float[] getBottomMid() {
+        return new float[]{(left + right) / 2, bottom};
+    }
 }

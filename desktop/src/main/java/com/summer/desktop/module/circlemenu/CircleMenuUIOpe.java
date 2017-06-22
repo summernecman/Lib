@@ -32,6 +32,7 @@ public class CircleMenuUIOpe extends BaseUIBean<FragNoteBoomBinding> {
                 .addSubMenu(Color.parseColor("#30A400"), R.drawable.delete)
                 .addSubMenu(Color.parseColor("#FF4B32"), R.drawable.rename)
                 .addSubMenu(Color.parseColor("#FF4B32"), R.drawable.insert_image)
+                .addSubMenu(Color.parseColor("#258CFF"), R.drawable.insert_link)
                 .setOnMenuSelectedListener(new OnMenuSelectedListener() {
 
                     @Override
@@ -45,11 +46,15 @@ public class CircleMenuUIOpe extends BaseUIBean<FragNoteBoomBinding> {
 
             @Override
             public void onMenuOpened() {
-
+                onFinishListener.onFinish(-1);
             }
 
             @Override
             public void onMenuClosed() {
+                onFinishListener.onFinish(-2);
+                if (fragment == null) {
+                    return;
+                }
                 FragmentTransaction transaction = fragment.getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.setCustomAnimations(R.anim.anim_push_left_in, R.anim.anim_push_right_out);
                 transaction.remove(fragment);

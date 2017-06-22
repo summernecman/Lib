@@ -16,6 +16,8 @@ public class MinuteBean extends BaseDABean {
 
     private int textSize;
 
+    private boolean done = false;
+
     public MinuteRect getMinuteRect() {
         return minuteRect;
     }
@@ -54,5 +56,13 @@ public class MinuteBean extends BaseDABean {
 
     public void setTextSize(int textSize) {
         this.textSize = textSize;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }

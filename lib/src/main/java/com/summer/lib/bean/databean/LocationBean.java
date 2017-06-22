@@ -9,6 +9,9 @@ public class LocationBean {
 
     private float y;
 
+    public LocationBean() {
+    }
+
     public LocationBean(float x, float y) {
         this.x = x;
         this.y = y;

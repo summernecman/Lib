@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.Note;
+import com.summer.lib.util.data.DateFormatUtil;
 import com.summer.lib.view.bottommenu.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -48,7 +49,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> im
         holder.itemView.setTag(R.id.position, position);
         holder.itemView.setTag(R.id.data, notes.get(position));
         holder.textView.setText(notes.get(position).getName());
-        //holder.dateTV.setText(DateFormatUtil.yyyyMMdd_HHmmss_to_yyyyMMdd_HHmm(notes.get(position).getCreatedAt()));
+        holder.dateTV.setText(DateFormatUtil.yyyyMMdd_HHmmss_to_yyyyMMdd_HHmm(notes.get(position).getCreatedAt()));
         if (notes.get(position).getType().equals(Note.NOTE)) {
             holder.imgIV.setImageResource(R.drawable.note);
         } else {

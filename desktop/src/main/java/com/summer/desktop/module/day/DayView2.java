@@ -21,11 +21,10 @@ import com.summer.lib.bean.databean.XYBean;
 import com.summer.lib.constant.color.ColorConstant;
 import com.summer.lib.util.LogUtil;
 import com.summer.lib.util.NullUtil;
-import com.summer.lib.util.ScreenUtil;
 
 import java.util.ArrayList;
 
-public class DayView extends View implements View.OnLongClickListener {
+public class DayView2 extends View implements View.OnLongClickListener {
 
     //移动的阈值
     private static final int TOUCH_SLOP = 5;
@@ -33,20 +32,16 @@ public class DayView extends View implements View.OnLongClickListener {
     int nowh = -1;
     int nowm = -1;
     int border = 1;
-    int wnum = 24;
-    int hnum = 60;
+    int wnum = 60;
+    int hnum = 24;
     ArrayList<TimeBean> times = new ArrayList<>();
     MinuteDAOpe minuteDAOpe;
     float w, h;
     OnlongClickWithHM longClickListener;
     XYBean xyBean = new XYBean();
     private float mLastMotionX, mLastMotionY;
-    //是否移动了
-    private boolean isMoved;
-    //长按的runnable
-    private MyRunnable runnable;
 
-    public DayView(Context context, @Nullable AttributeSet attrs) {
+    public DayView2(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         minuteDAOpe = new MinuteDAOpe(context);
         setOnLongClickListener(this);
@@ -55,18 +50,14 @@ public class DayView extends View implements View.OnLongClickListener {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        w = (((ScreenUtil.w - border) / (wnum + 1)) - border);
-        //h = ((ScreenUtil.h - 50 * ValueConstant.DIMEN_1 - ScreenUtil.sbh - (hnum + 2)) / hnum);
         View view = (View) getParent();
-        LogUtil.E(view.getWidth() + ":" + view.getHeight());
-        w = (view.getWidth() - (wnum) * border) / (wnum + 1);
-        h = (view.getHeight() - (hnum + 2) * border) / (hnum + 1);
-        //w = (view.getWidth()-(wnum+2)*border)/(wnum+1);
+        w = (view.getWidth()) / (wnum + 1);
+        h = (view.getHeight()) / (hnum + 1);
         if (rects.size() == 0) {
-            for (int i = 0; i < (wnum + 1); i++) {
+            for (int i = 0; i < (hnum + 1); i++) {
                 ArrayList<MinuteBean> rect = new ArrayList<>();
-                for (int j = 0; j < (hnum + 1); j++) {
-                    MinuteRect minuteRect = new MinuteRect(border * (i + 1) + w * i, border * (j + 1) + h * j, border * (i + 1) + w * i + w, border * (j + 1) + h * j + h, w, h);
+                for (int j = 0; j < (wnum + 1); j++) {
+                    MinuteRect minuteRect = new MinuteRect(border * (j + 1) + w * j, border * (i + 1) + h * i, border * (j + 1) + w * j + w, border * (i + 1) + h * i + h, w, h);
                     MinuteBean minuteBean = new MinuteBean();
                     minuteBean.setMinuteRect(minuteRect);
                     rect.add(minuteBean);
@@ -85,7 +76,7 @@ public class DayView extends View implements View.OnLongClickListener {
     public void initData() {
         nowh = minuteDAOpe.nowH();
         nowm = minuteDAOpe.nowM();
-        int x = (nowh - 5) < 0 ? (nowh - 5) + wnum : (nowh - 5);
+        int x = (nowh - 5) < 0 ? (nowh - 5) + hnum : (nowh - 5);
         int y = nowm;
 
         for (int i = 0; i < rects.size(); i++) {
@@ -94,15 +85,14 @@ public class DayView extends View implements View.OnLongClickListener {
                 rects.get(i).get(j).setTextSize((int) (w));
                 //black
                 if (j == 0 && i != 0) {
-                    if ((6 - 1 + i) % 24 == nowh) {
-                        rects.get(i).get(j).setColor(getResources().getColor(com.summer.lib.R.color.black));
+                    if ((6 - 1 + i) % hnum == nowh) {
+                        rects.get(i).get(j).setColor(Color.BLACK);
                     }
-                    rects.get(i).get(j).setTextColor(Color.BLACK);
-                    rects.get(i).get(j).setText("" + (6 - 1 + i) % 24);
+                    rects.get(i).get(j).setText("" + (6 - 1 + i) % hnum);
                 } else if (i == 0 && j != 0) {
                     //横坐标0
                     if (j == nowm) {
-                        rects.get(i).get(j).setColor(getResources().getColor(com.summer.lib.R.color.black));
+                        rects.get(i).get(j).setColor(Color.BLACK);
                     }
                     rects.get(i).get(j).setText("" + (j));
                 } else {
@@ -110,8 +100,6 @@ public class DayView extends View implements View.OnLongClickListener {
                     if ((i * hnum + j) < (x * hnum + y) && i != 0 && j != 0) {
                         rects.get(i).get(j).setDone(true);
                         rects.get(i).get(j).setColor(Color.WHITE);
-                    } else if ((i * hnum + j) == (x * hnum + y)) {
-                        rects.get(i).get(j).setColor(getResources().getColor(com.summer.lib.R.color.black));
                     }
                 }
             }
@@ -123,16 +111,16 @@ public class DayView extends View implements View.OnLongClickListener {
             for (int i = 0; i < rects.size(); i++) {
                 for (int j = 0; j < rects.get(i).size(); j++) {
                     if (i != 0 && j != 0) {
-                        int sx = (times.get(a).sh - 5) < 0 ? (times.get(a).sh - 5) + wnum : (times.get(a).sh - 5);
+                        int sx = (times.get(a).sh - 5) < 0 ? (times.get(a).sh - 5) + hnum : (times.get(a).sh - 5);
                         int sy = times.get(a).sm;
-                        int ex = (times.get(a).eh - 5) < 0 ? (times.get(a).eh - 5) + wnum : (times.get(a).eh - 5);
+                        int ex = (times.get(a).eh - 5) < 0 ? (times.get(a).eh - 5) + hnum : (times.get(a).eh - 5);
                         int ey = times.get(a).em;
-                        if ((sx * hnum + sy) < (ex * hnum + ey)) {
-                            if ((i * hnum + j) >= ((sx * hnum + sy)) && (i * hnum + j) <= ((ex * hnum + ey))) {
+                        if ((sx * wnum + sy) < (ex * wnum + ey)) {
+                            if ((i * wnum + j) >= ((sx * wnum + sy)) && (i * wnum + j) <= ((ex * wnum + ey))) {
                                 rects.get(i).get(j).setColor(color);
                             }
                         } else {
-                            if ((i * hnum + j) <= ((ex * hnum + ey)) || (i * hnum + j) >= (sx * hnum + sy)) {
+                            if ((i * wnum + j) <= ((ex * wnum + ey)) || (i * wnum + j) >= (sx * wnum + sy)) {
                                 rects.get(i).get(j).setColor(color);
                             }
                         }
@@ -144,8 +132,8 @@ public class DayView extends View implements View.OnLongClickListener {
 
         for (int i = 0; i < rects.size(); i++) {
             for (int j = 0; j < rects.get(i).size(); j++) {
-                if (i != 0 && j != 0 && ((i * hnum + j) == (x * hnum + y))) {
-                    rects.get(i).get(j).setColor(getResources().getColor(com.summer.lib.R.color.black));
+                if (i == x && j == y) {
+                    rects.get(i).get(j).setColor(Color.BLACK);
                 }
             }
         }
@@ -185,7 +173,7 @@ public class DayView extends View implements View.OnLongClickListener {
             paint.setTextSize(rects.get(0).get(0).getTextSize());
             paint.setColor(rects.get(0).get(0).getTextColor());
             LocationBean locationBean = countCenterXY(times.get(i), rects.get(0).get(0).getTextSize());
-            canvas.drawText(times.get(i).text, locationBean.getX() + w / 3, locationBean.getY(), paint);
+            canvas.drawText(times.get(i).text, locationBean.getX() + w, locationBean.getY() + h, paint);
         }
 
     }
@@ -212,13 +200,13 @@ public class DayView extends View implements View.OnLongClickListener {
     //  //根据给出的时分算出所在区间并删除
     public void delete(int h, int m) {
         LogUtil.E(h + "--" + m);
-        h = (h - 5) < 0 ? (h - 5) + wnum : (h - 5);
+        h = (h - 5) < 0 ? (h - 5) + hnum : (h - 5);
         for (int i = 0; i < times.size(); i++) {
-            int sx = (times.get(i).sh - 5) < 0 ? (times.get(i).sh - 5) + wnum : (times.get(i).sh - 5);
+            int sx = (times.get(i).sh - 5) < 0 ? (times.get(i).sh - 5) + hnum : (times.get(i).sh - 5);
             int sy = times.get(i).sm;
-            int ex = (times.get(i).eh - 5) < 0 ? (times.get(i).eh - 5) + wnum : (times.get(i).eh - 5);
+            int ex = (times.get(i).eh - 5) < 0 ? (times.get(i).eh - 5) + hnum : (times.get(i).eh - 5);
             int ey = times.get(i).em;
-            if ((h * hnum + m) >= ((sx * hnum + sy)) && (h * hnum + m) <= ((ex * hnum + ey))) {
+            if ((h * wnum + m) >= ((sx * wnum + sy)) && (h * wnum + m) <= ((ex * wnum + ey))) {
                 times.remove(i);
                 i--;
             }
@@ -230,29 +218,29 @@ public class DayView extends View implements View.OnLongClickListener {
     //根据给出的时分算出所在区间中心坐标
     public LocationBean countCenterXY(TimeBean timeBean, int textsize) {
 
-        int sx = (timeBean.sh - 5) < 0 ? (timeBean.sh - 5) + wnum : (timeBean.sh - 5);
-        int sy = timeBean.sm + 1;
-        int ex = (timeBean.eh - 5) < 0 ? (timeBean.eh - 5) + wnum + 1 : (timeBean.eh - 5) + 1;
-        int ey = timeBean.em + 1;
+        int sx = (timeBean.sh - 5) < 0 ? (timeBean.sh - 5) + hnum : (timeBean.sh - 5);
+        int sy = timeBean.sm;
+        int ex = (timeBean.eh - 5) < 0 ? (timeBean.eh - 5) + hnum + 1 : (timeBean.eh - 5) + 1;
+        int ey = timeBean.em;
 
-        LocationBean sl = new LocationBean(sx * w, (sy + 1) * h);
+        LocationBean sl = new LocationBean((sy) * w, (sx) * h);
         return sl;
     }
 
     //根据给出的时分算出所在区间
     public String getArea(int h, int m) {
-        h = (h - 5) < 0 ? (h - 5) + wnum : (h - 5);
+        h = (h - 5) < 0 ? (h - 5) + hnum : (h - 5);
         for (int i = 0; i < times.size(); i++) {
-            int sx = (times.get(i).sh - 5) < 0 ? (times.get(i).sh - 5) + wnum : (times.get(i).sh - 5);
+            int sx = (times.get(i).sh - 5) < 0 ? (times.get(i).sh - 5) + hnum : (times.get(i).sh - 5);
             int sy = times.get(i).sm;
-            int ex = (times.get(i).eh - 5) < 0 ? (times.get(i).eh - 5) + wnum : (times.get(i).eh - 5);
+            int ex = (times.get(i).eh - 5) < 0 ? (times.get(i).eh - 5) + hnum : (times.get(i).eh - 5);
             int ey = times.get(i).em;
-            if (((sx * hnum + sy)) <= ((ex * hnum + ey))) {
-                if ((h * hnum + m) >= ((sx * hnum + sy)) && (h * hnum + m) <= ((ex * hnum + ey))) {
+            if (((sx * wnum + sy)) <= ((ex * wnum + ey))) {
+                if ((h * wnum + m) >= ((sx * wnum + sy)) && (h * wnum + m) <= ((ex * wnum + ey))) {
                     return times.get(i).toString();
                 }
             } else {
-                if ((h * hnum + m) >= ((sx * hnum + sy)) || (h * hnum + m) <= ((ex * hnum + ey))) {
+                if ((h * wnum + m) >= ((sx * wnum + sy)) || (h * wnum + m) <= ((ex * wnum + ey))) {
                     return times.get(i).toString();
                 }
             }
@@ -263,8 +251,8 @@ public class DayView extends View implements View.OnLongClickListener {
 
     //根据坐标算出小时分钟
     public int[] countHM(float x, float y) {
-        int a = (int) (5 + x / w);
-        int b = (int) (y / h);
+        int b = (int) (x / w);
+        int a = (int) (5 + y / h);
         if (a >= (wnum + 1)) {
             a = a - (wnum + 1);
         }
@@ -273,8 +261,8 @@ public class DayView extends View implements View.OnLongClickListener {
     }
 
     public int[] countIJ(float x, float y) {
-        int a = (int) (x / w);
-        int b = (int) (y / h);
+        int b = (int) (x / w);
+        int a = (int) (y / h);
         return new int[]{a, b};
     }
 

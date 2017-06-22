@@ -5,7 +5,9 @@ package com.summer.desktop.module.note.notelist;
 import android.content.Context;
 
 import com.summer.desktop.bean.dabean.GsonNoteBean;
+import com.summer.desktop.bean.dabean.ImageNote;
 import com.summer.desktop.bean.dabean.Note;
+import com.summer.desktop.bean.dabean.NoteDetail;
 import com.summer.desktop.bean.dabean.TimeBean;
 import com.summer.lib.base.interf.OnFinishListener;
 import com.summer.lib.base.ope.BaseDAOpe;
@@ -63,6 +65,21 @@ public class NoteListDAOpe extends BaseDAOpe {
         });
     }
 
+    public void createLink(String parentid, final OnFinishListener onFinishListener) {
+        Note note = new Note(Note.NOTE, "链接" + RandomUtil.getInstance().nextFloat() * 100);
+        GsonNoteBean gsonNoteBean = new GsonNoteBean();
+        gsonNoteBean.setType(GsonNoteBean.TYPE_NOTE_LINK);
+        note.setData(GsonUtil.getInstance().toJson(gsonNoteBean));
+        note.setParentId(parentid);
+        note.save(new SaveListener<String>() {
+            @Override
+            public void done(String objectId, BmobException e) {
+                onFinishListener.onFinish(objectId);
+            }
+        });
+    }
+
+
     public void createTodayNote(final TimeBean timeBean, final String parentid, String[] name, final String finalname, final OnFinishListener onFinishListener) {
         i = -1;
         todayNoteBookExist(parentid, name, new OnFinishListener() {
@@ -106,7 +123,9 @@ public class NoteListDAOpe extends BaseDAOpe {
     public void todayNoteBookExist(final String parentid, final String[] name, final OnFinishListener onFinishListener) {
         i++;
         if (name.length <= i) {
-            onFinishListener.onFinish(parentid);
+            if (onFinishListener != null) {
+                onFinishListener.onFinish(parentid);
+            }
             return;
         }
         BmobQuery<Note> query = new BmobQuery<>();
@@ -116,7 +135,9 @@ public class NoteListDAOpe extends BaseDAOpe {
             @Override
             public void done(List<Note> list, BmobException e) {
                 if (e != null) {
-                    onFinishListener.onFinish(null);
+                    if (onFinishListener != null) {
+                        onFinishListener.onFinish(e);
+                    }
                     return;
                 }
                 if (list == null) {
@@ -143,7 +164,9 @@ public class NoteListDAOpe extends BaseDAOpe {
         note.save(new SaveListener<String>() {
             @Override
             public void done(String objectId, BmobException e) {
-                onFinishListener.onFinish(objectId);
+                if (onFinishListener != null) {
+                    onFinishListener.onFinish(e);
+                }
             }
         });
     }
@@ -154,7 +177,9 @@ public class NoteListDAOpe extends BaseDAOpe {
         note.save(new SaveListener<String>() {
             @Override
             public void done(String objectId, BmobException e) {
-                onFinishListener.onFinish(objectId);
+                if (onFinishListener != null) {
+                    onFinishListener.onFinish(e);
+                }
             }
         });
     }
@@ -168,7 +193,59 @@ public class NoteListDAOpe extends BaseDAOpe {
         note.delete(new UpdateListener() {
             @Override
             public void done(BmobException e) {
-                onFinishListener.onFinish(e);
+                if (onFinishListener != null) {
+                    onFinishListener.onFinish(e);
+                }
+            }
+        });
+    }
+
+    public void deleteNoteWithFile(final Note n, final OnFinishListener onFinishListener) {
+        ArrayList<String> strings = new ArrayList<>();
+        if (n.getType().equals(Note.NOTE)) {
+            GsonNoteBean gsonNoteBean = GsonUtil.getInstance().fromJson(n.getData(), GsonNoteBean.class);
+            ArrayList<NoteDetail> noteDetails = gsonNoteBean.getData();
+            for (int i = 0; noteDetails != null && i < noteDetails.size(); i++) {
+                if (NoteDetail.IMAGE.equals(noteDetails.get(i).getType())) {
+                    ImageNote imageNote = GsonUtil.getInstance().fromJson(noteDetails.get(i).getData(), ImageNote.class);
+                    strings.add(imageNote.getSrc());
+                }
+
+            }
+        }
+        String[] strs = new String[strings.size()];
+        strs = strings.toArray(strs);
+        deleteFile(strs, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                deleteNote(n, onFinishListener);
+            }
+        });
+    }
+
+    public void deleteFile(String[] urls, final OnFinishListener onFinishListener) {
+        BmobFile.deleteBatch(urls, new DeleteBatchListener() {
+            @Override
+            public void done(String[] failUrls, BmobException e) {
+                if (onFinishListener != null) {
+                    onFinishListener.onFinish(failUrls);
+                }
+            }
+        });
+    }
+
+    public void deleteNote(String objectid, final OnFinishListener onFinishListener) {
+        if (objectid == null) {
+            return;
+        }
+        Note note = new Note();
+        note.setObjectId(objectid);
+        note.delete(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (onFinishListener != null) {
+                    onFinishListener.onFinish(e);
+                }
             }
         });
     }
@@ -207,7 +284,9 @@ public class NoteListDAOpe extends BaseDAOpe {
         note.update(new UpdateListener() {
             @Override
             public void done(BmobException e) {
-                onFinishListener.onFinish(e);
+                if (onFinishListener != null) {
+                    onFinishListener.onFinish(e);
+                }
             }
         });
     }

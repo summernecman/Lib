@@ -71,7 +71,8 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
                         break;
                     case 2:
                         //delete
-                        getOpes().getDa().deleteNote(note1, new OnFinishListener() {
+
+                        getOpes().getDa().deleteNoteWithFile(note1, new OnFinishListener() {
                             @Override
                             public void onFinish(Object o) {
                                 getOpes().getUi().getData(NoteListFrag.this, NoteListFrag.this);
@@ -100,6 +101,14 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
                     case 4:
                         //note
                         getOpes().getDa().createGallery(getOpes().getUi().parentNote.getObjectId(), new OnFinishListener() {
+                            @Override
+                            public void onFinish(Object o) {
+                                getOpes().getUi().getData(NoteListFrag.this, NoteListFrag.this);
+                            }
+                        });
+                        break;
+                    case 5:
+                        getOpes().getDa().createLink(getOpes().getUi().parentNote.getObjectId(), new OnFinishListener() {
                             @Override
                             public void onFinish(Object o) {
                                 getOpes().getUi().getData(NoteListFrag.this, NoteListFrag.this);

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
@@ -32,15 +33,31 @@ public class NoteDetailUIOpe extends BaseUIBean<FragNoteTxtBinding> {
     }
 
     public void getData(final Fragment fragment, GsonNoteBean bean, OnFinishListener onFinishListener, View.OnClickListener listener) {
-        if (viewDataBinding.txtroot.getChildCount() != 0) {
-            RecyclerView recyclerView = (RecyclerView) viewDataBinding.txtroot.getChildAt(0);
-            (recyclerView.getAdapter()).notifyDataSetChanged();
-        } else {
-            RecyclerView recyclerView = (RecyclerView) ViewCreater.create(context, bean);
-            viewDataBinding.txtroot.addView(recyclerView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            ((NoteDetailAdapter) recyclerView.getAdapter()).setOnFinishListener(onFinishListener);
-            ((NoteDetailAdapter) recyclerView.getAdapter()).setOnClickListener(listener);
+        switch (bean.getType()) {
+            case GsonNoteBean.TYPE_NOTE_LINK:
+                if (viewDataBinding.txtroot.getChildCount() != 0) {
+                    WebView webView = (WebView) viewDataBinding.txtroot.getChildAt(0);
+                    if (bean.getData() != null && bean.getData().size() > 0 && bean.getData().get(0).getData() != null) {
+                        webView.loadUrl(bean.getData().get(0).getData());
+                    }
+                } else {
+                    WebView webView = (WebView) ViewCreater.create(context, bean);
+                    viewDataBinding.txtroot.addView(webView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                }
+                break;
+            default:
+                if (viewDataBinding.txtroot.getChildCount() != 0) {
+                    RecyclerView recyclerView = (RecyclerView) viewDataBinding.txtroot.getChildAt(0);
+                    (recyclerView.getAdapter()).notifyDataSetChanged();
+                } else {
+                    RecyclerView recyclerView = (RecyclerView) ViewCreater.create(context, bean);
+                    viewDataBinding.txtroot.addView(recyclerView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                    ((NoteDetailAdapter) recyclerView.getAdapter()).setOnFinishListener(onFinishListener);
+                    ((NoteDetailAdapter) recyclerView.getAdapter()).setOnClickListener(listener);
+                }
+                break;
         }
+
     }
 
     public void init(final Fragment fragment, final GsonNoteBean bean, OnBMClickListener onBMClickListener) {
@@ -62,5 +79,13 @@ public class NoteDetailUIOpe extends BaseUIBean<FragNoteTxtBinding> {
         bundle.putSerializable(ValueConstant.DATA_POSITION, p);
         pagerFrag.setArguments(bundle);
         FragmentUtil.getInstance().add(fragment.getActivity(), R.id.root_note, pagerFrag);
+    }
+
+    public WebView dealWebView() {
+        if (viewDataBinding.txtroot.getChildCount() != 0 && viewDataBinding.txtroot.getChildAt(0) instanceof WebView) {
+            WebView webView = (WebView) viewDataBinding.txtroot.getChildAt(0);
+            return webView;
+        }
+        return null;
     }
 }

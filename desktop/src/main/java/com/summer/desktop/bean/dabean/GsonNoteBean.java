@@ -11,6 +11,7 @@ public class GsonNoteBean extends BaseDABean {
     public static final String TYPE_NOTE = "type_note";
     public static final String TYPE_GALLERY = "type_gallery";
     public static final String TYPE_NOTE_DAY = "type_note_day";
+    public static final String TYPE_NOTE_LINK = "type_note_link";
     ArrayList<NoteDetail> data = new ArrayList<>();
     private String type = TYPE_NOTE;
 

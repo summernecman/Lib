@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
@@ -25,26 +27,29 @@ public class ViewCreater {
 
 
     public static View create(Context context, GsonNoteBean bean) {
-
-        RecyclerView recyclerView = new RecyclerView(context);
-        recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        recyclerView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
         switch (bean.getType()) {
-            case GsonNoteBean.TYPE_GALLERY:
-                recyclerView.setLayoutManager(new GridLayoutManager(context, 3));
-                break;
+            case GsonNoteBean.TYPE_NOTE_LINK:
+                return createWebView(context, bean);
             default:
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                break;
-        }
-        if (bean.getData() == null) {
-            return recyclerView;
-        }
-        recyclerView.setAdapter(new NoteDetailAdapter(context, bean));
-        attachToItemTouch(recyclerView, bean.getData());
-        return recyclerView;
+                RecyclerView recyclerView = new RecyclerView(context);
+                recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+                recyclerView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
+                switch (bean.getType()) {
+                    case GsonNoteBean.TYPE_GALLERY:
+                        recyclerView.setLayoutManager(new GridLayoutManager(context, 3));
+                        break;
+                    default:
+                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                        break;
+                }
+                if (bean.getData() == null) {
+                    return recyclerView;
+                }
+                recyclerView.setAdapter(new NoteDetailAdapter(context, bean));
+                attachToItemTouch(recyclerView, bean.getData());
+                return recyclerView;
+        }
     }
 
     public static void attachToItemTouch(RecyclerView recyclerView, final ArrayList<NoteDetail> data) {
@@ -79,5 +84,16 @@ public class ViewCreater {
             }
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);
+    }
+
+    public static WebView createWebView(Context context, GsonNoteBean bean) {
+        WebView webView = new WebView(context);
+        webView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
+        if (bean.getData() != null && bean.getData().size() > 0 && bean.getData().get(0).getData() != null) {
+            webView.loadUrl(bean.getData().get(0).getData());
+        }
+        return webView;
     }
 }

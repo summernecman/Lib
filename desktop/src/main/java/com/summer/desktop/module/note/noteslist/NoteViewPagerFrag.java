@@ -15,6 +15,9 @@ public class NoteViewPagerFrag extends BaseUIFrag<NoteViewPagerUIOpe, NotesViewP
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getOpes().getDa().init(fragment);
+        if (getOpes().getDa().notes.size() <= getOpes().getDa().position) {
+            return;
+        }
         TitleUtil.getInstance().add(getOpes().getDa().notes.get(getOpes().getDa().position).getName());
         getOpes().getUi().initpager(this, getOpes().getDa().notes, getOpes().getDa().position);
     }
@@ -22,6 +25,9 @@ public class NoteViewPagerFrag extends BaseUIFrag<NoteViewPagerUIOpe, NotesViewP
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (getOpes().getDa().notes.size() <= getOpes().getDa().position) {
+            return;
+        }
         TitleUtil.getInstance().remove(getOpes().getDa().notes.get(getOpes().getDa().position).getName());
     }
 }

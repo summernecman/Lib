@@ -25,22 +25,22 @@ public class DayMainUIOpe extends BaseUIBean<FragDayMainBinding> {
     }
 
 
-    public void initList(DayView.OnlongClickWithHM listener) {
+    public void initList(DayView3.OnlongClickWithHM listener) {
 //        dayMainAdapter = new DayMainAdapter(context);
 //        getUiBean().initRecylce(dayMainAdapter);
 //        dayMainAdapter.setOnLongClickListener(listener);
-        viewDataBinding.dayview.setLongClickListener(listener);
+        viewDataBinding.dayview2.setLongClickListener(listener);
 
     }
 
     public void addTimes(ArrayList<TimeBean> times) {
 //        dayMainAdapter.setTimes(times);
 //        dayMainAdapter.notifyDataSetChanged();
-        viewDataBinding.dayview.setTimes(times);
+        viewDataBinding.dayview2.setTimes(times);
     }
 
     public void deleteTime(int h, int m) {
-        viewDataBinding.dayview.delete(h, m);
+        viewDataBinding.dayview2.delete(h, m);
     }
 
     public void goToNote(FragmentActivity activity, String parentid) {

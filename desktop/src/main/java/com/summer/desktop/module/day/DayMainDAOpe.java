@@ -28,6 +28,8 @@ public class DayMainDAOpe extends BaseDAOpe {
 
     ArrayList<TimeBean> times = new ArrayList<>();
 
+    ArrayList<Note> notes;
+
     public DayMainDAOpe(Context context) {
         super(context);
         minuteDAOpe = new MinuteDAOpe(context);
@@ -58,8 +60,8 @@ public class DayMainDAOpe extends BaseDAOpe {
     public ArrayList<TimeBean> initTimeBean(ArrayList<TimeBean> t) {
         ArrayList<TimeBean> timeBeen = (ArrayList<TimeBean>) getDayDBOpe().getList();
         getTimes().clear();
-        getTimes().addAll(timeBeen);
         getTimes().addAll(t);
+        getTimes().addAll(timeBeen);
         return getTimes();
     }
 
@@ -85,9 +87,30 @@ public class DayMainDAOpe extends BaseDAOpe {
                                 times.add(timeBean);
                             }
                         }
-                        Object[] t = new Object[]{objects[0], times};
+                        Object[] t = new Object[]{objects[0], times, notes};
                         listener.onFinish(t);
                     }
                 });
+    }
+
+    public ArrayList<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(ArrayList<Note> notes) {
+        this.notes = notes;
+    }
+
+    public void delete(String str, OnFinishListener onFinishListener) {
+        for (int i = 0; notes != null && i < notes.size(); i++) {
+            GsonNoteBean gsonNoteBean = GsonUtil.getInstance().fromJson(notes.get(i).getData(), GsonNoteBean.class);
+            if (gsonNoteBean.getType().equals(GsonNoteBean.TYPE_NOTE_DAY)) {
+                TimeBean timeBean = GsonUtil.getInstance().fromJson(gsonNoteBean.getTimeDetail(), TimeBean.class);
+                if (timeBean.toString().equals(str)) {
+                    noteListDAOpe.deleteNote(notes.get(i).getObjectId(), onFinishListener);
+                }
+            }
+        }
+
     }
 }
