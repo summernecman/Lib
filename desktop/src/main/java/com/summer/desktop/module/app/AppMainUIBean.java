@@ -6,9 +6,9 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
+import com.android.lib.base.adapter.AppPagerAdapter;
+import com.android.lib.base.ope.BaseUIBean;
 import com.summer.desktop.databinding.FragAppMainBinding;
-import com.summer.lib.base.adapter.AppPagerAdapter;
-import com.summer.lib.base.ope.BaseUIBean;
 
 import java.util.ArrayList;
 

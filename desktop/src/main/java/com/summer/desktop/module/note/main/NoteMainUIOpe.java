@@ -5,11 +5,11 @@ package com.summer.desktop.module.note.main;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
+import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.util.FragmentUtil;
 import com.summer.desktop.R;
 import com.summer.desktop.databinding.FragNoteMainBinding;
 import com.summer.desktop.util.TitleUtil;
-import com.summer.lib.base.ope.BaseUIBean;
-import com.summer.lib.util.FragmentUtil;
 
 public class NoteMainUIOpe extends BaseUIBean<FragNoteMainBinding> {
 

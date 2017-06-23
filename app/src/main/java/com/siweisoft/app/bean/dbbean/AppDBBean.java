@@ -2,9 +2,9 @@ package com.siweisoft.app.bean.dbbean;
 
 import android.graphics.drawable.Drawable;
 
+import com.android.lib.bean.dbbean.BaseDbBean;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import com.summer.lib.bean.dbbean.BaseDbBean;
 
 /**
  * Created by ${viwmox} on 2016-12-26.
@@ -14,18 +14,15 @@ import com.summer.lib.bean.dbbean.BaseDbBean;
 public class AppDBBean extends BaseDbBean {
 
     public static final String GROUPNAME = "groupName";
+    public static final String APPNAME = "appName";
+    public static final String PACKAGENAME = "packageName";
+    public static final String ICONPATH = "iconPath";
     @DatabaseField(columnName = GROUPNAME)
     private String groupName;
-
-    public static final String APPNAME = "appName";
     @DatabaseField(columnName = APPNAME)
     private String appName;
-
-    public static final String PACKAGENAME = "packageName";
     @DatabaseField(columnName = PACKAGENAME)
     private String packageName;
-
-    public static final String ICONPATH = "iconPath";
     @DatabaseField(columnName = ICONPATH)
     private String iconPath;
 

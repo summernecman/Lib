@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.android.lib.base.fragment.BaseUIFrag;
+import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.util.IntentUtil;
+import com.android.lib.util.NullUtil;
+import com.android.lib.view.bottommenu.MessageEvent;
 import com.summer.desktop.bean.dbbean.AppDBBean;
-import com.summer.lib.base.fragment.BaseUIFrag;
-import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.util.IntentUtil;
-import com.summer.lib.util.NullUtil;
-import com.summer.lib.view.bottommenu.MessageEvent;
 
 import java.util.ArrayList;
 

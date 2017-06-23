@@ -2,9 +2,9 @@ package com.summer.desktop.bean.dbbean;
 
 import android.graphics.drawable.Drawable;
 
+import com.android.lib.bean.dbbean.BaseDbBean;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import com.summer.lib.bean.dbbean.BaseDbBean;
 
 /**
  * Created by ${viwmox} on 2016-12-26.

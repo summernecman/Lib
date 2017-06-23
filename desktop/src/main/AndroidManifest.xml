@@ -33,7 +33,7 @@
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:theme="@style/ImagePickerThemeFullScreen" />
 
-        <service android:name="com.summer.lib.service.main.AppService">
+        <service android:name="com.android.lib.service.main.AppService">
             <intent-filter>
                 <action android:name="com.summer.lib.service.main.AppService" />
             </intent-filter>

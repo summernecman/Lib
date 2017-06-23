@@ -2,8 +2,8 @@ package com.summer.desktop.util;
 
 //by summer on 2017-05-26.
 
+import com.android.lib.view.bottommenu.MessageEvent;
 import com.summer.desktop.module.note.main.NoteMainFrag;
-import com.summer.lib.view.bottommenu.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

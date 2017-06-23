@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.siweisoft.app.R;
 import com.summer.lib.bean.uibean.BaseUIBean;
-import com.summer.lib.util.ScreenUtil;
 
 import butterknife.BindView;
 

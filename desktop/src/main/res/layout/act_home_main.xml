@@ -29,7 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/gray" />
-    <com.summer.lib.view.bottommenu.BottomItemView
+
+        <com.android.lib.view.bottommenu.BottomItemView
         android:id="@+id/bottom_viewpager"
         android:layout_width="match_parent"
         android:layout_height="50dp"

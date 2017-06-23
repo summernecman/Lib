@@ -1,14 +1,13 @@
 package com.siweisoft.app.home;
 
 import android.content.Context;
-import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.lib.base.adapter.AppRecycleAdapter;
+import com.android.lib.util.LogUtil;
+import com.siweisoft.app.R;
 import com.siweisoft.app.bean.dbbean.AppDBBean;
 import com.siweisoft.app.bean.uibean.AppUIBean;
-import com.siweisoft.app.R;
-import com.summer.lib.base.adapter.AppRecycleAdapter;
-import com.summer.lib.util.LogUtil;
 
 import java.util.ArrayList;
 

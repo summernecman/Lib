@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.android.lib.base.fragment.BaseUIFrag;
 import com.summer.desktop.util.TitleUtil;
-import com.summer.lib.base.fragment.BaseUIFrag;
 
 public class NoteViewPagerFrag extends BaseUIFrag<NoteViewPagerUIOpe, NotesViewPagerDAOpe> {
 

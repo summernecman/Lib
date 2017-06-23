@@ -5,10 +5,10 @@ package com.summer.desktop.module.app;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
+import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.base.interf.OnFinishWithObjI;
+import com.android.lib.base.ope.BaseDAOpe;
 import com.summer.desktop.bean.dbbean.AppDBBean;
-import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.base.interf.OnFinishWithObjI;
-import com.summer.lib.base.ope.BaseDAOpe;
 
 import java.util.ArrayList;
 

@@ -8,6 +8,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
+import com.android.lib.base.fragment.BaseUIFrag;
+import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.bean.databean.EventBean;
+import com.android.lib.util.FragmentUtil;
+import com.android.lib.util.GsonUtil;
+import com.android.lib.util.IntentUtil;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.GsonNoteBean;
@@ -15,12 +21,6 @@ import com.summer.desktop.bean.dabean.NoteDetail;
 import com.summer.desktop.bean.dabean.TxtNote;
 import com.summer.desktop.module.circlemenu.CircleMenuFrag;
 import com.summer.desktop.module.note.rename.RenameFrag;
-import com.summer.lib.base.fragment.BaseUIFrag;
-import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.bean.databean.EventBean;
-import com.summer.lib.util.FragmentUtil;
-import com.summer.lib.util.GsonUtil;
-import com.summer.lib.util.IntentUtil;
 
 import java.util.ArrayList;
 
@@ -99,7 +99,7 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
     public void onFinish(final Object o) {
         final CircleMenuFrag circleMenuFrag = new CircleMenuFrag();
         FragmentTransaction transaction = fragment.getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.root, circleMenuFrag);
+        transaction.add(R.id.root_note, circleMenuFrag);
         transaction.commit();
         circleMenuFrag.setOnFinishListener(new OnFinishListener() {
             @Override

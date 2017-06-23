@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".view.hellocharts.samples.PreviewLineChartActivity$PlaceholderFragment">
+    tools:context="com.android.lib.view.hellocharts.samples.PreviewLineChartActivity$PlaceholderFragment">
 
     <com.summer.lib.lecho.libhellocharts.view.ColumnChartView
         android:id="@+id/chart"

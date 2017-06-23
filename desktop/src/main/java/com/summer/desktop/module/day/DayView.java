@@ -15,13 +15,13 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.android.lib.bean.databean.LocationBean;
+import com.android.lib.bean.databean.XYBean;
+import com.android.lib.constant.color.ColorConstant;
+import com.android.lib.util.LogUtil;
+import com.android.lib.util.NullUtil;
+import com.android.lib.util.ScreenUtil;
 import com.summer.desktop.bean.dabean.TimeBean;
-import com.summer.lib.bean.databean.LocationBean;
-import com.summer.lib.bean.databean.XYBean;
-import com.summer.lib.constant.color.ColorConstant;
-import com.summer.lib.util.LogUtil;
-import com.summer.lib.util.NullUtil;
-import com.summer.lib.util.ScreenUtil;
 
 import java.util.ArrayList;
 

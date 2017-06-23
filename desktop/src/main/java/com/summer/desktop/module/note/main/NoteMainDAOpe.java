@@ -6,9 +6,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.android.lib.base.ope.BaseDAOpe;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.module.note.noteslist.NoteViewPagerFrag;
-import com.summer.lib.base.ope.BaseDAOpe;
 
 import java.util.ArrayList;
 

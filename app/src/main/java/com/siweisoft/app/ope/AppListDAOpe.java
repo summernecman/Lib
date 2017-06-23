@@ -7,10 +7,10 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 
+import com.android.lib.base.interf.OnFinishWithObjI;
+import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.util.PackageUtil;
 import com.siweisoft.app.bean.dbbean.AppDBBean;
-import com.summer.lib.base.interf.OnFinishWithObjI;
-import com.summer.lib.base.ope.BaseDAOpe;
-import com.summer.lib.util.PackageUtil;
 
 import java.util.ArrayList;
 import java.util.List;

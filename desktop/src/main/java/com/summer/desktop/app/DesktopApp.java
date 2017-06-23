@@ -2,8 +2,8 @@ package com.summer.desktop.app;
 
 import android.content.Intent;
 
-import com.summer.lib.aplication.LibAplication;
-import com.summer.lib.service.main.AppService;
+import com.android.lib.aplication.LibAplication;
+import com.android.lib.service.main.AppService;
 
 import cn.bmob.v3.Bmob;
 

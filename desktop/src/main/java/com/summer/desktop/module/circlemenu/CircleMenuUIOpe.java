@@ -8,12 +8,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
+import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.base.ope.BaseUIBean;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 import com.summer.desktop.R;
 import com.summer.desktop.databinding.FragNoteBoomBinding;
-import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.base.ope.BaseUIBean;
 
 import java.io.Serializable;
 

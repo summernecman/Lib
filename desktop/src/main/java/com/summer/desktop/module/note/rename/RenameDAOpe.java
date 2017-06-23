@@ -4,7 +4,7 @@ package com.summer.desktop.module.note.rename;
 
 import android.content.Context;
 
-import com.summer.lib.base.ope.BaseDAOpe;
+import com.android.lib.base.ope.BaseDAOpe;
 
 public class RenameDAOpe extends BaseDAOpe {
 

@@ -3,12 +3,12 @@ package com.siweisoft.app.home;
 import android.content.Context;
 import android.view.View;
 
+import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.util.IntentUtil;
 import com.siweisoft.app.R;
 import com.siweisoft.app.bean.dbbean.AppDBBean;
 import com.siweisoft.app.impl.IApp;
-import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.base.ope.BaseUIBean;
-import com.summer.lib.util.IntentUtil;
 
 import java.util.ArrayList;
 

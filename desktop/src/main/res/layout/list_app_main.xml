@@ -7,7 +7,8 @@
             name="item"
             type="com.summer.desktop.bean.dbbean.AppDBBean" />
     </data>
-<com.summer.lib.view.menuview.homebottom.HomeBottomItem xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <com.android.lib.view.menuview.homebottom.HomeBottomItem xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/approot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -36,5 +37,5 @@
         android:text="@{item.appName}"
         android:textColor="@color/black"
         android:textSize="13sp" />
-</com.summer.lib.view.menuview.homebottom.HomeBottomItem>
+    </com.android.lib.view.menuview.homebottom.HomeBottomItem>
 </layout>

@@ -4,10 +4,10 @@ package com.summer.desktop.module.note.rename;
 
 import android.view.View;
 
+import com.android.lib.base.fragment.BaseUIFrag;
+import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.util.FragmentUtil;
 import com.summer.desktop.R;
-import com.summer.lib.base.fragment.BaseUIFrag;
-import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.util.FragmentUtil;
 
 import butterknife.OnClick;
 

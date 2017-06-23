@@ -51,7 +51,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!--zxing二维码扫码activity-->
-        <activity android:name="com.summer.lib.view.zxing.activity.CaptureActivity" />
+        <activity android:name="com.summer.lib.com.android.lib.view.zxing.activity.CaptureActivity" />
         <!--图片选择activity-->
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"

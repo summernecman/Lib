@@ -1,149 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <View
-        android:background="@color/color_divide_line"
         android:layout_width="match_parent"
-        android:layout_height="1px" />
+        android:layout_height="1px"
+        android:background="@color/color_divide_line" />
     <LinearLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimens_base_bottom">
+        android:layout_height="@dimen/dimens_base_bottom"
+        android:background="@color/white">
 
-        <com.summer.lib.view.menuview.homebottom.HomeBottomItem
+        <com.android.lib.view.menuview.homebottom.HomeBottomItem
             android:id="@+id/ll_bed"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
-                android:padding="1dp"
-                android:src="@drawable/drawable_bed"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-
-            <TextView
-                android:layout_marginTop="1dp"
-                android:id="@+id/tv_bed"
-                android:textSize="11sp"
-                android:textColor="@color/color_bottom_select"
-                android:text="病床"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </com.summer.lib.view.menuview.homebottom.HomeBottomItem>
-
-        <com.summer.lib.view.menuview.homebottom.HomeBottomItem
-            android:id="@+id/ll_mission"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:padding="1dp"
-                android:src="@drawable/drawable_mission"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:id="@+id/imageView" />
+                android:padding="1dp"
+                android:src="@drawable/drawable_bed" />
 
             <TextView
+                android:id="@+id/tv_bed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
+                android:text="病床"
+                android:textColor="@color/color_bottom_select"
+                android:textSize="11sp" />
+        </com.android.lib.view.menuview.homebottom.HomeBottomItem>
+
+        <com.android.lib.view.menuview.homebottom.HomeBottomItem
+            android:id="@+id/ll_mission"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="1dp"
+                android:src="@drawable/drawable_mission" />
+
+            <TextView
                 android:id="@+id/tv_mission"
-                android:textSize="11sp"
-                android:textColor="@color/color_bottom_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
                 android:text="任务"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </com.summer.lib.view.menuview.homebottom.HomeBottomItem>
+                android:textColor="@color/color_bottom_select"
+                android:textSize="11sp" />
+        </com.android.lib.view.menuview.homebottom.HomeBottomItem>
 
 
-        <com.summer.lib.view.menuview.homebottom.HomeBottomItem
+        <com.android.lib.view.menuview.homebottom.HomeBottomItem
             android:id="@+id/ll_check"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
-                android:padding="1dp"
-                android:src="@drawable/drawable_check"
                 android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:padding="1dp"
+                android:src="@drawable/drawable_check" />
 
             <TextView
-                android:layout_marginTop="1dp"
                 android:id="@+id/tv_check"
-                android:textSize="11sp"
-                android:textColor="@color/color_bottom_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
                 android:text="核对"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </com.summer.lib.view.menuview.homebottom.HomeBottomItem>
+                android:textColor="@color/color_bottom_select"
+                android:textSize="11sp" />
+        </com.android.lib.view.menuview.homebottom.HomeBottomItem>
 
 
-        <com.summer.lib.view.menuview.homebottom.HomeBottomItem
+        <com.android.lib.view.menuview.homebottom.HomeBottomItem
             android:id="@+id/ll_info"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
-                android:padding="1dp"
-                android:src="@drawable/drawable_info"
                 android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:padding="1dp"
+                android:src="@drawable/drawable_info" />
 
             <TextView
-                android:layout_marginTop="1dp"
                 android:id="@+id/tv_info"
-                android:textSize="11sp"
-                android:textColor="@color/color_bottom_select"
-                android:text="信息"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </com.summer.lib.view.menuview.homebottom.HomeBottomItem>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:text="信息"
+                android:textColor="@color/color_bottom_select"
+                android:textSize="11sp" />
+        </com.android.lib.view.menuview.homebottom.HomeBottomItem>
 
-        <com.summer.lib.view.menuview.homebottom.HomeBottomItem
+        <com.android.lib.view.menuview.homebottom.HomeBottomItem
             android:id="@+id/ll_setting"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
-                android:padding="1dp"
-                android:src="@drawable/drawable_setting"
                 android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:padding="1dp"
+                android:src="@drawable/drawable_setting" />
 
             <TextView
-                android:layout_marginTop="1dp"
                 android:id="@+id/tv_setting"
-                android:textSize="11sp"
-                android:textColor="@color/color_bottom_select"
-                android:text="设置"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </com.summer.lib.view.menuview.homebottom.HomeBottomItem>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:text="设置"
+                android:textColor="@color/color_bottom_select"
+                android:textSize="11sp" />
+        </com.android.lib.view.menuview.homebottom.HomeBottomItem>
     </LinearLayout>
 </LinearLayout>

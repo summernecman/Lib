@@ -8,12 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
+import com.android.lib.base.adapter.AppsDataBindingAdapter;
+import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.view.bottommenu.MessageEvent;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dbbean.AppDBBean;
 import com.summer.desktop.databinding.FragAppAppsBinding;
-import com.summer.lib.base.adapter.AppsDataBindingAdapter;
-import com.summer.lib.base.ope.BaseUIBean;
-import com.summer.lib.view.bottommenu.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

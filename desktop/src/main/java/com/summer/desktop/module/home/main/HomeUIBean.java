@@ -8,12 +8,12 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 
+import com.android.lib.base.adapter.AppPagerAdapter;
+import com.android.lib.base.interf.view.OnPageChangeAdapterI;
+import com.android.lib.base.listener.DoubleClickListener;
+import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.view.bottommenu.BottomItemView;
 import com.summer.desktop.databinding.ActHomeMainBinding;
-import com.summer.lib.base.adapter.AppPagerAdapter;
-import com.summer.lib.base.interf.view.OnPageChangeAdapterI;
-import com.summer.lib.base.listener.DoubleClickListener;
-import com.summer.lib.base.ope.BaseUIBean;
-import com.summer.lib.view.bottommenu.BottomItemView;
 
 import java.util.ArrayList;
 

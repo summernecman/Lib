@@ -5,10 +5,10 @@ package com.summer.desktop.module.home.main;
 import android.os.Bundle;
 import android.view.View;
 
+import com.android.lib.base.activity.BaseUIActivity;
+import com.android.lib.base.listener.DoubleClickListener;
+import com.android.lib.util.FragmentUtil;
 import com.summer.desktop.R;
-import com.summer.lib.base.activity.BaseUIActivity;
-import com.summer.lib.base.listener.DoubleClickListener;
-import com.summer.lib.util.FragmentUtil;
 
 public class HomeActivity extends BaseUIActivity<HomeUIBean, HomeDAOpe> implements IPostion, DoubleClickListener, View.OnClickListener {
 

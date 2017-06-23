@@ -9,9 +9,9 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.android.lib.base.adapter.AppRecycleAdapter;
 import com.siweisoft.app.R;
 import com.siweisoft.app.impl.IRecycle;
-import com.summer.lib.base.adapter.AppRecycleAdapter;
 import com.summer.lib.bean.uibean.BaseUIBean;
 
 import butterknife.BindView;

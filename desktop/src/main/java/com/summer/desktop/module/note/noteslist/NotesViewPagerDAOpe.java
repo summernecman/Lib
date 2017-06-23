@@ -5,8 +5,8 @@ package com.summer.desktop.module.note.noteslist;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
+import com.android.lib.base.ope.BaseDAOpe;
 import com.summer.desktop.bean.dabean.Note;
-import com.summer.lib.base.ope.BaseDAOpe;
 
 import java.util.ArrayList;
 

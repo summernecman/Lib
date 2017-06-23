@@ -4,16 +4,16 @@ package com.summer.desktop.module.note.notelist;
 
 import android.content.Context;
 
+import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.util.GsonUtil;
+import com.android.lib.util.LogUtil;
+import com.android.lib.util.RandomUtil;
 import com.summer.desktop.bean.dabean.GsonNoteBean;
 import com.summer.desktop.bean.dabean.ImageNote;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.bean.dabean.NoteDetail;
 import com.summer.desktop.bean.dabean.TimeBean;
-import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.base.ope.BaseDAOpe;
-import com.summer.lib.util.GsonUtil;
-import com.summer.lib.util.LogUtil;
-import com.summer.lib.util.RandomUtil;
 
 import java.util.ArrayList;
 import java.util.List;

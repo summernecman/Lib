@@ -6,12 +6,12 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
+import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.view.bottommenu.MessageEvent;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.databinding.FragNoteNotesBinding;
 import com.summer.desktop.module.note.main.NoteMainFrag;
 import com.summer.desktop.util.TitleUtil;
-import com.summer.lib.base.ope.BaseUIBean;
-import com.summer.lib.view.bottommenu.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

@@ -4,7 +4,7 @@ package com.siweisoft.app.value;
 
 import android.graphics.Color;
 
-import com.summer.lib.constant.color.ColorConstant;
+import com.android.lib.constant.color.ColorConstant;
 
 public class Values {
 

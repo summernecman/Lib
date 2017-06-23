@@ -2,9 +2,9 @@ package com.summer.desktop.bean.dabean;
 
 //by summer on 2017-06-13.
 
+import com.android.lib.bean.dbbean.BaseDbBean;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import com.summer.lib.bean.dbbean.BaseDbBean;
 
 @DatabaseTable(tableName = "timebean")
 public class TimeBean extends BaseDbBean {

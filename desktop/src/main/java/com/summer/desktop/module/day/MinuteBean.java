@@ -2,7 +2,7 @@ package com.summer.desktop.module.day;
 
 //by summer on 2017-06-15.
 
-import com.summer.lib.bean.databean.BaseDABean;
+import com.android.lib.bean.databean.BaseDABean;
 
 public class MinuteBean extends BaseDABean {
 

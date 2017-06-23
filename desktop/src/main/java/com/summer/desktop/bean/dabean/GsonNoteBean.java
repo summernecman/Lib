@@ -2,7 +2,7 @@ package com.summer.desktop.bean.dabean;
 
 //by summer on 2017-05-25.
 
-import com.summer.lib.bean.databean.BaseDABean;
+import com.android.lib.bean.databean.BaseDABean;
 
 import java.util.ArrayList;
 

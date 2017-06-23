@@ -6,14 +6,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.util.FragmentUtil;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.bean.dabean.TimeBean;
 import com.summer.desktop.databinding.FragDayMainBinding;
 import com.summer.desktop.module.home.main.HomeActivity;
 import com.summer.desktop.module.note.noteslist.NoteViewPagerFrag;
-import com.summer.lib.base.ope.BaseUIBean;
-import com.summer.lib.util.FragmentUtil;
 
 import java.util.ArrayList;
 

@@ -4,8 +4,8 @@ package com.summer.desktop.module.app;
 
 import android.content.Context;
 
+import com.android.lib.base.ope.BaseUIBean;
 import com.summer.desktop.databinding.ListAppMainBinding;
-import com.summer.lib.base.ope.BaseUIBean;
 
 public class AppItemUIBean extends BaseUIBean<ListAppMainBinding> {
 

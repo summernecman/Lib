@@ -4,7 +4,7 @@ package com.summer.desktop.module.circlemenu;
 
 import android.content.Context;
 
-import com.summer.lib.base.ope.BaseDAOpe;
+import com.android.lib.base.ope.BaseDAOpe;
 
 public class CricleMenuDAOpe extends BaseDAOpe {
     public CricleMenuDAOpe(Context context) {

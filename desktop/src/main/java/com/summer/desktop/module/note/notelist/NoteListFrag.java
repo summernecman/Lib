@@ -8,19 +8,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
+import com.android.lib.base.adapter.AppPagerAdapter;
+import com.android.lib.base.fragment.BaseUIFrag;
+import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.util.FragmentUtil;
+import com.android.lib.view.bottommenu.MessageEvent;
+import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
+import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.module.circlemenu.CircleMenuFrag;
 import com.summer.desktop.module.home.main.HomeActivity;
 import com.summer.desktop.module.note.noteslist.NoteViewPagerFrag;
 import com.summer.desktop.module.note.rename.RenameFrag;
-import com.summer.lib.base.adapter.AppPagerAdapter;
-import com.summer.lib.base.fragment.BaseUIFrag;
-import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.util.FragmentUtil;
-import com.summer.lib.view.bottommenu.MessageEvent;
-import com.summer.lib.view.refreshlayout.MaterialRefreshLayout;
-import com.summer.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 
 public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
 

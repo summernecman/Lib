@@ -2,7 +2,7 @@ package com.siweisoft.app.impl;
 
 //by summer on 2017-03-31.
 
-import com.summer.lib.base.adapter.AppRecycleAdapter;
+import com.android.lib.base.adapter.AppRecycleAdapter;
 
 public interface IRecycle {
 

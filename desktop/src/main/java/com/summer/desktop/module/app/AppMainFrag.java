@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.summer.lib.base.fragment.BaseUIFrag;
+import com.android.lib.base.fragment.BaseUIFrag;
 
 public class AppMainFrag extends BaseUIFrag<AppMainUIBean, AppMainDAOpe> {
 

@@ -7,13 +7,13 @@ import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
+import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.base.interf.OnFinishWithObjI;
+import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.util.LogUtil;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dbbean.AppDBBean;
 import com.summer.desktop.db.ope.AppsDBOpe;
-import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.base.interf.OnFinishWithObjI;
-import com.summer.lib.base.ope.BaseDAOpe;
-import com.summer.lib.util.LogUtil;
 
 import java.util.ArrayList;
 

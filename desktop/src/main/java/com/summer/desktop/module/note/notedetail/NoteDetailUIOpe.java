@@ -11,17 +11,17 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
+import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.constant.ValueConstant;
+import com.android.lib.util.FragmentUtil;
+import com.android.lib.view.image.imagepager.ImagePagerFrag;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.GsonNoteBean;
 import com.summer.desktop.databinding.FragNoteTxtBinding;
 import com.summer.desktop.util.ViewCreater;
-import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.base.ope.BaseUIBean;
-import com.summer.lib.constant.ValueConstant;
-import com.summer.lib.util.FragmentUtil;
-import com.summer.lib.view.image.imagepager.ImagePagerFrag;
 
 import java.util.ArrayList;
 

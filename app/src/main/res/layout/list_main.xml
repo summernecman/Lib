@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.summer.lib.view.menuview.homebottom.HomeBottomItem
+<com.android.lib.view.menuview.homebottom.HomeBottomItem
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/approot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/approot"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     android:padding="10dp"
     >
 <ImageView
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
-    android:layout_gravity="center_horizontal"
-    android:layout_centerInParent="true"
     android:id="@+id/appicon"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp" />
 
     <TextView
-        android:singleLine="true"
-        android:layout_gravity="center_horizontal"
         android:id="@+id/tv_appname"
-        android:textSize="13sp"
-        android:textColor="@color/white"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</com.summer.lib.view.menuview.homebottom.HomeBottomItem>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+</com.android.lib.view.menuview.homebottom.HomeBottomItem>

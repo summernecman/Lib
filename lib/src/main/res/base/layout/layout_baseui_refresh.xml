@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frag_base_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/frag_base_root">
+    android:orientation="vertical">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:clickable="true">
+        android:clickable="true"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -17,46 +17,46 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:background="@color/white"
-                android:layout_marginTop="@dimen/dimens_base_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimens_base_title"
+                android:background="@color/white">
 
-                <com.summer.lib.view.refreshlayout.MaterialRefreshLayout
+                <com.android.lib.view.refreshlayout.MaterialRefreshLayout
 
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/refresh"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:isLoadMore="false"
-                    app:wave_color="@color/color_base"
-                    app:progress_size_type="normal"
                     android:background="@color/color_bg_refresh"
+                    app:isLoadMore="false"
                     app:overlay="false"
-                    app:wave_show="false"
+                    app:progress_show_circle_backgroud="false"
+                    app:progress_size_type="normal"
+                    app:wave_color="@color/color_base"
                     app:wave_height_type="normal"
-                    app:progress_show_circle_backgroud="false">
+                    app:wave_show="false">
 
                     <RelativeLayout
                         android:id="@+id/frag_base_container"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-                </com.summer.lib.view.refreshlayout.MaterialRefreshLayout>
+                </com.android.lib.view.refreshlayout.MaterialRefreshLayout>
 
-                <com.summer.lib.view.base.BottomFinishView
+                <com.android.lib.view.base.BottomFinishView
                     android:id="@+id/finishview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
                 <ImageView
-                    android:visibility="gone"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/icon_gou"
-                    android:alpha="0.5"
                     android:id="@+id/iv_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop" />
+                    android:layout_centerInParent="true"
+                    android:alpha="0.5"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_gou"
+                    android:visibility="gone" />
             </RelativeLayout>
 
             <RelativeLayout

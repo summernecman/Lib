@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.android.lib.base.fragment.BaseUIFrag;
+import com.android.lib.view.bottommenu.MessageEvent;
 import com.summer.desktop.util.TitleUtil;
-import com.summer.lib.base.fragment.BaseUIFrag;
-import com.summer.lib.view.bottommenu.MessageEvent;
 
 public class NoteMainFrag extends BaseUIFrag<NoteMainUIOpe, NoteMainDAOpe> {
 

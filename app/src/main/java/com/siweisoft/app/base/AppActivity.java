@@ -5,9 +5,9 @@ package com.siweisoft.app.base;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 
-import com.summer.lib.base.activity.BaseUIActivity;
-import com.summer.lib.base.ope.BaseDAOpe;
-import com.summer.lib.base.ope.BaseUIBean;
+import com.android.lib.base.activity.BaseUIActivity;
+import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.base.ope.BaseUIBean;
 
 public abstract class AppActivity<A extends BaseUIBean, B extends BaseDAOpe> extends BaseUIActivity<A, B> {
     @Override

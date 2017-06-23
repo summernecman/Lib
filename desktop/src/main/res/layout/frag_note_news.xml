@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.summer.lib.view.other.AppMaterialRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.android.lib.view.other.AppMaterialRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/refresh"
         android:layout_width="match_parent"
@@ -35,6 +35,6 @@
         android:overScrollMode="never" />
 
         </RelativeLayout>
-    </com.summer.lib.view.other.AppMaterialRefreshLayout>
+    </com.android.lib.view.other.AppMaterialRefreshLayout>
 </RelativeLayout>
 </layout>

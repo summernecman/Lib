@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.summer.lib.view.other.SweetView
+    <com.android.lib.view.other.SweetView
         android:id="@+id/sv_sv"
         android:layout_width="match_parent"
         android:layout_height="70dp" />
 
     <LinearLayout
-        android:background="@color/color_base"
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layoutAnimation="@anim/anim_layout_bottommenu_trans">
+        android:background="@color/color_base"
+        android:layoutAnimation="@anim/anim_layout_bottommenu_trans"
+        android:orientation="vertical">
 
 
     </LinearLayout>

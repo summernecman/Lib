@@ -15,6 +15,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.bean.databean.EventBean;
+import com.android.lib.util.LogUtil;
+import com.android.lib.util.ScreenUtil;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.summer.desktop.R;
@@ -24,10 +28,6 @@ import com.summer.desktop.bean.dabean.LinkNote;
 import com.summer.desktop.bean.dabean.NoteDetail;
 import com.summer.desktop.bean.dabean.TxtNote;
 import com.summer.desktop.util.GlideApp;
-import com.summer.lib.base.interf.OnFinishListener;
-import com.summer.lib.bean.databean.EventBean;
-import com.summer.lib.util.LogUtil;
-import com.summer.lib.util.ScreenUtil;
 
 import java.io.File;
 import java.util.ArrayList;

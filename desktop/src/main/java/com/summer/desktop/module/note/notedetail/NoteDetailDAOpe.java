@@ -7,6 +7,12 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.widget.EditText;
 
+import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.bean.databean.EventBean;
+import com.android.lib.util.GsonUtil;
+import com.android.lib.util.IntentUtil;
+import com.android.lib.util.LogUtil;
+import com.android.lib.util.NullUtil;
 import com.google.gson.Gson;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -14,12 +20,6 @@ import com.summer.desktop.bean.dabean.GsonNoteBean;
 import com.summer.desktop.bean.dabean.ImageNote;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.bean.dabean.NoteDetail;
-import com.summer.lib.base.ope.BaseDAOpe;
-import com.summer.lib.bean.databean.EventBean;
-import com.summer.lib.util.GsonUtil;
-import com.summer.lib.util.IntentUtil;
-import com.summer.lib.util.LogUtil;
-import com.summer.lib.util.NullUtil;
 
 import java.io.File;
 import java.util.ArrayList;

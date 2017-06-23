@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,7 +9,7 @@
      android:childDivider="@drawable/child_bg" 这个直接引color,或者图片会导致整个孩子背景都为这个颜色
     -->
 
-    <com.summer.lib.view.pinnedheaderexpandablelistview.expandable.ui.StickyLayout
+    <com.android.lib.view.pinnedheaderexpandablelistview.expandable.ui.StickyLayout
         android:id="@+id/sticky_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,8 +20,8 @@
             android:id="@+id/sticky_header"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:gravity="center"
             android:background="#78A524"
+            android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
@@ -39,7 +38,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.summer.lib.view.pinnedheaderexpandablelistview.expandable.ui.PinnedHeaderExpandableListView
+            <com.android.lib.view.pinnedheaderexpandablelistview.expandable.ui.PinnedHeaderExpandableListView
                 android:id="@+id/expandablelist"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -49,8 +48,8 @@
                 android:divider="@color/gray"
                 android:dividerHeight="1dp"
                 android:groupIndicator="@null"
-                android:scrollbarAlwaysDrawHorizontalTrack="false"></com.summer.lib.view.pinnedheaderexpandablelistview.expandable.ui.PinnedHeaderExpandableListView>
+                android:scrollbarAlwaysDrawHorizontalTrack="false"></com.android.lib.view.pinnedheaderexpandablelistview.expandable.ui.PinnedHeaderExpandableListView>
         </LinearLayout>
-    </com.summer.lib.view.pinnedheaderexpandablelistview.expandable.ui.StickyLayout>
+    </com.android.lib.view.pinnedheaderexpandablelistview.expandable.ui.StickyLayout>
 
 </RelativeLayout>

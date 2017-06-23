@@ -5,12 +5,12 @@ package com.summer.desktop.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.android.lib.database.DatabaseHelper;
+import com.android.lib.util.LogUtil;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.summer.desktop.bean.dabean.TimeBean;
 import com.summer.desktop.bean.dbbean.AppDBBean;
-import com.summer.lib.database.DatabaseHelper;
-import com.summer.lib.util.LogUtil;
 
 import java.sql.SQLException;
 

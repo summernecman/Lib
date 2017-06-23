@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.lib.util.data.DateFormatUtil;
+import com.android.lib.view.bottommenu.MessageEvent;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.Note;
-import com.summer.lib.util.data.DateFormatUtil;
-import com.summer.lib.view.bottommenu.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

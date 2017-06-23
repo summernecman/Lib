@@ -7,13 +7,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.util.LogUtil;
+import com.android.lib.util.system.HandleUtil;
+import com.android.lib.view.ItemDecoration.MyItemDecoration2;
+import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.databinding.FragNoteNewsBinding;
-import com.summer.lib.base.ope.BaseUIBean;
-import com.summer.lib.util.LogUtil;
-import com.summer.lib.util.system.HandleUtil;
-import com.summer.lib.view.ItemDecoration.MyItemDecoration2;
-import com.summer.lib.view.refreshlayout.MaterialRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;

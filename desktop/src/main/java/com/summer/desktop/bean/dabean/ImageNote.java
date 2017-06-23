@@ -1,6 +1,6 @@
 package com.summer.desktop.bean.dabean;
 
-import com.summer.lib.bean.databean.BaseDABean;
+import com.android.lib.bean.databean.BaseDABean;
 
 /**
  * Created by summer on 2017/5/25 23:46.

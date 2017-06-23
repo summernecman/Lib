@@ -5,10 +5,10 @@ package com.summer.desktop.module.home.main;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
+import com.android.lib.base.ope.BaseDAOpe;
 import com.summer.desktop.module.app.AppItemsFrag;
 import com.summer.desktop.module.day.DayFrag;
 import com.summer.desktop.module.note.main.NoteMainFrag;
-import com.summer.lib.base.ope.BaseDAOpe;
 
 import java.util.ArrayList;
 

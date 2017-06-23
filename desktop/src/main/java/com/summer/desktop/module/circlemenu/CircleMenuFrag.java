@@ -7,9 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
+import com.android.lib.base.fragment.BaseUIFrag;
+import com.android.lib.base.interf.OnFinishListener;
 import com.summer.desktop.R;
-import com.summer.lib.base.fragment.BaseUIFrag;
-import com.summer.lib.base.interf.OnFinishListener;
 
 public class CircleMenuFrag extends BaseUIFrag<CircleMenuUIOpe, CricleMenuDAOpe> {
 

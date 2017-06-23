@@ -4,12 +4,12 @@ package com.summer.desktop.db.ope;
 
 import android.content.Context;
 
+import com.android.lib.base.ope.BaseDBOpe;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.Where;
 import com.summer.desktop.bean.dbbean.AppDBBean;
 import com.summer.desktop.db.DbHelper;
-import com.summer.lib.base.ope.BaseDBOpe;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
