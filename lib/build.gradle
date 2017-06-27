@@ -93,4 +93,5 @@ dependencies {
     compile 'com.j256.ormlite:ormlite-android:4.48'
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
     compile 'com.alibaba:fastjson:1.2.33'
+    compile 'org.xutils:xutils:3.5.0'
 }
