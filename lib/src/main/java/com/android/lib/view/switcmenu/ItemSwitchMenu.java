@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.summer.lib.R;
-import com.summer.lib.R2;
+import com.android.lib.R;
+import com.android.lib.R2;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -29,10 +29,10 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.android.lib.R;
 import com.android.lib.view.zxing.DisplayUtil;
 import com.android.lib.view.zxing.camera.CameraManager;
 import com.google.zxing.ResultPoint;
-import com.summer.lib.R;
 
 import java.util.Collection;
 import java.util.HashSet;

@@ -23,8 +23,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.lib.R;
 import com.android.lib.view.pickerview.config.PickerConfig;
-import com.summer.lib.R;
 
 /**
  * Abstract wheel adapter provides common functionality for adapters.

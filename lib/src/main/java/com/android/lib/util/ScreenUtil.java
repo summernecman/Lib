@@ -5,8 +5,8 @@ import android.content.Context;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.android.lib.R;
 import com.android.lib.constant.ValueConstant;
-import com.summer.lib.R;
 
 /**
  * 屏幕工具类

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.lib.R;
 import com.android.lib.view.hellocharts.animation.ChartAnimationListener;
 import com.android.lib.view.hellocharts.gesture.ZoomType;
 import com.android.lib.view.hellocharts.listener.LineChartOnValueSelectListener;
@@ -23,7 +24,6 @@ import com.android.lib.view.hellocharts.model.Viewport;
 import com.android.lib.view.hellocharts.util.ChartUtils;
 import com.android.lib.view.hellocharts.view.Chart;
 import com.android.lib.view.hellocharts.view.LineChartView;
-import com.summer.lib.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 /**
  * recycleview适配器的基类

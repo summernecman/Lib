@@ -7,9 +7,9 @@ import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.PopupWindow;
 
+import com.android.lib.R;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.ScreenUtil;
-import com.summer.lib.R;
 
 /**
  * Created by ${viwmox} on 2016-11-14.

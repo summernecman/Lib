@@ -44,7 +44,7 @@ android {
                     'src/main/res/voip',
                     'src/main/res/chart',
                     'src/main/res/zxing',
-                    'src/main/res/view',
+                    'src/main/res/satellite',
                     'src/main/res/home',
                     'src/main/res/avi',
                     'src/main/res/animstyle',

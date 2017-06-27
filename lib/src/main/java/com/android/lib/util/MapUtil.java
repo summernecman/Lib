@@ -29,7 +29,7 @@ public class MapUtil {
             context.startActivity(mIntent);
         } catch (Exception e) {
             e.printStackTrace();
-            ToastUtil.getInstance().show(context, "请安装地图类软件哦");
+            ToastUtil.getInstance().showLong(context, "请安装地图类软件哦");
         }
     }
 }

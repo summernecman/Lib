@@ -1,8 +1,0 @@
-<resources>
-
-    <style name="mytheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:colorBackground">@color/transparent</item>
-        <item name="android:colorForeground">@color/transparent</item>
-        </style>
-
-</resources>

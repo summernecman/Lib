@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.lib.R;
 import com.android.lib.view.hellocharts.listener.ComboLineColumnChartOnValueSelectListener;
 import com.android.lib.view.hellocharts.model.Axis;
 import com.android.lib.view.hellocharts.model.Column;
@@ -22,7 +23,6 @@ import com.android.lib.view.hellocharts.model.PointValue;
 import com.android.lib.view.hellocharts.model.SubcolumnValue;
 import com.android.lib.view.hellocharts.util.ChartUtils;
 import com.android.lib.view.hellocharts.view.ComboLineColumnChartView;
-import com.summer.lib.R;
 
 import java.util.ArrayList;
 import java.util.List;

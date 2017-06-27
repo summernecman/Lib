@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.lib.R;
+import com.android.lib.R2;
 import com.android.lib.base.interf.view.OnAppItemLongClickListener;
 import com.android.lib.base.interf.view.OnAppItemSelectListener;
 import com.android.lib.util.LogUtil;
-import com.summer.lib.R;
-import com.summer.lib.R2;
 
 import java.util.ArrayList;
 

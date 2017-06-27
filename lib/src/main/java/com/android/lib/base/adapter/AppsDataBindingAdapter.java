@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.lib.R;
 import com.android.lib.bean.AppViewHolder;
-import com.summer.lib.R;
 
 import java.util.ArrayList;
 

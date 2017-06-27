@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import com.android.lib.BuildConfig;
 import com.android.lib.view.hellocharts.animation.PieChartRotationAnimator;
 import com.android.lib.view.hellocharts.animation.PieChartRotationAnimatorV14;
 import com.android.lib.view.hellocharts.animation.PieChartRotationAnimatorV8;
@@ -20,7 +21,6 @@ import com.android.lib.view.hellocharts.model.SelectedValue;
 import com.android.lib.view.hellocharts.model.SliceValue;
 import com.android.lib.view.hellocharts.provider.PieChartDataProvider;
 import com.android.lib.view.hellocharts.renderer.PieChartRenderer;
-import com.summer.lib.BuildConfig;
 
 /**
  * PieChart is a little different than others charts. It doesn't have axes. It doesn't support viewport so changing

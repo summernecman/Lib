@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.summer.lib">
+    package="com.android.lib">
     -------------------------------------------------------------------------------------------------
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.LOCATION_HARDWARE" />
@@ -37,7 +37,6 @@
         android:name="android.hardware.microphone"
         android:required="true" />
     --------------------------------------------------------------------------------------------------------
-    <!--环信-->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <!--<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />-->
@@ -51,7 +50,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!--zxing二维码扫码activity-->
-        <activity android:name="com.summer.lib.com.android.lib.view.zxing.activity.CaptureActivity" />
+        <activity android:name="com.android.lib.view.zxing.activity.CaptureActivity" />
         <!--图片选择activity-->
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"

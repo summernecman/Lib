@@ -8,7 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 /**
  * Created by ${viwmox} on 2017-02-16.

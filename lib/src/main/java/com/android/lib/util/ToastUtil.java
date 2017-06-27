@@ -18,23 +18,40 @@ public class ToastUtil {
         return instance;
     }
 
+    /**
+     * 显示操作成功
+     *
+     * @param context
+     */
     public void showSueess(Context context) {
         Toast.makeText(context, "操作成功", Toast.LENGTH_LONG).show();
     }
 
-    public void show(Context context, String msg) {
-        Toast.makeText(context, StringUtil.getStr(msg), Toast.LENGTH_SHORT).show();
-    }
 
+    /**
+     * 短显示 msg
+     * @param context
+     * @param msg
+     */
     public void showShort(Context context, String msg) {
         Toast.makeText(context, StringUtil.getStr(msg), Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 长显示 msg
+     * @param context
+     * @param msg
+     */
     public void showLong(Context context, String msg) {
         Toast.makeText(context, StringUtil.getStr(msg), Toast.LENGTH_LONG).show();
     }
 
 
+    /**
+     * hander 显示操作成功
+     * @param context
+     * @param handler
+     */
     public void showSueess(final Context context, Handler handler) {
         handler.post(new Runnable() {
             @Override
@@ -45,6 +62,12 @@ public class ToastUtil {
 
     }
 
+    /**
+     * hander 显示 msg
+     * @param context
+     * @param msg
+     * @param handler
+     */
     public void show(final Context context, final String msg, Handler handler) {
         handler.post(new Runnable() {
             @Override
@@ -55,6 +78,12 @@ public class ToastUtil {
 
     }
 
+    /**
+     * hander 短显示msg
+     * @param context
+     * @param msg
+     * @param handler
+     */
     public void showShort(final Context context, final String msg, Handler handler) {
         handler.post(new Runnable() {
             @Override
@@ -65,6 +94,12 @@ public class ToastUtil {
 
     }
 
+    /**
+     * hander 长显示msg
+     * @param context
+     * @param msg
+     * @param handler
+     */
     public void showLong(final Context context, final String msg, Handler handler) {
         handler.post(new Runnable() {
             @Override

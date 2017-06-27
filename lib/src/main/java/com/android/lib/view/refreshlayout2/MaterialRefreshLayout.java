@@ -17,8 +17,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
 
+import com.android.lib.R;
 import com.android.lib.constant.ValueConstant;
-import com.summer.lib.R;
 
 
 public class MaterialRefreshLayout extends FrameLayout {

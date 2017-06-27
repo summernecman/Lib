@@ -1,7 +1,7 @@
 package com.android.lib.constant;
 
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 import java.util.ArrayList;
 

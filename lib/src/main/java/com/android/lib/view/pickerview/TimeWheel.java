@@ -3,6 +3,7 @@ package com.android.lib.view.pickerview;
 import android.content.Context;
 import android.view.View;
 
+import com.android.lib.R;
 import com.android.lib.view.pickerview.adapters.NumericWheelAdapter;
 import com.android.lib.view.pickerview.config.PickerConfig;
 import com.android.lib.view.pickerview.data.source.TimeRepository;
@@ -10,7 +11,6 @@ import com.android.lib.view.pickerview.utils.PickerContants;
 import com.android.lib.view.pickerview.utils.Utils;
 import com.android.lib.view.pickerview.wheel.OnWheelChangedListener;
 import com.android.lib.view.pickerview.wheel.WheelView;
-import com.summer.lib.R;
 
 import java.util.Calendar;
 

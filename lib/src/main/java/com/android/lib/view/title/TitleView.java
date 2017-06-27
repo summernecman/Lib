@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 import butterknife.ButterKnife;
 

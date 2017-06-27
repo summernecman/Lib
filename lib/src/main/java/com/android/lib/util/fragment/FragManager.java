@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
+import com.android.lib.R;
 import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.LogUtil;
-import com.summer.lib.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

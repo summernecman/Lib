@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import com.android.lib.BuildConfig;
 import com.android.lib.view.hellocharts.listener.DummyLineChartOnValueSelectListener;
 import com.android.lib.view.hellocharts.listener.LineChartOnValueSelectListener;
 import com.android.lib.view.hellocharts.model.ChartData;
@@ -12,7 +13,6 @@ import com.android.lib.view.hellocharts.model.PointValue;
 import com.android.lib.view.hellocharts.model.SelectedValue;
 import com.android.lib.view.hellocharts.provider.LineChartDataProvider;
 import com.android.lib.view.hellocharts.renderer.LineChartRenderer;
-import com.summer.lib.BuildConfig;
 
 /**
  * LineChart, supports cubic lines, filled lines, circle and square points. Point radius and stroke width can be

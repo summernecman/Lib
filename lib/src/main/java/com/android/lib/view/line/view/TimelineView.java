@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 public class TimelineView extends View {
 

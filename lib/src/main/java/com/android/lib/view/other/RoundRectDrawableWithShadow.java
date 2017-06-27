@@ -28,7 +28,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 /**
  * A rounded rectangle drawable which also includes a shadow around.

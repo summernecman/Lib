@@ -7,7 +7,7 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 /**
  * Created by ${viwmox} on 2016-08-30.

@@ -7,13 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.lib.R;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.android.lib.base.ope.BaseOpes;
 import com.android.lib.base.ope.BaseUIBean;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.LogUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
-import com.summer.lib.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

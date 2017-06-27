@@ -25,13 +25,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.android.lib.R;
 import com.android.lib.view.zxing.activity.CaptureFragment;
 import com.android.lib.view.zxing.camera.CameraManager;
 import com.android.lib.view.zxing.view.ViewfinderResultPointCallback;
 import com.android.lib.view.zxing.view.ViewfinderView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.summer.lib.R;
 
 import java.util.Vector;
 

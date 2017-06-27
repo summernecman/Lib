@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.android.lib.R;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.android.lib.base.ope.BaseOpes;
 import com.android.lib.base.ope.BaseUIBean;
@@ -14,7 +15,6 @@ import com.android.lib.constant.color.ColorConstant;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.StatusBarUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
-import com.summer.lib.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

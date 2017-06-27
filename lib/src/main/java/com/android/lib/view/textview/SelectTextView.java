@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 /**
  * Created by ${viwmox} on 2016-10-18.

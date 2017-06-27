@@ -65,7 +65,7 @@ public class VoiceUtil {
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
         } catch (IllegalStateException e) {
             e.printStackTrace();
-            ToastUtil.getInstance().show(context, "请打开录音权限");
+            ToastUtil.getInstance().showLong(context, "请打开录音权限");
             return null;
         }
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);

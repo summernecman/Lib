@@ -5,6 +5,7 @@ import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import com.android.lib.BuildConfig;
 import com.android.lib.view.hellocharts.listener.BubbleChartOnValueSelectListener;
 import com.android.lib.view.hellocharts.listener.DummyBubbleChartOnValueSelectListener;
 import com.android.lib.view.hellocharts.model.BubbleChartData;
@@ -13,7 +14,6 @@ import com.android.lib.view.hellocharts.model.ChartData;
 import com.android.lib.view.hellocharts.model.SelectedValue;
 import com.android.lib.view.hellocharts.provider.BubbleChartDataProvider;
 import com.android.lib.view.hellocharts.renderer.BubbleChartRenderer;
-import com.summer.lib.BuildConfig;
 
 /**
  * BubbleChart, supports circle bubbles and square bubbles.

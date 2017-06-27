@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 
 /**

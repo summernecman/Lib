@@ -19,10 +19,10 @@ import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 
+import com.android.lib.R;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.system.HandleUtil;
-import com.summer.lib.R;
 
 
 public class MaterialRefreshLayout extends FrameLayout {

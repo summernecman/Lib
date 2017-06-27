@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
+import com.android.lib.R;
 import com.android.lib.base.listener.SimpleAnimationListener;
-import com.summer.lib.R;
 
 
 /**

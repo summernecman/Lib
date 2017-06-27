@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.lib.R;
 import com.android.lib.view.hellocharts.view.AbstractChartView;
 import com.android.lib.view.hellocharts.view.BubbleChartView;
 import com.android.lib.view.hellocharts.view.ColumnChartView;
@@ -24,7 +25,6 @@ import com.android.lib.view.hellocharts.view.LineChartView;
 import com.android.lib.view.hellocharts.view.PieChartView;
 import com.android.lib.view.hellocharts.view.PreviewColumnChartView;
 import com.android.lib.view.hellocharts.view.PreviewLineChartView;
-import com.summer.lib.R;
 
 import java.util.ArrayList;
 import java.util.List;

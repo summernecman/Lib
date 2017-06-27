@@ -19,7 +19,7 @@ package com.android.lib.sip;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 
 /**

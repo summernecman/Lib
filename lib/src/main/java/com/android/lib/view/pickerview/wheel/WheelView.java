@@ -31,10 +31,10 @@ import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.lib.R;
 import com.android.lib.view.pickerview.adapters.WheelViewAdapter;
 import com.android.lib.view.pickerview.config.DefaultConfig;
 import com.android.lib.view.pickerview.config.PickerConfig;
-import com.summer.lib.R;
 
 import java.util.LinkedList;
 import java.util.List;

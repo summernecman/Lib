@@ -16,9 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.lib.R;
 import com.android.lib.view.pinnedheaderexpandablelistview.expandable.ui.PinnedHeaderExpandableListView;
 import com.android.lib.view.pinnedheaderexpandablelistview.expandable.ui.StickyLayout;
-import com.summer.lib.R;
 
 import java.util.ArrayList;
 import java.util.List;

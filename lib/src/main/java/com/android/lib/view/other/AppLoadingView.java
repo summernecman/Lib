@@ -6,7 +6,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 
 /**

@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 
 public class AboutActivity extends ActionBarActivity {

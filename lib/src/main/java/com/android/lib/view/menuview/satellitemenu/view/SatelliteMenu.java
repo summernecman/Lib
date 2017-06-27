@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.android.lib.R;
+import com.android.lib.R2;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.AnimUtil;
 import com.android.lib.view.menuview.satellitemenu.bean.SatelliteBean;
-import com.summer.lib.R;
-import com.summer.lib.R2;
 
 import java.util.ArrayList;
 

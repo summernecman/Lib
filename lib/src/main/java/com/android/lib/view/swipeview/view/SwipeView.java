@@ -14,11 +14,11 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 
+import com.android.lib.R;
 import com.android.lib.base.interf.view.OnAppItemClickListener;
 import com.android.lib.util.LogUtil;
 import com.android.lib.view.chart.linearchat.bean.databean.Value;
 import com.android.lib.view.pinnedheaderexpandablelistview.expandable.ui.PinnedHeaderExpandableListView;
-import com.summer.lib.R;
 
 /**
  * Created by ${viwmox} on 2016-11-30.

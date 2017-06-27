@@ -5,7 +5,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.view.animation.AnimationUtils;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 
 /**

@@ -11,8 +11,8 @@ import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 
+import com.android.lib.R;
 import com.android.lib.util.LogUtil;
-import com.summer.lib.R;
 
 /**
  * Created by ${viwmox} on 2016-11-09.

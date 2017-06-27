@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
 import com.android.lib.base.ope.BaseUIBean;
-import com.summer.lib.databinding.ActivityImagesVpBinding;
+import com.android.lib.databinding.ActivityImagesVpBinding;
 
 import java.util.ArrayList;
 

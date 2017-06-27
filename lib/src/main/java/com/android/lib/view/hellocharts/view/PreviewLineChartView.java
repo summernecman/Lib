@@ -5,11 +5,11 @@ import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import com.android.lib.BuildConfig;
 import com.android.lib.view.hellocharts.computator.PreviewChartComputator;
 import com.android.lib.view.hellocharts.gesture.PreviewChartTouchHandler;
 import com.android.lib.view.hellocharts.model.LineChartData;
 import com.android.lib.view.hellocharts.renderer.PreviewLineChartRenderer;
-import com.summer.lib.BuildConfig;
 
 /**
  * Preview chart that can be used as overview for other LineChart. When you change Viewport of this chart, visible area

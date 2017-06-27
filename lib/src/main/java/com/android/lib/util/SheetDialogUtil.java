@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.lib.R;
 import com.android.lib.view.bottomdialogmenuview.BottomDialogMenuView;
-import com.summer.lib.R;
 
 //import com.siweisoft.imga.R;
 

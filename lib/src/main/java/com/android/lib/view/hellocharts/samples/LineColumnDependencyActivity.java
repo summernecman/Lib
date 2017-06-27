@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.lib.R;
 import com.android.lib.view.hellocharts.gesture.ZoomType;
 import com.android.lib.view.hellocharts.listener.ColumnChartOnValueSelectListener;
 import com.android.lib.view.hellocharts.model.Axis;
@@ -21,7 +22,6 @@ import com.android.lib.view.hellocharts.model.Viewport;
 import com.android.lib.view.hellocharts.util.ChartUtils;
 import com.android.lib.view.hellocharts.view.ColumnChartView;
 import com.android.lib.view.hellocharts.view.LineChartView;
-import com.summer.lib.R;
 
 import java.util.ArrayList;
 import java.util.List;

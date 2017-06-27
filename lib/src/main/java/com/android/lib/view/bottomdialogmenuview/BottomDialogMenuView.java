@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.lib.R;
 import com.android.lib.view.other.SweetView;
-import com.summer.lib.R;
 
 import java.util.ArrayList;
 

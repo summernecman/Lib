@@ -11,13 +11,13 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.android.lib.R;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.ScreenUtil;
 import com.android.lib.view.weekview.dayview.bean.PlanTipBean;
 import com.android.lib.view.weekview.dayview.bean.TimeLableBean;
 import com.android.lib.view.weekview.dayview.interf.OnTipClickListener;
-import com.summer.lib.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;

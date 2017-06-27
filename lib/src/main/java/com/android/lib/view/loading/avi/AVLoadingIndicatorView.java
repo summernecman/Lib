@@ -15,8 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
+import com.android.lib.R;
 import com.android.lib.view.loading.avi.indicators.BallPulseIndicator;
-import com.summer.lib.R;
 
 public class AVLoadingIndicatorView extends View {
 
@@ -105,23 +105,6 @@ public class AVLoadingIndicatorView extends View {
         return mIndicator;
     }
 
-    public void setIndicator(Indicator d) {
-        if (mIndicator != d) {
-            if (mIndicator != null) {
-                mIndicator.setCallback(null);
-                unscheduleDrawable(mIndicator);
-            }
-
-            mIndicator = d;
-            //need dealer set indicator color again if you didn't specified when you update the indicator .
-            setIndicatorColor(mIndicatorColor);
-            if (d != null) {
-                d.setCallback(this);
-            }
-            postInvalidate();
-        }
-    }
-
     /**
      * You should pay attention dealer pass this parameter with two way:
      * for example:
@@ -153,6 +136,23 @@ public class AVLoadingIndicatorView extends View {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void setIndicator(Indicator d) {
+        if (mIndicator != d) {
+            if (mIndicator != null) {
+                mIndicator.setCallback(null);
+                unscheduleDrawable(mIndicator);
+            }
+
+            mIndicator = d;
+            //need dealer set indicator color again if you didn't specified when you update the indicator .
+            setIndicatorColor(mIndicatorColor);
+            if (d != null) {
+                d.setCallback(this);
+            }
+            postInvalidate();
         }
     }
 

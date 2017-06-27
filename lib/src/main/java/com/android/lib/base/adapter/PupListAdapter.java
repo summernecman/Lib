@@ -1,11 +1,11 @@
-//package com.summer.lib.base.adapter;
+//package com.android.lib.base.adapter;
 //
 //import android.content.Context;
 //import android.support.v7.widget.RecyclerView;
 //import android.view.View;
 //import android.view.ViewGroup;
 //
-//import com.summer.lib.R;
+//import com.android.lib.R;
 //import OnAppItemClickListener;
 //import StringUtil;
 //

@@ -3,6 +3,7 @@ package com.android.lib.aplication;
 import android.app.Activity;
 import android.app.Application;
 
+import com.android.lib.R;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.exception.exception.CrashHander;
 import com.android.lib.util.ScreenUtil;
@@ -13,7 +14,6 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.summer.lib.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

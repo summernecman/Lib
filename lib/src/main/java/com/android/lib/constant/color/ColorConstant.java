@@ -1,6 +1,6 @@
 package com.android.lib.constant.color;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 /**
  * 颜色常量

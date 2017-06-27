@@ -40,8 +40,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.android.lib.R;
 import com.android.lib.util.LogUtil;
-import com.summer.lib.R;
 
 import java.text.ParseException;
 

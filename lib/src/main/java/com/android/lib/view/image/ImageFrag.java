@@ -8,11 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.lib.R;
 import com.android.lib.base.fragment.BaseFrg;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.NullUtil;
 import com.lzy.imagepicker.ImagePicker;
-import com.summer.lib.R;
 
 import uk.co.senab.photoview.PhotoView;
 

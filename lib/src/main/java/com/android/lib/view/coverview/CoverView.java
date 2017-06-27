@@ -10,10 +10,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.android.lib.R;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.SPUtil;
 import com.android.lib.util.ScreenUtil;
-import com.summer.lib.R;
 
 import java.util.Random;
 import java.util.concurrent.ExecutorService;

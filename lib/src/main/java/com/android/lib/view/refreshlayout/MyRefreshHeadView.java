@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.lib.R;
 import com.android.lib.util.thread.ThreadUtil;
-import com.summer.lib.R;
 
 /**
  * Created by ${viwmox} on 2017-02-23.

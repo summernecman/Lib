@@ -11,9 +11,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.lib.R;
 import com.android.lib.base.interf.view.OnAppItemSelectListener;
 import com.android.lib.base.listener.BaseOnPagerChangeListener;
-import com.summer.lib.R;
 
 import java.util.ArrayList;
 

@@ -20,6 +20,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.lib.R;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.view.zxing.camera.CameraManager;
 import com.android.lib.view.zxing.decoding.CaptureActivityHandler;
@@ -27,7 +28,6 @@ import com.android.lib.view.zxing.decoding.InactivityTimer;
 import com.android.lib.view.zxing.view.ViewfinderView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.summer.lib.R;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -68,7 +68,7 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
             if (!(PackageManager.PERMISSION_GRANTED == getActivity().checkSelfPermission(Manifest.permission.CAMERA))) {
                 getActivity().requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
                 if (!(PackageManager.PERMISSION_GRANTED == getActivity().checkSelfPermission(Manifest.permission.CAMERA))) {
-                    ToastUtil.getInstance().show(getActivity(), "请打开手机安全中心开启护士工作站照相权限");
+                    ToastUtil.getInstance().showLong(getActivity(), "请打开手机安全中心开启护士工作站照相权限");
                 }
             }
         }

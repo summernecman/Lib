@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.android.lib.R;
 import com.android.lib.base.listener.DoubleClickListener;
-import com.summer.lib.R;
 
 public class BottomItemView extends ViewPager {
 

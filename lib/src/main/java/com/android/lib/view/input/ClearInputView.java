@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 
-import com.summer.lib.R;
+import com.android.lib.R;
 
 import butterknife.ButterKnife;
 

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.android.lib.R;
 import com.android.lib.view.hellocharts.gesture.ContainerScrollType;
 import com.android.lib.view.hellocharts.gesture.ZoomType;
 import com.android.lib.view.hellocharts.model.Axis;
@@ -33,7 +34,6 @@ import com.android.lib.view.hellocharts.view.ColumnChartView;
 import com.android.lib.view.hellocharts.view.LineChartView;
 import com.android.lib.view.hellocharts.view.PieChartView;
 import com.android.lib.view.hellocharts.view.PreviewLineChartView;
-import com.summer.lib.R;
 
 import java.util.ArrayList;
 import java.util.List;

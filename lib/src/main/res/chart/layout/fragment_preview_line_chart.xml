@@ -9,11 +9,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.android.lib.view.hellocharts.samples.PreviewLineChartActivity$PlaceholderFragment">
 
-    <com.summer.lib.lecho.libhellocharts.view.LineChartView
+    <com.android.lib.lecho.libhellocharts.view.LineChartView
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></com.summer.lib.lecho.libhellocharts.view.LineChartView>
+        android:layout_weight="1"></com.android.lib.lecho.libhellocharts.view.LineChartView>
 
     <View
         android:layout_width="match_parent"
@@ -22,10 +22,10 @@
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray" />
 
-    <com.summer.lib.lecho.libhellocharts.view.PreviewLineChartView
+    <com.android.lib.lecho.libhellocharts.view.PreviewLineChartView
         android:id="@+id/chart_preview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></com.summer.lib.lecho.libhellocharts.view.PreviewLineChartView>
+        android:layout_weight="1"></com.android.lib.lecho.libhellocharts.view.PreviewLineChartView>
 
 </LinearLayout>
