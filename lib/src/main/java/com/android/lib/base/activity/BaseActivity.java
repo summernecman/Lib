@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.android.lib.aplication.LibAplication;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.activity.ActivityUtil;
 
 
 /**
@@ -22,9 +23,8 @@ public class BaseActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         activity = this;
         if (getApplication() instanceof LibAplication) {
-            LibAplication application = (LibAplication) getApplication();
-            application.getActMap().put(getClass().getSimpleName(), activity);
-            application.getActs().add(activity);
+            ActivityUtil.getInstance().getActMap().put(getClass().getSimpleName(), activity);
+            ActivityUtil.getInstance().getActList().add(activity);
         } else {
             LogUtil.E("你的application最好继承LibAplication以便享有方便的方法");
         }

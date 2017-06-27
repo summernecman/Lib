@@ -1,12 +1,12 @@
 package com.android.lib.aplication;
 
-import android.app.Activity;
 import android.app.Application;
 
 import com.android.lib.R;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.exception.exception.CrashHander;
 import com.android.lib.util.ScreenUtil;
+import com.android.lib.util.activity.ActivityUtil;
 import com.android.lib.view.image.ImagePickerLoader;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
@@ -15,24 +15,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-
 
 /**
  * 用于一些跟应用程序生命周期一致的处理
  */
 public class LibAplication extends Application {
 
-    /**
-     * 键值对存储activity
-     */
-    HashMap<String, Activity> actMap = new HashMap<>();
-    /**
-     * 列表存储activity
-     */
-    ArrayList<Activity> acts = new ArrayList<>();
 
     @Override
     public void onCreate() {
@@ -102,18 +90,7 @@ public class LibAplication extends Application {
      * 退出结束所有界面
      */
     public void exit() {
-        Iterator iterator = actMap.keySet().iterator();
-        while (iterator.hasNext()) {
-            actMap.get(iterator.next()).finish();
-        }
-        actMap.clear();
-    }
-
-    public HashMap<String, Activity> getActMap() {
-        return actMap;
-    }
-
-    public ArrayList<Activity> getActs() {
-        return acts;
+        ActivityUtil.getInstance().destoryActs();
+        System.gc();
     }
 }

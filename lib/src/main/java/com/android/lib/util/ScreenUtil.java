@@ -67,7 +67,6 @@ public class ScreenUtil {
             return -1;
         }
         return ((x - sx) * num) / (ex - sx);
-
     }
 
     /***
