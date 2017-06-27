@@ -14,6 +14,7 @@ import com.android.lib.bean.databean.EventBean;
 import com.android.lib.util.FragmentUtil;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.IntentUtil;
+import com.android.lib.util.system.HandleUtil;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.GsonNoteBean;
@@ -32,7 +33,12 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getOpes().getDa().init(fragment);
-        getOpes().getUi().getData(fragment, getOpes().getDa().bean, this, this);
+        HandleUtil.getInstance().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getOpes().getUi().getData(fragment, getOpes().getDa().bean, NoteDetailFrag.this, NoteDetailFrag.this);
+            }
+        }, 500);
         getOpes().getUi().init(fragment, getOpes().getDa().bean, new OnBMClickListener() {
             @Override
             public void onBoomButtonClick(int index) {

@@ -21,4 +21,5 @@ public class AppMainUIBean extends BaseUIBean<FragAppMainBinding> {
     public void initViewPager(FragmentActivity fragmentActivity, ArrayList<Fragment> fragments) {
         viewDataBinding.appViewpager.setAdapter(new AppPagerAdapter(fragmentActivity.getSupportFragmentManager(), context, fragments));
     }
+
 }

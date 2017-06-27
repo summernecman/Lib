@@ -40,7 +40,7 @@ public class AnimRecyclerView extends RecyclerView {
 
     @Override
     public void setAdapter(Adapter adapter) {
-        Animation animation = AnimationUtils.loadAnimation(context, R.anim.anim_push_left_in);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.anim_push_left_in_250);
         LayoutAnimationController lac = new LayoutAnimationController(animation);
         lac.setOrder(LayoutAnimationController.ORDER_NORMAL);
         lac.setDelay(0.5f);//注意这个地方是以秒为单位，是浮点型数据，所以要加f

@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.util.BitmapUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dbbean.AppDBBean;
@@ -42,7 +43,7 @@ public class AppItemsUIBean extends BaseUIBean<FragAppAppsBinding> {
 
     public void init() {
         getViewDataBinding().appRecycle.setLayoutManager(new GridLayoutManager(context, 5));
-        //getAppRecycle().addItemDecoration(new MyItemDecoration(context, 2));
+        viewDataBinding.appsIv.setImageDrawable(BitmapUtil.getInstance().getBgDrawable(context));
     }
 
 

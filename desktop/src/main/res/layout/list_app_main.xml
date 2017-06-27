@@ -13,9 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/transparent"
+        android:elevation="2dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="2dp">
 
         <ImageView
             android:id="@+id/appicon"
@@ -23,8 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_margin="8dp"
             android:src="@{item.icon}" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="@{item.appName}"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="13sp" />
     </com.android.lib.view.menuview.homebottom.HomeBottomItem>
 </layout>

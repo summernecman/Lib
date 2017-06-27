@@ -30,12 +30,13 @@
                 android:id="@+id/notelist"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white">
+                android:background="@color/color_block_back">
 
-                <android.support.v7.widget.RecyclerView
+                <com.android.lib.view.recyclerview.AnimRecyclerView
                     android:id="@+id/recycle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:overScrollMode="never" />
 
             </RelativeLayout>

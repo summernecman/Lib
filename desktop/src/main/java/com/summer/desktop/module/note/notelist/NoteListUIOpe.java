@@ -10,7 +10,6 @@ import android.view.View;
 import com.android.lib.base.ope.BaseUIBean;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.system.HandleUtil;
-import com.android.lib.view.ItemDecoration.MyItemDecoration2;
 import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.summer.desktop.bean.dabean.Note;
 import com.summer.desktop.databinding.FragNoteNewsBinding;
@@ -37,7 +36,7 @@ public class NoteListUIOpe extends BaseUIBean<FragNoteNewsBinding> {
 
     public void init(Fragment fragment, View.OnClickListener listener, View.OnLongClickListener longClickListener, MaterialRefreshListener refreshListener) {
         viewDataBinding.recycle.setLayoutManager(new LinearLayoutManager(context));
-        viewDataBinding.recycle.addItemDecoration(new MyItemDecoration2(context, 3));
+        //viewDataBinding.recycle.addItemDecoration(new MyItemDecoration2(context, 3));
         viewDataBinding.notelist.setOnLongClickListener(longClickListener);
         parentNote = (Note) fragment.getArguments().getSerializable("data");
         viewDataBinding.refresh.setMaterialRefreshListener(refreshListener);

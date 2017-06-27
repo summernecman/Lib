@@ -15,7 +15,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.android.lib.bean.databean.LocationBean;
 import com.android.lib.bean.databean.XYBean;
 import com.android.lib.constant.color.ColorConstant;
 import com.android.lib.util.LogUtil;
@@ -40,6 +39,7 @@ public class DayView3 extends View implements View.OnLongClickListener {
     float w, h;
     OnlongClickWithHM longClickListener;
     XYBean xyBean = new XYBean();
+    Paint paint = new Paint();
     private float mLastMotionX, mLastMotionY;
 
     public DayView3(Context context, @Nullable AttributeSet attrs) {
@@ -82,8 +82,9 @@ public class DayView3 extends View implements View.OnLongClickListener {
 
         for (int i = 0; i < rects.size(); i++) {
             for (int j = 0; j < rects.get(i).size(); j++) {
+                rects.get(i).get(j).setText("");
                 rects.get(i).get(j).setColor(Color.WHITE);
-                rects.get(i).get(j).setTextSize((int) (w));
+                rects.get(i).get(j).setTextSize((int) (w) / 2);
                 //black
                 if (j == 0 && i != 0) {
                     if ((6 - 1 + i) % hnum == nowh) {
@@ -111,11 +112,22 @@ public class DayView3 extends View implements View.OnLongClickListener {
             int color = getResources().getColor(ColorConstant.colors[a % ColorConstant.colors.length]);
             for (int i = 0; i < rects.size(); i++) {
                 for (int j = 0; j < rects.get(i).size(); j++) {
+                    if (i == x && j == y) {
+                        rects.get(i).get(j).setColor(Color.DKGRAY);
+                        rects.get(i).get(j).setText(minuteDAOpe.nowM() + "");
+                    }
                     if (i != 0 && j != 0) {
                         int sx = (times.get(a).sh - 5) < 0 ? (times.get(a).sh - 5) + hnum : (times.get(a).sh - 5);
                         int sy = times.get(a).sm / ww + 1;
                         int ex = (times.get(a).eh - 5) < 0 ? (times.get(a).eh - 5) + hnum : (times.get(a).eh - 5);
                         int ey = (times.get(a).em % ww) == 0 ? times.get(a).em / ww : times.get(a).em / ww + 1;
+
+                        //设置的时间段开始时间点的h.m
+                        if (sx == i && sy == j) {
+                            rects.get(i).get(j).setTextSize((int) (w) * 2 / 3);
+                            rects.get(i).get(j).setText(times.get(a).text);
+                        }
+
                         if ((sx * wnum + sy) <= (ex * wnum + ey)) {
                             if ((i * wnum + j) >= ((sx * wnum + sy)) && (i * wnum + j) <= ((ex * wnum + ey))) {
                                 rects.get(i).get(j).setColor(color);
@@ -130,35 +142,23 @@ public class DayView3 extends View implements View.OnLongClickListener {
             }
         }
 
-        for (int i = 0; i < rects.size(); i++) {
-            for (int j = 0; j < rects.get(i).size(); j++) {
-                if (i == x && j == y) {
-                    rects.get(i).get(j).setColor(Color.DKGRAY);
-                    rects.get(i).get(j).setText(minuteDAOpe.nowM() + "");
-                }
-            }
-        }
-
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG));
-        Paint paint = new Paint();
         paint.setAntiAlias(true);
-
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
         canvas.drawColor(Color.BLACK);
-        paint.setTextSize(rects.get(0).get(0).getMinuteRect().w / 2);
         for (int i = 0; i < rects.size(); i++) {
             for (int j = 0; j < rects.get(i).size(); j++) {
-
+                paint.setTextSize(rects.get(i).get(j).getTextColor());
                 paint.setColor(rects.get(i).get(j).getColor());
                 canvas.drawRect(new RectF(rects.get(i).get(j).getMinuteRect().left, rects.get(i).get(j).getMinuteRect().top, rects.get(i).get(j).getMinuteRect().right, rects.get(i).get(j).getMinuteRect().bottom), paint);
                 if (!NullUtil.isStrEmpty(rects.get(i).get(j).getText())) {
                     paint.setColor(rects.get(i).get(j).getTextColor());
-                    canvas.drawText(rects.get(i).get(j).getText(), rects.get(i).get(j).getMinuteRect().left + rects.get(i).get(j).getMinuteRect().w / 3, rects.get(i).get(j).getMinuteRect().bottom - rects.get(i).get(j).getMinuteRect().h / 3, paint);
+                    drawTextCenter(rects.get(i).get(j), paint, canvas);
                 }
                 if (rects.get(i).get(j).isDone()) {
                     paint.setColor(Color.BLACK);
@@ -172,13 +172,19 @@ public class DayView3 extends View implements View.OnLongClickListener {
                 }
             }
         }
-        for (int i = 0; i < times.size(); i++) {
-            paint.setTextSize(rects.get(0).get(0).getTextSize());
-            paint.setColor(rects.get(0).get(0).getTextColor());
-            LocationBean locationBean = countCenterXY(times.get(i), rects.get(0).get(0).getTextSize());
-            canvas.drawText(times.get(i).text, locationBean.getX(), locationBean.getY() + h, paint);
-        }
+    }
 
+    public void drawTextCenter(MinuteBean minuteBean, Paint paint, Canvas canvas) {
+        paint.setTextSize(minuteBean.getTextSize());
+        RectF rect = new RectF(minuteBean.getMinuteRect().left, minuteBean.getMinuteRect().top, minuteBean.getMinuteRect().right, minuteBean.getMinuteRect().bottom);//画一个矩形
+        paint.setStyle(Paint.Style.FILL);
+        //该方法即为设置基线上那个点究竟是left,center,还是right  这里我设置为center
+        paint.setTextAlign(Paint.Align.CENTER);
+        Paint.FontMetrics fontMetrics = paint.getFontMetrics();
+        float top = fontMetrics.top;//为基线到字体上边框的距离,即上图中的top
+        float bottom = fontMetrics.bottom;//为基线到字体下边框的距离,即上图中的bottom
+        int baseLineY = (int) (rect.centerY() - top / 2 - bottom / 2);//基线中间点的y轴计算公式
+        canvas.drawText(minuteBean.getText(), rect.centerX(), baseLineY, paint);
     }
 
     public void initTouch(int x, int y) {
@@ -219,17 +225,6 @@ public class DayView3 extends View implements View.OnLongClickListener {
         invalidate();
     }
 
-    //根据给出的时分算出所在区间中心坐标
-    public LocationBean countCenterXY(TimeBean timeBean, int textsize) {
-
-        int sx = (timeBean.sh - 5) < 0 ? (timeBean.sh - 5) + hnum : (timeBean.sh - 5);
-        int sy = timeBean.sm / ww + 1;
-        int ex = (timeBean.eh - 5) < 0 ? (timeBean.eh - 5) + hnum + 1 : (timeBean.eh - 5) + 1;
-        int ey = (timeBean.em % ww) == 0 ? timeBean.em / ww : timeBean.em / ww + 1;
-
-        LocationBean sl = new LocationBean((sy) * w, (sx) * h);
-        return sl;
-    }
 
     //根据给出的时分算出所在区间
     public String getArea(int h, int m) {
@@ -321,19 +316,4 @@ public class DayView3 extends View implements View.OnLongClickListener {
         public void onLongClick(View v, int h, int m);
     }
 
-    public class MyRunnable implements Runnable {
-
-        public int h;
-        public int m;
-
-        public MyRunnable(int h, int m) {
-            this.h = h;
-            this.m = m;
-        }
-
-        @Override
-        public void run() {
-
-        }
-    }
 }

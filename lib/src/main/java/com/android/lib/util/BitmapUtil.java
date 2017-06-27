@@ -1,8 +1,10 @@
 package com.android.lib.util;
 
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -93,4 +95,12 @@ public class BitmapUtil {
         }
         return newFiles;
     }
+
+    public Drawable getBgDrawable(Context context) {
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
+        // 获取当前壁纸
+        Drawable wallpaperDrawable = wallpaperManager.getDrawable();
+        return wallpaperDrawable;
+    }
+
 }

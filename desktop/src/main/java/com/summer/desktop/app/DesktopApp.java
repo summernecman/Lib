@@ -18,8 +18,7 @@ public class DesktopApp extends LibAplication {
     public void onCreate() {
         super.onCreate();
         Bmob.initialize(this, "a372099e1546f084af11ba4cfc1b8439");
-        Intent intent = new Intent(this, AppService.class);
-        startService(intent);
+        startService(new Intent(this, AppService.class));
         new Thread(new Runnable() {
             @Override
             public void run() {
