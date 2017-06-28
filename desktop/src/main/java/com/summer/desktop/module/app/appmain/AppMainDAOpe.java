@@ -9,8 +9,8 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.interf.OnFinishWithObjI;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.summer.desktop.bean.dbbean.AppDBBean;
-import com.summer.desktop.module.app.appitems.AppItemsFrag;
 import com.summer.desktop.module.app.appitems.AppListDAOpe;
+import com.summer.desktop.module.app.folder.NormalFragment;
 
 import java.util.ArrayList;
 
@@ -36,7 +36,7 @@ public class AppMainDAOpe extends BaseDAOpe {
 
     public ArrayList<Fragment> getFragments() {
         ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(new AppItemsFrag());
+        fragments.add(new NormalFragment());
         return fragments;
     }
 

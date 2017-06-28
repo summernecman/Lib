@@ -6,7 +6,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 
 import com.android.lib.base.ope.BaseDAOpe;
-import com.summer.desktop.module.app.appitems.AppItemsFrag;
+import com.summer.desktop.module.app.appmain.AppMainFrag;
 import com.summer.desktop.module.day.daymain.DayMainFrag;
 import com.summer.desktop.module.note.main.NoteMainFrag;
 
@@ -22,7 +22,7 @@ public class HomeDAOpe extends BaseDAOpe {
     public ArrayList<Fragment> getFragment() {
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new DayMainFrag());
-        fragments.add(new AppItemsFrag());
+        fragments.add(new AppMainFrag());
         fragments.add(new NoteMainFrag());
         return fragments;
     }

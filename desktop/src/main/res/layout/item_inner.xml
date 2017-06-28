@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.lib.view.menuview.homebottom.HomeBottomItem xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/approot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:elevation="2dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="2dp">
+
+    <ImageView
+        android:id="@+id/appicon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerInside"
+        android:src="@drawable/drawable_setting" />
+
+    <TextView
+        android:id="@+id/tv_appname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="123"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+</com.android.lib.view.menuview.homebottom.HomeBottomItem>

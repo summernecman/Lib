@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 
 import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.constant.color.ColorConstant;
 import com.android.lib.util.FragmentUtil;
 import com.summer.desktop.R;
 import com.summer.desktop.databinding.FragNoteMainBinding;
@@ -16,6 +17,7 @@ public class NoteMainUIOpe extends BaseUIBean<FragNoteMainBinding> {
 
     public NoteMainUIOpe(Context context) {
         super(context);
+        viewDataBinding.tvTitle.setBackgroundColor(ColorConstant.COLOR_STATUS);
     }
 
     public void initList(Fragment f, Fragment fragment) {

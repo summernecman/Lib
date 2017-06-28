@@ -9,11 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginBottom="2dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_marginTop="2dp"
         android:background="@drawable/drawable_press_black_while"
-        android:elevation="1dp"
+        android:elevation="0.5dp"
         android:orientation="vertical"
         android:padding="5dp">
 

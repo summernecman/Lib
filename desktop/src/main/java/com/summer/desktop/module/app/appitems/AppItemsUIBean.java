@@ -11,6 +11,7 @@ import android.view.View;
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.ope.BaseUIBean;
 import com.android.lib.util.BitmapUtil;
+import com.android.lib.util.LogUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dbbean.AppDBBean;
@@ -20,6 +21,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class AppItemsUIBean extends BaseUIBean<FragAppAppsBinding> {
 
@@ -69,48 +71,36 @@ public class AppItemsUIBean extends BaseUIBean<FragAppAppsBinding> {
 
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-
                 int fromPosition = viewHolder.getAdapterPosition();//得到拖动ViewHolder的position
-
                 int toPosition = target.getAdapterPosition();//得到目标ViewHolder的position
-
+                LogUtil.E(fromPosition + "--" + toPosition);
                 if (fromPosition < toPosition) {
-
                     for (int i = fromPosition; i < toPosition; i++) {
-
                         Collections.swap(appDBBeen, i, i + 1);
-
                     }
-
 //                    for (int i = fromPosition; i < toPosition; i++) {
-
 //                        appDBBeen.get(i).setPosition(i);
-
 //                    }
-
                 } else {
-
                     for (int i = fromPosition; i > toPosition; i--) {
-
                         Collections.swap(appDBBeen, i, i - 1);
-
                     }
-
 //                    for (int i = fromPosition; i > toPosition; i--) {
-
 //                        appDBBeen.get(i).setPosition(i);
-
 //                    }
                 }
                 recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
                 return true;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 
             }
 
             @Override
-
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
+            public RecyclerView.ViewHolder chooseDropTarget(RecyclerView.ViewHolder selected, List<RecyclerView.ViewHolder> dropTargets, int curX, int curY) {
+                return super.chooseDropTarget(selected, dropTargets, curX, curY);
             }
         });
         itemTouchHelper.attachToRecyclerView(getViewDataBinding().appRecycle);

@@ -3,6 +3,7 @@ package com.summer.desktop.app;
 import android.content.Intent;
 
 import com.android.lib.aplication.LibAplication;
+import com.android.lib.constant.color.ColorConstant;
 import com.android.lib.service.main.AppService;
 
 import cn.bmob.v3.Bmob;
@@ -17,6 +18,7 @@ public class DesktopApp extends LibAplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        ColorConstant.COLOR_STATUS = getResources().getColor(com.android.lib.R.color.color_light_blue_400);
         Bmob.initialize(this, "a372099e1546f084af11ba4cfc1b8439");
         startService(new Intent(this, AppService.class));
         new Thread(new Runnable() {

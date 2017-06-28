@@ -36,7 +36,6 @@
                 android:id="@+id/bottom_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/color_blue_300"
                 android:translationZ="3dp" />
         </LinearLayout>
     </RelativeLayout>

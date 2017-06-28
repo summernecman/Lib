@@ -47,7 +47,7 @@ public abstract class BaseUIActivity<A extends BaseUIBean, B extends BaseDAOpe> 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_baseui_withouttitle);
-        StatusBarUtil.getInstance().setStatusBarColorResId(activity, ColorConstant.COLOR_STATUS);
+        StatusBarUtil.getInstance().setStatusBarColor(activity, ColorConstant.COLOR_STATUS);
         ACT_ROOT_VIEW = (ViewGroup) findViewById(R.id.act_base_root);
         if (getOpes().getUi() != null && getOpes().getUi().getViewDataBinding().getRoot() != null) {
             ACT_ROOT_VIEW.addView(getOpes().getUi().getViewDataBinding().getRoot(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));

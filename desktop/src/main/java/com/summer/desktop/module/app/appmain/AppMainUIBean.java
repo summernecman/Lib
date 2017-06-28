@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.android.lib.base.adapter.AppPagerAdapter;
 import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.util.BitmapUtil;
 import com.summer.desktop.databinding.FragAppMainBinding;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class AppMainUIBean extends BaseUIBean<FragAppMainBinding> {
 
     public AppMainUIBean(Context context) {
         super(context);
+        viewDataBinding.appsIv.setImageDrawable(BitmapUtil.getInstance().getBgDrawable(context));
     }
 
     public void initViewPager(FragmentActivity fragmentActivity, ArrayList<Fragment> fragments) {

@@ -124,6 +124,19 @@ public class DayMainFrag extends BaseUIFrag<DayMainUIOpe, DayMainDAOpe> implemen
                     case 1:
                         initData();
                         break;
+                    case 5:
+                        getOpes().getDa().getNoteListDAOpe().getTodayNotes("0", new String[]{
+                                Calendar.getInstance().get(Calendar.YEAR) + "年",
+                                (Calendar.getInstance().get(Calendar.MONTH) + 1) + "月",
+                                Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "日"}, new OnFinishListener() {
+                            @Override
+                            public void onFinish(Object o) {
+                                Object[] objects = (Object[]) o;
+                                getOpes().getUi().goToNote(activity, (String) objects[0]);
+
+                            }
+                        });
+                        break;
                 }
             }
         });

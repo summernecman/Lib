@@ -32,7 +32,7 @@ public class HomeActivity extends BaseUIActivity<HomeUIBean, HomeDAOpe> implemen
             //Toast.makeText(getApplicationContext(), "double kill", Toast.LENGTH_SHORT).show();
             FragmentUtil.getInstance().removeTop(activity);
         } else {
-            //super.onBackPressed();
+            super.onBackPressed();
         }
     }
 

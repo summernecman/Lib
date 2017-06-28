@@ -27,6 +27,19 @@ android {
     dexOptions {
         jumboMode true
     }
+    //自定义资源目录
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res',
+                    'src/main/res/classify',
+            ]
+
+            jniLibs.srcDirs = [
+                    'libDir',
+            ]
+        }
+    }
 }
 
 dependencies {

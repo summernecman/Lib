@@ -12,6 +12,7 @@ import com.android.lib.base.adapter.AppPagerAdapter;
 import com.android.lib.base.interf.view.OnPageChangeAdapterI;
 import com.android.lib.base.listener.DoubleClickListener;
 import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.constant.color.ColorConstant;
 import com.android.lib.view.bottommenu.BottomItemView;
 import com.summer.desktop.databinding.ActHomeMainBinding;
 
@@ -46,6 +47,7 @@ public class HomeUIBean extends BaseUIBean<ActHomeMainBinding> {
     }
 
     public void initBottom(PagerAdapter adapter, DoubleClickListener doubleClickListener, View.OnClickListener listener) {
+        viewDataBinding.bottomViewpager.setBackgroundColor(ColorConstant.COLOR_STATUS);
         getViewDataBinding().bottomViewpager.setAdapter(adapter);
         getViewDataBinding().bottomViewpager.setOffscreenPageLimit(7);
         getViewDataBinding().bottomViewpager.setCurrentItem(1000);
