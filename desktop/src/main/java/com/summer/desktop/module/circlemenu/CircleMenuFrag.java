@@ -27,7 +27,7 @@ public class CircleMenuFrag extends BaseUIFrag<CircleMenuUIOpe, CricleMenuDAOpe>
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.anim_push_left_in, R.anim.anim_push_right_out);
         transaction.remove(CircleMenuFrag.this);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     public void setOnFinishListener(OnFinishListener onFinishListener) {

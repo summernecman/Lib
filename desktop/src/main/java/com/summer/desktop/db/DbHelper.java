@@ -40,7 +40,8 @@ public class DbHelper extends DatabaseHelper {
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
-            TableUtils.createTable(connectionSource, AppDBBean.class);
+            TableUtils.createTableIfNotExists(connectionSource, AppDBBean.class);
+            TableUtils.createTableIfNotExists(connectionSource, TimeBean.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }

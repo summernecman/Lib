@@ -55,6 +55,11 @@ public class MyAdapter extends SimpleAdapter<AppDBBean, MyAdapter.FloderHolder> 
             itemHolder = (ItemHolder) convertView.getTag(R.id.data);
             itemHolder.nametv.setText(mData.get(mainPosition).get(subPosition).getAppName());
             itemHolder.appicon.setImageDrawable(mData.get(mainPosition).get(subPosition).getIcon());
+            if (mData.get(mainPosition).size() > 1) {
+                itemHolder.nametv.setVisibility(View.GONE);
+            } else {
+                itemHolder.nametv.setVisibility(View.VISIBLE);
+            }
         }
         //mData.get(mainPosition).get(subPosition).setPosition(mainPosition);
         return convertView;
@@ -83,6 +88,9 @@ public class MyAdapter extends SimpleAdapter<AppDBBean, MyAdapter.FloderHolder> 
 
         public ItemHolder(View itemView) {
             super(itemView);
+            itemView.getLayoutParams().width = (int) (ScreenUtil.w / 4);
+            itemView.getLayoutParams().height = itemView.getLayoutParams().width;
+            itemView.requestFocus();
             appicon = (ImageView) itemView.findViewById(R.id.appicon);
             nametv = (TextView) itemView.findViewById(R.id.tv_appname);
         }

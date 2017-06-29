@@ -106,7 +106,7 @@ public class NoteDetailFrag extends BaseUIFrag<NoteDetailUIOpe, NoteDetailDAOpe>
         final CircleMenuFrag circleMenuFrag = new CircleMenuFrag();
         FragmentTransaction transaction = fragment.getActivity().getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.root_note, circleMenuFrag);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
         circleMenuFrag.setOnFinishListener(new OnFinishListener() {
             @Override
             public void onFinish(Object b) {

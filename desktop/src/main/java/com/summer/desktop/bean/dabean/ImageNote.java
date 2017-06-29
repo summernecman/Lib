@@ -57,4 +57,14 @@ public class ImageNote extends BaseDABean {
     public void setHeight(int height) {
         this.height = height;
     }
+
+    @Override
+    public String toString() {
+        return "ImageNote{" +
+                "src='" + src + '\'' +
+                ", localSrc='" + localSrc + '\'' +
+                ", width=" + width +
+                ", height=" + height +
+                '}';
+    }
 }

@@ -97,7 +97,7 @@ public class FolderItemsDAOpe extends BaseDAOpe {
             if (map.get(data.get(i).getPosition()) == null) {
                 ArrayList<AppDBBean> l = new ArrayList<AppDBBean>();
                 l.add(data.get(i));
-                map.put(i, l);
+                map.put(data.get(i).getPosition(), l);
             } else {
                 map.get(data.get(i).getPosition()).add(data.get(i));
             }

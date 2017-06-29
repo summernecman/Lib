@@ -3,6 +3,8 @@ package com.summer.desktop.module.note.notedetail;
 //by summer on 2017-05-27.
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -20,6 +22,8 @@ import com.android.lib.bean.databean.EventBean;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.ScreenUtil;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.summer.desktop.R;
 import com.summer.desktop.bean.dabean.GsonNoteBean;
@@ -30,6 +34,10 @@ import com.summer.desktop.bean.dabean.TxtNote;
 import com.summer.desktop.util.GlideApp;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -89,7 +97,7 @@ public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLo
         switch (getItemViewType(position)) {
             case 0:
                 ImageHolder imageHolder = (ImageHolder) holder;
-                ImageNote imageNote = gson.fromJson(data.get(position).getData(), ImageNote.class);
+                final ImageNote imageNote = gson.fromJson(data.get(position).getData(), ImageNote.class);
                 switch (bean.getType()) {
                     case GsonNoteBean.TYPE_GALLERY:
                         break;
@@ -106,12 +114,14 @@ public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLo
                         //com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(imageNote.getLocalSrc(),imageHolder.imageView);
                     } else {
                         // GlideApp.with(context).load(imageNote.getLocalSrc()).placeholder(R.drawable.app).diskCacheStrategy(DiskCacheStrategy.ALL).encodeQuality(10).into(imageHolder.imageView);
-                        GlideApp.with(context).load(imageNote.getLocalSrc()).into(imageHolder.imageView);
+                        GlideApp.with(context).load(imageNote.getSrc()).placeholder(R.drawable.app).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageHolder.imageView);
+                        saveBitmap(imageNote);
                         //com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(imageNote.getLocalSrc(),imageHolder.imageView);
                     }
                 } else {
                     GlideApp.with(context).load(imageNote.getSrc()).placeholder(R.drawable.app).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageHolder.imageView);
                     //com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(imageNote.getSrc(),imageHolder.imageView);
+                    saveBitmap(imageNote);
                 }
                 imageHolder.itemView.setTag(R.id.position, position);
                 imageHolder.itemView.setTag(R.id.data, data.get(position));
@@ -192,6 +202,54 @@ public class NoteDetailAdapter extends RecyclerView.Adapter implements View.OnLo
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
+    }
+
+    public void saveBitmap(final ImageNote imageNote) {
+        LogUtil.E(imageNote.toString());
+        GlideApp.with(context).asBitmap().load(imageNote.getSrc()).into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(final Bitmap resource, Transition<? super Bitmap> transition) {
+                new AsyncTask<String, String, ImageNote>() {
+                    @Override
+                    protected ImageNote doInBackground(String... params) {
+                        String s = imageNote.getLocalSrc().substring("file://".length(), imageNote.getLocalSrc().length());
+                        File file = new File(s);
+                        String[] sss = s.split("\\/");
+                        String end = sss[sss.length - 1];
+                        File file2 = new File(s.replace(end, ""));
+                        if (!file2.exists()) {
+                            file2.mkdirs();
+                        }
+                        if (!file.exists()) {
+                            try {
+                                file.createNewFile();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        OutputStream os = null;
+                        try {
+                            os = new FileOutputStream(file);
+                        } catch (FileNotFoundException e) {
+                            LogUtil.E(e);
+                            e.printStackTrace();
+                        }
+                        LogUtil.E(resource == null);
+                        LogUtil.E(os == null);
+//                        String[] s1 = name.split("\\.");
+//                        String s2= s1[s1.length-1];
+                        resource.compress(Bitmap.CompressFormat.JPEG, 100, os);
+                        return imageNote;
+                    }
+
+                    @Override
+                    protected void onPostExecute(ImageNote imageNote) {
+                        super.onPostExecute(imageNote);
+                        LogUtil.E(imageNote.toString());
+                    }
+                }.execute();
+            }
+        });
     }
 
     public static class ImageHolder extends RecyclerView.ViewHolder {

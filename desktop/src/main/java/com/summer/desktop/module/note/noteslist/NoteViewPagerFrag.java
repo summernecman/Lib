@@ -25,7 +25,7 @@ public class NoteViewPagerFrag extends BaseUIFrag<NoteViewPagerUIOpe, NotesViewP
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (getOpes().getDa().notes.size() <= getOpes().getDa().position) {
+        if (getOpes().getDa().notes == null || getOpes().getDa().notes.size() <= getOpes().getDa().position) {
             return;
         }
         TitleUtil.getInstance().remove(getOpes().getDa().notes.get(getOpes().getDa().position).getName());

@@ -58,7 +58,7 @@ public class CircleMenuUIOpe extends BaseUIBean<FragNoteBoomBinding> {
                 FragmentTransaction transaction = fragment.getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.setCustomAnimations(R.anim.anim_push_left_in, R.anim.anim_push_right_out);
                 transaction.remove(fragment);
-                transaction.commit();
+                transaction.commitAllowingStateLoss();
             }
 
         });

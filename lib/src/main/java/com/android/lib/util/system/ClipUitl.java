@@ -29,6 +29,9 @@ public class ClipUitl {
 
         ClipboardManager myClipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clipData = myClipboard.getPrimaryClip();
+        if (clipData == null) {
+            return "";
+        }
         int itemcount = clipData.getItemCount();
         for (int i = 0; i < itemcount; i++) {
             LogUtil.E(clipData.getItemAt(i).getText());
