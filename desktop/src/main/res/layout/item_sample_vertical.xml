@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="1dp">
 
     <com.summer.desktop.module.classify.simple.widget.InsertAbleGridView
         android:layout_width="match_parent"

@@ -27,5 +27,5 @@
         android:singleLine="true"
         android:text="123"
         android:textColor="@color/white"
-        android:textSize="13sp" />
+        android:textSize="10sp" />
 </com.android.lib.view.menuview.homebottom.HomeBottomItem>

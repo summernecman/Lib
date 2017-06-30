@@ -46,12 +46,12 @@ public class FolderItemsDAOpe extends BaseDAOpe {
                     appDBBean.setPackageName("");
                     appDBBean.setIcon(new BitmapDrawable(BitmapFactory.decodeResource(context.getResources(), R.drawable.app)));
                     o.add(appDBBean);
+                    appsDBOpe.save(o);
+                    list.addAll(o);
                     for (int i = 0; i < list.size(); i++) {
                         LogUtil.E(list.get(i).getAppName() + "----" + list.get(i).getPosition());
                         list.get(i).setPosition(i);
                     }
-                    appsDBOpe.save(o);
-                    list.addAll(o);
                     ll.clear();
                     ll = sortList(list);
                     listener.onFinish(ll);
@@ -60,6 +60,7 @@ public class FolderItemsDAOpe extends BaseDAOpe {
         } else {
             final PackageManager pm = context.getPackageManager();
             for (int i = 0; i < list.size(); i++) {
+                LogUtil.E(list.get(i).getPosition());
                 try {
                     if (list.get(i).getPosition() == null) {
                         list.get(i).setPosition(i);
