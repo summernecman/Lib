@@ -26,3 +26,12 @@ step3:
     //android 6.0 之后 取消支持 Apache HTTP 客户端，要继续使用 Apache HTTP API，您必须先在 build.gradle 文件中声明以下编译时依赖项：
     useLibrary 'org.apache.http.legacy'//add this
 
+        xmlns:tools="http://schemas.android.com/tools"
+
+        tools:replace="android:label,android:theme" in your androidrmanifest.xml application
+
+
+          dataBinding {
+                enabled = true
+            }
+
