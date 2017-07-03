@@ -14,7 +14,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
 dependencies {
-	        compile 'com.github.summernecman:Lib:1.0.1'
+	        compile 'com.github.summernecman:Lib:1.0.3'
 	}
   
 (https://jitpack.io/#summernecman/Lib)
