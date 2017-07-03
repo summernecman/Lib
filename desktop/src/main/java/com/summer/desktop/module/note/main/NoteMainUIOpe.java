@@ -17,7 +17,7 @@ public class NoteMainUIOpe extends BaseUIBean<FragNoteMainBinding> {
 
     public NoteMainUIOpe(Context context) {
         super(context);
-        viewDataBinding.tvTitle.setBackgroundColor(ColorConstant.COLOR_STATUS);
+        viewDataBinding.tvTitle.setBackgroundColor(context.getResources().getColor(ColorConstant.COLOR_STATUS));
     }
 
     public void initList(Fragment f, Fragment fragment) {

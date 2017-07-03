@@ -47,7 +47,7 @@ public class HomeUIBean extends BaseUIBean<ActHomeMainBinding> {
     }
 
     public void initBottom(PagerAdapter adapter, DoubleClickListener doubleClickListener, View.OnClickListener listener) {
-        viewDataBinding.bottomViewpager.setBackgroundColor(ColorConstant.COLOR_STATUS);
+        viewDataBinding.bottomViewpager.setBackgroundColor(context.getResources().getColor(ColorConstant.COLOR_STATUS));
         getViewDataBinding().bottomViewpager.setAdapter(adapter);
         getViewDataBinding().bottomViewpager.setOffscreenPageLimit(7);
         getViewDataBinding().bottomViewpager.setCurrentItem(1000);

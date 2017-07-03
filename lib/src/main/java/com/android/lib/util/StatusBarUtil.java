@@ -59,8 +59,8 @@ public class StatusBarUtil {
         }
         SystemBarTintManager tintManager = new SystemBarTintManager(activity);
         tintManager.setStatusBarTintEnabled(true);
-        tintManager.setNavigationBarTintEnabled(true);
-        tintManager.setTintColor(color);
+        tintManager.setNavigationBarTintEnabled(false);
+        tintManager.setStatusBarTintColor(color);
     }
 
     public void hideNavigationBar(Activity activity) {
@@ -72,4 +72,17 @@ public class StatusBarUtil {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
+
+
+//    public void setStatusBarColor(Activity activity, int color) {
+//        ViewGroup decorViewGroup = (ViewGroup) activity.getWindow().getDecorView();
+//        View statusBarView = new View(activity.getWindow().getContext());
+//        int statusBarHeight = (int) ScreenUtil.getInstance().getStatusBarHeight(activity);
+//        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, statusBarHeight);
+//        params.gravity = Gravity.TOP;
+//        statusBarView.setLayoutParams(params);
+//        statusBarView.setBackgroundColor(color);
+//        decorViewGroup.addView(statusBarView);
+//    }
+
 }

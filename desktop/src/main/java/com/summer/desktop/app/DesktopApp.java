@@ -18,7 +18,7 @@ public class DesktopApp extends LibAplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        ColorConstant.COLOR_STATUS = getResources().getColor(com.android.lib.R.color.color_light_blue_400);
+        ColorConstant.COLOR_STATUS = com.android.lib.R.color.color_light_blue_500;
         Bmob.initialize(this, "a372099e1546f084af11ba4cfc1b8439");
         startService(new Intent(this, AppService.class));
         new Thread(new Runnable() {
