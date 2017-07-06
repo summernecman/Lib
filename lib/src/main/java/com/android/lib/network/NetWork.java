@@ -2,8 +2,6 @@ package com.android.lib.network;
 
 import android.content.Context;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.network.bean.req.BaseReqBean;
@@ -11,9 +9,8 @@ import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.network.interf.OnNetWorkReqInterf;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.SPUtil;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -33,9 +30,6 @@ public class NetWork {
 
     private static Gson gson = new Gson();
 
-    private static RequestQueue mQueue;
-
-
     private NetWork() {
 
     }
@@ -43,7 +37,6 @@ public class NetWork {
     public static NetWork getInstance(Context context) {
         if (instance == null) {
             instance = new NetWork();
-            mQueue = Volley.newRequestQueue(context.getApplicationContext());
         }
         return instance;
     }
@@ -52,12 +45,6 @@ public class NetWork {
         UrlConstant.URI = url;
     }
 
-    /**
-     * @param tag
-     */
-    public void cancle(Context tag) {
-        mQueue.cancelAll(tag);
-    }
 
 //    @Deprecated
 //    public void doHttpRequset(final Context context, final String model, final BaseReqBean reqBean, final OnNetWorkReqInterf reqInterf) {
@@ -183,8 +170,10 @@ public class NetWork {
 
         RequestParams requestParams = new RequestParams(UrlConstant.URI + model);
         requestParams.setUseCookie(true);
-        Map<String, String> map = JSON.parseObject(jsonstr, new TypeReference<Map<String, String>>() {
-        });
+        Map<String, String> map = gson.fromJson(jsonstr, new TypeToken<Map<String, String>>() {
+        }.getType());
+//        Map<String, String> map = JSON.parseObject(jsonstr, new TypeReference<Map<String, String>>() {
+//        });
         for (Map.Entry<String, String> entry : map.entrySet()) {
             requestParams.addBodyParameter(entry.getKey(), entry.getValue());
         }
@@ -248,8 +237,10 @@ public class NetWork {
         requestParams.setUseCookie(true);
         requestParams.setHeader("Cookie", SPUtil.getInstance().getStr(ValueConstant.cookieFromResponse));
         LogUtil.E(UrlConstant.URI + model + "---" + ValueConstant.cookieFromResponse);
-        Map<String, String> map = JSON.parseObject(jsonstr, new TypeReference<Map<String, String>>() {
-        });
+        Map<String, String> map = gson.fromJson(jsonstr, new TypeToken<Map<String, String>>() {
+        }.getType());
+//        Map<String, String> map = JSON.parseObject(jsonstr, new TypeReference<Map<String, String>>() {
+//        });
         for (Map.Entry<String, String> entry : map.entrySet()) {
             requestParams.addBodyParameter(entry.getKey(), entry.getValue());
         }

@@ -8,7 +8,7 @@ import android.content.Context;
 import android.view.WindowManager;
 
 import com.android.lib.R;
-import com.android.lib.view.loading.avi.AVLoadingIndicatorView;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 

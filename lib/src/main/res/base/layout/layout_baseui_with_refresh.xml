@@ -34,7 +34,6 @@
                     android:id="@+id/refresh_boot"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/icon_bg_frg"
                     app:isLoadMore="false"
                     app:overlay="false"
                     app:progress_colors="@array/material_colors"

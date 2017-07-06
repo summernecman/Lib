@@ -10,10 +10,6 @@ import com.android.lib.util.activity.ActivityUtil;
 import com.android.lib.view.image.ImagePickerLoader;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
-import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 
 /**
@@ -32,26 +28,11 @@ public class LibAplication extends Application {
      * 初始化application设置
      */
     protected void initApplication() {
-        initImageLoader();
         initSysConfig();
         initImagePicker();
         initCrash();
     }
 
-    /**
-     * 初始化图片加载了imageloader
-     */
-    public void initImageLoader() {
-        ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(this);
-        config.threadPriority(Thread.NORM_PRIORITY - 2);
-        config.denyCacheImageMultipleSizesInMemory();
-        config.diskCacheFileNameGenerator(new Md5FileNameGenerator());
-        config.diskCacheSize(50 * 1024 * 1024); // 50 MiB
-        config.tasksProcessingOrder(QueueProcessingType.LIFO);
-        config.writeDebugLogs();
-        //Initialize ImageLoader with configuration.
-        ImageLoader.getInstance().init(config.build());
-    }
 
     /**
      * 初始化系统常量
