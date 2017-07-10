@@ -54,13 +54,13 @@ public class FragmentUtil {
             transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
             transaction.hide(fragment);
             transaction.add(id, now);
-            transaction.commit();
+            transaction.commitAllowingStateLoss();
         } else {
             fragments.add(now);
             FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
             transaction.add(id, now);
-            transaction.commit();
+            transaction.commitAllowingStateLoss();
         }
     }
 
@@ -72,13 +72,13 @@ public class FragmentUtil {
             transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
             transaction.hide(fragment);
             transaction.add(id, now);
-            transaction.commit();
+            transaction.commitAllowingStateLoss();
         } else {
             fragments.add(now);
             FragmentTransaction transaction = f.getChildFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.anim_push_right_in, R.anim.anim_push_left_out);
             transaction.add(id, now);
-            transaction.commit();
+            transaction.commitAllowingStateLoss();
         }
     }
 
@@ -93,14 +93,14 @@ public class FragmentUtil {
             transaction.setCustomAnimations(R.anim.anim_push_left_in, R.anim.anim_push_right_out);
             transaction.hide(now);
             transaction.show(old);
-            transaction.commit();
+            transaction.commitAllowingStateLoss();
             fragments.remove(now);
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
                     transaction.remove(now);
-                    transaction.commit();
+                    transaction.commitAllowingStateLoss();
                 }
             }, 500);
         }
@@ -119,7 +119,7 @@ public class FragmentUtil {
         for (int i = 0; fragments != null && i < fragments.size(); i++) {
             transaction.remove(fragments.get(i));
         }
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
 
