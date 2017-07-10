@@ -5,6 +5,7 @@ import android.databinding.ViewDataBinding;
 import android.view.LayoutInflater;
 
 import com.android.lib.bean.AppViewHolder;
+import com.android.lib.databinding.LayoutBaseuiWithouttitleBinding;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -32,19 +33,23 @@ public class BaseUIBean<A extends ViewDataBinding> {
     public A initViewDataBinding() {
         A viewDataBinding = null;
         if (viewDataBinding == null) {
-            Class<A> a = (Class<A>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-            Method method = null;
-            try {
-                method = a.getMethod("inflate", LayoutInflater.class);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            }
-            try {
-                viewDataBinding = (A) method.invoke(null, LayoutInflater.from(context));
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+            if (getClass().getGenericSuperclass() instanceof ParameterizedType) {
+                Class<A> a = (Class<A>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+                Method method = null;
+                try {
+                    method = a.getMethod("inflate", LayoutInflater.class);
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    viewDataBinding = (A) method.invoke(null, LayoutInflater.from(context));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                viewDataBinding = (A) LayoutBaseuiWithouttitleBinding.inflate(LayoutInflater.from(context));
             }
         }
         return viewDataBinding;

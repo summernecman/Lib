@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="baseui"
+            type="String" />
+    </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/act_base_root"
     android:layout_width="match_parent"
@@ -8,3 +16,5 @@
     android:orientation="vertical">
 
 </RelativeLayout>
+
+</layout>

@@ -1,6 +1,7 @@
 package com.android.lib.base.activity;
 
 import android.content.Context;
+import android.databinding.ViewDataBinding;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -59,23 +60,26 @@ public abstract class BaseUIActivity<A extends BaseUIBean, B extends BaseDAOpe> 
      */
     public BaseOpes<A, B> getOpes() {
         if (opes == null) {
-            Class<A> a = (Class<A>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-            Class<B> b = (Class<B>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
-            try {
-                Constructor<A> ac = a.getConstructor(Context.class);
-                Constructor<B> bc = b.getConstructor(Context.class);
-                A aa = ac.newInstance(activity);
-                B bb = bc.newInstance(activity);
-                opes = new BaseOpes<>(aa, bb);
-                LogUtil.E(aa + ":" + bb);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+            if (getClass().getGenericSuperclass() instanceof ParameterizedType) {
+                Class<A> a = (Class<A>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+                Class<B> b = (Class<B>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+                try {
+                    Constructor<A> ac = a.getConstructor(Context.class);
+                    Constructor<B> bc = b.getConstructor(Context.class);
+                    A aa = ac.newInstance(activity);
+                    B bb = bc.newInstance(activity);
+                    opes = new BaseOpes<>(aa, bb);
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                opes = (BaseOpes<A, B>) new BaseOpes<>(new BaseUIBean<ViewDataBinding>(activity), new BaseDAOpe(activity));
             }
         }
         return opes;

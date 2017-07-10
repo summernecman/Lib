@@ -1,2 +1,2 @@
 //工程包含的模块
-include ':desktop', ":lib"
+include ':test', ":lib"
