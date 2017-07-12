@@ -49,9 +49,6 @@
         android:label="@string/appname"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--zxing二维码扫码activity-->
-        <activity android:name="com.android.lib.view.zxing.activity.CaptureActivity" />
-        <!--图片选择activity-->
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:theme="@style/ImagePickerThemeFullScreen" />

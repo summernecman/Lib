@@ -2,7 +2,6 @@ package com.android.lib.network.netadapter;
 
 import android.content.Context;
 
-import com.android.lib.constant.MethodConstant;
 import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.network.interf.OnNetWorkReqInterf;
 import com.android.lib.util.LogUtil;
@@ -43,9 +42,9 @@ public abstract class OnNetWorkReqAdapter implements OnNetWorkReqInterf {
 //                    baseResBean.setErrorCode(ValueConstant.ERROR_CODE_DATA_NULL);
 //                    onNetWorkResult(false,baseResBean);
 
-                    onNetWorkResult(true, MethodConstant.toObject(baseResBean.getData()));
+                    onNetWorkResult(true, baseResBean.getData());
                 } else {
-                    onNetWorkResult(true, MethodConstant.toObject(baseResBean.getData()));
+                    onNetWorkResult(true, baseResBean.getData());
                 }
             }
 
