@@ -42,15 +42,15 @@ public abstract class OnNetWorkReqAdapter implements OnNetWorkReqInterf {
 //                    baseResBean.setErrorCode(ValueConstant.ERROR_CODE_DATA_NULL);
 //                    onNetWorkResult(false,baseResBean);
 
-                    onNetWorkResult(true, baseResBean.getData());
+                    onNetWorkResult(true, baseResBean);
                 } else {
-                    onNetWorkResult(true, baseResBean.getData());
+                    onNetWorkResult(true, baseResBean);
                 }
             }
 
         }
     }
 
-    public abstract void onNetWorkResult(boolean success, Object o);
+    public abstract void onNetWorkResult(boolean success, BaseResBean o);
 
 }

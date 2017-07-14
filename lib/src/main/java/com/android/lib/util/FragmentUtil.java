@@ -104,8 +104,15 @@ public class FragmentUtil {
                 }
             }, 500);
         }
+    }
 
-
+    public void remove(final FragmentActivity fragmentActivity, Fragment fragment) {
+        if (fragment == null) {
+            return;
+        }
+        FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+        transaction.remove(fragment);
+        transaction.commitAllowingStateLoss();
     }
 
     public void clear() {

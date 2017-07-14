@@ -2,7 +2,6 @@ package com.android.lib.network.netadapter;
 
 import android.content.Context;
 
-import com.android.lib.constant.MethodConstant;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.network.bean.db.NetCacheDBBean;
 import com.android.lib.network.bean.res.BaseResBean;
@@ -52,15 +51,15 @@ public abstract class OnNetWorkReqCacheAdapter implements OnNetWorkReqInterf {
 //                    baseResBean.setErrorCode(ValueConstant.ERROR_CODE_DATA_NULL);
 //                    onNetWorkResult(false,baseResBean);
 
-                    onNetWorkResult(true, MethodConstant.toObject(baseResBean.getData()));
+                    onNetWorkResult(true, baseResBean);
                 } else {
-                    onNetWorkResult(true, MethodConstant.toObject(baseResBean.getData()));
+                    onNetWorkResult(true, baseResBean);
                 }
             }
 
         }
     }
 
-    public abstract void onNetWorkResult(boolean success, Object o);
+    public abstract void onNetWorkResult(boolean success, BaseResBean o);
 
 }

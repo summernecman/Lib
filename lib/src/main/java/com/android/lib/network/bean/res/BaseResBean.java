@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class BaseResBean implements Serializable {
 
-    private String data;
+    private Object data;
 
     private boolean isException;
 
@@ -20,11 +20,11 @@ public class BaseResBean implements Serializable {
 
     }
 
-    public String getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Object data) {
         this.data = data;
     }
 

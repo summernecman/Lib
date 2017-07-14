@@ -22,7 +22,7 @@ public interface OnNetWorkReqInterf {
     /**
      * 网络请求获取数据结果
      */
-    void onNetWorkResult(boolean success, Object o);
+    void onNetWorkResult(boolean success, BaseResBean o);
 
 
 }

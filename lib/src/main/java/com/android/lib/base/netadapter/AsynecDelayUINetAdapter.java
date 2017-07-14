@@ -3,6 +3,8 @@ package com.android.lib.base.netadapter;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.android.lib.network.bean.res.BaseResBean;
+
 /**
  * Created by ${viwmox} on 2017-02-20.
  */
@@ -19,7 +21,7 @@ public abstract class AsynecDelayUINetAdapter extends DelayUINetAdapter {
     }
 
     @Override
-    public void onNetWorkResult(final boolean success, final Object o) {
+    public void onNetWorkResult(final boolean success, final BaseResBean o) {
         new AsyncTask<String, String, Object>() {
             @Override
             protected Object doInBackground(String... params) {

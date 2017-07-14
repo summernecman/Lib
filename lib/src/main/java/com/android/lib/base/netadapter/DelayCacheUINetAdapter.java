@@ -3,7 +3,6 @@ package com.android.lib.base.netadapter;
 import android.content.Context;
 import android.os.Handler;
 
-import com.android.lib.constant.MethodConstant;
 import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.util.LoadUtil;
 
@@ -50,7 +49,7 @@ public abstract class DelayCacheUINetAdapter extends UINetChacheAdapter {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            onNetWorkResult(true, MethodConstant.toObject(baseResBean.getData()));
+                            onNetWorkResult(true, baseResBean);
                             LoadUtil.getInstance().onStopLoading(tag);
                         }
                     }, delay);
@@ -58,7 +57,7 @@ public abstract class DelayCacheUINetAdapter extends UINetChacheAdapter {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            onNetWorkResult(true, MethodConstant.toObject(baseResBean.getData()));
+                            onNetWorkResult(true, baseResBean);
                             LoadUtil.getInstance().onStopLoading(tag);
                         }
                     }, delay);

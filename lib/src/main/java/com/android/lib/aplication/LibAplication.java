@@ -5,11 +5,14 @@ import android.app.Application;
 import com.android.lib.R;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.exception.exception.CrashHander;
+import com.android.lib.util.SPUtil;
 import com.android.lib.util.ScreenUtil;
 import com.android.lib.util.activity.ActivityUtil;
 import com.android.lib.view.image.ImagePickerLoader;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
+
+import org.xutils.x;
 
 
 /**
@@ -31,6 +34,7 @@ public class LibAplication extends Application {
         initSysConfig();
         initImagePicker();
         initCrash();
+        initXutils();
     }
 
 
@@ -41,6 +45,7 @@ public class LibAplication extends Application {
         ScreenUtil.getInstance().getScreenSize(getApplicationContext());
         ScreenUtil.getInstance().getStatusBarHeight(getApplicationContext());
         ValueConstant.DIMEN_1 = (int) getResources().getDimension(R.dimen.dimen_1);
+        SPUtil.getInstance().init(this);
     }
 
     /**
@@ -58,6 +63,11 @@ public class LibAplication extends Application {
         imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
         imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
         imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
+    }
+
+    public void initXutils() {
+        x.Ext.init(this);
+        x.Ext.setDebug(false); //输出debug日志，开启会影响性能
     }
 
     /**

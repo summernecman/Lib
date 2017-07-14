@@ -1,2 +1,2 @@
 //工程包含的模块
-include ':test', ":lib"
+include ':test', ":lib", ':service'
