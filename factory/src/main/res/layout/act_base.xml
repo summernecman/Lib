@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-
     <data>
-
         <variable
             name="act_base"
             type="String" />
@@ -13,20 +11,26 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/item_title2" />
+        <include
+            android:id="@+id/title2"
+            layout="@layout/item_title2" />
 
         <RelativeLayout
             android:id="@+id/act_base_id"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/color_light_blue_400" />
+            android:background="@color/white" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
         <com.summer.factory.ui.base.TabView
             android:id="@+id/tabview"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_base_title"
-            android:background="@color/color_dark_red"
+            android:layout_height="@dimen/dimens_base_item"
+            android:background="@color/color_base_nurse"
             android:orientation="horizontal"></com.summer.factory.ui.base.TabView>
 
     </LinearLayout>

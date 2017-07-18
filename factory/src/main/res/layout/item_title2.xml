@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="title"
+            type="com.summer.factory.bean.da.LayoutDABean" />
+    </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ftitle_bar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dimens_base_title"
-    android:background="@color/color_base_nurse"
+    android:background="@color/color_blue_400"
     android:elevation="1dp"
     android:gravity="center_vertical"
     android:orientation="vertical">
@@ -15,8 +23,9 @@
         android:layout_centerVertical="true"
         android:layout_margin="7dp"
         android:gravity="center"
+        android:padding="2dp"
         android:scaleType="fitStart"
-        android:src="@drawable/back"
+        android:src="@drawable/drawable_back2"
         android:textColor="@color/color_title_select"
         android:textSize="17sp"
         android:visibility="visible" />
@@ -32,9 +41,10 @@
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:paddingTop="2.5dp"
+        android:text="@={title.a}"
         android:textColor="@color/white"
-        android:textSize="17sp"
-        android:visibility="gone" />
+        android:textSize="20sp"
+        android:visibility="visible" />
 
 
     <ImageView
@@ -44,12 +54,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_margin="7dp"
-        android:layout_marginRight="10dp"
         android:gravity="center_vertical"
-        android:paddingBottom="2.5dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="2.5dp"
+        android:padding="2dp"
         android:scaleType="fitEnd"
         android:src="@drawable/drawable_right2"
         android:textColor="@color/color_title_select"
@@ -57,3 +63,4 @@
         android:visibility="visible" />
 
 </RelativeLayout>
+</layout>

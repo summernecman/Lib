@@ -10,6 +10,7 @@ import android.view.View;
 import com.android.lib.base.activity.BaseUIActivity;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseOpes;
+import com.android.lib.util.StatusBarUtil;
 import com.summer.factory.R;
 import com.summer.factory.value.FactoryValue;
 
@@ -22,14 +23,18 @@ public abstract class BaseFactoryAct extends BaseUIActivity<BaseFactoryUIOpe, Ba
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.getInstance().setStatusBarColor(activity, getResources().getColor(com.android.lib.R.color.color_blue_400));
         getOpes().getDa().setFragments(initFrag());
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        ArrayList<TabView.Txt> txts = new ArrayList<>();
         for (int i = 0; i < getOpes().getDa().getFragments().size(); i++) {
             fragmentTransaction.add(FactoryValue.BASE_ID, getOpes().getDa().getFragments().get(i));
             if (i > 0) {
                 fragmentTransaction.hide(getOpes().getDa().getFragments().get(i));
             }
+            txts.add(new TabView.Txt(getOpes().getDa().getFragments().get(i).getArguments().getString(FactoryValue.FRAG_TITLE)));
         }
+        getOpes().getUi().viewDataBinding.tabview.setTxt(txts);
         fragmentTransaction.commitAllowingStateLoss();
         getOpes().getUi().initRadioButton(this);
     }
@@ -59,6 +64,7 @@ public abstract class BaseFactoryAct extends BaseUIActivity<BaseFactoryUIOpe, Ba
     }
 
     public abstract ArrayList<Fragment> initFrag();
+
 
     @Override
     public void onFinish(Object o) {

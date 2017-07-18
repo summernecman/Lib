@@ -8,4 +8,6 @@ import com.summer.factory.R;
 public class FactoryValue extends ValueConstant {
 
     public static final int BASE_ID = R.id.act_base_id;
+
+    public static final String FRAG_TITLE = "FRAG_TITLE";
 }

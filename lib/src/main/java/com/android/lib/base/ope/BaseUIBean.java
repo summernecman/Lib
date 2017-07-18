@@ -17,8 +17,8 @@ import java.lang.reflect.ParameterizedType;
 public class BaseUIBean<A extends ViewDataBinding> {
 
     public AppViewHolder viewHolder;
-    public A viewDataBinding;
     public int[] variableId;
+    public A viewDataBinding;
     protected Context context;
 
 

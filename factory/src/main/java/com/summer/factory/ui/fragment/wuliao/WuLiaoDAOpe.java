@@ -5,23 +5,23 @@ package com.summer.factory.ui.fragment.wuliao;
 import android.content.Context;
 
 import com.android.lib.base.ope.BaseDAOpe;
-import com.summer.factory.bean.da.WuLiaoItemDABean;
+import com.summer.factory.bean.da.LayoutDABean;
 
 import java.util.ArrayList;
 
 public class WuLiaoDAOpe extends BaseDAOpe {
 
-    ArrayList<WuLiaoItemDABean> wuliaodata;
+    ArrayList<LayoutDABean> wuliaodata;
 
     public WuLiaoDAOpe(Context context) {
         super(context);
     }
 
-    public ArrayList<WuLiaoItemDABean> getWuliaodata() {
+    public ArrayList<LayoutDABean> getWuliaodata() {
         return wuliaodata;
     }
 
-    public void setWuliaodata(ArrayList<WuLiaoItemDABean> wuliaodata) {
+    public void setWuliaodata(ArrayList<LayoutDABean> wuliaodata) {
         this.wuliaodata = wuliaodata;
     }
 }

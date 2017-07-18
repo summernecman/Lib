@@ -13,10 +13,13 @@ import android.widget.RadioGroup;
 
 import com.summer.factory.R;
 
+import java.util.ArrayList;
+
 public class TabView extends RadioGroup {
 
-    int num = 2;                                                                                    //tab数量
     boolean add = false;
+
+    ArrayList<Txt> txt = new ArrayList<>();
 
 
     public TabView(Context context, AttributeSet attrs) {
@@ -28,9 +31,9 @@ public class TabView extends RadioGroup {
     protected void onWindowVisibilityChanged(int visibility) {
         super.onWindowVisibilityChanged(visibility);
         if (!add) {
-            for (int i = 0; i < num; i++) {
+            for (int i = 0; i < txt.size(); i++) {
                 RadioButton radioButton = new RadioButton(getContext());
-                radioButton.setText("fdsf");
+                radioButton.setText(txt.get(i).txt);
                 radioButton.setTextColor(Color.BLACK);
                 radioButton.setGravity(Gravity.CENTER);
                 radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -43,13 +46,20 @@ public class TabView extends RadioGroup {
         }
     }
 
-    public int getNum() {
-        return num;
+    public ArrayList<Txt> getTxt() {
+        return txt;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setTxt(ArrayList<Txt> txt) {
+        this.txt = txt;
     }
 
+    public static class Txt {
+        public String txt;
+
+        public Txt(String txt) {
+            this.txt = txt;
+        }
+    }
 
 }

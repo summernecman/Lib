@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:label,android:theme">
         <activity
-            android:name=".ui.frmpurreceive.FrmPurReceiveAct"
+            android:name=".ui.main.MainAct"
             android:configChanges="orientation|keyboardHidden|navigation">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -19,6 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.frmwork.FrmWorkAct" />
+        <activity android:name=".ui.activity.frmpurreceive.FrmPurReceiveAct" />
+        <activity android:name=".ui.activity.frmotherin.FrmOtherInAct" />
+        <activity android:name=".ui.activity.frmotherout.FrmOtherOutAct" />
+        <activity android:name=".ui.activity.frmmove.FrmMoveAct" />
     </application>
 
 </manifest>
