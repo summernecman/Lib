@@ -38,7 +38,7 @@ public abstract class BaseUIActivity<A extends BaseUIBean, B extends BaseDAOpe> 
     /**
      * 操作类
      */
-    BaseOpes<A, B> opes;
+    protected BaseOpes<A, B> opes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
