@@ -3,6 +3,7 @@
     package="com.summer.factory">
 
     <application
+        android:name=".FactoryApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,11 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.frmwork.FrmWorkAct" />
-        <activity android:name=".ui.activity.frmpurreceive.FrmPurReceiveAct" />
-        <activity android:name=".ui.activity.frmotherin.FrmOtherInAct" />
-        <activity android:name=".ui.activity.frmotherout.FrmOtherOutAct" />
-        <activity android:name=".ui.activity.frmmove.FrmMoveAct" />
+        <activity android:name=".ui.activity.FrmWorkAct" />
+        <activity android:name=".ui.activity.FrmPurReceiveAct" />
+        <activity android:name=".ui.activity.FrmOtherInAct" />
+        <activity android:name=".ui.activity.FrmOtherOutAct" />
+        <activity android:name=".ui.activity.FrmMoveAct" />
+        <activity android:name=".ui.activity.FrmBeginWorkAct" />
+        <activity android:name=".ui.activity.FrmSearchItem2Act" />
+        <activity android:name=".ui.activity.FrmSearchItemAct" />
+        <activity android:name=".ui.activity.FrmUpdateWorkAct" />
     </application>
 
 </manifest>

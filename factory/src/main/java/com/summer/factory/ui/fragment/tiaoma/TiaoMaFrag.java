@@ -28,9 +28,8 @@ public class TiaoMaFrag extends BaseUIFrag<TiaoMaUIOpe, TiaoMaDAOpe> {
         ArrayList<LayoutDABean> wuliaodata = new ArrayList<>();
         for (int i = 0; i < 34; i++) {
             LayoutDABean wuLiaoItemDABean = new LayoutDABean();
-            wuLiaoItemDABean.a.set("物料a");
-            wuLiaoItemDABean.b.set("物料2fd");
-            wuLiaoItemDABean.c.set("物料fds3");
+            wuLiaoItemDABean.a.set("" + i);
+            wuLiaoItemDABean.b.set("物料2fd" + i);
             wuliaodata.add(wuLiaoItemDABean);
         }
         getOpes().getDa().setWuliaodata(wuliaodata);

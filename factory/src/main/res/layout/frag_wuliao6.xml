@@ -4,7 +4,7 @@
     <data>
 
         <variable
-            name="kaigong"
+            name="wuliao6"
             type="com.summer.factory.bean.da.LayoutDABean" />
 
     </data>
@@ -19,8 +19,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_blue_100"
-            android:elevation="1dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="3dp">
@@ -31,13 +29,14 @@
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="@={kaigong.a}"
+                android:text="@={wuliao6.a}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <EditText
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/dimens_base_item"
+                android:layout_weight="1"
                 android:background="@drawable/drawable_border_rect_black"
                 android:paddingLeft="2dp" />
 
@@ -47,7 +46,34 @@
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="@={kaigong.a}"
+                android:text="@={wuliao6.a}"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimens_base_item"
+                android:layout_weight="1"
+                android:background="@drawable/drawable_border_rect_black"
+                android:paddingLeft="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimens_base_item"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@={wuliao6.b}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -59,29 +85,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycle"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_blue_100"
-            android:elevation="1dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="3dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimens_base_item"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="@={kaigong.a}"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-
-        </LinearLayout>
     </LinearLayout>
 </layout>

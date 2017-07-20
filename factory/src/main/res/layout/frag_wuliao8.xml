@@ -4,7 +4,7 @@
     <data>
 
         <variable
-            name="wuliao2"
+            name="wuliao"
             type="com.summer.factory.bean.da.LayoutDABean" />
 
     </data>
@@ -31,36 +31,21 @@
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="@={wuliao2.a}"
+                android:text="@={wuliao.a}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-            <Spinner
-                android:layout_width="0dp"
+            <EditText
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/dimens_base_item"
-                android:layout_weight="1"
-                android:paddingLeft="2dp" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimens_base_item"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="@={wuliao2.b}"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:background="@drawable/drawable_border_rect_black"
+                android:paddingLeft="2dp"
+                android:singleLine="true" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+        <include
+            android:id="@+id/wuliaohead"
+            layout="@layout/item_title_3" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycle"
@@ -89,7 +74,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao2.c}"
+                    android:text="@={wuliao.b}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -113,7 +98,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao2.d}"
+                    android:text="@={wuliao.c}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -121,7 +106,9 @@
                     android:layout_width="100dp"
                     android:layout_height="@dimen/dimens_base_item"
                     android:background="@drawable/drawable_border_rect_black"
-                    android:paddingLeft="2dp" />
+                    android:digits="0123456789"
+                    android:paddingLeft="2dp"
+                    android:singleLine="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -129,7 +116,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao2.d}"
+                    android:text="@={wuliao.d}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -137,7 +124,10 @@
                     android:layout_width="100dp"
                     android:layout_height="@dimen/dimens_base_item"
                     android:background="@drawable/drawable_border_rect_black"
-                    android:paddingLeft="2dp" />
+                    android:digits="0123456789"
+                    android:inputType="number"
+                    android:paddingLeft="2dp"
+                    android:singleLine="true" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

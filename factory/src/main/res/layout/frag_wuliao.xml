@@ -7,9 +7,6 @@
             name="wuliao"
             type="com.summer.factory.bean.da.LayoutDABean" />
 
-        <variable
-            name="wuliao2"
-            type="com.summer.factory.bean.da.LayoutDABean" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,111 +17,29 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_blue_100"
-            android:elevation="1dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="3dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimens_base_item"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="@={wuliao.a}"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimens_base_item"
-                android:background="@drawable/drawable_border_rect_black"
-                android:paddingLeft="2dp" />
-        </LinearLayout>
-
-        <include
-            android:id="@+id/wuliaohead"
-            layout="@layout/item_wuliao" />
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycle"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:orientation="vertical" />
 
         <LinearLayout
+            android:id="@+id/ll_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_blue_100"
-            android:elevation="1dp"
-            android:orientation="vertical">
+            android:orientation="horizontal" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="3dp">
+        <LinearLayout
+            android:id="@+id/ll_mid"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal" />
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimens_base_item"
-                    android:gravity="center"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:text="@={wuliao.b}"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+        <LinearLayout
+            android:id="@+id/ll_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
 
-                <EditText
-                    android:layout_width="100dp"
-                    android:layout_height="@dimen/dimens_base_item"
-                    android:background="@drawable/drawable_border_rect_black"
-                    android:paddingLeft="2dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="3dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimens_base_item"
-                    android:gravity="center"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:text="@={wuliao.c}"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:layout_width="100dp"
-                    android:layout_height="@dimen/dimens_base_item"
-                    android:background="@drawable/drawable_border_rect_black"
-                    android:paddingLeft="2dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimens_base_item"
-                    android:gravity="center"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:text="@={wuliao.d}"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:layout_width="100dp"
-                    android:layout_height="@dimen/dimens_base_item"
-                    android:background="@drawable/drawable_border_rect_black"
-                    android:paddingLeft="2dp" />
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
 </layout>

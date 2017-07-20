@@ -4,13 +4,16 @@
     <data>
 
         <variable
-            name="danzheng"
+            name="xianchangpandian"
             type="com.summer.factory.bean.da.LayoutDABean" />
+
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical">
 
         <LinearLayout
@@ -28,45 +31,7 @@
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="@={danzheng.a}"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimens_base_item"
-                android:background="@drawable/drawable_border_rect_black"
-                android:paddingLeft="2dp" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimens_base_item"
-                android:background="@drawable/drawable_border_rect_black"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="@={danzheng.b}"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_blue_100"
-            android:elevation="1dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="3dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimens_base_item"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="@={danzheng.a}"
+                android:text="@={xianchangpandian.a}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -75,16 +40,6 @@
                 android:layout_height="@dimen/dimens_base_item"
                 android:layout_weight="1"
                 android:paddingLeft="2dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_blue_100"
-            android:elevation="1dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="3dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -92,16 +47,11 @@
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="@={danzheng.a}"
+                android:text="@={xianchangpandian.a}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
-
-            <Spinner
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dimens_base_item"
-                android:layout_weight="1"
-                android:paddingLeft="2dp" />
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,17 +68,27 @@
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="@={danzheng.a}"
+                android:text="@={xianchangpandian.a}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <EditText
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="@dimen/dimens_base_item"
                 android:background="@drawable/drawable_border_rect_black"
                 android:paddingLeft="2dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimens_base_item"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@={xianchangpandian.a}"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -145,50 +105,75 @@
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="@={danzheng.a}"
+                android:text="@={xianchangpandian.a}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimens_base_item"
-                android:background="@drawable/drawable_border_rect_black"
-                android:paddingLeft="2dp" />
 
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/color_blue_100"
             android:elevation="1dp"
-            android:gravity="bottom"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="3dp">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/dimens_base_item"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="@={danzheng.a}"
+                android:text="@={xianchangpandian.a}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_blue_100"
+            android:elevation="1dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="3dp">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/dimens_base_item"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="@={danzheng.a}"
+                android:text="@={xianchangpandian.a}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_blue_100"
+            android:elevation="1dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimens_base_item"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@={xianchangpandian.a}"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
         </LinearLayout>
     </LinearLayout>

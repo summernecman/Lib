@@ -4,7 +4,7 @@
     <data>
 
         <variable
-            name="title"
+            name="title2"
             type="com.summer.factory.bean.da.LayoutDABean" />
     </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -41,7 +41,7 @@
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:paddingTop="2.5dp"
-        android:text="@={title.a}"
+        android:text="@={title2.a}"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:visibility="visible" />

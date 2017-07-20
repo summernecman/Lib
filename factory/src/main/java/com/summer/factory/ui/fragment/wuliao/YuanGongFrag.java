@@ -5,26 +5,22 @@ package com.summer.factory.ui.fragment.wuliao;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.android.lib.base.fragment.BaseUIFrag;
 import com.summer.factory.value.FactoryValue;
 
-public class WuLiaoFrag extends BaseUIFrag<WuLiaoUIOpe, WuLiaoDAOpe> {
+public class YuanGongFrag extends WuLiaoFrag {
 
     public static Fragment getInstance(String title) {
-        WuLiaoFrag wuLiaoFrag = new WuLiaoFrag();
+        YuanGongFrag wuLiaoFrag = new YuanGongFrag();
         wuLiaoFrag.setArguments(new Bundle());
         wuLiaoFrag.getArguments().putString(FactoryValue.FRAG_TITLE, "物料");
         return wuLiaoFrag;
     }
 
-
     @Override
     public void doThing() {
-        getOpes().getUi().initTitleTxtEdit(getOpes().getDa().getTextEditData());
-        getOpes().getUi().initText3(getOpes().getDa().getRecycleTitleData3());
+        getOpes().getUi().initText2(getOpes().getDa().getRecycleTitleData22());
         getOpes().getUi().initRecycle();
-        getOpes().getUi().initBottom(getOpes().getDa().getBottomData1());
-        getOpes().getUi().initRecycle3(getOpes().getDa().getRecycleData3());
+        getOpes().getUi().initBottom3(getOpes().getDa().getBottomData3());
+        getOpes().getUi().initRecycle2(getOpes().getDa().getRecycleData2());
     }
-
 }

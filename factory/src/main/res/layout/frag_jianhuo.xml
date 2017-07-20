@@ -4,12 +4,9 @@
     <data>
 
         <variable
-            name="wuliao"
+            name="jianhuo"
             type="com.summer.factory.bean.da.LayoutDABean" />
 
-        <variable
-            name="wuliao2"
-            type="com.summer.factory.bean.da.LayoutDABean" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,7 +31,7 @@
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="@={wuliao.a}"
+                android:text="@={jianhuo.a}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -45,9 +42,11 @@
                 android:paddingLeft="2dp" />
         </LinearLayout>
 
-        <include
-            android:id="@+id/wuliaohead"
-            layout="@layout/item_wuliao" />
+        <LinearLayout
+            android:id="@+id/ll_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycle"

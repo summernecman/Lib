@@ -35,6 +35,7 @@ public abstract class BaseFactoryAct extends BaseUIActivity<BaseFactoryUIOpe, Ba
             txts.add(new TabView.Txt(getOpes().getDa().getFragments().get(i).getArguments().getString(FactoryValue.FRAG_TITLE)));
         }
         getOpes().getUi().viewDataBinding.tabview.setTxt(txts);
+
         fragmentTransaction.commitAllowingStateLoss();
         getOpes().getUi().initRadioButton(this);
     }

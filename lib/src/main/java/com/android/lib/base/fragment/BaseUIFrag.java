@@ -1,6 +1,7 @@
 package com.android.lib.base.fragment;
 
 import android.content.Context;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -64,8 +65,14 @@ public abstract class BaseUIFrag<A extends BaseUIBean, B extends BaseDAOpe> exte
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        doThing();
 
     }
+
+    public void doThing() {
+
+    }
+
 
     @Override
     public void onDestroyView() {
@@ -85,8 +92,18 @@ public abstract class BaseUIFrag<A extends BaseUIBean, B extends BaseDAOpe> exte
      */
     public BaseOpes<A, B> getOpes() {
         if (opes == null) {
-            Class<A> a = (Class<A>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-            Class<B> b = (Class<B>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+            getaabb(getClass());
+        }
+        return opes;
+    }
+
+    private BaseOpes<A, B> getaabb(Class<?> c) {
+        if (c == null) {
+            opes = (BaseOpes<A, B>) new BaseOpes<>(new BaseUIBean<ViewDataBinding>(activity), new BaseDAOpe(activity));
+        }
+        if (c.getGenericSuperclass() instanceof ParameterizedType) {
+            Class<A> a = (Class<A>) ((ParameterizedType) c.getGenericSuperclass()).getActualTypeArguments()[0];
+            Class<B> b = (Class<B>) ((ParameterizedType) c.getGenericSuperclass()).getActualTypeArguments()[1];
             try {
                 Constructor<A> ac = a.getConstructor(Context.class);
                 Constructor<B> bc = b.getConstructor(Context.class);
@@ -102,9 +119,13 @@ public abstract class BaseUIFrag<A extends BaseUIBean, B extends BaseDAOpe> exte
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
+        } else {
+            getaabb(c.getSuperclass());
         }
+
         return opes;
     }
+
 
     @Override
     public void onClick(View v) {

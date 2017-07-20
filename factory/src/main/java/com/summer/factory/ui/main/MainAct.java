@@ -8,11 +8,15 @@ import android.view.View;
 
 import com.android.lib.base.activity.BaseUIActivity;
 import com.summer.factory.R;
-import com.summer.factory.ui.activity.frmmove.FrmMoveAct;
-import com.summer.factory.ui.activity.frmotherin.FrmOtherInAct;
-import com.summer.factory.ui.activity.frmotherout.FrmOtherOutAct;
-import com.summer.factory.ui.activity.frmpurreceive.FrmPurReceiveAct;
-import com.summer.factory.ui.activity.frmwork.FrmWorkAct;
+import com.summer.factory.ui.activity.FrmBeginWorkAct;
+import com.summer.factory.ui.activity.FrmMoveAct;
+import com.summer.factory.ui.activity.FrmOtherInAct;
+import com.summer.factory.ui.activity.FrmOtherOutAct;
+import com.summer.factory.ui.activity.FrmPurReceiveAct;
+import com.summer.factory.ui.activity.FrmSearchItem2Act;
+import com.summer.factory.ui.activity.FrmSearchItemAct;
+import com.summer.factory.ui.activity.FrmUpdateWorkAct;
+import com.summer.factory.ui.activity.FrmWorkAct;
 
 public class MainAct extends BaseUIActivity<MainActUIOpe, MainActDAOpe> implements View.OnClickListener {
 
@@ -41,6 +45,19 @@ public class MainAct extends BaseUIActivity<MainActUIOpe, MainActDAOpe> implemen
             case 4:
                 startActivity(new Intent(this, FrmMoveAct.class));
                 break;
+            case 5:
+                startActivity(new Intent(this, FrmSearchItemAct.class));
+                break;
+            case 6:
+                startActivity(new Intent(this, FrmSearchItem2Act.class));
+                break;
+            case 7:
+                startActivity(new Intent(this, FrmBeginWorkAct.class));
+                break;
+            case 8:
+                startActivity(new Intent(this, FrmUpdateWorkAct.class));
+                break;
+
         }
     }
 }

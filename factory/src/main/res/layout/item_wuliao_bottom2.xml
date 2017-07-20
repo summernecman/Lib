@@ -4,69 +4,14 @@
     <data>
 
         <variable
-            name="wuliao2"
+            name="itemwuliaobottom2"
             type="com.summer.factory.bean.da.LayoutDABean" />
-
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_blue_100"
-            android:elevation="1dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="3dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimens_base_item"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="@={wuliao2.a}"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <Spinner
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dimens_base_item"
-                android:layout_weight="1"
-                android:paddingLeft="2dp" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimens_base_item"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="@={wuliao2.b}"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycle"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,7 +34,23 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao2.c}"
+                    android:text="@={itemwuliaobottom2.a}"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:layout_width="100dp"
+                    android:layout_height="@dimen/dimens_base_item"
+                    android:background="@drawable/drawable_border_rect_black"
+                    android:paddingLeft="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimens_base_item"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@={itemwuliaobottom2.b}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -113,7 +74,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao2.d}"
+                    android:text="@={itemwuliaobottom2.c}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -129,15 +90,36 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao2.d}"
+                    android:text="@={itemwuliaobottom2.d}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
                 <EditText
-                    android:layout_width="100dp"
+                    android:layout_width="80dp"
                     android:layout_height="@dimen/dimens_base_item"
                     android:background="@drawable/drawable_border_rect_black"
                     android:paddingLeft="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimens_base_item"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@={itemwuliaobottom2.e}"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimens_base_item"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:singleLine="true"
+                    android:text="@={itemwuliaobottom2.f}"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

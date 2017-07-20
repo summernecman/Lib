@@ -2,9 +2,8 @@
 <layout>
 
     <data>
-
         <variable
-            name="itemwuliao"
+            name="itemtitle3"
             type="com.summer.factory.bean.da.LayoutDABean" />
     </data>
 
@@ -23,7 +22,7 @@
             android:layout_weight="1"
             android:background="@drawable/drawable_border_rect_black"
             android:gravity="center"
-            android:text="@={itemwuliao.a}"
+            android:text="@={itemtitle3.a}"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -33,7 +32,7 @@
             android:layout_weight="1"
             android:background="@drawable/drawable_border_rect_black"
             android:gravity="center"
-            android:text="@={itemwuliao.b}"
+            android:text="@={itemtitle3.b}"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -43,7 +42,7 @@
             android:layout_weight="1"
             android:background="@drawable/drawable_border_rect_black"
             android:gravity="center"
-            android:text="@={itemwuliao.b}"
+            android:text="@={itemtitle3.c}"
             android:textColor="@color/black"
             android:textSize="15sp" />
     </LinearLayout>

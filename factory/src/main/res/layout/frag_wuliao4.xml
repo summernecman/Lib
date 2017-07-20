@@ -4,7 +4,7 @@
     <data>
 
         <variable
-            name="wuliao2"
+            name="wuliao4"
             type="com.summer.factory.bean.da.LayoutDABean" />
 
     </data>
@@ -16,45 +16,6 @@
         android:focusableInTouchMode="true"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_blue_100"
-            android:elevation="1dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="3dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimens_base_item"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="@={wuliao2.a}"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <Spinner
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dimens_base_item"
-                android:layout_weight="1"
-                android:paddingLeft="2dp" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimens_base_item"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="@={wuliao2.b}"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_title"
@@ -83,21 +44,21 @@
                 android:padding="3dp">
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimens_base_item"
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao2.c}"
+                    android:text="@={wuliao4.a}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
                 <EditText
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/dimens_base_item"
                     android:background="@drawable/drawable_border_rect_black"
                     android:paddingLeft="2dp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -113,13 +74,14 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao2.d}"
+                    android:text="@={wuliao4.a}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
                 <EditText
-                    android:layout_width="100dp"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/dimens_base_item"
+                    android:layout_weight="1"
                     android:background="@drawable/drawable_border_rect_black"
                     android:paddingLeft="2dp" />
 
@@ -129,13 +91,57 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao2.d}"
+                    android:text="@={wuliao4.b}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
                 <EditText
-                    android:layout_width="100dp"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/dimens_base_item"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_border_rect_black"
+                    android:paddingLeft="2dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimens_base_item"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@={wuliao4.a}"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dimens_base_item"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_border_rect_black"
+                    android:paddingLeft="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimens_base_item"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@={wuliao4.b}"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dimens_base_item"
+                    android:layout_weight="1"
                     android:background="@drawable/drawable_border_rect_black"
                     android:paddingLeft="2dp" />
             </LinearLayout>

@@ -60,28 +60,37 @@ public abstract class BaseUIActivity<A extends BaseUIBean, B extends BaseDAOpe> 
      */
     public BaseOpes<A, B> getOpes() {
         if (opes == null) {
-            if (getClass().getGenericSuperclass() instanceof ParameterizedType) {
-                Class<A> a = (Class<A>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-                Class<B> b = (Class<B>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
-                try {
-                    Constructor<A> ac = a.getConstructor(Context.class);
-                    Constructor<B> bc = b.getConstructor(Context.class);
-                    A aa = ac.newInstance(activity);
-                    B bb = bc.newInstance(activity);
-                    opes = new BaseOpes<>(aa, bb);
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                opes = (BaseOpes<A, B>) new BaseOpes<>(new BaseUIBean<ViewDataBinding>(activity), new BaseDAOpe(activity));
-            }
+            getaabb(getClass());
         }
+        return opes;
+    }
+
+    private BaseOpes<A, B> getaabb(Class<?> c) {
+        if (c == null) {
+            opes = (BaseOpes<A, B>) new BaseOpes<>(new BaseUIBean<ViewDataBinding>(activity), new BaseDAOpe(activity));
+        }
+        if (c.getGenericSuperclass() instanceof ParameterizedType) {
+            Class<A> a = (Class<A>) ((ParameterizedType) c.getGenericSuperclass()).getActualTypeArguments()[0];
+            Class<B> b = (Class<B>) ((ParameterizedType) c.getGenericSuperclass()).getActualTypeArguments()[1];
+            try {
+                Constructor<A> ac = a.getConstructor(Context.class);
+                Constructor<B> bc = b.getConstructor(Context.class);
+                A aa = ac.newInstance(activity);
+                B bb = bc.newInstance(activity);
+                opes = new BaseOpes<>(aa, bb);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (java.lang.InstantiationException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        } else {
+            getaabb(c.getSuperclass());
+        }
+
         return opes;
     }
 

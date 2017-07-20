@@ -4,12 +4,9 @@
     <data>
 
         <variable
-            name="wuliao"
+            name="wuliao3"
             type="com.summer.factory.bean.da.LayoutDABean" />
 
-        <variable
-            name="wuliao2"
-            type="com.summer.factory.bean.da.LayoutDABean" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,9 +17,11 @@
         android:orientation="vertical">
 
 
-        <include
-            android:id="@+id/wuliaohead"
-            layout="@layout/item_wuliao" />
+        <LinearLayout
+            android:id="@+id/ll_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycle"
@@ -51,7 +50,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao.a}"
+                    android:text="@={wuliao3.a}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -67,7 +66,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao.b}"
+                    android:text="@={wuliao3.b}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -91,7 +90,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao.c}"
+                    android:text="@={wuliao3.c}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -107,7 +106,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao.d}"
+                    android:text="@={wuliao3.d}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -123,7 +122,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao.e}"
+                    android:text="@={wuliao3.e}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -133,7 +132,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@={wuliao.f}"
+                    android:text="@={wuliao3.f}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>

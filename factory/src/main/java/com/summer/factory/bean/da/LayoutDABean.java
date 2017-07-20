@@ -23,4 +23,11 @@ public class LayoutDABean extends BaseBean {
     public final ObservableField<String> g = new ObservableField<>();
 
     public final ObservableField<String> h = new ObservableField<>();
+
+    public final ObservableField<String> i = new ObservableField<>();
+
+    public final ObservableField<String> j = new ObservableField<>();
+
+    public final ObservableField<String> k = new ObservableField<>();
+
 }

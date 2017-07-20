@@ -23,7 +23,7 @@ public class LingLiaoDanUIOpe extends BaseUIBean<FragLiliaodanBinding> {
 
     public void initText() {
         LayoutDABean bean = new LayoutDABean();
-        bean.a.set("领料单");
+        bean.a.set("领料单号");
         viewDataBinding.title2.setItemlingliaodan(bean);
     }
 

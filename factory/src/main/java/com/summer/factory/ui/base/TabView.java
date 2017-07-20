@@ -43,6 +43,9 @@ public class TabView extends RadioGroup {
                 this.addView(radioButton);
             }
             add = true;
+            if (txt.size() > 0) {
+                ((RadioButton) getChildAt(0)).setChecked(true);
+            }
         }
     }
 
