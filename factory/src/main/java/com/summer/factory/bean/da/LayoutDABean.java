@@ -30,4 +30,6 @@ public class LayoutDABean extends BaseBean {
 
     public final ObservableField<String> k = new ObservableField<>();
 
+    public final ObservableField<String>[] data = new ObservableField[]{a, b, c, d, e, f, g, h, i, j, k};
+
 }

@@ -16,6 +16,14 @@ public class WuLiaoDAOpe extends BaseDAOpe {
         super(context);
     }
 
+    public LayoutDABean getData(String[] str) {
+        LayoutDABean bean = new LayoutDABean();
+        for (int i = 0; str != null && i < str.length; i++) {
+            bean.data[i].set(str[i]);
+        }
+        return bean;
+    }
+
     public ArrayList<LayoutDABean> getRecycleData3() {
         ArrayList<LayoutDABean> wuliaodata = new ArrayList<>();
         for (int i = 0; i < 14; i++) {

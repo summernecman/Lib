@@ -9,14 +9,19 @@ import android.view.View;
 import com.android.lib.base.activity.BaseUIActivity;
 import com.summer.factory.R;
 import com.summer.factory.ui.activity.FrmBeginWorkAct;
+import com.summer.factory.ui.activity.FrmCodeBindAct;
+import com.summer.factory.ui.activity.FrmConfirmSoAct;
+import com.summer.factory.ui.activity.FrmEndWorkAct;
 import com.summer.factory.ui.activity.FrmMoveAct;
 import com.summer.factory.ui.activity.FrmOtherInAct;
 import com.summer.factory.ui.activity.FrmOtherOutAct;
 import com.summer.factory.ui.activity.FrmPurReceiveAct;
+import com.summer.factory.ui.activity.FrmSWSMoveAct;
 import com.summer.factory.ui.activity.FrmSearchItem2Act;
 import com.summer.factory.ui.activity.FrmSearchItemAct;
 import com.summer.factory.ui.activity.FrmUpdateWorkAct;
 import com.summer.factory.ui.activity.FrmWorkAct;
+import com.summer.factory.ui.activity.FrmWorkSiteCheckAct;
 
 public class MainAct extends BaseUIActivity<MainActUIOpe, MainActDAOpe> implements View.OnClickListener {
 
@@ -56,6 +61,22 @@ public class MainAct extends BaseUIActivity<MainActUIOpe, MainActDAOpe> implemen
                 break;
             case 8:
                 startActivity(new Intent(this, FrmUpdateWorkAct.class));
+                break;
+            case 9:
+                startActivity(new Intent(this, FrmEndWorkAct.class));
+                break;
+
+            case 29:
+                startActivity(new Intent(this, FrmConfirmSoAct.class));
+                break;
+            case 30:
+                startActivity(new Intent(this, FrmWorkSiteCheckAct.class));
+                break;
+            case 31:
+                startActivity(new Intent(this, FrmSWSMoveAct.class));
+                break;
+            case 32:
+                startActivity(new Intent(this, FrmCodeBindAct.class));
                 break;
 
         }

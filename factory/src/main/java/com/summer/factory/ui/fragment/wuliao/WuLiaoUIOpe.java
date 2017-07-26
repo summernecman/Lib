@@ -11,10 +11,13 @@ import com.android.lib.base.ope.BaseUIBean;
 import com.summer.factory.BR;
 import com.summer.factory.R;
 import com.summer.factory.bean.da.LayoutDABean;
+import com.summer.factory.databinding.FragBaogongBinding;
 import com.summer.factory.databinding.FragWuliaoBinding;
 import com.summer.factory.databinding.ItemRecycleBinding;
 import com.summer.factory.databinding.ItemTextBinding;
 import com.summer.factory.databinding.ItemTextEditBinding;
+import com.summer.factory.databinding.ItemTextEditTxtBinding;
+import com.summer.factory.databinding.ItemTitle1Binding;
 import com.summer.factory.databinding.ItemTitle3Binding;
 import com.summer.factory.databinding.ItemTitle4Binding;
 import com.summer.factory.databinding.ItemTitleTwoBinding;
@@ -41,6 +44,12 @@ public class WuLiaoUIOpe extends BaseUIBean<FragWuliaoBinding> {
 
     ItemTextBinding itemTextBinding;
 
+    ItemTextEditTxtBinding itemTextEditTxtBinding;
+
+    FragBaogongBinding fragBaogongBinding;
+
+    ItemTitle1Binding itemTitle1Binding;
+
     public WuLiaoUIOpe(Context context) {
         super(context);
     }
@@ -49,6 +58,18 @@ public class WuLiaoUIOpe extends BaseUIBean<FragWuliaoBinding> {
         itemTextEditBinding = ItemTextEditBinding.inflate(LayoutInflater.from(context), viewDataBinding.llTop, false);
         viewDataBinding.llTop.addView(itemTextEditBinding.getRoot());
         itemTextEditBinding.setItemtextedit(bean);
+    }
+
+    public void initTitleTxt(LayoutDABean bean) {
+        ItemTextBinding itemTextBinding = ItemTextBinding.inflate(LayoutInflater.from(context), viewDataBinding.llTop, false);
+        viewDataBinding.llTop.addView(itemTextBinding.getRoot());
+        itemTextBinding.setItemtext(bean);
+    }
+
+    public void initTitleTxtEditTxt(LayoutDABean bean) {
+        itemTextEditTxtBinding = ItemTextEditTxtBinding.inflate(LayoutInflater.from(context), viewDataBinding.llTop, false);
+        viewDataBinding.llTop.addView(itemTextEditTxtBinding.getRoot());
+        itemTextEditTxtBinding.setItemtextedittxt(bean);
     }
 
     public void initTitleTxtSpiCheckTxt(LayoutDABean bean) {
@@ -73,6 +94,12 @@ public class WuLiaoUIOpe extends BaseUIBean<FragWuliaoBinding> {
         itemTitleTwoBinding = ItemTitleTwoBinding.inflate(LayoutInflater.from(context), viewDataBinding.llTitle, false);
         viewDataBinding.llTitle.addView(itemTitleTwoBinding.getRoot());
         itemTitleTwoBinding.setItemtitletwo(bean);
+    }
+
+    public void initText1(LayoutDABean bean) {
+        itemTitle1Binding = ItemTitle1Binding.inflate(LayoutInflater.from(context), viewDataBinding.llTitle, false);
+        viewDataBinding.llTitle.addView(itemTitle1Binding.getRoot());
+        itemTitle1Binding.setItemtitle1(bean);
     }
 
     public void initRecycle() {
@@ -104,6 +131,12 @@ public class WuLiaoUIOpe extends BaseUIBean<FragWuliaoBinding> {
         itemTextBinding.setItemtext(bean);
     }
 
+    public void initBottom5(LayoutDABean bean) {
+        ItemTextEditTxtBinding itemTextEditTxtBinding = ItemTextEditTxtBinding.inflate(LayoutInflater.from(context), viewDataBinding.llBottom, false);
+        viewDataBinding.llBottom.addView(itemTextEditTxtBinding.getRoot());
+        itemTextEditTxtBinding.setItemtextedittxt(bean);
+    }
+
 
     public void initRecycle3(ArrayList<LayoutDABean> list) {
         itemRecycleBinding.recycle.setLayoutManager(new LinearLayoutManager(context));
@@ -119,4 +152,22 @@ public class WuLiaoUIOpe extends BaseUIBean<FragWuliaoBinding> {
         itemRecycleBinding.recycle.setLayoutManager(new LinearLayoutManager(context));
         itemRecycleBinding.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_title_two, BR.itemtitletwo, list));
     }
+
+    public void initRecycle1(ArrayList<LayoutDABean> list) {
+        itemRecycleBinding.recycle.setLayoutManager(new LinearLayoutManager(context));
+        itemRecycleBinding.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_title_1, BR.itemtitle1, list));
+    }
+
+    public void addBangGongItem(LayoutDABean bean) {
+        fragBaogongBinding = FragBaogongBinding.inflate(LayoutInflater.from(context), viewDataBinding.llTitle, false);
+        viewDataBinding.llTitle.addView(fragBaogongBinding.getRoot());
+        fragBaogongBinding.setBaogong(bean);
+    }
+
+    public void addWorkSiteCheck(LayoutDABean bean) {
+        fragBaogongBinding = FragBaogongBinding.inflate(LayoutInflater.from(context), viewDataBinding.llTitle, false);
+        viewDataBinding.llTitle.addView(fragBaogongBinding.getRoot());
+        fragBaogongBinding.setBaogong(bean);
+    }
+
 }

@@ -29,6 +29,13 @@
         <activity android:name=".ui.activity.FrmSearchItem2Act" />
         <activity android:name=".ui.activity.FrmSearchItemAct" />
         <activity android:name=".ui.activity.FrmUpdateWorkAct" />
+        <activity android:name=".ui.activity.FrmEndWorkAct" />
+
+
+        <activity android:name=".ui.activity.FrmConfirmSoAct" />
+        <activity android:name=".ui.activity.FrmWorkSiteCheckAct" />
+        <activity android:name=".ui.activity.FrmSWSMoveAct" />
+        <activity android:name=".ui.activity.FrmCodeBindAct" />
     </application>
 
 </manifest>
