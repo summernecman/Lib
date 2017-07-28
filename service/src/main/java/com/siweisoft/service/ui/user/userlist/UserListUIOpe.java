@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
-import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.util.LogUtil;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.R;
@@ -16,10 +16,10 @@ import com.siweisoft.service.ui.main.RoleInfo;
 
 import java.util.ArrayList;
 
-public class UserListUIBean extends BaseUIBean<FragUserlistBinding> {
+public class UserListUIOpe extends BaseUIOpe<FragUserlistBinding> {
 
 
-    public UserListUIBean(Context context) {
+    public UserListUIOpe(Context context) {
         super(context);
     }
 
@@ -27,8 +27,8 @@ public class UserListUIBean extends BaseUIBean<FragUserlistBinding> {
         for (int i = 0; i < data.size(); i++) {
             LogUtil.E(data.get(i).toString());
         }
-        viewDataBinding.recycle.setLayoutManager(new LinearLayoutManager(context));
-        viewDataBinding.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_userlist, BR.item_user, data) {
+        bind.recycle.setLayoutManager(new LinearLayoutManager(context));
+        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_userlist, BR.item_user, data) {
             @Override
             public void onClick(View v) {
                 super.onClick(v);

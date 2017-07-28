@@ -4,13 +4,13 @@ package com.siweisoft.service.ui.user.login;
 
 import android.content.Context;
 
-import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.base.ope.BaseUIOpe;
 import com.siweisoft.service.databinding.FragLoginBinding;
 
-public class LoginUIBean extends BaseUIBean<FragLoginBinding> {
+public class LoginUIOpe extends BaseUIOpe<FragLoginBinding> {
 
 
-    public LoginUIBean(Context context) {
+    public LoginUIOpe(Context context) {
         super(context);
     }
 }

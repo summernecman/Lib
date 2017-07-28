@@ -24,7 +24,7 @@ import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import butterknife.OnClick;
 
-public class UserListFrag extends BaseUIFrag<UserListUIBean, UserListDAOpe> {
+public class UserListFrag extends BaseUIFrag<UserListUIOpe, UserListDAOpe> {
 
 
     public static Fragment getFragment(int userid) {

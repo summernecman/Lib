@@ -11,7 +11,7 @@ import com.siweisoft.service.ui.Constant.VideoValue;
 import com.siweisoft.service.ui.user.login.LoginFrag;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
 
-public class MainAct extends BaseUIActivity<MainUIBean, MainDAOpe> {
+public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

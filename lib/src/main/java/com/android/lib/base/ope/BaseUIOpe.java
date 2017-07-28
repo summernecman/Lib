@@ -14,19 +14,19 @@ import java.lang.reflect.ParameterizedType;
 /**
  * ui处理操作者 处理对象 uibean fragment view
  */
-public class BaseUIBean<A extends ViewDataBinding> {
+public class BaseUIOpe<A extends ViewDataBinding> {
 
     public AppViewHolder viewHolder;
     public int[] variableId;
-    public A viewDataBinding;
+    public A bind;
     protected Context context;
 
 
-    public BaseUIBean(Context context) {
+    public BaseUIOpe(Context context) {
         this.context = context;
-        viewDataBinding = initViewDataBinding();
-        viewHolder = new AppViewHolder(viewDataBinding);
-        viewDataBinding.executePendingBindings();
+        bind = initViewDataBinding();
+        viewHolder = new AppViewHolder(bind);
+        bind.executePendingBindings();
     }
 
 
@@ -55,8 +55,8 @@ public class BaseUIBean<A extends ViewDataBinding> {
         return viewDataBinding;
     }
 
-    public A getViewDataBinding() {
-        return viewDataBinding;
+    public A getBind() {
+        return bind;
     }
 
     public int[] getVariableId() {

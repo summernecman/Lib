@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by ${viwmox} on 2016-12-21.
  */
 
-public class BaseOpes<A extends BaseUIBean, B extends BaseDAOpe> implements Serializable {
+public class BaseOpes<A extends BaseUIOpe, B extends BaseDAOpe> implements Serializable {
 
     /**
      * 操作者

@@ -18,7 +18,7 @@ public class FrmUpdateWorkAct extends BaseFactoryAct {
         super.onCreate(savedInstanceState);
         LayoutDABean bean = new LayoutDABean();
         bean.a.set("06.原材料库位查询");
-        getOpes().getUi().viewDataBinding.title2.setTitle2(bean);
+        getOpes().getUi().bind.title2.setTitle2(bean);
 
     }
 

@@ -19,7 +19,7 @@ public class FrmOtherOutAct extends BaseFactoryAct {
         super.onCreate(savedInstanceState);
         LayoutDABean bean = new LayoutDABean();
         bean.a.set("04.其他出库");
-        getOpes().getUi().viewDataBinding.title2.setTitle2(bean);
+        getOpes().getUi().bind.title2.setTitle2(bean);
 
     }
 

@@ -7,12 +7,12 @@ import android.support.annotation.IdRes;
 import android.widget.RadioGroup;
 
 import com.android.lib.base.interf.OnFinishListener;
-import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.util.LogUtil;
 import com.summer.factory.R;
 import com.summer.factory.databinding.ActBaseBinding;
 
-public class BaseFactoryUIOpe extends BaseUIBean<ActBaseBinding> {
+public class BaseFactoryUIOpe extends BaseUIOpe<ActBaseBinding> {
 
 
     public BaseFactoryUIOpe(Context context) {
@@ -20,7 +20,7 @@ public class BaseFactoryUIOpe extends BaseUIBean<ActBaseBinding> {
     }
 
     public void initRadioButton(final OnFinishListener onFinishListener) {
-        viewDataBinding.tabview.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        bind.tabview.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 int position = (int) group.findViewById(checkedId).getTag(R.id.position);

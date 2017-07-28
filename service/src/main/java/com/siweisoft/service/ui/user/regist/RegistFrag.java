@@ -15,12 +15,12 @@ import com.siweisoft.service.ui.user.login.LoginFrag;
 
 import butterknife.OnClick;
 
-public class RegistFrag extends BaseUIFrag<RegistUIBean, RegistDAOpe> {
+public class RegistFrag extends BaseUIFrag<RegistUIOpe, RegistDAOpe> {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getOpes().getUi().viewDataBinding.setUser(getOpes().getDa().getUserInfo());
+        getOpes().getUi().bind.setUser(getOpes().getDa().getUserInfo());
     }
 
     @OnClick({R.id.onRegist})

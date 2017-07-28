@@ -22,7 +22,7 @@ import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import butterknife.OnClick;
 
-public class VideoChatFrag extends BaseUIFrag<VideoChatUIBean, VideoChatDAOpe> {
+public class VideoChatFrag extends BaseUIFrag<VideoChatUIOpe, VideoChatDAOpe> {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -34,23 +34,23 @@ public class VideoChatFrag extends BaseUIFrag<VideoChatUIBean, VideoChatDAOpe> {
         if (!Value.userInfo.type.get()) {
             // 设置录像格式（0表示mp4）
             AnyChatCoreSDK.SetSDKOptionInt(AnyChatDefine.BRAC_SO_RECORD_FILETYPE, 0);
-            getOpes().getUi().viewDataBinding.surfaceviewLocal.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS); //设置 SURFACE_TYPE_PUSH_BUFFERS 模式
-            getOpes().getUi().viewDataBinding.surfaceviewLocal.getHolder().addCallback(AnyChatCoreSDK.mCameraHelper);// 打开本地视频预览，开始采集本地视频数据
+            getOpes().getUi().bind.surfaceviewLocal.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS); //设置 SURFACE_TYPE_PUSH_BUFFERS 模式
+            getOpes().getUi().bind.surfaceviewLocal.getHolder().addCallback(AnyChatCoreSDK.mCameraHelper);// 打开本地视频预览，开始采集本地视频数据
             LogUtil.E("hh:" + getOpes().getDa().getRoleInfo().toString());
             if (AnyChatCoreSDK.GetSDKOptionInt(AnyChatDefine.BRAC_SO_LOCALVIDEO_CAPDRIVER) == AnyChatDefine.VIDEOCAP_DRIVER_JAVA) { // 如果是采用Java视频采集，则需要设置Surface的CallBack
-                getOpes().getUi().viewDataBinding.surfaceviewLocal.getHolder().addCallback(AnyChatCoreSDK.mCameraHelper);
+                getOpes().getUi().bind.surfaceviewLocal.getHolder().addCallback(AnyChatCoreSDK.mCameraHelper);
             }
-            getOpes().getUi().viewDataBinding.surfaceviewLocal.setZOrderOnTop(true);
+            getOpes().getUi().bind.surfaceviewLocal.setZOrderOnTop(true);
             ChatInit.getInstance().openLocalCamera();
             //打开音频
             ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(getOpes().getDa().getRoleInfo().getUserID()), 1);
         } else {
             if (AnyChatCoreSDK.GetSDKOptionInt(AnyChatDefine.BRAC_SO_VIDEOSHOW_DRIVERCTRL) == AnyChatDefine.VIDEOSHOW_DRIVER_JAVA) {// 如果是采用Java视频显示，则需要设置Surface的CallBack
-                int index = ChatInit.getInstance().getAnyChatSDK().mVideoHelper.bindVideo(getOpes().getUi().viewDataBinding.surfaceviewLocal.getHolder());
+                int index = ChatInit.getInstance().getAnyChatSDK().mVideoHelper.bindVideo(getOpes().getUi().bind.surfaceviewLocal.getHolder());
                 ChatInit.getInstance().getAnyChatSDK().mVideoHelper.SetVideoUser(index, Integer.parseInt(getOpes().getDa().getRoleInfo().getUserID()));
             }
             ChatInit.getInstance().openLocalCamera(Integer.parseInt(getOpes().getDa().getRoleInfo().getUserID()));
-            ChatInit.getInstance().loadRemoveVideo(getOpes().getUi().viewDataBinding.surfaceviewLocal, Integer.parseInt(getOpes().getDa().getRoleInfo().getUserID()));
+            ChatInit.getInstance().loadRemoveVideo(getOpes().getUi().bind.surfaceviewLocal, Integer.parseInt(getOpes().getDa().getRoleInfo().getUserID()));
             HandleUtil.getInstance().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -92,36 +92,36 @@ public class VideoChatFrag extends BaseUIFrag<VideoChatUIBean, VideoChatDAOpe> {
                 FragmentUtil.getInstance().removeTop(activity);
                 break;
             case R.id.btn_speakControl:
-                if ((Boolean) getOpes().getUi().viewDataBinding.btnSpeakControl.getTag(R.id.data)) {
-                    getOpes().getUi().viewDataBinding.btnSpeakControl.setTag(R.id.data, false);
-                    getOpes().getUi().viewDataBinding.btnSpeakControl.setImageResource(R.drawable.speak_off);
+                if ((Boolean) getOpes().getUi().bind.btnSpeakControl.getTag(R.id.data)) {
+                    getOpes().getUi().bind.btnSpeakControl.setTag(R.id.data, false);
+                    getOpes().getUi().bind.btnSpeakControl.setImageResource(R.drawable.speak_off);
                     ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(-1, 0);
                 } else {
-                    getOpes().getUi().viewDataBinding.btnSpeakControl.setTag(R.id.data, true);
-                    getOpes().getUi().viewDataBinding.btnSpeakControl.setImageResource(R.drawable.speak_on);
+                    getOpes().getUi().bind.btnSpeakControl.setTag(R.id.data, true);
+                    getOpes().getUi().bind.btnSpeakControl.setImageResource(R.drawable.speak_on);
                     ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(-1, 1);
                 }
                 break;
             case R.id.btn_speakControl_remove:
-                if ((Boolean) getOpes().getUi().viewDataBinding.btnSpeakControlRemove.getTag(R.id.data)) {
-                    getOpes().getUi().viewDataBinding.btnSpeakControlRemove.setTag(R.id.data, false);
-                    getOpes().getUi().viewDataBinding.btnSpeakControlRemove.setImageResource(R.drawable.speak_off);
+                if ((Boolean) getOpes().getUi().bind.btnSpeakControlRemove.getTag(R.id.data)) {
+                    getOpes().getUi().bind.btnSpeakControlRemove.setTag(R.id.data, false);
+                    getOpes().getUi().bind.btnSpeakControlRemove.setImageResource(R.drawable.speak_off);
                     ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(getOpes().getDa().getRoleInfo().getUserID()), 0);
                 } else {
-                    getOpes().getUi().viewDataBinding.btnSpeakControlRemove.setTag(R.id.data, true);
-                    getOpes().getUi().viewDataBinding.btnSpeakControlRemove.setImageResource(R.drawable.speak_on);
+                    getOpes().getUi().bind.btnSpeakControlRemove.setTag(R.id.data, true);
+                    getOpes().getUi().bind.btnSpeakControlRemove.setImageResource(R.drawable.speak_on);
                     ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(getOpes().getDa().getRoleInfo().getUserID()), 1);
                 }
                 break;
             case R.id.btn_cameraControl:
-                if ((Boolean) getOpes().getUi().viewDataBinding.btnCameraControl.getTag(R.id.data)) {
-                    getOpes().getUi().viewDataBinding.btnCameraControl.setTag(R.id.data, false);
-                    getOpes().getUi().viewDataBinding.btnCameraControl.setImageResource(R.drawable.camera_off);
+                if ((Boolean) getOpes().getUi().bind.btnCameraControl.getTag(R.id.data)) {
+                    getOpes().getUi().bind.btnCameraControl.setTag(R.id.data, false);
+                    getOpes().getUi().bind.btnCameraControl.setImageResource(R.drawable.camera_off);
                     ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Value.userInfo.type.get() ? Integer.parseInt(getOpes().getDa().getRoleInfo().getUserID()) : -1, 0);
 
                 } else {
-                    getOpes().getUi().viewDataBinding.btnCameraControl.setTag(R.id.data, true);
-                    getOpes().getUi().viewDataBinding.btnCameraControl.setImageResource(R.drawable.camera_on);
+                    getOpes().getUi().bind.btnCameraControl.setTag(R.id.data, true);
+                    getOpes().getUi().bind.btnCameraControl.setImageResource(R.drawable.camera_on);
                     ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Value.userInfo.type.get() ? Integer.parseInt(getOpes().getDa().getRoleInfo().getUserID()) : -1, 1);
                 }
                 break;

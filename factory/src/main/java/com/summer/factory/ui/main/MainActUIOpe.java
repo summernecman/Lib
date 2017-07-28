@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
-import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.util.ScreenUtil;
 import com.summer.factory.BR;
@@ -20,7 +20,7 @@ import com.summer.factory.databinding.ActMainBinding;
 
 import java.util.ArrayList;
 
-public class MainActUIOpe extends BaseUIBean<ActMainBinding> {
+public class MainActUIOpe extends BaseUIOpe<ActMainBinding> {
 
 
     public MainActUIOpe(Context context) {
@@ -28,8 +28,8 @@ public class MainActUIOpe extends BaseUIBean<ActMainBinding> {
     }
 
     public void initList(ArrayList<LayoutDABean> txts, final View.OnClickListener onClickListener) {
-        viewDataBinding.recycle.setLayoutManager(new GridLayoutManager(context, 4));
-        viewDataBinding.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_main, BR.itemmain, txts) {
+        bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
+        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_main, BR.itemmain, txts) {
 
             @Override
             public AppViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

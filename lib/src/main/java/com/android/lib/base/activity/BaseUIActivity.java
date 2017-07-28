@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import com.android.lib.R;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.android.lib.base.ope.BaseOpes;
-import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.util.LogUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
 
@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 /**
  * Created by summer on 2016/4/16 0016 11:51.
  */
-public abstract class BaseUIActivity<A extends BaseUIBean, B extends BaseDAOpe> extends BaseActivity {
+public abstract class BaseUIActivity<A extends BaseUIOpe, B extends BaseDAOpe> extends BaseActivity {
 
     /**
      * 添加内容界面的容器
@@ -49,8 +49,8 @@ public abstract class BaseUIActivity<A extends BaseUIBean, B extends BaseDAOpe> 
 //        StatusBarUtil.getInstance().setStatusBarColor(activity, ColorConstant.COLOR_STATUS);
 //        StatusBarUtil.getInstance().hideNavigationBar(activity);
         ACT_ROOT_VIEW = (ViewGroup) findViewById(R.id.act_base_root);
-        if (getOpes().getUi() != null && getOpes().getUi().getViewDataBinding().getRoot() != null) {
-            ACT_ROOT_VIEW.addView(getOpes().getUi().getViewDataBinding().getRoot(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        if (getOpes().getUi() != null && getOpes().getUi().getBind().getRoot() != null) {
+            ACT_ROOT_VIEW.addView(getOpes().getUi().getBind().getRoot(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
         ButterKnife.bind(activity);
     }
@@ -67,7 +67,7 @@ public abstract class BaseUIActivity<A extends BaseUIBean, B extends BaseDAOpe> 
 
     private BaseOpes<A, B> getaabb(Class<?> c) {
         if (c == null) {
-            opes = (BaseOpes<A, B>) new BaseOpes<>(new BaseUIBean<ViewDataBinding>(activity), new BaseDAOpe(activity));
+            opes = (BaseOpes<A, B>) new BaseOpes<>(new BaseUIOpe<ViewDataBinding>(activity), new BaseDAOpe(activity));
         }
         if (c.getGenericSuperclass() instanceof ParameterizedType) {
             Class<A> a = (Class<A>) ((ParameterizedType) c.getGenericSuperclass()).getActualTypeArguments()[0];

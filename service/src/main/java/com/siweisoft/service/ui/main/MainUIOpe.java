@@ -4,11 +4,11 @@ package com.siweisoft.service.ui.main;
 
 import android.content.Context;
 
-import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.base.ope.BaseUIOpe;
 import com.siweisoft.service.databinding.ActMainBinding;
 
-public class MainUIBean extends BaseUIBean<ActMainBinding> {
-    public MainUIBean(Context context) {
+public class MainUIOpe extends BaseUIOpe<ActMainBinding> {
+    public MainUIOpe(Context context) {
         super(context);
     }
 }

@@ -4,13 +4,13 @@ package com.siweisoft.service.ui.user.regist;
 
 import android.content.Context;
 
-import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.base.ope.BaseUIOpe;
 import com.siweisoft.service.databinding.FragRegistBinding;
 
-public class RegistUIBean extends BaseUIBean<FragRegistBinding> {
+public class RegistUIOpe extends BaseUIOpe<FragRegistBinding> {
 
 
-    public RegistUIBean(Context context) {
+    public RegistUIOpe(Context context) {
         super(context);
     }
 }

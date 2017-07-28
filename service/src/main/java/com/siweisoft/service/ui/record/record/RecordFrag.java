@@ -9,7 +9,7 @@ import android.view.View;
 import com.android.lib.base.fragment.BaseUIFrag;
 import com.siweisoft.service.ui.Constant.VideoValue;
 
-public class RecordFrag extends BaseUIFrag<RecordUIBean, RecordDAOpe> {
+public class RecordFrag extends BaseUIFrag<RecordUIOpe, RecordDAOpe> {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

@@ -19,7 +19,7 @@ public class FrmEndWorkAct extends BaseFactoryAct {
         super.onCreate(savedInstanceState);
         LayoutDABean bean = new LayoutDABean();
         bean.a.set("10.流程票报工");
-        getOpes().getUi().viewDataBinding.title2.setTitle2(bean);
+        getOpes().getUi().bind.title2.setTitle2(bean);
 
     }
 

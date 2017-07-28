@@ -18,7 +18,7 @@ public class FrmSWSMoveAct extends BaseFactoryAct {
         super.onCreate(savedInstanceState);
         LayoutDABean bean = new LayoutDABean();
         bean.a.set("32.半成品整箱移位");
-        getOpes().getUi().viewDataBinding.title2.setTitle2(bean);
+        getOpes().getUi().bind.title2.setTitle2(bean);
 
     }
 

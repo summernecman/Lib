@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.android.lib.R;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.android.lib.base.ope.BaseOpes;
-import com.android.lib.base.ope.BaseUIBean;
+import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.LogUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
@@ -30,7 +30,7 @@ import butterknife.Unbinder;
 /**
  * Created by summer on 2016/4/16 0016 16:03.
  */
-public abstract class BaseUIFrag<A extends BaseUIBean, B extends BaseDAOpe> extends BaseFrg implements View.OnClickListener, View.OnLongClickListener {
+public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> extends BaseFrg implements View.OnClickListener, View.OnLongClickListener {
 
     /**
      * fragment所属的层次
@@ -55,8 +55,8 @@ public abstract class BaseUIFrag<A extends BaseUIBean, B extends BaseDAOpe> exte
         }
         View group = inflater.inflate(getLayoutID(), null);
         ViewGroup parent = (ViewGroup) group.findViewById(R.id.container);
-        if (getOpes().getUi() != null && getOpes().getUi().getViewDataBinding().getRoot() != null) {
-            parent.addView(getOpes().getUi().getViewDataBinding().getRoot(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        if (getOpes().getUi() != null && getOpes().getUi().getBind().getRoot() != null) {
+            parent.addView(getOpes().getUi().getBind().getRoot(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
         unbinder = ButterKnife.bind(this, group);
         return group;
@@ -99,7 +99,7 @@ public abstract class BaseUIFrag<A extends BaseUIBean, B extends BaseDAOpe> exte
 
     private BaseOpes<A, B> getaabb(Class<?> c) {
         if (c == null) {
-            opes = (BaseOpes<A, B>) new BaseOpes<>(new BaseUIBean<ViewDataBinding>(activity), new BaseDAOpe(activity));
+            opes = (BaseOpes<A, B>) new BaseOpes<>(new BaseUIOpe<ViewDataBinding>(activity), new BaseDAOpe(activity));
         }
         if (c.getGenericSuperclass() instanceof ParameterizedType) {
             Class<A> a = (Class<A>) ((ParameterizedType) c.getGenericSuperclass()).getActualTypeArguments()[0];
