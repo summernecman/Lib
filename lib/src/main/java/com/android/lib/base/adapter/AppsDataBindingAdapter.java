@@ -15,7 +15,7 @@ import com.android.lib.bean.AppViewHolder;
 
 import java.util.ArrayList;
 
-public class AppsDataBindingAdapter extends RecyclerView.Adapter<AppViewHolder> implements View.OnClickListener {
+public class AppsDataBindingAdapter extends RecyclerView.Adapter<AppViewHolder> implements View.OnClickListener, View.OnLongClickListener {
 
 
     ArrayList list;
@@ -42,6 +42,7 @@ public class AppsDataBindingAdapter extends RecyclerView.Adapter<AppViewHolder> 
         viewDataBinding.getRoot().setTag(R.id.data, list.get(position));
         viewDataBinding.getRoot().setTag(R.id.position, position);
         viewDataBinding.getRoot().setOnClickListener(this);
+        viewDataBinding.getRoot().setOnLongClickListener(this);
         viewDataBinding.setVariable(vari, list.get(position));
     }
 
@@ -53,5 +54,10 @@ public class AppsDataBindingAdapter extends RecyclerView.Adapter<AppViewHolder> 
     @Override
     public void onClick(View v) {
 
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        return true;
     }
 }

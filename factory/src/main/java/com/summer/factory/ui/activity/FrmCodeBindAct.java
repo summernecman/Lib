@@ -19,7 +19,7 @@ public class FrmCodeBindAct extends BaseFactoryAct {
         super.onCreate(savedInstanceState);
         LayoutDABean bean = new LayoutDABean();
         bean.a.set("10.快捷码");
-        getOpes().getUi().bind.title2.setTitle2(bean);
+        getOpes().U().bind.title2.setTitle2(bean);
 
     }
 

@@ -55,8 +55,8 @@ public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> exten
         }
         View group = inflater.inflate(getLayoutID(), null);
         ViewGroup parent = (ViewGroup) group.findViewById(R.id.container);
-        if (getOpes().getUi() != null && getOpes().getUi().getBind().getRoot() != null) {
-            parent.addView(getOpes().getUi().getBind().getRoot(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        if (P().U() != null && P().U().getBind().getRoot() != null) {
+            parent.addView(P().U().getBind().getRoot(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
         unbinder = ButterKnife.bind(this, group);
         return group;
@@ -90,7 +90,7 @@ public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> exten
     /**
      * 获取操作类
      */
-    public BaseOpes<A, B> getOpes() {
+    public BaseOpes<A, B> P() {
         if (opes == null) {
             getaabb(getClass());
         }

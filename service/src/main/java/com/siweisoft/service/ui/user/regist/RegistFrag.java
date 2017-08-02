@@ -20,12 +20,12 @@ public class RegistFrag extends BaseUIFrag<RegistUIOpe, RegistDAOpe> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getOpes().getUi().bind.setUser(getOpes().getDa().getUserInfo());
+        P().U().bind.setUser(P().D().getUserInfo());
     }
 
     @OnClick({R.id.onRegist})
     public void onClickEvent(View v) {
-        getOpes().getDa().getUserI().regist(getOpes().getDa().getUserInfo(), new OnFinishListener() {
+        P().D().getUserI().regist(P().D().getUserInfo(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 if ((Boolean) o) {

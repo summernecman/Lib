@@ -18,6 +18,6 @@ public class FrmWorkSiteCheckFrag extends WuLiaoFrag {
 
     @Override
     public void doThing() {
-        getOpes().getUi().addWorkSiteCheck(getOpes().getDa().getData(new String[]{"", "", "", ""}));
+        P().U().addWorkSiteCheck(P().D().getData(new String[]{"", "", "", ""}));
     }
 }

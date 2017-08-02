@@ -43,19 +43,19 @@ public abstract class OnNetWorkReqCacheAdapter implements OnNetWorkReqInterf {
                     break;
             }
         } else {
-            if (baseResBean.isException()) {
-                onNetWorkResult(false, baseResBean);
-            } else {
-                if (baseResBean.getData() == null) {
-//                    baseResBean.setErrorMessage(ValueConstant.ERROR_STR_DATA_NULL);
-//                    baseResBean.setErrorCode(ValueConstant.ERROR_CODE_DATA_NULL);
-//                    onNetWorkResult(false,baseResBean);
-
-                    onNetWorkResult(true, baseResBean);
-                } else {
-                    onNetWorkResult(true, baseResBean);
-                }
-            }
+//            if (baseResBean.isException()) {
+//                onNetWorkResult(false, baseResBean);
+//            } else {
+//                if (baseResBean.getData() == null) {
+////                    baseResBean.setErrorMessage(ValueConstant.ERROR_STR_DATA_NULL);
+////                    baseResBean.setErrorCode(ValueConstant.ERROR_CODE_DATA_NULL);
+////                    onNetWorkResult(false,baseResBean);
+//
+//                    onNetWorkResult(true, baseResBean);
+//                } else {
+//                    onNetWorkResult(true, baseResBean);
+//                }
+//            }
 
         }
     }

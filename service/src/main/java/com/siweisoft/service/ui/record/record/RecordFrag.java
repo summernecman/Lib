@@ -14,6 +14,6 @@ public class RecordFrag extends BaseUIFrag<RecordUIOpe, RecordDAOpe> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getOpes().getUi().loadUrl(VideoValue.URL.URLROCORD);
+        P().U().loadUrl(VideoValue.URL.URLROCORD);
     }
 }

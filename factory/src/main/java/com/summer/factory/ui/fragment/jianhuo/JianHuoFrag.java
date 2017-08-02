@@ -19,9 +19,9 @@ public class JianHuoFrag extends WuLiaoFrag {
 
     @Override
     public void doThing() {
-        getOpes().getUi().initTitleTxtEdit(getOpes().getDa().getTextEditData4());
-        getOpes().getUi().initText3(getOpes().getDa().getRecycleTitleData33());
-        getOpes().getUi().initRecycle();
-        getOpes().getUi().initRecycle3(getOpes().getDa().getRecycleData3());
+        P().U().initTitleTxtEdit(P().D().getTextEditData4());
+        P().U().initText3(P().D().getRecycleTitleData33());
+        P().U().initRecycle();
+        P().U().initRecycle3(P().D().getRecycleData3());
     }
 }

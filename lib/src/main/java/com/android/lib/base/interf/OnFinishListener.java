@@ -3,7 +3,7 @@ package com.android.lib.base.interf;
 /**
  * Created by ${viwmox} on 2016-10-19.
  */
-public interface OnFinishListener {
+public interface OnFinishListener<T> {
 
-    void onFinish(Object o);
+    void onFinish(T o);
 }

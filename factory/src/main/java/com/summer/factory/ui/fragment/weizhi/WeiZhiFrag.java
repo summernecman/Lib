@@ -31,7 +31,7 @@ public class WeiZhiFrag extends BaseUIFrag<WeiZhiUIOpe, WeiZhiDAOpe> {
         wuLiaoItemDABean.b.set("物料2");
         wuLiaoItemDABean.c.set("物料3");
         wuliaodata.add(wuLiaoItemDABean);
-        getOpes().getDa().setData(wuliaodata);
-        getOpes().getUi().initRecycle(getOpes().getDa().getData());
+        P().D().setData(wuliaodata);
+        P().U().initRecycle(P().D().getData());
     }
 }

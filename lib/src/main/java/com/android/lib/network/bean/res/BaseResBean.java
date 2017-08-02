@@ -8,11 +8,10 @@ import java.io.Serializable;
  */
 public class BaseResBean implements Serializable {
 
-    private Object data;
 
-    private boolean isException;
+    private boolean isException = false;
 
-    private int errorCode;
+    private int errorCode = 0;
 
     private String errorMessage;
 
@@ -20,13 +19,6 @@ public class BaseResBean implements Serializable {
 
     }
 
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
 
     public int getErrorCode() {
         return errorCode;
@@ -55,7 +47,6 @@ public class BaseResBean implements Serializable {
     @Override
     public String toString() {
         return "BaseResBean{" +
-                "data=" + data +
                 ", isException=" + isException +
                 ", errorCode=" + errorCode +
                 ", errorMessage='" + errorMessage + '\'' +

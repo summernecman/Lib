@@ -5,13 +5,21 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.os.Environment;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -36,6 +44,76 @@ public class BitmapUtil {
         return instance;
     }
 
+    public static void saveImage(final Context context, final String url) {
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                String s[] = url.split("/");
+                File dir = new File(Environment.getExternalStorageDirectory() + "/files");
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File file = new File(dir, s[s.length - 1]);
+                if (!file.exists()) {
+                    try {
+                        file.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                FileOutputStream fileOutputStream = null;
+                FileInputStream fileInputStream = null;
+                HttpURLConnection conn = null;
+                try {
+                    fileOutputStream = new FileOutputStream(file);
+                    URL u = new URL(url);
+                    conn = (HttpURLConnection) u.openConnection();
+                    InputStream input = conn.getInputStream();
+                    byte[] bytes = new byte[1024];
+                    int bytec = input.read(bytes);
+                    while (bytec != -1) {
+                        fileOutputStream.write(bytes, 0, bytec);
+                        bytec = input.read(bytes);
+                    }
+                    fileOutputStream.flush();
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (conn != null) {
+                    conn.disconnect();
+                }
+                try {
+                    if (fileInputStream != null) {
+                        fileInputStream.close();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (fileOutputStream != null) {
+                        fileOutputStream.close();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                ToastUtil.getInstance().showShort(context, "保存成功");
+            }
+        }.execute();
+
+    }
+
     /**
      * 设置imageview的src
      */
@@ -49,7 +127,6 @@ public class BitmapUtil {
         }
         Glide.with(context).load(imageSrc).into(imageView);
     }
-
 
     public ArrayList<File> getThumbnails(ArrayList<File> files) {
         if (files == null) {
@@ -102,5 +179,6 @@ public class BitmapUtil {
         Drawable wallpaperDrawable = wallpaperManager.getDrawable();
         return wallpaperDrawable;
     }
+
 
 }

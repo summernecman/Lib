@@ -84,15 +84,18 @@ public class FragmentUtil {
 
 
     public void removeTop(final FragmentActivity fragmentActivity) {
-        if (fragments != null && fragments.size() > 1) {
+        if (fragments != null && fragments.size() > 0) {
             LogUtil.E("befroe");
             final Fragment now = fragments.get(fragments.size() - 1);
-            final Fragment old = fragments.get(fragments.size() - 2);
-            LogUtil.E("after");
+            final Fragment old;
             FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.anim_push_left_in, R.anim.anim_push_right_out);
             transaction.hide(now);
-            transaction.show(old);
+            if (fragments.size() > 1) {
+                LogUtil.E("after");
+                old = fragments.get(fragments.size() - 2);
+                transaction.show(old);
+            }
             transaction.commitAllowingStateLoss();
             fragments.remove(now);
             handler.postDelayed(new Runnable() {

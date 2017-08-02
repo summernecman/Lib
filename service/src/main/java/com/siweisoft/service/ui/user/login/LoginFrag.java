@@ -20,17 +20,17 @@ public class LoginFrag extends BaseUIFrag<LoginUIOpe, LoginDAOpe> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getOpes().getUi().bind.setUserinfo(getOpes().getDa().getUserInfo());
+        P().U().bind.setUserinfo(P().D().getUserInfo());
     }
 
     @OnClick({R.id.button, R.id.forgetpwd, R.id.regist})
     public void onClickEvent(View view) {
         switch (view.getId()) {
             case R.id.button:
-                if (NullUtil.isStrEmpty(getOpes().getDa().getUserInfo().name.get())) {
+                if (NullUtil.isStrEmpty(P().D().getUserInfo().name.get())) {
                     return;
                 }
-                getOpes().getDa().login(getOpes().getDa().getUserInfo());
+                P().D().login(P().D().getUserInfo());
                 break;
             case R.id.forgetpwd:
 

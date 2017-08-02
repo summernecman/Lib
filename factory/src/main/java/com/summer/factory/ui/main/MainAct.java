@@ -28,7 +28,7 @@ public class MainAct extends BaseUIActivity<MainActUIOpe, MainActDAOpe> implemen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getOpes().getUi().initList(getOpes().getDa().getTxts(), this);
+        getOpes().U().initList(getOpes().D().getTxts(), this);
     }
 
     @Override

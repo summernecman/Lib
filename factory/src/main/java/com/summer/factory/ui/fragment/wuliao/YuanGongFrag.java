@@ -18,9 +18,9 @@ public class YuanGongFrag extends WuLiaoFrag {
 
     @Override
     public void doThing() {
-        getOpes().getUi().initText2(getOpes().getDa().getRecycleTitleData22());
-        getOpes().getUi().initRecycle();
-        getOpes().getUi().initBottom3(getOpes().getDa().getBottomData3());
-        getOpes().getUi().initRecycle2(getOpes().getDa().getRecycleData2());
+        P().U().initText2(P().D().getRecycleTitleData22());
+        P().U().initRecycle();
+        P().U().initBottom3(P().D().getBottomData3());
+        P().U().initRecycle2(P().D().getRecycleData2());
     }
 }

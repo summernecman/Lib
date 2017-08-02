@@ -37,7 +37,7 @@ public class UserListFrag extends BaseUIFrag<UserListUIOpe, UserListDAOpe> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getOpes().getUi().initList(ChatInit.getInstance().getUserList(getArguments().getInt(ValueConstant.DATA_DATA)), this);
+        P().U().initList(ChatInit.getInstance().getUserList(getArguments().getInt(ValueConstant.DATA_DATA)), this);
         ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
     }
 
@@ -49,12 +49,12 @@ public class UserListFrag extends BaseUIFrag<UserListUIOpe, UserListDAOpe> {
             ToastUtil.getInstance().showShort(activity, "这是你自己");
             return;
         }
-        getOpes().getDa().getUserI().getUserInfo(roleInfo.getName(), new OnFinishListener() {
+        P().D().getUserI().getUserInfo(roleInfo.getName(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 if (o != null) {
                     UserReqBean userReqBean = (UserReqBean) o;
-                    getOpes().getDa().setRoleInfo(roleInfo);
+                    P().D().setRoleInfo(roleInfo);
                     boolean is = userReqBean.getIscustomer() == 0 ? false : true;
                     if (is == Value.userInfo.type.get()) {
                         ToastUtil.getInstance().showShort(activity, "客服之间不能视频");
@@ -81,7 +81,7 @@ public class UserListFrag extends BaseUIFrag<UserListUIOpe, UserListDAOpe> {
     @Override
     public void dealMesage(MessageEvent event) {
         super.dealMesage(event);
-        getOpes().getUi().initList(ChatInit.getInstance().getUserList(getArguments().getInt(ValueConstant.DATA_DATA)), this);
+        P().U().initList(ChatInit.getInstance().getUserList(getArguments().getInt(ValueConstant.DATA_DATA)), this);
         ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
     }
 }

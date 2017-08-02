@@ -32,7 +32,7 @@ public class TiaoMaFrag extends BaseUIFrag<TiaoMaUIOpe, TiaoMaDAOpe> {
             wuLiaoItemDABean.b.set("物料2fd" + i);
             wuliaodata.add(wuLiaoItemDABean);
         }
-        getOpes().getDa().setWuliaodata(wuliaodata);
-        getOpes().getUi().initRecycle(getOpes().getDa().getWuliaodata());
+        P().D().setWuliaodata(wuliaodata);
+        P().U().initRecycle(P().D().getWuliaodata());
     }
 }

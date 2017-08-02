@@ -21,6 +21,6 @@ public class DanZhengFrag extends BaseUIFrag<DanZhengUIOpe, DanZhengDAOpe> {
 
     @Override
     public void doThing() {
-        getOpes().getUi().initData(getOpes().getDa().getDanzhengData());
+        P().U().initData(P().D().getDanzhengData());
     }
 }

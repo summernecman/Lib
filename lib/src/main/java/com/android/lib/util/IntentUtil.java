@@ -125,7 +125,7 @@ public class IntentUtil {
     public void photosShowFromphone(Fragment fragment, int requstCode) {
         Intent intent = new Intent(fragment.getContext(), ImageGridActivity.class);
         intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, false); // 是否是直接打开相机
-        fragment.startActivityForResult(intent, ValueConstant.CODE_REQUSET);
+        fragment.startActivityForResult(intent, requstCode);
     }
 
     public void share(Fragment fragment, ArrayList<String> str) {

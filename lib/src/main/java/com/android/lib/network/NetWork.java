@@ -2,6 +2,7 @@ package com.android.lib.network;
 
 import android.content.Context;
 
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.network.bean.req.BaseReqBean;
@@ -163,7 +164,7 @@ public class NetWork {
             BaseResBean res = new BaseResBean();
             res.setErrorCode(ValueConstant.ERROR_CODE_NET_NO_CONNETCT);
             res.setErrorMessage(ValueConstant.ERROR_STR_NET_NO_CONNETCT);
-            res.setData(jsonstr);
+            //res.setData(jsonstr);
             reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, res);
             return;
         }
@@ -228,7 +229,7 @@ public class NetWork {
             BaseResBean res = new BaseResBean();
             res.setErrorCode(ValueConstant.ERROR_CODE_NET_NO_CONNETCT);
             res.setErrorMessage(ValueConstant.ERROR_STR_NET_NO_CONNETCT);
-            res.setData(jsonstr);
+            // res.setData(jsonstr);
             reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, res);
             return;
         }
@@ -248,6 +249,7 @@ public class NetWork {
         x.http().post(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String response) {
+                LogUtil.E("gson", "" + response);
                 if (response == null) {
                     BaseResBean res = new BaseResBean();
                     res.setErrorCode(ValueConstant.ERROR_CODE_RES_NULL);
@@ -257,7 +259,6 @@ public class NetWork {
                     BaseResBean baseResBean = gson.fromJson(response.toString(), BaseResBean.class);
                     reqInterf.onNetWorkReqFinish(true, UrlConstant.URI + model, baseResBean);
                 }
-                LogUtil.E("gson", response);
             }
 
             @Override
@@ -281,6 +282,107 @@ public class NetWork {
             }
         });
     }
+
+
+    public void doHttpRequsetFile(final Context context, final String model, final BaseReqBean reqBean, final OnNetWorkReqInterf reqInterf) {
+        LogUtil.E(UrlConstant.URI + model);
+        final String jsonstr = gson.toJson(reqBean);
+        LogUtil.E(jsonstr);
+        if (!reqInterf.onNetWorkReqStart(UrlConstant.URI + model, jsonstr)) {
+            BaseResBean res = new BaseResBean();
+            res.setErrorCode(ValueConstant.ERROR_CODE_NET_NO_CONNETCT);
+            res.setErrorMessage(ValueConstant.ERROR_STR_NET_NO_CONNETCT);
+            // res.setData(jsonstr);
+            reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, res);
+            return;
+        }
+
+        RequestParams requestParams = new RequestParams(UrlConstant.URI + model);
+        requestParams.setUseCookie(true);
+        requestParams.setHeader("Cookie", SPUtil.getInstance().getStr(ValueConstant.cookieFromResponse));
+        LogUtil.E(UrlConstant.URI + model + "---" + ValueConstant.cookieFromResponse);
+        Map<String, String> map = gson.fromJson(jsonstr, new TypeToken<Map<String, String>>() {
+        }.getType());
+//        Map<String, String> map = JSON.parseObject(jsonstr, new TypeReference<Map<String, String>>() {
+//        });
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            requestParams.addBodyParameter(entry.getKey(), entry.getValue());
+        }
+
+        x.http().post(requestParams, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String response) {
+                LogUtil.E("gson", "" + response);
+                if (response == null) {
+                    BaseResBean res = new BaseResBean();
+                    res.setErrorCode(ValueConstant.ERROR_CODE_RES_NULL);
+                    res.setErrorMessage(ValueConstant.ERROR_STR_RES_NULL);
+                    reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, res);
+                } else {
+                    BaseResBean baseResBean = gson.fromJson(response.toString(), BaseResBean.class);
+                    reqInterf.onNetWorkReqFinish(true, UrlConstant.URI + model, baseResBean);
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                BaseResBean baseResBean = new BaseResBean();
+                baseResBean.setErrorCode(ValueConstant.ERROR_CODE_VOLLEY_FAIL);
+                baseResBean.setErrorMessage(ex.getMessage() == null ? "" : ex.getMessage());
+                baseResBean.setException(true);
+                reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, baseResBean);
+                LogUtil.E(ex == null ? "" : ex.getMessage());
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+                LogUtil.E(cex);
+            }
+
+            @Override
+            public void onFinished() {
+                LogUtil.E("");
+            }
+        });
+    }
+
+    public void doHttpRequsetWithSession(final Context context, final String model, final BaseReqBean reqBean, final OnFinishListener onFinishListener) {
+        LogUtil.E(UrlConstant.URI + model);
+        final String jsonstr = gson.toJson(reqBean);
+        LogUtil.E(jsonstr);
+
+        RequestParams requestParams = new RequestParams(UrlConstant.URI + model);
+        requestParams.setUseCookie(true);
+        requestParams.setHeader("Cookie", SPUtil.getInstance().getStr(ValueConstant.cookieFromResponse));
+        LogUtil.E(UrlConstant.URI + model + "---" + ValueConstant.cookieFromResponse);
+        Map<String, String> map = gson.fromJson(jsonstr, new TypeToken<Map<String, String>>() {
+        }.getType());
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            requestParams.addBodyParameter(entry.getKey(), entry.getValue());
+        }
+        x.http().post(requestParams, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String response) {
+                onFinishListener.onFinish(response);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                onFinishListener.onFinish(ex);
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+                LogUtil.E(cex);
+            }
+
+            @Override
+            public void onFinished() {
+                LogUtil.E("");
+            }
+        });
+    }
+
 
 //    @Deprecated
 //    public void doHttpRequsetWithS(final Context context, final String url, final String req, final OnNetWorkReqInterf reqInterf) {

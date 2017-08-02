@@ -6,7 +6,7 @@ import com.android.lib.network.bean.res.BaseResBean;
 /**
  * Created by ${viwmox} on 2016-04-27.
  */
-public interface OnNetWorkReqInterf {
+public interface OnNetWorkReqInterf<T extends BaseResBean> {
 
 
     /**
@@ -17,12 +17,12 @@ public interface OnNetWorkReqInterf {
     /**
      * 网络请求完成
      */
-    void onNetWorkReqFinish(boolean haveData, String url, BaseResBean baseResBean);
+    void onNetWorkReqFinish(boolean haveData, String url, T baseResBean);
 
     /**
      * 网络请求获取数据结果
      */
-    void onNetWorkResult(boolean success, BaseResBean o);
+    void onNetWorkResult(boolean success, T o);
 
 
 }
