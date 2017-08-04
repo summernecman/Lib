@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.widget.ImageView;
 
+import com.android.lib.base.interf.OnFinishListener;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
@@ -109,6 +110,148 @@ public class BitmapUtil {
             @Override
             protected void onPostExecute(String s) {
                 ToastUtil.getInstance().showShort(context, "保存成功");
+            }
+        }.execute();
+
+    }
+
+    public static void saveImage(final Context context, final String src, final String url) {
+        final File file = new File(src);
+        if (file.exists()) {
+            return;
+        }
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+
+                if (!file.exists()) {
+                    try {
+                        file.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                FileOutputStream fileOutputStream = null;
+                FileInputStream fileInputStream = null;
+                HttpURLConnection conn = null;
+                try {
+                    fileOutputStream = new FileOutputStream(file);
+                    URL u = new URL(url);
+                    conn = (HttpURLConnection) u.openConnection();
+                    InputStream input = conn.getInputStream();
+                    byte[] bytes = new byte[1024];
+                    int bytec = input.read(bytes);
+                    while (bytec != -1) {
+                        fileOutputStream.write(bytes, 0, bytec);
+                        bytec = input.read(bytes);
+                    }
+                    fileOutputStream.flush();
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (conn != null) {
+                    conn.disconnect();
+                }
+                try {
+                    if (fileInputStream != null) {
+                        fileInputStream.close();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (fileOutputStream != null) {
+                        fileOutputStream.close();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                //ToastUtil.getInstance().showShort(context, "保存成功");
+            }
+        }.execute();
+
+    }
+
+    public static void saveImage(final Context context, final String src, final String url, final OnFinishListener listener) {
+        final File file = new File(src);
+        if (file.exists()) {
+            return;
+        }
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+
+                if (!file.exists()) {
+                    if (!file.getParentFile().exists()) {
+                        file.getParentFile().mkdirs();
+                    }
+                    try {
+                        file.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                FileOutputStream fileOutputStream = null;
+                FileInputStream fileInputStream = null;
+                HttpURLConnection conn = null;
+                try {
+                    fileOutputStream = new FileOutputStream(file);
+                    URL u = new URL(url);
+                    conn = (HttpURLConnection) u.openConnection();
+                    InputStream input = conn.getInputStream();
+                    byte[] bytes = new byte[1024];
+                    int bytec = input.read(bytes);
+                    while (bytec != -1) {
+                        fileOutputStream.write(bytes, 0, bytec);
+                        bytec = input.read(bytes);
+                    }
+                    fileOutputStream.flush();
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (conn != null) {
+                    conn.disconnect();
+                }
+                try {
+                    if (fileInputStream != null) {
+                        fileInputStream.close();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (fileOutputStream != null) {
+                        fileOutputStream.close();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                //ToastUtil.getInstance().showShort(context, "保存成功");
+                listener.onFinish(src);
             }
         }.execute();
 

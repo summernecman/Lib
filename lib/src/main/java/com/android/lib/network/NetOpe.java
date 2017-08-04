@@ -96,7 +96,7 @@ public class NetOpe implements BaseOpe {
         });
     }
 
-    public <T extends BaseResBean> void doHttpRequsetWithFile(Context context, String model, FilesBean data, final onNetProcess<T> onNetProcess, final Class<T> t) {
+    public void doHttpRequsetWithFile(Context context, String model, final int position, FilesBean data, final onNetProcess<String> onNetProcess) {
         onNetProcess.onStart(NET_URL + model, "");
         RequestParams requestParams = new RequestParams(NET_URL + model);
 
@@ -110,31 +110,18 @@ public class NetOpe implements BaseOpe {
         requestParams.setRequestBody(body);
         requestParams.setMultipart(true);
 
-        T tt = null;
-        try {
-            tt = t.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        final T finalTt = tt;
 
         x.http().post(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String response) {
                 LogUtil.E(response);
-                onNetProcess.onResult(GsonUtil.getInstance().fromJson(response, t));
+                onNetProcess.onResult(position + "");
                 onNetProcess.onEnd(TYPE_SUCCESS, response);
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                LogUtil.E("" + ex.getMessage());
-                finalTt.setErrorCode(-1);
-                finalTt.setErrorMessage("" + ex.getMessage());
-                finalTt.setException(true);
-                onNetProcess.onResult(finalTt);
+                onNetProcess.onResult("-1");
                 onNetProcess.onEnd(TYPE_ERROR, ex.getMessage());
             }
 

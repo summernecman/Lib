@@ -10,11 +10,12 @@ import com.android.lib.bean.FilesBean;
 import com.android.lib.bean.LayoutDABean;
 import com.android.lib.network.NetOpe;
 import com.android.lib.network.bean.res.BaseResBean;
-import com.android.lib.network.interf.OnNetWorkReqInterf;
-import com.android.lib.network.netadapter.OnNetWorkReqAdapter;
+import com.android.lib.network.netadapter.OnNetProcessAdapter;
 import com.android.lib.util.GsonUtil;
+import com.android.lib.util.NullUtil;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.summer.desktop.module.note.bean.NoteOrBookBean;
+import com.summer.desktop.module.note.netdata.NoteDataI;
 import com.summer.desktop.module.note.netdata.NoteDataOpe;
 import com.summer.desktop.module.note.note.bean.NoteBean;
 import com.summer.desktop.module.note.note.bean.NoteImageItemBean;
@@ -28,7 +29,7 @@ public class NoteDAOpe extends BaseDAOpe {
 
     NoteOrBookBean notedata;
 
-    NoteDataOpe noteDataOpe;
+    NoteDataI noteDataOpe;
 
     ArrayList<LayoutDABean> data = new ArrayList<>();
 
@@ -52,6 +53,7 @@ public class NoteDAOpe extends BaseDAOpe {
                 case NoteItemBean.TYPE_IMAGE:
                     NoteImageItemBean noteImageItemBean = GsonUtil.getInstance().fromJson(noteBean.getData().get(i).getData(), NoteImageItemBean.class);
                     daBean.a.set(noteImageItemBean.getSrc());
+                    daBean.b.set(noteImageItemBean.getUrl());
                     daBean.cint.set(noteImageItemBean.getW());
                     daBean.bint.set(noteImageItemBean.getH());
                     break;
@@ -77,6 +79,7 @@ public class NoteDAOpe extends BaseDAOpe {
                 case NoteItemBean.TYPE_IMAGE:
                     NoteImageItemBean noteImageItemBean = GsonUtil.getInstance().fromJson(noteBean.getData().get(i).getData(), NoteImageItemBean.class);
                     noteImageItemBean.setSrc((String) data.get(i).a.get());
+                    noteImageItemBean.setUrl((String) data.get(i).b.get());
                     noteBean.getData().get(i).setType(NoteItemBean.TYPE_IMAGE);
                     noteBean.getData().get(i).setData(GsonUtil.getInstance().toJson(noteImageItemBean));
                     break;
@@ -97,7 +100,7 @@ public class NoteDAOpe extends BaseDAOpe {
         this.notedata = notedata;
     }
 
-    public NoteDataOpe getNoteDataOpe() {
+    public NoteDataI getNoteDataOpe() {
         return noteDataOpe;
     }
 
@@ -105,7 +108,7 @@ public class NoteDAOpe extends BaseDAOpe {
         this.noteDataOpe = noteDataOpe;
     }
 
-    public void addTxt(OnNetWorkReqInterf onNetWorkReqInterf) {
+    public void addTxt(final NetOpe.onNetProcess process) {
         NoteBean noteBean = notedata.getData();
         NoteTxtItemBean noteTxtItemBean = new NoteTxtItemBean();
         noteTxtItemBean.setTxt("new txt");
@@ -114,10 +117,10 @@ public class NoteDAOpe extends BaseDAOpe {
         noteItemBean.setData(GsonUtil.getInstance().toJson(noteTxtItemBean));
         noteBean.getData().add(noteItemBean);
         notedata.setData(noteBean);
-        noteDataOpe.updateNote(notedata, onNetWorkReqInterf);
+        noteDataOpe.updateNote(notedata, process);
     }
 
-    public void addImage(final ArrayList<ImageItem> imageItems, final NetOpe.onNetProcess process) {
+    public void addImages(final ArrayList<ImageItem> imageItems, final NetOpe.onNetProcess process1, final NetOpe.onNetProcess process) {
         NoteBean noteBean = notedata.getData();
         for (int i = 0; i < imageItems.size(); i++) {
             NoteImageItemBean noteImageItemBean = new NoteImageItemBean();
@@ -130,26 +133,80 @@ public class NoteDAOpe extends BaseDAOpe {
             noteBean.getData().add(noteItemBean);
         }
         notedata.setData(noteBean);
-        noteDataOpe.updateNote(notedata, new OnNetWorkReqAdapter(context) {
+        noteDataOpe.updateNote(notedata, new OnNetProcessAdapter<BaseResBean>() {
             @Override
-            public void onNetWorkResult(boolean success, BaseResBean o) {
-                if (success) {
+            public void onResult(BaseResBean resBean) {
+                if (!resBean.isException()) {
                     FilesBean files = new FilesBean();
                     for (int i = 0; i < imageItems.size(); i++) {
                         FileBean fileBean = new FileBean();
                         fileBean.setFile(new File(imageItems.get(i).path));
                         files.getData().add(fileBean);
                     }
-                    noteDataOpe.addFile(files, process);
+//                    noteDataOpe.addFile(notedata,i,files, process);
                 }
             }
         });
 
     }
 
-    public void updateData(OnNetWorkReqInterf onNetWorkReqInterf) {
+    public void upateNote(final ArrayList<ImageItem> imageItems, final NetOpe.onNetProcess process) {
+        NoteBean noteBean = notedata.getData();
+        for (int i = 0; i < imageItems.size(); i++) {
+            NoteImageItemBean noteImageItemBean = new NoteImageItemBean();
+            noteImageItemBean.setSrc(imageItems.get(i).path);
+            noteImageItemBean.setW(imageItems.get(i).width);
+            noteImageItemBean.setH(imageItems.get(i).height);
+            NoteItemBean noteItemBean = new NoteItemBean();
+            noteItemBean.setType(NoteItemBean.TYPE_IMAGE);
+            noteItemBean.setData(GsonUtil.getInstance().toJson(noteImageItemBean));
+            noteBean.getData().add(noteItemBean);
+        }
+        notedata.setData(noteBean);
+        noteDataOpe.updateNote(notedata, process);
+
+    }
+
+    public void getNoteDetail(final NetOpe.onNetProcess process) {
+        noteDataOpe.getNoteDetail(notedata, process);
+    }
+
+
+    public void CheckImages(final NetOpe.onNetProcess process) {
+        if (notedata == null || notedata.getData() == null || notedata.getData().getData() == null || notedata.getData().getData().size() == 0) {
+            return;
+        }
+        for (int i = 0; i < notedata.getData().getData().size(); i++) {
+            if (notedata.getData().getData().get(i).getType() == NoteItemBean.TYPE_IMAGE) {
+                final NoteImageItemBean noteImageItemBean = GsonUtil.getInstance().fromJson(notedata.getData().getData().get(i).getData(), NoteImageItemBean.class);
+                FileBean fileBean = new FileBean();
+                File file = new File(noteImageItemBean.getSrc());
+                if (file.exists() && NullUtil.isStrEmpty(noteImageItemBean.getUrl())) {
+                    FilesBean files = new FilesBean();
+                    fileBean.setFile(file);
+                    files.getData().add(fileBean);
+                    noteDataOpe.addFile(i, files, new OnNetProcessAdapter<String>() {
+                        @Override
+                        public void onResult(String s) {
+                            int j = Integer.parseInt(s);
+                            if (j == -1) {
+                                return;
+                            } else {
+                                String[] sttr = noteImageItemBean.getSrc().split("/");
+                                noteImageItemBean.setUrl(sttr[sttr.length - 1]);
+                                notedata.getData().getData().get(j).setData(GsonUtil.getInstance().toJson(noteImageItemBean));
+                                noteDataOpe.updateNote(notedata, process);
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+    public void updateData(final NetOpe.onNetProcess process) {
         getNoteListData(data);
-        noteDataOpe.updateNote(notedata, onNetWorkReqInterf);
+        noteDataOpe.updateNote(notedata, process);
     }
 
     public ArrayList<LayoutDABean> getData() {

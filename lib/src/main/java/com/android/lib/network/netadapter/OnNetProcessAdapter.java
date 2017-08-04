@@ -3,9 +3,8 @@ package com.android.lib.network.netadapter;
 //by summer on 2017-08-01.
 
 import com.android.lib.network.NetOpe;
-import com.android.lib.network.bean.res.BaseResBean;
 
-public class OnNetProcessAdapter<T extends BaseResBean> implements NetOpe.onNetProcess<T> {
+public class OnNetProcessAdapter<T> implements NetOpe.onNetProcess<T> {
 
 
     @Override

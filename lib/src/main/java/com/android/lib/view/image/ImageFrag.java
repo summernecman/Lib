@@ -11,9 +11,7 @@ import android.view.ViewGroup;
 import com.android.lib.R;
 import com.android.lib.base.fragment.BaseFrg;
 import com.android.lib.constant.ValueConstant;
-import com.android.lib.util.BitmapUtil;
 import com.android.lib.util.NullUtil;
-import com.android.lib.util.ToastUtil;
 import com.lzy.imagepicker.ImagePicker;
 
 import uk.co.senab.photoview.PhotoView;
@@ -48,12 +46,12 @@ public class ImageFrag extends BaseFrg implements View.OnLongClickListener {
 
     @Override
     public boolean onLongClick(View v) {
-        if (!url.startsWith("http:")) {
-            ToastUtil.getInstance().showShort(activity, "已经是本地文件");
-            return true;
-        }
-        ToastUtil.getInstance().showShort(activity, "开始保存");
-        BitmapUtil.saveImage(activity, url);
+//        if (!url.startsWith("http:")) {
+//            ToastUtil.getInstance().showShort(activity, "已经是本地文件");
+//            return true;
+//        }
+//        ToastUtil.getInstance().showShort(activity, "开始保存");
+//        BitmapUtil.saveImage(activity, url);
         return true;
     }
 

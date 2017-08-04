@@ -11,13 +11,12 @@ import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.network.netadapter.OnNetProcessAdapter;
-import com.android.lib.network.netadapter.OnNetWorkReqAdapter;
 import com.android.lib.util.IntentUtil;
-import com.android.lib.util.LogUtil;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.summer.desktop.R;
+import com.summer.desktop.module.note.bean.NoteListResBean;
 import com.summer.desktop.module.note.bean.NoteOrBookBean;
 
 import java.io.File;
@@ -41,7 +40,7 @@ public class NoteFrag extends BaseUIFrag<NoteUIOpe, NoteDAOpe> {
 //                        renameFrag.setOnfinish(new OnFinishListener() {
 //                            @Override
 //                            public void onFinish(Object o) {
-//                                P().D().addImage(o.toString(),new OnNetWorkReqAdapter(activity) {
+//                                P().D().addImages(o.toString(),new OnNetWorkReqAdapter(activity) {
 //                                    @Override
 //                                    public void onNetWorkResult(boolean success, BaseResBean o) {
 //                                        LogUtil.E(o);
@@ -51,10 +50,18 @@ public class NoteFrag extends BaseUIFrag<NoteUIOpe, NoteDAOpe> {
 //                        });
                         break;
                     case 1:
-                        P().D().addTxt(new OnNetWorkReqAdapter(activity) {
+                        P().D().addTxt(new OnNetProcessAdapter<BaseResBean>() {
                             @Override
-                            public void onNetWorkResult(boolean success, BaseResBean o) {
-                                LogUtil.E(o);
+                            public void onResult(BaseResBean resBean) {
+                                P().D().getNoteDetail(new OnNetProcessAdapter<NoteListResBean>() {
+                                    @Override
+                                    public void onResult(NoteListResBean resBean) {
+                                        if (resBean.getData() != null && resBean.getData().size() > 0) {
+                                            P().D().setNotedata(resBean.getData().get(0));
+                                            P().U().fillNoteDetail(P().D().getNoteList(), NoteFrag.this);
+                                        }
+                                    }
+                                });
                             }
                         });
                         break;
@@ -66,12 +73,8 @@ public class NoteFrag extends BaseUIFrag<NoteUIOpe, NoteDAOpe> {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        P().D().updateData(new OnNetWorkReqAdapter(activity.getApplicationContext()) {
-            @Override
-            public void onNetWorkResult(boolean success, BaseResBean o) {
-
-            }
-        });
+        P().D().CheckImages(new OnNetProcessAdapter());
+        P().D().updateData(new OnNetProcessAdapter());
     }
 
     @Override
@@ -80,12 +83,34 @@ public class NoteFrag extends BaseUIFrag<NoteUIOpe, NoteDAOpe> {
         if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
             if (data != null && requestCode == 0) {
                 ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                P().D().addImage(images, new OnNetProcessAdapter() {
+                P().D().upateNote(images, new OnNetProcessAdapter<BaseResBean>() {
                     @Override
-                    public void onResult(Object o) {
-
+                    public void onResult(BaseResBean resBean) {
+                        P().D().getNoteDetail(new OnNetProcessAdapter<NoteListResBean>() {
+                            @Override
+                            public void onResult(NoteListResBean resBean) {
+                                if (resBean.getData() != null && resBean.getData().size() > 0) {
+                                    P().D().setNotedata(resBean.getData().get(0));
+                                    P().U().fillNoteDetail(P().D().getNoteList(), NoteFrag.this);
+                                }
+                            }
+                        });
                     }
                 });
+//                P().D().addImages(images, new OnNetProcessAdapter() {
+//                    @Override
+//                    public void onResult(Object o) {
+//                        P().D().getNoteDetail(new OnNetProcessAdapter<NoteListResBean>(){
+//                            @Override
+//                            public void onResult(NoteListResBean resBean) {
+//                                if(resBean.getData()!=null && resBean.getData().size()>0){
+//                                    P().D().setNotedata(resBean.getData().get(0));
+//                                    P().U().fillNoteDetail(P().D().getNoteList(), NoteFrag.this);
+//                                }
+//                            }
+//                        });
+//                    }
+//                },new OnNetProcessAdapter());
             }
         }
     }

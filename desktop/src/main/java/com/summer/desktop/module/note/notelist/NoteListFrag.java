@@ -11,6 +11,7 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.network.netadapter.OnNetProcessAdapter;
 import com.android.lib.util.FragmentUtil;
+import com.android.lib.util.NullUtil;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.summer.desktop.R;
 import com.summer.desktop.module.circlemenu.CircleMenuFrag;
@@ -18,6 +19,7 @@ import com.summer.desktop.module.note.bean.NoteListResBean;
 import com.summer.desktop.module.note.bean.NoteOrBookBean;
 import com.summer.desktop.module.note.note.NoteFrag;
 import com.summer.desktop.module.note.notemain.NoteMainFrag;
+import com.summer.desktop.module.rename.RenameFrag;
 
 public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
 
@@ -43,10 +45,12 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
                 });
             }
         }, this);
+        P().U().bind.refresh.autoRefresh();
     }
 
     @Override
     public boolean onLongClick(View v) {
+        final Object o = v.getTag(R.id.position);
         CircleMenuFrag circleMenuFrag = new CircleMenuFrag();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.homeroot, circleMenuFrag);
@@ -59,18 +63,55 @@ public class NoteListFrag extends BaseUIFrag<NoteListUIOpe, NoteListDAOpe> {
                         P().D().getNoteDataOpe().addNote(P().D().getNoteOrBookBean().getParentId(), new OnNetProcessAdapter() {
                             @Override
                             public void onResult(Object o) {
-
+                                P().U().bind.refresh.autoRefresh();
                             }
                         });
 
                         break;
                     case 1:
-                        P().D().getNoteDataOpe().addNoteBook(0, new OnNetProcessAdapter() {
+                        P().D().getNoteDataOpe().addNoteBook(P().D().getNoteOrBookBean().getParentId(), new OnNetProcessAdapter() {
                             @Override
                             public void onResult(Object o) {
                                 P().U().bind.refresh.autoRefresh();
                             }
                         });
+                        break;
+                    case 2:
+                        if (o == null) {
+                            return;
+                        }
+                        int position = (int) o;
+                        P().D().getNoteDataOpe().delteNote(P().D().getList().getData().get(position), new OnNetProcessAdapter() {
+                            @Override
+                            public void onResult(Object o) {
+                                P().U().bind.refresh.autoRefresh();
+                            }
+                        });
+                        break;
+                    case 3:
+                        if (o == null) {
+                            return;
+                        }
+                        final int position1 = (int) o;
+                        RenameFrag renameFrag = new RenameFrag();
+                        FragmentUtil.getInstance().add(activity, R.id.homeroot, renameFrag);
+                        renameFrag.setOnfinish(new OnFinishListener() {
+                            @Override
+                            public void onFinish(Object o) {
+                                String s = (String) o;
+                                if (NullUtil.isStrEmpty(s)) {
+                                    return;
+                                }
+                                P().D().getList().getData().get(position1).setName(s);
+                                P().D().getNoteDataOpe().renameNote(P().D().getList().getData().get(position1), new OnNetProcessAdapter() {
+                                    @Override
+                                    public void onResult(Object o) {
+                                        P().U().bind.refresh.autoRefresh();
+                                    }
+                                });
+                            }
+                        });
+
                         break;
                 }
             }

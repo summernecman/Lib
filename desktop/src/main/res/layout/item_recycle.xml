@@ -27,6 +27,7 @@
             app:wave_show="false">
 
             <RelativeLayout
+                android:id="@+id/rl_recylce"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/color_block_back">

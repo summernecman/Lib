@@ -8,12 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.bean.LayoutDABean;
 import com.android.lib.network.NetOpe;
+import com.android.lib.util.BitmapUtil;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.ScreenUtil;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.summer.desktop.BR;
 import com.summer.desktop.R;
 import com.summer.desktop.databinding.ItemEdittextBinding;
@@ -65,21 +66,26 @@ public class NoteAdapter extends RecyclerView.Adapter<AppViewHolder> {
                 holder.viewDataBinding.setVariable(BR.edittext, data.get(position));
                 break;
             case NoteItemBean.TYPE_IMAGE:
-                ItemImageBinding itemImageBinding = (ItemImageBinding) holder.viewDataBinding;
+                final ItemImageBinding itemImageBinding = (ItemImageBinding) holder.viewDataBinding;
 
 
                 itemImageBinding.imageView.getLayoutParams().width = (int) ScreenUtil.w;
                 itemImageBinding.imageView.getLayoutParams().height = (int) (ScreenUtil.w * data.get(position).bint.get() / data.get(position).cint.get());
-                itemImageBinding.imageView.requestLayout();
-
-
-                String[] strs = data.get(position).a.get().toString().split("/");
+                if (itemImageBinding.imageView.getLayoutParams().height <= itemImageBinding.imageView.getLayoutParams().width * 2) {
+                    itemImageBinding.imageView.requestLayout();
+                }
+                final String[] strs = data.get(position).a.get().toString().split("/");
                 LogUtil.E(NetOpe.NET_DOMAIN + "/files/" + strs[strs.length - 1]);
-                File file = new File(data.get(position).a.get().toString());
+                final File file = new File(data.get(position).a.get().toString());
                 if (file.exists()) {
                     GlideApp.with(context).load(data.get(position).a.get().toString()).placeholder(R.drawable.app).into(itemImageBinding.imageView);
                 } else {
-                    GlideApp.with(context).load(NetOpe.NET_DOMAIN + "/files/" + strs[strs.length - 1]).placeholder(R.drawable.app).encodeQuality(10).diskCacheStrategy(DiskCacheStrategy.ALL).into(itemImageBinding.imageView);
+                    BitmapUtil.saveImage(context, file.getPath(), NetOpe.NET_DOMAIN + "/files/" + strs[strs.length - 1], new OnFinishListener() {
+                        @Override
+                        public void onFinish(Object o) {
+                            GlideApp.with(context).load(file.getPath()).placeholder(R.drawable.app).into(itemImageBinding.imageView);
+                        }
+                    });
                 }
                 holder.viewDataBinding.setVariable(BR.imageview, data.get(position));
                 ((ItemImageBinding) holder.viewDataBinding).imageView.setTag(R.id.data, NetOpe.NET_DOMAIN + "/files/" + strs[strs.length - 1]);

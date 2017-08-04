@@ -38,7 +38,7 @@ public class NoteListUIOpe extends BaseUIOpe<ItemRecycleBinding> {
                 }
             }
         });
-        bind.refresh.setOnLongClickListener(longClickListener);
+        bind.rlRecylce.setOnLongClickListener(longClickListener);
     }
 
     public void fillRecycle(ArrayList<LayoutDABean> data, final View.OnLongClickListener onLongClickListener, final View.OnClickListener onClickListener) {
