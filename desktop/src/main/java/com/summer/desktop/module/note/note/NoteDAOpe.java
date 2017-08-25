@@ -14,6 +14,7 @@ import com.android.lib.network.netadapter.OnNetProcessAdapter;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.NullUtil;
 import com.lzy.imagepicker.bean.ImageItem;
+import com.summer.desktop.module.note.bean.FileListBean;
 import com.summer.desktop.module.note.bean.NoteOrBookBean;
 import com.summer.desktop.module.note.netdata.NoteDataI;
 import com.summer.desktop.module.note.netdata.NoteDataOpe;
@@ -28,6 +29,10 @@ import java.util.ArrayList;
 public class NoteDAOpe extends BaseDAOpe {
 
     NoteOrBookBean notedata;
+
+    ArrayList<NoteOrBookBean> noteOrBooks = new ArrayList<>();
+
+    int position;
 
     NoteDataI noteDataOpe;
 
@@ -45,6 +50,7 @@ public class NoteDAOpe extends BaseDAOpe {
             LayoutDABean daBean = new LayoutDABean();
             data.add(daBean);
             daBean.aint.set(noteBean.getData().get(i).getType());
+            daBean.dint.set(noteBean.getType());
             switch (noteBean.getData().get(i).getType()) {
                 case NoteItemBean.TYPE_TXT:
                     NoteTxtItemBean noteTxtItemBean = GsonUtil.getInstance().fromJson(noteBean.getData().get(i).getData(), NoteTxtItemBean.class);
@@ -93,7 +99,7 @@ public class NoteDAOpe extends BaseDAOpe {
 
 
     public NoteOrBookBean getNotedata() {
-        return notedata;
+        return noteOrBooks.get(position);
     }
 
     public void setNotedata(NoteOrBookBean notedata) {
@@ -185,18 +191,13 @@ public class NoteDAOpe extends BaseDAOpe {
                     FilesBean files = new FilesBean();
                     fileBean.setFile(file);
                     files.getData().add(fileBean);
-                    noteDataOpe.addFile(i, files, new OnNetProcessAdapter<String>() {
+                    final int finalI = i;
+                    noteDataOpe.addFile(i, files, new OnNetProcessAdapter<FileListBean>() {
                         @Override
-                        public void onResult(String s) {
-                            int j = Integer.parseInt(s);
-                            if (j == -1) {
-                                return;
-                            } else {
-                                String[] sttr = noteImageItemBean.getSrc().split("/");
-                                noteImageItemBean.setUrl(sttr[sttr.length - 1]);
-                                notedata.getData().getData().get(j).setData(GsonUtil.getInstance().toJson(noteImageItemBean));
-                                noteDataOpe.updateNote(notedata, process);
-                            }
+                        public void onResult(FileListBean s) {
+                            noteImageItemBean.setUrl(s.getData().get(0));
+                            notedata.getData().getData().get(finalI).setData(GsonUtil.getInstance().toJson(noteImageItemBean));
+                            noteDataOpe.updateNote(notedata, process);
                         }
                     });
                 }
@@ -211,5 +212,28 @@ public class NoteDAOpe extends BaseDAOpe {
 
     public ArrayList<LayoutDABean> getData() {
         return data;
+    }
+
+    public void deleteItem(int position) {
+        if (notedata != null && notedata.getData() != null && notedata.getData().getData() != null && notedata.getData().getData().size() > position) {
+            notedata.getData().getData().remove(position);
+        }
+    }
+
+    public ArrayList<NoteOrBookBean> getNoteOrBooks() {
+        return noteOrBooks;
+    }
+
+    public void setNoteOrBooks(ArrayList<NoteOrBookBean> noteOrBooks) {
+        this.noteOrBooks = noteOrBooks;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+        this.notedata = noteOrBooks.get(position);
     }
 }

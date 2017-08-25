@@ -4,7 +4,7 @@
     <data>
 
         <variable
-            name="record"
+            name="frag_record"
             type="String" />
     </data>
 

@@ -24,26 +24,26 @@ public abstract class BaseFactoryAct extends BaseUIActivity<BaseFactoryUIOpe, Ba
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtil.getInstance().setStatusBarColor(activity, getResources().getColor(com.android.lib.R.color.color_blue_400));
-        getOpes().D().setFragments(initFrag());
+        getP().getD().setFragments(initFrag());
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         ArrayList<TabView.Txt> txts = new ArrayList<>();
-        for (int i = 0; i < getOpes().D().getFragments().size(); i++) {
-            fragmentTransaction.add(FactoryValue.BASE_ID, getOpes().D().getFragments().get(i));
+        for (int i = 0; i < getP().getD().getFragments().size(); i++) {
+            fragmentTransaction.add(FactoryValue.BASE_ID, getP().getD().getFragments().get(i));
             if (i > 0) {
-                fragmentTransaction.hide(getOpes().D().getFragments().get(i));
+                fragmentTransaction.hide(getP().getD().getFragments().get(i));
             }
-            txts.add(new TabView.Txt(getOpes().D().getFragments().get(i).getArguments().getString(FactoryValue.FRAG_TITLE)));
+            txts.add(new TabView.Txt(getP().getD().getFragments().get(i).getArguments().getString(FactoryValue.FRAG_TITLE)));
         }
-        getOpes().U().bind.tabview.setTxt(txts);
+        getP().getU().bind.tabview.setTxt(txts);
 
         fragmentTransaction.commitAllowingStateLoss();
-        getOpes().U().initRadioButton(this);
+        getP().getU().initRadioButton(this);
     }
 
     /**
      * 获取操作类
      */
-    public BaseOpes<BaseFactoryUIOpe, BaseFactoryDAOpe> getOpes() {
+    public BaseOpes<BaseFactoryUIOpe, BaseFactoryDAOpe> getP() {
         if (opes == null) {
             opes = new BaseOpes<>(new BaseFactoryUIOpe(activity), new BaseFactoryDAOpe(activity));
         }
@@ -71,11 +71,11 @@ public abstract class BaseFactoryAct extends BaseUIActivity<BaseFactoryUIOpe, Ba
     public void onFinish(Object o) {
         int position = (int) o;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        for (int i = 0; i < getOpes().D().getFragments().size(); i++) {
+        for (int i = 0; i < getP().getD().getFragments().size(); i++) {
             if (i == position) {
-                fragmentTransaction.show(getOpes().D().getFragments().get(i));
+                fragmentTransaction.show(getP().getD().getFragments().get(i));
             } else {
-                fragmentTransaction.hide(getOpes().D().getFragments().get(i));
+                fragmentTransaction.hide(getP().getD().getFragments().get(i));
             }
         }
         fragmentTransaction.commitAllowingStateLoss();

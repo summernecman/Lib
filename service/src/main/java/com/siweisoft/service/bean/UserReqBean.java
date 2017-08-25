@@ -5,13 +5,14 @@ package com.siweisoft.service.bean;
 import com.android.lib.network.bean.req.BaseReqBean;
 
 public class UserReqBean extends BaseReqBean {
+
     private String phone;
 
-    private String username;
+    private String name;
 
     private String pwd;
 
-    private Integer iscustomer;
+    private Integer usertype;
 
     private String belong;
 
@@ -23,13 +24,6 @@ public class UserReqBean extends BaseReqBean {
         this.phone = phone;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getPwd() {
         return pwd;
@@ -39,19 +33,27 @@ public class UserReqBean extends BaseReqBean {
         this.pwd = pwd;
     }
 
-    public Integer getIscustomer() {
-        return iscustomer;
-    }
-
-    public void setIscustomer(Integer iscustomer) {
-        this.iscustomer = iscustomer;
-    }
-
     public String getBelong() {
         return belong;
     }
 
     public void setBelong(String belong) {
         this.belong = belong;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(Integer usertype) {
+        this.usertype = usertype;
     }
 }

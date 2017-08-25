@@ -16,8 +16,15 @@ import java.util.ArrayList;
 public class NoteListDAOpe extends BaseDAOpe {
 
     public static final Object[] noteListData = new Object[]{"a", "c"};
+
     NoteOrBookBean noteOrBookBean;
-    NoteListResBean list;
+
+    ArrayList<NoteOrBookBean> noteOrBooks = new ArrayList<>();
+
+    int position;
+
+    NoteListResBean list = new NoteListResBean();
+    ArrayList<LayoutDABean> data = new ArrayList<>();
     private NoteDataI noteDataOpe;
 
     public NoteListDAOpe(Context context) {
@@ -36,7 +43,7 @@ public class NoteListDAOpe extends BaseDAOpe {
     }
 
     public ArrayList<LayoutDABean> getNoteListData3(ArrayList<NoteOrBookBean> list) {
-        ArrayList<LayoutDABean> data = new ArrayList<>();
+        data.clear();
         for (int i = 0; list != null && i < list.size(); i++) {
             LayoutDABean layoutDABean = new LayoutDABean();
             layoutDABean.a.set(list.get(i).getName());
@@ -48,12 +55,22 @@ public class NoteListDAOpe extends BaseDAOpe {
         return data;
     }
 
+//    public ArrayList<NoteOrBookBean> getBooks(){
+//        ArrayList<NoteOrBookBean> books = new ArrayList<>();
+//        for(int i=0;i<noteOrBooks.size();i++){
+//            if(noteOrBooks.get(i).getType()==NoteOrBookBean.TYPE_NOTEBOOK){
+//
+//            }
+//        }
+//    }
+
     public NoteListResBean getList() {
         return list;
     }
 
     public void setList(NoteListResBean list) {
-        this.list = list;
+        this.list.getData().clear();
+        this.list.getData().addAll(list.getData());
     }
 
     public NoteDataI getNoteDataOpe() {
@@ -64,11 +81,28 @@ public class NoteListDAOpe extends BaseDAOpe {
         this.noteDataOpe = noteDataOpe;
     }
 
+    public ArrayList<NoteOrBookBean> getNoteOrBooks() {
+        return noteOrBooks;
+    }
+
+    public void setNoteOrBooks(ArrayList<NoteOrBookBean> noteOrBooks) {
+        this.noteOrBooks = noteOrBooks;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     public NoteOrBookBean getNoteOrBookBean() {
-        return noteOrBookBean;
+        return noteOrBooks.get(position);
     }
 
     public void setNoteOrBookBean(NoteOrBookBean noteOrBookBean) {
         this.noteOrBookBean = noteOrBookBean;
+        noteOrBooks.set(position, noteOrBookBean);
     }
 }

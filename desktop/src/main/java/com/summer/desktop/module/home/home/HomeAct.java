@@ -5,18 +5,27 @@ package com.summer.desktop.module.home.home;
 import android.os.Bundle;
 
 import com.android.lib.base.activity.BaseUIActivity;
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.FragmentUtil;
+import com.bumptech.glide.Glide;
 
 public class HomeAct extends BaseUIActivity<HomeUIOpe, HomeDAOpe> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getOpes().U().initViewPager(getSupportFragmentManager(), activity, getOpes().D().getFragments());
+        getP().getU().initViewPager(getSupportFragmentManager(), activity, getP().getD().getFragments());
     }
 
     @Override
     public void onBackPressed() {
-        FragmentUtil.getInstance().removeTop(activity);
+        FragmentUtil.getInstance().removeTop(activity, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                Glide.get(activity).clearMemory();
+                HomeAct.super.onBackPressed();
+
+            }
+        });
     }
 }

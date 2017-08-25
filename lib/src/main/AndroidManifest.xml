@@ -46,7 +46,6 @@
     ---------------------------------------------------------------------------------------------------------
     <application
         android:allowBackup="true"
-        android:label="@string/appname"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity

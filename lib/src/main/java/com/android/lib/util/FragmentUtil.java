@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 import com.android.lib.R;
+import com.android.lib.base.interf.OnFinishListener;
 
 import java.util.ArrayList;
 
@@ -106,6 +107,34 @@ public class FragmentUtil {
                     transaction.commitAllowingStateLoss();
                 }
             }, 500);
+        }
+    }
+
+    public void removeTop(final FragmentActivity fragmentActivity, OnFinishListener onFinishListener) {
+        if (fragments != null && fragments.size() > 0) {
+            LogUtil.E("befroe");
+            final Fragment now = fragments.get(fragments.size() - 1);
+            final Fragment old;
+            FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.anim_push_left_in, R.anim.anim_push_right_out);
+            transaction.hide(now);
+            if (fragments.size() > 1) {
+                LogUtil.E("after");
+                old = fragments.get(fragments.size() - 2);
+                transaction.show(old);
+            }
+            transaction.commitAllowingStateLoss();
+            fragments.remove(now);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+                    transaction.remove(now);
+                    transaction.commitAllowingStateLoss();
+                }
+            }, 500);
+        } else {
+            onFinishListener.onFinish(fragments);
         }
     }
 

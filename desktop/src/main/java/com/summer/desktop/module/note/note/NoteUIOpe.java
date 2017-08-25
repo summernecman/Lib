@@ -5,9 +5,10 @@ package com.summer.desktop.module.note.note;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
 
+import com.android.lib.base.listener.ViewListener;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.LayoutDABean;
 import com.android.lib.constant.ValueConstant;
@@ -17,6 +18,7 @@ import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 import com.summer.desktop.R;
 import com.summer.desktop.databinding.FragNoteDetailBinding;
+import com.summer.desktop.module.note.note.bean.NoteBean;
 
 import java.util.ArrayList;
 
@@ -28,11 +30,15 @@ public class NoteUIOpe extends BaseUIOpe<FragNoteDetailBinding> {
     }
 
 
-    public void fillNoteDetail(ArrayList<LayoutDABean> data, View.OnClickListener onClickListener) {
-        bind.recycle.setLayoutManager(new LinearLayoutManager(context));
+    public void fillNoteDetail(ArrayList<LayoutDABean> data, int type, ViewListener listener) {
+        if (type == NoteBean.NOTE_TYPE_GALLERY) {
+            bind.recycle.setLayoutManager(new GridLayoutManager(context, 3));
+        } else {
+            bind.recycle.setLayoutManager(new LinearLayoutManager(context));
+        }
         NoteAdapter noteAdapter = new NoteAdapter(context, data);
         bind.recycle.setAdapter(noteAdapter);
-        noteAdapter.setOnImageClick(onClickListener);
+        noteAdapter.setViewListener(listener);
     }
 
     public void init(OnBMClickListener onBMClickListener) {

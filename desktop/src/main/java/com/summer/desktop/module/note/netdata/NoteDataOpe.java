@@ -10,6 +10,7 @@ import com.android.lib.network.NetOpe;
 import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.util.GsonUtil;
 import com.summer.desktop.module.base.bean.DesktopReqBean;
+import com.summer.desktop.module.note.bean.FileListBean;
 import com.summer.desktop.module.note.bean.NoteListResBean;
 import com.summer.desktop.module.note.bean.NoteOrBookBean;
 import com.summer.desktop.module.note.bean.NoteReqBean;
@@ -45,6 +46,22 @@ public class NoteDataOpe extends BaseDAOpe implements NoteDataI {
         reqBean.setType(1);
         NoteBean noteBean = new NoteBean();
         noteBean.setData(new ArrayList<NoteItemBean>());
+        noteBean.setType(NoteBean.NOTE_TYPE_NORMAL);
+        reqBean.setData(noteBean);
+        DesktopReqBean desktopReqBean = new DesktopReqBean();
+        desktopReqBean.setData(GsonUtil.getInstance().toJson(reqBean));
+        NetOpe.getInstance().doHttpRequset(context, "/note/addnote", desktopReqBean, process, BaseResBean.class);
+    }
+
+    @Override
+    public void addGalleryNote(Integer parentId, NetOpe.onNetProcess process) {
+        NoteOrBookBean reqBean = new NoteOrBookBean();
+        reqBean.setParentId(parentId);
+        reqBean.setName("new note");
+        reqBean.setType(1);
+        NoteBean noteBean = new NoteBean();
+        noteBean.setData(new ArrayList<NoteItemBean>());
+        noteBean.setType(NoteBean.NOTE_TYPE_GALLERY);
         reqBean.setData(noteBean);
         DesktopReqBean desktopReqBean = new DesktopReqBean();
         desktopReqBean.setData(GsonUtil.getInstance().toJson(reqBean));
@@ -67,13 +84,16 @@ public class NoteDataOpe extends BaseDAOpe implements NoteDataI {
     public void updateNote(NoteOrBookBean reqBean, NetOpe.onNetProcess process) {
         DesktopReqBean desktopReqBean = new DesktopReqBean();
         desktopReqBean.setData(GsonUtil.getInstance().toJson(reqBean));
-        NetOpe.getInstance().doHttpRequset(context, "/note/updatenote", desktopReqBean, process, BaseResBean.class);
+        NetOpe.getInstance().doHttpRequset(context, "/note/updatedata", desktopReqBean, process, BaseResBean.class);
     }
 
     @Override
     public void addFile(int position, FilesBean files, NetOpe.onNetProcess process) {
-        NetOpe.getInstance().doHttpRequsetWithFile(context, "/note/addfiles", position, files, process);
+        //NetOpe.getInstance().doHttpRequsetWithFile(context, "/note/addfiles", position, files, process);
+
+        NetOpe.getInstance().doHttpRequsetWithFile(context, "/note/addfiles", position, files, process, FileListBean.class);
     }
+
 
     @Override
     public void delteNote(NoteOrBookBean reqBean, NetOpe.onNetProcess process) {

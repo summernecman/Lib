@@ -22,7 +22,7 @@ public class BaseOpes<A extends BaseUIOpe, B extends BaseDAOpe> implements Seria
         this.da = da;
     }
 
-    public B D() {
+    public B getD() {
         return da;
     }
 
@@ -30,7 +30,7 @@ public class BaseOpes<A extends BaseUIOpe, B extends BaseDAOpe> implements Seria
         this.da = da;
     }
 
-    public A U() {
+    public A getU() {
         return ui;
     }
 

@@ -18,10 +18,10 @@ public class FrmCodeBindFrag extends WuLiaoFrag {
 
     @Override
     public void doThing() {
-        P().U().initTitleTxtEditTxt(P().D().getData(new String[]{"条码", "", "清空"}));
-        P().U().initText1(P().D().getData(new String[]{"绑定信息"}));
-        P().U().initRecycle();
-        P().U().initBottom3(P().D().getData(new String[]{"信息"}));
-        P().U().initRecycle1(P().D().getRecycleData2());
+        getP().getU().initTitleTxtEditTxt(getP().getD().getData(new String[]{"条码", "", "清空"}));
+        getP().getU().initText1(getP().getD().getData(new String[]{"绑定信息"}));
+        getP().getU().initRecycle();
+        getP().getU().initBottom3(getP().getD().getData(new String[]{"信息"}));
+        getP().getU().initRecycle1(getP().getD().getRecycleData2());
     }
 }

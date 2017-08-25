@@ -19,7 +19,7 @@ public class FrmPurReceiveAct extends BaseFactoryAct {
         super.onCreate(savedInstanceState);
         LayoutDABean bean = new LayoutDABean();
         bean.a.set("01.采购收料");
-        getOpes().U().bind.title2.setTitle2(bean);
+        getP().getU().bind.title2.setTitle2(bean);
 
     }
 

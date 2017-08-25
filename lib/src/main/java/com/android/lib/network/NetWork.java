@@ -3,6 +3,7 @@ package com.android.lib.network;
 import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.bean.BaseBean;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.network.bean.req.BaseReqBean;
@@ -221,7 +222,7 @@ public class NetWork {
         });
     }
 
-    public void doHttpRequsetWithSession(final Context context, final String model, final BaseReqBean reqBean, final OnNetWorkReqInterf reqInterf) {
+    public void doHttpRequsetWithSession(final Context context, final String model, final BaseBean reqBean, final OnNetWorkReqInterf reqInterf) {
         LogUtil.E(UrlConstant.URI + model);
         final String jsonstr = gson.toJson(reqBean);
         LogUtil.E(jsonstr);

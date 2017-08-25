@@ -6,12 +6,15 @@ import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.constant.ValueConstant;
 import com.summer.desktop.module.note.bean.NoteOrBookBean;
 
+import java.util.ArrayList;
+
 public class NoteMainFrag extends BaseUIFrag<NoteMainUIOpe, NoteMainDAOpe> {
 
 
     @Override
     public void doThing() {
-        P().D().setNoteOrBookBean((NoteOrBookBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
-        P().U().initViewPager(getChildFragmentManager(), activity, P().D().getFragments());
+        getP().getD().setNoteOrBooks((ArrayList<NoteOrBookBean>) getArguments().getSerializable(ValueConstant.DATA_DATA));
+        getP().getD().setPosition(getArguments().getInt(ValueConstant.DATA_POSITION));
+        getP().getU().initViewPager(getChildFragmentManager(), activity, getP().getD().getFragments(), getP().getD().getPosition());
     }
 }

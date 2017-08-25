@@ -2,12 +2,13 @@ package com.siweisoft.service.ui.main;
 
 //by summer on 2017-07-06.
 
-import com.android.lib.util.FragmentUtil;
+import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
+
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
 import com.bairuitech.anychat.AnyChatBaseEvent;
-import com.siweisoft.service.R;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.Constant.VideoValue;
 import com.siweisoft.service.ui.user.userlist.UserListFrag;
@@ -18,9 +19,9 @@ import org.greenrobot.eventbus.EventBus;
 public class AnyChatBaseEventImp implements AnyChatBaseEvent {
 
 
-    MainAct activity;
+    FragmentActivity activity;
 
-    public AnyChatBaseEventImp(MainAct mainAct) {
+    public AnyChatBaseEventImp(FragmentActivity mainAct) {
         this.activity = mainAct;
     }
 
@@ -32,6 +33,7 @@ public class AnyChatBaseEventImp implements AnyChatBaseEvent {
     @Override
     public void OnAnyChatConnectMessage(boolean b) {
         ToastUtil.getInstance().showShort(activity, "OnAnyChatConnectMessage" + b);
+        //  FragmentUtil2.getInstance().removeTop(activity,R.id.act_base_root);
     }
 
     /***
@@ -43,8 +45,11 @@ public class AnyChatBaseEventImp implements AnyChatBaseEvent {
     public void OnAnyChatLoginMessage(int dwUserId, int dwErrorCode) {
         LogUtil.E("OnAnyChatLoginMessage" + dwUserId + "--" + dwErrorCode);
         ChatInit.getInstance().enterRoom(VideoValue.URL.ROOMID, "");
-        Value.userInfo.userid.set(dwUserId);
-        FragmentUtil.getInstance().add(activity, R.id.serviceroot, UserListFrag.getFragment(dwUserId));
+        Value.userBean.setChatid(dwUserId + "");
+        Value.userBean.setChatid(dwErrorCode + "");
+        Intent intent = new Intent(activity, MainAct.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        activity.startActivity(intent);
     }
 
     /**

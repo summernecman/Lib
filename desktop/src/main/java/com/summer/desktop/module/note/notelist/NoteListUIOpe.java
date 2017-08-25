@@ -4,10 +4,10 @@ package com.summer.desktop.module.note.notelist;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.base.listener.ViewListener;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.LayoutDABean;
 import com.android.lib.ope.uiope.RecycleUIOpe;
@@ -29,7 +29,7 @@ public class NoteListUIOpe extends BaseUIOpe<ItemRecycleBinding> {
     }
 
 
-    public void initRefresh(final OnFinishListener onFinishListener, View.OnLongClickListener longClickListener) {
+    public void initRefresh(final OnFinishListener onFinishListener, final ViewListener longClickListener) {
         bind.refresh.setMaterialRefreshListener(new MaterialRefreshListenerAdpter() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
@@ -38,22 +38,17 @@ public class NoteListUIOpe extends BaseUIOpe<ItemRecycleBinding> {
                 }
             }
         });
-        bind.rlRecylce.setOnLongClickListener(longClickListener);
-    }
-
-    public void fillRecycle(ArrayList<LayoutDABean> data, final View.OnLongClickListener onLongClickListener, final View.OnClickListener onClickListener) {
-        bind.recycle.setLayoutManager(new LinearLayoutManager(context));
-        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_note_brief, BR.notebrief, data) {
+        bind.refresh.setOnFinishListener(new OnFinishListener() {
             @Override
-            public boolean onLongClick(View v) {
-                onLongClickListener.onLongClick(v);
-                return true;
-            }
-
-            @Override
-            public void onClick(View v) {
-                onClickListener.onClick(v);
+            public void onFinish(Object o) {
+                longClickListener.onInterupt(ViewListener.TYPE_ONLONGCLICK, bind.recycle);
             }
         });
+    }
+
+    public void fillRecycle(ArrayList<LayoutDABean> data, ViewListener viewListener) {
+        bind.recycle.setLayoutManager(new LinearLayoutManager(context));
+        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_note_brief, BR.notebrief, data, viewListener));
+
     }
 }

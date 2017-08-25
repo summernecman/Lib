@@ -20,11 +20,11 @@ public class WuLiaoFrag extends BaseUIFrag<WuLiaoUIOpe, WuLiaoDAOpe> {
 
     @Override
     public void doThing() {
-        P().U().initTitleTxtEdit(P().D().getTextEditData());
-        P().U().initText3(P().D().getRecycleTitleData3());
-        P().U().initRecycle();
-        P().U().initBottom(P().D().getBottomData1());
-        P().U().initRecycle3(P().D().getRecycleData3());
+        getP().getU().initTitleTxtEdit(getP().getD().getTextEditData());
+        getP().getU().initText3(getP().getD().getRecycleTitleData3());
+        getP().getU().initRecycle();
+        getP().getU().initBottom(getP().getD().getBottomData1());
+        getP().getU().initRecycle3(getP().getD().getRecycleData3());
     }
 
 }

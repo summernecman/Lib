@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class NoteListResBean extends BaseResBean {
 
-    private ArrayList<NoteOrBookBean> data;
+    private ArrayList<NoteOrBookBean> data = new ArrayList<>();
 
 
     public ArrayList<NoteOrBookBean> getData() {

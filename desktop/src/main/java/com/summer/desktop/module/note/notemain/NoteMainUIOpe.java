@@ -19,7 +19,7 @@ public class NoteMainUIOpe extends BaseUIOpe<ItemViewpagerBinding> {
         super(context);
     }
 
-    public void initViewPager(FragmentManager fragmentManager, Context context, final ArrayList<Fragment> fragments) {
+    public void initViewPager(FragmentManager fragmentManager, Context context, final ArrayList<Fragment> fragments, int position) {
         bind.viewpager.setOffscreenPageLimit(fragments.size());
         bind.viewpager.setAdapter(new AppBasePagerAdapter(fragmentManager, context) {
             @Override
@@ -32,5 +32,6 @@ public class NoteMainUIOpe extends BaseUIOpe<ItemViewpagerBinding> {
                 return fragments.size();
             }
         });
+        bind.viewpager.setCurrentItem(position);
     }
 }

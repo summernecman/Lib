@@ -18,7 +18,7 @@ public class FrmSearchItemAct extends BaseFactoryAct {
         super.onCreate(savedInstanceState);
         LayoutDABean bean = new LayoutDABean();
         bean.a.set("06.原材料库位查询");
-        getOpes().U().bind.title2.setTitle2(bean);
+        getP().getU().bind.title2.setTitle2(bean);
 
     }
 

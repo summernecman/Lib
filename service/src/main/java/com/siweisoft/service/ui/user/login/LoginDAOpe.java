@@ -8,41 +8,38 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
-import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.Constant.VideoValue;
-import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 public class LoginDAOpe extends BaseDAOpe {
 
-    UserInfo userInfo = new UserInfo();
+    UserBean userBean = new UserBean();
 
     UserI userI;
 
 
     public LoginDAOpe(Context context) {
         super(context);
+        userBean.setPhone("18721607438");
+        userBean.setPwd("111111");
         userI = new UserNetOpe(context);
     }
 
-    public void login(UserInfo userInfo) {
-        userI.login(userInfo, new OnFinishListener() {
+    public void login(UserBean userBean, final OnFinishListener onFinishListener) {
+        userI.login(userBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                if ((Boolean) o) {
-                    ChatInit.getInstance().doLogin(VideoValue.URL.IP, VideoValue.URL.PROT, getUserInfo().name.get());
-                    Value.userInfo = getUserInfo();
-                }
+                UserBean res = (UserBean) o;
+                onFinishListener.onFinish(res);
             }
         });
     }
 
 
-    public UserInfo getUserInfo() {
-        return userInfo;
+    public UserBean getUserBean() {
+        return userBean;
     }
 
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public void setUserBean(UserBean userBean) {
+        this.userBean = userBean;
     }
 
 

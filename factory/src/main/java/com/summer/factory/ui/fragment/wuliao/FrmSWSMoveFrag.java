@@ -18,10 +18,10 @@ public class FrmSWSMoveFrag extends WuLiaoFrag {
 
     @Override
     public void doThing() {
-        P().U().initText3(P().D().getData(new String[]{"条码号", "库位", "品牌"}));
-        P().U().initRecycle();
-        P().U().initBottom5(P().D().getData(new String[]{"流程票", "", "清空"}));
-        P().U().initBottom3(P().D().getData(new String[]{"库  位"}));
-        P().U().initRecycle3(P().D().getRecycleData2());
+        getP().getU().initText3(getP().getD().getData(new String[]{"条码号", "库位", "品牌"}));
+        getP().getU().initRecycle();
+        getP().getU().initBottom5(getP().getD().getData(new String[]{"流程票", "", "清空"}));
+        getP().getU().initBottom3(getP().getD().getData(new String[]{"库  位"}));
+        getP().getU().initRecycle3(getP().getD().getRecycleData2());
     }
 }

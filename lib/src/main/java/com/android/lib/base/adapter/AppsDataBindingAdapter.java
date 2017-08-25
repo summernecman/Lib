@@ -11,24 +11,34 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.lib.R;
+import com.android.lib.base.listener.ViewListener;
 import com.android.lib.bean.AppViewHolder;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class AppsDataBindingAdapter extends RecyclerView.Adapter<AppViewHolder> implements View.OnClickListener, View.OnLongClickListener {
 
 
-    ArrayList list;
+    List list;
     int vari;
     int layout;
+    ViewListener viewListener;
     private Context context;
 
 
-    public AppsDataBindingAdapter(Context context, int layout, int vari, ArrayList list) {
+    public AppsDataBindingAdapter(Context context, int layout, int vari, List list) {
         this.context = context;
         this.layout = layout;
         this.vari = vari;
         this.list = list;
+    }
+
+    public AppsDataBindingAdapter(Context context, int layout, int vari, List list, ViewListener viewListener) {
+        this.context = context;
+        this.layout = layout;
+        this.vari = vari;
+        this.list = list;
+        this.viewListener = viewListener;
     }
 
     @Override
@@ -53,11 +63,20 @@ public class AppsDataBindingAdapter extends RecyclerView.Adapter<AppViewHolder> 
 
     @Override
     public void onClick(View v) {
-
+        if (viewListener != null) {
+            viewListener.onInterupt(ViewListener.TYPE_ONCLICK, v);
+        }
     }
 
     @Override
     public boolean onLongClick(View v) {
+        if (viewListener != null) {
+            viewListener.onInterupt(ViewListener.TYPE_ONLONGCLICK, v);
+        }
         return true;
+    }
+
+    public void setViewListener(ViewListener viewListener) {
+        this.viewListener = viewListener;
     }
 }

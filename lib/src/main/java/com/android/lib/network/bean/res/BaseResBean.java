@@ -15,6 +15,8 @@ public class BaseResBean implements Serializable {
 
     private String errorMessage;
 
+    private Object data;
+
     public BaseResBean() {
 
     }
@@ -44,12 +46,21 @@ public class BaseResBean implements Serializable {
         isException = exception;
     }
 
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
     @Override
     public String toString() {
         return "BaseResBean{" +
-                ", isException=" + isException +
+                "isException=" + isException +
                 ", errorCode=" + errorCode +
                 ", errorMessage='" + errorMessage + '\'' +
+                ", data=" + data +
                 '}';
     }
 }

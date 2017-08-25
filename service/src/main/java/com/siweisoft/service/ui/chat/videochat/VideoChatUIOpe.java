@@ -8,15 +8,15 @@ import android.view.View;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.siweisoft.service.R;
 import com.siweisoft.service.databinding.FragVideochatBinding;
-import com.siweisoft.service.ui.user.login.UserInfo;
+import com.siweisoft.service.ui.user.login.UserBean;
 
 public class VideoChatUIOpe extends BaseUIOpe<FragVideochatBinding> {
     public VideoChatUIOpe(Context context) {
         super(context);
     }
 
-    public void initIcon(UserInfo info) {
-        if (info.type.get()) {
+    public void initIcon(UserBean info) {
+        if (info.getUsertype() == 0) {
             bind.btnSwitchvideo.setVisibility(View.GONE);
         }
         bind.btnCameraControl.setTag(R.id.data, true);

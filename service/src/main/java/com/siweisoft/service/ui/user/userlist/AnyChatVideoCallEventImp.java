@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.android.lib.constant.ValueConstant;
-import com.android.lib.util.FragmentUtil;
+import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.LogUtil;
 import com.bairuitech.anychat.AnyChatDefine;
 import com.bairuitech.anychat.AnyChatVideoCallEvent;
-import com.siweisoft.service.R;
+import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
 import com.siweisoft.service.ui.main.RoleInfo;
 import com.siweisoft.service.videochat.chatutil.CallingCenter;
@@ -43,17 +43,16 @@ public class AnyChatVideoCallEventImp implements AnyChatVideoCallEvent {
                 LogUtil.E("视频呼叫会话开始事件");
                 Fragment videofragment = new VideoChatFrag();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(ValueConstant.DATA_DATA, fragment.getArguments().getInt(ValueConstant.DATA_DATA));
                 bundle.putSerializable(ValueConstant.DATA_DATA2, roleInfo);
                 videofragment.setArguments(bundle);
-                FragmentUtil.getInstance().add(fragment.getActivity(), R.id.serviceroot, videofragment);
+                FragmentUtil2.getInstance().add(fragment.getActivity(), Value.ROOTID_TWO, videofragment);
                 break;
             case AnyChatDefine.BRAC_VIDEOCALL_EVENT_FINISH:
                 LogUtil.E("挂断（结束）呼叫会话");
-                if (FragmentUtil.fragments != null &&
-                        FragmentUtil.fragments.size() > 1 &&
-                        FragmentUtil.fragments.get(FragmentUtil.fragments.size() - 1) instanceof VideoChatFrag) {
-                    FragmentUtil.getInstance().removeTop(fragment.getActivity());
+                if (FragmentUtil2.fragMap.get(Value.ROOTID_TWO) != null &&
+                        FragmentUtil2.fragMap.get(Value.ROOTID_TWO).size() > 1 &&
+                        FragmentUtil2.fragMap.get(Value.ROOTID_TWO).get(FragmentUtil2.fragMap.get(Value.ROOTID_TWO).size() - 1) instanceof VideoChatFrag) {
+                    FragmentUtil2.getInstance().removeTop(fragment.getActivity(), Value.ROOTID_TWO);
                 }
                 break;
         }

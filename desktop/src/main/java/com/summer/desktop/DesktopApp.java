@@ -12,8 +12,10 @@ public class DesktopApp extends LibAplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        NetOpe.NET_DOMAIN = "http://192.168.20.177:8079";
+        NetOpe.NET_DOMAIN = "http://192.168.20.175:8079";
         NetOpe.NET_DOMAIN = "http://106.14.161.168:8079";
+        //NetOpe.NET_DOMAIN = "http://summernecman.55555.io";
+
         NetOpe.NET_URL = NetOpe.NET_DOMAIN + "/test";
         UrlConstant.URI = NetOpe.NET_DOMAIN + "/test";
 
@@ -23,5 +25,7 @@ public class DesktopApp extends LibAplication {
                 Glide.get(getApplicationContext()).clearDiskCache();
             }
         }).start();
+
+
     }
 }

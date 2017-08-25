@@ -5,11 +5,10 @@ package com.siweisoft.service.ui.Constant;
 public class VideoValue {
 
     public static class URL {
-        public static final String IP = "115.159.82.33";       //192.168.1.207      //180.168.218.122               //ip地址
-        public static final int PROT = 8906;                                                               //端口号
-        public static final int ROOMID = 1;                                                             //默认房间号
-
+        public static String IP = "115.159.82.33";       //192.168.1.207      //180.168.218.122               //ip地址
         public static final String URLROCORD = IP + ":8079/record";
+        public static int PROT = 8906;                                                               //端口号
+        public static int ROOMID = 1;                                                             //默认房间号
     }
 
     public static class ConfigEntity {

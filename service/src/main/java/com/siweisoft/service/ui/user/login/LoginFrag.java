@@ -7,11 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.android.lib.base.fragment.BaseUIFrag;
-import com.android.lib.util.FragmentUtil;
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.NullUtil;
 import com.siweisoft.service.R;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.user.regist.RegistFrag;
+import com.siweisoft.service.ui.Constant.VideoValue;
+import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import butterknife.OnClick;
 
@@ -20,23 +21,26 @@ public class LoginFrag extends BaseUIFrag<LoginUIOpe, LoginDAOpe> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        P().U().bind.setUserinfo(P().D().getUserInfo());
+        getP().getU().bind.setLogin(getP().getD().getUserBean());
     }
 
-    @OnClick({R.id.button, R.id.forgetpwd, R.id.regist})
+    @OnClick({R.id.button})
     public void onClickEvent(View view) {
         switch (view.getId()) {
             case R.id.button:
-                if (NullUtil.isStrEmpty(P().D().getUserInfo().name.get())) {
+                if (NullUtil.isStrEmpty(getP().getD().getUserBean().getPhone())) {
                     return;
                 }
-                P().D().login(P().D().getUserInfo());
-                break;
-            case R.id.forgetpwd:
-
-                break;
-            case R.id.regist:
-                FragmentUtil.getInstance().add(activity, Value.ROOTID, new RegistFrag());
+                getP().getD().login(getP().getD().getUserBean(), new OnFinishListener() {
+                    @Override
+                    public void onFinish(Object o) {
+                        UserBean res = (UserBean) o;
+                        if (res != null) {
+                            Value.userBean = res;
+                            ChatInit.getInstance().doLogin(VideoValue.URL.IP, VideoValue.URL.PROT, Value.userBean.getPhone());
+                        }
+                    }
+                });
                 break;
         }
     }

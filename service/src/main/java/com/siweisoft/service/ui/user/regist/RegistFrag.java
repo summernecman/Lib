@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.base.interf.OnFinishListener;
-import com.android.lib.util.FragmentUtil;
+import com.android.lib.util.FragmentUtil2;
 import com.siweisoft.service.R;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.login.LoginFrag;
@@ -20,16 +20,16 @@ public class RegistFrag extends BaseUIFrag<RegistUIOpe, RegistDAOpe> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        P().U().bind.setUser(P().D().getUserInfo());
+        getP().getU().bind.setRegist(getP().getD().getUserBean());
     }
 
     @OnClick({R.id.onRegist})
     public void onClickEvent(View v) {
-        P().D().getUserI().regist(P().D().getUserInfo(), new OnFinishListener() {
+        getP().getD().getUserI().regist(getP().getD().getUserBean(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 if ((Boolean) o) {
-                    FragmentUtil.getInstance().add(activity, Value.ROOTID, new LoginFrag());
+                    FragmentUtil2.getInstance().add(activity, Value.ROOTID, new LoginFrag());
                 }
             }
         });

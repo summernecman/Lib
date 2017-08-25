@@ -19,7 +19,7 @@ public class CircleMenuFrag extends BaseUIFrag<CircleMenuUIOpe, CricleMenuDAOpe>
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        P().U().init(fragment, this, onFinishListener);
+        getP().getU().init(fragment, this, onFinishListener);
     }
 
     @Override

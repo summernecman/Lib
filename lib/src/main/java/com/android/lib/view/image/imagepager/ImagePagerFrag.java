@@ -18,11 +18,11 @@ public class ImagePagerFrag extends BaseUIFrag<ImagePagerUIOpe, ImagePagerDAOpe>
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (getArguments() != null && getArguments().getSerializable(ValueConstant.DATA_DATA) != null) {
-            P().D().setUrls((ArrayList<String>) getArguments().getSerializable(ValueConstant.DATA_DATA));
-            P().D().setPostion(getArguments().getInt(ValueConstant.DATA_POSITION));
+            getP().getD().setUrls((ArrayList<String>) getArguments().getSerializable(ValueConstant.DATA_DATA));
+            getP().getD().setPostion(getArguments().getInt(ValueConstant.DATA_POSITION));
         } else {
-            P().D().setUrls(new ArrayList<String>());
+            getP().getD().setUrls(new ArrayList<String>());
         }
-        P().U().initPager(getActivity().getSupportFragmentManager(), P().D().getUrls(), P().D().getPostion());
+        getP().getU().initPager(getActivity().getSupportFragmentManager(), getP().getD().getUrls(), getP().getD().getPostion());
     }
 }

@@ -18,7 +18,7 @@ public class BaoGongFrag extends WuLiaoFrag {
 
     @Override
     public void doThing() {
-        P().U().addBangGongItem(P().D().getData(new String[]{"流程票"}));
+        getP().getU().addBangGongItem(getP().getD().getData(new String[]{"流程票"}));
 
     }
 }

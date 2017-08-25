@@ -21,15 +21,15 @@ public class FrmConFirmSoFrag extends WuLiaoFrag {
 
     @Override
     public void doThing() {
-        P().U().initTitleTxtEdit(P().D().getData(new String[]{"销货单", ""}));
-        P().U().initTitleTxt(P().D().getData(new String[]{"大、小包装/合格证"}));
-        P().U().initText3(P().D().getData(new String[]{"品号", "单据数量", "拣货"}));
-        P().U().initRecycle();
+        getP().getU().initTitleTxtEdit(getP().getD().getData(new String[]{"销货单", ""}));
+        getP().getU().initTitleTxt(getP().getD().getData(new String[]{"大、小包装/合格证"}));
+        getP().getU().initText3(getP().getD().getData(new String[]{"品号", "单据数量", "拣货"}));
+        getP().getU().initRecycle();
         ArrayList<LayoutDABean> data = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            data.add(P().D().getData(new String[]{"品号", "单据数量", "拣货"}));
+            data.add(getP().getD().getData(new String[]{"品号", "单据数量", "拣货"}));
         }
-        P().U().initRecycle3(data);
+        getP().getU().initRecycle3(data);
 
 
     }

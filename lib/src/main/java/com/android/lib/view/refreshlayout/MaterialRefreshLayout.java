@@ -557,13 +557,11 @@ public class MaterialRefreshLayout extends FrameLayout {
 
     public void finishRefreshing() {
         if (mChildView != null) {
-            ViewPropertyAnimatorCompat viewPropertyAnimatorCompat = ViewCompat.animate(mChildView);
+            final ViewPropertyAnimatorCompat viewPropertyAnimatorCompat = ViewCompat.animate(mChildView);
             viewPropertyAnimatorCompat.setDuration(200);
             viewPropertyAnimatorCompat.y(ViewCompat.getTranslationY(mChildView));
             viewPropertyAnimatorCompat.translationY(0);
             viewPropertyAnimatorCompat.setInterpolator(new DecelerateInterpolator());
-            viewPropertyAnimatorCompat.start();
-
             if (mMaterialHeaderView != null) {
                 mMaterialHeaderView.onComlete(MaterialRefreshLayout.this);
             } else if (mSunLayout != null) {
@@ -573,6 +571,12 @@ public class MaterialRefreshLayout extends FrameLayout {
             if (refreshListener != null) {
                 refreshListener.onfinish();
             }
+            HandleUtil.getInstance().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    viewPropertyAnimatorCompat.start();
+                }
+            }, 1000);
         }
         isRefreshing = false;
         progressValue = 0;

@@ -18,10 +18,10 @@ public class WuLiao2Frag extends WuLiaoFrag {
 
     @Override
     public void doThing() {
-        P().U().initTitleTxtEdit(P().D().getTextEditData2());
-        P().U().initText2(P().D().getRecycleTitleData2());
-        P().U().initRecycle();
-        P().U().initBottom(P().D().getBottomData1());
-        P().U().initRecycle2(P().D().getRecycleData2());
+        getP().getU().initTitleTxtEdit(getP().getD().getTextEditData2());
+        getP().getU().initText2(getP().getD().getRecycleTitleData2());
+        getP().getU().initRecycle();
+        getP().getU().initBottom(getP().getD().getBottomData1());
+        getP().getU().initRecycle2(getP().getD().getRecycleData2());
     }
 }

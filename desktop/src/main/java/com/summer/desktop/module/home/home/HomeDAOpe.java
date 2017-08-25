@@ -24,9 +24,13 @@ public class HomeDAOpe extends BaseDAOpe {
         ArrayList<Fragment> fragments = new ArrayList<>();
         NoteMainFrag noteMainFrag = new NoteMainFrag();
         noteMainFrag.setArguments(new Bundle());
+        ArrayList<NoteOrBookBean> noteOrBooks = new ArrayList<>();
         NoteOrBookBean noteOrBookBean = new NoteOrBookBean();
         noteOrBookBean.setParentId(0);
-        noteMainFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, noteOrBookBean);
+        noteOrBookBean.setType(NoteOrBookBean.TYPE_NOTEBOOK);
+        noteOrBooks.add(noteOrBookBean);
+        noteMainFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, noteOrBooks);
+        noteMainFrag.getArguments().putInt(ValueConstant.DATA_POSITION, 0);
         fragments.add(noteMainFrag);
         return fragments;
     }

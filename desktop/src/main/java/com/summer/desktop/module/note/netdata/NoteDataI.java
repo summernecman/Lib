@@ -12,6 +12,8 @@ public interface NoteDataI {
 
     public void addNote(Integer parentId, NetOpe.onNetProcess process);
 
+    public void addGalleryNote(Integer parentId, NetOpe.onNetProcess process);
+
     public void addNoteBook(Integer parentId, NetOpe.onNetProcess process);
 
     public void updateNote(NoteOrBookBean reqBean, NetOpe.onNetProcess process);

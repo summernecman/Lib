@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="user"
-            type="com.siweisoft.service.ui.user.login.UserInfo" />
+            name="regist"
+            type="com.siweisoft.service.ui.user.login.UserBean" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,13 +17,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="用户名"
-            android:text="@={user.name}" />
+            android:text="@={regist.name}" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="密码"
-            android:text="@={user.pwd}" />
+            android:text="@={regist.pwd}" />
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -34,7 +34,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:checked="@={!user.type}"
                 android:gravity="center"
                 android:text="客户" />
 
@@ -42,7 +41,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:checked="@={user.type}"
                 android:gravity="center"
                 android:text="客服" />
         </RadioGroup>

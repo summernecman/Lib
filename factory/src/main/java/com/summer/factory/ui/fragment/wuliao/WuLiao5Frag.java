@@ -18,9 +18,9 @@ public class WuLiao5Frag extends WuLiaoFrag {
 
     @Override
     public void doThing() {
-        P().U().initText4(P().D().getRecycleTitleData32());
-        P().U().initRecycle();
-        P().U().initBottom2(P().D().getBottomData2());
-        P().U().initRecycle4(P().D().getRecycleData4());
+        getP().getU().initText4(getP().getD().getRecycleTitleData32());
+        getP().getU().initRecycle();
+        getP().getU().initBottom2(getP().getD().getBottomData2());
+        getP().getU().initRecycle4(getP().getD().getRecycleData4());
     }
 }

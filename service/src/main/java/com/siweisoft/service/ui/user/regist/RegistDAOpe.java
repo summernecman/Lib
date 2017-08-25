@@ -7,11 +7,11 @@ import android.content.Context;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
-import com.siweisoft.service.ui.user.login.UserInfo;
+import com.siweisoft.service.ui.user.login.UserBean;
 
 public class RegistDAOpe extends BaseDAOpe {
 
-    UserInfo userInfo = new UserInfo();
+    UserBean userBean = new UserBean();
 
     UserI userI;
 
@@ -20,12 +20,12 @@ public class RegistDAOpe extends BaseDAOpe {
         userI = new UserNetOpe(context);
     }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
+    public UserBean getUserBean() {
+        return userBean;
     }
 
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public void setUserBean(UserBean userBean) {
+        this.userBean = userBean;
     }
 
     public UserI getUserI() {

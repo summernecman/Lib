@@ -52,6 +52,8 @@ public class LayoutDABean extends BaseBean {
 
     public final ObservableField<Integer> cint = new ObservableField<>();
 
+    public final ObservableField<Integer> dint = new ObservableField<>();
+
     public final ObservableField<Boolean> aboo = new ObservableField<>();
 
 

@@ -10,7 +10,7 @@ import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatDefine;
 import com.siweisoft.service.ui.Constant.VideoValue;
 import com.siweisoft.service.ui.main.RoleInfo;
-import com.siweisoft.service.ui.user.login.UserInfo;
+import com.siweisoft.service.ui.user.login.UserBean;
 
 import java.util.ArrayList;
 
@@ -85,13 +85,20 @@ public class ChatInit {
         AnyChatCoreSDK.SetSDKOptionInt(AnyChatDefine.BRAC_SO_LOCALVIDEO_AUTOROTATION, configEntity.mVideoAutoRotation); // 本地视频自动旋转设置
     }
 
-
-    public void doLogin(String ip, int port, String name) {
+    public void doConnect(String ip, int port) {
         anyChatSDK.Connect(ip, port);
+    }
+
+    public void doLogin(String name) {
         /***
          * AnyChat支持多种用户身份验证方式，包括更安全的签名登录，
          * 详情请参考：http://bbs.anychat.cn/forum.php?mod=viewthread&tid=2211&highlight=%C7%A9%C3%FB
          */
+        anyChatSDK.Login(name, "");
+    }
+
+    public void doLogin(String ip, int port, String name) {
+        anyChatSDK.Connect(ip, port);
         anyChatSDK.Login(name, "");
     }
 
@@ -104,6 +111,7 @@ public class ChatInit {
         anyChatSDK.Logout();
         anyChatSDK.removeEvent(o);
         anyChatSDK.Release();
+        anyChatSDK = null;
     }
 
 
@@ -115,22 +123,22 @@ public class ChatInit {
         anyChatSDK.LeaveRoom(roomID);
     }
 
-    public ArrayList<RoleInfo> getUserList(int myid) {
-        ArrayList<RoleInfo> roleInfos = new ArrayList<>();
+    public ArrayList<UserBean> getUserList() {
+        ArrayList<UserBean> users = new ArrayList<>();
         int[] userID = anyChatSDK.GetRoomOnlineUsers(VideoValue.URL.ROOMID);
-        RoleInfo userselfInfo = new RoleInfo();
-        roleInfos.add(userselfInfo);
-        userselfInfo.setUserID(String.valueOf(myid));
-        userselfInfo.setName(anyChatSDK.GetUserName(myid) + "(自己)");
+//        UserBean userBean = new UserBean();
+//        users.add(userBean);
+//        userBean.setChatid(String.valueOf(myid));
+//        userBean.setName(anyChatSDK.GetUserName(myid) + "(自己)");
 
         for (int index = 0; index < userID.length; ++index) {
-            RoleInfo info = new RoleInfo();
-            info.setName(anyChatSDK.GetUserName(userID[index]));
-            info.setUserID(String.valueOf(userID[index]));
-            roleInfos.add(info);
-            LogUtil.E(info.toString());
+            UserBean userBean = new UserBean();
+            userBean.setName(anyChatSDK.GetUserName(userID[index]));
+            userBean.setChatid(String.valueOf(userID[index]));
+            users.add(userBean);
+            LogUtil.E(userBean.toString());
         }
-        return roleInfos;
+        return users;
     }
 
     public void openLocalCamera() {
@@ -174,23 +182,23 @@ public class ChatInit {
         anyChatSDK.StreamRecordCtrlEx(-1, 1, mdwFlags, 0, "开始录制");
     }
 
-    public void startRecordVideo(UserInfo userInfo, RoleInfo roleInfo) {
+    public void startRecordVideo(UserBean userBean, RoleInfo roleInfo) {
         int mdwFlags = 0;                    // 本地视频录制参数标致
         mdwFlags = AnyChatDefine.BRAC_RECORD_FLAGS_AUDIO
                 + AnyChatDefine.BRAC_RECORD_FLAGS_VIDEO
                 + AnyChatDefine.ANYCHAT_RECORD_FLAGS_LOCALCB
                 + AnyChatDefine.ANYCHAT_RECORD_FLAGS_SERVER;
-        anyChatSDK.StreamRecordCtrlEx(Integer.parseInt(roleInfo.getUserID()), 1, mdwFlags, 0, "开始录制");
+        anyChatSDK.StreamRecordCtrlEx(Integer.parseInt(roleInfo.getUserID()), 1, mdwFlags, 0, roleInfo.getName());
     }
 
-    public void stopRecordVideo() {
+    public void stopRecordVideo(UserBean userBean) {
         int mdwFlags = 0;                    // 本地视频录制参数标致
         mdwFlags = AnyChatDefine.BRAC_RECORD_FLAGS_AUDIO
                 + AnyChatDefine.BRAC_RECORD_FLAGS_VIDEO
                 + AnyChatDefine.ANYCHAT_RECORD_FLAGS_LOCALCB
                 + AnyChatDefine.ANYCHAT_RECORD_FLAGS_SERVER;
         anyChatSDK.StreamRecordCtrlEx(-1, 0, mdwFlags, 0,
-                "关闭服务器视频录制");
+                userBean.getName());
     }
 
 
