@@ -24,6 +24,8 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> {
     public void onBackPressed() {
         FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
         if (FragmentUtil2.fragMap.get(Value.getNowRoot()).size() == 0) {
+            ChatInit.getInstance().leaveRoom(VideoValue.URL.ROOMID);
+            ChatInit.getInstance().doLoginOut();
             ((ServieApp) getApplication()).exit();
         }
     }
@@ -31,8 +33,6 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ChatInit.getInstance().leaveRoom(VideoValue.URL.ROOMID);
-        ChatInit.getInstance().doLoginOut();
     }
 
 }

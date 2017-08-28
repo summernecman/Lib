@@ -19,11 +19,11 @@ import java.util.List;
 public class AppsDataBindingAdapter extends RecyclerView.Adapter<AppViewHolder> implements View.OnClickListener, View.OnLongClickListener {
 
 
-    List list;
-    int vari;
-    int layout;
-    ViewListener viewListener;
-    private Context context;
+    protected List list;
+    protected int vari;
+    protected int layout;
+    protected ViewListener viewListener;
+    protected Context context;
 
 
     public AppsDataBindingAdapter(Context context, int layout, int vari, List list) {

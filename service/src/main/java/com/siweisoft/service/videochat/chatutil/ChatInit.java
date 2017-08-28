@@ -5,9 +5,11 @@ package com.siweisoft.service.videochat.chatutil;
 import android.content.Context;
 import android.view.SurfaceView;
 
+import com.android.lib.util.GsonUtil;
 import com.android.lib.util.LogUtil;
 import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatDefine;
+import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.VideoValue;
 import com.siweisoft.service.ui.main.RoleInfo;
 import com.siweisoft.service.ui.user.login.UserBean;
@@ -94,19 +96,31 @@ public class ChatInit {
          * AnyChat支持多种用户身份验证方式，包括更安全的签名登录，
          * 详情请参考：http://bbs.anychat.cn/forum.php?mod=viewthread&tid=2211&highlight=%C7%A9%C3%FB
          */
+        if (anyChatSDK == null) {
+            return;
+        }
         anyChatSDK.Login(name, "");
     }
 
     public void doLogin(String ip, int port, String name) {
+        if (anyChatSDK == null) {
+            return;
+        }
         anyChatSDK.Connect(ip, port);
         anyChatSDK.Login(name, "");
     }
 
     public void doLoginOut() {
+        if (anyChatSDK == null) {
+            return;
+        }
         anyChatSDK.Logout();
     }
 
     public void clear(Object o) {
+        if (anyChatSDK == null) {
+            return;
+        }
         anyChatSDK.LeaveRoom(-1);
         anyChatSDK.Logout();
         anyChatSDK.removeEvent(o);
@@ -116,14 +130,19 @@ public class ChatInit {
 
 
     public void enterRoom(int roomID, String pwd) {
-        anyChatSDK.EnterRoom(roomID, pwd);
+        if (anyChatSDK != null) {
+            anyChatSDK.EnterRoom(roomID, pwd);
+        }
     }
 
     public void leaveRoom(int roomID) {
-        anyChatSDK.LeaveRoom(roomID);
+        if (anyChatSDK != null) {
+            anyChatSDK.LeaveRoom(roomID);
+        }
     }
 
     public ArrayList<UserBean> getUserList() {
+
         ArrayList<UserBean> users = new ArrayList<>();
         int[] userID = anyChatSDK.GetRoomOnlineUsers(VideoValue.URL.ROOMID);
 //        UserBean userBean = new UserBean();
@@ -182,7 +201,16 @@ public class ChatInit {
         anyChatSDK.StreamRecordCtrlEx(-1, 1, mdwFlags, 0, "开始录制");
     }
 
-    public void startRecordVideo(UserBean userBean, RoleInfo roleInfo) {
+    public void startRecordVideo(UserBean userBean, VideoBean bean) {
+        int mdwFlags = 0;                    // 本地视频录制参数标致
+        mdwFlags = AnyChatDefine.BRAC_RECORD_FLAGS_AUDIO
+                + AnyChatDefine.BRAC_RECORD_FLAGS_VIDEO
+                + AnyChatDefine.ANYCHAT_RECORD_FLAGS_LOCALCB
+                + AnyChatDefine.ANYCHAT_RECORD_FLAGS_SERVER;
+        anyChatSDK.StreamRecordCtrlEx(Integer.parseInt(bean.getOtherid()), 1, mdwFlags, 0, GsonUtil.getInstance().toJson(bean));
+    }
+
+    public void startRecordVideo(UserBean userBean, RoleInfo roleInfo, VideoBean videoBean) {
         int mdwFlags = 0;                    // 本地视频录制参数标致
         mdwFlags = AnyChatDefine.BRAC_RECORD_FLAGS_AUDIO
                 + AnyChatDefine.BRAC_RECORD_FLAGS_VIDEO

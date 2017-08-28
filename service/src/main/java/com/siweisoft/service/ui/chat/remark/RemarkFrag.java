@@ -4,21 +4,28 @@ package com.siweisoft.service.ui.chat.remark;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.constant.ValueConstant;
-import com.bairuitech.anychat.AnyChatDefine;
-import com.siweisoft.service.ui.user.login.UserBean;
-import com.siweisoft.service.videochat.chatutil.ChatInit;
+import com.android.lib.util.FragmentUtil2;
+import com.siweisoft.service.netdb.video.VideoBean;
+import com.siweisoft.service.ui.Constant.Value;
+import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
 
 public class RemarkFrag extends BaseUIFrag<RemarkUIOpe, RemarkDAOpe> {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getP().getD().setUserBean((UserBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
-        ChatInit.getInstance().getAnyChatSDK().VideoCallControl(AnyChatDefine.BRAC_VIDEOCALL_EVENT_REQUEST, Integer.parseInt(getP().getD().getUserBean().getChatid()), 0, 0, 0, "");
+        getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
+
+        Fragment videofragment = new VideoChatFrag();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(ValueConstant.DATA_DATA, getP().getD().getVideoBean());
+        videofragment.setArguments(bundle);
+        FragmentUtil2.getInstance().add(fragment.getActivity(), Value.ROOTID_TWO, videofragment);
     }
 
     @Override

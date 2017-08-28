@@ -46,7 +46,6 @@ public class AnyChatBaseEventImp implements AnyChatBaseEvent {
         LogUtil.E("OnAnyChatLoginMessage" + dwUserId + "--" + dwErrorCode);
         ChatInit.getInstance().enterRoom(VideoValue.URL.ROOMID, "");
         Value.userBean.setChatid(dwUserId + "");
-        Value.userBean.setChatid(dwErrorCode + "");
         Intent intent = new Intent(activity, MainAct.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         activity.startActivity(intent);

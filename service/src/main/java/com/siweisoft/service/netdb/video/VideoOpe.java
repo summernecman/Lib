@@ -15,6 +15,7 @@ import com.android.lib.util.LogUtil;
 import com.google.gson.reflect.TypeToken;
 import com.siweisoft.service.ui.user.login.UserBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VideoOpe extends BaseDAOpe implements VideoI {
@@ -59,6 +60,21 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 LogUtil.E(GsonUtil.getInstance().toJson(o.getData()));
                 List<VideoBean> retList = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<List<VideoBean>>() {
+                }.getType());
+                onFinishListener.onFinish(retList);
+            }
+        });
+    }
+
+    @Override
+    public void getVideosByContacts(UserBean userBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/getVideosByContacts", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                LogUtil.E(GsonUtil.getInstance().toJson(o.getData()));
+                ArrayList<ArrayList<VideoBean>> retList = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<ArrayList<VideoBean>>>() {
                 }.getType());
                 onFinishListener.onFinish(retList);
             }

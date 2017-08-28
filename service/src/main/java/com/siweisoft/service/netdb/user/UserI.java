@@ -13,7 +13,8 @@ public interface UserI {
 
     public void login(UserBean userBean, OnFinishListener onFinishListener);
 
-    public void logout(UserBean userBean, OnFinishListener onFinishListener);
 
     public void getUserInfo(String name, OnFinishListener onFinishListener);
+
+    public void loginOut(UserBean userBean, OnFinishListener onFinishListener);
 }

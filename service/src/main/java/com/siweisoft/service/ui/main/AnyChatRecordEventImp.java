@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.util.GsonUtil;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.util.data.DateFormatUtil;
@@ -27,13 +28,11 @@ public class AnyChatRecordEventImp extends BaseDAOpe implements AnyChatRecordEve
 
     @Override
     public void OnAnyChatRecordEvent(int dwUserId, int dwErrorCode, String lpFileName, int dwElapse, int dwFlags, int dwParam, String lpUserStr) {
+        VideoBean videoBean = GsonUtil.getInstance().fromJson(lpUserStr, VideoBean.class);
         ToastUtil.getInstance().showLong(context, "@dwUserId:" + dwUserId + "@lpFileName:" + lpFileName + "@dwElapse:" + dwElapse + "@dwFlags:" + dwFlags + "@dwParam:" + dwParam + "@lpUserStr" + lpUserStr);
-        LogUtil.E("OnAnyChatRecordEvent:" + dwUserId + "-0-" + dwErrorCode + "-0-" + lpFileName + "-0-" + dwElapse + "-0-" + dwFlags + "-0-" + dwParam + "-0-" + lpUserStr);
-        VideoBean videoBean = new VideoBean();
+        LogUtil.E("OnAnyChatRecordEvent:" + dwUserId + "@" + dwErrorCode + "@" + lpFileName + "@" + dwElapse + "@" + dwFlags + "@" + dwParam + "@" + lpUserStr);
         videoBean.setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
         videoBean.setFile(lpFileName);
-        videoBean.setTophone(Value.userBean.getPhone());
-        videoBean.setFromphone(lpUserStr);
         // videoBean.setToid();
         videoI.addVideo(videoBean, new OnFinishListener() {
             @Override

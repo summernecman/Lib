@@ -5,21 +5,22 @@ package com.siweisoft.service.ui.chat.videochat;
 import android.content.Context;
 
 import com.android.lib.base.ope.BaseDAOpe;
-import com.siweisoft.service.ui.main.RoleInfo;
+import com.siweisoft.service.netdb.video.VideoBean;
 
 public class VideoChatDAOpe extends BaseDAOpe {
 
-    RoleInfo roleInfo;
+
+    VideoBean videoBean;
 
     public VideoChatDAOpe(Context context) {
         super(context);
     }
 
-    public RoleInfo getRoleInfo() {
-        return roleInfo;
+    public VideoBean getVideoBean() {
+        return videoBean;
     }
 
-    public void setRoleInfo(RoleInfo roleInfo) {
-        this.roleInfo = roleInfo;
+    public void setVideoBean(VideoBean videoBean) {
+        this.videoBean = videoBean;
     }
 }

@@ -7,14 +7,15 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.android.lib.base.fragment.BaseUIFrag;
-import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.GsonUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
+import com.bairuitech.anychat.AnyChatDefine;
 import com.siweisoft.service.R;
+import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.Constant.VideoValue;
-import com.siweisoft.service.ui.chat.remark.RemarkFrag;
 import com.siweisoft.service.ui.user.login.UserBean;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
@@ -43,10 +44,10 @@ public class UserListFrag extends BaseUIFrag<UserListUIOpe, UserListDAOpe> {
                     ToastUtil.getInstance().showShort(activity, "这是你自己");
                     return;
                 }
-                RemarkFrag remarkFrag = new RemarkFrag();
-                remarkFrag.setArguments(new Bundle());
-                remarkFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, userBean);
-                FragmentUtil2.getInstance().add(activity, Value.ROOTID_TWO, remarkFrag);
+                VideoBean videoBean = new VideoBean();
+                videoBean.setFromphone(Value.userBean.getPhone());
+                videoBean.setTophone(ChatInit.getInstance().getAnyChatSDK().GetUserName(Integer.parseInt(userBean.getChatid())));
+                ChatInit.getInstance().getAnyChatSDK().VideoCallControl(AnyChatDefine.BRAC_VIDEOCALL_EVENT_REQUEST, Integer.parseInt(userBean.getChatid()), 0, 0, 0, GsonUtil.getInstance().toJson(videoBean));
                 break;
         }
     }

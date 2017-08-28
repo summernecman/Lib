@@ -1,76 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:hedgehog="http://schemas.android.com/apk/res-auto">
+<layout>
 
     <data>
 
         <variable
             name="frag_usercenter"
             type="com.siweisoft.service.ui.user.login.UserBean" />
+
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_base_graybg"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="80dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ic_launcher_round" />
+                android:id="@+id/head"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="10dp">
             <TextView
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="234"
+                android:text="@{frag_usercenter.phone}"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+        </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="5dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="评分:"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <com.hedgehog.ratingbar.RatingBar
-                android:id="@+id/ratingbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                hedgehog:clickable="true"
-                hedgehog:halfstart="true"
-                hedgehog:starCount="5"
-                hedgehog:starEmpty="@mipmap/star_empty"
-                hedgehog:starFill="@mipmap/star_full"
-                hedgehog:starHalf="@mipmap/star_half"
-                hedgehog:starImageHeight="30dp"
-                hedgehog:starImagePadding="10dp"
-                hedgehog:starImageWidth="30dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -148,17 +137,22 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycle"
             android:layout_width="match_parent"
-            android:layout_height="120dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ll_remark"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -166,6 +160,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:paddingLeft="5dp"
                     android:text="评价"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -182,19 +177,24 @@
                     android:layout_height="wrap_content"
                     android:text="46"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:src="@drawable/icon_gou" />
+                    android:src="@drawable/icon_arraw" />
             </LinearLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:id="@+id/ll_collect"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -202,6 +202,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:paddingLeft="5dp"
                     android:text="收藏"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -218,19 +219,23 @@
                     android:layout_height="wrap_content"
                     android:text="8"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
-
+                    android:textSize="17sp" />
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:src="@drawable/icon_gou" />
+                    android:src="@drawable/icon_arraw" />
             </LinearLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:id="@+id/ll_account"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -238,6 +243,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:paddingLeft="5dp"
                     android:text="账号安全"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -256,16 +262,21 @@
                     android:textSize="18sp" />
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:src="@drawable/icon_gou" />
+                    android:src="@drawable/icon_arraw" />
             </LinearLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:id="@+id/ll_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -273,6 +284,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:paddingLeft="5dp"
                     android:text="意见反馈"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -291,16 +303,21 @@
                     android:textSize="18sp" />
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:src="@drawable/icon_gou" />
+                    android:src="@drawable/icon_arraw" />
             </LinearLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:id="@+id/aboutus"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -308,6 +325,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:paddingLeft="5dp"
                     android:text="关于我们"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -326,15 +344,16 @@
                     android:textSize="18sp" />
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:src="@drawable/icon_gou" />
+                    android:src="@drawable/icon_arraw" />
             </LinearLayout>
         </LinearLayout>
 
         <Button
+            android:id="@+id/logout"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"

@@ -4,9 +4,12 @@ package com.siweisoft.service.ui.chat.remark;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.view.LayoutInflater;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.ope.BaseUIOpe;
+import com.android.lib.bean.TitleBean;
+import com.android.lib.databinding.ItemTitleBinding;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.R;
 import com.siweisoft.service.databinding.FragRemarkBinding;
@@ -22,6 +25,11 @@ public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
     public void initTips(ArrayList<String> data) {
         bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
         bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, data));
+    }
+
+    public void initTitle() {
+        TitleBean titleBean = new TitleBean("返回", "辩题", "确定");
+        ItemTitleBinding.inflate(LayoutInflater.from(context)).setTitlebean1(titleBean);
     }
 
 }

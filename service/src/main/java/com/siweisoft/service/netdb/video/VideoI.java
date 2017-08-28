@@ -12,4 +12,6 @@ public interface VideoI {
     public void addVideo(VideoBean videoBean, OnFinishListener onFinishListener);
 
     public void getHistoryVideos(UserBean userBean, OnFinishListener onFinishListener);
+
+    public void getVideosByContacts(UserBean userBean, OnFinishListener onFinishListener);
 }

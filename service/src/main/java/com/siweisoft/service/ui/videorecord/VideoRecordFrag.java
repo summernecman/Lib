@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.android.lib.base.fragment.BaseUIFrag;
-import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.listener.ViewListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
@@ -17,19 +16,14 @@ import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
 import com.siweisoft.service.ui.video.videoplay.VideoPlayFrag;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 public class VideoRecordFrag extends BaseUIFrag<VideoRecordUIOpe, VideoRecordDAOpe> implements ViewListener {
 
     @Override
     public void doThing() {
-        getP().getD().getHistory(new OnFinishListener() {
-            @Override
-            public void onFinish(Object o) {
-                List<VideoBean> retList = (List<VideoBean>) o;
-                getP().getU().initList(retList, VideoRecordFrag.this);
-            }
-        });
+        getP().getD().setVideos((ArrayList<VideoBean>) getArguments().getSerializable(ValueConstant.DATA_DATA));
+        getP().getU().initList(getP().getD().getVideos(), VideoRecordFrag.this);
 
     }
 

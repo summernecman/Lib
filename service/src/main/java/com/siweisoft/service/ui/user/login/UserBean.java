@@ -22,6 +22,10 @@ public class UserBean extends BaseBean {
 
     private String belong;
 
+    private String headUrl = "";
+
+    private float rate;
+
     @Bindable
     public String getPhone() {
         return phone;
@@ -85,6 +89,24 @@ public class UserBean extends BaseBean {
         this.chatid = chatid;
     }
 
+    @Bindable
+    public String getHeadUrl() {
+        return headUrl;
+    }
+
+    public void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
+    }
+
+    @Bindable
+    public float getRate() {
+        return rate;
+    }
+
+    public void setRate(float rate) {
+        this.rate = rate;
+    }
+
     @Override
     public String toString() {
         return "UserBean{" +
@@ -95,6 +117,8 @@ public class UserBean extends BaseBean {
                 ", pwd='" + pwd + '\'' +
                 ", usertype=" + usertype +
                 ", belong='" + belong + '\'' +
+                ", headUrl='" + headUrl + '\'' +
+                ", rate=" + rate +
                 '}';
     }
 }

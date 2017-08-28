@@ -5,14 +5,14 @@ package com.siweisoft.service.ui.chat.remark;
 import android.content.Context;
 
 import com.android.lib.base.ope.BaseDAOpe;
-import com.siweisoft.service.ui.user.login.UserBean;
+import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.user.userinfo.UserInfoDAOpe;
 
 public class RemarkDAOpe extends BaseDAOpe {
 
     UserInfoDAOpe userInfoDAOpe;
 
-    UserBean userBean;
+    VideoBean videoBean;
 
 
     public RemarkDAOpe(Context context) {
@@ -20,11 +20,19 @@ public class RemarkDAOpe extends BaseDAOpe {
         userInfoDAOpe = new UserInfoDAOpe(context);
     }
 
-    public UserBean getUserBean() {
-        return userBean;
+    public UserInfoDAOpe getUserInfoDAOpe() {
+        return userInfoDAOpe;
     }
 
-    public void setUserBean(UserBean userBean) {
-        this.userBean = userBean;
+    public void setUserInfoDAOpe(UserInfoDAOpe userInfoDAOpe) {
+        this.userInfoDAOpe = userInfoDAOpe;
+    }
+
+    public VideoBean getVideoBean() {
+        return videoBean;
+    }
+
+    public void setVideoBean(VideoBean videoBean) {
+        this.videoBean = videoBean;
     }
 }

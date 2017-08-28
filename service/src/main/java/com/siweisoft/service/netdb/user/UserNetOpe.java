@@ -42,12 +42,21 @@ public class UserNetOpe extends BaseDAOpe implements UserI {
         });
     }
 
-    @Override
-    public void logout(UserBean userBean, OnFinishListener onFinishListener) {
-
-    }
 
     @Override
     public void getUserInfo(String name, final OnFinishListener onFinishListener) {
+    }
+
+    @Override
+    public void loginOut(UserBean userBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/loginOut", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                UserBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), UserBean.class);
+                onFinishListener.onFinish(res);
+            }
+        });
     }
 }

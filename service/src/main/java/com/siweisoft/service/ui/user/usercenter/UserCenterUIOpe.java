@@ -10,6 +10,7 @@ import com.android.lib.base.ope.BaseUIOpe;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.R;
 import com.siweisoft.service.databinding.FragUsercenterBinding;
+import com.siweisoft.service.ui.Constant.Value;
 
 import java.util.ArrayList;
 
@@ -21,5 +22,9 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
     public void initTips(ArrayList<String> data) {
         bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
         bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, data));
+    }
+
+    public void initHead() {
+        bind.setVariable(BR.frag_usercenter, Value.userBean);
     }
 }
