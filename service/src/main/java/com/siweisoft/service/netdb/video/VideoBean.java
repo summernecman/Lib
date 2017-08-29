@@ -123,7 +123,7 @@ public class VideoBean extends BaseBean {
 
     @Bindable
     public String getOtherid() {
-        if (Value.userBean.getChatid() == fromchatid) {
+        if (Value.userBean.getChatid().equals(fromchatid)) {
             otherid = tochatid;
         } else {
             otherid = fromchatid;
@@ -136,7 +136,7 @@ public class VideoBean extends BaseBean {
     }
 
     public String getOthername() {
-        if (Value.userBean.getPhone() == fromphone) {
+        if (Value.userBean.getPhone().equals(fromphone)) {
             othername = tophone;
         } else {
             othername = fromphone;

@@ -10,16 +10,18 @@ import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.R;
-import com.siweisoft.service.bean.RemarkBean;
 import com.siweisoft.service.databinding.FragUserinfoBinding;
+import com.siweisoft.service.netdb.comment.CommentBean;
 
 import java.util.ArrayList;
 
 public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
 
 
+
     public UserInfoUIOpe(Context context) {
         super(context);
+
     }
 
     public void initTips(ArrayList<String> data) {
@@ -27,8 +29,9 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
         bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, data));
     }
 
-    public void initRemarks(ArrayList<RemarkBean> data) {
+    public void initRemarks(ArrayList<CommentBean> data) {
         bind.remarklist.setLayoutManager(new LinearLayoutManager(context));
         bind.remarklist.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_remark, BR.item_remark, data));
     }
+
 }

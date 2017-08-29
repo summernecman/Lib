@@ -3,6 +3,7 @@ package com.siweisoft.service.netdb.video;
 //by summer on 17-08-24.
 
 import com.android.lib.base.interf.OnFinishListener;
+import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.ui.user.login.UserBean;
 
 public interface VideoI {
@@ -14,4 +15,6 @@ public interface VideoI {
     public void getHistoryVideos(UserBean userBean, OnFinishListener onFinishListener);
 
     public void getVideosByContacts(UserBean userBean, OnFinishListener onFinishListener);
+
+    public void commentVideo(CommentBean commentBean, OnFinishListener onFinishListener);
 }

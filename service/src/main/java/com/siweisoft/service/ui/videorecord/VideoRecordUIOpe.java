@@ -13,6 +13,7 @@ import com.android.lib.bean.AppViewHolder;
 import com.android.lib.view.ItemDecoration.MyItemDecoration;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.R;
+import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.databinding.FragVideorecordBinding;
 import com.siweisoft.service.netdb.video.VideoBean;
 
@@ -37,5 +38,10 @@ public class VideoRecordUIOpe extends BaseUIOpe<FragVideorecordBinding> {
                 holder.viewDataBinding.getRoot().findViewById(R.id.play).setOnClickListener(this);
             }
         });
+    }
+
+    public void initTitle() {
+        TitleBean titleBean = new TitleBean("返回", "历史录像", "");
+        bind.head.setTitle2(titleBean);
     }
 }

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.android.lib.base.fragment.BaseUIFrag;
+import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.ToastUtil;
@@ -34,12 +35,15 @@ public class UserListFrag extends BaseUIFrag<UserListUIOpe, UserListDAOpe> {
     @Override
     public void onClick(View v) {
         super.onClick(v);
+        final UserBean userBean = (UserBean) v.getTag(R.id.data);
         switch (v.getId()) {
             case R.id.iv_head:
-                FragmentUtil2.getInstance().add(activity, Value.ROOTID_TWO, new UserInfoFrag());
+                UserInfoFrag userInfoFrag = new UserInfoFrag();
+                userInfoFrag.setArguments(new Bundle());
+                userInfoFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, userBean);
+                FragmentUtil2.getInstance().add(activity, Value.ROOTID_TWO, userInfoFrag);
                 break;
             default:
-                final UserBean userBean = (UserBean) v.getTag(R.id.data);
                 if (userBean.getChatid().equals(Value.userBean.getChatid())) {
                     ToastUtil.getInstance().showShort(activity, "这是你自己");
                     return;

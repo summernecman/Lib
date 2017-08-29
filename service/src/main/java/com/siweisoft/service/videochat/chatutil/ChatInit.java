@@ -43,7 +43,7 @@ public class ChatInit {
             mConfigEntity.mConfigMode = VideoValue.ConfigEntity.VIDEO_MODE_CUSTOMCONFIG;
             mConfigEntity.mResolutionWidth = 1080;
             mConfigEntity.mResolutionHeight = 720;
-            mConfigEntity.mVideoBitrate = 400 * 1000;
+            mConfigEntity.mVideoBitrate = 800 * 1000;
             mConfigEntity.mVideoFps = 15;
             mConfigEntity.mVideoQuality = VideoValue.Config.mArrVideoQualityValue[2];
             mConfigEntity.mVideoPreset = VideoValue.Config.mArrVideoPresetValue[3];
@@ -153,6 +153,7 @@ public class ChatInit {
         for (int index = 0; index < userID.length; ++index) {
             UserBean userBean = new UserBean();
             userBean.setName(anyChatSDK.GetUserName(userID[index]));
+            userBean.setPhone(anyChatSDK.GetUserName(userID[index]));
             userBean.setChatid(String.valueOf(userID[index]));
             users.add(userBean);
             LogUtil.E(userBean.toString());

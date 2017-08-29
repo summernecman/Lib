@@ -44,6 +44,7 @@ public class VideoChatFrag extends BaseUIFrag<VideoChatUIOpe, VideoChatDAOpe> {
             ChatInit.getInstance().openLocalCamera();
             //打开音频
             ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(getP().getD().getVideoBean().getOtherid()), 1);
+            ChatInit.getInstance().getAnyChatSDK().SetRecordSnapShotEvent(new AnyChatRecordEventImp(activity));
         } else {
             if (AnyChatCoreSDK.GetSDKOptionInt(AnyChatDefine.BRAC_SO_VIDEOSHOW_DRIVERCTRL) == AnyChatDefine.VIDEOSHOW_DRIVER_JAVA) {// 如果是采用Java视频显示，则需要设置Surface的CallBack
                 int index = ChatInit.getInstance().getAnyChatSDK().mVideoHelper.bindVideo(getP().getU().bind.surfaceviewLocal.getHolder());

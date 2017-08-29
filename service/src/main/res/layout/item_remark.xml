@@ -5,7 +5,7 @@
 
         <variable
             name="item_remark"
-            type="com.siweisoft.service.bean.RemarkBean" />
+            type="com.siweisoft.service.netdb.comment.CommentBean" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,7 +28,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12323"
+                android:text="@={item_remark.fromuser}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 

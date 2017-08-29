@@ -6,6 +6,8 @@ import android.content.Context;
 
 import com.android.lib.base.ope.BaseDAOpe;
 import com.siweisoft.service.netdb.video.VideoBean;
+import com.siweisoft.service.netdb.video.VideoI;
+import com.siweisoft.service.netdb.video.VideoOpe;
 import com.siweisoft.service.ui.user.userinfo.UserInfoDAOpe;
 
 public class RemarkDAOpe extends BaseDAOpe {
@@ -14,10 +16,15 @@ public class RemarkDAOpe extends BaseDAOpe {
 
     VideoBean videoBean;
 
+    VideoI videoI;
+
+    float ratingbar;
+
 
     public RemarkDAOpe(Context context) {
         super(context);
         userInfoDAOpe = new UserInfoDAOpe(context);
+        videoI = new VideoOpe(context);
     }
 
     public UserInfoDAOpe getUserInfoDAOpe() {

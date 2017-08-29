@@ -25,7 +25,7 @@ public class UserListUIOpe extends BaseUIOpe<FragUserlistBinding> {
         super(context);
     }
 
-    public void initList(ArrayList<UserBean> data, final View.OnClickListener onClickListener) {
+    public void initList(final ArrayList<UserBean> data, final View.OnClickListener onClickListener) {
         for (int i = 0; i < data.size(); i++) {
             LogUtil.E(data.get(i).toString());
         }
@@ -41,6 +41,7 @@ public class UserListUIOpe extends BaseUIOpe<FragUserlistBinding> {
             public void onBindViewHolder(AppViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 ItemUserBinding viewDataBinding = (ItemUserBinding) holder.viewDataBinding;
+                viewDataBinding.ivHead.setTag(R.id.data, data.get(position));
                 viewDataBinding.ivHead.setOnClickListener(this);
             }
         });

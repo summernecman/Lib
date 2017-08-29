@@ -10,11 +10,15 @@ import com.android.lib.util.GsonUtil;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.util.data.DateFormatUtil;
+import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatRecordEvent;
+import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.netdb.video.VideoI;
 import com.siweisoft.service.netdb.video.VideoOpe;
 import com.siweisoft.service.ui.Constant.Value;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class AnyChatRecordEventImp extends BaseDAOpe implements AnyChatRecordEvent {
 
@@ -34,20 +38,22 @@ public class AnyChatRecordEventImp extends BaseDAOpe implements AnyChatRecordEve
         videoBean.setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
         videoBean.setFile(lpFileName);
         // videoBean.setToid();
-        videoI.addVideo(videoBean, new OnFinishListener() {
-            @Override
-            public void onFinish(Object o) {
-                LogUtil.E(o);
-            }
-        });
+        if (Value.userBean.getUsertype() == 0) {
+            videoI.addVideo(videoBean, new OnFinishListener() {
+                @Override
+                public void onFinish(Object o) {
 
-        videoI.getVideos(Value.userBean, new OnFinishListener() {
-            @Override
-            public void onFinish(Object o) {
-                LogUtil.E(o);
-            }
-        });
+                }
+            });
+        } else {
 
+        }
+        AnyChatCoreSDK.getInstance(context).SendTextMessage(dwUserId, 1, lpFileName);
+
+
+        CommentBean commentBean = new CommentBean();
+        commentBean.setVideoname(lpFileName);
+        EventBus.getDefault().post(commentBean);
     }
 
     @Override

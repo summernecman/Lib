@@ -4,16 +4,23 @@ package com.siweisoft.service.ui.user.userinfo;
 
 import android.content.Context;
 
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
-import com.siweisoft.service.bean.RemarkBean;
+import com.siweisoft.service.netdb.comment.CommentBean;
+import com.siweisoft.service.netdb.comment.CommentI;
+import com.siweisoft.service.netdb.comment.CommentOpe;
+import com.siweisoft.service.ui.user.login.UserBean;
 
 import java.util.ArrayList;
 
 public class UserInfoDAOpe extends BaseDAOpe {
 
+    UserBean userBean;
 
+    CommentI commentI;
     public UserInfoDAOpe(Context context) {
         super(context);
+        commentI = new CommentOpe(context);
     }
 
     public ArrayList<String> getData() {
@@ -28,15 +35,22 @@ public class UserInfoDAOpe extends BaseDAOpe {
         return data;
     }
 
-    public ArrayList<RemarkBean> getRemarks() {
-        ArrayList<RemarkBean> data = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            RemarkBean remarkBean = new RemarkBean();
-            remarkBean.setCreated("1992:2:3");
-            remarkBean.setRemark("fjds;flkj;;;;;;;;;;;;;;;;;;;;;;;;;;;sgjoignreg;dflkvg;发的发的1了1了1就11了囧记1解耦囧看看看解决1后哦哦卡片机解耦");
-            remarkBean.setAgreenum(i);
-            data.add(remarkBean);
-        }
-        return data;
+    public void getRemarks(UserBean userBean, final OnFinishListener onFinishListener) {
+        commentI.getCommentByUserName(userBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                ArrayList<CommentBean> res = (ArrayList<CommentBean>) o;
+                onFinishListener.onFinish(res);
+            }
+        });
+
+    }
+
+    public UserBean getUserBean() {
+        return userBean;
+    }
+
+    public void setUserBean(UserBean userBean) {
+        this.userBean = userBean;
     }
 }

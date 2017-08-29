@@ -21,7 +21,9 @@
 
             <include
                 android:id="@+id/test"
-                layout="@layout/item_title" />
+                layout="@layout/item_title2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_base_title" />
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"

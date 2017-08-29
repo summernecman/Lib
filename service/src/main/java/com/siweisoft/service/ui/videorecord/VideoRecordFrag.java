@@ -18,10 +18,13 @@ import com.siweisoft.service.ui.video.videoplay.VideoPlayFrag;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import butterknife.OnClick;
+
 public class VideoRecordFrag extends BaseUIFrag<VideoRecordUIOpe, VideoRecordDAOpe> implements ViewListener {
 
     @Override
     public void doThing() {
+        getP().getU().initTitle();
         getP().getD().setVideos((ArrayList<VideoBean>) getArguments().getSerializable(ValueConstant.DATA_DATA));
         getP().getU().initList(getP().getD().getVideos(), VideoRecordFrag.this);
 
@@ -42,6 +45,18 @@ public class VideoRecordFrag extends BaseUIFrag<VideoRecordUIOpe, VideoRecordDAO
                         FragmentUtil2.getInstance().add(activity, Value.ROOTID_ONE, new UserInfoFrag());
                         break;
                 }
+                break;
+        }
+    }
+
+    @OnClick({R.id.ftv_back, R.id.ftv_title, R.id.ftv_right})
+    public void onClickEvent(View v) {
+        switch (v.getId()) {
+            case R.id.ftv_title:
+
+                break;
+            case R.id.ftv_back:
+                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
                 break;
         }
     }
