@@ -45,23 +45,23 @@ public abstract class DelayUINetAdapter extends UINetAdapter {
                     }
                 }, delay);
             } else {
-//                if (baseResBean.getData() == null) {
-//                    handler.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            onNetWorkResult(true, baseResBean);
-//                            LoadUtil.getInstance().onStopLoading(tag);
-//                        }
-//                    }, delay);
-//                } else {
-//                    handler.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            onNetWorkResult(true, baseResBean);
-//                            LoadUtil.getInstance().onStopLoading(tag);
-//                        }
-//                    }, delay);
-//                }
+                if (baseResBean.getData() == null) {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            onNetWorkResult(true, baseResBean);
+                            LoadUtil.getInstance().onStopLoading(tag);
+                        }
+                    }, delay);
+                } else {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            onNetWorkResult(true, baseResBean);
+                            LoadUtil.getInstance().onStopLoading(tag);
+                        }
+                    }, delay);
+                }
             }
         }
     }

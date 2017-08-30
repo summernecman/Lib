@@ -22,6 +22,7 @@ public class LoginFrag extends BaseUIFrag<LoginUIOpe, LoginDAOpe> {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getP().getU().bind.setLogin(getP().getD().getUserBean());
+        getP().getU().initImage(getP().getD().getImageUril());
     }
 
     @OnClick({R.id.button})

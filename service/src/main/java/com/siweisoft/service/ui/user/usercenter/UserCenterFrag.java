@@ -16,6 +16,7 @@ import com.siweisoft.service.ui.setting.feedback.FeedBackFrag;
 import com.siweisoft.service.ui.setting.frag_account.AccountFrag;
 import com.siweisoft.service.ui.setting.frag_collect.CollecFrag;
 import com.siweisoft.service.ui.setting.remarklist.RemarkListFrag;
+import com.siweisoft.service.ui.user.userheadname.UserHeadNameFrag;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import butterknife.OnClick;
@@ -23,14 +24,23 @@ import butterknife.OnClick;
 public class UserCenterFrag extends BaseUIFrag<UserCenterUIOpe, UserCenterDAOpe> {
     @Override
     public void doThing() {
-        getP().getU().initHead();
+
         getP().getU().initTips(getP().getD().userInfoDAOpe.getData());
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        getP().getU().initHead();
+    }
 
-    @OnClick({R.id.logout, R.id.ll_remark, R.id.ll_collect, R.id.ll_account, R.id.ll_feedback, R.id.aboutus})
+
+    @OnClick({R.id.logout, R.id.ll_head, R.id.ll_remark, R.id.ll_collect, R.id.ll_account, R.id.ll_feedback, R.id.aboutus})
     public void onClickEvent(View view) {
         switch (view.getId()) {
+            case R.id.ll_head:
+                FragmentUtil2.getInstance().add(activity, Value.ROOTID_THREE, new UserHeadNameFrag());
+                break;
             case R.id.logout:
                 getP().getD().getUserI().loginOut(Value.userBean, new OnFinishListener() {
                     @Override

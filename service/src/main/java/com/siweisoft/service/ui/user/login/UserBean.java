@@ -22,9 +22,12 @@ public class UserBean extends BaseBean {
 
     private String belong;
 
-    private String headUrl = "";
+    private String headurl = "";
 
     private float rate;
+
+    private String uuuid;
+
 
     @Bindable
     public String getPhone() {
@@ -90,12 +93,12 @@ public class UserBean extends BaseBean {
     }
 
     @Bindable
-    public String getHeadUrl() {
-        return headUrl;
+    public String getHeadurl() {
+        return headurl;
     }
 
-    public void setHeadUrl(String headUrl) {
-        this.headUrl = headUrl;
+    public void setHeadurl(String headurl) {
+        this.headurl = headurl;
     }
 
     @Bindable
@@ -105,6 +108,14 @@ public class UserBean extends BaseBean {
 
     public void setRate(float rate) {
         this.rate = rate;
+    }
+
+    public String getUuuid() {
+        return uuuid;
+    }
+
+    public void setUuuid(String uuuid) {
+        this.uuuid = uuuid;
     }
 
     @Override
@@ -117,8 +128,9 @@ public class UserBean extends BaseBean {
                 ", pwd='" + pwd + '\'' +
                 ", usertype=" + usertype +
                 ", belong='" + belong + '\'' +
-                ", headUrl='" + headUrl + '\'' +
+                ", headurl='" + headurl + '\'' +
                 ", rate=" + rate +
+                ", uuuid='" + uuuid + '\'' +
                 '}';
     }
 }

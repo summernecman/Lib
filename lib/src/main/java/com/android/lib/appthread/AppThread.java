@@ -13,7 +13,7 @@ public class AppThread extends Thread {
     public boolean stop = true;
     public boolean pause = true;
     //时间间隔
-    public long sleepTime = 20000;
+    public long sleepTime = 10000;
     int count = 0;
 
     private AppThread() {

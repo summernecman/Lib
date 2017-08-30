@@ -1,4 +1,4 @@
-package com.android.lib.util;
+package com.siweisoft.service;
 
 //by summer on 2017-06-12.
 
@@ -10,7 +10,7 @@ import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.bumptech.glide.module.AppGlideModule;
 
 @GlideModule
-public class LibGlidModule extends AppGlideModule {
+public class ServerGlidModule extends AppGlideModule {
 
     @Override
     public void applyOptions(Context context, GlideBuilder builder) {

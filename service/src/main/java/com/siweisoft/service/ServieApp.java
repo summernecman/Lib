@@ -2,8 +2,11 @@ package com.siweisoft.service;
 
 //by summer on 2017-07-03.
 
+import android.content.Intent;
+
 import com.android.lib.aplication.LibAplication;
 import com.android.lib.constant.UrlConstant;
+import com.android.lib.service.main.AppService;
 import com.android.lib.util.SPUtil;
 import com.siweisoft.service.ui.Constant.VideoValue;
 
@@ -29,6 +32,9 @@ public class ServieApp extends LibAplication {
 
         JCVideoPlayer.ACTION_BAR_EXIST = false;
         JCVideoPlayer.TOOL_BAR_EXIST = false;
+
+
+        startService(new Intent(this, AppService.class));
     }
 
     @Override

@@ -86,7 +86,8 @@ dependencies {
     compile 'com.github.florent37:viewanimator:1.0.5'//动画帮助
     compile 'org.greenrobot:eventbus:3.0.0'//消息总线处理
     compile 'com.lzy.widget:imagepicker:0.5.5'//图片选择
-    compile 'com.github.bumptech.glide:glide:4.0.0-RC0'//图片加载
+    compile 'com.github.bumptech.glide:glide:4.0.0'//图片加载
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
     compile 'com.j256.ormlite:ormlite-core:4.48'//本地数据库存储
     compile 'com.j256.ormlite:ormlite-android:4.48'
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'//二维码扫码

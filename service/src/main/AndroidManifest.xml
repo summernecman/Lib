@@ -13,7 +13,8 @@
         tools:replace="android:label,android:theme">
         <activity
             android:name=".ui.user.login.LoginAct"
-            android:configChanges="orientation|keyboardHidden|navigation">
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.MAIN" />
@@ -23,8 +24,10 @@
 
         <activity
             android:name=".ui.main.MainAct"
+            android:exported="true"
             android:screenOrientation="portrait" />
 
+        <service android:name="com.android.lib.service.main.AppService" />
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -34,5 +37,6 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RESTART_PACKAGES" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
 
 </manifest>
