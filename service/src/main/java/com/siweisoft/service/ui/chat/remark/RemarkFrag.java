@@ -11,6 +11,7 @@ import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.GsonUtil;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.util.data.DateFormatUtil;
@@ -59,7 +60,7 @@ public class RemarkFrag extends BaseUIFrag<RemarkUIOpe, RemarkDAOpe> {
 
     @Override
     public void doThing() {
-        getP().getU().initTips(getP().getD().userInfoDAOpe.getData());
+        getP().getU().initTips(getP().getD().getData());
     }
 
     @OnClick({R.id.ftv_back, R.id.ftv_title, R.id.ftv_right})
@@ -72,7 +73,7 @@ public class RemarkFrag extends BaseUIFrag<RemarkUIOpe, RemarkDAOpe> {
                 commentBean.setTouser(getP().getD().getVideoBean().getOthername());
                 commentBean.setRate(getP().getD().ratingbar);
                 commentBean.setRemark(getP().getU().getRemark());
-                commentBean.setTips("1,3,4,4,4,5,5,5");
+                commentBean.setTips(GsonUtil.getInstance().toJson(getP().getD().getData()));
                 commentBean.setVideoname(getP().getD().getVideoBean().getFile());
                 getP().getD().videoI.commentVideo(commentBean, new OnFinishListener() {
                     @Override

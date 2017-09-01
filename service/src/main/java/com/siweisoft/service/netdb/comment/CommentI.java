@@ -11,5 +11,7 @@ public interface CommentI {
 
     public void getCommentByUserName(UserBean userBean, OnFinishListener onFinishListener);
 
+    public void getUserTips(UserBean userBean, OnFinishListener onFinishListener);
+
 
 }

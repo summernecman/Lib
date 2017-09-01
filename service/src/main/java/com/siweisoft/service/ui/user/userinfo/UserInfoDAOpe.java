@@ -6,6 +6,8 @@ import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.siweisoft.service.bean.TipBean;
+import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.comment.CommentI;
 import com.siweisoft.service.netdb.comment.CommentOpe;
@@ -23,16 +25,17 @@ public class UserInfoDAOpe extends BaseDAOpe {
         commentI = new CommentOpe(context);
     }
 
-    public ArrayList<String> getData() {
-        ArrayList<String> data = new ArrayList<>();
-        data.add("业务熟练");
-        data.add("态度好");
-        data.add("专业");
-        data.add("解决问题");
-        data.add("未解决问题");
-        data.add("态度差");
-
-        return data;
+    public TipsBean getData() {
+        TipsBean tipsBean = new TipsBean();
+        ArrayList<TipBean> tipBeen = new ArrayList<>();
+        tipBeen.add(new TipBean(0, "业务熟练", 0));
+        tipBeen.add(new TipBean(1, "态度好", 0));
+        tipBeen.add(new TipBean(2, "专业", 0));
+        tipBeen.add(new TipBean(3, "解决问题", 0));
+        tipBeen.add(new TipBean(4, "未解决问题", 0));
+        tipBeen.add(new TipBean(5, "态度差", 0));
+        tipsBean.setTipBeen(tipBeen);
+        return tipsBean;
     }
 
     public void getRemarks(UserBean userBean, final OnFinishListener onFinishListener) {

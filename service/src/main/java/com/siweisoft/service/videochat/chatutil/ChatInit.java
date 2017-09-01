@@ -11,7 +11,6 @@ import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatDefine;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.VideoValue;
-import com.siweisoft.service.ui.main.RoleInfo;
 import com.siweisoft.service.ui.user.login.UserBean;
 
 import java.util.ArrayList;
@@ -211,23 +210,14 @@ public class ChatInit {
         anyChatSDK.StreamRecordCtrlEx(Integer.parseInt(bean.getOtherid()), 1, mdwFlags, 0, GsonUtil.getInstance().toJson(bean));
     }
 
-    public void startRecordVideo(UserBean userBean, RoleInfo roleInfo, VideoBean videoBean) {
-        int mdwFlags = 0;                    // 本地视频录制参数标致
-        mdwFlags = AnyChatDefine.BRAC_RECORD_FLAGS_AUDIO
-                + AnyChatDefine.BRAC_RECORD_FLAGS_VIDEO
-                + AnyChatDefine.ANYCHAT_RECORD_FLAGS_LOCALCB
-                + AnyChatDefine.ANYCHAT_RECORD_FLAGS_SERVER;
-        anyChatSDK.StreamRecordCtrlEx(Integer.parseInt(roleInfo.getUserID()), 1, mdwFlags, 0, roleInfo.getName());
-    }
 
-    public void stopRecordVideo(UserBean userBean) {
+    public void stopRecordVideo(UserBean userBean, VideoBean bean) {
         int mdwFlags = 0;                    // 本地视频录制参数标致
         mdwFlags = AnyChatDefine.BRAC_RECORD_FLAGS_AUDIO
                 + AnyChatDefine.BRAC_RECORD_FLAGS_VIDEO
                 + AnyChatDefine.ANYCHAT_RECORD_FLAGS_LOCALCB
                 + AnyChatDefine.ANYCHAT_RECORD_FLAGS_SERVER;
-        anyChatSDK.StreamRecordCtrlEx(-1, 0, mdwFlags, 0,
-                userBean.getName());
+        anyChatSDK.StreamRecordCtrlEx(-1, 0, mdwFlags, 0, GsonUtil.getInstance().toJson(bean));
     }
 
 

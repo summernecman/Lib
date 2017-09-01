@@ -21,7 +21,7 @@ public class ServieApp extends LibAplication {
         super.onCreate();
         UrlConstant.URI = "http://106.14.161.168:8079/server";
         UrlConstant.URI = "http://192.168.20.175:8079/server";
-
+        UrlConstant.fileUrl = "http://192.168.20.175:8079/files";
 
         VideoValue.URL.IP = "106.14.161.168";
         VideoValue.URL.PROT = 8906;

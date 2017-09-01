@@ -77,7 +77,7 @@ public class VideoChatFrag extends BaseUIFrag<VideoChatUIOpe, VideoChatDAOpe> {
                 }
                 break;
             case R.id.endCall:
-                ChatInit.getInstance().stopRecordVideo(Value.userBean);
+                ChatInit.getInstance().stopRecordVideo(Value.userBean, getP().getD().getVideoBean());
                 CallingCenter.getInstance().VideoCallControl(AnyChatDefine.ANYCHAT_STREAMPLAY_EVENT_FINISH, Integer.parseInt(getP().getD().getVideoBean().getOtherid()), AnyChatDefine.BRAC_ERRORCODE_SESSION_REFUSE, 0, 0, "");
                 ChatInit.getInstance().closeRemoveVideo(Integer.parseInt(getP().getD().getVideoBean().getOtherid()));
                 ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Integer.parseInt(Value.userBean.getChatid()), 0);
@@ -128,7 +128,7 @@ public class VideoChatFrag extends BaseUIFrag<VideoChatUIOpe, VideoChatDAOpe> {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ChatInit.getInstance().stopRecordVideo(Value.userBean);
+        ChatInit.getInstance().stopRecordVideo(Value.userBean, getP().getD().getVideoBean());
         CallingCenter.getInstance().VideoCallControl(AnyChatDefine.ANYCHAT_STREAMPLAY_EVENT_FINISH, Integer.parseInt(getP().getD().getVideoBean().getOtherid()), AnyChatDefine.BRAC_ERRORCODE_SESSION_REFUSE, 0, 0, "");
         ChatInit.getInstance().closeRemoveVideo(Integer.parseInt(getP().getD().getVideoBean().getOtherid()));
         ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Integer.parseInt(Value.userBean.getChatid()), 0);

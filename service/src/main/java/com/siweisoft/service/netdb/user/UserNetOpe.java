@@ -10,7 +10,9 @@ import com.android.lib.base.ope.BaseDAOpe;
 import com.android.lib.network.NetWork;
 import com.android.lib.network.bean.req.BaseReqBean;
 import com.android.lib.network.bean.res.BaseResBean;
+import com.android.lib.network.netadapter.OnNetWorkReqAdapter;
 import com.android.lib.util.GsonUtil;
+import com.siweisoft.service.netdb.video.VideoTimeBean;
 import com.siweisoft.service.ui.user.login.UserBean;
 
 public class UserNetOpe extends BaseDAOpe implements UserI {
@@ -47,7 +49,7 @@ public class UserNetOpe extends BaseDAOpe implements UserI {
     public void getLoginInfo(UserBean userBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
-        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/getLoginInfo", baseReqBean, new DelayUINetAdapter(context) {
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/getLoginInfo", baseReqBean, new OnNetWorkReqAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 UserBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), UserBean.class);
@@ -90,6 +92,19 @@ public class UserNetOpe extends BaseDAOpe implements UserI {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 UserBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), UserBean.class);
+                onFinishListener.onFinish(res);
+            }
+        });
+    }
+
+    @Override
+    public void getUserCallInfo(UserBean userBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/user/getusercallinfo", baseReqBean, new DelayUINetAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                VideoTimeBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), VideoTimeBean.class);
                 onFinishListener.onFinish(res);
             }
         });

@@ -5,6 +5,7 @@ package com.siweisoft.service.ui.chat.remark;
 import android.content.Context;
 
 import com.android.lib.base.ope.BaseDAOpe;
+import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.netdb.video.VideoI;
 import com.siweisoft.service.netdb.video.VideoOpe;
@@ -19,6 +20,8 @@ public class RemarkDAOpe extends BaseDAOpe {
     VideoI videoI;
 
     float ratingbar;
+
+    TipsBean tipsBean;
 
 
     public RemarkDAOpe(Context context) {
@@ -41,5 +44,16 @@ public class RemarkDAOpe extends BaseDAOpe {
 
     public void setVideoBean(VideoBean videoBean) {
         this.videoBean = videoBean;
+    }
+
+    public TipsBean getData() {
+        if (tipsBean == null) {
+            tipsBean = userInfoDAOpe.getData();
+        }
+        return tipsBean;
+    }
+
+    public TipsBean getTipsBean() {
+        return tipsBean;
     }
 }

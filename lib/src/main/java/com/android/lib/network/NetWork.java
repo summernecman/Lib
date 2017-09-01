@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.bean.BaseBean;
+import com.android.lib.bean.FilesBean;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.network.bean.req.BaseReqBean;
@@ -15,11 +16,15 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.xutils.common.Callback;
+import org.xutils.common.util.KeyValue;
 import org.xutils.http.RequestParams;
+import org.xutils.http.body.MultipartBody;
 import org.xutils.http.cookie.DbCookieStore;
 import org.xutils.x;
 
 import java.net.HttpCookie;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -383,6 +388,71 @@ public class NetWork {
             }
         });
     }
+
+
+    public void doHttpRequsetWithFile(Context context, final String model, FilesBean data, final OnNetWorkReqInterf reqInterf) {
+        LogUtil.E(UrlConstant.URI + model);
+        final String jsonstr = gson.toJson(data);
+        LogUtil.E(jsonstr);
+        if (!reqInterf.onNetWorkReqStart(UrlConstant.URI + model, jsonstr)) {
+            BaseResBean res = new BaseResBean();
+            res.setErrorCode(ValueConstant.ERROR_CODE_NET_NO_CONNETCT);
+            res.setErrorMessage(ValueConstant.ERROR_STR_NET_NO_CONNETCT);
+            // res.setData(jsonstr);
+            reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, res);
+            return;
+        }
+
+        LogUtil.E(UrlConstant.URI + model + "---" + ValueConstant.cookieFromResponse);
+        RequestParams requestParams = new RequestParams(UrlConstant.URI + model);
+
+
+        List<KeyValue> list = new ArrayList<>();
+        for (int i = 0; i < data.getData().size(); i++) {
+            list.add(new KeyValue("file", data.getData().get(i).getFile()));
+            //requestParams.addBodyParameter("file"+i, data.getData().get(i).getFile(),null);
+        }
+        MultipartBody body = new MultipartBody(list, "UTF-8");
+        requestParams.setRequestBody(body);
+        requestParams.setMultipart(true);
+
+        x.http().post(requestParams, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String response) {
+                LogUtil.E("gson", "" + response);
+                if (response == null) {
+                    BaseResBean res = new BaseResBean();
+                    res.setErrorCode(ValueConstant.ERROR_CODE_RES_NULL);
+                    res.setErrorMessage(ValueConstant.ERROR_STR_RES_NULL);
+                    reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, res);
+                } else {
+                    BaseResBean baseResBean = gson.fromJson(response.toString(), BaseResBean.class);
+                    reqInterf.onNetWorkReqFinish(true, UrlConstant.URI + model, baseResBean);
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                BaseResBean baseResBean = new BaseResBean();
+                baseResBean.setErrorCode(ValueConstant.ERROR_CODE_VOLLEY_FAIL);
+                baseResBean.setErrorMessage(ex.getMessage() == null ? "" : ex.getMessage());
+                baseResBean.setException(true);
+                reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, baseResBean);
+                LogUtil.E(ex == null ? "" : ex.getMessage());
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+                LogUtil.E(cex);
+            }
+
+            @Override
+            public void onFinished() {
+                LogUtil.E("");
+            }
+        });
+    }
+
 
 
 //    @Deprecated

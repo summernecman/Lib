@@ -5,7 +5,7 @@
 
         <variable
             name="item_tip"
-            type="String" />
+            type="com.siweisoft.service.bean.TipBean" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,15 +13,25 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/tv_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_margin="3dp"
-            android:background="@drawable/drawable_border_rect_gray"
+            android:layout_margin="5dp"
+            android:background="@drawable/drawable_select_rect_g_b"
             android:padding="3dp"
             android:singleLine="true"
-            android:text="@{item_tip}"
+            android:text='@{item_tip.tip+""}'
             android:textColor="@color/gray"
             android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_launcher_round"
+            android:text='@{item_tip.num+""}'
+            android:textColor="@color/red"
+            android:textSize="10sp" />
     </RelativeLayout>
 </layout>

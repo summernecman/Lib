@@ -8,6 +8,10 @@ public class FileBean extends BaseBean {
 
     private File file;
 
+    public FileBean(File file) {
+        this.file = file;
+    }
+
     public File getFile() {
         return file;
     }

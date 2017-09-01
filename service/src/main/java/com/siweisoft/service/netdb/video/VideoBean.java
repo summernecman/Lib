@@ -40,6 +40,8 @@ public class VideoBean extends BaseBean {
 
     private String othername;
 
+    private long timenum;
+
     @Bindable
     public int getId() {
         return id;
@@ -144,6 +146,15 @@ public class VideoBean extends BaseBean {
         return othername;
     }
 
+
+    public long getTimenum() {
+        return timenum;
+    }
+
+    public void setTimenum(long timenum) {
+        this.timenum = timenum;
+    }
+
     @Override
     public String toString() {
         return "VideoBean{" +
@@ -158,6 +169,7 @@ public class VideoBean extends BaseBean {
                 ", tochatid='" + tochatid + '\'' +
                 ", otherid='" + otherid + '\'' +
                 ", othername='" + othername + '\'' +
+                ", timenum=" + timenum +
                 '}';
     }
 }

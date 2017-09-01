@@ -21,4 +21,6 @@ public interface UserI {
     public void setHeadUrl(UserBean userBean, OnFinishListener onFinishListener);
 
     public void setName(UserBean userBean, OnFinishListener onFinishListener);
+
+    public void getUserCallInfo(UserBean userBean, OnFinishListener onFinishListener);
 }

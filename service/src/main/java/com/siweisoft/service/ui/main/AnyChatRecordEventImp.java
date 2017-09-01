@@ -37,6 +37,7 @@ public class AnyChatRecordEventImp extends BaseDAOpe implements AnyChatRecordEve
         LogUtil.E("OnAnyChatRecordEvent:" + dwUserId + "@" + dwErrorCode + "@" + lpFileName + "@" + dwElapse + "@" + dwFlags + "@" + dwParam + "@" + lpUserStr);
         videoBean.setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
         videoBean.setFile(lpFileName);
+        videoBean.setTimenum(dwElapse);
         // videoBean.setToid();
         if (Value.userBean.getUsertype() == 0) {
             videoI.addVideo(videoBean, new OnFinishListener() {

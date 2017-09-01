@@ -19,8 +19,8 @@ public class LoginUIOpe extends BaseUIOpe<FragLoginBinding> {
 
     public void initImage(String url) {
         LogUtil.E(Value.userBean.getHeadurl());
-        GlideApp.with(context).asBitmap().centerCrop().load("content://com.android.providers.media.documents/document/image%3A115755").into(bind.ivTop);
-        //GlideApp.with(context).asBitmap().load(url).centerCrop().into(bind.ivTop);
+        //GlideApp.with(context).asBitmap().centerCrop().load("content://com.android.providers.media.documents/document/image%3A115755").into(bind.ivTop);
+        GlideApp.with(context).asBitmap().load(url).centerCrop().into(bind.ivTop);
         // bind.ivTop
     }
 }

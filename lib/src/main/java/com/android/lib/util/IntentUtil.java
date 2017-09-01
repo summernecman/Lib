@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -116,10 +117,19 @@ public class IntentUtil {
     }
 
     public void photoShowFromphone(Fragment fragment, int requstCode) {
-        Intent getImage = new Intent(Intent.ACTION_GET_CONTENT);
-        getImage.addCategory(Intent.CATEGORY_OPENABLE);
-        getImage.setType("image/*");
-        fragment.startActivityForResult(getImage, requstCode);
+        Intent intent;
+        if (Build.VERSION.SDK_INT < 19) {
+            intent = new Intent();
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            fragment.startActivityForResult(intent, requstCode);
+        } else {
+            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("image/*");
+            fragment.startActivityForResult(intent, requstCode);
+        }
+
     }
 
     public void photosShowFromphone(Fragment fragment, int requstCode) {
