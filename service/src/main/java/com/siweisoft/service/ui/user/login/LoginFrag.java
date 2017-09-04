@@ -6,17 +6,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.NullUtil;
 import com.siweisoft.service.R;
+import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.Constant.VideoValue;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import butterknife.OnClick;
 
-public class LoginFrag extends BaseUIFrag<LoginUIOpe, LoginDAOpe> {
+public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

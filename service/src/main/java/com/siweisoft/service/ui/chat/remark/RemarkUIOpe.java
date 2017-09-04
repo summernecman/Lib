@@ -15,7 +15,6 @@ import com.hedgehog.ratingbar.RatingBar;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.R;
 import com.siweisoft.service.bean.TipsBean;
-import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.databinding.FragRemarkBinding;
 
 public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
@@ -58,10 +57,6 @@ public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
         });
     }
 
-    public void initTitle() {
-        TitleBean titleBean = new TitleBean("返回", "辩题", "确定");
-        bind.test.setTitle2(titleBean);
-    }
 
     public String getRemark() {
         return bind.remark.getText().toString();

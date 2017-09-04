@@ -11,9 +11,9 @@ import com.android.lib.base.listener.ViewListener;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.view.ItemDecoration.MyItemDecoration;
+import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.R;
-import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.databinding.FragVideorecordBinding;
 import com.siweisoft.service.netdb.video.VideoBean;
 
@@ -29,7 +29,7 @@ public class VideoRecordUIOpe extends BaseUIOpe<FragVideorecordBinding> {
 
     public void initList(final List<VideoBean> data, ViewListener viewListener) {
         bind.recycle.setLayoutManager(new LinearLayoutManager(context));
-        bind.recycle.addItemDecoration(new MyItemDecoration(context, 3, Color.GRAY));
+        bind.recycle.addItemDecoration(new MyItemDecoration(context, 1, Color.GRAY));
         bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_videorecord, BR.item_videorecord, data, viewListener) {
             @Override
             public void onBindViewHolder(AppViewHolder holder, int position) {
@@ -40,8 +40,8 @@ public class VideoRecordUIOpe extends BaseUIOpe<FragVideorecordBinding> {
         });
     }
 
-    public void initTitle() {
-        TitleBean titleBean = new TitleBean("返回", "历史录像", "");
-        bind.head.setTitle2(titleBean);
+    public void initRefresh(MaterialRefreshListener refreshListener) {
+        bind.refresh.setMaterialRefreshListener(refreshListener);
     }
+
 }

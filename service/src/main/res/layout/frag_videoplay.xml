@@ -64,6 +64,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/drawable_border_input"
+            android:enabled="false"
             android:gravity="start" />
     </LinearLayout>
 

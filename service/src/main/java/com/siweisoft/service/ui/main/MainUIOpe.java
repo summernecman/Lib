@@ -2,6 +2,7 @@ package com.siweisoft.service.ui.main;
 
 //by summer on 2017-07-03.
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,10 @@ import com.android.lib.base.adapter.AppBasePagerAdapter;
 import com.android.lib.base.interf.view.OnAppItemSelectListener;
 import com.android.lib.base.listener.BaseOnPagerChangeListener;
 import com.android.lib.base.ope.BaseUIOpe;
+import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.StatusBarUtil;
+import com.siweisoft.service.R;
+import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.databinding.ActMainBinding;
 import com.siweisoft.service.ui.Constant.Value;
 
@@ -20,6 +25,21 @@ import java.util.ArrayList;
 public class MainUIOpe extends BaseUIOpe<ActMainBinding> {
     public MainUIOpe(Context context) {
         super(context);
+        StatusBarUtil.getInstance().setStatusBarColorResId((Activity) context, R.color.color_base_nurse);
+    }
+
+
+    public void initTitle() {
+        ArrayList<Fragment> fragments = FragmentUtil2.fragMap.get(Value.getNowRoot());
+        if (fragments != null && fragments.size() > 0) {
+            BaseServerFrag baseUIFrag = (BaseServerFrag) fragments.get(fragments.size() - 1);
+            if (baseUIFrag != null) {
+                bind.tophead.setTitle2(baseUIFrag.getTitleBean());
+                bind.tophead.ftvBack.setVisibility(View.VISIBLE);
+                bind.tophead.ftvTitle.setVisibility(View.VISIBLE);
+                bind.tophead.ftvRight.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     public void initViewPager(FragmentManager fm, final ArrayList<Fragment> fragments) {
@@ -40,6 +60,7 @@ public class MainUIOpe extends BaseUIOpe<ActMainBinding> {
             public void onPageSelected(int position) {
                 bind.homebottomview.select(position);
                 Value.setPostion(position);
+                initTitle();
             }
         });
         bind.vpVp.setCurrentItem(1);

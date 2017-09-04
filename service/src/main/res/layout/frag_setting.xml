@@ -14,11 +14,6 @@
         android:background="@color/color_base_graybg"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/test"
-            layout="@layout/item_title2"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_base_title" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +25,7 @@
                 android:id="@+id/ll_set"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@color/white"
+                android:background="@drawable/drawable_press_black_while"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 

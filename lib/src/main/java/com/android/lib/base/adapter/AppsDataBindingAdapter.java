@@ -54,6 +54,7 @@ public class AppsDataBindingAdapter extends RecyclerView.Adapter<AppViewHolder> 
         viewDataBinding.getRoot().setOnClickListener(this);
         viewDataBinding.getRoot().setOnLongClickListener(this);
         viewDataBinding.setVariable(vari, list.get(position));
+        viewDataBinding.executePendingBindings();//加一行，问题解决
     }
 
     @Override
@@ -78,5 +79,13 @@ public class AppsDataBindingAdapter extends RecyclerView.Adapter<AppViewHolder> 
 
     public void setViewListener(ViewListener viewListener) {
         this.viewListener = viewListener;
+    }
+
+    public List getList() {
+        return list;
+    }
+
+    public void setList(List list) {
+        this.list = list;
     }
 }

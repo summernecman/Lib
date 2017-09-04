@@ -6,16 +6,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.FragmentUtil2;
 import com.siweisoft.service.R;
+import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.login.LoginFrag;
 
 import butterknife.OnClick;
 
-public class RegistFrag extends BaseUIFrag<RegistUIOpe, RegistDAOpe> {
+public class RegistFrag extends BaseServerFrag<RegistUIOpe, RegistDAOpe> {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

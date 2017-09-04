@@ -4,22 +4,22 @@ package com.siweisoft.service.ui.setting.setting;
 
 import android.view.View;
 
-import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.FragmentUtil2;
 import com.siweisoft.service.R;
 import com.siweisoft.service.ServieApp;
+import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.Constant.VideoValue;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import butterknife.OnClick;
 
-public class SettingFrag extends BaseUIFrag<SettingUIOpe, SettingDAOpe> {
+public class SettingFrag extends BaseServerFrag<SettingUIOpe, SettingDAOpe> {
 
     @Override
     public void doThing() {
-        getP().getU().setTitle();
+
     }
 
     @OnClick({R.id.ll_set})

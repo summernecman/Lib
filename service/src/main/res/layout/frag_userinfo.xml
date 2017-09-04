@@ -6,6 +6,12 @@
         <variable
             name="frag_userinfo"
             type="com.siweisoft.service.ui.user.login.UserBean" />
+
+        <variable
+            name="callinfo1"
+            type="com.siweisoft.service.netdb.video.VideoTimeBean" />
+
+
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -82,7 +88,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="103"
+                    android:text='@{callinfo1.timeout+""}'
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -105,7 +111,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="103"
+                    android:text='@{callinfo1.timein+""}'
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -113,7 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="呼出"
+                    android:text="呼入"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -129,7 +135,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="103"
+                    android:text='@{callinfo1.timehours+""}'
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -137,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="呼出"
+                    android:text="分钟"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>

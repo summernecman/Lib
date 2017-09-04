@@ -11,7 +11,10 @@ import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.comment.CommentI;
 import com.siweisoft.service.netdb.comment.CommentOpe;
+import com.siweisoft.service.netdb.user.UserI;
+import com.siweisoft.service.netdb.user.UserNetOpe;
 import com.siweisoft.service.ui.user.login.UserBean;
+import com.siweisoft.service.ui.user.usercenter.UserCenterDAOpe;
 
 import java.util.ArrayList;
 
@@ -20,10 +23,17 @@ public class UserInfoDAOpe extends BaseDAOpe {
     UserBean userBean;
 
     CommentI commentI;
+
+    UserI userI;
+
+    UserCenterDAOpe userCenterDAOpe;
+
+
     public UserInfoDAOpe(Context context) {
         super(context);
-        commentI = new CommentOpe(context);
+
     }
+
 
     public TipsBean getData() {
         TipsBean tipsBean = new TipsBean();
@@ -39,6 +49,9 @@ public class UserInfoDAOpe extends BaseDAOpe {
     }
 
     public void getRemarks(UserBean userBean, final OnFinishListener onFinishListener) {
+        if (commentI == null) {
+            commentI = new CommentOpe(context);
+        }
         commentI.getCommentByUserName(userBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
@@ -49,11 +62,27 @@ public class UserInfoDAOpe extends BaseDAOpe {
 
     }
 
+    public void getUserCallInfo(UserBean userBean, OnFinishListener onFinishListener) {
+        if (userI == null) {
+            userI = new UserNetOpe(context);
+        }
+        userI.getUserCallInfo(userBean, onFinishListener);
+    }
+
+
+
     public UserBean getUserBean() {
         return userBean;
     }
 
     public void setUserBean(UserBean userBean) {
         this.userBean = userBean;
+    }
+
+    public UserCenterDAOpe getUserCenterDAOpe() {
+        if (userCenterDAOpe == null) {
+            userCenterDAOpe = new UserCenterDAOpe(context);
+        }
+        return userCenterDAOpe;
     }
 }

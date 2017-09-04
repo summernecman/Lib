@@ -24,26 +24,36 @@ public class UserCenterDAOpe extends BaseDAOpe {
 
     public UserCenterDAOpe(Context context) {
         super(context);
-        userInfoDAOpe = new UserInfoDAOpe(context);
-        userI = new UserNetOpe(context);
-        commentI = new CommentOpe(context);
     }
 
+
     public UserInfoDAOpe getUserInfoDAOpe() {
+        if (userInfoDAOpe == null) {
+            userInfoDAOpe = new UserInfoDAOpe(context);
+        }
         return userInfoDAOpe;
     }
 
     public UserI getUserI() {
+        if (userI == null) {
+            userI = new UserNetOpe(context);
+        }
         return userI;
     }
 
     public void getUserCallInfo(OnFinishListener onFinishListener) {
+        if (userI == null) {
+            userI = new UserNetOpe(context);
+        }
         UserBean userBean = new UserBean();
         userBean.setPhone(Value.userBean.getPhone());
         userI.getUserCallInfo(userBean, onFinishListener);
     }
 
     public void getUserTips(UserBean userBean, OnFinishListener onFinishListener) {
+        if (commentI == null) {
+            commentI = new CommentOpe(context);
+        }
         commentI.getUserTips(userBean, onFinishListener);
     }
 }

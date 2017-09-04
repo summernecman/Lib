@@ -3,17 +3,19 @@ package com.siweisoft.service.ui.user.userlist;
 //by summer on 2017-07-04.
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
+import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
+import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.bairuitech.anychat.AnyChatDefine;
 import com.siweisoft.service.R;
+import com.siweisoft.service.base.BaseServerFrag;
+import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.Constant.VideoValue;
@@ -21,13 +23,24 @@ import com.siweisoft.service.ui.user.login.UserBean;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
 
-public class UserListFrag extends BaseUIFrag<UserListUIOpe, UserListDAOpe> {
-
+public class UserListFrag extends BaseServerFrag<UserListUIOpe, UserListDAOpe> {
 
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void doThing() {
+        getP().getU().initRefresh(new MaterialRefreshListenerAdpter() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                initData();
+                materialRefreshLayout.finishRefreshingDelay();
+            }
+        });
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        setTitleBean(new TitleBean("", "联系人", ""));
         getP().getU().initList(ChatInit.getInstance().getUserList(), this);
         ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
     }

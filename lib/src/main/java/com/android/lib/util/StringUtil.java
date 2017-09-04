@@ -110,8 +110,6 @@ public class StringUtil {
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public String getPath(Context context, Uri uri) {
-//        uri=Uri.parse("content://com.android.providers.media.documents/document/image%3A128989");
-//        FileUtil.getInstance().saveToFile(getClass().getSimpleName() + ":getPath:" + (uri == null ? uri : uri.toString()));
         if (uri == null) {
             return null;
         }
@@ -128,25 +126,19 @@ public class StringUtil {
                     String wholeID = DocumentsContract.getDocumentId(uri);
                     String id = wholeID.split(":")[1];
                     String[] column = {MediaStore.Images.Media.DATA};
-                    String sel = MediaStore.Images.Media._ID + " =? ";
-                    Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, column,
-                            sel, new String[]{id}, null);
+                    String sel = MediaStore.Images.Media._ID + "=?";
+                    Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, column, sel, new String[]{id}, null);
                     int columnIndex = cursor.getColumnIndex(column[0]);
                     if (cursor.moveToFirst()) {
                         data = cursor.getString(columnIndex);
                     }
                     cursor.close();
                 } else {
-                    Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
-                    if (null != cursor) {
-                        if (cursor.moveToFirst()) {
-                            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-                            if (index > -1) {
-                                data = cursor.getString(index);
-                            }
-                        }
-                        cursor.close();
-                    }
+                    String[] projection = {MediaStore.Images.Media.DATA};
+                    Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                    cursor.moveToFirst();
+                    data = cursor.getString(column_index);
                 }
 
             } else {
@@ -155,4 +147,6 @@ public class StringUtil {
         }
         return data;
     }
+
+
 }

@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
@@ -18,6 +17,8 @@ import com.android.lib.util.data.DateFormatUtil;
 import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatTextMsgEvent;
 import com.siweisoft.service.R;
+import com.siweisoft.service.base.BaseServerFrag;
+import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
@@ -26,16 +27,13 @@ import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import butterknife.OnClick;
-
-public class RemarkFrag extends BaseUIFrag<RemarkUIOpe, RemarkDAOpe> {
+public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
-        getP().getU().initTitle();
-        getView().findViewById(R.id.ftv_right).setVisibility(View.GONE);
+        setTitleBean(new TitleBean("返回", "评论", "确定"));
         Fragment videofragment = new VideoChatFrag();
         Bundle bundle = new Bundle();
         bundle.putSerializable(ValueConstant.DATA_DATA, getP().getD().getVideoBean());
@@ -50,12 +48,19 @@ public class RemarkFrag extends BaseUIFrag<RemarkUIOpe, RemarkDAOpe> {
         AnyChatCoreSDK.getInstance(activity).SetTextMessageEvent(new AnyChatTextMsgEvent() {
             @Override
             public void OnAnyChatTextMessage(int i, int i1, boolean b, String s) {
-                getView().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
+                getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
                 LogUtil.E(i + "" + i1 + "" + b + "" + s);
                 ToastUtil.getInstance().showLong(activity, i + "@" + i1 + "@" + s);
                 getP().getD().getVideoBean().setFile(s);
             }
         });
+        getActivity().findViewById(R.id.ftv_right).setOnClickListener(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getActivity().findViewById(R.id.ftv_right).setVisibility(View.GONE);
     }
 
     @Override
@@ -63,8 +68,9 @@ public class RemarkFrag extends BaseUIFrag<RemarkUIOpe, RemarkDAOpe> {
         getP().getU().initTips(getP().getD().getData());
     }
 
-    @OnClick({R.id.ftv_back, R.id.ftv_title, R.id.ftv_right})
-    public void onClickEvent(View v) {
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
         switch (v.getId()) {
             case R.id.ftv_right:
                 CommentBean commentBean = new CommentBean();
@@ -82,21 +88,12 @@ public class RemarkFrag extends BaseUIFrag<RemarkUIOpe, RemarkDAOpe> {
                     }
                 });
                 break;
-            case R.id.ftv_title:
-
-                break;
-            case R.id.ftv_back:
-                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
-                break;
         }
     }
 
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(CommentBean bean) {
-        getView().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
         getP().getD().getVideoBean().setFile(bean.getVideoname());
     }
-
-    ;
 }

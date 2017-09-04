@@ -17,4 +17,5 @@ public interface VideoI {
     public void getVideosByContacts(UserBean userBean, OnFinishListener onFinishListener);
 
     public void commentVideo(CommentBean commentBean, OnFinishListener onFinishListener);
+
 }

@@ -33,7 +33,6 @@ public class ServieApp extends LibAplication {
         JCVideoPlayer.ACTION_BAR_EXIST = false;
         JCVideoPlayer.TOOL_BAR_EXIST = false;
 
-
         startService(new Intent(this, AppService.class));
     }
 

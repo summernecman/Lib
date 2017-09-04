@@ -70,10 +70,15 @@ public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> exten
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         doThing();
+        initData();
 
     }
 
     public void doThing() {
+
+    }
+
+    public void initData() {
 
     }
 
@@ -167,4 +172,5 @@ public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> exten
             return;
         }
     }
+
 }

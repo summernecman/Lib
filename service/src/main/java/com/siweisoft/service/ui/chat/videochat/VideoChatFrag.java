@@ -7,13 +7,13 @@ import android.support.annotation.Nullable;
 import android.view.SurfaceHolder;
 import android.view.View;
 
-import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.LogUtil;
 import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatDefine;
 import com.siweisoft.service.R;
+import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.main.AnyChatRecordEventImp;
@@ -22,7 +22,7 @@ import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import butterknife.OnClick;
 
-public class VideoChatFrag extends BaseUIFrag<VideoChatUIOpe, VideoChatDAOpe> {
+public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe> {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

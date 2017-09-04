@@ -28,7 +28,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:padding="1dp"
-                android:src="@drawable/drawable_bed" />
+                android:src="@drawable/drawable_video" />
 
             <TextView
                 android:id="@+id/tv_bed"
@@ -55,7 +55,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:padding="1dp"
-                android:src="@drawable/drawable_mission" />
+                android:src="@drawable/drawable_call" />
 
             <TextView
                 android:id="@+id/tv_mission"
@@ -82,7 +82,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:padding="1dp"
-                android:src="@drawable/drawable_check" />
+                android:src="@drawable/drawable_setting" />
 
             <TextView
                 android:id="@+id/tv_check"

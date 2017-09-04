@@ -13,6 +13,7 @@ import com.android.lib.network.netadapter.OnNetWorkReqAdapter;
 import com.android.lib.util.GsonUtil;
 import com.google.gson.reflect.TypeToken;
 import com.siweisoft.service.bean.TipBean;
+import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.user.login.UserBean;
 
 import java.util.ArrayList;
@@ -65,5 +66,19 @@ public class CommentOpe extends BaseDAOpe implements CommentI {
             }
         });
 
+    }
+
+    @Override
+    public void getVideoComment(VideoBean videoBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(videoBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/comment/getVideoCommentByVideoName", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                ArrayList<CommentBean> res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<CommentBean>>() {
+                }.getType());
+                onFinishListener.onFinish(res);
+            }
+        });
     }
 }

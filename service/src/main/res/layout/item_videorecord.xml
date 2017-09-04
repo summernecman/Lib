@@ -11,6 +11,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:background="@drawable/drawable_press_black_while"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -40,7 +41,7 @@
                     android:layout_weight="1"
                     android:text='@{item_videorecord.fromphone+"---"+item_videorecord.tophone}'
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -48,7 +49,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:text="@={item_videorecord.created}"
-                    android:textColor="@color/black"
+                    android:textColor="@color/gray"
                     android:textSize="15sp" />
             </LinearLayout>
 

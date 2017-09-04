@@ -5,28 +5,42 @@ package com.siweisoft.service.ui.videorecord;
 import android.os.Bundle;
 import android.view.View;
 
-import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.base.listener.ViewListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
+import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.siweisoft.service.R;
+import com.siweisoft.service.base.BaseServerFrag;
+import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
+import com.siweisoft.service.ui.user.login.UserBean;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
 import com.siweisoft.service.ui.video.videoplay.VideoPlayFrag;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import butterknife.OnClick;
+public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecordDAOpe> implements ViewListener {
 
-public class VideoRecordFrag extends BaseUIFrag<VideoRecordUIOpe, VideoRecordDAOpe> implements ViewListener {
+    @Override
+    public void initData() {
+        super.initData();
+        setTitleBean(new TitleBean("返回", "录像", ""));
+        getP().getD().setVideos((ArrayList<VideoBean>) getArguments().getSerializable(ValueConstant.DATA_DATA));
+        getP().getU().initList(getP().getD().getVideos(), VideoRecordFrag.this);
+    }
 
     @Override
     public void doThing() {
-        getP().getU().initTitle();
-        getP().getD().setVideos((ArrayList<VideoBean>) getArguments().getSerializable(ValueConstant.DATA_DATA));
-        getP().getU().initList(getP().getD().getVideos(), VideoRecordFrag.this);
+        getP().getU().initRefresh(new MaterialRefreshListenerAdpter() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                initData();
+                materialRefreshLayout.finishRefreshingDelay();
+            }
+        });
 
     }
 
@@ -42,21 +56,14 @@ public class VideoRecordFrag extends BaseUIFrag<VideoRecordUIOpe, VideoRecordDAO
                         FragmentUtil2.getInstance().add(activity, Value.ROOTID_ONE, playFrag);
                         break;
                     default:
-                        FragmentUtil2.getInstance().add(activity, Value.ROOTID_ONE, new UserInfoFrag());
+                        UserInfoFrag userInfoFrag = new UserInfoFrag();
+                        userInfoFrag.setArguments(new Bundle());
+                        UserBean userBean = new UserBean();
+                        userBean.setPhone(getP().getD().getVideos().get((Integer) v.getTag(R.id.position)).getOthername());
+                        userInfoFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, userBean);
+                        FragmentUtil2.getInstance().add(activity, Value.ROOTID_ONE, userInfoFrag);
                         break;
                 }
-                break;
-        }
-    }
-
-    @OnClick({R.id.ftv_back, R.id.ftv_title, R.id.ftv_right})
-    public void onClickEvent(View v) {
-        switch (v.getId()) {
-            case R.id.ftv_title:
-
-                break;
-            case R.id.ftv_back:
-                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
                 break;
         }
     }

@@ -7,17 +7,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.View;
 
 import com.android.lib.base.activity.BaseUIActivity;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.system.UUUIDUtil;
+import com.siweisoft.service.R;
 import com.siweisoft.service.ServieApp;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.Constant.VideoValue;
 import com.siweisoft.service.ui.user.login.UserBean;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
+
+import butterknife.OnClick;
+import butterknife.Optional;
 
 public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> {
 
@@ -49,6 +54,21 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> {
         super.onDestroy();
         unregisterReceiver(loginInfoBroadCast);
     }
+
+
+    @Optional
+    @OnClick({R.id.ftv_back, R.id.ftv_title, R.id.ftv_right})
+    public void onClickEventListener(View v) {
+        switch (v.getId()) {
+            case R.id.ftv_title:
+
+                break;
+            case R.id.ftv_back:
+                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+                break;
+        }
+    }
+
 
     class LoginInfoBroadCast extends BroadcastReceiver {
 

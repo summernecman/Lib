@@ -14,17 +14,12 @@
         android:background="@color/color_base_graybg"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/test"
-            layout="@layout/item_title2"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_base_title" />
 
         <LinearLayout
             android:id="@+id/ll_head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/drawable_press_black_while"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10dp">
@@ -50,7 +45,7 @@
             android:id="@+id/ll_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/drawable_press_black_while"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10dp">

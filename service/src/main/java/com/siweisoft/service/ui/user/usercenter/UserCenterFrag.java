@@ -4,11 +4,14 @@ package com.siweisoft.service.ui.user.usercenter;
 
 import android.view.View;
 
-import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
+import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.siweisoft.service.R;
+import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TipBean;
+import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.video.VideoTimeBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.setting.aboutus.AboutUsFrag;
@@ -23,12 +26,24 @@ import java.util.HashMap;
 
 import butterknife.OnClick;
 
-public class UserCenterFrag extends BaseUIFrag<UserCenterUIOpe, UserCenterDAOpe> {
+public class UserCenterFrag extends BaseServerFrag<UserCenterUIOpe, UserCenterDAOpe> {
+
     @Override
     public void doThing() {
+        getP().getU().initRefresh(new MaterialRefreshListenerAdpter() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                initData();
+                materialRefreshLayout.finishRefreshingDelay();
+            }
+        });
+    }
 
-        getP().getU().initTips(getP().getD().userInfoDAOpe.getData());
-
+    @Override
+    public void initData() {
+        super.initData();
+        setTitleBean(new TitleBean("", "个人中心", ""));
+        getP().getU().initTips(getP().getD().getUserInfoDAOpe().getData());
         getP().getD().getUserCallInfo(new OnFinishListener() {
             @Override
             public void onFinish(Object o) {

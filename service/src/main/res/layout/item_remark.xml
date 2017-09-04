@@ -11,6 +11,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/drawable_press_black_while"
         android:gravity="center_vertical"
         android:orientation="vertical">
 
@@ -44,8 +45,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="@={item_remark.remark}"
-            android:textColor="@color/black"
+            android:textColor="@color/gray"
             android:textSize="15sp" />
 
         <ImageView

@@ -5,7 +5,6 @@ package com.siweisoft.service.ui.user.userheadname;
 import android.content.Intent;
 import android.view.View;
 
-import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.bean.FileBean;
 import com.android.lib.bean.FilesBean;
@@ -17,9 +16,10 @@ import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.IntentUtil;
 import com.android.lib.util.LogUtil;
-import com.android.lib.util.StringUtil;
+import com.android.lib.util.UriUtils;
 import com.google.gson.reflect.TypeToken;
 import com.siweisoft.service.R;
+import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.login.UserBean;
 import com.siweisoft.service.ui.user.rename.RenameFrag;
@@ -29,16 +29,15 @@ import java.util.ArrayList;
 
 import butterknife.OnClick;
 
-public class UserHeadNameFrag extends BaseUIFrag<UserHeadNameUIOpe, UserHeadNameDAOpe> {
+public class UserHeadNameFrag extends BaseServerFrag<UserHeadNameUIOpe, UserHeadNameDAOpe> {
 
 
     @Override
     public void doThing() {
         getP().getU().initInfo();
-        getP().getU().initTitle();
     }
 
-    @OnClick({R.id.ll_head, R.id.ll_name, R.id.ftv_back, R.id.ftv_title, R.id.ftv_right})
+    @OnClick({R.id.ll_head, R.id.ll_name})
     public void onClickEvent(View v) {
         switch (v.getId()) {
             case R.id.ll_head:
@@ -46,14 +45,6 @@ public class UserHeadNameFrag extends BaseUIFrag<UserHeadNameUIOpe, UserHeadName
                 break;
             case R.id.ll_name:
                 FragmentUtil2.getInstance().add(activity, Value.ROOTID_THREE, new RenameFrag());
-                break;
-            case R.id.ftv_right:
-                break;
-            case R.id.ftv_title:
-
-                break;
-            case R.id.ftv_back:
-                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
                 break;
         }
     }
@@ -65,7 +56,7 @@ public class UserHeadNameFrag extends BaseUIFrag<UserHeadNameUIOpe, UserHeadName
         }
         FilesBean filesBean = new FilesBean();
         ArrayList<FileBean> fileBeen = new ArrayList<>();
-        fileBeen.add(new FileBean(new File(StringUtil.getInstance().getPath(activity, data.getData()))));
+        fileBeen.add(new FileBean(new File(UriUtils.getPath(activity, data.getData()))));
         filesBean.setData(fileBeen);
 
         NetWork.getInstance(activity).doHttpRequsetWithFile(activity, "/user/addheadurl", filesBean, new OnNetWorkReqAdapter(activity) {

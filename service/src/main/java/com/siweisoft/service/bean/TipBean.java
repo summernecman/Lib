@@ -60,4 +60,14 @@ public class TipBean extends BaseBean {
     public void setSelect(boolean select) {
         this.select = select;
     }
+
+    @Override
+    public String toString() {
+        return "TipBean{" +
+                "position=" + position +
+                ", tip='" + tip + '\'' +
+                ", num=" + num +
+                ", select=" + select +
+                '}';
+    }
 }

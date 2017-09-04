@@ -10,6 +10,7 @@ import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.util.LogUtil;
+import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.R;
 import com.siweisoft.service.databinding.FragUserlistBinding;
@@ -45,5 +46,9 @@ public class UserListUIOpe extends BaseUIOpe<FragUserlistBinding> {
                 viewDataBinding.ivHead.setOnClickListener(this);
             }
         });
+    }
+
+    public void initRefresh(MaterialRefreshListener refreshListener) {
+        bind.refresh.setMaterialRefreshListener(refreshListener);
     }
 }

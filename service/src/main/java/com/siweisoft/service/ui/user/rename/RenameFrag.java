@@ -4,15 +4,15 @@ package com.siweisoft.service.ui.user.rename;
 
 import android.view.View;
 
-import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.base.interf.OnFinishListener;
 import com.siweisoft.service.R;
+import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.login.UserBean;
 
 import butterknife.OnClick;
 
-public class RenameFrag extends BaseUIFrag<RenameUIOpe, RenameDAOpe> {
+public class RenameFrag extends BaseServerFrag<RenameUIOpe, RenameDAOpe> {
 
     @Override
     public void doThing() {
