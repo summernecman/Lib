@@ -52,6 +52,11 @@ public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
             public void onClick(View v) {
                 super.onClick(v);
                 data.getTipBeen().get((Integer) v.getTag(R.id.position)).setSelect(!data.getTipBeen().get((Integer) v.getTag(R.id.position)).isSelect());
+                if (data.getTipBeen().get((Integer) v.getTag(R.id.position)).isSelect()) {
+                    data.getTipBeen().get((Integer) v.getTag(R.id.position)).setNum(1);
+                } else {
+                    data.getTipBeen().get((Integer) v.getTag(R.id.position)).setNum(0);
+                }
                 notifyDataSetChanged();
             }
         });

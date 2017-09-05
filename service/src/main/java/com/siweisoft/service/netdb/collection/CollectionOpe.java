@@ -11,9 +11,11 @@ import com.android.lib.network.bean.req.BaseReqBean;
 import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.network.netadapter.OnNetWorkReqAdapter;
 import com.android.lib.util.GsonUtil;
-import com.android.lib.util.LogUtil;
+import com.google.gson.reflect.TypeToken;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.user.login.UserBean;
+
+import java.util.ArrayList;
 
 public class CollectionOpe extends BaseDAOpe implements CollectionI {
 
@@ -23,25 +25,40 @@ public class CollectionOpe extends BaseDAOpe implements CollectionI {
     }
 
     @Override
-    public void getCollectionVideosByUserId(UserBean userBean, OnFinishListener onFinishListener) {
+    public void getCollectionVideosByUserId(UserBean userBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
         NetWork.getInstance(context).doHttpRequsetWithSession(context, "/collection/getCollectionVideosByUserId", baseReqBean, new OnNetWorkReqAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
-                LogUtil.E(o);
+                ArrayList<VideoBean> res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<VideoBean>>() {
+                }.getType());
+                onFinishListener.onFinish(res);
             }
         });
     }
 
     @Override
-    public void collect(VideoBean videoBean, OnFinishListener onFinishListener) {
+    public void getCollectionNumByUserId(UserBean userBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/collection/getCollectionNumByUserId", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                onFinishListener.onFinish(o.getData() + "");
+            }
+        });
+    }
+
+
+    @Override
+    public void collect(VideoBean videoBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(videoBean));
         NetWork.getInstance(context).doHttpRequsetWithSession(context, "/collection/collect", baseReqBean, new OnNetWorkReqAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
-
+                onFinishListener.onFinish(b);
             }
         });
     }

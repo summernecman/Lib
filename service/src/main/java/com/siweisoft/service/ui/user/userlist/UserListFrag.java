@@ -5,10 +5,10 @@ package com.siweisoft.service.ui.user.userlist;
 import android.os.Bundle;
 import android.view.View;
 
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
-import com.android.lib.util.ToastUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
@@ -22,6 +22,8 @@ import com.siweisoft.service.ui.Constant.VideoValue;
 import com.siweisoft.service.ui.user.login.UserBean;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
+
+import java.util.ArrayList;
 
 public class UserListFrag extends BaseServerFrag<UserListUIOpe, UserListDAOpe> {
 
@@ -43,6 +45,14 @@ public class UserListFrag extends BaseServerFrag<UserListUIOpe, UserListDAOpe> {
         setTitleBean(new TitleBean("", "联系人", ""));
         getP().getU().initList(ChatInit.getInstance().getUserList(), this);
         ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
+        getP().getD().getUsersInfoByPhone(ChatInit.getInstance().getUserList(), new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getP().getU().initList((ArrayList<UserBean>) o, UserListFrag.this);
+                ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
+            }
+        });
+
     }
 
     @Override
@@ -56,11 +66,7 @@ public class UserListFrag extends BaseServerFrag<UserListUIOpe, UserListDAOpe> {
                 userInfoFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, userBean);
                 FragmentUtil2.getInstance().add(activity, Value.ROOTID_TWO, userInfoFrag);
                 break;
-            default:
-                if (userBean.getChatid().equals(Value.userBean.getChatid())) {
-                    ToastUtil.getInstance().showShort(activity, "这是你自己");
-                    return;
-                }
+            case R.id.iv_call:
                 VideoBean videoBean = new VideoBean();
                 videoBean.setFromphone(Value.userBean.getPhone());
                 videoBean.setTophone(ChatInit.getInstance().getAnyChatSDK().GetUserName(Integer.parseInt(userBean.getChatid())));
@@ -79,7 +85,12 @@ public class UserListFrag extends BaseServerFrag<UserListUIOpe, UserListDAOpe> {
     @Override
     public void dealMesage(MessageEvent event) {
         super.dealMesage(event);
-        getP().getU().initList(ChatInit.getInstance().getUserList(), this);
-        ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
+        getP().getD().getUsersInfoByPhone(ChatInit.getInstance().getUserList(), new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getP().getU().initList((ArrayList<UserBean>) o, UserListFrag.this);
+                ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
+            }
+        });
     }
 }

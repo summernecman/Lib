@@ -73,4 +73,12 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
     public void initRefresh(MaterialRefreshListener refreshListener) {
         bind.refresh.setMaterialRefreshListener(refreshListener);
     }
+
+    public void initCommentNum(String num) {
+        bind.tvCommentnum.setText(num);
+    }
+
+    public void initCollectNum(String num) {
+        bind.tvCollectnum.setText(num);
+    }
 }

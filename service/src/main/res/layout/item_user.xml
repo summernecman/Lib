@@ -65,11 +65,11 @@
                     hedgehog:starImageWidth="30dp" />
 
                 <TextView
+                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="@={item_user.name}"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -86,12 +86,13 @@
                     android:layout_marginTop="5dp"
                     android:text="25km"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="13sp" />
 
                 <ImageView
+                    android:id="@+id/iv_call"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/jc_play_pressed" />
+                    android:src="@drawable/icon_call_p" />
 
             </LinearLayout>
         </LinearLayout>

@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
-import com.android.lib.util.LogUtil;
+import com.android.lib.util.ToastUtil;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TitleBean;
@@ -34,13 +34,18 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                 }
             }
         });
-        getActivity().findViewById(R.id.ftv_right).setOnClickListener(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
         JCVideoPlayer.releaseAllVideos();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getActivity().findViewById(R.id.ftv_right).setOnClickListener(this);
     }
 
     @Override
@@ -56,7 +61,9 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                 getP().getD().collect(getP().getD().getVideoBean(), new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
-                        LogUtil.E(o);
+                        if ((Boolean) o) {
+                            ToastUtil.getInstance().showShort(activity, "收藏成功");
+                        }
                     }
                 });
                 break;

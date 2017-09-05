@@ -35,9 +35,9 @@ public class MainUIOpe extends BaseUIOpe<ActMainBinding> {
             BaseServerFrag baseUIFrag = (BaseServerFrag) fragments.get(fragments.size() - 1);
             if (baseUIFrag != null) {
                 bind.tophead.setTitle2(baseUIFrag.getTitleBean());
-                bind.tophead.ftvBack.setVisibility(View.VISIBLE);
-                bind.tophead.ftvTitle.setVisibility(View.VISIBLE);
-                bind.tophead.ftvRight.setVisibility(View.VISIBLE);
+//                bind.tophead.ftvBack.setVisibility(View.VISIBLE);
+//                bind.tophead.ftvTitle.setVisibility(View.VISIBLE);
+//                bind.tophead.ftvRight.setVisibility(View.VISIBLE);
             }
         }
     }

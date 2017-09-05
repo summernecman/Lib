@@ -5,6 +5,8 @@ package com.siweisoft.service.netdb.user;
 import com.android.lib.base.interf.OnFinishListener;
 import com.siweisoft.service.ui.user.login.UserBean;
 
+import java.util.ArrayList;
+
 public interface UserI {
 
     public void registed(String username, OnFinishListener onFinishListener);
@@ -23,4 +25,8 @@ public interface UserI {
     public void setName(UserBean userBean, OnFinishListener onFinishListener);
 
     public void getUserCallInfo(UserBean userBean, OnFinishListener onFinishListener);
+
+    public void getUsersInfoByPhone(ArrayList<UserBean> userBeen, OnFinishListener onFinishListener);
+
+    public void getArrayUsersInfoByPhone(ArrayList<ArrayList<UserBean>> userBeen, OnFinishListener onFinishListener);
 }

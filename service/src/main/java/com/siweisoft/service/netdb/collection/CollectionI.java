@@ -10,5 +10,7 @@ public interface CollectionI {
 
     public void getCollectionVideosByUserId(UserBean userBean, OnFinishListener onFinishListener);
 
+    public void getCollectionNumByUserId(UserBean userBean, OnFinishListener onFinishListener);
+
     public void collect(VideoBean videoBean, OnFinishListener onFinishListener);
 }

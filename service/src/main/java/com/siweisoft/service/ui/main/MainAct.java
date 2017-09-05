@@ -13,13 +13,11 @@ import com.android.lib.base.activity.BaseUIActivity;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.ToastUtil;
 import com.android.lib.util.system.UUUIDUtil;
 import com.siweisoft.service.R;
-import com.siweisoft.service.ServieApp;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.Constant.VideoValue;
 import com.siweisoft.service.ui.user.login.UserBean;
-import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import butterknife.OnClick;
 import butterknife.Optional;
@@ -41,11 +39,13 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> {
 
     @Override
     public void onBackPressed() {
-        FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
-        if (FragmentUtil2.fragMap.get(Value.getNowRoot()).size() == 0) {
-            ChatInit.getInstance().leaveRoom(VideoValue.URL.ROOMID);
-            ChatInit.getInstance().doLoginOut();
-            ((ServieApp) getApplication()).exit();
+        if (FragmentUtil2.fragMap.get(Value.getNowRoot()).size() == 1) {
+//            ChatInit.getInstance().leaveRoom(VideoValue.URL.ROOMID);
+//            ChatInit.getInstance().doLoginOut();
+//            ((ServieApp) getApplication()).exit();
+            ToastUtil.getInstance().showShort(activity, "请从设置里退出");
+        } else {
+            FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
         }
     }
 

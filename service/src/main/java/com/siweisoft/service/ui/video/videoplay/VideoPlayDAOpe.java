@@ -11,6 +11,7 @@ import com.siweisoft.service.netdb.collection.CollectionOpe;
 import com.siweisoft.service.netdb.comment.CommentI;
 import com.siweisoft.service.netdb.comment.CommentOpe;
 import com.siweisoft.service.netdb.video.VideoBean;
+import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userinfo.UserInfoDAOpe;
 
 public class VideoPlayDAOpe extends BaseDAOpe {
@@ -44,12 +45,18 @@ public class VideoPlayDAOpe extends BaseDAOpe {
         if (commentI == null) {
             commentI = new CommentOpe(context);
         }
-        commentI.getVideoComment(videoBean, onFinishListener);
+        videoBean.setToUser(Value.userBean);
+        commentI.getVideoCommentByVideoNameAndFrom(videoBean, onFinishListener);
     }
 
     public void collect(VideoBean videoBean, OnFinishListener onFinishListener) {
         if (collectionI == null) {
             collectionI = new CollectionOpe(context);
+        }
+        if (Value.userBean.getId() == videoBean.getFromUser().getId()) {
+            videoBean.setFromid(videoBean.getFromUser().getId());
+        } else {
+            videoBean.setFromid(videoBean.getToUser().getId());
         }
         collectionI.collect(videoBean, onFinishListener);
     }

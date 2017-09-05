@@ -54,13 +54,19 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                 getP().getD().getVideoBean().setFile(s);
             }
         });
-        getActivity().findViewById(R.id.ftv_right).setOnClickListener(this);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         getActivity().findViewById(R.id.ftv_right).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.ftv_right).setOnClickListener(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
     }
 
     @Override

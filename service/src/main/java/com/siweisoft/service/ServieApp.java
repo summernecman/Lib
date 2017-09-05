@@ -19,13 +19,17 @@ public class ServieApp extends LibAplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        UrlConstant.URI = "http://106.14.161.168:8079/server";
-        UrlConstant.URI = "http://192.168.20.175:8079/server";
-        UrlConstant.fileUrl = "http://192.168.20.175:8079/files";
+        UrlConstant.HTTP = "http://";
+        UrlConstant.NETSTART = "106.14.161.168";
+        UrlConstant.NETSTART = "192.168.20.175";
+
+        UrlConstant.URI = UrlConstant.HTTP + UrlConstant.NETSTART + ":8079/server";
+        UrlConstant.fileUrl = UrlConstant.HTTP + UrlConstant.NETSTART + ":8079/files";
 
         VideoValue.URL.IP = "106.14.161.168";
         VideoValue.URL.PROT = 8906;
         SPUtil.getInstance().init(this);
+
 
         x.Ext.init(this);
         x.Ext.setDebug(false); //输出debug日志，开启会影响性能

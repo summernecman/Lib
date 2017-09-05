@@ -54,6 +54,18 @@ public class CommentOpe extends BaseDAOpe implements CommentI {
     }
 
     @Override
+    public void getCommentNumByUserName(UserBean userBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/comment/getCommentNumByUserName", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                onFinishListener.onFinish(o.getData() + "");
+            }
+        });
+    }
+
+    @Override
     public void getUserTips(UserBean userBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
@@ -69,10 +81,24 @@ public class CommentOpe extends BaseDAOpe implements CommentI {
     }
 
     @Override
-    public void getVideoComment(VideoBean videoBean, final OnFinishListener onFinishListener) {
+    public void getVideoCommentByVideoName(VideoBean videoBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(videoBean));
         NetWork.getInstance(context).doHttpRequsetWithSession(context, "/comment/getVideoCommentByVideoName", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                ArrayList<CommentBean> res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<CommentBean>>() {
+                }.getType());
+                onFinishListener.onFinish(res);
+            }
+        });
+    }
+
+    @Override
+    public void getVideoCommentByVideoNameAndFrom(VideoBean videoBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(videoBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/comment/getVideoCommentByVideoNameAndFrom", baseReqBean, new OnNetWorkReqAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 ArrayList<CommentBean> res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<CommentBean>>() {

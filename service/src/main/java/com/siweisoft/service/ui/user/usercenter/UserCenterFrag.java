@@ -15,9 +15,9 @@ import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.video.VideoTimeBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.setting.aboutus.AboutUsFrag;
+import com.siweisoft.service.ui.setting.account.AccountFrag;
+import com.siweisoft.service.ui.setting.collect.CollecFrag;
 import com.siweisoft.service.ui.setting.feedback.FeedBackFrag;
-import com.siweisoft.service.ui.setting.frag_account.AccountFrag;
-import com.siweisoft.service.ui.setting.frag_collect.CollecFrag;
 import com.siweisoft.service.ui.setting.remarklist.RemarkListFrag;
 import com.siweisoft.service.ui.setting.setting.SettingFrag;
 import com.siweisoft.service.ui.user.userheadname.UserHeadNameFrag;
@@ -43,6 +43,7 @@ public class UserCenterFrag extends BaseServerFrag<UserCenterUIOpe, UserCenterDA
     public void initData() {
         super.initData();
         setTitleBean(new TitleBean("", "个人中心", ""));
+        getP().getU().initHead();
         getP().getU().initTips(getP().getD().getUserInfoDAOpe().getData());
         getP().getD().getUserCallInfo(new OnFinishListener() {
             @Override
@@ -58,12 +59,25 @@ public class UserCenterFrag extends BaseServerFrag<UserCenterUIOpe, UserCenterDA
                 getP().getU().initTips((HashMap<Integer, TipBean>) o);
             }
         });
+
+        getP().getD().getCommentNumByUserName(Value.userBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getP().getU().initCommentNum((String) o);
+            }
+        });
+
+        getP().getD().getCollectionNumByUserId(Value.userBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getP().getU().initCollectNum((String) o);
+            }
+        });
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        getP().getU().initHead();
     }
 
 

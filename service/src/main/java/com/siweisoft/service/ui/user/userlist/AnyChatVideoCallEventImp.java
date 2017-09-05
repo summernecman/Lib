@@ -56,7 +56,7 @@ public class AnyChatVideoCallEventImp implements AnyChatVideoCallEvent {
                 RemarkFrag remarkFrag = new RemarkFrag();
                 remarkFrag.setArguments(new Bundle());
                 remarkFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, videoBean);
-                FragmentUtil2.getInstance().add(fragment.getActivity(), Value.ROOTID_TWO, remarkFrag);
+                FragmentUtil2.getInstance().add(fragment.getActivity(), Value.ROOTID, remarkFrag);
 
 
                 LogUtil.E("视频呼叫会话开始事件" + userStr);

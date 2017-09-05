@@ -5,6 +5,7 @@ package com.siweisoft.service.ui.user.rename;
 import android.view.View;
 
 import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.util.FragmentUtil2;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.ui.Constant.Value;
@@ -28,6 +29,7 @@ public class RenameFrag extends BaseServerFrag<RenameUIOpe, RenameDAOpe> {
                     public void onFinish(Object o) {
                         UserBean bean = (UserBean) o;
                         Value.userBean.setName(bean.getName());
+                        FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
                     }
                 });
                 break;

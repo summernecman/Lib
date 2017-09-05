@@ -1,4 +1,4 @@
-package com.siweisoft.service.ui.setting.frag_account;
+package com.siweisoft.service.ui.setting.account;
 
 //by summer on 17-08-28.
 

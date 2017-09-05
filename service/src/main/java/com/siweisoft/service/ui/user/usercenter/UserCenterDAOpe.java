@@ -6,6 +6,8 @@ import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.siweisoft.service.netdb.collection.CollectionI;
+import com.siweisoft.service.netdb.collection.CollectionOpe;
 import com.siweisoft.service.netdb.comment.CommentI;
 import com.siweisoft.service.netdb.comment.CommentOpe;
 import com.siweisoft.service.netdb.user.UserI;
@@ -21,6 +23,8 @@ public class UserCenterDAOpe extends BaseDAOpe {
     UserI userI;
 
     CommentI commentI;
+
+    CollectionI collectionI;
 
     public UserCenterDAOpe(Context context) {
         super(context);
@@ -55,5 +59,19 @@ public class UserCenterDAOpe extends BaseDAOpe {
             commentI = new CommentOpe(context);
         }
         commentI.getUserTips(userBean, onFinishListener);
+    }
+
+    public void getCommentNumByUserName(UserBean userBean, OnFinishListener onFinishListener) {
+        if (commentI == null) {
+            commentI = new CommentOpe(context);
+        }
+        commentI.getCommentNumByUserName(userBean, onFinishListener);
+    }
+
+    public void getCollectionNumByUserId(UserBean userBean, OnFinishListener onFinishListener) {
+        if (collectionI == null) {
+            collectionI = new CollectionOpe(context);
+        }
+        collectionI.getCollectionNumByUserId(userBean, onFinishListener);
     }
 }

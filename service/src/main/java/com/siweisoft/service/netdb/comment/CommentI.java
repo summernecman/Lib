@@ -10,10 +10,14 @@ public interface CommentI {
 
     public void addComment(CommentBean commentBean, OnFinishListener onFinishListener);
 
+    public void getCommentNumByUserName(UserBean userBean, OnFinishListener onFinishListener);
+
     public void getCommentByUserName(UserBean userBean, OnFinishListener onFinishListener);
 
     public void getUserTips(UserBean userBean, OnFinishListener onFinishListener);
 
-    public void getVideoComment(VideoBean videoBean, OnFinishListener onFinishListener);
+    public void getVideoCommentByVideoName(VideoBean videoBean, OnFinishListener onFinishListener);
+
+    public void getVideoCommentByVideoNameAndFrom(VideoBean videoBean, OnFinishListener onFinishListener);
 
 }

@@ -23,6 +23,7 @@
             android:padding="10dp">
 
             <ImageView
+                android:id="@+id/iv_head"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/ic_launcher_round" />
@@ -41,7 +42,15 @@
                     android:layout_weight="1"
                     android:text='@{item_videorecord.fromphone+"---"+item_videorecord.tophone}'
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/iv_way"
+                    android:layout_width="20dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/drawable_callway" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -66,10 +75,10 @@
                     android:src="@drawable/jc_play_pressed" />
 
                 <TextView
+                    android:id="@+id/tv_times"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="12:34"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>

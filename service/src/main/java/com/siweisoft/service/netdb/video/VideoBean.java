@@ -5,6 +5,7 @@ import android.databinding.Bindable;
 
 import com.android.lib.bean.BaseBean;
 import com.siweisoft.service.ui.Constant.Value;
+import com.siweisoft.service.ui.user.login.UserBean;
 
 /**
  * Created by SWSD on 17-08-24.
@@ -41,6 +42,10 @@ public class VideoBean extends BaseBean {
     private String othername;
 
     private long timenum;
+
+    private UserBean fromUser;
+
+    private UserBean toUser;
 
     @Bindable
     public int getId() {
@@ -155,6 +160,24 @@ public class VideoBean extends BaseBean {
         this.timenum = timenum;
     }
 
+    @Bindable
+    public UserBean getFromUser() {
+        return fromUser;
+    }
+
+    public void setFromUser(UserBean fromUser) {
+        this.fromUser = fromUser;
+    }
+
+    @Bindable
+    public UserBean getToUser() {
+        return toUser;
+    }
+
+    public void setToUser(UserBean toUser) {
+        this.toUser = toUser;
+    }
+
     @Override
     public String toString() {
         return "VideoBean{" +
@@ -170,6 +193,8 @@ public class VideoBean extends BaseBean {
                 ", otherid='" + otherid + '\'' +
                 ", othername='" + othername + '\'' +
                 ", timenum=" + timenum +
+                ", fromUser=" + fromUser +
+                ", toUser=" + toUser +
                 '}';
     }
 }

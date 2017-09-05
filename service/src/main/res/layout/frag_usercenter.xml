@@ -70,7 +70,7 @@
                             android:gravity="center_vertical"
                             android:text="@{frag_usercenter.name}"
                             android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="22sp" />
 
                         <TextView
                             android:id="@+id/tv_rate"
@@ -79,7 +79,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:text="@{frag_usercenter.phone}"
-                            android:textColor="@color/black"
+                            android:textColor="@color/gray"
                             android:textSize="15sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -104,15 +104,15 @@
                             android:layout_height="wrap_content"
                             android:text='@{callinfo.timeout+""}'
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="18sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="呼出"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textColor="@color/gray"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -134,7 +134,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="呼入"
-                            android:textColor="@color/black"
+                            android:textColor="@color/gray"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -151,14 +151,14 @@
                             android:layout_height="wrap_content"
                             android:text='@{callinfo.timehours+""}'
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="18sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="分钟"
-                            android:textColor="@color/black"
+                            android:textColor="@color/gray"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -184,7 +184,7 @@
 
                         android:id="@+id/ll_remark"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="45dp"
                         android:background="@drawable/drawable_press_black_while"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
@@ -213,10 +213,10 @@
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/tv_commentnum"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
-                            android:text="46"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -236,7 +236,7 @@
                     <LinearLayout
                         android:id="@+id/ll_collect"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="45dp"
                         android:background="@drawable/drawable_press_black_while"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
@@ -263,10 +263,10 @@
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/tv_collectnum"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
-                            android:text="8"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -286,7 +286,7 @@
                     <LinearLayout
                         android:id="@+id/ll_account"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="45dp"
                         android:background="@drawable/drawable_press_black_while"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
@@ -334,7 +334,7 @@
                     <LinearLayout
                         android:id="@+id/ll_feedback"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="45dp"
                         android:background="@drawable/drawable_press_black_while"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
@@ -382,7 +382,7 @@
                     <LinearLayout
                         android:id="@+id/aboutus"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="45dp"
                         android:background="@drawable/drawable_press_black_while"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
@@ -433,7 +433,7 @@
                     <LinearLayout
                         android:id="@+id/set"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="45dp"
                         android:background="@drawable/drawable_press_black_while"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
@@ -442,7 +442,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_marginLeft="5dp"
-                            android:src="@drawable/icon_setting_p" />
+                            android:src="@drawable/icon_setting" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

@@ -9,9 +9,11 @@ import android.view.View;
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
+import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.LogUtil;
 import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.siweisoft.service.BR;
+import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
 import com.siweisoft.service.databinding.FragUserlistBinding;
 import com.siweisoft.service.databinding.ItemUserBinding;
@@ -44,6 +46,10 @@ public class UserListUIOpe extends BaseUIOpe<FragUserlistBinding> {
                 ItemUserBinding viewDataBinding = (ItemUserBinding) holder.viewDataBinding;
                 viewDataBinding.ivHead.setTag(R.id.data, data.get(position));
                 viewDataBinding.ivHead.setOnClickListener(this);
+                viewDataBinding.ivCall.setTag(R.id.data, data.get(position));
+                viewDataBinding.ivCall.setOnClickListener(this);
+                GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
+                LogUtil.E("111111111111:" + UrlConstant.fileUrl + "/" + data.get(position).getHeadurl());
             }
         });
     }
