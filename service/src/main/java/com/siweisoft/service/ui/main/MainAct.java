@@ -15,6 +15,7 @@ import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.util.system.UUUIDUtil;
+import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.siweisoft.service.R;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.login.UserBean;
@@ -39,6 +40,10 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> {
 
     @Override
     public void onBackPressed() {
+        if (StandardGSYVideoPlayer.backFromWindowFull(this)) {
+            return;
+        }
+
         if (FragmentUtil2.fragMap.get(Value.getNowRoot()).size() == 1) {
 //            ChatInit.getInstance().leaveRoom(VideoValue.URL.ROOMID);
 //            ChatInit.getInstance().doLoginOut();

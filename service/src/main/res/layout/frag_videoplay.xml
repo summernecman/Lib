@@ -13,7 +13,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+        <!--        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+                    android:id="@+id/videoplayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />-->
+
+        <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
             android:id="@+id/videoplayer"
             android:layout_width="match_parent"
             android:layout_height="200dp" />

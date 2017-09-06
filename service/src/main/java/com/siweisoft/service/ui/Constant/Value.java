@@ -2,14 +2,19 @@ package com.siweisoft.service.ui.Constant;
 
 //by summer on 2017-07-04.
 
+import android.os.Environment;
+
 import com.android.lib.constant.ValueConstant;
 import com.siweisoft.service.R;
 import com.siweisoft.service.ui.user.login.UserBean;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Value extends ValueConstant {
 
+
+    public static int FULLSCREEN = R.id.rlroot;
 
     public static int ROOTID = R.id.serviceroot;
 
@@ -20,6 +25,8 @@ public class Value extends ValueConstant {
     public static int ROOTID_THREE = R.id.three;
 
     public static int position = 0;
+
+    public static String CACHE_FILE = "videocache";
 
     public static ArrayList<Integer> root = new ArrayList<>();
     public static UserBean userBean = new UserBean();
@@ -36,6 +43,14 @@ public class Value extends ValueConstant {
 
     public static void setPostion(int postion) {
         Value.position = postion;
+    }
+
+    public static File getCacheFile() {
+        File file = new File(Environment.getExternalStorageDirectory().getPath() + "/" + CACHE_FILE);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return file;
     }
 
 }
