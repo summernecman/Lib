@@ -44,6 +44,11 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> {
             return;
         }
 
+        if (FragmentUtil2.fragMap.get(Value.FULLSCREEN).size() == 1) {
+            FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
+            return;
+        }
+
         if (FragmentUtil2.fragMap.get(Value.getNowRoot()).size() == 1) {
 //            ChatInit.getInstance().leaveRoom(VideoValue.URL.ROOMID);
 //            ChatInit.getInstance().doLoginOut();

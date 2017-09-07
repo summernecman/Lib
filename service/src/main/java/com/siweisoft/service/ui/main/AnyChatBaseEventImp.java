@@ -11,7 +11,7 @@ import com.android.lib.view.bottommenu.MessageEvent;
 import com.bairuitech.anychat.AnyChatBaseEvent;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.Constant.VideoValue;
-import com.siweisoft.service.ui.user.userlist.UserListFrag;
+import com.siweisoft.service.ui.user.onlinelist.OnLineListFrag;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import org.greenrobot.eventbus.EventBus;
@@ -70,7 +70,7 @@ public class AnyChatBaseEventImp implements AnyChatBaseEvent {
     public void OnAnyChatOnlineUserMessage(int dwUserNum, int dwRoomId) {
         MessageEvent messageEvent = new MessageEvent();
         messageEvent.sender = MainAct.class.getName();
-        messageEvent.dealer = UserListFrag.class.getName();
+        messageEvent.dealer = OnLineListFrag.class.getName();
         EventBus.getDefault().post(messageEvent);
     }
 
@@ -83,7 +83,7 @@ public class AnyChatBaseEventImp implements AnyChatBaseEvent {
     public void OnAnyChatUserAtRoomMessage(int dwUserId, boolean bEnter) {
         MessageEvent messageEvent = new MessageEvent();
         messageEvent.sender = MainAct.class.getName();
-        messageEvent.dealer = UserListFrag.class.getName();
+        messageEvent.dealer = OnLineListFrag.class.getName();
         EventBus.getDefault().post(messageEvent);
     }
 

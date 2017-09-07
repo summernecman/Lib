@@ -3,6 +3,7 @@ package com.siweisoft.service.netdb.comment;
 //by summer on 17-08-29.
 
 import com.android.lib.bean.BaseBean;
+import com.siweisoft.service.ui.user.login.UserBean;
 
 public class CommentBean extends BaseBean {
 
@@ -21,6 +22,10 @@ public class CommentBean extends BaseBean {
     private String fromuser;
 
     private String touser;
+
+    private UserBean fromUser;
+
+    private UserBean toUser;
 
     public int getId() {
         return id;
@@ -85,5 +90,21 @@ public class CommentBean extends BaseBean {
 
     public void setVideoname(String videoname) {
         this.videoname = videoname;
+    }
+
+    public UserBean getFromUser() {
+        return fromUser;
+    }
+
+    public void setFromUser(UserBean fromUser) {
+        this.fromUser = fromUser;
+    }
+
+    public UserBean getToUser() {
+        return toUser;
+    }
+
+    public void setToUser(UserBean toUser) {
+        this.toUser = toUser;
     }
 }

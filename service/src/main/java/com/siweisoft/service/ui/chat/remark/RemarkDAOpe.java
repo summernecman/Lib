@@ -4,11 +4,15 @@ package com.siweisoft.service.ui.chat.remark;
 
 import android.content.Context;
 
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.siweisoft.service.bean.TipsBean;
+import com.siweisoft.service.netdb.user.UserI;
+import com.siweisoft.service.netdb.user.UserNetOpe;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.netdb.video.VideoI;
 import com.siweisoft.service.netdb.video.VideoOpe;
+import com.siweisoft.service.ui.user.login.UserBean;
 import com.siweisoft.service.ui.user.userinfo.UserInfoDAOpe;
 
 public class RemarkDAOpe extends BaseDAOpe {
@@ -22,6 +26,8 @@ public class RemarkDAOpe extends BaseDAOpe {
     float ratingbar;
 
     TipsBean tipsBean;
+
+    UserI userI;
 
 
     public RemarkDAOpe(Context context) {
@@ -55,5 +61,12 @@ public class RemarkDAOpe extends BaseDAOpe {
 
     public TipsBean getTipsBean() {
         return tipsBean;
+    }
+
+    public void getChatUserInfo(UserBean userBean, OnFinishListener onFinishListener) {
+        if (userI == null) {
+            userI = new UserNetOpe(context);
+        }
+        userI.getUserInfoByPhone(userBean, onFinishListener);
     }
 }

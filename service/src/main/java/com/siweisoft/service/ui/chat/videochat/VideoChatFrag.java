@@ -86,41 +86,41 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                 ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(-1, 0);
                 ChatInit.getInstance().getAnyChatSDK().removeEvent(this);
                 ChatInit.getInstance().getAnyChatSDK().mSensorHelper.DestroySensor();
-                FragmentUtil2.getInstance().removeTop(activity, R.id.serviceroot);
+                FragmentUtil2.getInstance().removeTop(activity, Value.FULLSCREEN);
                 break;
             case R.id.btn_speakControl:
-                if ((Boolean) getP().getU().bind.btnSpeakControl.getTag(R.id.data)) {
-                    getP().getU().bind.btnSpeakControl.setTag(R.id.data, false);
-                    getP().getU().bind.btnSpeakControl.setImageResource(R.drawable.speak_off);
-                    ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(-1, 0);
-                } else {
-                    getP().getU().bind.btnSpeakControl.setTag(R.id.data, true);
-                    getP().getU().bind.btnSpeakControl.setImageResource(R.drawable.speak_on);
-                    ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(-1, 1);
-                }
-                break;
-            case R.id.btn_speakControl_remove:
-                if ((Boolean) getP().getU().bind.btnSpeakControlRemove.getTag(R.id.data)) {
-                    getP().getU().bind.btnSpeakControlRemove.setTag(R.id.data, false);
-                    getP().getU().bind.btnSpeakControlRemove.setImageResource(R.drawable.speak_off);
-                    ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(getP().getD().getVideoBean().getOtherid()), 0);
-                } else {
-                    getP().getU().bind.btnSpeakControlRemove.setTag(R.id.data, true);
-                    getP().getU().bind.btnSpeakControlRemove.setImageResource(R.drawable.speak_on);
-                    ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(getP().getD().getVideoBean().getOtherid()), 1);
-                }
+//                if ((Boolean) getP().getU().bind.btnSpeakControl.getTag(R.id.data)) {
+//                    getP().getU().bind.btnSpeakControl.setTag(R.id.data, false);
+//                    getP().getU().bind.btnSpeakControl.setImageResource(R.drawable.speak_off);
+//                    ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(-1, 0);
+//                } else {
+//                    getP().getU().bind.btnSpeakControl.setTag(R.id.data, true);
+//                    getP().getU().bind.btnSpeakControl.setImageResource(R.drawable.speak_on);
+//                    ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(-1, 1);
+//                }
+//                break;
+//            case R.id.btn_speakControl_remove:
+//                if ((Boolean) getP().getU().bind.btnSpeakControlRemove.getTag(R.id.data)) {
+//                    getP().getU().bind.btnSpeakControlRemove.setTag(R.id.data, false);
+//                    getP().getU().bind.btnSpeakControlRemove.setImageResource(R.drawable.speak_off);
+//                    ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(getP().getD().getVideoBean().getOtherid()), 0);
+//                } else {
+//                    getP().getU().bind.btnSpeakControlRemove.setTag(R.id.data, true);
+//                    getP().getU().bind.btnSpeakControlRemove.setImageResource(R.drawable.speak_on);
+//                    ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(getP().getD().getVideoBean().getOtherid()), 1);
+//                }
                 break;
             case R.id.btn_cameraControl:
-                if ((Boolean) getP().getU().bind.btnCameraControl.getTag(R.id.data)) {
-                    getP().getU().bind.btnCameraControl.setTag(R.id.data, false);
-                    getP().getU().bind.btnCameraControl.setImageResource(R.drawable.camera_off);
-                    //ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Value.userBean.type.get() ? Integer.parseInt(getP().getD().getRoleInfo().getUserID()) : -1, 0);
-
-                } else {
-                    getP().getU().bind.btnCameraControl.setTag(R.id.data, true);
-                    getP().getU().bind.btnCameraControl.setImageResource(R.drawable.camera_on);
-                    //ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Value.userBean.type.get() ? Integer.parseInt(getP().getD().getRoleInfo().getUserID()) : -1, 1);
-                }
+//                if ((Boolean) getP().getU().bind.btnCameraControl.getTag(R.id.data)) {
+//                    getP().getU().bind.btnCameraControl.setTag(R.id.data, false);
+//                    getP().getU().bind.btnCameraControl.setImageResource(R.drawable.camera_off);
+//                    ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Value.userBean.getUsertype()==1 ? Integer.parseInt(Value.userBean.getChatid())  : -1, 0);
+//
+//                } else {
+//                    getP().getU().bind.btnCameraControl.setTag(R.id.data, true);
+//                    getP().getU().bind.btnCameraControl.setImageResource(R.drawable.camera_on);
+//                    ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Value.userBean.getUsertype()==1 ? Integer.parseInt(Value.userBean.getChatid()) : -1, 1);
+//                }
                 break;
         }
     }

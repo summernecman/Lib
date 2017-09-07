@@ -10,6 +10,8 @@ import com.siweisoft.service.netdb.collection.CollectionI;
 import com.siweisoft.service.netdb.collection.CollectionOpe;
 import com.siweisoft.service.netdb.comment.CommentI;
 import com.siweisoft.service.netdb.comment.CommentOpe;
+import com.siweisoft.service.netdb.share.ShareI;
+import com.siweisoft.service.netdb.share.ShareOpe;
 import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
 import com.siweisoft.service.ui.Constant.Value;
@@ -25,6 +27,8 @@ public class UserCenterDAOpe extends BaseDAOpe {
     CommentI commentI;
 
     CollectionI collectionI;
+
+    ShareI shareI;
 
     public UserCenterDAOpe(Context context) {
         super(context);
@@ -73,5 +77,12 @@ public class UserCenterDAOpe extends BaseDAOpe {
             collectionI = new CollectionOpe(context);
         }
         collectionI.getCollectionNumByUserId(userBean, onFinishListener);
+    }
+
+    public void getShareNumByUserPhone(UserBean userBean, OnFinishListener onFinishListener) {
+        if (shareI == null) {
+            shareI = new ShareOpe(context);
+        }
+        shareI.getShareNumByUserPhone(userBean, onFinishListener);
     }
 }

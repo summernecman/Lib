@@ -60,7 +60,9 @@ public class CommentOpe extends BaseDAOpe implements CommentI {
         NetWork.getInstance(context).doHttpRequsetWithSession(context, "/comment/getCommentNumByUserName", baseReqBean, new OnNetWorkReqAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
-                onFinishListener.onFinish(o.getData() + "");
+                double res = (double) o.getData();
+                int r = (int) res;
+                onFinishListener.onFinish(r + "");
             }
         });
     }

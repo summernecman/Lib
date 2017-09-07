@@ -39,23 +39,61 @@ public class CollectionOpe extends BaseDAOpe implements CollectionI {
     }
 
     @Override
+    public void isCollectedByVideoIdAndUserId(final CollectionBean collectionBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(collectionBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/collection/isCollectedByVideoIdAndUserId", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                if (o.getData() == null) {
+                    onFinishListener.onFinish(o.getData());
+                } else {
+                    CollectionBean collectionBean1 = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), CollectionBean.class);
+                    onFinishListener.onFinish(collectionBean1);
+                }
+
+
+            }
+        });
+    }
+
+    @Override
     public void getCollectionNumByUserId(UserBean userBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
         NetWork.getInstance(context).doHttpRequsetWithSession(context, "/collection/getCollectionNumByUserId", baseReqBean, new OnNetWorkReqAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
-                onFinishListener.onFinish(o.getData() + "");
+                double res = (double) o.getData();
+                int r = (int) res;
+                onFinishListener.onFinish(r + "");
             }
         });
     }
 
 
     @Override
-    public void collect(VideoBean videoBean, final OnFinishListener onFinishListener) {
+    public void collect(CollectionBean collectionBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
-        baseReqBean.setData(GsonUtil.getInstance().toJson(videoBean));
+        baseReqBean.setData(GsonUtil.getInstance().toJson(collectionBean));
         NetWork.getInstance(context).doHttpRequsetWithSession(context, "/collection/collect", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                if (!b) {
+                    onFinishListener.onFinish(b);
+                    return;
+                }
+                CollectionBean collectionBean1 = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), CollectionBean.class);
+                onFinishListener.onFinish(collectionBean1);
+            }
+        });
+    }
+
+    @Override
+    public void disCollect(CollectionBean collectionBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(collectionBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/collection/discollect", baseReqBean, new OnNetWorkReqAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 onFinishListener.onFinish(b);

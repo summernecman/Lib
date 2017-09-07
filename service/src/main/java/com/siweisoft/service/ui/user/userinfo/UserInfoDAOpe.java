@@ -15,6 +15,7 @@ import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
 import com.siweisoft.service.ui.user.login.UserBean;
 import com.siweisoft.service.ui.user.usercenter.UserCenterDAOpe;
+import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import java.util.ArrayList;
 
@@ -84,5 +85,16 @@ public class UserInfoDAOpe extends BaseDAOpe {
             userCenterDAOpe = new UserCenterDAOpe(context);
         }
         return userCenterDAOpe;
+    }
+
+
+    public UserBean getUserChatInfo(UserBean userBean) {
+        ArrayList<UserBean> userBeen = ChatInit.getInstance().getUserList();
+        for (int i = 0; i < userBeen.size(); i++) {
+            if (userBeen.get(i).getPhone().equals(userBean.getPhone())) {
+                return userBeen.get(i);
+            }
+        }
+        return null;
     }
 }

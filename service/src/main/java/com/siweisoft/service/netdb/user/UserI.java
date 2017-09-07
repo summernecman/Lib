@@ -15,6 +15,10 @@ public interface UserI {
 
     public void login(UserBean userBean, OnFinishListener onFinishListener);
 
+    public void getUserList(OnFinishListener onFinishListener);
+
+    public void getUserListWithOutMe(UserBean userBean, OnFinishListener onFinishListener);
+
 
     public void getLoginInfo(UserBean userBean, OnFinishListener onFinishListener);
 
@@ -25,6 +29,8 @@ public interface UserI {
     public void setName(UserBean userBean, OnFinishListener onFinishListener);
 
     public void getUserCallInfo(UserBean userBean, OnFinishListener onFinishListener);
+
+    public void getUserInfoByPhone(UserBean userBean, OnFinishListener onFinishListener);
 
     public void getUsersInfoByPhone(ArrayList<UserBean> userBeen, OnFinishListener onFinishListener);
 

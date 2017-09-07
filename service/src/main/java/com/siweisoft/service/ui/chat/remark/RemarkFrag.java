@@ -23,6 +23,7 @@ import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
+import com.siweisoft.service.ui.user.login.UserBean;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -38,7 +39,7 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ValueConstant.DATA_DATA, getP().getD().getVideoBean());
         videofragment.setArguments(bundle);
-        FragmentUtil2.getInstance().add(fragment.getActivity(), Value.ROOTID_TWO, videofragment);
+        FragmentUtil2.getInstance().add(fragment.getActivity(), Value.FULLSCREEN, videofragment);
         getP().getU().initRatingBar(new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
@@ -52,6 +53,15 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                 LogUtil.E(i + "" + i1 + "" + b + "" + s);
                 ToastUtil.getInstance().showLong(activity, i + "@" + i1 + "@" + s);
                 getP().getD().getVideoBean().setFile(s);
+            }
+        });
+        final UserBean userBean = new UserBean();
+        userBean.setPhone(getP().getD().getVideoBean().getTophone());
+        getP().getD().getChatUserInfo(userBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                UserBean userBean1 = (UserBean) o;
+                getP().getU().initTop(userBean1);
             }
         });
     }

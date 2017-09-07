@@ -15,7 +15,6 @@ import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.user.login.UserBean;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
 import com.siweisoft.service.ui.video.videoplay.VideoPlayFrag;
 
@@ -58,9 +57,7 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
                     default:
                         UserInfoFrag userInfoFrag = new UserInfoFrag();
                         userInfoFrag.setArguments(new Bundle());
-                        UserBean userBean = new UserBean();
-                        userBean.setPhone(getP().getD().getVideos().get((Integer) v.getTag(R.id.position)).getOthername());
-                        userInfoFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, userBean);
+                        userInfoFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, getP().getD().getVideos().get((Integer) v.getTag(R.id.position)).getOtherUser());
                         FragmentUtil2.getInstance().add(activity, Value.ROOTID_ONE, userInfoFrag);
                         break;
                 }

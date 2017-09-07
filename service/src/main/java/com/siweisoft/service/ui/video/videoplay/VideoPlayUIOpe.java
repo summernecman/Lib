@@ -20,6 +20,7 @@ import com.siweisoft.service.databinding.FragVideoplayBinding;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
+import com.siweisoft.service.ui.main.MainAct;
 
 
 public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
@@ -120,5 +121,13 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
 
     public OrientationUtils getOrientationUtils() {
         return orientationUtils;
+    }
+
+
+    public void initShare(int vis, String txt, View.OnClickListener onClickListener) {
+        MainAct act = (MainAct) context;
+        act.getP().getU().bind.tophead.ftvRight2.setVisibility(vis);
+        act.getP().getU().bind.tophead.ftvRight2.setText(txt);
+        act.getP().getU().bind.tophead.ftvRight2.setOnClickListener(onClickListener);
     }
 }

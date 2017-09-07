@@ -191,19 +191,19 @@
 
                         <ImageView
                             android:id="@+id/imageView3"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="5dp"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="8dp"
                             android:src="@drawable/icon_comment" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:paddingLeft="5dp"
+                            android:paddingLeft="8dp"
                             android:text="评价"
-                            android:textColor="@color/gray"
-                            android:textSize="16sp" />
+                            android:textColor="@color/color_base_txt_black"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -216,7 +216,7 @@
                             android:id="@+id/tv_commentnum"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="15dp"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -242,18 +242,18 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="5dp"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="8dp"
                             android:src="@drawable/icon_collect" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:paddingLeft="5dp"
+                            android:paddingLeft="8dp"
                             android:text="收藏"
-                            android:textColor="@color/gray"
-                            android:textSize="16sp" />
+                            android:textColor="@color/color_base_txt_black"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -266,7 +266,57 @@
                             android:id="@+id/tv_collectnum"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="15dp"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/icon_arraw"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px" />
+                    <LinearLayout
+                        android:id="@+id/ll_share"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/drawable_press_black_while"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="8dp"
+                            android:src="@drawable/icon_collect" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:paddingLeft="8dp"
+                            android:text="分享"
+                            android:textColor="@color/color_base_txt_black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_share"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="15dp"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -292,18 +342,18 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="5dp"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="8dp"
                             android:src="@drawable/icon_security" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:paddingLeft="5dp"
+                            android:paddingLeft="8dp"
                             android:text="账号安全"
-                            android:textColor="@color/gray"
-                            android:textSize="16sp" />
+                            android:textColor="@color/color_base_txt_black"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -340,18 +390,18 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="5dp"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="8dp"
                             android:src="@drawable/icon_comment" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:paddingLeft="5dp"
+                            android:paddingLeft="8dp"
                             android:text="意见反馈"
-                            android:textColor="@color/gray"
-                            android:textSize="16sp" />
+                            android:textColor="@color/color_base_txt_black"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -389,19 +439,19 @@
 
                         <ImageView
                             android:id="@+id/imageView4"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="5dp"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="8dp"
                             android:src="@drawable/icon_about" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:paddingLeft="5dp"
+                            android:paddingLeft="8dp"
                             android:text="关于我们"
-                            android:textColor="@color/gray"
-                            android:textSize="16sp" />
+                            android:textColor="@color/color_base_txt_black"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -439,18 +489,18 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="5dp"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="8dp"
                             android:src="@drawable/icon_setting" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:paddingLeft="5dp"
+                            android:paddingLeft="8dp"
                             android:text="设置"
-                            android:textColor="@color/gray"
-                            android:textSize="16sp" />
+                            android:textColor="@color/color_base_txt_black"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:layout_width="wrap_content"

@@ -1,12 +1,12 @@
 package com.siweisoft.service.ui.user.userlist;
 
-//by summer on 2017-07-04.
+//by summer on 17-09-06.
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
+import com.android.lib.base.listener.ViewListener;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.constant.UrlConstant;
@@ -16,7 +16,7 @@ import com.siweisoft.service.BR;
 import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
 import com.siweisoft.service.databinding.FragUserlistBinding;
-import com.siweisoft.service.databinding.ItemUserBinding;
+import com.siweisoft.service.databinding.ItemUser2Binding;
 import com.siweisoft.service.ui.user.login.UserBean;
 
 import java.util.ArrayList;
@@ -28,26 +28,20 @@ public class UserListUIOpe extends BaseUIOpe<FragUserlistBinding> {
         super(context);
     }
 
-    public void initList(final ArrayList<UserBean> data, final View.OnClickListener onClickListener) {
+
+    public void initList(final ArrayList<UserBean> data, final ViewListener viewListener) {
         for (int i = 0; i < data.size(); i++) {
             LogUtil.E(data.get(i).toString());
         }
         bind.recycle.setLayoutManager(new LinearLayoutManager(context));
-        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_user, BR.item_user, data) {
-            @Override
-            public void onClick(View v) {
-                super.onClick(v);
-                onClickListener.onClick(v);
-            }
+        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_user2, BR.item_user2, data, viewListener) {
 
             @Override
             public void onBindViewHolder(AppViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                ItemUserBinding viewDataBinding = (ItemUserBinding) holder.viewDataBinding;
+                ItemUser2Binding viewDataBinding = (ItemUser2Binding) holder.viewDataBinding;
                 viewDataBinding.ivHead.setTag(R.id.data, data.get(position));
                 viewDataBinding.ivHead.setOnClickListener(this);
-                viewDataBinding.ivCall.setTag(R.id.data, data.get(position));
-                viewDataBinding.ivCall.setOnClickListener(this);
                 GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
                 LogUtil.E("111111111111:" + UrlConstant.fileUrl + "/" + data.get(position).getHeadurl());
             }

@@ -148,5 +148,23 @@ public class StringUtil {
         return data;
     }
 
+    public static String secondToMinute(int second) {
+        if (second < 60) {
+            return second + "秒";
+        }
+        int m = second / 60;
+        int s = second % 60;
+        return m + "分" + s + "秒";
+    }
+
+    public static String secondToMinute(long second) {
+        if (second < 60) {
+            return second + "秒";
+        }
+        long m = second / 60;
+        long s = second % 60;
+        return m + "分" + s + "秒";
+    }
+
 
 }

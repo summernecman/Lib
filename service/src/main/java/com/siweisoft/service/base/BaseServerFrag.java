@@ -36,5 +36,7 @@ public class BaseServerFrag<A extends BaseUIOpe, B extends BaseDAOpe> extends Ba
 
     public void setTitleBean(TitleBean titleBean) {
         this.titleBean = titleBean;
+        MainAct act = (MainAct) activity;
+        act.getP().getU().initTitle();
     }
 }

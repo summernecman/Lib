@@ -7,8 +7,8 @@ import android.support.v4.app.Fragment;
 
 import com.android.lib.base.ope.BaseDAOpe;
 import com.siweisoft.service.ui.history.HistoryFrag;
+import com.siweisoft.service.ui.user.onlinelist.OnLineListFrag;
 import com.siweisoft.service.ui.user.usercenter.UserCenterFrag;
-import com.siweisoft.service.ui.user.userlist.UserListFrag;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class HomeDAOpe extends BaseDAOpe {
     public ArrayList<Fragment> getFragment() {
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new HistoryFrag());
-        fragments.add(new UserListFrag());
+        fragments.add(new OnLineListFrag());
         fragments.add(new UserCenterFrag());
         return fragments;
     }

@@ -47,6 +47,34 @@ public class UserNetOpe extends BaseDAOpe implements UserI {
         });
     }
 
+    @Override
+    public void getUserList(final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(new UserBean()));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/user/getUserList", baseReqBean, new DelayUINetAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                ArrayList<UserBean> res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<UserBean>>() {
+                }.getType());
+                onFinishListener.onFinish(res);
+            }
+        });
+    }
+
+    @Override
+    public void getUserListWithOutMe(UserBean userBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/user/getUserListWithOutMe", baseReqBean, new DelayUINetAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                ArrayList<UserBean> res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<UserBean>>() {
+                }.getType());
+                onFinishListener.onFinish(res);
+            }
+        });
+    }
+
 
     @Override
     public void getLoginInfo(UserBean userBean, final OnFinishListener onFinishListener) {
@@ -108,6 +136,19 @@ public class UserNetOpe extends BaseDAOpe implements UserI {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 VideoTimeBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), VideoTimeBean.class);
+                onFinishListener.onFinish(res);
+            }
+        });
+    }
+
+    @Override
+    public void getUserInfoByPhone(UserBean userBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/user/getUserInfoByPhone", baseReqBean, new DelayUINetAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                UserBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), UserBean.class);
                 onFinishListener.onFinish(res);
             }
         });

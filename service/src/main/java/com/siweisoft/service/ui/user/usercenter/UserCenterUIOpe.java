@@ -4,10 +4,10 @@ package com.siweisoft.service.ui.user.usercenter;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
-import android.view.View;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.ope.BaseUIOpe;
+import com.android.lib.bean.AppViewHolder;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.LogUtil;
 import com.android.lib.view.refreshlayout.MaterialRefreshListener;
@@ -40,12 +40,7 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
             UserInfoDAOpe userInfoDAOpe = new UserInfoDAOpe(context);
             final TipsBean tipsBean = userInfoDAOpe.getData();
             bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
-            bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipsBean.getTipBeen()) {
-                @Override
-                public void onClick(View v) {
-                    super.onClick(v);
-                    tipsBean.getTipBeen().get((Integer) v.getTag(R.id.position)).setSelect(tipsBean.getTipBeen().get((Integer) v.getTag(R.id.position)).isSelect());
-                }
+            bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip2, BR.item_tip2, tipsBean.getTipBeen()) {
             });
             return;
         }
@@ -57,7 +52,13 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
             tipBeen.add(new TipBean(key, data.get(key).getTip(), data.get(key).getNum()));
         }
         bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
-        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipBeen));
+        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipBeen) {
+            @Override
+            public void onBindViewHolder(AppViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.viewDataBinding.getRoot().setSelected(true);
+            }
+        });
     }
 
     public void initCallInfo(VideoTimeBean videoTimeBean) {
@@ -80,5 +81,10 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
 
     public void initCollectNum(String num) {
         bind.tvCollectnum.setText(num);
+    }
+
+
+    public void initShareNum(String num) {
+        bind.tvShare.setText(num);
     }
 }

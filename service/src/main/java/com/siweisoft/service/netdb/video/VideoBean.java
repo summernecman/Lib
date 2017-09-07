@@ -151,6 +151,16 @@ public class VideoBean extends BaseBean {
         return othername;
     }
 
+    public UserBean getOtherUser() {
+        UserBean userBean;
+        if (Value.userBean.getPhone().equals(fromphone)) {
+            userBean = getToUser();
+        } else {
+            userBean = getFromUser();
+        }
+        return userBean;
+    }
+
 
     public long getTimenum() {
         return timenum;

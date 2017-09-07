@@ -11,11 +11,14 @@ import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
+import com.android.lib.constant.UrlConstant;
 import com.hedgehog.ratingbar.RatingBar;
 import com.siweisoft.service.BR;
+import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
 import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.databinding.FragRemarkBinding;
+import com.siweisoft.service.ui.user.login.UserBean;
 
 public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
 
@@ -45,7 +48,7 @@ public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
                 viewDataBinding.getRoot().setOnClickListener(this);
                 viewDataBinding.getRoot().setOnLongClickListener(this);
                 viewDataBinding.setVariable(vari, list.get(position));
-                viewDataBinding.getRoot().findViewById(R.id.tv_tip).setSelected(data.getTipBeen().get(position).isSelect());
+                viewDataBinding.getRoot().setSelected(data.getTipBeen().get(position).isSelect());
             }
 
             @Override
@@ -57,7 +60,8 @@ public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
                 } else {
                     data.getTipBeen().get((Integer) v.getTag(R.id.position)).setNum(0);
                 }
-                notifyDataSetChanged();
+                v.setSelected(data.getTipBeen().get((Integer) v.getTag(R.id.position)).isSelect());
+//                notifyDataSetChanged();
             }
         });
     }
@@ -67,6 +71,11 @@ public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
         return bind.remark.getText().toString();
     }
 
+
+    public void initTop(UserBean userBean) {
+        GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + userBean.getHeadurl()).into(bind.imageView2);
+        bind.tvName.setText("" + userBean.getName());
+    }
 
 
 }

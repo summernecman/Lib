@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:hedgehog="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item_user2"
+            type="com.siweisoft.service.ui.user.login.UserBean" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/drawable_press_black_while"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp">
+
+                <ImageView
+                    android:id="@+id/iv_head"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_launcher_round" />
+
+                <ImageView
+                    android:id="@+id/iv_head1"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_launcher_round" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
+
+                <com.hedgehog.ratingbar.RatingBar
+                    android:id="@+id/ratingbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    hedgehog:clickable="true"
+                    hedgehog:halfstart="true"
+                    hedgehog:starCount="5"
+                    hedgehog:starEmpty="@mipmap/star_empty"
+                    hedgehog:starFill="@mipmap/star_full"
+                    hedgehog:starHalf="@mipmap/star_half"
+                    hedgehog:starImageHeight="30dp"
+                    hedgehog:starImagePadding="10dp"
+                    hedgehog:starImageWidth="30dp" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:text="@{item_user2.name}"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/gray" />
+    </LinearLayout>
+</layout>

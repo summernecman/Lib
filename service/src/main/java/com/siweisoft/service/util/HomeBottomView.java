@@ -122,7 +122,9 @@ public class HomeBottomView extends LinearLayout implements View.OnLongClickList
 
     @Override
     public boolean onLongClick(View v) {
-        onLongClickListener.onLongClick(v);
+        if (onLongClickListener != null) {
+            onLongClickListener.onLongClick(v);
+        }
         return true;
     }
 }

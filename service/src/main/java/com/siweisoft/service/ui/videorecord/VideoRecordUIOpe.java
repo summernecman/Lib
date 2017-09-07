@@ -11,6 +11,7 @@ import com.android.lib.base.listener.ViewListener;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.constant.UrlConstant;
+import com.android.lib.util.StringUtil;
 import com.android.lib.view.ItemDecoration.MyItemDecoration;
 import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.siweisoft.service.BR;
@@ -41,7 +42,7 @@ public class VideoRecordUIOpe extends BaseUIOpe<FragVideorecordBinding> {
                 ItemVideorecordBinding itemVideorecordBinding = (ItemVideorecordBinding) holder.viewDataBinding;
                 holder.viewDataBinding.getRoot().findViewById(R.id.play).setTag(com.android.lib.R.id.data, data.get(position));
                 holder.viewDataBinding.getRoot().findViewById(R.id.play).setOnClickListener(this);
-                ((ItemVideorecordBinding) holder.viewDataBinding).tvTimes.setText("" + data.get(position).getTimenum() + "秒");
+                ((ItemVideorecordBinding) holder.viewDataBinding).tvTimes.setText(StringUtil.secondToMinute(data.get(position).getTimenum()));
                 if (Value.userBean.getPhone().equals(data.get(position).getFromUser().getPhone())) {
                     itemVideorecordBinding.ivWay.setSelected(false);
                     GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getToUser().getHeadurl()).into(itemVideorecordBinding.ivHead);

@@ -9,14 +9,19 @@ import android.view.View;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.ope.BaseUIOpe;
+import com.android.lib.bean.AppViewHolder;
+import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.LogUtil;
 import com.siweisoft.service.BR;
+import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
 import com.siweisoft.service.bean.TipBean;
 import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.databinding.FragUserinfoBinding;
+import com.siweisoft.service.databinding.ItemRemarkBinding;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoTimeBean;
+import com.siweisoft.service.ui.user.login.UserBean;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,16 +58,34 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
             tipBeen.add(new TipBean(key, data.get(key).getTip(), data.get(key).getNum()));
         }
         bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
-        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipBeen));
+        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipBeen) {
+            @Override
+            public void onBindViewHolder(AppViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.viewDataBinding.getRoot().setSelected(true);
+            }
+        });
     }
 
-    public void initRemarks(ArrayList<CommentBean> data) {
+    public void initRemarks(final ArrayList<CommentBean> data) {
         bind.remarklist.setLayoutManager(new LinearLayoutManager(context));
-        bind.remarklist.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_remark, BR.item_remark, data));
+        bind.remarklist.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_remark, BR.item_remark, data) {
+            @Override
+            public void onBindViewHolder(AppViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                ItemRemarkBinding itemRemarkBinding = (ItemRemarkBinding) holder.viewDataBinding;
+                GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemRemarkBinding.ivHead);
+            }
+        });
     }
 
     public void initCallInfo(VideoTimeBean videoTimeBean) {
         bind.setCallinfo1(videoTimeBean);
+    }
+
+    public void initHead(UserBean userBean) {
+        bind.tvName.setText(userBean.getName() + "");
+        GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + userBean.getHeadurl()).into(bind.ivHead11);
     }
 
 }

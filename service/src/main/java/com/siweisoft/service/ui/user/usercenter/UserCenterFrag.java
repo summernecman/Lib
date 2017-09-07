@@ -20,6 +20,7 @@ import com.siweisoft.service.ui.setting.collect.CollecFrag;
 import com.siweisoft.service.ui.setting.feedback.FeedBackFrag;
 import com.siweisoft.service.ui.setting.remarklist.RemarkListFrag;
 import com.siweisoft.service.ui.setting.setting.SettingFrag;
+import com.siweisoft.service.ui.setting.sharelist.ShareListFrag;
 import com.siweisoft.service.ui.user.userheadname.UserHeadNameFrag;
 
 import java.util.HashMap;
@@ -67,6 +68,14 @@ public class UserCenterFrag extends BaseServerFrag<UserCenterUIOpe, UserCenterDA
             }
         });
 
+        getP().getD().getShareNumByUserPhone(Value.userBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getP().getU().initShareNum((String) o);
+            }
+        });
+
+
         getP().getD().getCollectionNumByUserId(Value.userBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
@@ -81,7 +90,7 @@ public class UserCenterFrag extends BaseServerFrag<UserCenterUIOpe, UserCenterDA
     }
 
 
-    @OnClick({R.id.ll_head, R.id.ll_remark, R.id.ll_collect, R.id.ll_account, R.id.ll_feedback, R.id.aboutus, R.id.set})
+    @OnClick({R.id.ll_head, R.id.ll_remark, R.id.ll_collect, R.id.ll_account, R.id.ll_feedback, R.id.aboutus, R.id.set, R.id.ll_share})
     public void onClickEvent(View view) {
         switch (view.getId()) {
             case R.id.ll_head:
@@ -104,6 +113,9 @@ public class UserCenterFrag extends BaseServerFrag<UserCenterUIOpe, UserCenterDA
                 break;
             case R.id.set:
                 FragmentUtil2.getInstance().add(activity, Value.ROOTID_THREE, new SettingFrag());
+                break;
+            case R.id.ll_share:
+                FragmentUtil2.getInstance().add(activity, Value.ROOTID_THREE, new ShareListFrag());
                 break;
         }
     }

@@ -1,4 +1,4 @@
-package com.siweisoft.service.ui.user.userlist;
+package com.siweisoft.service.ui.user.onlinelist;
 
 //by summer on 2017-07-07.
 
@@ -14,7 +14,6 @@ import com.bairuitech.anychat.AnyChatVideoCallEvent;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.remark.RemarkFrag;
-import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
 import com.siweisoft.service.ui.main.RoleInfo;
 import com.siweisoft.service.videochat.chatutil.CallingCenter;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
@@ -56,7 +55,7 @@ public class AnyChatVideoCallEventImp implements AnyChatVideoCallEvent {
                 RemarkFrag remarkFrag = new RemarkFrag();
                 remarkFrag.setArguments(new Bundle());
                 remarkFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, videoBean);
-                FragmentUtil2.getInstance().add(fragment.getActivity(), Value.ROOTID, remarkFrag);
+                FragmentUtil2.getInstance().add(fragment.getActivity(), Value.getNowRoot(), remarkFrag);
 
 
                 LogUtil.E("视频呼叫会话开始事件" + userStr);
@@ -64,11 +63,7 @@ public class AnyChatVideoCallEventImp implements AnyChatVideoCallEvent {
                 break;
             case AnyChatDefine.BRAC_VIDEOCALL_EVENT_FINISH:
                 LogUtil.E("挂断（结束）呼叫会话");
-                if (FragmentUtil2.fragMap.get(Value.ROOTID_TWO) != null &&
-                        FragmentUtil2.fragMap.get(Value.ROOTID_TWO).size() > 1 &&
-                        FragmentUtil2.fragMap.get(Value.ROOTID_TWO).get(FragmentUtil2.fragMap.get(Value.ROOTID_TWO).size() - 1) instanceof VideoChatFrag) {
-                    FragmentUtil2.getInstance().removeTop(fragment.getActivity(), Value.ROOTID_TWO);
-                }
+                FragmentUtil2.getInstance().removeTop(fragment.getActivity(), Value.FULLSCREEN);
                 break;
         }
     }

@@ -8,6 +8,7 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.FragmentUtil2;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
+import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.login.UserBean;
 
@@ -17,6 +18,7 @@ public class RenameFrag extends BaseServerFrag<RenameUIOpe, RenameDAOpe> {
 
     @Override
     public void doThing() {
+        setTitleBean(new TitleBean("返回", "重命名", ""));
         getP().getU().initInfo(getP().getD().getUserBean());
     }
 

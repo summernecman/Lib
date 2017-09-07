@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="fraguserlist"
+            type="String" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.android.lib.view.other.AppMaterialRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:isLoadMore="false"
+            app:overlay="false"
+            app:progress_show_circle_backgroud="false"
+            app:progress_size_type="normal"
+            app:wave_color="@color/color_base"
+            app:wave_height_type="normal"
+            app:wave_show="false">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.android.lib.view.other.AppMaterialRefreshLayout>
+    </RelativeLayout>
+</layout>
