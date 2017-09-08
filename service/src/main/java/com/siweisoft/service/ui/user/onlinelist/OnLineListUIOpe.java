@@ -18,7 +18,7 @@ import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
 import com.siweisoft.service.databinding.FragOnlinelistBinding;
 import com.siweisoft.service.databinding.ItemUserBinding;
-import com.siweisoft.service.ui.user.login.UserBean;
+import com.siweisoft.service.netdb.user.UserBean;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class OnLineListUIOpe extends BaseUIOpe<FragOnlinelistBinding> {
     }
 
     public void initList(final ArrayList<UserBean> data, final View.OnClickListener onClickListener) {
-        for (int i = 0; i < data.size(); i++) {
+        for (int i = 0; data != null && i < data.size(); i++) {
             LogUtil.E(data.get(i).toString());
         }
         bind.recycle.setLayoutManager(new LinearLayoutManager(context));
@@ -50,6 +50,7 @@ public class OnLineListUIOpe extends BaseUIOpe<FragOnlinelistBinding> {
                 viewDataBinding.ivCall.setTag(R.id.data, data.get(position));
                 viewDataBinding.ivCall.setOnClickListener(this);
                 viewDataBinding.tvName.setText(StringUtil.getStr(data.get(position).getName()));
+                viewDataBinding.ratingbar.setStar(data.get(position).getAvg());
                 GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
                 LogUtil.E("111111111111:" + UrlConstant.fileUrl + "/" + data.get(position).getHeadurl());
             }

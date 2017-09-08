@@ -14,10 +14,10 @@ import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TipBean;
 import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
+import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.netdb.video.VideoTimeBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.user.login.UserBean;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import java.util.ArrayList;

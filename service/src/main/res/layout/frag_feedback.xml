@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:hedgehog="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -11,7 +11,47 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_base_graybg"
         android:orientation="vertical">
+
+        <EditText
+            android:gravity="start"
+            android:textSize="15sp"
+            android:hint="请输入您宝贵的意见"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:background="@drawable/drawable_border_round"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <com.hedgehog.ratingbar.RatingBar
+            android:background="@color/white"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:id="@+id/ratingbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            hedgehog:clickable="true"
+            hedgehog:halfstart="true"
+            hedgehog:starCount="5"
+            hedgehog:starEmpty="@mipmap/star_empty"
+            hedgehog:starFill="@mipmap/star_full"
+            hedgehog:starHalf="@mipmap/star_half"
+            hedgehog:starImageHeight="30dp"
+            hedgehog:starImagePadding="10dp"
+            hedgehog:starImageWidth="30dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
 
     </LinearLayout>
 </layout>

@@ -14,7 +14,7 @@ import com.android.lib.util.GsonUtil;
 import com.android.lib.util.LogUtil;
 import com.google.gson.reflect.TypeToken;
 import com.siweisoft.service.netdb.comment.CommentBean;
-import com.siweisoft.service.ui.user.login.UserBean;
+import com.siweisoft.service.netdb.user.UserBean;
 
 import java.util.ArrayList;
 import java.util.List;

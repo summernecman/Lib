@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.android.lib.R;
 import com.android.lib.constant.ValueConstant;
-import com.android.lib.exception.exception.CrashHander;
 import com.android.lib.util.SPUtil;
 import com.android.lib.util.ScreenUtil;
 import com.android.lib.util.activity.ActivityUtil;
@@ -33,7 +32,6 @@ public class LibAplication extends Application {
     protected void initApplication() {
         initSysConfig();
         initImagePicker();
-        initCrash();
         initXutils();
     }
 
@@ -70,12 +68,6 @@ public class LibAplication extends Application {
         x.Ext.setDebug(false); //输出debug日志，开启会影响性能
     }
 
-    /**
-     * 系统报错处理
-     */
-    public void initCrash() {
-        CrashHander.getInstance().init(this);
-    }
 
     /**
      * 退出结束所有界面
@@ -84,4 +76,5 @@ public class LibAplication extends Application {
         ActivityUtil.getInstance().destoryActs();
         System.gc();
     }
+
 }

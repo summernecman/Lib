@@ -16,10 +16,10 @@ import com.bairuitech.anychat.AnyChatDefine;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TitleBean;
+import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.Constant.VideoValue;
-import com.siweisoft.service.ui.user.login.UserBean;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
 

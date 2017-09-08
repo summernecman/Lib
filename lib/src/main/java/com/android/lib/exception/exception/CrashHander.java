@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.android.lib.aplication.LibAplication;
 import com.android.lib.base.activity.BaseActivity;
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.LogUtil;
 
 import java.io.PrintWriter;
@@ -24,6 +25,8 @@ public class CrashHander implements Thread.UncaughtExceptionHandler {
 
     Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
 
+    OnFinishListener onFinishListener;
+
     public static CrashHander getInstance() {
         if (instance == null) {
             instance = new CrashHander();
@@ -31,7 +34,8 @@ public class CrashHander implements Thread.UncaughtExceptionHandler {
         return instance;
     }
 
-    public void init(Context context) {
+    public void init(Context context, OnFinishListener onFinishListener) {
+        this.onFinishListener = onFinishListener;
         this.context = context;
         uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(this);
@@ -48,13 +52,13 @@ public class CrashHander implements Thread.UncaughtExceptionHandler {
             saveInfo(ex, result);
         }
         if (true) {
-            try {
-                Thread.sleep(2000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(2000);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
             uncaughtExceptionHandler.uncaughtException(thread, ex);
-            //restart(thread, ex);
+            restart(thread, ex);
         }
     }
 
@@ -102,6 +106,9 @@ public class CrashHander implements Thread.UncaughtExceptionHandler {
      */
     public void saveInfo(Throwable ex, String result) {
         LogUtil.E(ex.getMessage() + "---" + result);
+        if (onFinishListener != null) {
+            onFinishListener.onFinish(result);
+        }
     }
 
     private boolean showException() {

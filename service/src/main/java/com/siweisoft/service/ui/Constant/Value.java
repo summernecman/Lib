@@ -6,7 +6,7 @@ import android.os.Environment;
 
 import com.android.lib.constant.ValueConstant;
 import com.siweisoft.service.R;
-import com.siweisoft.service.ui.user.login.UserBean;
+import com.siweisoft.service.netdb.user.UserBean;
 
 import java.io.File;
 import java.util.ArrayList;

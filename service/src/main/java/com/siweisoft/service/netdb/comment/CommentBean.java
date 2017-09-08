@@ -3,7 +3,7 @@ package com.siweisoft.service.netdb.comment;
 //by summer on 17-08-29.
 
 import com.android.lib.bean.BaseBean;
-import com.siweisoft.service.ui.user.login.UserBean;
+import com.siweisoft.service.netdb.user.UserBean;
 
 public class CommentBean extends BaseBean {
 

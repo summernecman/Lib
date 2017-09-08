@@ -7,6 +7,7 @@ import android.content.Context;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.android.lib.util.system.UUUIDUtil;
+import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
 

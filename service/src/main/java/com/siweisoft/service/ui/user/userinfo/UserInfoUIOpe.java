@@ -20,8 +20,8 @@ import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.databinding.FragUserinfoBinding;
 import com.siweisoft.service.databinding.ItemRemarkBinding;
 import com.siweisoft.service.netdb.comment.CommentBean;
+import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoTimeBean;
-import com.siweisoft.service.ui.user.login.UserBean;
 
 import java.util.ArrayList;
 import java.util.HashMap;

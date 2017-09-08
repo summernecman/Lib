@@ -9,9 +9,9 @@ import com.android.lib.util.GsonUtil;
 import com.android.lib.util.LogUtil;
 import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatDefine;
+import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.VideoValue;
-import com.siweisoft.service.ui.user.login.UserBean;
 
 import java.util.ArrayList;
 

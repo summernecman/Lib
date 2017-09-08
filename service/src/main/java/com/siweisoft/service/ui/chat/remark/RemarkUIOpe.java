@@ -18,7 +18,7 @@ import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
 import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.databinding.FragRemarkBinding;
-import com.siweisoft.service.ui.user.login.UserBean;
+import com.siweisoft.service.netdb.user.UserBean;
 
 public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
 

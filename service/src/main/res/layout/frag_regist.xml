@@ -5,7 +5,7 @@
 
         <variable
             name="regist"
-            type="com.siweisoft.service.ui.user.login.UserBean" />
+            type="com.siweisoft.service.netdb.user.UserBean" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

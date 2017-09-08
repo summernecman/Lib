@@ -4,8 +4,8 @@ package com.siweisoft.service.netdb.video;
 import android.databinding.Bindable;
 
 import com.android.lib.bean.BaseBean;
+import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.user.login.UserBean;
 
 /**
  * Created by SWSD on 17-08-24.

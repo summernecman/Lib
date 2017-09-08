@@ -12,10 +12,10 @@ import com.siweisoft.service.netdb.comment.CommentI;
 import com.siweisoft.service.netdb.comment.CommentOpe;
 import com.siweisoft.service.netdb.share.ShareI;
 import com.siweisoft.service.netdb.share.ShareOpe;
+import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.user.login.UserBean;
 import com.siweisoft.service.ui.user.userinfo.UserInfoDAOpe;
 
 public class UserCenterDAOpe extends BaseDAOpe {

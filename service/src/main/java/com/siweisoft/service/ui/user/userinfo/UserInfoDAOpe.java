@@ -11,9 +11,9 @@ import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.comment.CommentI;
 import com.siweisoft.service.netdb.comment.CommentOpe;
+import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
-import com.siweisoft.service.ui.user.login.UserBean;
 import com.siweisoft.service.ui.user.usercenter.UserCenterDAOpe;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
 

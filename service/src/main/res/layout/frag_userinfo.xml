@@ -5,7 +5,7 @@
 
         <variable
             name="frag_userinfo"
-            type="com.siweisoft.service.ui.user.login.UserBean" />
+            type="com.siweisoft.service.netdb.user.UserBean" />
 
         <variable
             name="callinfo1"

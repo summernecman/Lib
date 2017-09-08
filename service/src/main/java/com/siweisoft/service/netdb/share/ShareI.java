@@ -3,7 +3,7 @@ package com.siweisoft.service.netdb.share;
 //by summer on 17-09-06.
 
 import com.android.lib.base.interf.OnFinishListener;
-import com.siweisoft.service.ui.user.login.UserBean;
+import com.siweisoft.service.netdb.user.UserBean;
 
 public interface ShareI {
 

@@ -3,8 +3,8 @@ package com.siweisoft.service.netdb.comment;
 //by summer on 17-08-29.
 
 import com.android.lib.base.interf.OnFinishListener;
+import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
-import com.siweisoft.service.ui.user.login.UserBean;
 
 public interface CommentI {
 

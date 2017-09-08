@@ -6,7 +6,7 @@ import android.content.Context;
 
 import com.android.lib.base.ope.BaseUIOpe;
 import com.siweisoft.service.databinding.FragRenameBinding;
-import com.siweisoft.service.ui.user.login.UserBean;
+import com.siweisoft.service.netdb.user.UserBean;
 
 public class RenameUIOpe extends BaseUIOpe<FragRenameBinding> {
 

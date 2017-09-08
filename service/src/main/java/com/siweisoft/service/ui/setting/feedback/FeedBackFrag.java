@@ -2,14 +2,69 @@ package com.siweisoft.service.ui.setting.feedback;
 
 //by summer on 17-08-28.
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
+import com.android.lib.base.listener.ViewListener;
+import com.android.lib.constant.ValueConstant;
+import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.IntentUtil;
+import com.android.lib.util.ToastUtil;
+import com.android.lib.util.UriUtils;
+import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TitleBean;
+import com.siweisoft.service.ui.Constant.Value;
+import com.siweisoft.service.ui.Image.ImageFrag;
+import com.siweisoft.service.ui.main.MainAct;
 
-public class FeedBackFrag extends BaseServerFrag<FeedBAckUIOpe, FeedBackDAOpe> {
+public class FeedBackFrag extends BaseServerFrag<FeedBAckUIOpe, FeedBackDAOpe> implements MainAct.OnTitleClick, ViewListener {
 
     @Override
     public void doThing() {
         super.doThing();
-        setTitleBean(new TitleBean("返回", "意见反馈", ""));
+        setTitleBean(new TitleBean("返回", "意见反馈", "确定"));
+        initOnTitleClick(this);
+        getP().getU().initPics(getP().getD().getPics(), this);
+    }
+
+    @Override
+    public boolean onTitleClick(View v) {
+        switch (v.getId()) {
+            case R.id.ftv_right:
+                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onInterupt(int type, View v) {
+        switch (type) {
+            case ViewListener.TYPE_ONCLICK:
+                if (v.getTag(R.id.data) instanceof Integer) {
+                    IntentUtil.getInstance().photoShowFromphone(fragment, ValueConstant.CODE_REQUSET3);
+                } else {
+                    ImageFrag imageFrag = new ImageFrag();
+                    imageFrag.setArguments(new Bundle());
+                    imageFrag.getArguments().putString(ValueConstant.DATA_DATA, (String) v.getTag(R.id.data));
+                    FragmentUtil2.getInstance().add(activity, Value.getNowRoot(), imageFrag);
+                }
+                break;
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null) {
+            return;
+        }
+        getP().getD().addPic(UriUtils.getPath(activity, data.getData()));
+        if (getP().getD().getPics().size() > 9) {
+            ToastUtil.getInstance().showShort(activity, "图片有点太多了");
+        }
+        getP().getU().initPics(getP().getD().getPics(), this);
     }
 }

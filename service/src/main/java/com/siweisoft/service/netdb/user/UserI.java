@@ -3,7 +3,6 @@ package com.siweisoft.service.netdb.user;
 //by summer on 2017-07-10.
 
 import com.android.lib.base.interf.OnFinishListener;
-import com.siweisoft.service.ui.user.login.UserBean;
 
 import java.util.ArrayList;
 

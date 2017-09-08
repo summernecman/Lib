@@ -8,7 +8,7 @@ import android.view.View;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.siweisoft.service.R;
 import com.siweisoft.service.databinding.FragVideochatBinding;
-import com.siweisoft.service.ui.user.login.UserBean;
+import com.siweisoft.service.netdb.user.UserBean;
 
 public class VideoChatUIOpe extends BaseUIOpe<FragVideochatBinding> {
     public VideoChatUIOpe(Context context) {

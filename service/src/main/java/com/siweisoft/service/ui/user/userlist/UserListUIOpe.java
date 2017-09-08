@@ -17,7 +17,7 @@ import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
 import com.siweisoft.service.databinding.FragUserlistBinding;
 import com.siweisoft.service.databinding.ItemUser2Binding;
-import com.siweisoft.service.ui.user.login.UserBean;
+import com.siweisoft.service.netdb.user.UserBean;
 
 import java.util.ArrayList;
 

@@ -14,7 +14,6 @@ import com.android.lib.network.netadapter.OnNetWorkReqAdapter;
 import com.android.lib.util.GsonUtil;
 import com.google.gson.reflect.TypeToken;
 import com.siweisoft.service.netdb.video.VideoTimeBean;
-import com.siweisoft.service.ui.user.login.UserBean;
 
 import java.util.ArrayList;
 

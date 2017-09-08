@@ -243,7 +243,7 @@ public class NetWork {
         RequestParams requestParams = new RequestParams(UrlConstant.URI + model);
         requestParams.setUseCookie(true);
         requestParams.setHeader("Cookie", SPUtil.getInstance().getStr(ValueConstant.cookieFromResponse));
-        LogUtil.E(UrlConstant.URI + model + "---" + ValueConstant.cookieFromResponse);
+        //LogUtil.E(UrlConstant.URI + model + "---" + ValueConstant.cookieFromResponse);
         Map<String, String> map = gson.fromJson(jsonstr, new TypeToken<Map<String, String>>() {
         }.getType());
 //        Map<String, String> map = JSON.parseObject(jsonstr, new TypeReference<Map<String, String>>() {

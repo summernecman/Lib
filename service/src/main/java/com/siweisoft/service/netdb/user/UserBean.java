@@ -1,4 +1,4 @@
-package com.siweisoft.service.ui.user.login;
+package com.siweisoft.service.netdb.user;
 
 //by summer on 2017-07-03.
 
@@ -27,6 +27,8 @@ public class UserBean extends BaseBean {
     private float rate;
 
     private String uuuid;
+
+    private float avg;
 
 
     @Bindable
@@ -110,12 +112,22 @@ public class UserBean extends BaseBean {
         this.rate = rate;
     }
 
+    @Bindable
     public String getUuuid() {
         return uuuid;
     }
 
     public void setUuuid(String uuuid) {
         this.uuuid = uuuid;
+    }
+
+    @Bindable
+    public float getAvg() {
+        return avg;
+    }
+
+    public void setAvg(float avg) {
+        this.avg = avg;
     }
 
     @Override
@@ -131,6 +143,7 @@ public class UserBean extends BaseBean {
                 ", headurl='" + headurl + '\'' +
                 ", rate=" + rate +
                 ", uuuid='" + uuuid + '\'' +
+                ", avg=" + avg +
                 '}';
     }
 }

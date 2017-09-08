@@ -13,8 +13,8 @@ import com.android.lib.network.netadapter.OnNetWorkReqAdapter;
 import com.android.lib.util.GsonUtil;
 import com.google.gson.reflect.TypeToken;
 import com.siweisoft.service.bean.TipBean;
+import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
-import com.siweisoft.service.ui.user.login.UserBean;
 
 import java.util.ArrayList;
 import java.util.HashMap;

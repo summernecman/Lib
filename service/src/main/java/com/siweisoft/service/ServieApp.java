@@ -8,12 +8,15 @@ import com.android.lib.aplication.LibAplication;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.service.main.AppService;
 import com.android.lib.util.SPUtil;
+import com.siweisoft.service.netdb.crash.CrashOpe;
 import com.siweisoft.service.ui.Constant.VideoValue;
 
 import org.xutils.x;
 
 
 public class ServieApp extends LibAplication {
+
+    CrashOpe crashOpe;
 
     @Override
     public void onCreate() {

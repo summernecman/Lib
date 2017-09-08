@@ -9,7 +9,7 @@ import com.android.lib.base.ope.BaseDAOpe;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.comment.CommentI;
 import com.siweisoft.service.netdb.comment.CommentOpe;
-import com.siweisoft.service.ui.user.login.UserBean;
+import com.siweisoft.service.netdb.user.UserBean;
 
 import java.util.ArrayList;
 

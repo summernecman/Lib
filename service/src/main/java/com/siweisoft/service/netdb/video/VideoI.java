@@ -4,7 +4,7 @@ package com.siweisoft.service.netdb.video;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.siweisoft.service.netdb.comment.CommentBean;
-import com.siweisoft.service.ui.user.login.UserBean;
+import com.siweisoft.service.netdb.user.UserBean;
 
 public interface VideoI {
 
