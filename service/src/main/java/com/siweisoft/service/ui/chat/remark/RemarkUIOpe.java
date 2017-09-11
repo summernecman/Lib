@@ -12,6 +12,7 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.constant.UrlConstant;
+import com.android.lib.util.StringUtil;
 import com.hedgehog.ratingbar.RatingBar;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.GlideApp;
@@ -74,7 +75,7 @@ public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
 
     public void initTop(UserBean userBean) {
         GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + userBean.getHeadurl()).into(bind.imageView2);
-        bind.tvName.setText("" + userBean.getName());
+        bind.tvName.setText(StringUtil.getStr(userBean.getName()));
     }
 
 

@@ -11,6 +11,7 @@ import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.NullUtil;
 import com.android.lib.util.StringUtil;
 import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.siweisoft.service.BR;
@@ -49,10 +50,17 @@ public class OnLineListUIOpe extends BaseUIOpe<FragOnlinelistBinding> {
                 viewDataBinding.ivHead.setOnClickListener(this);
                 viewDataBinding.ivCall.setTag(R.id.data, data.get(position));
                 viewDataBinding.ivCall.setOnClickListener(this);
-                viewDataBinding.tvName.setText(StringUtil.getStr(data.get(position).getName()));
+                viewDataBinding.tvName.setText(NullUtil.isStrEmpty(data.get(position).getName()) ? data.get(position).getPhone() : StringUtil.getStr(data.get(position).getName()));
                 viewDataBinding.ratingbar.setStar(data.get(position).getAvg());
                 GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
                 LogUtil.E("111111111111:" + UrlConstant.fileUrl + "/" + data.get(position).getHeadurl());
+                if (data.get(position).getState() == UserBean.STATE_OFFLINE) {
+                    viewDataBinding.getRoot().setAlpha(0.3f);
+                    viewDataBinding.ivHead1.setSelected(false);
+                } else {
+                    viewDataBinding.getRoot().setAlpha(1f);
+                    viewDataBinding.ivHead1.setSelected(true);
+                }
             }
         });
     }

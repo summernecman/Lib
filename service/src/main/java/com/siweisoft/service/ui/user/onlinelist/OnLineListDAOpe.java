@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.siweisoft.service.bean.AllUserBean;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
@@ -43,6 +44,34 @@ public class OnLineListDAOpe extends BaseDAOpe {
             userI = new UserNetOpe(context);
         }
         userI.getUsersInfoByPhone(data, onFinishListener);
+    }
+
+    public void getUnTypeUserList(UserBean data, OnFinishListener onFinishListener) {
+        if (userI == null) {
+            userI = new UserNetOpe(context);
+        }
+        userI.getUnTypeUserList(data, onFinishListener);
+    }
+
+
+    public void getOtherUsersInfoByPhone(AllUserBean data, OnFinishListener onFinishListener) {
+        if (userI == null) {
+            userI = new UserNetOpe(context);
+        }
+        userI.getOtherUsersInfoByPhone(data, onFinishListener);
+    }
+
+    public ArrayList<UserBean> getOnlineUsersInfo(ArrayList<UserBean> netusers, ArrayList<UserBean> chatusers) {
+        for (int i = 0; netusers != null && i < netusers.size(); i++) {
+            for (int j = 0; chatusers != null && j < chatusers.size(); j++) {
+                if (netusers.get(i).getPhone().equals(chatusers.get(j).getPhone())) {
+                    netusers.get(i).setState(UserBean.STATE_ONLINE);
+                    netusers.get(i).setChatid(chatusers.get(j).getChatid());
+                    break;
+                }
+            }
+        }
+        return netusers;
     }
 
 

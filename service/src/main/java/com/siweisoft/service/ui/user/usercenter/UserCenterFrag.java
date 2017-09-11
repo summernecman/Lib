@@ -21,6 +21,7 @@ import com.siweisoft.service.ui.setting.feedback.FeedBackFrag;
 import com.siweisoft.service.ui.setting.remarklist.RemarkListFrag;
 import com.siweisoft.service.ui.setting.setting.SettingFrag;
 import com.siweisoft.service.ui.setting.sharelist.ShareListFrag;
+import com.siweisoft.service.ui.user.unit.UnitFrag;
 import com.siweisoft.service.ui.user.userheadname.UserHeadNameFrag;
 
 import java.util.HashMap;
@@ -90,7 +91,7 @@ public class UserCenterFrag extends BaseServerFrag<UserCenterUIOpe, UserCenterDA
     }
 
 
-    @OnClick({R.id.ll_head, R.id.ll_remark, R.id.ll_collect, R.id.ll_account, R.id.ll_feedback, R.id.aboutus, R.id.set, R.id.ll_share})
+    @OnClick({R.id.ll_head, R.id.ll_remark, R.id.ll_collect, R.id.ll_account, R.id.ll_feedback, R.id.aboutus, R.id.set, R.id.ll_share, R.id.ll_unit})
     public void onClickEvent(View view) {
         switch (view.getId()) {
             case R.id.ll_head:
@@ -116,6 +117,9 @@ public class UserCenterFrag extends BaseServerFrag<UserCenterUIOpe, UserCenterDA
                 break;
             case R.id.ll_share:
                 FragmentUtil2.getInstance().add(activity, Value.ROOTID_THREE, new ShareListFrag());
+                break;
+            case R.id.ll_unit:
+                FragmentUtil2.getInstance().add(activity, Value.ROOTID_THREE, new UnitFrag());
                 break;
         }
     }

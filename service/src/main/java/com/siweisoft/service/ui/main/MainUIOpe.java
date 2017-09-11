@@ -31,7 +31,7 @@ public class MainUIOpe extends BaseUIOpe<ActMainBinding> {
 
     public void initTitle() {
         ArrayList<Fragment> fragments = FragmentUtil2.fragMap.get(Value.getNowRoot());
-        if (fragments != null && fragments.size() > 0) {
+        if (fragments != null && fragments.size() > 0 && fragments.get(fragments.size() - 1) instanceof BaseServerFrag) {
             BaseServerFrag baseUIFrag = (BaseServerFrag) fragments.get(fragments.size() - 1);
             if (baseUIFrag != null) {
                 bind.tophead.setTitle2(baseUIFrag.getTitleBean());

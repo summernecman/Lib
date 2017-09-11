@@ -144,10 +144,6 @@ public class ChatInit {
 
         ArrayList<UserBean> users = new ArrayList<>();
         int[] userID = anyChatSDK.GetRoomOnlineUsers(VideoValue.URL.ROOMID);
-//        UserBean userBean = new UserBean();
-//        users.add(userBean);
-//        userBean.setChatid(String.valueOf(myid));
-//        userBean.setName(anyChatSDK.GetUserName(myid) + "(自己)");
 
         for (int index = 0; index < userID.length; ++index) {
             UserBean userBean = new UserBean();

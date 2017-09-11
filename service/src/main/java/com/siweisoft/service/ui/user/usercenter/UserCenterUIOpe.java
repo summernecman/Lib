@@ -17,6 +17,7 @@ import com.siweisoft.service.R;
 import com.siweisoft.service.bean.TipBean;
 import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.databinding.FragUsercenterBinding;
+import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoTimeBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userinfo.UserInfoDAOpe;
@@ -69,6 +70,17 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
         LogUtil.E(Value.userBean.getHeadurl());
         GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + Value.userBean.getHeadurl()).into(bind.head);
         bind.setVariable(BR.frag_usercenter, Value.userBean);
+        switch (Value.userBean.getUsertype()) {
+            case UserBean.CUSTOME:
+                GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/usertype/icon_customer").into(bind.type);
+                break;
+            case UserBean.ENGINEER:
+                GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/usertype/icon_engineer" + Value.userBean.getHeadurl()).into(bind.type);
+                break;
+            case UserBean.SERVER:
+                GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/usertype/icon_server" + Value.userBean.getHeadurl()).into(bind.type);
+                break;
+        }
     }
 
     public void initRefresh(MaterialRefreshListener refreshListener) {
@@ -86,5 +98,9 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
 
     public void initShareNum(String num) {
         bind.tvShare.setText(num);
+    }
+
+    public void initUnit() {
+
     }
 }

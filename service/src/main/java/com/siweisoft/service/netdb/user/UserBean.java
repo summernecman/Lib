@@ -5,6 +5,7 @@ package com.siweisoft.service.netdb.user;
 import android.databinding.Bindable;
 
 import com.android.lib.bean.BaseBean;
+import com.siweisoft.service.netdb.unit.UnitBean;
 
 public class UserBean extends BaseBean {
 
@@ -29,6 +30,27 @@ public class UserBean extends BaseBean {
     private String uuuid;
 
     private float avg;
+
+    private int unitid;
+
+    private UnitBean unit;
+
+    private int state;
+
+
+    public static final int CUSTOME = 2;
+
+    public static final int SERVER = 0;
+
+    public static final int ENGINEER = 1;
+
+    public static final int STATE_ONLINE = 1;
+
+    public static final int STATE_OFFLINE = 0;
+
+    public static final int STATE_INVIDEO = 2;
+
+
 
 
     @Bindable
@@ -130,6 +152,30 @@ public class UserBean extends BaseBean {
         this.avg = avg;
     }
 
+    public int getUnitid() {
+        return unitid;
+    }
+
+    public void setUnitid(int unitid) {
+        this.unitid = unitid;
+    }
+
+    public UnitBean getUnit() {
+        return unit;
+    }
+
+    public void setUnit(UnitBean unit) {
+        this.unit = unit;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "UserBean{" +
@@ -144,6 +190,9 @@ public class UserBean extends BaseBean {
                 ", rate=" + rate +
                 ", uuuid='" + uuuid + '\'' +
                 ", avg=" + avg +
+                ", unitid=" + unitid +
+                ", unit=" + unit +
+                ", state=" + state +
                 '}';
     }
 }

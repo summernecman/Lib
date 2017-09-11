@@ -14,7 +14,6 @@
         android:orientation="vertical">
 
 
-
         <LinearLayout
             android:id="@+id/ll_name"
             android:layout_width="match_parent"
@@ -23,7 +22,6 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/et_input"
                 android:paddingRight="10dp"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dimens_base_item"

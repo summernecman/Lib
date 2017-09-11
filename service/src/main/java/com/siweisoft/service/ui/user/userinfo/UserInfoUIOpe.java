@@ -12,6 +12,8 @@ import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.NullUtil;
+import com.android.lib.util.StringUtil;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
@@ -84,7 +86,7 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
     }
 
     public void initHead(UserBean userBean) {
-        bind.tvName.setText(userBean.getName() + "");
+        bind.tvName.setText(NullUtil.isStrEmpty(userBean.getName()) ? userBean.getPhone() : StringUtil.getStr(userBean.getName()));
         GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + userBean.getHeadurl()).into(bind.ivHead11);
     }
 

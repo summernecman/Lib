@@ -13,9 +13,9 @@ import com.bairuitech.anychat.AnyChatDefine;
 import com.bairuitech.anychat.AnyChatVideoCallEvent;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
+import com.siweisoft.service.ui.chat.recept.ReceiptFrag;
 import com.siweisoft.service.ui.chat.remark.RemarkFrag;
 import com.siweisoft.service.ui.main.RoleInfo;
-import com.siweisoft.service.videochat.chatutil.CallingCenter;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 public class AnyChatVideoCallEventImp implements AnyChatVideoCallEvent {
@@ -31,8 +31,25 @@ public class AnyChatVideoCallEventImp implements AnyChatVideoCallEvent {
         LogUtil.E(dwEventType + "-" + dwUserId + "-" + dwUserId + "-" + dwErrorCode + "-" + dwFlags + "-" + dwParam + "-" + "-" + userStr);
         switch (dwEventType) {
             case AnyChatDefine.BRAC_VIDEOCALL_EVENT_REQUEST:
-                LogUtil.E("oncllick" + ChatInit.getInstance().getAnyChatSDK().GetUserName(dwUserId) + "向你发来视频请求");
-                CallingCenter.getInstance().VideoCallControl(AnyChatDefine.BRAC_VIDEOCALL_EVENT_REPLY, dwUserId, AnyChatDefine.BRAC_ERRORCODE_SUCCESS, 0, 0, userStr);
+
+                VideoBean videoBean1 = GsonUtil.getInstance().fromJson(userStr, VideoBean.class);
+                if (videoBean1.getFromphone().equals(Value.userBean.getPhone())) {
+                    videoBean1.setTochatid(dwUserId + "");
+                    videoBean1.setFromchatid(Value.userBean.getChatid());
+                } else {
+                    videoBean1.setFromchatid(dwUserId + "");
+                    videoBean1.setTochatid(Value.userBean.getChatid());
+                }
+
+
+                ReceiptFrag receiptFrag = new ReceiptFrag();
+                receiptFrag.setArguments(new Bundle());
+                receiptFrag.getArguments().putInt(ValueConstant.DATA_POSITION, dwUserId);
+                receiptFrag.getArguments().putString(Value.DATA_DATA2, userStr);
+                receiptFrag.getArguments().putSerializable(Value.DATA_DATA, videoBean1);
+                FragmentUtil2.getInstance().add(fragment.getActivity(), Value.FULLSCREEN, receiptFrag);
+//                LogUtil.E("oncllick" + ChatInit.getInstance().getAnyChatSDK().GetUserName(dwUserId) + "向你发来视频请求");
+//                CallingCenter.getInstance().VideoCallControl(AnyChatDefine.BRAC_VIDEOCALL_EVENT_REPLY, dwUserId, AnyChatDefine.BRAC_ERRORCODE_SUCCESS, 0, 0, userStr);
                 break;
             case AnyChatDefine.BRAC_VIDEOCALL_EVENT_REPLY:
                 LogUtil.E("呼叫成功等待响应");
@@ -55,7 +72,7 @@ public class AnyChatVideoCallEventImp implements AnyChatVideoCallEvent {
                 RemarkFrag remarkFrag = new RemarkFrag();
                 remarkFrag.setArguments(new Bundle());
                 remarkFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, videoBean);
-                FragmentUtil2.getInstance().add(fragment.getActivity(), Value.getNowRoot(), remarkFrag);
+                FragmentUtil2.getInstance().add(fragment.getActivity(), Value.ROOTID_TWO, remarkFrag);
 
 
                 LogUtil.E("视频呼叫会话开始事件" + userStr);

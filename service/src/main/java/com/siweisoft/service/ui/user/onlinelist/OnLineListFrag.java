@@ -43,15 +43,21 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
     public void initData() {
         super.initData();
         setTitleBean(new TitleBean("", "联系人", ""));
-        getP().getU().initList(ChatInit.getInstance().getUserList(), this);
         ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
-        getP().getD().getUsersInfoByPhone(ChatInit.getInstance().getUserList(), new OnFinishListener() {
+        getP().getD().getUnTypeUserList(Value.userBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getU().initList((ArrayList<UserBean>) o, OnLineListFrag.this);
+                getP().getU().initList(getP().getD().getOnlineUsersInfo((ArrayList<UserBean>) o, ChatInit.getInstance().getUserList()), OnLineListFrag.this);
                 ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
             }
         });
+//        getP().getD().getOtherUsersInfoByPhone(new AllUserBean(Value.userBean,ChatInit.getInstance().getUserList()), new OnFinishListener() {
+//            @Override
+//            public void onFinish(Object o) {
+//                getP().getU().initList((ArrayList<UserBean>) o, OnLineListFrag.this);
+//                ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
+//            }
+//        });
 
     }
 
@@ -67,9 +73,14 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
                 FragmentUtil2.getInstance().add(activity, Value.ROOTID_TWO, userInfoFrag);
                 break;
             case R.id.iv_call:
+                if (userBean.getState() != UserBean.STATE_ONLINE) {
+                    return;
+                }
                 VideoBean videoBean = new VideoBean();
                 videoBean.setFromphone(Value.userBean.getPhone());
                 videoBean.setTophone(ChatInit.getInstance().getAnyChatSDK().GetUserName(Integer.parseInt(userBean.getChatid())));
+                videoBean.setToUser(userBean);
+                videoBean.setFromUser(Value.userBean);
                 ChatInit.getInstance().getAnyChatSDK().VideoCallControl(AnyChatDefine.BRAC_VIDEOCALL_EVENT_REQUEST, Integer.parseInt(userBean.getChatid()), 0, 0, 0, GsonUtil.getInstance().toJson(videoBean));
                 break;
         }
@@ -85,12 +96,20 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
     @Override
     public void dealMesage(MessageEvent event) {
         super.dealMesage(event);
-        getP().getD().getUsersInfoByPhone(ChatInit.getInstance().getUserList(), new OnFinishListener() {
+        getP().getD().getUnTypeUserList(Value.userBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getU().initList((ArrayList<UserBean>) o, OnLineListFrag.this);
+                getP().getU().initList(getP().getD().getOnlineUsersInfo((ArrayList<UserBean>) o, ChatInit.getInstance().getUserList()), OnLineListFrag.this);
                 ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
             }
         });
+
+//        getP().getD().getOtherUsersInfoByPhone(new AllUserBean(Value.userBean,ChatInit.getInstance().getUserList()), new OnFinishListener() {
+//            @Override
+//            public void onFinish(Object o) {
+//                getP().getU().initList((ArrayList<UserBean>) o, OnLineListFrag.this);
+//                ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
+//            }
+//        });
     }
 }

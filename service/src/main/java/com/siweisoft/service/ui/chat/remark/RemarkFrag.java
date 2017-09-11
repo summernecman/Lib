@@ -97,6 +97,8 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                 commentBean.setRemark(getP().getU().getRemark());
                 commentBean.setTips(GsonUtil.getInstance().toJson(getP().getD().getData()));
                 commentBean.setVideoname(getP().getD().getVideoBean().getFile());
+                commentBean.setFromid(Value.userBean.getId());
+                commentBean.setToid(getP().getD().getVideoBean().getOtherUser().getId());
                 getP().getD().videoI.commentVideo(commentBean, new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {

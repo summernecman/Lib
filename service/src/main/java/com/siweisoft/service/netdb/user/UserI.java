@@ -3,6 +3,7 @@ package com.siweisoft.service.netdb.user;
 //by summer on 2017-07-10.
 
 import com.android.lib.base.interf.OnFinishListener;
+import com.siweisoft.service.bean.AllUserBean;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,8 @@ public interface UserI {
     public void login(UserBean userBean, OnFinishListener onFinishListener);
 
     public void getUserList(OnFinishListener onFinishListener);
+
+    public void getUnTypeUserList(UserBean userBean, OnFinishListener onFinishListener);
 
     public void getUserListWithOutMe(UserBean userBean, OnFinishListener onFinishListener);
 
@@ -34,4 +37,9 @@ public interface UserI {
     public void getUsersInfoByPhone(ArrayList<UserBean> userBeen, OnFinishListener onFinishListener);
 
     public void getArrayUsersInfoByPhone(ArrayList<ArrayList<UserBean>> userBeen, OnFinishListener onFinishListener);
+
+    public void getOtherUsersInfoByPhone(AllUserBean allUserBean, OnFinishListener onFinishListener);
+
+    public void updateUnit(UserBean userBean, OnFinishListener onFinishListener);
+
 }

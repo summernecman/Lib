@@ -27,6 +27,10 @@ public class CommentBean extends BaseBean {
 
     private UserBean toUser;
 
+    private int fromid;
+
+    private int toid;
+
     public int getId() {
         return id;
     }
@@ -106,5 +110,21 @@ public class CommentBean extends BaseBean {
 
     public void setToUser(UserBean toUser) {
         this.toUser = toUser;
+    }
+
+    public int getFromid() {
+        return fromid;
+    }
+
+    public void setFromid(int fromid) {
+        this.fromid = fromid;
+    }
+
+    public int getToid() {
+        return toid;
+    }
+
+    public void setToid(int toid) {
+        this.toid = toid;
     }
 }

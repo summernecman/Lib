@@ -16,7 +16,6 @@ import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.netdb.video.VideoI;
 import com.siweisoft.service.netdb.video.VideoOpe;
-import com.siweisoft.service.ui.Constant.Value;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -39,16 +38,12 @@ public class AnyChatRecordEventImp extends BaseDAOpe implements AnyChatRecordEve
         videoBean.setFile(lpFileName);
         videoBean.setTimenum(dwElapse);
         // videoBean.setToid();
-        if (Value.userBean.getUsertype() == 0) {
-            videoI.addVideo(videoBean, new OnFinishListener() {
-                @Override
-                public void onFinish(Object o) {
+        videoI.addVideo(videoBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
 
-                }
-            });
-        } else {
-
-        }
+            }
+        });
         AnyChatCoreSDK.getInstance(context).SendTextMessage(dwUserId, 1, lpFileName);
 
 

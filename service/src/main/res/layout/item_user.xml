@@ -34,10 +34,10 @@
 
                 <ImageView
                     android:id="@+id/iv_head1"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_launcher_round" />
+                    android:src="@drawable/drawable_online" />
             </RelativeLayout>
 
             <LinearLayout
@@ -81,6 +81,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -90,8 +91,8 @@
 
                 <ImageView
                     android:id="@+id/iv_call"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:src="@drawable/icon_call_p" />
 
             </LinearLayout>

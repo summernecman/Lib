@@ -62,6 +62,8 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> {
                     VideoBean videoBean = new VideoBean();
                     videoBean.setFromphone(Value.userBean.getPhone());
                     videoBean.setTophone(ChatInit.getInstance().getAnyChatSDK().GetUserName(Integer.parseInt(userBean.getChatid())));
+                    videoBean.setToUser(getP().getD().getUserBean());
+                    videoBean.setFromUser(Value.userBean);
                     ChatInit.getInstance().getAnyChatSDK().VideoCallControl(AnyChatDefine.BRAC_VIDEOCALL_EVENT_REQUEST, Integer.parseInt(userBean.getChatid()), 0, 0, 0, GsonUtil.getInstance().toJson(videoBean));
                 } else {
                     ToastUtil.getInstance().showShort(activity, "用户不在线");

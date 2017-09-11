@@ -32,7 +32,10 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
         LogUtil.E(getP().getD().getVideoBean());
         ChatInit.getInstance().getAnyChatSDK().mSensorHelper.InitSensor(activity);                  // 启动 AnyChat 传感器监听
         AnyChatCoreSDK.mCameraHelper.SetContext(activity.getApplicationContext());                                          // 初始化 Camera 上下文句柄
-        if (Value.userBean.getUsertype() != 0) {
+
+
+        if (getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getOtherUser())) {
+            //发送视频方
             // 设置录像格式（0表示mp4）
             AnyChatCoreSDK.SetSDKOptionInt(AnyChatDefine.BRAC_SO_RECORD_FILETYPE, 0);
             getP().getU().bind.surfaceviewLocal.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS); //设置 SURFACE_TYPE_PUSH_BUFFERS 模式
@@ -46,6 +49,7 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
             ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(getP().getD().getVideoBean().getOtherid()), 1);
             ChatInit.getInstance().getAnyChatSDK().SetRecordSnapShotEvent(new AnyChatRecordEventImp(activity));
         } else {
+            //接受视频方
             if (AnyChatCoreSDK.GetSDKOptionInt(AnyChatDefine.BRAC_SO_VIDEOSHOW_DRIVERCTRL) == AnyChatDefine.VIDEOSHOW_DRIVER_JAVA) {// 如果是采用Java视频显示，则需要设置Surface的CallBack
                 int index = ChatInit.getInstance().getAnyChatSDK().mVideoHelper.bindVideo(getP().getU().bind.surfaceviewLocal.getHolder());
                 ChatInit.getInstance().getAnyChatSDK().mVideoHelper.SetVideoUser(index, Integer.parseInt(getP().getD().getVideoBean().getOtherid()));
@@ -53,7 +57,17 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
             ChatInit.getInstance().openLocalCamera(Integer.parseInt(getP().getD().getVideoBean().getOtherid()));
             ChatInit.getInstance().loadRemoveVideo(getP().getU().bind.surfaceviewLocal, Integer.parseInt(getP().getD().getVideoBean().getOtherid()));
             ChatInit.getInstance().getAnyChatSDK().SetRecordSnapShotEvent(new AnyChatRecordEventImp(activity));
-            ChatInit.getInstance().startRecordVideo(Value.userBean, getP().getD().getVideoBean());
+
+            VideoBean videoBean = new VideoBean();
+            videoBean.setFile(getP().getD().getVideoBean().getFile());
+            videoBean.setCreated(getP().getD().getVideoBean().getCreated());
+            videoBean.setFromid(getP().getD().getVideoBean().getFromid());
+            videoBean.setToid(getP().getD().getVideoBean().getToid());
+            videoBean.setFromphone(getP().getD().getVideoBean().getFromphone());
+            videoBean.setTophone(getP().getD().getVideoBean().getTophone());
+            videoBean.setTochatid(getP().getD().getVideoBean().getTochatid());
+            videoBean.setFromchatid(getP().getD().getVideoBean().getFromchatid());
+            ChatInit.getInstance().startRecordVideo(Value.userBean, videoBean);
         }
     }
 
@@ -77,7 +91,14 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                 }
                 break;
             case R.id.endCall:
-                ChatInit.getInstance().stopRecordVideo(Value.userBean, getP().getD().getVideoBean());
+                VideoBean videoBean = new VideoBean();
+                videoBean.setFile(getP().getD().getVideoBean().getFile());
+                videoBean.setCreated(getP().getD().getVideoBean().getCreated());
+                videoBean.setFromid(getP().getD().getVideoBean().getFromid());
+                videoBean.setToid(getP().getD().getVideoBean().getToid());
+                videoBean.setFromphone(getP().getD().getVideoBean().getFromphone());
+                videoBean.setTophone(getP().getD().getVideoBean().getTophone());
+                ChatInit.getInstance().stopRecordVideo(Value.userBean, videoBean);
                 CallingCenter.getInstance().VideoCallControl(AnyChatDefine.ANYCHAT_STREAMPLAY_EVENT_FINISH, Integer.parseInt(getP().getD().getVideoBean().getOtherid()), AnyChatDefine.BRAC_ERRORCODE_SESSION_REFUSE, 0, 0, "");
                 ChatInit.getInstance().closeRemoveVideo(Integer.parseInt(getP().getD().getVideoBean().getOtherid()));
                 ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Integer.parseInt(Value.userBean.getChatid()), 0);
@@ -128,7 +149,16 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ChatInit.getInstance().stopRecordVideo(Value.userBean, getP().getD().getVideoBean());
+        VideoBean videoBean = new VideoBean();
+        videoBean.setFile(getP().getD().getVideoBean().getFile());
+        videoBean.setCreated(getP().getD().getVideoBean().getCreated());
+        videoBean.setFromid(getP().getD().getVideoBean().getFromid());
+        videoBean.setToid(getP().getD().getVideoBean().getToid());
+        videoBean.setFromphone(getP().getD().getVideoBean().getFromphone());
+        videoBean.setTophone(getP().getD().getVideoBean().getTophone());
+        videoBean.setTochatid(getP().getD().getVideoBean().getTochatid());
+        videoBean.setFromchatid(getP().getD().getVideoBean().getFromchatid());
+        ChatInit.getInstance().stopRecordVideo(Value.userBean, videoBean);
         CallingCenter.getInstance().VideoCallControl(AnyChatDefine.ANYCHAT_STREAMPLAY_EVENT_FINISH, Integer.parseInt(getP().getD().getVideoBean().getOtherid()), AnyChatDefine.BRAC_ERRORCODE_SESSION_REFUSE, 0, 0, "");
         ChatInit.getInstance().closeRemoveVideo(Integer.parseInt(getP().getD().getVideoBean().getOtherid()));
         ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Integer.parseInt(Value.userBean.getChatid()), 0);
