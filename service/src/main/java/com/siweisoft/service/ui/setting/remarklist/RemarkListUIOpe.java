@@ -33,7 +33,7 @@ public class RemarkListUIOpe extends BaseUIOpe<FragRemarklistBinding> {
             public void onBindViewHolder(AppViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 ItemRemarkBinding itemRemarkBinding = (ItemRemarkBinding) holder.viewDataBinding;
-                GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemRemarkBinding.ivHead);
+                GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemRemarkBinding.ivHead);
             }
         });
     }

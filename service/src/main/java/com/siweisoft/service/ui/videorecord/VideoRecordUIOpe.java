@@ -45,10 +45,10 @@ public class VideoRecordUIOpe extends BaseUIOpe<FragVideorecordBinding> {
                 ((ItemVideorecordBinding) holder.viewDataBinding).tvTimes.setText(StringUtil.secondToMinute(data.get(position).getTimenum()));
                 if (Value.userBean.getPhone().equals(data.get(position).getFromUser().getPhone())) {
                     itemVideorecordBinding.ivWay.setSelected(false);
-                    GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getToUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
+                    GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getToUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
                 } else {
                     itemVideorecordBinding.ivWay.setSelected(true);
-                    GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
+                    GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
                 }
             }
         });

@@ -47,7 +47,7 @@ public class CollectUIOpe extends BaseUIOpe<FragCollectBinding> {
                     GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getToUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
                 } else {
                     itemVideorecordBinding.ivWay.setSelected(true);
-                    GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
+                    GlideApp.with(context).asBitmap().placeholder(R.drawable.icon_head1).placeholder(R.drawable.icon_head1).centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
                 }
             }
         });

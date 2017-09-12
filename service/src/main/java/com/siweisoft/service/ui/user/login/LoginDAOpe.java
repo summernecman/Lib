@@ -20,7 +20,7 @@ public class LoginDAOpe extends BaseDAOpe {
 
     public LoginDAOpe(Context context) {
         super(context);
-        userBean.setPhone("18721607438");
+        userBean.setPhone("18711111111");
         userBean.setPwd("111111");
         userBean.setUuuid(UUUIDUtil.getInstance().getUUUId(context));
         userI = new UserNetOpe(context);

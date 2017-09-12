@@ -3,6 +3,7 @@ package com.android.lib.util.data;
 import android.annotation.SuppressLint;
 
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.NullUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,8 @@ public class DateFormatUtil {
     public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
     public static final String MM_DD_HH_MM_SS = "MM-dd HH:mm:ss";
+
+    public static final String MM_DD_HH_MM = "MM-dd HH:mm";
 
     public static final String DD_HH_MM_SS = "dd HH:mm:ss";
 
@@ -44,6 +47,22 @@ public class DateFormatUtil {
     public static String getdDateStr(String dateFormat, Date date) {
         SimpleDateFormat format = new SimpleDateFormat(dateFormat);
         return format.format(date);
+    }
+
+
+    public static String getdDateStr(String dateFormat, String dateFormat2, String data) {
+        if (NullUtil.isStrEmpty(data)) {
+            return "";
+        }
+        SimpleDateFormat format = new SimpleDateFormat(dateFormat);
+        Date date = null;
+        try {
+            date = format.parse(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat format2 = new SimpleDateFormat(dateFormat2);
+        return format2.format(date);
     }
 
     public static Date getStrDate(String time, String dateFormat) throws ParseException {

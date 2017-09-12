@@ -35,8 +35,8 @@ public class BaseServerFrag<A extends BaseUIOpe, B extends BaseDAOpe> extends Ba
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
         if (getActivity() instanceof MainAct) {
             MainAct mainAct = (MainAct) getActivity();
             mainAct.getP().getU().initTitle();

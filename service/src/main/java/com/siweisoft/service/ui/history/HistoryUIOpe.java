@@ -42,14 +42,14 @@ public class HistoryUIOpe extends BaseUIOpe<FragHistoryBinding> {
                     viewDataBinding.setVariable(vari, data.get(position).get(0));
                     viewDataBinding.tvVideonum.setText(StringUtil.getStr(data.get(position).size()));
                     if (Value.userBean.getPhone().equals(data.get(position).get(0).getFromUser().getPhone())) {
-                        GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).get(0).getToUser().getHeadurl()).into(viewDataBinding.ivHead);
+                        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).get(0).getToUser().getHeadurl()).into(viewDataBinding.ivHead);
                         if (NullUtil.isStrEmpty(data.get(position).get(0).getToUser().getName())) {
                             viewDataBinding.tvTophone.setText(data.get(position).get(0).getToUser().getPhone());
                         } else {
                             viewDataBinding.tvTophone.setText(data.get(position).get(0).getToUser().getName());
                         }
                     } else {
-                        GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).get(0).getFromUser().getHeadurl()).into(viewDataBinding.ivHead);
+                        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).get(0).getFromUser().getHeadurl()).into(viewDataBinding.ivHead);
                         if (NullUtil.isStrEmpty(data.get(position).get(0).getFromUser().getName())) {
                             viewDataBinding.tvTophone.setText(data.get(position).get(0).getFromUser().getPhone());
                         } else {

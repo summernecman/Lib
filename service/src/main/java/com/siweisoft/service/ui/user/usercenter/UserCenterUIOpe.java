@@ -5,6 +5,7 @@ package com.siweisoft.service.ui.user.usercenter;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 
+import com.android.lib.base.activity.BaseActivity;
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
@@ -67,18 +68,24 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
     }
 
     public void initHead() {
+        if (context instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) context;
+            if (activity.isDestroyed()) {
+                return;
+            }
+        }
         LogUtil.E(Value.userBean.getHeadurl());
-        GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + Value.userBean.getHeadurl()).into(bind.head);
+        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + Value.userBean.getHeadurl()).into(bind.head);
         bind.setVariable(BR.frag_usercenter, Value.userBean);
         switch (Value.userBean.getUsertype()) {
             case UserBean.CUSTOME:
-                GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/usertype/icon_customer").into(bind.type);
+                GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_customer.png").into(bind.type);
                 break;
             case UserBean.ENGINEER:
-                GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/usertype/icon_engineer" + Value.userBean.getHeadurl()).into(bind.type);
+                GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_engineer.png").into(bind.type);
                 break;
             case UserBean.SERVER:
-                GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/usertype/icon_server" + Value.userBean.getHeadurl()).into(bind.type);
+                GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_server.png").into(bind.type);
                 break;
         }
     }

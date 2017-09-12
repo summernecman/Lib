@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
+import com.android.lib.base.listener.ViewListener;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.constant.UrlConstant;
@@ -69,14 +70,16 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
         });
     }
 
-    public void initRemarks(final ArrayList<CommentBean> data) {
+    public void initRemarks(final ArrayList<CommentBean> data, ViewListener viewListener) {
         bind.remarklist.setLayoutManager(new LinearLayoutManager(context));
-        bind.remarklist.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_remark, BR.item_remark, data) {
+        bind.remarklist.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_remark, BR.item_remark, data, viewListener) {
             @Override
             public void onBindViewHolder(AppViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 ItemRemarkBinding itemRemarkBinding = (ItemRemarkBinding) holder.viewDataBinding;
-                GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemRemarkBinding.ivHead);
+                itemRemarkBinding.ivAgree.setOnClickListener(this);
+                itemRemarkBinding.ivAgree.setTag(R.id.data, data.get(position));
+                GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemRemarkBinding.ivHead);
             }
         });
     }
@@ -87,7 +90,8 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
 
     public void initHead(UserBean userBean) {
         bind.tvName.setText(NullUtil.isStrEmpty(userBean.getName()) ? userBean.getPhone() : StringUtil.getStr(userBean.getName()));
-        GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + userBean.getHeadurl()).into(bind.ivHead11);
+        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + userBean.getHeadurl()).into(bind.ivHead11);
+
     }
 
 }

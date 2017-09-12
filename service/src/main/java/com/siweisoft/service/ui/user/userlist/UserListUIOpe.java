@@ -42,7 +42,7 @@ public class UserListUIOpe extends BaseUIOpe<FragUserlistBinding> {
                 ItemUser2Binding viewDataBinding = (ItemUser2Binding) holder.viewDataBinding;
                 viewDataBinding.ivHead.setTag(R.id.data, data.get(position));
                 viewDataBinding.ivHead.setOnClickListener(this);
-                GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
+                GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
                 LogUtil.E("111111111111:" + UrlConstant.fileUrl + "/" + data.get(position).getHeadurl());
             }
         });

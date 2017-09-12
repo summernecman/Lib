@@ -5,6 +5,7 @@ package com.siweisoft.service.netdb.user;
 import android.databinding.Bindable;
 
 import com.android.lib.bean.BaseBean;
+import com.android.lib.util.NullUtil;
 import com.siweisoft.service.netdb.unit.UnitBean;
 
 public class UserBean extends BaseBean {
@@ -174,6 +175,14 @@ public class UserBean extends BaseBean {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    @Bindable
+    public String getPhoneOrName() {
+        if (NullUtil.isStrEmpty(getName())) {
+            return getPhone();
+        }
+        return getName();
     }
 
     @Override

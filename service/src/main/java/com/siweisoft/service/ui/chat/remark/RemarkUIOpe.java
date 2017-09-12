@@ -74,7 +74,7 @@ public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
 
 
     public void initTop(UserBean userBean) {
-        GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + userBean.getHeadurl()).into(bind.imageView2);
+        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + userBean.getHeadurl()).into(bind.imageView2);
         bind.tvName.setText(StringUtil.getStr(userBean.getName()));
     }
 

@@ -609,29 +609,35 @@ public class MaterialRefreshLayout extends FrameLayout {
     }
 
     public void finishRefreshingDelay() {
-        if (mChildView != null) {
-            HandleUtil.getInstance().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    ViewPropertyAnimatorCompat viewPropertyAnimatorCompat = ViewCompat.animate(mChildView);
-                    viewPropertyAnimatorCompat.setDuration(200);
-                    viewPropertyAnimatorCompat.y(ViewCompat.getTranslationY(mChildView));
-                    viewPropertyAnimatorCompat.translationY(0);
-                    viewPropertyAnimatorCompat.setInterpolator(new DecelerateInterpolator());
-                    viewPropertyAnimatorCompat.start();
-                }
-            }, 500);
-            if (mMaterialHeaderView != null) {
-                mMaterialHeaderView.onComlete(MaterialRefreshLayout.this);
-            } else if (mSunLayout != null) {
-                mSunLayout.onComlete(MaterialRefreshLayout.this);
+//        if (mChildView != null) {
+//            HandleUtil.getInstance().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    ViewPropertyAnimatorCompat viewPropertyAnimatorCompat = ViewCompat.animate(mChildView);
+//                    viewPropertyAnimatorCompat.setDuration(200);
+//                    viewPropertyAnimatorCompat.y(ViewCompat.getTranslationY(mChildView));
+//                    viewPropertyAnimatorCompat.translationY(0);
+//                    viewPropertyAnimatorCompat.setInterpolator(new DecelerateInterpolator());
+//                    viewPropertyAnimatorCompat.start();
+//                }
+//            }, 500);
+//            if (mMaterialHeaderView != null) {
+//                mMaterialHeaderView.onComlete(MaterialRefreshLayout.this);
+//            } else if (mSunLayout != null) {
+//                mSunLayout.onComlete(MaterialRefreshLayout.this);
+//            }
+//            if (refreshListener != null) {
+//                refreshListener.onfinish();
+//            }
+//        }
+//        isRefreshing = false;
+//        progressValue = 0;
+        HandleUtil.getInstance().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finishRefreshing();
             }
-            if (refreshListener != null) {
-                refreshListener.onfinish();
-            }
-        }
-        isRefreshing = false;
-        progressValue = 0;
+        }, 500);
     }
 
     public void finishRefresh() {

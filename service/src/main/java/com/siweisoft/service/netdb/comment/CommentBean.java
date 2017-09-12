@@ -2,7 +2,10 @@ package com.siweisoft.service.netdb.comment;
 
 //by summer on 17-08-29.
 
+import android.databinding.Bindable;
+
 import com.android.lib.bean.BaseBean;
+import com.android.lib.util.data.DateFormatUtil;
 import com.siweisoft.service.netdb.user.UserBean;
 
 public class CommentBean extends BaseBean {
@@ -65,6 +68,11 @@ public class CommentBean extends BaseBean {
 
     public String getCreated() {
         return created;
+    }
+
+    @Bindable
+    public String getMMDD_HHMM() {
+        return DateFormatUtil.getdDateStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS, DateFormatUtil.MM_DD_HH_MM, created);
     }
 
     public void setCreated(String created) {

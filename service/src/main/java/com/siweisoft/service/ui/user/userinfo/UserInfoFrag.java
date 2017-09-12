@@ -5,6 +5,7 @@ package com.siweisoft.service.ui.user.userinfo;
 import android.view.View;
 
 import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.base.listener.ViewListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.ToastUtil;
@@ -13,6 +14,7 @@ import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TipBean;
 import com.siweisoft.service.bean.TitleBean;
+import com.siweisoft.service.netdb.agree.AgreeBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
@@ -25,7 +27,7 @@ import java.util.HashMap;
 
 import butterknife.OnClick;
 
-public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> {
+public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> implements ViewListener {
 
     @Override
     public void doThing() {
@@ -40,7 +42,7 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> {
         getP().getD().getRemarks(getP().getD().getUserBean(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getU().initRemarks((ArrayList<CommentBean>) o);
+                getP().getU().initRemarks((ArrayList<CommentBean>) o, UserInfoFrag.this);
             }
         });
 
@@ -67,6 +69,32 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> {
                     ChatInit.getInstance().getAnyChatSDK().VideoCallControl(AnyChatDefine.BRAC_VIDEOCALL_EVENT_REQUEST, Integer.parseInt(userBean.getChatid()), 0, 0, 0, GsonUtil.getInstance().toJson(videoBean));
                 } else {
                     ToastUtil.getInstance().showShort(activity, "用户不在线");
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onInterupt(int type, final View v) {
+        switch (type) {
+            case ViewListener.TYPE_ONCLICK:
+                switch (v.getId()) {
+                    case R.id.iv_agree:
+                        CommentBean commentBean = (CommentBean) v.getTag(R.id.data);
+                        AgreeBean agreeBean = new AgreeBean();
+                        agreeBean.setCommentid(commentBean.getId());
+                        agreeBean.setAgreeid(Value.userBean.getId());
+                        getP().getD().clickAgree(agreeBean, new OnFinishListener() {
+                            @Override
+                            public void onFinish(Object o) {
+                                if ((Boolean) o) {
+                                    v.setSelected(true);
+                                } else {
+                                    v.setSelected(false);
+                                }
+                            }
+                        });
+                        break;
                 }
                 break;
         }

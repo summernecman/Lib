@@ -18,6 +18,7 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.exception.exception.CrashHander;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.LogUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.util.system.UUUIDUtil;
@@ -28,6 +29,7 @@ import com.siweisoft.service.netdb.crash.CrashI;
 import com.siweisoft.service.netdb.crash.CrashOpe;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.ui.Constant.Value;
+import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import butterknife.OnClick;
 import butterknife.Optional;
@@ -136,6 +138,12 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         }
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LogUtil.E(ChatInit.getInstance().getAnyChatSDK().GetUserName(Integer.parseInt(Value.userBean.getChatid())));
+    }
 
     public interface OnTitleClick {
         public boolean onTitleClick(View v);

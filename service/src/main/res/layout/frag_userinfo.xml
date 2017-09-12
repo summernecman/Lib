@@ -22,6 +22,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:padding="5dp"
             android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,8 +32,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/iv_head11"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 app:civ_border_width="1px"
                 app:civ_border_color="#FF000000" />
 
@@ -56,30 +57,24 @@
                     android:layout_height="0dp"
                     android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="评分:"
-                        android:textColor="@color/gray"
-                        android:textSize="16sp" />
 
                     <com.hedgehog.ratingbar.RatingBar
                         android:id="@+id/ratingbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:gravity="center"
+                        android:gravity="left|center_vertical"
                         hedgehog:clickable="true"
                         hedgehog:halfstart="true"
                         hedgehog:starCount="5"
                         hedgehog:starEmpty="@mipmap/star_empty"
                         hedgehog:starFill="@mipmap/star_full"
                         hedgehog:starHalf="@mipmap/star_half"
-                        hedgehog:starImageHeight="30dp"
-                        hedgehog:starImagePadding="10dp"
-                        hedgehog:starImageWidth="30dp" />
+                        hedgehog:starImageHeight="25dp"
+                        hedgehog:starImagePadding="3dp"
+                        hedgehog:starImageWidth="25dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -87,14 +82,14 @@
 
 
         <LinearLayout
-            android:background="@color/white"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <LinearLayout
-                android:paddingBottom="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -106,19 +101,18 @@
                     android:layout_height="wrap_content"
                     android:text='@{callinfo1.timeout+""}'
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="呼出"
-                    android:textColor="@color/black"
+                    android:textColor="@color/gray"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:paddingBottom="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -137,13 +131,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="呼入"
-                    android:textColor="@color/black"
+                    android:textColor="@color/gray"
                     android:textSize="16sp" />
             </LinearLayout>
 
 
             <LinearLayout
-                android:paddingBottom="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -155,14 +148,14 @@
                     android:layout_height="wrap_content"
                     android:text='@{callinfo1.timehours+""}'
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="分钟"
-                    android:textColor="@color/black"
+                    android:textColor="@color/gray"
                     android:textSize="16sp" />
             </LinearLayout>
 

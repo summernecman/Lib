@@ -8,6 +8,9 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.siweisoft.service.bean.TipBean;
 import com.siweisoft.service.bean.TipsBean;
+import com.siweisoft.service.netdb.agree.AgreeBean;
+import com.siweisoft.service.netdb.agree.AgreeI;
+import com.siweisoft.service.netdb.agree.AgreeOpe;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.comment.CommentI;
 import com.siweisoft.service.netdb.comment.CommentOpe;
@@ -26,6 +29,8 @@ public class UserInfoDAOpe extends BaseDAOpe {
     CommentI commentI;
 
     UserI userI;
+
+    AgreeI agreeI;
 
     UserCenterDAOpe userCenterDAOpe;
 
@@ -96,5 +101,12 @@ public class UserInfoDAOpe extends BaseDAOpe {
             }
         }
         return null;
+    }
+
+    public void clickAgree(AgreeBean agreeBean, OnFinishListener onFinishListener) {
+        if (agreeI == null) {
+            agreeI = new AgreeOpe(context);
+        }
+        agreeI.clickAgree(agreeBean, onFinishListener);
     }
 }

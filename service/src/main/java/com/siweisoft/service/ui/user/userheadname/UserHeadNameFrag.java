@@ -33,10 +33,16 @@ import butterknife.OnClick;
 public class UserHeadNameFrag extends BaseServerFrag<UserHeadNameUIOpe, UserHeadNameDAOpe> {
 
 
+    @Override
+    public void doThing() {
+        super.doThing();
+        setTitleBean(new TitleBean("返回", "头像和姓名", ""));
+        getP().getU().initInfo();
+    }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
         setTitleBean(new TitleBean("返回", "头像和姓名", ""));
         getP().getU().initInfo();
     }

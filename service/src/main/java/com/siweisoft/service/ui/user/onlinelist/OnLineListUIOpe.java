@@ -52,14 +52,25 @@ public class OnLineListUIOpe extends BaseUIOpe<FragOnlinelistBinding> {
                 viewDataBinding.ivCall.setOnClickListener(this);
                 viewDataBinding.tvName.setText(NullUtil.isStrEmpty(data.get(position).getName()) ? data.get(position).getPhone() : StringUtil.getStr(data.get(position).getName()));
                 viewDataBinding.ratingbar.setStar(data.get(position).getAvg());
-                GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
-                LogUtil.E("111111111111:" + UrlConstant.fileUrl + "/" + data.get(position).getHeadurl());
+                GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
                 if (data.get(position).getState() == UserBean.STATE_OFFLINE) {
                     viewDataBinding.getRoot().setAlpha(0.3f);
                     viewDataBinding.ivHead1.setSelected(false);
                 } else {
                     viewDataBinding.getRoot().setAlpha(1f);
                     viewDataBinding.ivHead1.setSelected(true);
+                }
+
+                switch (data.get(position).getUsertype()) {
+                    case UserBean.CUSTOME:
+                        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_customer.png").into(viewDataBinding.ivHeadType);
+                        break;
+                    case UserBean.ENGINEER:
+                        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_engineer.png").into(viewDataBinding.ivHeadType);
+                        break;
+                    case UserBean.SERVER:
+                        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_server.png").into(viewDataBinding.ivHeadType);
+                        break;
                 }
             }
         });

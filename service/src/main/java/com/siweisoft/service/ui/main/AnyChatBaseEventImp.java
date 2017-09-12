@@ -47,7 +47,6 @@ public class AnyChatBaseEventImp implements AnyChatBaseEvent {
         ChatInit.getInstance().enterRoom(VideoValue.URL.ROOMID, "");
         Value.userBean.setChatid(dwUserId + "");
         Intent intent = new Intent(activity, MainAct.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         activity.startActivity(intent);
     }
 
@@ -81,6 +80,7 @@ public class AnyChatBaseEventImp implements AnyChatBaseEvent {
      */
     @Override
     public void OnAnyChatUserAtRoomMessage(int dwUserId, boolean bEnter) {
+        LogUtil.E("OnAnyChatUserAtRoomMessage", dwUserId + "::::" + bEnter);
         MessageEvent messageEvent = new MessageEvent();
         messageEvent.sender = MainAct.class.getName();
         messageEvent.dealer = OnLineListFrag.class.getName();
@@ -93,6 +93,6 @@ public class AnyChatBaseEventImp implements AnyChatBaseEvent {
      */
     @Override
     public void OnAnyChatLinkCloseMessage(int dwReason) {
-
+        LogUtil.E("OnAnyChatLinkCloseMessage", "" + dwReason);
     }
 }
