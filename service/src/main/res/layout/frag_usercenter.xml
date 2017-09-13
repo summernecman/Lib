@@ -212,6 +212,9 @@
                                 android:textSize="15sp" />
 
                             <TextView
+                                android:gravity="right|center_vertical"
+                                android:id="@+id/tv_unit"
+                                android:layout_marginLeft="20dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"

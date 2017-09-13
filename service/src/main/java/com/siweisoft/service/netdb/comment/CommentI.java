@@ -14,10 +14,14 @@ public interface CommentI {
 
     public void getCommentByUserName(UserBean userBean, OnFinishListener onFinishListener);
 
+    public void getCommentByUserNameWithMyOption(CommentBean commentBean, OnFinishListener onFinishListener);
+
     public void getUserTips(UserBean userBean, OnFinishListener onFinishListener);
 
     public void getVideoCommentByVideoName(VideoBean videoBean, OnFinishListener onFinishListener);
 
     public void getVideoCommentByVideoNameAndFrom(VideoBean videoBean, OnFinishListener onFinishListener);
+
+    public void getVideoRateCommentByUseId(UserBean userBean, OnFinishListener onFinishListener);
 
 }

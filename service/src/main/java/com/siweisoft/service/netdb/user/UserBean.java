@@ -51,7 +51,11 @@ public class UserBean extends BaseBean {
 
     public static final int STATE_INVIDEO = 2;
 
+    public static final int USER_TYPE_SERVER = 0;
 
+    public static final int USER_TYPE_ENGINEER = 1;
+
+    public static final int USER_TYPE_CUSTOMER = 2;
 
 
     @Bindable

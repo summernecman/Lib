@@ -5,10 +5,16 @@ package com.siweisoft.service.ui.main;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.StringUtil;
 import com.android.lib.util.ToastUtil;
+import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
 import com.bairuitech.anychat.AnyChatBaseEvent;
+import com.siweisoft.service.netdb.crash.CrashBean;
+import com.siweisoft.service.netdb.crash.CrashI;
+import com.siweisoft.service.netdb.crash.CrashOpe;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.Constant.VideoValue;
 import com.siweisoft.service.ui.user.onlinelist.OnLineListFrag;
@@ -20,6 +26,7 @@ public class AnyChatBaseEventImp implements AnyChatBaseEvent {
 
 
     FragmentActivity activity;
+    CrashI crashI;
 
     public AnyChatBaseEventImp(FragmentActivity mainAct) {
         this.activity = mainAct;
@@ -94,5 +101,19 @@ public class AnyChatBaseEventImp implements AnyChatBaseEvent {
     @Override
     public void OnAnyChatLinkCloseMessage(int dwReason) {
         LogUtil.E("OnAnyChatLinkCloseMessage", "" + dwReason);
+
+        final CrashBean crashBean = new CrashBean();
+        crashBean.setError(StringUtil.getStr(dwReason));
+        crashBean.setCreatedtime(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
+        crashBean.setUserBean(Value.userBean);
+        if (crashI == null) {
+            crashI = new CrashOpe(activity);
+        }
+        crashI.sendCrash(crashBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+
+            }
+        });
     }
 }

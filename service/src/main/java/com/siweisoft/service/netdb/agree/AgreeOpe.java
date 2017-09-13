@@ -78,7 +78,8 @@ public class AgreeOpe extends BaseDAOpe implements AgreeI {
         NetWork.getInstance(context).doHttpRequsetWithSession(context, "/agree/clickAgree", baseReqBean, new OnNetWorkReqAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
-                onFinishListener.onFinish((boolean) o.getData());
+                AgreeNumBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), AgreeNumBean.class);
+                onFinishListener.onFinish(res);
             }
         });
     }

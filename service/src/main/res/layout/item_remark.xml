@@ -48,7 +48,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="@={item_remark.MMDD_HHMM}"
                 android:textColor="@color/gray"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -61,13 +60,26 @@
             android:textColor="@color/gray"
             android:textSize="15sp" />
 
+            <LinearLayout
+                android:layout_gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp">
         <ImageView
             android:id="@+id/iv_agree"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:layout_gravity="right"
             android:src="@drawable/drawable_agree" />
 
+                <TextView
+                    android:id="@+id/tv_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:text='@{item_remark.agreeNum+""}'
+                    android:textColor="@color/gray"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
         </LinearLayout>
 

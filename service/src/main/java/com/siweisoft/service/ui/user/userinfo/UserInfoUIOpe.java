@@ -15,6 +15,7 @@ import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.NullUtil;
 import com.android.lib.util.StringUtil;
+import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
@@ -79,6 +80,8 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
                 ItemRemarkBinding itemRemarkBinding = (ItemRemarkBinding) holder.viewDataBinding;
                 itemRemarkBinding.ivAgree.setOnClickListener(this);
                 itemRemarkBinding.ivAgree.setTag(R.id.data, data.get(position));
+                itemRemarkBinding.ivAgree.setTag(R.id.data1, itemRemarkBinding.tvNum);
+                itemRemarkBinding.ivAgree.setSelected(data.get(position).isAgree());
                 GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemRemarkBinding.ivHead);
             }
         });
@@ -89,9 +92,14 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
     }
 
     public void initHead(UserBean userBean) {
+        bind.ratingbar.setStar(userBean.getAvg());
         bind.tvName.setText(NullUtil.isStrEmpty(userBean.getName()) ? userBean.getPhone() : StringUtil.getStr(userBean.getName()));
         GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + userBean.getHeadurl()).into(bind.ivHead11);
 
     }
 
+
+    public void initRefresh(MaterialRefreshListener refreshListener) {
+        bind.refresh.setMaterialRefreshListener(refreshListener);
+    }
 }

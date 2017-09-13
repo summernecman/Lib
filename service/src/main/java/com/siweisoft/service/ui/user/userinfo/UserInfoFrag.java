@@ -3,18 +3,23 @@ package com.siweisoft.service.ui.user.userinfo;
 //by summer on 17-08-24.
 
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.listener.ViewListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.GsonUtil;
+import com.android.lib.util.StringUtil;
 import com.android.lib.util.ToastUtil;
+import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
+import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.bairuitech.anychat.AnyChatDefine;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TipBean;
 import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.agree.AgreeBean;
+import com.siweisoft.service.netdb.agree.AgreeNumBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
@@ -29,20 +34,34 @@ import butterknife.OnClick;
 
 public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> implements ViewListener {
 
+
     @Override
     public void doThing() {
+        getP().getU().initRefresh(new MaterialRefreshListenerAdpter() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                initData();
+                materialRefreshLayout.finishRefreshingDelay();
+            }
+        });
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
         setTitleBean(new TitleBean("返回", "信息", ""));
         getP().getD().setUserBean((UserBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
         getP().getD().getUserCenterDAOpe().getUserTips(getP().getD().getUserBean(), new OnFinishListener() {
-                            @Override
-                            public void onFinish(Object o) {
-                                getP().getU().initTips((HashMap<Integer, TipBean>) o);
-                            }
-                        });
-        getP().getD().getRemarks(getP().getD().getUserBean(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getU().initRemarks((ArrayList<CommentBean>) o, UserInfoFrag.this);
+                getP().getU().initTips((HashMap<Integer, TipBean>) o);
+            }
+        });
+        getP().getD().getRemarks(getP().getD().getCommentReq(Value.userBean, getP().getD().getUserBean()), new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getP().getD().setCommentBeen((ArrayList<CommentBean>) o);
+                getP().getU().initRemarks(getP().getD().getCommentBeen(), UserInfoFrag.this);
             }
         });
 
@@ -53,6 +72,13 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
             }
         });
         getP().getU().initHead(getP().getD().getUserBean());
+
+        getP().getD().getUserRateIfNull(getP().getD().getUserBean(), new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getP().getD().getUserBean().setAvg((Float) o);
+            }
+        });
     }
 
     @OnClick({R.id.call})
@@ -80,18 +106,19 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
             case ViewListener.TYPE_ONCLICK:
                 switch (v.getId()) {
                     case R.id.iv_agree:
-                        CommentBean commentBean = (CommentBean) v.getTag(R.id.data);
+                        final CommentBean commentBean = (CommentBean) v.getTag(R.id.data);
                         AgreeBean agreeBean = new AgreeBean();
                         agreeBean.setCommentid(commentBean.getId());
                         agreeBean.setAgreeid(Value.userBean.getId());
                         getP().getD().clickAgree(agreeBean, new OnFinishListener() {
                             @Override
                             public void onFinish(Object o) {
-                                if ((Boolean) o) {
-                                    v.setSelected(true);
-                                } else {
-                                    v.setSelected(false);
-                                }
+                                AgreeNumBean res = (AgreeNumBean) o;
+                                v.setSelected(res.isAgree());
+                                TextView textView = (TextView) v.getTag(R.id.data1);
+                                textView.setText(StringUtil.getStr(res.getAgreenum()));
+                                commentBean.setAgree(res.isAgree());
+                                commentBean.setAgreeNum(res.getAgreenum());
                             }
                         });
                         break;

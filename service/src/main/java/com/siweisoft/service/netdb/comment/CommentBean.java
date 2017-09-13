@@ -34,6 +34,11 @@ public class CommentBean extends BaseBean {
 
     private int toid;
 
+    private int agreeNum;
+
+    private boolean agree;
+
+    @Bindable
     public int getId() {
         return id;
     }
@@ -42,6 +47,7 @@ public class CommentBean extends BaseBean {
         this.id = id;
     }
 
+    @Bindable
     public float getRate() {
         return rate;
     }
@@ -50,6 +56,7 @@ public class CommentBean extends BaseBean {
         this.rate = rate;
     }
 
+    @Bindable
     public String getTips() {
         return tips;
     }
@@ -58,6 +65,7 @@ public class CommentBean extends BaseBean {
         this.tips = tips;
     }
 
+    @Bindable
     public String getRemark() {
         return remark;
     }
@@ -66,6 +74,7 @@ public class CommentBean extends BaseBean {
         this.remark = remark;
     }
 
+    @Bindable
     public String getCreated() {
         return created;
     }
@@ -79,7 +88,7 @@ public class CommentBean extends BaseBean {
         this.created = created;
     }
 
-
+    @Bindable
     public String getFromuser() {
         return fromuser;
     }
@@ -88,6 +97,7 @@ public class CommentBean extends BaseBean {
         this.fromuser = fromuser;
     }
 
+    @Bindable
     public String getTouser() {
         return touser;
     }
@@ -96,6 +106,7 @@ public class CommentBean extends BaseBean {
         this.touser = touser;
     }
 
+    @Bindable
     public String getVideoname() {
         return videoname;
     }
@@ -104,6 +115,7 @@ public class CommentBean extends BaseBean {
         this.videoname = videoname;
     }
 
+    @Bindable
     public UserBean getFromUser() {
         return fromUser;
     }
@@ -112,6 +124,7 @@ public class CommentBean extends BaseBean {
         this.fromUser = fromUser;
     }
 
+    @Bindable
     public UserBean getToUser() {
         return toUser;
     }
@@ -120,6 +133,7 @@ public class CommentBean extends BaseBean {
         this.toUser = toUser;
     }
 
+    @Bindable
     public int getFromid() {
         return fromid;
     }
@@ -128,11 +142,30 @@ public class CommentBean extends BaseBean {
         this.fromid = fromid;
     }
 
+    @Bindable
     public int getToid() {
         return toid;
     }
 
     public void setToid(int toid) {
         this.toid = toid;
+    }
+
+    @Bindable
+    public int getAgreeNum() {
+        return agreeNum;
+    }
+
+    public void setAgreeNum(int agreeNum) {
+        this.agreeNum = agreeNum;
+    }
+
+    @Bindable
+    public boolean isAgree() {
+        return agree;
+    }
+
+    public void setAgree(boolean agree) {
+        this.agree = agree;
     }
 }

@@ -34,6 +34,8 @@ public class UserInfoDAOpe extends BaseDAOpe {
 
     UserCenterDAOpe userCenterDAOpe;
 
+    ArrayList<CommentBean> commentBeen;
+
 
     public UserInfoDAOpe(Context context) {
         super(context);
@@ -54,11 +56,11 @@ public class UserInfoDAOpe extends BaseDAOpe {
         return tipsBean;
     }
 
-    public void getRemarks(UserBean userBean, final OnFinishListener onFinishListener) {
+    public void getRemarks(CommentBean commentBean, final OnFinishListener onFinishListener) {
         if (commentI == null) {
             commentI = new CommentOpe(context);
         }
-        commentI.getCommentByUserName(userBean, new OnFinishListener() {
+        commentI.getCommentByUserNameWithMyOption(commentBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 ArrayList<CommentBean> res = (ArrayList<CommentBean>) o;
@@ -68,6 +70,16 @@ public class UserInfoDAOpe extends BaseDAOpe {
 
     }
 
+    public void getUserRateIfNull(UserBean userBean, OnFinishListener onFinishListener) {
+        if (commentI == null) {
+            commentI = new CommentOpe(context);
+        }
+        if (userBean.getAvg() == 0f) {
+            commentI.getVideoRateCommentByUseId(userBean, onFinishListener);
+        }
+    }
+
+
     public void getUserCallInfo(UserBean userBean, OnFinishListener onFinishListener) {
         if (userI == null) {
             userI = new UserNetOpe(context);
@@ -75,6 +87,13 @@ public class UserInfoDAOpe extends BaseDAOpe {
         userI.getUserCallInfo(userBean, onFinishListener);
     }
 
+
+    public CommentBean getCommentReq(UserBean local, UserBean userBean) {
+        CommentBean commentBean = new CommentBean();
+        commentBean.setFromUser(local);
+        commentBean.setToUser(userBean);
+        return commentBean;
+    }
 
 
     public UserBean getUserBean() {
@@ -108,5 +127,13 @@ public class UserInfoDAOpe extends BaseDAOpe {
             agreeI = new AgreeOpe(context);
         }
         agreeI.clickAgree(agreeBean, onFinishListener);
+    }
+
+    public ArrayList<CommentBean> getCommentBeen() {
+        return commentBeen;
+    }
+
+    public void setCommentBeen(ArrayList<CommentBean> commentBeen) {
+        this.commentBeen = commentBeen;
     }
 }

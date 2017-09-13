@@ -4,6 +4,7 @@ package com.siweisoft.service.ui.user.usercenter;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.view.View;
 
 import com.android.lib.base.activity.BaseActivity;
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
@@ -11,6 +12,7 @@ import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.StringUtil;
 import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.GlideApp;
@@ -87,6 +89,11 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
             case UserBean.SERVER:
                 GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_server.png").into(bind.type);
                 break;
+        }
+
+        bind.tvUnit.setText(StringUtil.getStr(Value.userBean.getUnit().getUnitname()));
+        if (Value.userBean.getUsertype() != UserBean.USER_TYPE_CUSTOMER) {
+            bind.llUnit.setVisibility(View.GONE);
         }
     }
 
