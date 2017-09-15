@@ -27,4 +27,8 @@ public class LoginUIOpe extends BaseUIOpe<FragLoginBinding> {
         GlideApp.with(context).asBitmap().load(url).centerCrop().into(bind.ivTop);
         // bind.ivTop
     }
+
+    public void showErrorMsg(final String msg) {
+        LogUtil.E(msg);
+    }
 }

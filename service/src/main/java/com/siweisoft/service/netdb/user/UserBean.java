@@ -57,6 +57,12 @@ public class UserBean extends BaseBean {
 
     public static final int USER_TYPE_CUSTOMER = 2;
 
+    public UserBean() {
+    }
+
+    public UserBean(String phone) {
+        this.phone = phone;
+    }
 
     @Bindable
     public String getPhone() {

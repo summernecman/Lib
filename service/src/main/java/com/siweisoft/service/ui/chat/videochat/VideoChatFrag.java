@@ -1,173 +1,151 @@
 package com.siweisoft.service.ui.chat.videochat;
 
-//by summer on 2017-07-04.
+//by summer on 17-09-14.
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.SurfaceHolder;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.media.projection.MediaProjection;
+import android.media.projection.MediaProjectionManager;
+import android.os.Build;
+import android.os.IBinder;
+import android.util.DisplayMetrics;
 import android.view.View;
 
-import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
-import com.android.lib.util.LogUtil;
-import com.bairuitech.anychat.AnyChatCoreSDK;
-import com.bairuitech.anychat.AnyChatDefine;
+import com.android.lib.util.GsonUtil;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.EMNoActiveCallException;
+import com.hyphenate.exceptions.EMServiceNotReadyException;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
+import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.main.AnyChatRecordEventImp;
-import com.siweisoft.service.videochat.chatutil.CallingCenter;
-import com.siweisoft.service.videochat.chatutil.ChatInit;
+import com.siweisoft.service.util.RecordService;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.OnClick;
 
+import static android.content.Context.MEDIA_PROJECTION_SERVICE;
+
 public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe> {
 
+
+    private static final int RECORD_REQUEST_CODE = 101;
+    private static final int STORAGE_REQUEST_CODE = 102;
+    private static final int AUDIO_REQUEST_CODE = 103;
+
+    private MediaProjectionManager projectionManager;
+    private MediaProjection mediaProjection;
+    private RecordService recordService;
+
+
+
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getP().getU().initIcon(Value.userBean);
-        getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
-        LogUtil.E(getP().getD().getVideoBean());
-        ChatInit.getInstance().getAnyChatSDK().mSensorHelper.InitSensor(activity);                  // 启动 AnyChat 传感器监听
-        AnyChatCoreSDK.mCameraHelper.SetContext(activity.getApplicationContext());                                          // 初始化 Camera 上下文句柄
+    public void doThing() {
+        super.doThing();
+        getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(Value.DATA_DATA));
 
 
-        if (getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getOtherUser())) {
-            //发送视频方
-            // 设置录像格式（0表示mp4）
-            AnyChatCoreSDK.SetSDKOptionInt(AnyChatDefine.BRAC_SO_RECORD_FILETYPE, 0);
-            getP().getU().bind.surfaceviewLocal.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS); //设置 SURFACE_TYPE_PUSH_BUFFERS 模式
-            getP().getU().bind.surfaceviewLocal.getHolder().addCallback(AnyChatCoreSDK.mCameraHelper);// 打开本地视频预览，开始采集本地视频数据
-            if (AnyChatCoreSDK.GetSDKOptionInt(AnyChatDefine.BRAC_SO_LOCALVIDEO_CAPDRIVER) == AnyChatDefine.VIDEOCAP_DRIVER_JAVA) { // 如果是采用Java视频采集，则需要设置Surface的CallBack
-                getP().getU().bind.surfaceviewLocal.getHolder().addCallback(AnyChatCoreSDK.mCameraHelper);
-            }
-            getP().getU().bind.surfaceviewLocal.setZOrderOnTop(true);
-            ChatInit.getInstance().openLocalCamera();
-            //打开音频
-            ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(getP().getD().getVideoBean().getOtherid()), 1);
-            ChatInit.getInstance().getAnyChatSDK().SetRecordSnapShotEvent(new AnyChatRecordEventImp(activity));
+        try {//单参数
+            EMClient.getInstance().callManager().makeVideoCall(getP().getD().getVideoBean().getToUser().getPhone(), GsonUtil.getInstance().toJson(getP().getD().getVideoBean()));
+        } catch (EMServiceNotReadyException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if (getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getToUser())) {
+            EMClient.getInstance().callManager().setSurfaceView(getP().getU().bind.surfaceviewLocal, null);
         } else {
-            //接受视频方
-            if (AnyChatCoreSDK.GetSDKOptionInt(AnyChatDefine.BRAC_SO_VIDEOSHOW_DRIVERCTRL) == AnyChatDefine.VIDEOSHOW_DRIVER_JAVA) {// 如果是采用Java视频显示，则需要设置Surface的CallBack
-                int index = ChatInit.getInstance().getAnyChatSDK().mVideoHelper.bindVideo(getP().getU().bind.surfaceviewLocal.getHolder());
-                ChatInit.getInstance().getAnyChatSDK().mVideoHelper.SetVideoUser(index, Integer.parseInt(getP().getD().getVideoBean().getOtherid()));
-            }
-            ChatInit.getInstance().openLocalCamera(Integer.parseInt(getP().getD().getVideoBean().getOtherid()));
-            ChatInit.getInstance().loadRemoveVideo(getP().getU().bind.surfaceviewLocal, Integer.parseInt(getP().getD().getVideoBean().getOtherid()));
-            ChatInit.getInstance().getAnyChatSDK().SetRecordSnapShotEvent(new AnyChatRecordEventImp(activity));
-
-            VideoBean videoBean = new VideoBean();
-            videoBean.setFile(getP().getD().getVideoBean().getFile());
-            videoBean.setCreated(getP().getD().getVideoBean().getCreated());
-            videoBean.setFromid(getP().getD().getVideoBean().getFromid());
-            videoBean.setToid(getP().getD().getVideoBean().getToid());
-            videoBean.setFromphone(getP().getD().getVideoBean().getFromphone());
-            videoBean.setTophone(getP().getD().getVideoBean().getTophone());
-            videoBean.setTochatid(getP().getD().getVideoBean().getTochatid());
-            videoBean.setFromchatid(getP().getD().getVideoBean().getFromchatid());
-            ChatInit.getInstance().startRecordVideo(Value.userBean, videoBean);
+            EMClient.getInstance().callManager().setSurfaceView(null, getP().getU().bind.surfaceviewLocal);
         }
-    }
 
-    @OnClick({R.id.btn_switchvideo, R.id.endCall, R.id.btn_cameraControl, R.id.btn_speakControl, R.id.btn_speakControl_remove})
-    public void onClickEvent(View v) {
-        switch (v.getId()) {
-            case R.id.btn_switchvideo:
-                if (AnyChatCoreSDK.GetSDKOptionInt(AnyChatDefine.BRAC_SO_LOCALVIDEO_CAPDRIVER) == AnyChatDefine.VIDEOCAP_DRIVER_JAVA) {
-                    AnyChatCoreSDK.mCameraHelper.SwitchCamera();
-                    return;
-                }
-                String strVideoCaptures[] = ChatInit.getInstance().getAnyChatSDK().EnumVideoCapture();
-                String temp = ChatInit.getInstance().getAnyChatSDK().GetCurVideoCapture();
-                for (int i = 0; i < strVideoCaptures.length; i++) {
-                    if (!temp.equals(strVideoCaptures[i])) {
-                        ChatInit.getInstance().getAnyChatSDK().UserCameraControl(-1, 0);
-                        ChatInit.getInstance().getAnyChatSDK().SelectVideoCapture(strVideoCaptures[i]);
-                        ChatInit.getInstance().getAnyChatSDK().UserCameraControl(-1, 1);
-                        break;
-                    }
-                }
-                break;
-            case R.id.endCall:
-                VideoBean videoBean = new VideoBean();
-                videoBean.setFile(getP().getD().getVideoBean().getFile());
-                videoBean.setCreated(getP().getD().getVideoBean().getCreated());
-                videoBean.setFromid(getP().getD().getVideoBean().getFromid());
-                videoBean.setToid(getP().getD().getVideoBean().getToid());
-                videoBean.setFromphone(getP().getD().getVideoBean().getFromphone());
-                videoBean.setTophone(getP().getD().getVideoBean().getTophone());
-                ChatInit.getInstance().stopRecordVideo(Value.userBean, videoBean);
-                CallingCenter.getInstance().VideoCallControl(AnyChatDefine.ANYCHAT_STREAMPLAY_EVENT_FINISH, Integer.parseInt(getP().getD().getVideoBean().getOtherid()), AnyChatDefine.BRAC_ERRORCODE_SESSION_REFUSE, 0, 0, "");
-                ChatInit.getInstance().closeRemoveVideo(Integer.parseInt(getP().getD().getVideoBean().getOtherid()));
-                ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Integer.parseInt(Value.userBean.getChatid()), 0);
-                ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(Value.userBean.getChatid()), 0);
-                ChatInit.getInstance().getAnyChatSDK().UserCameraControl(-1, 0);
-                ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(-1, 0);
-                ChatInit.getInstance().getAnyChatSDK().removeEvent(this);
-                ChatInit.getInstance().getAnyChatSDK().mSensorHelper.DestroySensor();
-                FragmentUtil2.getInstance().removeTop(activity, Value.FULLSCREEN);
-                break;
-            case R.id.btn_speakControl:
-//                if ((Boolean) getP().getU().bind.btnSpeakControl.getTag(R.id.data)) {
-//                    getP().getU().bind.btnSpeakControl.setTag(R.id.data, false);
-//                    getP().getU().bind.btnSpeakControl.setImageResource(R.drawable.speak_off);
-//                    ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(-1, 0);
-//                } else {
-//                    getP().getU().bind.btnSpeakControl.setTag(R.id.data, true);
-//                    getP().getU().bind.btnSpeakControl.setImageResource(R.drawable.speak_on);
-//                    ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(-1, 1);
-//                }
-//                break;
-//            case R.id.btn_speakControl_remove:
-//                if ((Boolean) getP().getU().bind.btnSpeakControlRemove.getTag(R.id.data)) {
-//                    getP().getU().bind.btnSpeakControlRemove.setTag(R.id.data, false);
-//                    getP().getU().bind.btnSpeakControlRemove.setImageResource(R.drawable.speak_off);
-//                    ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(getP().getD().getVideoBean().getOtherid()), 0);
-//                } else {
-//                    getP().getU().bind.btnSpeakControlRemove.setTag(R.id.data, true);
-//                    getP().getU().bind.btnSpeakControlRemove.setImageResource(R.drawable.speak_on);
-//                    ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(getP().getD().getVideoBean().getOtherid()), 1);
-//                }
-                break;
-            case R.id.btn_cameraControl:
-//                if ((Boolean) getP().getU().bind.btnCameraControl.getTag(R.id.data)) {
-//                    getP().getU().bind.btnCameraControl.setTag(R.id.data, false);
-//                    getP().getU().bind.btnCameraControl.setImageResource(R.drawable.camera_off);
-//                    ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Value.userBean.getUsertype()==1 ? Integer.parseInt(Value.userBean.getChatid())  : -1, 0);
-//
-//                } else {
-//                    getP().getU().bind.btnCameraControl.setTag(R.id.data, true);
-//                    getP().getU().bind.btnCameraControl.setImageResource(R.drawable.camera_on);
-//                    ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Value.userBean.getUsertype()==1 ? Integer.parseInt(Value.userBean.getChatid()) : -1, 1);
-//                }
-                break;
-        }
+
+        projectionManager = (MediaProjectionManager) activity.getSystemService(MEDIA_PROJECTION_SERVICE);
+
+
+        Intent intent = new Intent(activity, RecordService.class);
+        activity.bindService(intent, connection, Context.BIND_AUTO_CREATE);
+
+
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        VideoBean videoBean = new VideoBean();
-        videoBean.setFile(getP().getD().getVideoBean().getFile());
-        videoBean.setCreated(getP().getD().getVideoBean().getCreated());
-        videoBean.setFromid(getP().getD().getVideoBean().getFromid());
-        videoBean.setToid(getP().getD().getVideoBean().getToid());
-        videoBean.setFromphone(getP().getD().getVideoBean().getFromphone());
-        videoBean.setTophone(getP().getD().getVideoBean().getTophone());
-        videoBean.setTochatid(getP().getD().getVideoBean().getTochatid());
-        videoBean.setFromchatid(getP().getD().getVideoBean().getFromchatid());
-        ChatInit.getInstance().stopRecordVideo(Value.userBean, videoBean);
-        CallingCenter.getInstance().VideoCallControl(AnyChatDefine.ANYCHAT_STREAMPLAY_EVENT_FINISH, Integer.parseInt(getP().getD().getVideoBean().getOtherid()), AnyChatDefine.BRAC_ERRORCODE_SESSION_REFUSE, 0, 0, "");
-        ChatInit.getInstance().closeRemoveVideo(Integer.parseInt(getP().getD().getVideoBean().getOtherid()));
-        ChatInit.getInstance().getAnyChatSDK().UserCameraControl(Integer.parseInt(Value.userBean.getChatid()), 0);
-        ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(Integer.parseInt(Value.userBean.getChatid()), 0);
-        ChatInit.getInstance().getAnyChatSDK().UserCameraControl(-1, 0);
-        ChatInit.getInstance().getAnyChatSDK().UserSpeakControl(-1, 0);
-        ChatInit.getInstance().getAnyChatSDK().removeEvent(this);
-        ChatInit.getInstance().getAnyChatSDK().mSensorHelper.DestroySensor();
+        activity.unbindService(connection);
+        recordService.stopRecord();
+    }
+
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            DisplayMetrics metrics = new DisplayMetrics();
+            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+            RecordService.RecordBinder binder = (RecordService.RecordBinder) service;
+            recordService = binder.getRecordService();
+            recordService.setConfig(metrics.widthPixels, metrics.heightPixels, metrics.densityDpi);
+
+
+            Intent captureIntent = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                captureIntent = projectionManager.createScreenCaptureIntent();
+            }
+            startActivityForResult(captureIntent, RECORD_REQUEST_CODE);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+
+    };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RECORD_REQUEST_CODE) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mediaProjection = projectionManager.getMediaProjection(resultCode, data);
+            }
+            recordService.setMediaProject(mediaProjection);
+            recordService.startRecord();
+        }
     }
 
 
+    @Override
+    public void initData() {
+        super.initData();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(CommentBean bean) {
+        try {
+            EMClient.getInstance().callManager().endCall();
+        } catch (EMNoActiveCallException e) {
+            e.printStackTrace();
+        }
+        FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
+    }
+
+    @OnClick({R.id.endCall, R.id.btn_switchvideo})
+    public void onClickEvent(View v) {
+        switch (v.getId()) {
+            case R.id.endCall:
+                try {
+                    EMClient.getInstance().callManager().endCall();
+                } catch (EMNoActiveCallException e) {
+                    e.printStackTrace();
+                }
+                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
+                break;
+            case R.id.btn_switchvideo:
+                EMClient.getInstance().callManager().switchCamera();
+                break;
+
+        }
+    }
 }

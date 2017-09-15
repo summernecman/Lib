@@ -8,11 +8,9 @@ import android.view.View;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
-import com.android.lib.util.GsonUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
-import com.bairuitech.anychat.AnyChatDefine;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TitleBean;
@@ -20,6 +18,7 @@ import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.Constant.VideoValue;
+import com.siweisoft.service.ui.chat.remark.RemarkFrag;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
 import com.siweisoft.service.videochat.chatutil.ChatInit;
 
@@ -43,12 +42,12 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
     public void initData() {
         super.initData();
         setTitleBean(new TitleBean("", "联系人", ""));
-        ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
+        //ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
         getP().getD().getUnTypeUserList(Value.userBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getU().initList(getP().getD().getOnlineUsersInfo((ArrayList<UserBean>) o, ChatInit.getInstance().getUserList()), OnLineListFrag.this);
-                ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
+                getP().getU().initList((ArrayList<UserBean>) o, OnLineListFrag.this);
+                //ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
             }
         });
 //        getP().getD().getOtherUsersInfoByPhone(new AllUserBean(Value.userBean,ChatInit.getInstance().getUserList()), new OnFinishListener() {
@@ -77,11 +76,16 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
                     return;
                 }
                 VideoBean videoBean = new VideoBean();
-                videoBean.setFromphone(Value.userBean.getPhone());
-                videoBean.setTophone(ChatInit.getInstance().getAnyChatSDK().GetUserName(Integer.parseInt(userBean.getChatid())));
                 videoBean.setToUser(userBean);
                 videoBean.setFromUser(Value.userBean);
-                ChatInit.getInstance().getAnyChatSDK().VideoCallControl(AnyChatDefine.BRAC_VIDEOCALL_EVENT_REQUEST, Integer.parseInt(userBean.getChatid()), 0, 0, 0, GsonUtil.getInstance().toJson(videoBean));
+
+
+                RemarkFrag remarkFrag = new RemarkFrag();
+                remarkFrag.setArguments(new Bundle());
+                remarkFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, videoBean);
+                FragmentUtil2.getInstance().add(fragment.getActivity(), Value.ROOTID_TWO, remarkFrag);
+
+                //ChatInit.getInstance().getAnyChatSDK().VideoCallControl(AnyChatDefine.BRAC_VIDEOCALL_EVENT_REQUEST, Integer.parseInt(userBean.getChatid()), 0, 0, 0, GsonUtil.getInstance().toJson(videoBean));
                 break;
         }
     }

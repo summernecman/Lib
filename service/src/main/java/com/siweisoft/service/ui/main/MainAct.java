@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
@@ -22,6 +23,10 @@ import com.android.lib.util.LogUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.util.system.UUUIDUtil;
+import com.android.lib.view.bottommenu.MessageEvent;
+import com.hyphenate.chat.EMCallStateChangeListener;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.EMNoActiveCallException;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.siweisoft.service.R;
 import com.siweisoft.service.netdb.crash.CrashBean;
@@ -29,7 +34,11 @@ import com.siweisoft.service.netdb.crash.CrashI;
 import com.siweisoft.service.netdb.crash.CrashOpe;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.videochat.chatutil.ChatInit;
+import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.io.File;
 
 import butterknife.OnClick;
 import butterknife.Optional;
@@ -52,6 +61,58 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         intentFilter.addAction(getPackageName() + ValueConstant.ACITON_GLOB_CAST);
         registerReceiver(loginInfoBroadCast, intentFilter);
         CrashHander.getInstance().init(this, this);
+
+
+        IntentFilter callFilter = new IntentFilter(EMClient.getInstance().callManager().getIncomingCallBroadcastAction());
+        registerReceiver(new CallReceiver(), callFilter);
+
+
+        EMClient.getInstance().callManager().addCallStateChangeListener(new EMCallStateChangeListener() {
+            @Override
+            public void onCallStateChanged(CallState callState, CallError error) {
+                LogUtil.E(callState);
+                switch (callState) {
+                    case CONNECTING: // 正在连接对方
+                        break;
+                    case CONNECTED: // 双方已经建立连接
+                        try {
+                            EMClient.getInstance().callManager().answerCall();
+                        } catch (EMNoActiveCallException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+
+                    case ACCEPTED: // 电话接通成功
+                        File file = new File(Environment.getExternalStorageDirectory(), "files");
+                        if (!file.exists()) {
+                            file.mkdirs();
+                        }
+
+                        EMClient.getInstance().callManager().getVideoCallHelper().startVideoRecord(file.getPath());
+                        break;
+                    case DISCONNECTED: // 电话断了
+                        LogUtil.E(EMClient.getInstance().callManager().getVideoCallHelper().stopVideoRecord());
+                        MessageEvent messageEvent = new MessageEvent();
+                        messageEvent.sender = MainAct.class.getName();
+                        messageEvent.dealer = VideoChatFrag.class.getName();
+                        EventBus.getDefault().post(messageEvent);
+                        break;
+                    case NETWORK_UNSTABLE: //网络不稳定
+                        if (error == CallError.ERROR_NO_DATA) {
+                            //无通话数据
+                        } else {
+                        }
+                        break;
+                    case NETWORK_NORMAL: //网络恢复正常
+
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        });
+
     }
 
     @Override
@@ -142,7 +203,7 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
     @Override
     public void onStart() {
         super.onStart();
-        LogUtil.E(ChatInit.getInstance().getAnyChatSDK().GetUserName(Integer.parseInt(Value.userBean.getChatid())));
+        //LogUtil.E(ChatInit.getInstance().getAnyChatSDK().GetUserName(Integer.parseInt(Value.userBean.getChatid())));
     }
 
     public interface OnTitleClick {
@@ -163,6 +224,15 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         } else {
             Log.d("TAG", "READ permission is granted...");
         }
+
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
+        if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, 2);
+        }
+
+
     }
 
     @Override

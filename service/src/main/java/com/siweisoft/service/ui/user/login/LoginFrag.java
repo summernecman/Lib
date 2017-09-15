@@ -2,18 +2,20 @@ package com.siweisoft.service.ui.user.login;
 
 //by summer on 2017-07-03.
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.util.NullUtil;
+import com.hyphenate.chat.EMClient;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.Constant.VideoValue;
-import com.siweisoft.service.videochat.chatutil.ChatInit;
+import com.siweisoft.service.ui.main.MainAct;
 
 import butterknife.OnClick;
 
@@ -36,10 +38,15 @@ public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
                 getP().getD().login(getP().getD().getUserBean(), new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
-                        UserBean res = (UserBean) o;
-                        if (res != null) {
-                            Value.userBean = res;
-                            ChatInit.getInstance().doLogin(VideoValue.URL.IP, VideoValue.URL.PROT, Value.userBean.getPhone());
+                        BaseResBean res = (BaseResBean) o;
+                        if (!res.isException()) {
+                            EMClient.getInstance().chatManager().loadAllConversations();
+                            EMClient.getInstance().groupManager().loadAllGroups();
+                            Value.userBean = (UserBean) res.getData();
+                            Intent intent = new Intent(activity, MainAct.class);
+                            activity.startActivity(intent);
+                        } else {
+                            getP().getU().showErrorMsg(res.getErrorMessage());
                         }
                     }
                 });

@@ -1,6 +1,6 @@
 package com.siweisoft.service.ui.chat.videochat;
 
-//by summer on 2017-07-04.
+//by summer on 17-09-14.
 
 import android.content.Context;
 
@@ -10,8 +10,8 @@ import com.siweisoft.service.netdb.video.VideoBean;
 
 public class VideoChatDAOpe extends BaseDAOpe {
 
+    private VideoBean videoBean;
 
-    VideoBean videoBean;
 
     public VideoChatDAOpe(Context context) {
         super(context);
@@ -24,6 +24,7 @@ public class VideoChatDAOpe extends BaseDAOpe {
     public void setVideoBean(VideoBean videoBean) {
         this.videoBean = videoBean;
     }
+
 
     public boolean isLocalSendVideo(UserBean local, UserBean remove) {
         switch (local.getUsertype()) {
@@ -40,4 +41,5 @@ public class VideoChatDAOpe extends BaseDAOpe {
         }
         return true;
     }
+
 }

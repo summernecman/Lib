@@ -11,16 +11,11 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
-import com.android.lib.util.LogUtil;
-import com.android.lib.util.ToastUtil;
 import com.android.lib.util.data.DateFormatUtil;
-import com.bairuitech.anychat.AnyChatCoreSDK;
-import com.bairuitech.anychat.AnyChatTextMsgEvent;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
-import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
@@ -46,24 +41,24 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                 getP().getD().ratingbar = (float) o;
             }
         });
-        AnyChatCoreSDK.getInstance(activity).SetTextMessageEvent(new AnyChatTextMsgEvent() {
-            @Override
-            public void OnAnyChatTextMessage(int i, int i1, boolean b, String s) {
-                getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
-                LogUtil.E(i + "" + i1 + "" + b + "" + s);
-                ToastUtil.getInstance().showLong(activity, i + "@" + i1 + "@" + s);
-                getP().getD().getVideoBean().setFile(s);
-            }
-        });
-        final UserBean userBean = new UserBean();
-        userBean.setPhone(getP().getD().getVideoBean().getTophone());
-        getP().getD().getChatUserInfo(userBean, new OnFinishListener() {
-            @Override
-            public void onFinish(Object o) {
-                UserBean userBean1 = (UserBean) o;
-                getP().getU().initTop(userBean1);
-            }
-        });
+//        AnyChatCoreSDK.getInstance(activity).SetTextMessageEvent(new AnyChatTextMsgEvent() {
+//            @Override
+//            public void OnAnyChatTextMessage(int i, int i1, boolean b, String s) {
+//                getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
+//                LogUtil.E(i + "" + i1 + "" + b + "" + s);
+//                ToastUtil.getInstance().showLong(activity, i + "@" + i1 + "@" + s);
+//                getP().getD().getVideoBean().setFile(s);
+//            }
+//        });
+//        final UserBean userBean = new UserBean();
+//        userBean.setPhone(getP().getD().getVideoBean().getTophone());
+//        getP().getD().getChatUserInfo(userBean, new OnFinishListener() {
+//            @Override
+//            public void onFinish(Object o) {
+//                UserBean userBean1 = (UserBean) o;
+//                getP().getU().initTop(userBean1);
+//            }
+//        });
     }
 
     @Override

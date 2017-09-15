@@ -6,7 +6,12 @@ import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.network.bean.res.BaseResBean;
+import com.android.lib.util.GsonUtil;
+import com.android.lib.util.LogUtil;
 import com.android.lib.util.system.UUUIDUtil;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
@@ -30,8 +35,35 @@ public class LoginDAOpe extends BaseDAOpe {
         userI.login(userBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                UserBean res = (UserBean) o;
-                onFinishListener.onFinish(res);
+                final BaseResBean baseResBean = (BaseResBean) o;
+                if (baseResBean.isException()) {
+                    onFinishListener.onFinish(baseResBean);
+                    return;
+                }
+                final UserBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(baseResBean.getData()), UserBean.class);
+                EMClient.getInstance().login(res.getPhone(), res.getPwd(), new EMCallBack() {//回调
+                    @Override
+                    public void onSuccess() {
+                        EMClient.getInstance().groupManager().loadAllGroups();
+                        EMClient.getInstance().chatManager().loadAllConversations();
+                        LogUtil.E("main", "登录聊天服务器成功！");
+                        baseResBean.setData(res);
+                        onFinishListener.onFinish(baseResBean);
+                    }
+
+                    @Override
+                    public void onProgress(int progress, String status) {
+
+                    }
+
+                    @Override
+                    public void onError(int code, String message) {
+                        LogUtil.E("main", code + "" + message);
+                        baseResBean.setException(true);
+                        baseResBean.setErrorMessage(message);
+                        onFinishListener.onFinish(baseResBean);
+                    }
+                });
             }
         });
     }
