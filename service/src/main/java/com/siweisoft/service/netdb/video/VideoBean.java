@@ -47,6 +47,8 @@ public class VideoBean extends BaseBean {
 
     private UserBean toUser;
 
+    private int uploaded;
+
     @Bindable
     public int getId() {
         return id;
@@ -188,6 +190,15 @@ public class VideoBean extends BaseBean {
         this.toUser = toUser;
     }
 
+    @Bindable
+    public int getUploaded() {
+        return uploaded;
+    }
+
+    public void setUploaded(int uploaded) {
+        this.uploaded = uploaded;
+    }
+
     @Override
     public String toString() {
         return "VideoBean{" +
@@ -205,6 +216,7 @@ public class VideoBean extends BaseBean {
                 ", timenum=" + timenum +
                 ", fromUser=" + fromUser +
                 ", toUser=" + toUser +
+                ", uploaded=" + uploaded +
                 '}';
     }
 }

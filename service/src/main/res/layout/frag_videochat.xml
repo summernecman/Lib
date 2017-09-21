@@ -6,35 +6,36 @@
             type="String" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <com.hyphenate.media.EMCallSurfaceView
-            android:id="@+id/surfaceview_local"
+            android:layout_marginBottom="50dp"
+            android:focusableInTouchMode="false"
+            android:clickable="false"
+            android:id="@+id/surfaceview"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_weight="1" />
+            android:layout_height="match_parent" />
 
         <LinearLayout
+            android:layout_alignParentBottom="true"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_gravity="bottom|right"
             android:background="#7f7f7f"
             android:orientation="horizontal">
 
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/btn_speakControl"
                 android:layout_width="52dp"
                 android:layout_height="fill_parent"
                 android:background="@drawable/button_background"
                 android:src="@drawable/speak_on" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/btn_speakControl_remove"
                 android:layout_width="52dp"
                 android:layout_height="fill_parent"
@@ -46,7 +47,8 @@
                 android:layout_height="match_parent"
                 android:background="@color/trans_white" />
 
-            <Button
+            <TextView
+                android:gravity="center"
                 android:id="@+id/endCall"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
@@ -61,19 +63,19 @@
                 android:layout_height="match_parent"
                 android:background="@color/trans_white" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/btn_switchvideo"
                 android:layout_width="52dp"
                 android:layout_height="fill_parent"
                 android:background="@drawable/button_background"
                 android:src="@drawable/switchvideo" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/btn_cameraControl"
                 android:layout_width="52dp"
                 android:layout_height="fill_parent"
                 android:background="@drawable/button_background"
                 android:src="@drawable/camera_on" />
         </LinearLayout>
-    </LinearLayout>
+    </FrameLayout>
 </layout>

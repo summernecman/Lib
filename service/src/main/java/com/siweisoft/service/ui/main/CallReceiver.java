@@ -13,7 +13,7 @@ import com.android.lib.util.LogUtil;
 import com.hyphenate.chat.EMClient;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.chat.remark.RemarkFrag;
+import com.siweisoft.service.ui.chat.recept.ReceiptFrag;
 
 public class CallReceiver extends BroadcastReceiver {
 
@@ -27,12 +27,11 @@ public class CallReceiver extends BroadcastReceiver {
 
         LogUtil.E(from + "" + type);
         VideoBean videoBean = GsonUtil.getInstance().fromJson(EMClient.getInstance().callManager().getCurrentCallSession().getExt(), VideoBean.class);
-        LogUtil.E(EMClient.getInstance().callManager().getIncomingCallBroadcastAction());
-        LogUtil.E(EMClient.getInstance().callManager().getCurrentCallSession().getRemoteName());
 
-        RemarkFrag remarkFrag = new RemarkFrag();
-        remarkFrag.setArguments(new Bundle());
-        remarkFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, videoBean);
-        FragmentUtil2.getInstance().add((FragmentActivity) context, Value.ROOTID_TWO, remarkFrag);
+        ReceiptFrag receiptFrag = new ReceiptFrag();
+        receiptFrag.setArguments(new Bundle());
+        receiptFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, videoBean);
+        FragmentUtil2.getInstance().add((FragmentActivity) context, Value.FULLSCREEN, receiptFrag);
+
     }
 }

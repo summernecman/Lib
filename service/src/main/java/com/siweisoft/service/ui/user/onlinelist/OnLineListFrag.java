@@ -17,10 +17,8 @@ import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.Constant.VideoValue;
 import com.siweisoft.service.ui.chat.remark.RemarkFrag;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
-import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import java.util.ArrayList;
 
@@ -78,7 +76,8 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
                 VideoBean videoBean = new VideoBean();
                 videoBean.setToUser(userBean);
                 videoBean.setFromUser(Value.userBean);
-
+                videoBean.setFromphone(Value.userBean.getPhone());
+                videoBean.setTophone(userBean.getPhone());
 
                 RemarkFrag remarkFrag = new RemarkFrag();
                 remarkFrag.setArguments(new Bundle());
@@ -93,8 +92,6 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ChatInit.getInstance().leaveRoom(VideoValue.URL.ROOMID);
-        ChatInit.getInstance().doLoginOut();
     }
 
     @Override
@@ -103,11 +100,10 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
         getP().getD().getUnTypeUserList(Value.userBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getU().initList(getP().getD().getOnlineUsersInfo((ArrayList<UserBean>) o, ChatInit.getInstance().getUserList()), OnLineListFrag.this);
-                ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
+                getP().getU().initList((ArrayList<UserBean>) o, OnLineListFrag.this);
+                //ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
             }
         });
-
 //        getP().getD().getOtherUsersInfoByPhone(new AllUserBean(Value.userBean,ChatInit.getInstance().getUserList()), new OnFinishListener() {
 //            @Override
 //            public void onFinish(Object o) {

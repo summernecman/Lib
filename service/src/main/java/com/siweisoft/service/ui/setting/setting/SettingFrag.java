@@ -12,8 +12,6 @@ import com.siweisoft.service.ServieApp;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.Constant.VideoValue;
-import com.siweisoft.service.videochat.chatutil.ChatInit;
 
 import butterknife.OnClick;
 
@@ -33,8 +31,6 @@ public class SettingFrag extends BaseServerFrag<SettingUIOpe, SettingDAOpe> {
                     public void onFinish(Object o) {
                         EMClient.getInstance().logout(true);
                         FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
-                        ChatInit.getInstance().leaveRoom(VideoValue.URL.ROOMID);
-                        ChatInit.getInstance().doLoginOut();
                         ((ServieApp) activity.getApplication()).exit();
                     }
                 });

@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
@@ -19,14 +18,10 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.exception.exception.CrashHander;
 import com.android.lib.util.FragmentUtil2;
-import com.android.lib.util.LogUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.util.system.UUUIDUtil;
-import com.android.lib.view.bottommenu.MessageEvent;
-import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
-import com.hyphenate.exceptions.EMNoActiveCallException;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.siweisoft.service.R;
 import com.siweisoft.service.netdb.crash.CrashBean;
@@ -34,11 +29,7 @@ import com.siweisoft.service.netdb.crash.CrashI;
 import com.siweisoft.service.netdb.crash.CrashOpe;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
-
-import org.greenrobot.eventbus.EventBus;
-
-import java.io.File;
+import com.siweisoft.service.ui.chat.videochat.VideoChatListener;
 
 import butterknife.OnClick;
 import butterknife.Optional;
@@ -55,63 +46,17 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getP().getU().initViewPager(getSupportFragmentManager(), getP().getD().getFragment());
-        //FragmentUtil2.getInstance().add(activity, R.id.serviceroot,new HomeFrag());
         loginInfoBroadCast = new LoginInfoBroadCast();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(getPackageName() + ValueConstant.ACITON_GLOB_CAST);
-        registerReceiver(loginInfoBroadCast, intentFilter);
+        //registerReceiver(loginInfoBroadCast, intentFilter);
         CrashHander.getInstance().init(this, this);
-
 
         IntentFilter callFilter = new IntentFilter(EMClient.getInstance().callManager().getIncomingCallBroadcastAction());
         registerReceiver(new CallReceiver(), callFilter);
 
-
-        EMClient.getInstance().callManager().addCallStateChangeListener(new EMCallStateChangeListener() {
-            @Override
-            public void onCallStateChanged(CallState callState, CallError error) {
-                LogUtil.E(callState);
-                switch (callState) {
-                    case CONNECTING: // 正在连接对方
-                        break;
-                    case CONNECTED: // 双方已经建立连接
-                        try {
-                            EMClient.getInstance().callManager().answerCall();
-                        } catch (EMNoActiveCallException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-
-                    case ACCEPTED: // 电话接通成功
-                        File file = new File(Environment.getExternalStorageDirectory(), "files");
-                        if (!file.exists()) {
-                            file.mkdirs();
-                        }
-
-                        EMClient.getInstance().callManager().getVideoCallHelper().startVideoRecord(file.getPath());
-                        break;
-                    case DISCONNECTED: // 电话断了
-                        LogUtil.E(EMClient.getInstance().callManager().getVideoCallHelper().stopVideoRecord());
-                        MessageEvent messageEvent = new MessageEvent();
-                        messageEvent.sender = MainAct.class.getName();
-                        messageEvent.dealer = VideoChatFrag.class.getName();
-                        EventBus.getDefault().post(messageEvent);
-                        break;
-                    case NETWORK_UNSTABLE: //网络不稳定
-                        if (error == CallError.ERROR_NO_DATA) {
-                            //无通话数据
-                        } else {
-                        }
-                        break;
-                    case NETWORK_NORMAL: //网络恢复正常
-
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-        });
+        EMClient.getInstance().callManager().addCallStateChangeListener(new VideoChatListener());
+        EMClient.getInstance().chatManager().addMessageListener(new EMMsgListener());
 
     }
 
@@ -127,9 +72,6 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         }
 
         if (FragmentUtil2.fragMap.get(Value.getNowRoot()).size() == 1) {
-//            ChatInit.getInstance().leaveRoom(VideoValue.URL.ROOMID);
-//            ChatInit.getInstance().doLoginOut();
-//            ((ServieApp) getApplication()).exit();
             ToastUtil.getInstance().showShort(activity, "请从设置里退出");
         } else {
             FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
@@ -139,7 +81,7 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(loginInfoBroadCast);
+        //unregisterReceiver(loginInfoBroadCast);
     }
 
 
@@ -199,12 +141,6 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         }
     }
 
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        //LogUtil.E(ChatInit.getInstance().getAnyChatSDK().GetUserName(Integer.parseInt(Value.userBean.getChatid())));
-    }
 
     public interface OnTitleClick {
         public boolean onTitleClick(View v);

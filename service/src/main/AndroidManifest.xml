@@ -32,7 +32,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".ui.chat.videochat.VideoChatFrag" />
         <service android:name="com.android.lib.service.main.AppService" />
 
 

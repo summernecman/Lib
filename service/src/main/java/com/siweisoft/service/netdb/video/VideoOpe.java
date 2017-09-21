@@ -6,6 +6,8 @@ import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.bean.FileBean;
+import com.android.lib.bean.FilesBean;
 import com.android.lib.network.NetWork;
 import com.android.lib.network.bean.req.BaseReqBean;
 import com.android.lib.network.bean.res.BaseResBean;
@@ -16,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.user.UserBean;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,6 +90,44 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(commentBean));
         NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/commentVideos", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                LogUtil.E(GsonUtil.getInstance().toJson(o.getData()));
+                onFinishListener.onFinish(o);
+            }
+        });
+    }
+
+    @Override
+    public void updateVideo(VideoBean videoBean, final OnFinishListener onFinishListener) {
+
+
+        FilesBean filesBean = new FilesBean();
+        ArrayList<FileBean> fileBeen = new ArrayList<>();
+        fileBeen.add(new FileBean(new File(videoBean.getFile())));
+        filesBean.setData(fileBeen);
+
+        NetWork.getInstance(context).doHttpRequsetWithFile(context, "/server/uploadvideo", filesBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean success, BaseResBean o) {
+                LogUtil.E(o);
+                ArrayList<String> files = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<String>>() {
+                }.getType());
+                onFinishListener.onFinish(files);
+            }
+        });
+    }
+
+    @Override
+    public void isVideoUploaded(VideoBean videoBean, OnFinishListener onFinishListener) {
+
+    }
+
+    @Override
+    public void setVideoUploaded(VideoBean videoBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(videoBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/setVideoUploaded", baseReqBean, new OnNetWorkReqAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 LogUtil.E(GsonUtil.getInstance().toJson(o.getData()));

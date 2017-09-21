@@ -18,4 +18,10 @@ public interface VideoI {
 
     public void commentVideo(CommentBean commentBean, OnFinishListener onFinishListener);
 
+    public void updateVideo(VideoBean videoBean, OnFinishListener onFinishListener);
+
+    public void isVideoUploaded(VideoBean videoBean, OnFinishListener onFinishListener);
+
+    public void setVideoUploaded(VideoBean videoBean, OnFinishListener onFinishListener);
+
 }

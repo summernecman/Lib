@@ -1,8 +1,6 @@
 package com.android.lib.aplication;
 
-import android.app.ActivityManager;
 import android.app.Application;
-import android.content.pm.PackageManager;
 
 import com.android.lib.R;
 import com.android.lib.constant.ValueConstant;
@@ -14,9 +12,6 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
 
 import org.xutils.x;
-
-import java.util.Iterator;
-import java.util.List;
 
 
 /**
@@ -71,26 +66,6 @@ public class LibAplication extends Application {
     public void initXutils() {
         x.Ext.init(this);
         x.Ext.setDebug(false); //输出debug日志，开启会影响性能
-    }
-
-    protected String getAppName(int pID) {
-        String processName = null;
-        ActivityManager am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
-        List l = am.getRunningAppProcesses();
-        Iterator i = l.iterator();
-        PackageManager pm = this.getPackageManager();
-        while (i.hasNext()) {
-            ActivityManager.RunningAppProcessInfo info = (ActivityManager.RunningAppProcessInfo) (i.next());
-            try {
-                if (info.pid == pID) {
-                    processName = info.processName;
-                    return processName;
-                }
-            } catch (Exception e) {
-                // Log.d("Process", "Error>> :"+ e.toString());
-            }
-        }
-        return processName;
     }
 
     /**
