@@ -82,7 +82,40 @@
                         android:textSize="17sp" />
 
                     <EditText
+                        android:inputType="textPassword"
                         android:id="@+id/et_pwd"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:gravity="center_vertical|left"
+                        android:text="@={login.pwd}"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/icon_bg_updatepwd"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="   服务器:"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
+                    <EditText
+                        android:inputType="textPassword"
+                        android:id="@+id/et_server"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:layout_marginLeft="10dp"
@@ -101,6 +134,25 @@
                     android:layout_marginLeft="20sp"
                     android:layout_marginRight="20dp"
             android:text="登录" />
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="right|center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tv_regist"
+                        android:padding="10dp"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="注册"
+                        android:textColor="@color/color_blue_300"
+                        android:textSize="16sp" />
+                </LinearLayout>
     </LinearLayout>
             </LinearLayout>
         </com.android.lib.view.other.AppScrollView>

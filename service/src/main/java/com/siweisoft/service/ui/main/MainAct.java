@@ -18,10 +18,10 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.exception.exception.CrashHander;
 import com.android.lib.util.FragmentUtil2;
-import com.android.lib.util.ToastUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.util.system.UUUIDUtil;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.EMNoActiveCallException;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.siweisoft.service.R;
 import com.siweisoft.service.netdb.crash.CrashBean;
@@ -29,6 +29,7 @@ import com.siweisoft.service.netdb.crash.CrashI;
 import com.siweisoft.service.netdb.crash.CrashOpe;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.ui.Constant.Value;
+import com.siweisoft.service.ui.chat.recept.ReceiptFrag;
 import com.siweisoft.service.ui.chat.videochat.VideoChatListener;
 
 import butterknife.OnClick;
@@ -42,6 +43,8 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
 
     OnTitleClick onTitleClick;
 
+    CallReceiver callReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +56,12 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         CrashHander.getInstance().init(this, this);
 
         IntentFilter callFilter = new IntentFilter(EMClient.getInstance().callManager().getIncomingCallBroadcastAction());
-        registerReceiver(new CallReceiver(), callFilter);
+        callReceiver = new CallReceiver();
+        registerReceiver(callReceiver, callFilter);
 
         EMClient.getInstance().callManager().addCallStateChangeListener(new VideoChatListener());
         EMClient.getInstance().chatManager().addMessageListener(new EMMsgListener());
+        EMClient.getInstance().addConnectionListener(new ChatConnectListener(activity));
 
     }
 
@@ -66,13 +71,31 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
             return;
         }
 
+
+        if (FragmentUtil2.fragMap.get(Value.FULLSCREEN) != null
+                && FragmentUtil2.fragMap.get(Value.FULLSCREEN).size() >= 1
+                && FragmentUtil2.fragMap.get(Value.FULLSCREEN).get(FragmentUtil2.fragMap.get(Value.FULLSCREEN).size() - 1).getClass().getName().equals(ReceiptFrag.class.getName())) {
+            FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
+            try {
+                EMClient.getInstance().callManager().rejectCall();
+            } catch (EMNoActiveCallException e) {
+                e.printStackTrace();
+            }
+            FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
+
+            return;
+        }
+
+
         if (FragmentUtil2.fragMap.get(Value.FULLSCREEN) != null && FragmentUtil2.fragMap.get(Value.FULLSCREEN).size() == 1) {
             FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
             return;
         }
 
         if (FragmentUtil2.fragMap.get(Value.getNowRoot()).size() == 1) {
-            ToastUtil.getInstance().showShort(activity, "请从设置里退出");
+            FragmentUtil2.getInstance().clear();
+            //ToastUtil.getInstance().showShort(activity, "请从设置里退出");
+            this.finish();
         } else {
             FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
         }
@@ -82,6 +105,7 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
     protected void onDestroy() {
         super.onDestroy();
         //unregisterReceiver(loginInfoBroadCast);
+        unregisterReceiver(callReceiver);
     }
 
 

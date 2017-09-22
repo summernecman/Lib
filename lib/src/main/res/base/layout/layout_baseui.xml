@@ -6,6 +6,7 @@
     android:background="@color/transparent"
     android:clipChildren="false"
     android:fitsSystemWindows="true"
+    android:clickable="true"
     android:orientation="vertical">
 
 </RelativeLayout>

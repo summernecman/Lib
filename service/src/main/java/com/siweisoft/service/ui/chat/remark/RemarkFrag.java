@@ -11,6 +11,7 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
+import com.android.lib.util.NullUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
 import com.siweisoft.service.R;
@@ -32,6 +33,7 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
         Fragment videofragment = new VideoChatFrag();
         Bundle bundle = new Bundle();
         bundle.putSerializable(ValueConstant.DATA_DATA, getP().getD().getVideoBean());
+        bundle.putBoolean(Value.DATA_INTENT, getArguments().getBoolean(Value.DATA_INTENT, false));
         videofragment.setArguments(bundle);
         FragmentUtil2.getInstance().add(fragment.getActivity(), Value.FULLSCREEN, videofragment);
         getP().getU().initRatingBar(new OnFinishListener() {
@@ -93,7 +95,12 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
             getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
             getP().getD().getVideoBean().setFile((String) event.data);
         } else {
-            getP().getD().updateVideo((VideoBean) event.data, new OnFinishListener() {
+            VideoBean videoBean = (VideoBean) event.data;
+            if (NullUtil.isStrEmpty(videoBean.getFile())) {
+                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+                return;
+            }
+            getP().getD().updateVideo(videoBean, new OnFinishListener() {
                 @Override
                 public void onFinish(Object o) {
 

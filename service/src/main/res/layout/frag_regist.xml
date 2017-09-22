@@ -13,11 +13,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <include
+            android:id="@+id/tophead"
+            layout="@layout/item_title2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_base_title" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="用户名"
-            android:text="@={regist.name}" />
+            android:text="@={regist.phone}" />
 
         <EditText
             android:layout_width="match_parent"
@@ -26,11 +31,13 @@
             android:text="@={regist.pwd}" />
 
         <RadioGroup
+            android:id="@+id/radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rb_customer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -38,11 +45,20 @@
                 android:text="客户" />
 
             <RadioButton
+                android:id="@+id/rb_server"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="客服" />
+
+            <RadioButton
+                android:id="@+id/rb_engineer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="工程师" />
         </RadioGroup>
 
         <Button

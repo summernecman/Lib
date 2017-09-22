@@ -228,9 +228,9 @@ public class NetWork {
     }
 
     public void doHttpRequsetWithSession(final Context context, final String model, final BaseBean reqBean, final OnNetWorkReqInterf reqInterf) {
-        LogUtil.E(UrlConstant.URI + model);
+        LogUtil.E("input-->" + UrlConstant.URI + model);
         final String jsonstr = gson.toJson(reqBean);
-        LogUtil.E(jsonstr);
+        LogUtil.E("input-->" + jsonstr);
         if (!reqInterf.onNetWorkReqStart(UrlConstant.URI + model, jsonstr)) {
             BaseResBean res = new BaseResBean();
             res.setErrorCode(ValueConstant.ERROR_CODE_NET_NO_CONNETCT);
@@ -255,7 +255,7 @@ public class NetWork {
         x.http().post(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String response) {
-                LogUtil.E("gson", "" + response);
+                LogUtil.E("output-->" + response);
                 if (response == null) {
                     BaseResBean res = new BaseResBean();
                     res.setErrorCode(ValueConstant.ERROR_CODE_RES_NULL);
@@ -274,17 +274,17 @@ public class NetWork {
                 baseResBean.setErrorMessage(ex.getMessage() == null ? "" : ex.getMessage());
                 baseResBean.setException(true);
                 reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, baseResBean);
-                LogUtil.E(ex == null ? "" : ex.getMessage());
+                LogUtil.E(ex == null ? "Throwable" : "Throwable-->" + ex.getMessage());
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-                LogUtil.E(cex);
+                LogUtil.E("onCancelled-->" + cex);
             }
 
             @Override
             public void onFinished() {
-                LogUtil.E("");
+                LogUtil.E("onFinished-->");
             }
         });
     }

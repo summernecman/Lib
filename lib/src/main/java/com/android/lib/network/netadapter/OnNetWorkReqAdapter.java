@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.network.interf.OnNetWorkReqInterf;
-import com.android.lib.util.LogUtil;
 import com.android.lib.util.NetWorkUtil;
 import com.google.gson.Gson;
 
@@ -30,7 +29,6 @@ public abstract class OnNetWorkReqAdapter implements OnNetWorkReqInterf {
 
     @Override
     public void onNetWorkReqFinish(boolean haveData, String url, BaseResBean baseResBean) {
-        LogUtil.E(gson.toJson(baseResBean));
         if (!haveData) {
             onNetWorkResult(false, baseResBean);
         } else {

@@ -2,13 +2,16 @@ package com.siweisoft.service.ui.user.userinfo;
 
 //by summer on 17-08-24.
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.listener.ViewListener;
 import com.android.lib.constant.ValueConstant;
+import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.StringUtil;
+import com.android.lib.util.ToastUtil;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.siweisoft.service.R;
@@ -19,8 +22,10 @@ import com.siweisoft.service.netdb.agree.AgreeBean;
 import com.siweisoft.service.netdb.agree.AgreeNumBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.user.UserBean;
+import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.netdb.video.VideoTimeBean;
 import com.siweisoft.service.ui.Constant.Value;
+import com.siweisoft.service.ui.chat.remark.RemarkFrag;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,6 +85,20 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
     public void onClickEvent(View v) {
         switch (v.getId()) {
             case R.id.call:
+                if (getP().getD().getUserBean().getState() != UserBean.STATE_ONLINE) {
+                    ToastUtil.getInstance().showShort(activity, "对方不在线");
+                    return;
+                }
+                VideoBean videoBean = new VideoBean();
+                videoBean.setToUser(getP().getD().getUserBean());
+                videoBean.setFromUser(Value.userBean);
+                videoBean.setFromphone(Value.userBean.getPhone());
+                videoBean.setTophone(getP().getD().getUserBean().getPhone());
+
+                RemarkFrag remarkFrag = new RemarkFrag();
+                remarkFrag.setArguments(new Bundle());
+                remarkFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, videoBean);
+                FragmentUtil2.getInstance().add(fragment.getActivity(), Value.ROOTID_TWO, remarkFrag);
                 break;
         }
     }

@@ -34,13 +34,15 @@ public class EMChatOpe extends BaseDAOpe {
         }
         EMOptions options = new EMOptions();
         options.setAcceptInvitationAlways(true);// 默认添加好友时，是不需要验证的，改成需要验证
-        options.setAutoLogin(false);
+        //options.setAutoLogin(false);
         EMClient.getInstance().init(context, options);//初始化
         EMClient.getInstance().callManager().getCallOptions().enableFixedVideoResolution(true);
         EMClient.getInstance().setDebugMode(true);//在做打包混淆时，关闭debug模式，避免消耗不必要的资源
 //        EMClient.getInstance().callManager().getCallOptions().setVideoResolution(360,640);
 //        EMClient.getInstance().callManager().getCallOptions().setMinVideoKbps(400);
 //        EMClient.getInstance().callManager().getCallOptions().setMaxVideoKbps(1000);
+
+        EMClient.getInstance().callManager().getVideoCallHelper().setPreferMovFormatEnable(true);
     }
 
     public static void sendCmdMsg(String to, String file) {

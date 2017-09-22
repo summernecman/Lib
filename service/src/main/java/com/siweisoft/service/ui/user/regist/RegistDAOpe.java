@@ -4,6 +4,7 @@ package com.siweisoft.service.ui.user.regist;
 
 import android.content.Context;
 
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.user.UserI;
@@ -13,7 +14,7 @@ public class RegistDAOpe extends BaseDAOpe {
 
     UserBean userBean = new UserBean();
 
-    UserI userI;
+    private UserI userI;
 
     public RegistDAOpe(Context context) {
         super(context);
@@ -28,7 +29,11 @@ public class RegistDAOpe extends BaseDAOpe {
         this.userBean = userBean;
     }
 
-    public UserI getUserI() {
-        return userI;
+    public void regist(UserBean userBean, OnFinishListener onFinishListener) {
+        if (userI == null) {
+            userI = new UserNetOpe(context);
+        }
+        userI.regist(userBean, onFinishListener);
     }
+
 }

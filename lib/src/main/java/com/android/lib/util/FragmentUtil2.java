@@ -10,6 +10,7 @@ import com.android.lib.base.interf.OnFinishListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * fragment操作的工具类
@@ -185,6 +186,15 @@ public class FragmentUtil2 {
 
     public void clear(int id) {
         fragMap.get(id).clear();
+    }
+
+    public void clear() {
+        Iterator i = fragMap.keySet().iterator();
+        while (i.hasNext()) {
+            Integer in = (Integer) i.next();
+            clear(in);
+
+        }
     }
 
     public void initClear(FragmentActivity fragmentActivity, int id) {

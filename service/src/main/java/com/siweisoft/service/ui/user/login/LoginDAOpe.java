@@ -8,13 +8,16 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.util.GsonUtil;
+import com.android.lib.util.LoadUtil;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.SPUtil;
 import com.android.lib.util.system.UUUIDUtil;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
+import com.siweisoft.service.ui.Constant.Value;
 
 public class LoginDAOpe extends BaseDAOpe {
 
@@ -25,13 +28,18 @@ public class LoginDAOpe extends BaseDAOpe {
 
     public LoginDAOpe(Context context) {
         super(context);
-        userBean.setPhone("18711111111");
-        userBean.setPwd("111111");
+        userBean.setPhone(SPUtil.getInstance().getStr(Value.USERNAME));
+        userBean.setPwd(SPUtil.getInstance().getStr(Value.PWD));
         userBean.setUuuid(UUUIDUtil.getInstance().getUUUId(context));
         userI = new UserNetOpe(context);
     }
 
+    public void autoLogin() {
+
+    }
+
     public void login(UserBean userBean, final OnFinishListener onFinishListener) {
+
         userI.login(userBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
@@ -40,6 +48,7 @@ public class LoginDAOpe extends BaseDAOpe {
                     onFinishListener.onFinish(baseResBean);
                     return;
                 }
+                LoadUtil.getInstance().onStartLoading(context, "login");
                 final UserBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(baseResBean.getData()), UserBean.class);
                 EMClient.getInstance().login(res.getPhone(), res.getPwd(), new EMCallBack() {//回调
                     @Override
@@ -49,6 +58,9 @@ public class LoginDAOpe extends BaseDAOpe {
                         LogUtil.E("main", "登录聊天服务器成功！");
                         baseResBean.setData(res);
                         onFinishListener.onFinish(baseResBean);
+                        LoadUtil.getInstance().onStopLoading("login");
+                        SPUtil.getInstance().init(context).saveStr(Value.USERNAME, res.getPhone());
+                        SPUtil.getInstance().saveStr(Value.PWD, res.getPwd());
                     }
 
                     @Override
@@ -62,6 +74,7 @@ public class LoginDAOpe extends BaseDAOpe {
                         baseResBean.setException(true);
                         baseResBean.setErrorMessage(message);
                         onFinishListener.onFinish(baseResBean);
+                        LoadUtil.getInstance().onStopLoading("login");
                     }
                 });
             }

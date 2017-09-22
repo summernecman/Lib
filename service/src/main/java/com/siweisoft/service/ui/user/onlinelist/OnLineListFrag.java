@@ -18,6 +18,7 @@ import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.remark.RemarkFrag;
+import com.siweisoft.service.ui.setting.collect.CollecFrag;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
     @Override
     public void initData() {
         super.initData();
-        setTitleBean(new TitleBean("", "联系人", ""));
+        setTitleBean(new TitleBean("", "联系人", "收藏"));
         //ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
         getP().getD().getUnTypeUserList(Value.userBean, new OnFinishListener() {
             @Override
@@ -85,6 +86,9 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
                 FragmentUtil2.getInstance().add(fragment.getActivity(), Value.ROOTID_TWO, remarkFrag);
 
                 //ChatInit.getInstance().getAnyChatSDK().VideoCallControl(AnyChatDefine.BRAC_VIDEOCALL_EVENT_REQUEST, Integer.parseInt(userBean.getChatid()), 0, 0, 0, GsonUtil.getInstance().toJson(videoBean));
+                break;
+            case R.id.ftv_right2:
+                FragmentUtil2.getInstance().add(activity, Value.ROOTID_TWO, new CollecFrag());
                 break;
         }
     }

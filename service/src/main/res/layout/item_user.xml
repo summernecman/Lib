@@ -111,7 +111,7 @@
                     android:id="@+id/iv_call"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
-                    android:src="@drawable/icon_call_p" />
+                    android:src="@drawable/drawable_call2" />
 
             </LinearLayout>
         </LinearLayout>

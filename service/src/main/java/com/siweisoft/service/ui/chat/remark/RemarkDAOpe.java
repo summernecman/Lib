@@ -100,7 +100,7 @@ public class RemarkDAOpe extends BaseDAOpe {
                         if (strs != null && strs.size() > 0) {
                             VideoBean v = new VideoBean();
                             v.setFile(s);
-                            videoI.setVideoUploaded(videoBean, new OnFinishListener() {
+                            videoI.setVideoUploaded(v, new OnFinishListener() {
                                 @Override
                                 public void onFinish(Object o) {
 

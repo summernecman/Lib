@@ -29,18 +29,11 @@
 
 
             <ImageView
-                android:id="@+id/btn_speakControl"
+                android:id="@+id/btn_speak"
                 android:layout_width="52dp"
                 android:layout_height="fill_parent"
                 android:background="@drawable/button_background"
-                android:src="@drawable/speak_on" />
-
-            <ImageView
-                android:id="@+id/btn_speakControl_remove"
-                android:layout_width="52dp"
-                android:layout_height="fill_parent"
-                android:background="@drawable/button_background"
-                android:src="@drawable/speak_on" />
+                android:src="@drawable/drawable_speak" />
 
             <View
                 android:layout_width="1dp"
@@ -71,11 +64,11 @@
                 android:src="@drawable/switchvideo" />
 
             <ImageView
-                android:id="@+id/btn_cameraControl"
+                android:id="@+id/btn_camera"
                 android:layout_width="52dp"
                 android:layout_height="fill_parent"
                 android:background="@drawable/button_background"
-                android:src="@drawable/camera_on" />
+                android:src="@drawable/drawable_camera" />
         </LinearLayout>
     </FrameLayout>
 </layout>

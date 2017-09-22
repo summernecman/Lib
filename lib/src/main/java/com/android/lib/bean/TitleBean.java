@@ -12,10 +12,19 @@ public class TitleBean extends BaseBean {
 
     private String rightTxt;
 
+    private String rightTxt2;
+
     public TitleBean(String leftTxt, String midTxt, String rightTxt) {
         this.leftTxt = leftTxt;
         this.midTxt = midTxt;
         this.rightTxt = rightTxt;
+    }
+
+    public TitleBean(String leftTxt, String midTxt, String rightTxt, String rightTxt2) {
+        this.leftTxt = leftTxt;
+        this.midTxt = midTxt;
+        this.rightTxt = rightTxt;
+        this.rightTxt2 = rightTxt2;
     }
 
     @Bindable
@@ -43,5 +52,14 @@ public class TitleBean extends BaseBean {
 
     public void setRightTxt(String rightTxt) {
         this.rightTxt = rightTxt;
+    }
+
+    @Bindable
+    public String getRightTxt2() {
+        return rightTxt2;
+    }
+
+    public void setRightTxt2(String rightTxt2) {
+        this.rightTxt2 = rightTxt2;
     }
 }

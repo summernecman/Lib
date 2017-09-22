@@ -31,7 +31,17 @@ public class UserNetOpe extends BaseDAOpe implements UserI {
 
     @Override
     public void regist(final UserBean userBean, final OnFinishListener onFinishListener) {
-
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/user/registEMAccount", baseReqBean, new UINetAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                if (!o.isException()) {
+                    UserBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), UserBean.class);
+                    onFinishListener.onFinish(b);
+                }
+            }
+        });
     }
 
     @Override

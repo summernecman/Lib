@@ -10,8 +10,6 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.FragmentUtil2;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
-import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.user.login.LoginFrag;
 
 import butterknife.OnClick;
 
@@ -21,18 +19,33 @@ public class RegistFrag extends BaseServerFrag<RegistUIOpe, RegistDAOpe> {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getP().getU().bind.setRegist(getP().getD().getUserBean());
-    }
-
-    @OnClick({R.id.onRegist})
-    public void onClickEvent(View v) {
-        getP().getD().getUserI().regist(getP().getD().getUserBean(), new OnFinishListener() {
+        getP().getU().onTypeClick(new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                if ((Boolean) o) {
-                    FragmentUtil2.getInstance().add(activity, Value.ROOTID, new LoginFrag());
-                }
+                getP().getD().getUserBean().setUsertype((Integer) o);
             }
         });
+    }
+
+
+    @OnClick({R.id.onRegist, R.id.ftv_back})
+    public void onClickEvent(View v) {
+        switch (v.getId()) {
+            case R.id.onRegist:
+                getP().getD().regist(getP().getD().getUserBean(), new OnFinishListener() {
+                    @Override
+                    public void onFinish(Object o) {
+                        if ((Boolean) o) {
+                            FragmentUtil2.getInstance().removeTop(activity, R.id.act_base_root);
+                        }
+                    }
+                });
+                break;
+            case R.id.ftv_back:
+                FragmentUtil2.getInstance().removeTop(activity, R.id.act_base_root);
+                break;
+        }
+
     }
 
 }

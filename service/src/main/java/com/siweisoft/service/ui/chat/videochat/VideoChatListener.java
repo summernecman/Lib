@@ -20,6 +20,7 @@ public class VideoChatListener implements EMCallStateChangeListener {
                 break;
 
             case ACCEPTED: // 电话接通成功
+                LogUtil.E("接受到录音指令1");
                 VideoChatMsg videoChatMsg = new VideoChatMsg();
                 videoChatMsg.code = VideoChatMsg.CODE_START_RECORD;
                 EventBus.getDefault().post(videoChatMsg);

@@ -25,4 +25,15 @@ public class LoginAct extends BaseUIActivity<BaseUIOpe, BaseDAOpe> {
     }
 
 
+    @Override
+    public void onBackPressed() {
+
+        if (FragmentUtil2.fragMap.get(R.id.act_base_root).size() == 1) {
+            FragmentUtil2.getInstance().clear();
+            this.finish();
+        } else {
+            FragmentUtil2.getInstance().removeTopRightNow(activity, R.id.act_base_root);
+        }
+    }
+
 }
