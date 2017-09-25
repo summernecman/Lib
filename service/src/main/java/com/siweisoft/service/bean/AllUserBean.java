@@ -15,6 +15,9 @@ public class AllUserBean extends BaseBean {
 
     private ArrayList<UserBean> other;
 
+    public AllUserBean() {
+    }
+
     public AllUserBean(UserBean me, ArrayList<UserBean> other) {
         this.me = me;
         this.other = other;

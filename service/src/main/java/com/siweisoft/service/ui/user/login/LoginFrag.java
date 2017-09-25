@@ -33,6 +33,7 @@ public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
         getP().getU().initImage(getP().getD().getImageUril());
         getP().getU().bind.etServer.setText(SPUtil.getInstance().init(activity).getStr(Value.DATA_INTENT2));
         if (EMClient.getInstance().isLoggedInBefore()) {
+            Value.initNetUrl(activity, SPUtil.getInstance().init(activity).getStr("url-1"));
             EMClient.getInstance().chatManager().loadAllConversations();
             EMClient.getInstance().groupManager().loadAllGroups();
             Value.userBean = GsonUtil.getInstance().fromJson(SPUtil.getInstance().init(activity).getStr(Value.DATA_DATA), UserBean.class);
@@ -52,8 +53,7 @@ public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
                 if (NullUtil.isStrEmpty(getP().getD().getUserBean().getPhone())) {
                     return;
                 }
-
-                UrlConstant.NETSTART = getP().getU().bind.etServer.getText().toString();
+                Value.initNetUrl(activity, getP().getU().bind.etServer.getText().toString());
                 getP().getD().login(getP().getD().getUserBean(), new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {

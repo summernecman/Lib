@@ -39,7 +39,9 @@ public class OnLineListUIOpe extends BaseUIOpe<FragOnlinelistBinding> {
             @Override
             public void onClick(View v) {
                 super.onClick(v);
-                onClickListener.onClick(v);
+                if (onClickListener != null) {
+                    onClickListener.onClick(v);
+                }
             }
 
             @Override
@@ -53,13 +55,13 @@ public class OnLineListUIOpe extends BaseUIOpe<FragOnlinelistBinding> {
                 viewDataBinding.tvName.setText(NullUtil.isStrEmpty(data.get(position).getName()) ? data.get(position).getPhone() : StringUtil.getStr(data.get(position).getName()));
                 viewDataBinding.ratingbar.setStar(data.get(position).getAvg());
                 GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
-                if (data.get(position).getState() == UserBean.STATE_OFFLINE) {
-                    viewDataBinding.getRoot().setAlpha(0.3f);
-                    viewDataBinding.ivHead1.setSelected(false);
-                } else {
-                    viewDataBinding.getRoot().setAlpha(1f);
-                    viewDataBinding.ivHead1.setSelected(true);
-                }
+//                if (data.get(position).getState() == UserBean.STATE_OFFLINE) {
+//                    viewDataBinding.getRoot().setAlpha(0.3f);
+//                    viewDataBinding.ivHead1.setSelected(false);
+//                } else {
+//                    viewDataBinding.getRoot().setAlpha(1f);
+//                    viewDataBinding.ivHead1.setSelected(true);
+//                }
 
                 switch (data.get(position).getUsertype()) {
                     case UserBean.CUSTOME:

@@ -6,10 +6,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.lib.base.adapter.AppBasePagerAdapter;
 import com.android.lib.base.interf.view.OnAppItemSelectListener;
 import com.android.lib.base.listener.BaseOnPagerChangeListener;
 import com.android.lib.base.ope.BaseUIOpe;
@@ -44,7 +44,7 @@ public class MainUIOpe extends BaseUIOpe<ActMainBinding> {
 
     public void initViewPager(FragmentManager fm, final ArrayList<Fragment> fragments) {
         bind.vpVp.setOffscreenPageLimit(3);
-        bind.vpVp.setAdapter(new AppBasePagerAdapter(fm, context) {
+        bind.vpVp.setAdapter(new FragmentPagerAdapter(fm) {
             @Override
             public Fragment getItem(int position) {
                 return fragments.get(position);
@@ -55,6 +55,17 @@ public class MainUIOpe extends BaseUIOpe<ActMainBinding> {
                 return fragments.size();
             }
         });
+//        bind.vpVp.setAdapter(new AppBasePagerAdapter(fm, context) {
+//            @Override
+//            public Fragment getItem(int position) {
+//                return fragments.get(position);
+//            }
+//
+//            @Override
+//            public int getCount() {
+//                return fragments.size();
+//            }
+//        });
         bind.vpVp.addOnPageChangeListener(new BaseOnPagerChangeListener() {
             @Override
             public void onPageSelected(int position) {

@@ -32,7 +32,9 @@ public class EMChatOpe extends BaseDAOpe {
             // 则此application::onCreate 是被service 调用的，直接返回
             return;
         }
+
         EMOptions options = new EMOptions();
+
         options.setAcceptInvitationAlways(true);// 默认添加好友时，是不需要验证的，改成需要验证
         //options.setAutoLogin(false);
         EMClient.getInstance().init(context, options);//初始化

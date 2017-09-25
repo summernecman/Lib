@@ -6,19 +6,24 @@ import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.hyphenate.chat.EMChatRoom;
 import com.siweisoft.service.bean.AllUserBean;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
+import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.main.RoleInfo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OnLineListDAOpe extends BaseDAOpe {
 
     RoleInfo roleInfo;
 
     UserI userI;
+
+    private EMChatRoom emChatRoom;
 
     public OnLineListDAOpe(Context context) {
         super(context);
@@ -61,6 +66,22 @@ public class OnLineListDAOpe extends BaseDAOpe {
         userI.getOtherUsersInfoByPhone(data, onFinishListener);
     }
 
+    public void getOtherUsersInfoByPhone(List<String> strs, OnFinishListener onFinishListener) {
+        if (userI == null) {
+            userI = new UserNetOpe(context);
+        }
+        ArrayList<UserBean> userBeen = new ArrayList<>();
+        for (int i = 0; i < strs.size(); i++) {
+            UserBean userBean = new UserBean(strs.get(i));
+            userBeen.add(userBean);
+        }
+        AllUserBean allUserBean = new AllUserBean();
+        allUserBean.setOther(userBeen);
+        allUserBean.setMe(Value.userBean);
+        userI.getOtherUsersInfoByPhone(allUserBean, onFinishListener);
+    }
+
+
     public ArrayList<UserBean> getOnlineUsersInfo(ArrayList<UserBean> netusers, ArrayList<UserBean> chatusers) {
         for (int i = 0; netusers != null && i < netusers.size(); i++) {
             for (int j = 0; chatusers != null && j < chatusers.size(); j++) {
@@ -74,5 +95,11 @@ public class OnLineListDAOpe extends BaseDAOpe {
         return netusers;
     }
 
+    public EMChatRoom getEmChatRoom() {
+        return emChatRoom;
+    }
 
+    public void setEmChatRoom(EMChatRoom emChatRoom) {
+        this.emChatRoom = emChatRoom;
+    }
 }

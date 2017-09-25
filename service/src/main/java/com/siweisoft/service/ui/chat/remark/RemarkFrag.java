@@ -21,7 +21,6 @@ import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
-import com.siweisoft.service.ui.main.EMMsgListener;
 
 public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
 
@@ -47,15 +46,9 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
     @Override
     public void onStart() {
         super.onStart();
-        getActivity().findViewById(R.id.ftv_right).setVisibility(View.GONE);
         getActivity().findViewById(R.id.ftv_right).setOnClickListener(this);
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
-    }
 
     @Override
     public void doThing() {
@@ -77,6 +70,7 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                 commentBean.setVideoname(getP().getD().getVideoBean().getFile());
                 commentBean.setFromid(Value.userBean.getId());
                 commentBean.setToid(getP().getD().getVideoBean().getOtherUser().getId());
+                commentBean.setVideoid(getP().getD().getVideoBean().getId());
                 getP().getD().videoI.commentVideo(commentBean, new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
@@ -91,24 +85,22 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
     @Override
     public void dealMesage(final MessageEvent event) {
         super.dealMesage(event);
-        if (EMMsgListener.class.getName().equals(event.sender)) {
-            getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
-            getP().getD().getVideoBean().setFile((String) event.data);
-        } else {
-            VideoBean videoBean = (VideoBean) event.data;
-            if (NullUtil.isStrEmpty(videoBean.getFile())) {
-                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
-                return;
-            }
-            getP().getD().updateVideo(videoBean, new OnFinishListener() {
-                @Override
-                public void onFinish(Object o) {
-
-                    getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
-                    getP().getD().getVideoBean().setFile(((VideoBean) (event.data)).getFile());
-                }
-            });
+        VideoBean videoBean = (VideoBean) event.data;
+        getP().getD().setVideoBean(videoBean);
+        //收到文件内容为空 == 录像不是我录的
+        if (NullUtil.isStrEmpty(videoBean.getFile())) {
+            //FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+            return;
         }
+        getP().getD().updateVideo(videoBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+
+                getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
+                getP().getD().getVideoBean().setFile(((VideoBean) (event.data)).getFile());
+            }
+        });
+
 
     }
 }

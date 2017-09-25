@@ -16,12 +16,21 @@ public interface VideoI {
 
     public void getVideosByContacts(UserBean userBean, OnFinishListener onFinishListener);
 
+    public void getVideosByContacts2(UserBean userBean, OnFinishListener onFinishListener);
+
     public void commentVideo(CommentBean commentBean, OnFinishListener onFinishListener);
 
     public void updateVideo(VideoBean videoBean, OnFinishListener onFinishListener);
 
+    public void updateVideoById(VideoBean videoBean, OnFinishListener onFinishListener);
+
     public void isVideoUploaded(VideoBean videoBean, OnFinishListener onFinishListener);
 
     public void setVideoUploaded(VideoBean videoBean, OnFinishListener onFinishListener);
+
+    public void getMaxVideoId(OnFinishListener onFinishListener);
+
+    public void insert_and_getid_fromvieo(VideoBean videoBean, OnFinishListener onFinishListener);
+
 
 }

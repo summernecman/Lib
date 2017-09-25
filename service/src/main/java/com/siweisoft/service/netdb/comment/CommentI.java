@@ -24,4 +24,6 @@ public interface CommentI {
 
     public void getVideoRateCommentByUseId(UserBean userBean, OnFinishListener onFinishListener);
 
+    public void getVideoCommentByVideoIdAndFrom(VideoBean videoBean, OnFinishListener onFinishListener);
+
 }

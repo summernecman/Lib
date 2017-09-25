@@ -4,10 +4,14 @@ package com.siweisoft.service.ui.chat.videochat;
 
 import android.content.Context;
 
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.data.DateFormatUtil;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
+import com.siweisoft.service.netdb.video.VideoI;
+import com.siweisoft.service.netdb.video.VideoOpe;
 
 public class VideoChatDAOpe extends BaseDAOpe {
 
@@ -16,6 +20,8 @@ public class VideoChatDAOpe extends BaseDAOpe {
     private double start;
 
     private double end;
+
+    VideoI videoI;
 
 
     public VideoChatDAOpe(Context context) {
@@ -66,5 +72,37 @@ public class VideoChatDAOpe extends BaseDAOpe {
     public int getMinute() {
         LogUtil.E(end + "---" + start);
         return (int) ((end - start) / 1000);
+    }
+
+    public void updateVideo(final VideoBean videoBean, final OnFinishListener onFinishListener) {
+        if (videoI == null) {
+            videoI = new VideoOpe(context.getApplicationContext());
+        }
+        videoI.getMaxVideoId(new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                videoI.addVideo(videoBean, new OnFinishListener() {
+                    @Override
+                    public void onFinish(Object o) {
+                        onFinishListener.onFinish(o);
+                    }
+                });
+            }
+        });
+    }
+
+    public void insert_and_getid_fromvieo(final VideoBean videoBean, final OnFinishListener onFinishListener) {
+        getVideoBean().setFile("");
+        getVideoBean().setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
+        getVideoBean().setTimenum(getMinute());
+        if (videoI == null) {
+            videoI = new VideoOpe(context.getApplicationContext());
+        }
+        videoI.insert_and_getid_fromvieo(videoBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                onFinishListener.onFinish(o);
+            }
+        });
     }
 }

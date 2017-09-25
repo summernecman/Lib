@@ -106,11 +106,15 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         super.onDestroy();
         //unregisterReceiver(loginInfoBroadCast);
         unregisterReceiver(callReceiver);
+        if (Value.room == null) {
+            return;
+        }
+        EMClient.getInstance().chatroomManager().leaveChatRoom(Value.room.getId());
     }
 
 
     @Optional
-    @OnClick({R.id.ftv_back, R.id.ftv_title, R.id.ftv_right})
+    @OnClick({R.id.ftv_back, R.id.ftv_title, R.id.ftv_right, R.id.ftv_right2})
     public void onClickEventListener(View v) {
         if (onTitleClick != null) {
             boolean b = onTitleClick.onTitleClick(v);
@@ -119,6 +123,8 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
             }
         }
         switch (v.getId()) {
+            case R.id.ftv_right:
+                break;
             case R.id.ftv_title:
                 break;
             case R.id.ftv_back:

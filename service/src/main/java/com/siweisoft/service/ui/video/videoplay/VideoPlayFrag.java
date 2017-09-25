@@ -65,29 +65,27 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                     @Override
                     public void onFinish(Object o) {
                         if (o == null) {
-                            setTitleBean(new TitleBean("返回", "视频播放", "收藏"));
+                            setTitleBean(new TitleBean("返回", "视频播放", "收藏", "分享"));
                         } else {
                             CollectionBean collectionBean = (CollectionBean) o;
                             getP().getD().getCollectionBean().setId(collectionBean.getId());
-                            setTitleBean(new TitleBean("返回", "视频播放", "已收藏"));
+                            setTitleBean(new TitleBean("返回", "视频播放", "已收藏", "分享"));
                         }
                     }
                 });
-                getP().getU().initShare(View.VISIBLE, "分享", this);
                 break;
             case VideoPlayFrag.TYPE_FROM_COLLECT:
-                getP().getU().initShare(View.VISIBLE, "分享", this);
                 break;
             case VideoPlayFrag.TYPE_FROM_SHARE:
                 getP().getD().isCollectedByVideoIdAndUserId(getP().getD().getVideoBean(), new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
                         if (o == null) {
-                            setTitleBean(new TitleBean("返回", "视频播放", "收藏"));
+                            setTitleBean(new TitleBean("返回", "视频播放", "收藏", "分享"));
                         } else {
                             CollectionBean collectionBean = (CollectionBean) o;
                             getP().getD().getCollectionBean().setId(collectionBean.getId());
-                            setTitleBean(new TitleBean("返回", "视频播放", "已收藏"));
+                            setTitleBean(new TitleBean("返回", "视频播放", "已收藏", "分享"));
                         }
                     }
                 });
@@ -137,7 +135,7 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                             public void onFinish(Object o) {
                                 if ((Boolean) o) {
                                     ToastUtil.getInstance().showShort(activity, "取消收藏");
-                                    setTitleBean(new TitleBean("返回", "视频播放", "收藏"));
+                                    setTitleBean(new TitleBean("返回", "视频播放", "收藏", "分享"));
                                 }
                             }
                         });
@@ -149,7 +147,7 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                     public void onFinish(Object o) {
                         if (o instanceof CollectionBean) {
                             ToastUtil.getInstance().showShort(activity, "收藏成功");
-                            setTitleBean(new TitleBean("返回", "视频播放", "已收藏"));
+                            setTitleBean(new TitleBean("返回", "视频播放", "已收藏", "分享"));
                             getP().getD().getCollectionBean().setId(((CollectionBean) o).getId());
                         }
                     }

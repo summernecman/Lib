@@ -86,6 +86,21 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
     }
 
     @Override
+    public void getVideosByContacts2(UserBean userBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/getVideosByContacts2", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                LogUtil.E(GsonUtil.getInstance().toJson(o.getData()));
+                ArrayList<ArrayList<VideoBean>> retList = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<ArrayList<VideoBean>>>() {
+                }.getType());
+                onFinishListener.onFinish(retList);
+            }
+        });
+    }
+
+    @Override
     public void commentVideo(CommentBean commentBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(commentBean));
@@ -119,6 +134,19 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
     }
 
     @Override
+    public void updateVideoById(VideoBean videoBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(videoBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/updateVideoById", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                LogUtil.E(GsonUtil.getInstance().toJson(o.getData()));
+                onFinishListener.onFinish(o);
+            }
+        });
+    }
+
+    @Override
     public void isVideoUploaded(VideoBean videoBean, OnFinishListener onFinishListener) {
 
     }
@@ -132,6 +160,30 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 LogUtil.E(GsonUtil.getInstance().toJson(o.getData()));
                 onFinishListener.onFinish(o);
+            }
+        });
+    }
+
+    @Override
+    public void getMaxVideoId(final OnFinishListener onFinishListener) {
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/getMaxVideoId", new BaseReqBean(), new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                onFinishListener.onFinish(o.getData());
+            }
+        });
+    }
+
+    @Override
+    public void insert_and_getid_fromvieo(final VideoBean videoBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(videoBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/insert_and_getid_fromvieo", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                LogUtil.E(GsonUtil.getInstance().toJson(o.getData()));
+                VideoBean videoBean1 = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), VideoBean.class);
+                onFinishListener.onFinish(videoBean1);
             }
         });
     }

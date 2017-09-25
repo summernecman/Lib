@@ -4,6 +4,7 @@ package com.siweisoft.service.ui.chat.videochat;
 
 import android.view.View;
 
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.LogUtil;
@@ -36,16 +37,22 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
     @Override
     public void doThing() {
         super.doThing();
-
-
         getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(Value.DATA_DATA));
+        //发起者
         if (getP().getD().getVideoBean().getFromUser().getPhone().equals(Value.userBean.getPhone())) {
-            try {//单参数
-                EMClient.getInstance().callManager().makeVideoCall(getP().getD().getVideoBean().getToUser().getPhone(), GsonUtil.getInstance().toJson(getP().getD().getVideoBean()));
-            } catch (EMServiceNotReadyException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            getP().getD().insert_and_getid_fromvieo(getP().getD().getVideoBean(), new OnFinishListener() {
+                @Override
+                public void onFinish(Object o) {
+                    getP().getD().setVideoBean((VideoBean) o);
+                    try {//单参数
+                        EMClient.getInstance().callManager().makeVideoCall(getP().getD().getVideoBean().getToUser().getPhone(), GsonUtil.getInstance().toJson(getP().getD().getVideoBean()));
+                    } catch (EMServiceNotReadyException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            });
+
         } else {
             try {
                 EMClient.getInstance().callManager().answerCall();
@@ -83,6 +90,9 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
         super.onDestroy();
         getP().getU().bind.surfaceview.release();
         getP().getD().setEnd(System.currentTimeMillis());
+        if (getP().getD().getVideoBean() == null) {
+            return;
+        }
         if (!getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getToUser())) {
             String s = EMClient.getInstance().callManager().getVideoCallHelper().stopVideoRecord();
             LogUtil.E(s);

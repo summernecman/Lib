@@ -61,7 +61,7 @@ public class VideoPlayDAOpe extends BaseDAOpe {
             commentI = new CommentOpe(context);
         }
         videoBean.setToUser(Value.userBean);
-        commentI.getVideoCommentByVideoNameAndFrom(videoBean, onFinishListener);
+        commentI.getVideoCommentByVideoIdAndFrom(videoBean, onFinishListener);
     }
 
     public void isCollectedByVideoIdAndUserId(VideoBean videoBean, OnFinishListener onFinishListener) {

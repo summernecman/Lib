@@ -26,6 +26,10 @@ public class SettingFrag extends BaseServerFrag<SettingUIOpe, SettingDAOpe> {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_set:
+                if (Value.room == null) {
+                    return;
+                }
+                EMClient.getInstance().chatroomManager().leaveChatRoom(Value.room.getId());
                 getP().getD().userI.loginOut(Value.userBean, new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
