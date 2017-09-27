@@ -14,6 +14,7 @@ import com.android.lib.base.listener.ViewListener;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.util.ScreenUtil;
+import com.hedgehog.ratingbar.RatingBar;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
@@ -50,5 +51,9 @@ public class FeedBAckUIOpe extends BaseUIOpe<FragFeedbackBinding> {
                 }
             }
         });
+    }
+
+    public void initRating(RatingBar.OnRatingChangeListener onRatingChangeListener) {
+        bind.ratingbar.setOnRatingChangeListener(onRatingChangeListener);
     }
 }

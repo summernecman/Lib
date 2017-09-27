@@ -16,10 +16,9 @@ import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
+import com.siweisoft.service.bean.HistoryBean;
 import com.siweisoft.service.databinding.FragHistoryBinding;
 import com.siweisoft.service.databinding.ItemHistoryBinding;
-import com.siweisoft.service.netdb.video.VideoBean;
-import com.siweisoft.service.ui.Constant.Value;
 
 import java.util.ArrayList;
 
@@ -29,7 +28,7 @@ public class HistoryUIOpe extends BaseUIOpe<FragHistoryBinding> {
         super(context);
     }
 
-    public void initList(final ArrayList<ArrayList<VideoBean>> data, ViewListener listener) {
+    public void initList(final ArrayList<HistoryBean> data, ViewListener listener) {
         bind.recycle.setLayoutManager(new LinearLayoutManager(context));
             bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_history, BR.item_history, data, listener) {
                 @Override
@@ -39,24 +38,14 @@ public class HistoryUIOpe extends BaseUIOpe<FragHistoryBinding> {
                     viewDataBinding.getRoot().setTag(com.android.lib.R.id.position, position);
                     viewDataBinding.getRoot().setOnClickListener(this);
                     viewDataBinding.getRoot().setOnLongClickListener(this);
-                    viewDataBinding.setVariable(vari, data.get(position).get(0));
-                    viewDataBinding.tvVideonum.setText(StringUtil.getStr(data.get(position).size()));
-                    if (Value.userBean.getPhone().equals(data.get(position).get(0).getFromUser().getPhone())) {
-                        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).get(0).getToUser().getHeadurl()).into(viewDataBinding.ivHead);
-                        if (NullUtil.isStrEmpty(data.get(position).get(0).getToUser().getName())) {
-                            viewDataBinding.tvTophone.setText(data.get(position).get(0).getToUser().getPhone());
-                        } else {
-                            viewDataBinding.tvTophone.setText(data.get(position).get(0).getToUser().getName());
-                        }
+                    viewDataBinding.setVariable(vari, data.get(position));
+                    viewDataBinding.tvVideonum.setText(StringUtil.getStr(data.get(position).getNum()));
+                    GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getUserBean().getHeadurl()).into(viewDataBinding.ivHead);
+                    if (NullUtil.isStrEmpty(data.get(position).getUserBean().getName())) {
+                        viewDataBinding.tvTophone.setText(data.get(position).getUserBean().getPhone());
                     } else {
-                        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).get(0).getFromUser().getHeadurl()).into(viewDataBinding.ivHead);
-                        if (NullUtil.isStrEmpty(data.get(position).get(0).getFromUser().getName())) {
-                            viewDataBinding.tvTophone.setText(data.get(position).get(0).getFromUser().getPhone());
-                        } else {
-                            viewDataBinding.tvTophone.setText(data.get(position).get(0).getFromUser().getName());
-                        }
+                        viewDataBinding.tvTophone.setText(data.get(position).getUserBean().getName());
                     }
-                    viewDataBinding.executePendingBindings();//加一行，问题解决
 //                    viewDataBinding.tvTophone.setText(data.get(position).get(0).getTophone());
 //                    viewDataBinding.tvDate.setText(data.get(position).get(0).getCreated());
                 }

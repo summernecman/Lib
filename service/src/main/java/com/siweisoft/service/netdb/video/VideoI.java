@@ -3,6 +3,7 @@ package com.siweisoft.service.netdb.video;
 //by summer on 17-08-24.
 
 import com.android.lib.base.interf.OnFinishListener;
+import com.siweisoft.service.bean.ContactBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.user.UserBean;
 
@@ -31,6 +32,10 @@ public interface VideoI {
     public void getMaxVideoId(OnFinishListener onFinishListener);
 
     public void insert_and_getid_fromvieo(VideoBean videoBean, OnFinishListener onFinishListener);
+
+    public void getVideosByBothUserId(ContactBean contactBean, OnFinishListener onFinishListener);
+
+    public void getByContacts(UserBean userBean, OnFinishListener onFinishListener);
 
 
 }

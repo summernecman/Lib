@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:label,android:theme">
         <activity
+            android:launchMode="singleTask"
             android:name=".ui.user.login.LoginAct"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="true">
@@ -24,6 +25,7 @@
         </activity>
 
         <activity
+            android:launchMode="singleTask"
             android:name=".ui.main.MainAct"
             android:exported="true"
             android:screenOrientation="portrait">
@@ -32,7 +34,9 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.chat.videochat.VideoChatFrag" />
+        <activity
+            android:name=".ui.chat.videochat.VideoChatFrag"
+            android:launchMode="singleTask" />
         <service android:name="com.android.lib.service.main.AppService" />
 
 

@@ -16,6 +16,7 @@ import com.siweisoft.service.netdb.user.UserNetOpe;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.netdb.video.VideoI;
 import com.siweisoft.service.netdb.video.VideoOpe;
+import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userinfo.UserInfoDAOpe;
 
 import java.io.File;
@@ -149,5 +150,12 @@ public class RemarkDAOpe extends BaseDAOpe {
                 });
             }
         });
+    }
+
+    public UserBean getOtherUser(VideoBean videoBean) {
+        if (Value.userBean.getPhone().equals(videoBean.getFromUser().getPhone())) {
+            return videoBean.getToUser();
+        }
+        return videoBean.getFromUser();
     }
 }

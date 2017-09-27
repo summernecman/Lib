@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.siweisoft.service.bean.AllUserBean;
 import com.siweisoft.service.bean.TipBean;
 import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.netdb.agree.AgreeBean;
@@ -17,9 +18,11 @@ import com.siweisoft.service.netdb.comment.CommentOpe;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
+import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.usercenter.UserCenterDAOpe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserInfoDAOpe extends BaseDAOpe {
 
@@ -68,6 +71,34 @@ public class UserInfoDAOpe extends BaseDAOpe {
         });
 
     }
+
+    public void getOtherUsersInfoByPhone(final UserBean u, List<String> strs, final OnFinishListener onFinishListener) {
+        if (userI == null) {
+            userI = new UserNetOpe(context);
+        }
+        ArrayList<UserBean> userBeen = new ArrayList<>();
+        for (int i = 0; i < strs.size(); i++) {
+            UserBean userBean = new UserBean(strs.get(i));
+            userBeen.add(userBean);
+        }
+        AllUserBean allUserBean = new AllUserBean();
+        allUserBean.setOther(userBeen);
+        allUserBean.setMe(Value.userBean);
+        userI.getOtherUsersInfoByPhone(allUserBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                ArrayList<UserBean> list = (ArrayList<UserBean>) o;
+                for (int i = 0; list != null && i < list.size(); i++) {
+                    if (u.getPhone().equals(list.get(i).getPhone())) {
+                        onFinishListener.onFinish(true);
+                        return;
+                    }
+                }
+                onFinishListener.onFinish(false);
+            }
+        });
+    }
+
 
     public void getUserRateIfNull(UserBean userBean, OnFinishListener onFinishListener) {
         if (commentI == null) {

@@ -15,6 +15,8 @@ import com.android.lib.network.netadapter.OnNetWorkReqAdapter;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.LogUtil;
 import com.google.gson.reflect.TypeToken;
+import com.siweisoft.service.bean.ContactBean;
+import com.siweisoft.service.bean.HistoryBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.user.UserBean;
 
@@ -184,6 +186,34 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
                 LogUtil.E(GsonUtil.getInstance().toJson(o.getData()));
                 VideoBean videoBean1 = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), VideoBean.class);
                 onFinishListener.onFinish(videoBean1);
+            }
+        });
+    }
+
+    @Override
+    public void getVideosByBothUserId(ContactBean contactBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(contactBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/getVideosByBothUserId", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                ArrayList<VideoBean> videos = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<VideoBean>>() {
+                }.getType());
+                onFinishListener.onFinish(videos);
+            }
+        });
+    }
+
+    @Override
+    public void getByContacts(UserBean userBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/getMyContactsById", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                ArrayList<HistoryBean> videos = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<HistoryBean>>() {
+                }.getType());
+                onFinishListener.onFinish(videos);
             }
         });
     }

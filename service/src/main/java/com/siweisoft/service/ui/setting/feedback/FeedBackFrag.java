@@ -6,15 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.listener.ViewListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.IntentUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.util.UriUtils;
+import com.android.lib.util.data.DateFormatUtil;
+import com.hedgehog.ratingbar.RatingBar;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TitleBean;
+import com.siweisoft.service.netdb.feedback.FeedBackBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.Image.ImageFrag;
 import com.siweisoft.service.ui.main.MainAct;
@@ -27,13 +31,29 @@ public class FeedBackFrag extends BaseServerFrag<FeedBAckUIOpe, FeedBackDAOpe> i
         setTitleBean(new TitleBean("返回", "意见反馈", "确定"));
         initOnTitleClick(this);
         getP().getU().initPics(getP().getD().getPics(), this);
+        getP().getU().initRating(new RatingBar.OnRatingChangeListener() {
+            @Override
+            public void onRatingChange(float RatingCount) {
+                getP().getD().setRate(RatingCount);
+            }
+        });
     }
 
     @Override
     public boolean onTitleClick(View v) {
         switch (v.getId()) {
             case R.id.ftv_right:
-                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+                FeedBackBean feedBackBean = new FeedBackBean();
+                feedBackBean.setCreate(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
+                feedBackBean.setUserid(Value.userBean.getId());
+                feedBackBean.setRate(getP().getD().getRate());
+                feedBackBean.setRemark(getP().getU().bind.input.getText().toString());
+                getP().getD().sendFeedBack(feedBackBean, new OnFinishListener() {
+                    @Override
+                    public void onFinish(Object o) {
+                        FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+                    }
+                });
                 return true;
         }
         return false;

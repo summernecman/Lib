@@ -22,7 +22,7 @@ import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.chat.remark.RemarkFrag;
+import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
 import com.siweisoft.service.ui.setting.collect.CollecFrag;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
 
@@ -139,10 +139,10 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
                 videoBean.setFromphone(Value.userBean.getPhone());
                 videoBean.setTophone(userBean.getPhone());
 
-                RemarkFrag remarkFrag = new RemarkFrag();
-                remarkFrag.setArguments(new Bundle());
-                remarkFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, videoBean);
-                FragmentUtil2.getInstance().add(fragment.getActivity(), Value.ROOTID_TWO, remarkFrag);
+                VideoChatFrag videoChatFrag = new VideoChatFrag();
+                videoChatFrag.setArguments(new Bundle());
+                videoChatFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, videoBean);
+                FragmentUtil2.getInstance().add(fragment.getActivity(), Value.FULLSCREEN, videoChatFrag);
 
                 //ChatInit.getInstance().getAnyChatSDK().VideoCallControl(AnyChatDefine.BRAC_VIDEOCALL_EVENT_REQUEST, Integer.parseInt(userBean.getChatid()), 0, 0, 0, GsonUtil.getInstance().toJson(videoBean));
                 break;

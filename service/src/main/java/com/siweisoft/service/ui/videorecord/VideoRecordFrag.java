@@ -5,6 +5,7 @@ package com.siweisoft.service.ui.videorecord;
 import android.os.Bundle;
 import android.view.View;
 
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.listener.ViewListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
@@ -12,6 +13,8 @@ import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
+import com.siweisoft.service.bean.ContactBean;
+import com.siweisoft.service.bean.HistoryBean;
 import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
@@ -27,8 +30,18 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
     public void initData() {
         super.initData();
         setTitleBean(new TitleBean("返回", "录像", ""));
-        getP().getD().setVideos((ArrayList<VideoBean>) getArguments().getSerializable(ValueConstant.DATA_DATA));
-        getP().getU().initList(getP().getD().getVideos(), VideoRecordFrag.this);
+        getP().getD().setHistoryBean((HistoryBean) getArguments().getSerializable(Value.DATA_DATA));
+        ContactBean contactBean = new ContactBean();
+        contactBean.setFromid(Value.userBean.getId());
+        contactBean.setToid(getP().getD().getHistoryBean().getUserBean().getId());
+        getP().getD().getVideosByBothUserId(contactBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getP().getD().setVideos((ArrayList<VideoBean>) o);
+                getP().getU().initList(getP().getD().getVideos(), VideoRecordFrag.this);
+            }
+        });
+
     }
 
     @Override

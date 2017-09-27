@@ -5,7 +5,7 @@
 
         <variable
             name="item_history"
-            type="com.siweisoft.service.netdb.video.VideoBean" />
+            type="com.siweisoft.service.bean.HistoryBean" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -51,7 +51,7 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="@={item_history.created}"
+                    android:text="@={item_history.date}"
                     android:textColor="@color/gray"
                     android:textSize="14sp" />
             </LinearLayout>

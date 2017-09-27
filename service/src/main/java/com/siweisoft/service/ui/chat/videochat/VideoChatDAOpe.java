@@ -23,6 +23,8 @@ public class VideoChatDAOpe extends BaseDAOpe {
 
     VideoI videoI;
 
+    private boolean accept = false;
+
 
     public VideoChatDAOpe(Context context) {
         super(context);
@@ -104,5 +106,13 @@ public class VideoChatDAOpe extends BaseDAOpe {
                 onFinishListener.onFinish(o);
             }
         });
+    }
+
+    public boolean isAccept() {
+        return accept;
+    }
+
+    public void setAccept(boolean accept) {
+        this.accept = accept;
     }
 }

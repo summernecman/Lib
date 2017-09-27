@@ -40,7 +40,7 @@ public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
 
     public void initTips(final TipsBean data) {
         bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
-        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, data.getTipBeen()) {
+        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip3, BR.item_tip3, data.getTipBeen()) {
             @Override
             public void onBindViewHolder(AppViewHolder holder, int position) {
                 ViewDataBinding viewDataBinding = holder.viewDataBinding;

@@ -13,8 +13,8 @@ import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
+import com.siweisoft.service.bean.HistoryBean;
 import com.siweisoft.service.bean.TitleBean;
-import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.videorecord.VideoRecordFrag;
 
@@ -41,7 +41,7 @@ public class HistoryFrag extends BaseServerFrag<HistoryUIOpe, HistoryDAOpe> impl
         getP().getD().getVideos(new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getU().initList((ArrayList<ArrayList<VideoBean>>) o, HistoryFrag.this);
+                getP().getU().initList((ArrayList<HistoryBean>) o, HistoryFrag.this);
             }
         });
     }

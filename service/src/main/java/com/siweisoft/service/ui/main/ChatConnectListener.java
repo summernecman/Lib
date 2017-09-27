@@ -4,6 +4,7 @@ package com.siweisoft.service.ui.main;
 
 import android.app.Activity;
 
+import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.ToastUtil;
 import com.hyphenate.EMConnectionListener;
@@ -33,6 +34,7 @@ public class ChatConnectListener implements EMConnectionListener {
             public void run() {
                 ToastUtil.getInstance().showLong(app, "你的账号在另一台手机登录");
                 LogUtil.E("onDisconnected3");
+                FragmentUtil2.getInstance().clear();
                 ((ServieApp) app.getApplication()).exit();
                 LogUtil.E("onDisconnected4");
             }

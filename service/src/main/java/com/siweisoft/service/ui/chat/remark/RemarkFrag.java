@@ -4,7 +4,6 @@ package com.siweisoft.service.ui.chat.remark;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.android.lib.base.interf.OnFinishListener;
@@ -13,14 +12,12 @@ import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.NullUtil;
 import com.android.lib.util.data.DateFormatUtil;
-import com.android.lib.view.bottommenu.MessageEvent;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
 
 public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
 
@@ -29,18 +26,28 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
         super.onViewCreated(view, savedInstanceState);
         getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
         setTitleBean(new TitleBean("返回", "评论", "确定"));
-        Fragment videofragment = new VideoChatFrag();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(ValueConstant.DATA_DATA, getP().getD().getVideoBean());
-        bundle.putBoolean(Value.DATA_INTENT, getArguments().getBoolean(Value.DATA_INTENT, false));
-        videofragment.setArguments(bundle);
-        FragmentUtil2.getInstance().add(fragment.getActivity(), Value.FULLSCREEN, videofragment);
         getP().getU().initRatingBar(new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 getP().getD().ratingbar = (float) o;
             }
         });
+
+        getP().getU().initTop(getP().getD().getOtherUser(getP().getD().getVideoBean()));
+        getP().getU().bind.tvName.setText(getP().getD().getOtherUser(getP().getD().getVideoBean()).getName());
+
+        //收到文件内容为空 == 录像不是我录的
+        if (NullUtil.isStrEmpty(getP().getD().getVideoBean().getFile())) {
+            //FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+            return;
+        }
+        getP().getD().updateVideo(getP().getD().getVideoBean(), new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
+            }
+        });
+
     }
 
     @Override
@@ -79,28 +86,5 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                 });
                 break;
         }
-    }
-
-
-    @Override
-    public void dealMesage(final MessageEvent event) {
-        super.dealMesage(event);
-        VideoBean videoBean = (VideoBean) event.data;
-        getP().getD().setVideoBean(videoBean);
-        //收到文件内容为空 == 录像不是我录的
-        if (NullUtil.isStrEmpty(videoBean.getFile())) {
-            //FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
-            return;
-        }
-        getP().getD().updateVideo(videoBean, new OnFinishListener() {
-            @Override
-            public void onFinish(Object o) {
-
-                getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
-                getP().getD().getVideoBean().setFile(((VideoBean) (event.data)).getFile());
-            }
-        });
-
-
     }
 }
