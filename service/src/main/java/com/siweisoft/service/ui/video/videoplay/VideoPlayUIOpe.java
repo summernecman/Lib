@@ -20,7 +20,6 @@ import com.siweisoft.service.databinding.FragVideoplayBinding;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.main.MainAct;
 
 
 public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
@@ -104,6 +103,10 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
         //bind.videoplayer.thumbImageView.setImage("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640");
     }
 
+    public void initRating(float rate) {
+        bind.ratingbar.setStar(rate);
+    }
+
     public void initTips(TipsBean data) {
         bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
         bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, data.getTipBeen()));
@@ -124,10 +127,10 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
     }
 
 
-    public void initShare(int vis, String txt, View.OnClickListener onClickListener) {
-        MainAct act = (MainAct) context;
-        act.getP().getU().bind.tophead.ftvRight2.setVisibility(vis);
-        act.getP().getU().bind.tophead.ftvRight2.setText(txt);
-        act.getP().getU().bind.tophead.ftvRight2.setOnClickListener(onClickListener);
-    }
+//    public void initShare(int vis, String txt, View.OnClickListener onClickListener) {
+//        MainAct act = (MainAct) context;
+//        act.getP().getU().bind.tophead.ftvRight2.setVisibility(vis);
+//        act.getP().getU().bind.tophead.ftvRight2.setText(txt);
+//        act.getP().getU().bind.tophead.ftvRight2.setOnClickListener(onClickListener);
+//    }
 }

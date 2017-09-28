@@ -59,6 +59,14 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
             }
         });
 
+        getP().getD().getRateByVideoId(getP().getD().getVideoBean(), new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getP().getU().initRating((Float) o);
+            }
+        });
+
+
         switch (getP().getD().getType()) {
             case VideoPlayFrag.TYPE_FROM_RECORD:
                 getP().getD().isCollectedByVideoIdAndUserId(getP().getD().getVideoBean(), new OnFinishListener() {
@@ -97,7 +105,7 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
     @Override
     public void onStart() {
         super.onStart();
-        getActivity().findViewById(R.id.ftv_right).setOnClickListener(this);
+        getActivity().findViewById(R.id.ftv_right2).setOnClickListener(this);
     }
 
 
@@ -116,7 +124,6 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getP().getU().initShare(View.GONE, "", null);
         GSYVideoPlayer.releaseAllVideos();
         getP().getU().getOrientationUtils().releaseListener();
     }
@@ -162,6 +169,9 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                 userListFrag.setOnFinishListener(new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
+                        if (o == null) {
+                            return;
+                        }
                         UserBean userBean1 = (UserBean) o;
                         ShareBean shareBean = new ShareBean();
                         shareBean.setSendid(Value.userBean.getId());

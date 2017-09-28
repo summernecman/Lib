@@ -11,12 +11,14 @@ import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.NullUtil;
+import com.android.lib.util.StringUtil;
 import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
 import com.siweisoft.service.databinding.FragUserlistBinding;
-import com.siweisoft.service.databinding.ItemUser2Binding;
+import com.siweisoft.service.databinding.ItemUserBinding;
 import com.siweisoft.service.netdb.user.UserBean;
 
 import java.util.ArrayList;
@@ -34,16 +36,26 @@ public class UserListUIOpe extends BaseUIOpe<FragUserlistBinding> {
             LogUtil.E(data.get(i).toString());
         }
         bind.recycle.setLayoutManager(new LinearLayoutManager(context));
-        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_user2, BR.item_user2, data, viewListener) {
+        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_user, BR.item_user, data, viewListener) {
 
             @Override
             public void onBindViewHolder(AppViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                ItemUser2Binding viewDataBinding = (ItemUser2Binding) holder.viewDataBinding;
-                viewDataBinding.ivHead.setTag(R.id.data, data.get(position));
-                viewDataBinding.ivHead.setOnClickListener(this);
-                GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
-                LogUtil.E("111111111111:" + UrlConstant.fileUrl + "/" + data.get(position).getHeadurl());
+                ItemUserBinding viewDataBinding = (ItemUserBinding) holder.viewDataBinding;
+                viewDataBinding.tvName.setText(NullUtil.isStrEmpty(data.get(position).getName()) ? data.get(position).getPhone() : StringUtil.getStr(data.get(position).getName()));
+                viewDataBinding.ratingbar.setStar(data.get(position).getAvg());
+                GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
+                switch (data.get(position).getUsertype()) {
+                    case UserBean.CUSTOME:
+                        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_customer.png").into(viewDataBinding.ivHeadType);
+                        break;
+                    case UserBean.ENGINEER:
+                        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_engineer.png").into(viewDataBinding.ivHeadType);
+                        break;
+                    case UserBean.SERVER:
+                        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_server.png").into(viewDataBinding.ivHeadType);
+                        break;
+                }
             }
         });
     }

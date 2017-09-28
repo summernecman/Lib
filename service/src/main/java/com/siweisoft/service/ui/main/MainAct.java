@@ -24,13 +24,13 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.EMNoActiveCallException;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.siweisoft.service.R;
+import com.siweisoft.service.ServieApp;
 import com.siweisoft.service.netdb.crash.CrashBean;
 import com.siweisoft.service.netdb.crash.CrashI;
 import com.siweisoft.service.netdb.crash.CrashOpe;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.recept.ReceiptFrag;
-import com.siweisoft.service.ui.chat.videochat.VideoChatListener;
 
 import butterknife.OnClick;
 import butterknife.Optional;
@@ -130,6 +130,8 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
             case R.id.ftv_back:
                 FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
                 break;
+            case R.id.ftv_right2:
+                break;
         }
     }
 
@@ -145,7 +147,12 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         crashI.sendCrash(crashBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-
+                EMClient.getInstance().logout(true);
+                if (Value.room != null) {
+                    EMClient.getInstance().chatroomManager().leaveChatRoom(Value.room.getId());
+                }
+                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+                ((ServieApp) activity.getApplication()).exit();
             }
         });
     }

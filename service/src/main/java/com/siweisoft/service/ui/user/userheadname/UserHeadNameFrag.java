@@ -40,13 +40,6 @@ public class UserHeadNameFrag extends BaseServerFrag<UserHeadNameUIOpe, UserHead
         getP().getU().initInfo();
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        setTitleBean(new TitleBean("返回", "头像和姓名", ""));
-        getP().getU().initInfo();
-    }
-
     @OnClick({R.id.ll_head, R.id.ll_name})
     public void onClickEvent(View v) {
         switch (v.getId()) {

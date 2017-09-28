@@ -51,6 +51,7 @@
                         android:textSize="17sp" />
 
                     <EditText
+                        android:singleLine="true"
                         android:id="@+id/et_account"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
@@ -82,6 +83,7 @@
                         android:textSize="17sp" />
 
                     <EditText
+                        android:singleLine="true"
                         android:id="@+id/et_pwd"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
@@ -114,6 +116,7 @@
                         android:textSize="17sp" />
 
                     <EditText
+                        android:singleLine="true"
                         android:id="@+id/et_server"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"

@@ -8,10 +8,16 @@
             type="String" />
     </data>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/tophead"
+            layout="@layout/item_title2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_base_title" />
         <com.android.lib.view.other.AppMaterialRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/refresh"
@@ -29,5 +35,5 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </com.android.lib.view.other.AppMaterialRefreshLayout>
-    </RelativeLayout>
+    </LinearLayout>
 </layout>

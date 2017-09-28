@@ -139,6 +139,20 @@ public class CommentOpe extends BaseDAOpe implements CommentI {
     }
 
     @Override
+    public void getVideoRateCommentByVideoid(VideoBean videoBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(videoBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/comment/getVideoRateCommentByVideoid", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                double l = (double) o.getData();
+                float res = (float) l;
+                onFinishListener.onFinish(res);
+            }
+        });
+    }
+
+    @Override
     public void getVideoCommentByVideoIdAndFrom(VideoBean videoBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(videoBean));

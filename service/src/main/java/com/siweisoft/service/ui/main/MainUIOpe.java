@@ -36,8 +36,6 @@ public class MainUIOpe extends BaseUIOpe<ActMainBinding> {
             if (baseUIFrag != null) {
                 bind.tophead.setTitle2(baseUIFrag.getTitleBean());
 //                bind.tophead.ftvBack.setVisibility(View.VISIBLE);
-//                bind.tophead.ftvTitle.setVisibility(View.VISIBLE);
-//                bind.tophead.ftvRight.setVisibility(View.VISIBLE);
             }
         }
     }

@@ -106,6 +106,12 @@ public class VideoPlayDAOpe extends BaseDAOpe {
         shareI.share(shareBean, onFinishListener);
     }
 
+    public void getRateByVideoId(VideoBean videoBean, OnFinishListener onFinishListener) {
+        if (commentI == null) {
+            commentI.getVideoRateCommentByVideoid(videoBean, onFinishListener);
+        }
+    }
+
 
     public UserBean getUserBean() {
         return userBean;

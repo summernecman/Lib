@@ -13,10 +13,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
-                    android:id="@+id/videoplayer"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp" />-->
+        <include
+            android:id="@+id/tophead"
+            layout="@layout/item_title2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_base_title" />
 
         <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
             android:id="@+id/videoplayer"
@@ -44,7 +45,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                hedgehog:clickable="true"
+                hedgehog:clickable="false"
                 hedgehog:halfstart="true"
                 hedgehog:starCount="5"
                 hedgehog:starEmpty="@mipmap/star_empty"

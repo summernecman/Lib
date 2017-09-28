@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item_tip4"
+            type="com.siweisoft.service.bean.TipBean" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:background="@drawable/drawable_radious_blue">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_tip"
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:padding="3dp"
+                android:singleLine="true"
+                android:text='@{item_tip4.tip+"("+item_tip4.num+")"}'
+                android:textColor="@color/gray"
+                android:textSize="13sp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

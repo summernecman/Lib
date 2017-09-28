@@ -12,6 +12,7 @@ import com.android.lib.constant.UrlConstant;
 import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
+import com.android.lib.util.LogUtil;
 import com.android.lib.util.NullUtil;
 import com.android.lib.util.SPUtil;
 import com.hyphenate.chat.EMClient;
@@ -22,12 +23,21 @@ import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.main.MainAct;
 import com.siweisoft.service.ui.user.regist.RegistFrag;
 
+import java.util.ArrayList;
+
 import butterknife.OnClick;
 
 public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        ArrayList<String> strings = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            strings.add("fdjasofjd" + i * 5);
+        }
+        LogUtil.E(GsonUtil.getInstance().toJson(strings));
+
         super.onViewCreated(view, savedInstanceState);
         getP().getU().bind.setLogin(getP().getD().getUserBean());
         getP().getU().initImage(getP().getD().getImageUril());

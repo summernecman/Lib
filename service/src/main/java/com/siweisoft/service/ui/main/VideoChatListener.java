@@ -1,9 +1,10 @@
-package com.siweisoft.service.ui.chat.videochat;
+package com.siweisoft.service.ui.main;
 
 //by summer on 17-09-20.
 
 import com.android.lib.util.LogUtil;
 import com.hyphenate.chat.EMCallStateChangeListener;
+import com.siweisoft.service.ui.chat.videochat.VideoChatMsg;
 
 import org.greenrobot.eventbus.EventBus;
 

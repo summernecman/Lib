@@ -21,6 +21,7 @@
         android:orientation="vertical">
 
         <include
+            android:visibility="gone"
             android:id="@+id/tophead"
             layout="@layout/item_title2"
             android:layout_width="match_parent"

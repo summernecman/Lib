@@ -2,6 +2,7 @@ package com.siweisoft.service.ui.chat.remark;
 
 //by summer on 17-08-24.
 
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,6 +21,7 @@ import com.siweisoft.service.R;
 import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.databinding.FragRemarkBinding;
 import com.siweisoft.service.netdb.user.UserBean;
+import com.siweisoft.service.ui.main.MainAct;
 
 public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
 
@@ -70,6 +72,13 @@ public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
 
     public String getRemark() {
         return bind.remark.getText().toString();
+    }
+
+    public void setFront(Activity activity) {
+        if (activity instanceof MainAct) {
+            MainAct act = (MainAct) activity;
+            act.getP().getU().bind.vpVp.setCurrentItem(1);
+        }
     }
 
 

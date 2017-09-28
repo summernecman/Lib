@@ -14,6 +14,11 @@
         android:background="@color/color_base_graybg"
         android:orientation="vertical">
 
+        <include
+            android:id="@+id/tophead"
+            layout="@layout/item_title2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_base_title" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -45,7 +50,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@drawable/drawable_press_black_while"
@@ -95,7 +100,7 @@
                 android:layout_height="1px" />
 
             <LinearLayout
-
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@drawable/drawable_press_black_while"
@@ -145,7 +150,7 @@
                 android:layout_height="1px" />
 
             <LinearLayout
-
+                android:clickable="true"
                 android:id="@+id/ll_remark"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"

@@ -23,7 +23,7 @@ public class SettingFrag extends BaseServerFrag<SettingUIOpe, SettingDAOpe> {
         setTitleBean(new TitleBean("返回", "设置", ""));
     }
     @OnClick({R.id.ll_set})
-    public void onClick(View view) {
+    public void onClickEvent(View view) {
         switch (view.getId()) {
             case R.id.ll_set:
                 if (Value.room == null) {

@@ -36,7 +36,7 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
 
     public void initTips(TipsBean data) {
         bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
-        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, data.getTipBeen()));
+        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip4, BR.item_tip4, data.getTipBeen()));
     }
 
     public void initTips(HashMap<Integer, TipBean> data) {
@@ -79,6 +79,9 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
         LogUtil.E(Value.userBean.getHeadurl());
         GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + Value.userBean.getHeadurl()).into(bind.head);
         bind.setVariable(BR.frag_usercenter, Value.userBean);
+        if (Value.userBean == null || Value.userBean.getUsertype() == null) {
+            return;
+        }
         switch (Value.userBean.getUsertype()) {
             case UserBean.CUSTOME:
                 GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_customer.png").into(bind.type);

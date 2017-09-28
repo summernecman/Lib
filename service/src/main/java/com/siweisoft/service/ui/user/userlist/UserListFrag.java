@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.listener.ViewListener;
-import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
@@ -24,7 +23,7 @@ public class UserListFrag extends BaseServerFrag<UserListUIOpe, UserListDAOpe> i
 
     @Override
     public void doThing() {
-        getP().getD().setUserBean((UserBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
+        // getP().getD().setUserBean((UserBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
         getP().getU().initRefresh(new MaterialRefreshListenerAdpter() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
