@@ -206,6 +206,20 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
     }
 
     @Override
+    public void getVideosByBothUserIdWithLimit(ContactBean contactBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(contactBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/getVideosByBothUserIdWithLimit", baseReqBean, new UINetAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                ArrayList<VideoBean> videos = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<VideoBean>>() {
+                }.getType());
+                onFinishListener.onFinish(videos);
+            }
+        });
+    }
+
+    @Override
     public void getByContacts(UserBean userBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
@@ -215,6 +229,20 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
                 ArrayList<HistoryBean> videos = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<HistoryBean>>() {
                 }.getType());
                 onFinishListener.onFinish(videos);
+            }
+        });
+    }
+
+    @Override
+    public void getUnUploadVideoNum(UserBean userBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/getUnUploadVideoNum", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                double d = (double) o.getData();
+                int num = (int) d;
+                onFinishListener.onFinish(num);
             }
         });
     }

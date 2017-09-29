@@ -130,9 +130,9 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
                 FragmentUtil2.getInstance().add(activity, Value.ROOTID_TWO, userInfoFrag);
                 break;
             case R.id.iv_call:
-//                if (userBean.getState() != UserBean.STATE_ONLINE) {
-//                    return;
-//                }
+                if (userBean.getState() != UserBean.STATE_ONLINE) {
+                    return;
+                }
                 VideoBean videoBean = new VideoBean();
                 videoBean.setToUser(userBean);
                 videoBean.setFromUser(Value.userBean);

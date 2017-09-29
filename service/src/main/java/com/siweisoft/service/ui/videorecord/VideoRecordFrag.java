@@ -33,12 +33,37 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
         getP().getD().setHistoryBean((HistoryBean) getArguments().getSerializable(Value.DATA_DATA));
         ContactBean contactBean = new ContactBean();
         contactBean.setFromid(Value.userBean.getId());
+        contactBean.setPagesize(5);
+        getP().getD().setPageindex(0);
+        contactBean.setPagestart(getP().getD().getPageindex());
         contactBean.setToid(getP().getD().getHistoryBean().getUserBean().getId());
-        getP().getD().getVideosByBothUserId(contactBean, new OnFinishListener() {
+        getP().getD().getVideosByBothUserIdWithLimit(contactBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 getP().getD().setVideos((ArrayList<VideoBean>) o);
                 getP().getU().initList(getP().getD().getVideos(), VideoRecordFrag.this);
+                getP().getU().bind.refresh.finishRefresh();
+                getP().getD().setPageindex(getP().getD().getPageindex() + 1);
+            }
+        });
+
+    }
+
+
+    public void initData2() {
+        super.initData();
+        ContactBean contactBean = new ContactBean();
+        contactBean.setFromid(Value.userBean.getId());
+        contactBean.setPagesize(5);
+        contactBean.setPagestart(getP().getD().getPageindex());
+        contactBean.setToid(getP().getD().getHistoryBean().getUserBean().getId());
+        getP().getD().getVideosByBothUserIdWithLimit(contactBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                getP().getU().loadmore();
+                getP().getD().setPageindex(getP().getD().getPageindex() + 1);
+                getP().getU().bind.refresh.finishRefreshLoadMore();
             }
         });
 
@@ -50,7 +75,11 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
                 initData();
-                materialRefreshLayout.finishRefreshingDelay();
+            }
+
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                initData2();
             }
         });
 

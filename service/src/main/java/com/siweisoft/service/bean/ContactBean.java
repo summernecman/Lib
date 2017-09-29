@@ -10,6 +10,10 @@ public class ContactBean extends BaseBean {
 
     private int toid;
 
+    private int pagesize;
+
+    private int pagestart;
+
     public int getId() {
         return id;
     }
@@ -32,5 +36,21 @@ public class ContactBean extends BaseBean {
 
     public void setToid(int toid) {
         this.toid = toid;
+    }
+
+    public int getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(int pagesize) {
+        this.pagesize = pagesize;
+    }
+
+    public int getPagestart() {
+        return pagestart;
+    }
+
+    public void setPagestart(int pagestart) {
+        this.pagestart = pagestart;
     }
 }

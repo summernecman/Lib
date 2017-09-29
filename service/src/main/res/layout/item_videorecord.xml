@@ -66,6 +66,17 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
+
+                    <TextView
+                        android:visibility="gone"
+                        android:text="未上传"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_upload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_red_A400"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <TextView

@@ -18,6 +18,7 @@ import com.siweisoft.service.R;
 import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.databinding.FragVideoplayBinding;
 import com.siweisoft.service.netdb.comment.CommentBean;
+import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 
@@ -28,6 +29,19 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
 
     public VideoPlayUIOpe(Context context) {
         super(context);
+    }
+
+    public void initUpload(VideoBean videoBean, View.OnClickListener onClickListener) {
+        bind.tvUpload.setOnClickListener(onClickListener);
+        if (Value.userBean.getUsertype() == UserBean.USER_TYPE_CUSTOMER) {
+            bind.tvUpload.setVisibility(View.GONE);
+            return;
+        }
+        if (videoBean.getUploaded() == 0) {
+            bind.tvUpload.setVisibility(View.VISIBLE);
+        } else {
+            bind.tvUpload.setVisibility(View.GONE);
+        }
     }
 
     public void play(VideoBean videoBean, final OnFinishListener onFinishListener) {
@@ -113,6 +127,7 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
     }
 
     public void initInfo(CommentBean commentBean) {
+        bind.ratingbar.setStar(commentBean.getRate());
         bind.remark.setText(commentBean.getRemark() + "");
         TipsBean tipsBean = GsonUtil.getInstance().fromJson(commentBean.getTips(), TipsBean.class);
         bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipsBean.getTipBeen()));

@@ -24,6 +24,8 @@ public class VideoRecordDAOpe extends BaseDAOpe {
 
     private HistoryBean historyBean;
 
+    private int pageindex = 0;
+
 
     public VideoRecordDAOpe(Context context) {
         super(context);
@@ -49,7 +51,15 @@ public class VideoRecordDAOpe extends BaseDAOpe {
         this.historyBean = historyBean;
     }
 
-    public void getVideosByBothUserId(ContactBean contactBean, OnFinishListener onFinishListener) {
-        videoI.getVideosByBothUserId(contactBean, onFinishListener);
+    public void getVideosByBothUserIdWithLimit(ContactBean contactBean, OnFinishListener onFinishListener) {
+        videoI.getVideosByBothUserIdWithLimit(contactBean, onFinishListener);
+    }
+
+    public int getPageindex() {
+        return pageindex;
+    }
+
+    public void setPageindex(int pageindex) {
+        this.pageindex = pageindex;
     }
 }

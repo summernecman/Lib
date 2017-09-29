@@ -54,6 +54,17 @@
                 hedgehog:starImageHeight="30dp"
                 hedgehog:starImagePadding="10dp"
                 hedgehog:starImageWidth="30dp" />
+
+            <TextView
+                android:layout_marginRight="5dp"
+                android:id="@+id/tv_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="未上传"
+                android:textColor="@color/color_red_A400"
+                android:textSize="18sp" />
+
+
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView

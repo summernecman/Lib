@@ -43,6 +43,7 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
         getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
         getP().getU().initTips(getP().getD().userInfoDAOpe.getData());
         getP().getD().getCollectionBean().setVideoid(getP().getD().getVideoBean().getId());
+        getP().getU().initUpload(getP().getD().getVideoBean(), this);
         getP().getU().play(getP().getD().getVideoBean(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
@@ -59,12 +60,6 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
             }
         });
 
-        getP().getD().getRateByVideoId(getP().getD().getVideoBean(), new OnFinishListener() {
-            @Override
-            public void onFinish(Object o) {
-                getP().getU().initRating((Float) o);
-            }
-        });
 
 
         switch (getP().getD().getType()) {
@@ -130,9 +125,18 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
 
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         super.onClick(v);
         switch (v.getId()) {
+            case R.id.tv_upload:
+                getP().getD().uploadVideo(getP().getD().getVideoBean(), new OnFinishListener() {
+                    @Override
+                    public void onFinish(Object o) {
+                        v.setVisibility(View.GONE);
+                    }
+                });
+                v.setEnabled(false);
+                break;
             case R.id.ftv_right:
                 TextView textView = (TextView) v;
                 if (!textView.getText().toString().equals("收藏")) {

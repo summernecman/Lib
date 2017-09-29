@@ -49,6 +49,10 @@ public class HistoryDAOpe extends BaseDAOpe {
         });
     }
 
+    public void getUnUploadVideoNum(final OnFinishListener onFinishListener) {
+        videoI.getUnUploadVideoNum(Value.userBean, onFinishListener);
+    }
+
     public void getArrayUsersInfoByPhone(ArrayList<ArrayList<UserBean>> data, OnFinishListener onFinishListener) {
         if (userI == null) {
             userI = new UserNetOpe(context);

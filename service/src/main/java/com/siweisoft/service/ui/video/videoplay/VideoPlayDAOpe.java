@@ -3,9 +3,11 @@ package com.siweisoft.service.ui.video.videoplay;
 //by summer on 17-08-24.
 
 import android.content.Context;
+import android.os.Environment;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.util.NullUtil;
 import com.siweisoft.service.netdb.collection.CollectionBean;
 import com.siweisoft.service.netdb.collection.CollectionI;
 import com.siweisoft.service.netdb.collection.CollectionOpe;
@@ -16,8 +18,12 @@ import com.siweisoft.service.netdb.share.ShareI;
 import com.siweisoft.service.netdb.share.ShareOpe;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
+import com.siweisoft.service.netdb.video.VideoI;
+import com.siweisoft.service.netdb.video.VideoOpe;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userinfo.UserInfoDAOpe;
+
+import java.io.File;
 
 public class VideoPlayDAOpe extends BaseDAOpe {
 
@@ -33,9 +39,12 @@ public class VideoPlayDAOpe extends BaseDAOpe {
 
     ShareI shareI;
 
+    VideoI videoi;
+
     private int type = 0;
 
     CollectionBean collectionBean = new CollectionBean();
+
 
 
     public VideoPlayDAOpe(Context context) {
@@ -99,6 +108,27 @@ public class VideoPlayDAOpe extends BaseDAOpe {
     }
 
 
+    public void uploadVideo(final VideoBean videoBean, final OnFinishListener onFinishListener) {
+        final String f = videoBean.getFile();
+        if (NullUtil.isStrEmpty(videoBean.getFile())) {
+            return;
+        }
+        final String[] ss = videoBean.getFile().split("/");
+        File file = new File(Environment.getExternalStorageDirectory() + "/videorecord", ss[ss.length - 1]);
+        videoBean.setFile(file.getPath());
+        if (videoi == null) {
+            videoi = new VideoOpe(context);
+        }
+        videoi.updateVideo(videoBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                videoBean.setFile(f);
+                videoi.setVideoUploaded(videoBean, onFinishListener);
+            }
+        });
+    }
+
+
     public void share(ShareBean shareBean, OnFinishListener onFinishListener) {
         if (shareI == null) {
             shareI = new ShareOpe(context);
@@ -106,11 +136,6 @@ public class VideoPlayDAOpe extends BaseDAOpe {
         shareI.share(shareBean, onFinishListener);
     }
 
-    public void getRateByVideoId(VideoBean videoBean, OnFinishListener onFinishListener) {
-        if (commentI == null) {
-            commentI.getVideoRateCommentByVideoid(videoBean, onFinishListener);
-        }
-    }
 
 
     public UserBean getUserBean() {
