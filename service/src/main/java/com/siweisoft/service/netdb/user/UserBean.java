@@ -57,6 +57,11 @@ public class UserBean extends BaseBean {
 
     public static final int USER_TYPE_CUSTOMER = 2;
 
+
+    private int pagesize;
+
+    private int pagestart;
+
     public UserBean() {
     }
 
@@ -193,6 +198,22 @@ public class UserBean extends BaseBean {
             return getPhone();
         }
         return getName();
+    }
+
+    public int getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(int pagesize) {
+        this.pagesize = pagesize;
+    }
+
+    public int getPagestart() {
+        return pagestart;
+    }
+
+    public void setPagestart(int pagestart) {
+        this.pagestart = pagestart;
     }
 
     @Override

@@ -12,7 +12,9 @@ public interface CommentI {
 
     public void getCommentNumByUserName(UserBean userBean, OnFinishListener onFinishListener);
 
-    public void getCommentByUserName(UserBean userBean, OnFinishListener onFinishListener);
+    public void getCommentByUserPhone(UserBean userBean, OnFinishListener onFinishListener);
+
+    public void getCommentByUserIdWithLimit(UserBean userBean, OnFinishListener onFinishListener);
 
     public void getCommentByUserNameWithMyOption(CommentBean commentBean, OnFinishListener onFinishListener);
 

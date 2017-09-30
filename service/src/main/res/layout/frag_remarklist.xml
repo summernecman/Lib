@@ -23,7 +23,7 @@
             android:id="@+id/refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:isLoadMore="false"
+            app:isLoadMore="true"
             app:overlay="false"
             app:progress_show_circle_backgroud="false"
             app:progress_size_type="normal"

@@ -17,6 +17,12 @@ public class RemarkListDAOpe extends BaseDAOpe {
 
     CommentI commentI;
 
+    private int pageindex = 0;
+
+    private int pagesize = 5;
+
+    private ArrayList<CommentBean> list;
+
     public RemarkListDAOpe(Context context) {
         super(context);
     }
@@ -25,7 +31,7 @@ public class RemarkListDAOpe extends BaseDAOpe {
         if (commentI == null) {
             commentI = new CommentOpe(context);
         }
-        commentI.getCommentByUserName(userBean, new OnFinishListener() {
+        commentI.getCommentByUserIdWithLimit(userBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 ArrayList<CommentBean> res = (ArrayList<CommentBean>) o;
@@ -33,5 +39,29 @@ public class RemarkListDAOpe extends BaseDAOpe {
             }
         });
 
+    }
+
+    public int getPageindex() {
+        return pageindex;
+    }
+
+    public void setPageindex(int pageindex) {
+        this.pageindex = pageindex;
+    }
+
+    public int getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(int pagesize) {
+        this.pagesize = pagesize;
+    }
+
+    public ArrayList<CommentBean> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<CommentBean> list) {
+        this.list = list;
     }
 }

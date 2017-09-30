@@ -134,7 +134,7 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
     }
 
     public void initTxt(VideoBean videoBean, boolean show) {
-        bind.remark.setText(show ? videoBean.getCreated() + "" : "");
+        // bind.remark.setText(show ? videoBean.getCreated() + "" : "");
     }
 
     public OrientationUtils getOrientationUtils() {
