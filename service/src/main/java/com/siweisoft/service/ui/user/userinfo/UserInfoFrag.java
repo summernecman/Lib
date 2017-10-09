@@ -46,6 +46,12 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
                 initData();
                 materialRefreshLayout.finishRefreshingDelay();
             }
+
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                initData2();
+
+            }
         });
     }
 
@@ -60,11 +66,19 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
                 getP().getU().initTips((HashMap<Integer, TipBean>) o);
             }
         });
-        getP().getD().getRemarks(getP().getD().getCommentReq(Value.userBean, getP().getD().getUserBean()), new OnFinishListener() {
+        getP().getD().getUserBean().setPagesize(5);
+        getP().getD().getUserBean().setPagestart(0);
+        getP().getD().getUserBean().setPagestart(getP().getD().getUserBean().getPagestart());
+        getP().getD().getCommentBeen().clear();
+        CommentBean commentBean = getP().getD().getCommentReq(Value.userBean, getP().getD().getUserBean());
+        getP().getD().getRemarks(commentBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getD().setCommentBeen((ArrayList<CommentBean>) o);
+                ArrayList<CommentBean> a = (ArrayList<CommentBean>) o;
+                getP().getD().getCommentBeen().addAll(a);
+                getP().getD().setCommentBeen(getP().getD().getCommentBeen());
                 getP().getU().initRemarks(getP().getD().getCommentBeen(), UserInfoFrag.this);
+                getP().getD().getUserBean().setPagestart(getP().getD().getUserBean().getPagestart() + 1);
             }
         });
 
@@ -82,6 +96,26 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
                 getP().getD().getUserBean().setAvg((Float) o);
             }
         });
+    }
+
+
+    public void initData2() {
+        getP().getD().getUserBean().setPagestart(getP().getD().getUserBean().getPagestart());
+        CommentBean commentBean = getP().getD().getCommentReq(Value.userBean, getP().getD().getUserBean());
+        getP().getD().getRemarks(commentBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getP().getU().bind.refresh.finishRefreshLoadMore();
+                ArrayList<CommentBean> a = (ArrayList<CommentBean>) o;
+                if (a == null || a.size() == 0) {
+                    ToastUtil.getInstance().showShort(activity, "已经加载完了");
+                }
+                getP().getD().getCommentBeen().addAll(a);
+                getP().getU().refreshRemarks();
+                getP().getD().getUserBean().setPagestart(getP().getD().getUserBean().getPagestart() + 1);
+            }
+        });
+
     }
 
     @OnClick({R.id.call})

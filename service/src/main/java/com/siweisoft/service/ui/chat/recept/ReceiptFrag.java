@@ -2,28 +2,29 @@ package com.siweisoft.service.ui.chat.recept;
 
 //by summer on 17-09-11.
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.IntentUtil;
 import com.android.lib.util.system.SystemUtil;
+import com.android.lib.view.bottommenu.MessageEvent;
+import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.EMNoActiveCallException;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
-import com.siweisoft.service.ui.chat.videochat.VideoChatMsg;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.OnClick;
 
 public class ReceiptFrag extends BaseServerFrag<ReceiptUIOpe, ReceiptDAOpe> {
 
+    Vibrator mVibrator;
 
     @Override
     public void doThing() {
@@ -31,6 +32,8 @@ public class ReceiptFrag extends BaseServerFrag<ReceiptUIOpe, ReceiptDAOpe> {
         if (SystemUtil.isBackground(activity)) {
             IntentUtil.getInstance().IntentTo(activity, activity.getPackageName());
         }
+        mVibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+        mVibrator.vibrate(new long[]{1000, 2000, 1000, 2000}, 0);
     }
 
     @OnClick({R.id.tv_receipt, R.id.tv_refuse})
@@ -56,15 +59,19 @@ public class ReceiptFrag extends BaseServerFrag<ReceiptUIOpe, ReceiptDAOpe> {
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(VideoChatMsg msg) {
-        switch (msg.code) {
-            case VideoChatMsg.CODE_END_RECORD:
+    @Override
+    public void dealMesage(MessageEvent event) {
+        super.dealMesage(event);
+        switch ((EMCallStateChangeListener.CallState) (event.data)) {
+            case DISCONNECTED:
                 FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
                 break;
         }
-
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mVibrator.cancel();
+    }
 }

@@ -58,7 +58,7 @@ public class UserBean extends BaseBean {
     public static final int USER_TYPE_CUSTOMER = 2;
 
 
-    private int pagesize;
+    private int pagesize = 5;
 
     private int pagestart;
 

@@ -19,17 +19,19 @@
             android:layout_height="70dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="@drawable/drawable_press_black_while"
-            android:padding="7.5dp">
+            android:background="@drawable/drawable_press_black_while">
 
             <RelativeLayout
-                android:layout_width="55dp"
-                android:layout_height="55dp">
+
+                android:layout_width="70dp"
+                android:layout_height="70dp">
 
                 <ImageView
+                    android:background="@drawable/drawable_press_black_while"
+                    android:padding="7.5dp"
                     android:id="@+id/iv_head"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp" />
+                    android:layout_width="70dp"
+                    android:layout_height="70dp" />
 
                 <ImageView
                     android:visibility="gone"
@@ -42,6 +44,8 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:layout_marginTop="7.5dp"
+                android:layout_marginBottom="7.5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_width="0dp"
@@ -94,7 +98,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="55dp"
+                android:layout_width="77.5dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -109,9 +113,10 @@
                     android:textSize="13sp" />
 
                 <ImageView
+                    android:padding="7.5dp"
                     android:id="@+id/iv_call"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:src="@drawable/drawable_call2" />
 
             </LinearLayout>

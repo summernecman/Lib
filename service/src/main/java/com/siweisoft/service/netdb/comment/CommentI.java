@@ -16,6 +16,8 @@ public interface CommentI {
 
     public void getCommentByUserIdWithLimit(UserBean userBean, OnFinishListener onFinishListener);
 
+    public void getCommentByUserIdWithMyOptionWithLimit(CommentBean commentBean, OnFinishListener onFinishListener);
+
     public void getCommentByUserNameWithMyOption(CommentBean commentBean, OnFinishListener onFinishListener);
 
     public void getUserTips(UserBean userBean, OnFinishListener onFinishListener);

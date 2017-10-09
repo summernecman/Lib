@@ -50,6 +50,10 @@ public class LoginDAOpe extends BaseDAOpe {
                 }
                 LoadUtil.getInstance().onStartLoading(context, "login");
                 final UserBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(baseResBean.getData()), UserBean.class);
+                if (res == null) {
+                    LoadUtil.getInstance().onStopLoading("login");
+                    return;
+                }
                 EMClient.getInstance().login(res.getPhone(), res.getPwd(), new EMCallBack() {//回调
                     @Override
                     public void onSuccess() {

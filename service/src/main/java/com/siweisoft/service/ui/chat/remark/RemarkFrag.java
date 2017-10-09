@@ -12,12 +12,14 @@ import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.NullUtil;
 import com.android.lib.util.data.DateFormatUtil;
+import com.android.lib.util.system.SystemUtil;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
+import com.siweisoft.service.ui.dialog.DialogFrag;
 
 public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
 
@@ -26,7 +28,7 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
         super.onViewCreated(view, savedInstanceState);
         getP().getU().setFront(activity);
         getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
-        setTitleBean(new TitleBean("返回", "评论", "确定"));
+        setTitleBean(new TitleBean("返回", "评论", "", "确定"));
         getP().getU().initRatingBar(new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
@@ -45,7 +47,28 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
         getP().getD().updateVideo(getP().getD().getVideoBean(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
+                final VideoBean videoBean = (VideoBean) o;
                 getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
+                if (SystemUtil.isWiFi(activity)) {
+                    getP().getD().uploadVideo(videoBean);
+                } else {
+                    DialogFrag dialogFrag = new DialogFrag();
+                    FragmentUtil2.getInstance().add(activity, Value.FULLSCREEN, dialogFrag);
+                    dialogFrag.setOnFinishListener(new OnFinishListener() {
+                        @Override
+                        public void onFinish(Object o) {
+                            switch (((View) o).getId()) {
+                                case R.id.tv_receipt:
+                                    getP().getD().uploadVideo(videoBean);
+                                    break;
+                                case R.id.tv_refuse:
+
+                                    break;
+                            }
+                            FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
+                        }
+                    });
+                }
             }
         });
 
@@ -67,7 +90,7 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
-            case R.id.ftv_right:
+            case R.id.ftv_right2:
                 CommentBean commentBean = new CommentBean();
                 commentBean.setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
                 commentBean.setFromuser(Value.userBean.getPhone());

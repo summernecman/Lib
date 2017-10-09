@@ -38,6 +38,13 @@ public class RemarkListUIOpe extends BaseUIOpe<FragRemarklistBinding> {
         });
     }
 
+    public void refreshRemarks(final ArrayList<CommentBean> data) {
+        if (bind.recycle.getLayoutManager() == null || bind.recycle.getAdapter() == null) {
+            return;
+        }
+        bind.recycle.getAdapter().notifyDataSetChanged();
+    }
+
     public void initRefresh(MaterialRefreshListener refreshListener) {
         bind.refresh.setMaterialRefreshListener(refreshListener);
     }

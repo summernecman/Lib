@@ -44,6 +44,9 @@ public class VideoRecordUIOpe extends BaseUIOpe<FragVideorecordBinding> {
                 ItemVideorecordBinding itemVideorecordBinding = (ItemVideorecordBinding) holder.viewDataBinding;
                 itemVideorecordBinding.tvUpload.setVisibility(Value.userBean.getUsertype() == UserBean.USER_TYPE_CUSTOMER ? View.GONE : data.get(position).getUploaded() == 1 ? View.GONE : View.VISIBLE);
                 holder.viewDataBinding.getRoot().findViewById(R.id.play).setTag(com.android.lib.R.id.data, data.get(position));
+                holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setTag(com.android.lib.R.id.data, data.get(position));
+                holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setTag(com.android.lib.R.id.position, position);
+                holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setOnClickListener(this);
                 holder.viewDataBinding.getRoot().findViewById(R.id.play).setOnClickListener(this);
                 ((ItemVideorecordBinding) holder.viewDataBinding).tvTimes.setText(StringUtil.secondToMinute(data.get(position).getTimenum()));
                 if (Value.userBean.getPhone().equals(data.get(position).getFromUser().getPhone())) {

@@ -21,15 +21,13 @@ import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.feedback.FeedBackBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.Image.ImageFrag;
-import com.siweisoft.service.ui.main.MainAct;
 
-public class FeedBackFrag extends BaseServerFrag<FeedBAckUIOpe, FeedBackDAOpe> implements MainAct.OnTitleClick, ViewListener {
+public class FeedBackFrag extends BaseServerFrag<FeedBAckUIOpe, FeedBackDAOpe> implements ViewListener {
 
     @Override
     public void doThing() {
         super.doThing();
-        setTitleBean(new TitleBean("返回", "意见反馈", "确定"));
-        initOnTitleClick(this);
+        setTitleBean(new TitleBean("返回", "意见反馈", "", "确定"));
         getP().getU().initPics(getP().getD().getPics(), this);
         getP().getU().initRating(new RatingBar.OnRatingChangeListener() {
             @Override
@@ -40,9 +38,10 @@ public class FeedBackFrag extends BaseServerFrag<FeedBAckUIOpe, FeedBackDAOpe> i
     }
 
     @Override
-    public boolean onTitleClick(View v) {
+    public void onClick(View v) {
+        super.onClick(v);
         switch (v.getId()) {
-            case R.id.ftv_right:
+            case R.id.ftv_right2:
                 FeedBackBean feedBackBean = new FeedBackBean();
                 feedBackBean.setCreate(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
                 feedBackBean.setUserid(Value.userBean.getId());
@@ -54,9 +53,7 @@ public class FeedBackFrag extends BaseServerFrag<FeedBAckUIOpe, FeedBackDAOpe> i
                         FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
                     }
                 });
-                return true;
         }
-        return false;
     }
 
     @Override

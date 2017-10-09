@@ -13,6 +13,8 @@ import com.android.lib.util.LogUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.util.system.HandleUtil;
+import com.android.lib.view.bottommenu.MessageEvent;
+import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.EMNoActiveCallException;
 import com.hyphenate.exceptions.EMServiceNotReadyException;
@@ -23,9 +25,7 @@ import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.Constant.VideoValue;
 import com.siweisoft.service.ui.chat.remark.RemarkFrag;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import com.siweisoft.service.ui.main.VideoChatListener;
 
 import butterknife.OnClick;
 
@@ -57,6 +57,8 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                         EMClient.getInstance().callManager().setSurfaceView(getP().getU().bind.surfaceview, null);
                     } else {
                         EMClient.getInstance().callManager().setSurfaceView(null, getP().getU().bind.surfaceview);
+                        getP().getU().bind.btnCamera.setVisibility(View.GONE);
+                        getP().getU().bind.btnSwitchvideo.setVisibility(View.GONE);
                     }
 
 
@@ -75,6 +77,8 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                 EMClient.getInstance().callManager().setSurfaceView(getP().getU().bind.surfaceview, null);
             } else {
                 EMClient.getInstance().callManager().setSurfaceView(null, getP().getU().bind.surfaceview);
+                getP().getU().bind.btnCamera.setVisibility(View.GONE);
+                getP().getU().bind.btnSwitchvideo.setVisibility(View.GONE);
             }
 
             getP().getD().setAccept(true);
@@ -129,35 +133,51 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
     }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(VideoChatMsg msg) {
-        switch (msg.code) {
-            case VideoChatMsg.CODE_END_RECORD:
-                try {
-                    EMClient.getInstance().callManager().endCall();
-                } catch (EMNoActiveCallException e) {
-                    e.printStackTrace();
-                }
-                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
-                break;
-            case VideoChatMsg.CODE_START_RECORD:
-                LogUtil.E("接受到录音指令2");
-                getP().getD().setAccept(true);
-                //建立通话后 视频发起者 并且 非视频信息发送者 将录制视频
-                if (getP().getD().getVideoBean().getFromUser().getPhone().equals(Value.userBean.getPhone()) && !getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getToUser())) {
-                    ToastUtil.getInstance().showLong(activity, "3s后开始录制");
-                    HandleUtil.getInstance().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            getP().getD().setStart(System.currentTimeMillis());
-                            EMClient.getInstance().callManager().getVideoCallHelper().startVideoRecord(VideoValue.getRecordFileDir().getPath());
-                            ToastUtil.getInstance().showLong(activity, "开始录制");
-                        }
-                    }, 3000);
-                }
-                break;
+    @Override
+    public void dealMesage(MessageEvent event) {
+        super.dealMesage(event);
+        if (VideoChatListener.class.getName().equals(event.sender)) {
+            final EMCallStateChangeListener.CallState state = (EMCallStateChangeListener.CallState) event.data;
+            switch (state) {
+                case VIDEO_PAUSE:
+                    ToastUtil.getInstance().showShort(activity, "对方关闭了视频");
+                    break;
+                case VOICE_PAUSE:
+                    ToastUtil.getInstance().showShort(activity, "对方关闭了音频");
+                    break;
+                case VIDEO_RESUME:
+                    ToastUtil.getInstance().showShort(activity, "对方恢复了视频");
+                    break;
+                case VOICE_RESUME:
+                    ToastUtil.getInstance().showShort(activity, "对方恢复了音频");
+                    break;
+                case DISCONNECTED:
+                    ToastUtil.getInstance().showShort(activity, "对方结束了通话");
+                    try {
+                        EMClient.getInstance().callManager().endCall();
+                    } catch (EMNoActiveCallException e) {
+                        e.printStackTrace();
+                    }
+                    FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
+                    break;
+                case ACCEPTED:
+                    LogUtil.E("接受到录音指令2");
+                    getP().getD().setAccept(true);
+                    //建立通话后 视频发起者 并且 非视频信息发送者 将录制视频
+                    if (getP().getD().getVideoBean().getFromUser().getPhone().equals(Value.userBean.getPhone()) && !getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getToUser())) {
+                        ToastUtil.getInstance().showLong(activity, "3s后开始录制");
+                        HandleUtil.getInstance().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                getP().getD().setStart(System.currentTimeMillis());
+                                EMClient.getInstance().callManager().getVideoCallHelper().startVideoRecord(VideoValue.getRecordFileDir().getPath());
+                                ToastUtil.getInstance().showLong(activity, "开始录制");
+                            }
+                        }, 3000);
+                    }
+                    break;
+            }
         }
-
     }
 
     @OnClick({R.id.endCall, R.id.btn_switchvideo, R.id.btn_speak, R.id.btn_camera})

@@ -9,6 +9,7 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.listener.ViewListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.ToastUtil;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.siweisoft.service.R;
@@ -60,6 +61,10 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
         getP().getD().getVideosByBothUserIdWithLimit(contactBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
+                ArrayList<VideoBean> a = (ArrayList<VideoBean>) o;
+                if (a == null || a.size() == 0) {
+                    ToastUtil.getInstance().showShort(activity, "加载完毕");
+                }
                 getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
                 getP().getU().loadmore();
                 getP().getD().setPageindex(getP().getD().getPageindex() + 1);
@@ -96,7 +101,7 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
                         playFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, (Serializable) v.getTag(R.id.data));
                         FragmentUtil2.getInstance().add(activity, Value.ROOTID_ONE, playFrag);
                         break;
-                    default:
+                    case R.id.iv_head:
                         UserInfoFrag userInfoFrag = new UserInfoFrag();
                         userInfoFrag.setArguments(new Bundle());
                         userInfoFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, getP().getD().getVideos().get((Integer) v.getTag(R.id.position)).getOtherUser());

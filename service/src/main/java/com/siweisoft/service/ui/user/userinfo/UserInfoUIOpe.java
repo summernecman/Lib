@@ -87,6 +87,14 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
         });
     }
 
+    public void refreshRemarks() {
+        if (bind.remarklist.getLayoutManager() == null || bind.remarklist.getAdapter() == null) {
+            return;
+        }
+        bind.remarklist.getAdapter().notifyDataSetChanged();
+    }
+
+
     public void initCallInfo(VideoTimeBean videoTimeBean) {
         bind.setCallinfo1(videoTimeBean);
     }

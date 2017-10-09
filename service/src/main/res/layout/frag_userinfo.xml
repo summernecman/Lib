@@ -158,7 +158,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{callinfo1.timehours+""}'
+                    android:text='@{callinfo1.timehours/60+""}'
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -186,7 +186,7 @@
                 android:id="@+id/refresh"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:isLoadMore="false"
+                app:isLoadMore="true"
                 app:overlay="false"
                 android:layout_weight="1"
                 app:progress_show_circle_backgroud="false"

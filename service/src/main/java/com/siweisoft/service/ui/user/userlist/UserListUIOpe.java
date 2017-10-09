@@ -18,7 +18,7 @@ import com.siweisoft.service.BR;
 import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
 import com.siweisoft.service.databinding.FragUserlistBinding;
-import com.siweisoft.service.databinding.ItemUserBinding;
+import com.siweisoft.service.databinding.ItemUser3Binding;
 import com.siweisoft.service.netdb.user.UserBean;
 
 import java.util.ArrayList;
@@ -36,12 +36,12 @@ public class UserListUIOpe extends BaseUIOpe<FragUserlistBinding> {
             LogUtil.E(data.get(i).toString());
         }
         bind.recycle.setLayoutManager(new LinearLayoutManager(context));
-        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_user, BR.item_user, data, viewListener) {
+        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_user3, BR.item_user3, data, viewListener) {
 
             @Override
             public void onBindViewHolder(AppViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                ItemUserBinding viewDataBinding = (ItemUserBinding) holder.viewDataBinding;
+                ItemUser3Binding viewDataBinding = (ItemUser3Binding) holder.viewDataBinding;
                 viewDataBinding.tvName.setText(NullUtil.isStrEmpty(data.get(position).getName()) ? data.get(position).getPhone() : StringUtil.getStr(data.get(position).getName()));
                 viewDataBinding.ratingbar.setStar(data.get(position).getAvg());
                 GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);

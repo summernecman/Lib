@@ -36,7 +36,7 @@ public class UserInfoDAOpe extends BaseDAOpe {
 
     UserCenterDAOpe userCenterDAOpe;
 
-    ArrayList<CommentBean> commentBeen;
+    ArrayList<CommentBean> commentBeen = new ArrayList<>();
 
 
     public UserInfoDAOpe(Context context) {
@@ -62,7 +62,7 @@ public class UserInfoDAOpe extends BaseDAOpe {
         if (commentI == null) {
             commentI = new CommentOpe(context);
         }
-        commentI.getCommentByUserNameWithMyOption(commentBean, new OnFinishListener() {
+        commentI.getCommentByUserIdWithMyOptionWithLimit(commentBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 ArrayList<CommentBean> res = (ArrayList<CommentBean>) o;
@@ -160,4 +160,5 @@ public class UserInfoDAOpe extends BaseDAOpe {
     public void setCommentBeen(ArrayList<CommentBean> commentBeen) {
         this.commentBeen = commentBeen;
     }
+
 }

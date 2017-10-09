@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="frag_dialog"
+            type="String" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:elevation="1dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/drawable_border_round"
+            android:padding="20dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="你的网络类型为非wifi，是否上传?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_receipt"
+                    android:background="@drawable/drawable_border_round"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:text="现在上传"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:id="@+id/tv_refuse"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/drawable_border_round"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:text="以后上传"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

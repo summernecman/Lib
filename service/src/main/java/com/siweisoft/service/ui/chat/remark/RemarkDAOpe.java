@@ -130,24 +130,53 @@ public class RemarkDAOpe extends BaseDAOpe {
             @Override
             public void onFinish(Object o) {
                 videoBean.setFile(ff);
-                onFinishListener.onFinish(o);
+                onFinishListener.onFinish(videoBean);
                 //EMChatOpe.sendCmdMsg(videoBean.getOtherUser().getPhone(), s);
-                videoI.updateVideo(videoBean, new OnFinishListener() {
-                    @Override
-                    public void onFinish(Object o) {
-                        ArrayList<String> strs = (ArrayList<String>) o;
-                        if (strs != null && strs.size() > 0) {
-                            VideoBean v = new VideoBean();
-                            v.setFile(s);
-                            videoI.setVideoUploaded(v, new OnFinishListener() {
-                                @Override
-                                public void onFinish(Object o) {
+//                videoI.updateVideo(videoBean, new OnFinishListener() {
+//                    @Override
+//                    public void onFinish(Object o) {
+//                        ArrayList<String> strs = (ArrayList<String>) o;
+//                        if (strs != null && strs.size() > 0) {
+//                            VideoBean v = new VideoBean();
+//                            v.setFile(s);
+//                            videoI.setVideoUploaded(v, new OnFinishListener() {
+//                                @Override
+//                                public void onFinish(Object o) {
+//
+//                                }
+//                            });
+//                        }
+//                    }
+//                });
+            }
+        });
+    }
 
-                                }
-                            });
+    public void uploadVideo(VideoBean videoBean) {
+        if (videoI == null) {
+            videoI = new VideoOpe(context.getApplicationContext());
+        }
+
+        final String ff = videoBean.getFile();
+        File file = new File(ff);
+        String[] ss = file.getName().split("_");
+        LogUtil.E("file.getName()" + file.getName());
+        final String s = UrlConstant.fileUrl + "/" + ss[1] + "/" + file.getName();
+
+        videoI.updateVideo(videoBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                ArrayList<String> strs = (ArrayList<String>) o;
+                if (strs != null && strs.size() > 0) {
+                    VideoBean v = new VideoBean();
+                    v.setFile(s);
+                    videoI.setVideoUploaded(v, new OnFinishListener() {
+                        @Override
+                        public void onFinish(Object o) {
+
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     }

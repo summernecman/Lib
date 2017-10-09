@@ -64,7 +64,7 @@ public class RemarkListFrag extends BaseServerFrag<RemarkListUIOpe, RemarkListDA
                     return;
                 }
                 getP().getD().getList().addAll(list);
-                getP().getU().initRemarks(getP().getD().getList());
+                getP().getU().refreshRemarks(getP().getD().getList());
                 getP().getD().setPageindex(getP().getD().getPageindex() + 1);
                 getP().getU().bind.refresh.finishRefreshLoadMore();
             }

@@ -30,7 +30,7 @@
 
             <ImageView
                 android:id="@+id/btn_speak"
-                android:layout_width="52dp"
+                android:layout_width="40dp"
                 android:layout_height="fill_parent"
                 android:background="@drawable/button_background"
                 android:src="@drawable/drawable_speak" />
@@ -40,15 +40,14 @@
                 android:layout_height="match_parent"
                 android:background="@color/trans_white" />
 
-            <TextView
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/icon_end"
                 android:gravity="center"
                 android:id="@+id/endCall"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@drawable/button_background"
-                android:text="@string/str_endCall"
-                android:textColor="@color/shollow_red"
                 android:textSize="23sp" />
 
             <View
@@ -56,19 +55,23 @@
                 android:layout_height="match_parent"
                 android:background="@color/trans_white" />
 
-            <ImageView
-                android:id="@+id/btn_switchvideo"
-                android:layout_width="52dp"
-                android:layout_height="fill_parent"
-                android:background="@drawable/button_background"
-                android:src="@drawable/switchvideo" />
 
             <ImageView
                 android:id="@+id/btn_camera"
-                android:layout_width="52dp"
+                android:layout_width="40dp"
                 android:layout_height="fill_parent"
                 android:background="@drawable/button_background"
                 android:src="@drawable/drawable_camera" />
         </LinearLayout>
+
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="right"
+            android:id="@+id/btn_switchvideo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button_background"
+            android:src="@drawable/switchvideo" />
     </FrameLayout>
 </layout>
