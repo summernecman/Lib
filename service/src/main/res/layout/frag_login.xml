@@ -140,11 +140,23 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20sp"
                     android:layout_marginRight="20dp"
-                    android:gravity="right|center_vertical"
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_reset"
+                        android:padding="10dp"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="忘记密码"
+                        android:textColor="@color/color_blue_300"
+                        android:textSize="16sp" />
 
                     <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_weight="1"
                         android:id="@+id/tv_regist"
                         android:padding="10dp"
                         android:layout_gravity="right|center_vertical"

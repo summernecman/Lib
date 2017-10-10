@@ -8,6 +8,7 @@ import android.widget.RadioGroup;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseUIOpe;
+import com.android.lib.util.NullUtil;
 import com.siweisoft.service.R;
 import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.databinding.FragRegistBinding;
@@ -37,5 +38,9 @@ public class RegistUIOpe extends BaseUIOpe<FragRegistBinding> {
                 }
             }
         });
+    }
+
+    public boolean vevify() {
+        return !NullUtil.isStrEmpty(bind.etAccount.getText().toString()) && !NullUtil.isStrEmpty(bind.etCode.getText().toString()) && !NullUtil.isStrEmpty(bind.etPwd.getText().toString());
     }
 }

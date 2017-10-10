@@ -118,7 +118,7 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
 
     }
 
-    @OnClick({R.id.call})
+    @OnClick({R.id.call, R.id.tv_phone})
     public void onClickEvent(View v) {
         switch (v.getId()) {
             case R.id.call:
@@ -156,6 +156,9 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
 
                     }
                 });
+                break;
+            case R.id.tv_phone:
+                //PhoneUtil.getInstance().Call(activity,getP().getD().getUserBean().getPhone());
                 break;
         }
     }

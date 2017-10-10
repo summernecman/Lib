@@ -46,7 +46,6 @@ public class UserCenterFrag extends BaseServerFrag<UserCenterUIOpe, UserCenterDA
         super.initData();
         setTitleBean(new TitleBean("", "个人中心", ""));
         getP().getU().initHead();
-        getP().getU().initTips(getP().getD().getUserInfoDAOpe().getData());
         getP().getD().getUserCallInfo(new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
@@ -58,7 +57,7 @@ public class UserCenterFrag extends BaseServerFrag<UserCenterUIOpe, UserCenterDA
         getP().getD().getUserTips(Value.userBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getU().initTips((HashMap<Integer, TipBean>) o);
+                getP().getU().initTips(getP().getD().mapTolist((HashMap<Integer, TipBean>) o));
             }
         });
 

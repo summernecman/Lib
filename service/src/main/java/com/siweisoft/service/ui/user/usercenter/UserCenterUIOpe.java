@@ -26,8 +26,6 @@ import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userinfo.UserInfoDAOpe;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 
 public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
     public UserCenterUIOpe(Context context) {
@@ -39,8 +37,8 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
         bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip4, BR.item_tip4, data.getTipBeen()));
     }
 
-    public void initTips(HashMap<Integer, TipBean> data) {
-        if (data == null || data.keySet() == null || data.keySet().size() == 0) {
+    public void initTips(ArrayList<TipBean> tipBeen) {
+        if (tipBeen == null || tipBeen.size() == 0) {
             UserInfoDAOpe userInfoDAOpe = new UserInfoDAOpe(context);
             final TipsBean tipsBean = userInfoDAOpe.getData();
             bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
@@ -48,21 +46,18 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
             });
             return;
         }
-        ArrayList<TipBean> tipBeen = new ArrayList<>();
-        Iterator<Integer> iterator = data.keySet().iterator();
-        while (iterator.hasNext()) {
-            int key = iterator.next();
-            LogUtil.E("key:" + key + ":" + data.get(key).getTip() + ":" + data.get(key).getNum());
-            tipBeen.add(new TipBean(key, data.get(key).getTip(), data.get(key).getNum()));
+        if (bind.recycle.getAdapter() == null) {
+            bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
+            bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipBeen) {
+                @Override
+                public void onBindViewHolder(AppViewHolder holder, int position) {
+                    super.onBindViewHolder(holder, position);
+                    holder.viewDataBinding.getRoot().setSelected(true);
+                }
+            });
+        } else {
+            bind.recycle.getAdapter().notifyDataSetChanged();
         }
-        bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
-        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipBeen) {
-            @Override
-            public void onBindViewHolder(AppViewHolder holder, int position) {
-                super.onBindViewHolder(holder, position);
-                holder.viewDataBinding.getRoot().setSelected(true);
-            }
-        });
     }
 
     public void initCallInfo(VideoTimeBean videoTimeBean) {

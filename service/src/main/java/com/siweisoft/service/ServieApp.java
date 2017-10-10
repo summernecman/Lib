@@ -13,6 +13,8 @@ import com.siweisoft.service.ui.chat.videochat.EMChatOpe;
 
 import org.xutils.x;
 
+import cn.jpush.sms.SMSSDK;
+
 
 public class ServieApp extends LibAplication {
 
@@ -42,6 +44,11 @@ public class ServieApp extends LibAplication {
         new EMChatOpe(this).initEM(this);
 
         //startService(new Intent(this, RecordService.class));
+
+
+        SMSSDK.getInstance().initSdk(this);
+        //SMSSDK.getInstance().setIntervalTime(5000);
+        SMSSDK.getInstance().setDebugMode(true);
     }
 
 

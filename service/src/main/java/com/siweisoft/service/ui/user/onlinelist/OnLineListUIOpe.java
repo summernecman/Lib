@@ -34,6 +34,7 @@ public class OnLineListUIOpe extends BaseUIOpe<FragOnlinelistBinding> {
         for (int i = 0; data != null && i < data.size(); i++) {
             LogUtil.E(data.get(i).toString());
         }
+
         bind.recycle.setLayoutManager(new LinearLayoutManager(context));
         bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_user, BR.item_user, data) {
             @Override

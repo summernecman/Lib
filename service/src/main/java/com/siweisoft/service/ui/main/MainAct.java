@@ -59,7 +59,7 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         callReceiver = new CallReceiver();
         registerReceiver(callReceiver, callFilter);
 
-        EMClient.getInstance().callManager().addCallStateChangeListener(new VideoChatListener());
+        EMClient.getInstance().callManager().addCallStateChangeListener(new VideoChatListener(activity));
         EMClient.getInstance().chatManager().addMessageListener(new EMMsgListener());
         EMClient.getInstance().addConnectionListener(new ChatConnectListener(activity));
 

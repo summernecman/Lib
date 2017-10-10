@@ -27,7 +27,7 @@ public class ShareOpe extends BaseDAOpe implements ShareI {
     public void share(final ShareBean shareBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(shareBean));
-        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/share/share", baseReqBean, new OnNetWorkReqAdapter(context) {
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/shark/shark", baseReqBean, new OnNetWorkReqAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 ShareBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), ShareBean.class);
@@ -40,7 +40,7 @@ public class ShareOpe extends BaseDAOpe implements ShareI {
     public void getShareNumByUserPhone(UserBean userBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
-        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/share/getShareNumByUserPhone", baseReqBean, new OnNetWorkReqAdapter(context) {
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/shark/getShareNumByUserPhone", baseReqBean, new OnNetWorkReqAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 double r = (double) o.getData();
@@ -54,7 +54,7 @@ public class ShareOpe extends BaseDAOpe implements ShareI {
     public void getSharesByReceipt(ShareBean shareBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(shareBean));
-        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/share/getSharesByReceipt", baseReqBean, new OnNetWorkReqAdapter(context) {
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/shark/getSharesByReceipt", baseReqBean, new OnNetWorkReqAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 ArrayList<VideoBean> res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<VideoBean>>() {

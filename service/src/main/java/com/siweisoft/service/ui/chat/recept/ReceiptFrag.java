@@ -17,6 +17,7 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.EMNoActiveCallException;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
+import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
 
@@ -29,6 +30,9 @@ public class ReceiptFrag extends BaseServerFrag<ReceiptUIOpe, ReceiptDAOpe> {
     @Override
     public void doThing() {
         super.doThing();
+        getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(Value.DATA_DATA));
+        getP().getU().initCallINfo(getP().getD().getVideoBean().getFromUser());
+        getP().getU().shark();
         if (SystemUtil.isBackground(activity)) {
             IntentUtil.getInstance().IntentTo(activity, activity.getPackageName());
         }

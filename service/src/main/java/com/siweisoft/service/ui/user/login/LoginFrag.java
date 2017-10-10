@@ -12,9 +12,9 @@ import com.android.lib.constant.UrlConstant;
 import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
-import com.android.lib.util.LogUtil;
 import com.android.lib.util.NullUtil;
 import com.android.lib.util.SPUtil;
+import com.android.lib.util.ToastUtil;
 import com.hyphenate.chat.EMClient;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
@@ -22,8 +22,7 @@ import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.main.MainAct;
 import com.siweisoft.service.ui.user.regist.RegistFrag;
-
-import java.util.ArrayList;
+import com.siweisoft.service.ui.user.resetpwd.ReSetPwdFrag;
 
 import butterknife.OnClick;
 
@@ -32,11 +31,7 @@ public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        ArrayList<String> strings = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            strings.add("fdjasofjd" + i * 5);
-        }
-        LogUtil.E(GsonUtil.getInstance().toJson(strings));
+        FragmentUtil2.getInstance().print();
 
         super.onViewCreated(view, savedInstanceState);
         getP().getU().bind.setLogin(getP().getD().getUserBean());
@@ -54,9 +49,11 @@ public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
             activity.startActivity(intent);
             activity.finish();
         }
+        getP().getU().initIp();
+        Value.initNetUrl(activity, getP().getU().bind.etServer.getText().toString());
     }
 
-    @OnClick({R.id.button, R.id.tv_regist})
+    @OnClick({R.id.button, R.id.tv_regist, R.id.tv_reset})
     public void onClickEvent(View view) {
         switch (view.getId()) {
             case R.id.button:
@@ -67,7 +64,7 @@ public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
                 getP().getD().login(getP().getD().getUserBean(), new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
-                        BaseResBean res = (BaseResBean) o;
+                        final BaseResBean res = (BaseResBean) o;
                         if (!res.isException()) {
                             EMClient.getInstance().chatManager().loadAllConversations();
                             EMClient.getInstance().groupManager().loadAllGroups();
@@ -78,13 +75,21 @@ public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
                             activity.startActivity(intent);
                             activity.finish();
                         } else {
-                            getP().getU().showErrorMsg(res.getErrorMessage());
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ToastUtil.getInstance().showShort(activity, res.getErrorMessage());
+                                }
+                            });
                         }
                     }
                 });
                 break;
             case R.id.tv_regist:
                 FragmentUtil2.getInstance().add(activity, R.id.act_base_root, new RegistFrag());
+                break;
+            case R.id.tv_reset:
+                FragmentUtil2.getInstance().add(activity, R.id.act_base_root, new ReSetPwdFrag());
                 break;
         }
     }

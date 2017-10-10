@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.bean.databean.LocationBean;
-import com.android.lib.util.LogUtil;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 
 
@@ -56,17 +55,17 @@ public class AppMaterialRefreshLayout extends MaterialRefreshLayout {
                 locationBean.setX(ev.getX());
                 locationBean.setY(ev.getY());
                 handler.postDelayed(runnable, 1000);
-                LogUtil.E(getClass().getSimpleName() + "dispatchTouchEvent", "ACTION_DOWN");
+                //LogUtil.E(getClass().getSimpleName() + "dispatchTouchEvent", "ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (Math.abs(locationBean.getX() - ev.getX()) > 20 || Math.abs(locationBean.getY() - ev.getY()) > 20) {
                     handler.removeCallbacks(runnable);
                 }
-                LogUtil.E(getClass().getSimpleName() + "dispatchTouchEvent", "ACTION_MOVE");
+                //LogUtil.E(getClass().getSimpleName() + "dispatchTouchEvent", "ACTION_MOVE");
                 break;
             case MotionEvent.ACTION_UP:
                 handler.removeCallbacks(runnable);
-                LogUtil.E(getClass().getSimpleName() + "dispatchTouchEvent", "ACTION_UP");
+                //LogUtil.E(getClass().getSimpleName() + "dispatchTouchEvent", "ACTION_UP");
                 break;
         }
 
@@ -77,10 +76,10 @@ public class AppMaterialRefreshLayout extends MaterialRefreshLayout {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                LogUtil.E(getClass().getSimpleName() + "onInterceptTouchEvent", "ACTION_DOWN");
+                //LogUtil.E(getClass().getSimpleName() + "onInterceptTouchEvent", "ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_UP:
-                LogUtil.E(getClass().getSimpleName() + "onInterceptTouchEvent", "ACTION_UP");
+                //LogUtil.E(getClass().getSimpleName() + "onInterceptTouchEvent", "ACTION_UP");
                 break;
         }
         return super.onInterceptTouchEvent(ev);
@@ -90,10 +89,10 @@ public class AppMaterialRefreshLayout extends MaterialRefreshLayout {
     public boolean onTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                LogUtil.E(getClass().getSimpleName() + "onTouchEvent", "ACTION_DOWN");
+                //LogUtil.E(getClass().getSimpleName() + "onTouchEvent", "ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_UP:
-                LogUtil.E(getClass().getSimpleName() + "onTouchEvent", "ACTION_UP");
+                //LogUtil.E(getClass().getSimpleName() + "onTouchEvent", "ACTION_UP");
                 break;
         }
         return super.onTouchEvent(ev);

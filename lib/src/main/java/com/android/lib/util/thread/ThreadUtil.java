@@ -16,6 +16,8 @@ public class ThreadUtil {
     private boolean stop = false;
 
     public void run(final long time, final OnLoadingInterf listener) {
+        stop = false;
+        max = 0;
         new AsyncTask<String, String, Void>() {
 
             @Override

@@ -39,6 +39,25 @@ public class UserNetOpe extends BaseDAOpe implements UserI {
                 if (!o.isException()) {
                     UserBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), UserBean.class);
                     onFinishListener.onFinish(b);
+                } else {
+                    onFinishListener.onFinish(o.getErrorMessage());
+                }
+            }
+        });
+    }
+
+    @Override
+    public void resetPwd(UserBean userBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/user/resetPwd", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                if (!o.isException()) {
+                    UserBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), UserBean.class);
+                    onFinishListener.onFinish(b);
+                } else {
+                    onFinishListener.onFinish(o.getErrorMessage());
                 }
             }
         });

@@ -21,6 +21,7 @@
             android:layout_height="@dimen/dimens_base_title" />
 
         <LinearLayout
+            android:padding="10dp"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_marginBottom="10dp"
@@ -50,6 +51,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ll_remarkme"
                 android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -100,6 +102,7 @@
                 android:layout_height="1px" />
 
             <LinearLayout
+                android:id="@+id/ll_function"
                 android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -151,7 +154,7 @@
 
             <LinearLayout
                 android:clickable="true"
-                android:id="@+id/ll_remark"
+                android:id="@+id/ll_question"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@drawable/drawable_press_black_while"

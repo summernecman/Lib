@@ -1,4 +1,4 @@
-package com.siweisoft.service.ui.user.regist;
+package com.siweisoft.service.ui.user.resetpwd;
 
 //by summer on 2017-07-10.
 
@@ -9,6 +9,7 @@ import android.view.View;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.interf.OnLoadingInterf;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.LoadUtil;
 import com.android.lib.util.StringUtil;
 import com.android.lib.util.ToastUtil;
 import com.siweisoft.service.R;
@@ -16,18 +17,12 @@ import com.siweisoft.service.base.BaseServerFrag;
 
 import butterknife.OnClick;
 
-public class RegistFrag extends BaseServerFrag<RegistUIOpe, RegistDAOpe> {
+public class ReSetPwdFrag extends BaseServerFrag<ReSetPwdUIOpe, ReSetPwdDAOpe> {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getP().getU().bind.setRegist(getP().getD().getUserBean());
-        getP().getU().onTypeClick(new OnFinishListener() {
-            @Override
-            public void onFinish(Object o) {
-                getP().getD().getUserBean().setUsertype((Integer) o);
-            }
-        });
+        getP().getU().bind.setResetpwd(getP().getD().getUserBean());
     }
 
 
@@ -39,24 +34,32 @@ public class RegistFrag extends BaseServerFrag<RegistUIOpe, RegistDAOpe> {
                     ToastUtil.getInstance().showShort(activity, "信息未填写完整");
                     return;
                 }
+                LoadUtil.getInstance().onStartLoading(activity, "@#$");
                 getP().getD().checkCode(getP().getU().bind.etAccount.getText().toString(), getP().getU().bind.etCode.getText().toString(), new OnFinishListener() {
                     @Override
-                    public void onFinish(Object o) {
-                        if ((Boolean) o) {
-                            getP().getD().regist(getP().getD().getUserBean(), new OnFinishListener() {
-                                @Override
-                                public void onFinish(Object o) {
-                                    if (o instanceof Boolean) {
-                                        ToastUtil.getInstance().showShort(activity, "注册成功");
-                                        FragmentUtil2.getInstance().removeTop(activity, R.id.act_base_root);
-                                    } else {
-                                        ToastUtil.getInstance().showShort(activity, StringUtil.getStr(o));
-                                    }
+                    public void onFinish(final Object o) {
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if ((Boolean) o) {
+                                    getP().getD().resetPwd(getP().getD().getUserBean(), new OnFinishListener() {
+                                        @Override
+                                        public void onFinish(Object o) {
+                                            if (o instanceof Boolean) {
+                                                ToastUtil.getInstance().showShort(activity, "重置成功");
+                                                FragmentUtil2.getInstance().removeTop(activity, R.id.act_base_root);
+                                            } else {
+                                                ToastUtil.getInstance().showShort(activity, StringUtil.getStr(o));
+                                            }
+                                            LoadUtil.getInstance().onStopLoading("@#$");
+                                        }
+                                    });
+                                } else {
+                                    ToastUtil.getInstance().showShort(activity, "短信验证码失败");
+                                    LoadUtil.getInstance().onStopLoading("@#$");
                                 }
-                            });
-                        } else {
-                            ToastUtil.getInstance().showShort(activity, "短信验证码失败");
-                        }
+                            }
+                        });
                     }
                 });
                 break;
@@ -65,6 +68,12 @@ public class RegistFrag extends BaseServerFrag<RegistUIOpe, RegistDAOpe> {
                 break;
             case R.id.tv_getcode:
                 getP().getU().bind.tvGetcode.setEnabled(false);
+                getP().getD().sendCode(getP().getU().bind.etAccount.getText().toString(), new OnFinishListener() {
+                    @Override
+                    public void onFinish(Object o) {
+
+                    }
+                });
                 getP().getD().getThreadUtil().run(1000, new OnLoadingInterf() {
                     @Override
                     public Void onStarLoading(Object o) {
@@ -80,12 +89,6 @@ public class RegistFrag extends BaseServerFrag<RegistUIOpe, RegistDAOpe> {
                     @Override
                     public Void onStopLoading(Object o) {
                         return null;
-                    }
-                });
-                getP().getD().sendCode(getP().getU().bind.etAccount.getText().toString(), new OnFinishListener() {
-                    @Override
-                    public void onFinish(Object o) {
-
                     }
                 });
                 break;

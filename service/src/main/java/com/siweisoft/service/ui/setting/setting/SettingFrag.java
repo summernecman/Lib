@@ -35,6 +35,8 @@ public class SettingFrag extends BaseServerFrag<SettingUIOpe, SettingDAOpe> {
                     public void onFinish(Object o) {
                         EMClient.getInstance().logout(true);
                         FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+                        FragmentUtil2.getInstance().clear();
+                        FragmentUtil2.getInstance().initClear(activity);
                         ((ServieApp) activity.getApplication()).exit();
                     }
                 });

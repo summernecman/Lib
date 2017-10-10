@@ -13,6 +13,8 @@ public interface UserI {
 
     public void regist(UserBean userBean, OnFinishListener onFinishListener);
 
+    public void resetPwd(UserBean userBean, OnFinishListener onFinishListener);
+
     public void login(UserBean userBean, OnFinishListener onFinishListener);
 
     public void getUserList(OnFinishListener onFinishListener);

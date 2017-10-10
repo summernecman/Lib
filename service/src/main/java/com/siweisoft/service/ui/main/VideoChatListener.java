@@ -2,7 +2,10 @@ package com.siweisoft.service.ui.main;
 
 //by summer on 17-09-20.
 
+import android.content.Context;
+
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.ToastUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
 import com.hyphenate.chat.EMCallStateChangeListener;
 import com.siweisoft.service.ui.chat.recept.ReceiptFrag;
@@ -11,9 +14,32 @@ import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
 import org.greenrobot.eventbus.EventBus;
 
 public class VideoChatListener implements EMCallStateChangeListener {
+
+    private Context context;
+
+    public VideoChatListener(Context context) {
+        this.context = context;
+    }
+
+    public VideoChatListener() {
+    }
+
     @Override
     public void onCallStateChanged(CallState callState, CallError error) {
         LogUtil.E(callState);
+        switch (error) {
+            case ERROR_BUSY:
+                ToastUtil.getInstance().showShort(context, "对方正忙");
+                break;
+            case ERROR_NORESPONSE:
+                ToastUtil.getInstance().showShort(context, "对方无反应");
+                break;
+            case REJECTED:
+                ToastUtil.getInstance().showShort(context, "对方已挂断");
+                break;
+        }
+
+
         switch (callState) {
             case ACCEPTED: // 电话接通成功
             case DISCONNECTED: // 电话断了

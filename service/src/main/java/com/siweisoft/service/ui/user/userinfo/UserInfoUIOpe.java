@@ -5,7 +5,6 @@ package com.siweisoft.service.ui.user.userinfo;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.listener.ViewListener;
@@ -46,11 +45,6 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
             final TipsBean tipsBean = userInfoDAOpe.getData();
             bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
             bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipsBean.getTipBeen()) {
-                @Override
-                public void onClick(View v) {
-                    super.onClick(v);
-                    tipsBean.getTipBeen().get((Integer) v.getTag(R.id.position)).setSelect(tipsBean.getTipBeen().get((Integer) v.getTag(R.id.position)).isSelect());
-                }
             });
             return;
         }
@@ -61,14 +55,18 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
             LogUtil.E("key:" + key + ":" + data.get(key).getTip() + ":" + data.get(key).getNum());
             tipBeen.add(new TipBean(key, data.get(key).getTip(), data.get(key).getNum()));
         }
-        bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
-        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipBeen) {
-            @Override
-            public void onBindViewHolder(AppViewHolder holder, int position) {
-                super.onBindViewHolder(holder, position);
-                holder.viewDataBinding.getRoot().setSelected(true);
-            }
-        });
+        if (bind.recycle.getAdapter() == null) {
+            bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
+            bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipBeen) {
+                @Override
+                public void onBindViewHolder(AppViewHolder holder, int position) {
+                    super.onBindViewHolder(holder, position);
+                    holder.viewDataBinding.getRoot().setSelected(true);
+                }
+            });
+        } else {
+            bind.recycle.getAdapter().notifyDataSetChanged();
+        }
     }
 
     public void initRemarks(final ArrayList<CommentBean> data, ViewListener viewListener) {
@@ -102,6 +100,7 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
     public void initHead(UserBean userBean) {
         bind.ratingbar.setStar(userBean.getAvg());
         bind.tvName.setText(NullUtil.isStrEmpty(userBean.getName()) ? userBean.getPhone() : StringUtil.getStr(userBean.getName()));
+        bind.tvPhone.setText(userBean.getPhone());
         GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + userBean.getHeadurl()).into(bind.ivHead11);
 
     }

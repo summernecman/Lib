@@ -8,6 +8,7 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.data.DateFormatUtil;
+import com.android.lib.util.thread.ThreadUtil;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.netdb.video.VideoI;
@@ -25,6 +26,7 @@ public class VideoChatDAOpe extends BaseDAOpe {
 
     private boolean accept = false;
 
+    private ThreadUtil threadUtil = new ThreadUtil();
 
     public VideoChatDAOpe(Context context) {
         super(context);
@@ -114,5 +116,13 @@ public class VideoChatDAOpe extends BaseDAOpe {
 
     public void setAccept(boolean accept) {
         this.accept = accept;
+    }
+
+    public ThreadUtil getThreadUtil() {
+        return threadUtil;
+    }
+
+    public void setThreadUtil(ThreadUtil threadUtil) {
+        this.threadUtil = threadUtil;
     }
 }

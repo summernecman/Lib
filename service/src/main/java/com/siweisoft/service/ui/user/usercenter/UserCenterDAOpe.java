@@ -6,6 +6,8 @@ import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.util.LogUtil;
+import com.siweisoft.service.bean.TipBean;
 import com.siweisoft.service.netdb.collection.CollectionI;
 import com.siweisoft.service.netdb.collection.CollectionOpe;
 import com.siweisoft.service.netdb.comment.CommentI;
@@ -18,6 +20,10 @@ import com.siweisoft.service.netdb.user.UserNetOpe;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userinfo.UserInfoDAOpe;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
 public class UserCenterDAOpe extends BaseDAOpe {
 
     UserInfoDAOpe userInfoDAOpe;
@@ -29,6 +35,8 @@ public class UserCenterDAOpe extends BaseDAOpe {
     CollectionI collectionI;
 
     ShareI shareI;
+
+    private ArrayList<TipBean> tipdata = new ArrayList<>();
 
     public UserCenterDAOpe(Context context) {
         super(context);
@@ -84,5 +92,21 @@ public class UserCenterDAOpe extends BaseDAOpe {
             shareI = new ShareOpe(context);
         }
         shareI.getShareNumByUserPhone(userBean, onFinishListener);
+    }
+
+    public ArrayList<TipBean> mapTolist(HashMap<Integer, TipBean> data) {
+        tipdata.clear();
+        Iterator<Integer> iterator = data.keySet().iterator();
+        while (iterator.hasNext()) {
+            int key = iterator.next();
+            LogUtil.E("key:" + key + ":" + data.get(key).getTip() + ":" + data.get(key).getNum());
+            tipdata.add(new TipBean(key, data.get(key).getTip(), data.get(key).getNum()));
+        }
+
+        return tipdata;
+    }
+
+    public ArrayList<TipBean> getTipdata() {
+        return tipdata;
     }
 }

@@ -14,6 +14,7 @@ import com.android.lib.base.ope.BaseOpes;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.system.HandleUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -76,7 +77,12 @@ public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> exten
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         doThing();
-        initData();
+        HandleUtil.getInstance().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                initData();
+            }
+        }, 500);
 
     }
 

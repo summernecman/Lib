@@ -15,6 +15,7 @@ import com.android.lib.network.netadapter.OnNetWorkReqAdapter;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.IntentUtil;
+import com.android.lib.util.LoadUtil;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.UriUtils;
 import com.google.gson.reflect.TypeToken;
@@ -61,7 +62,7 @@ public class UserHeadNameFrag extends BaseServerFrag<UserHeadNameUIOpe, UserHead
         ArrayList<FileBean> fileBeen = new ArrayList<>();
         fileBeen.add(new FileBean(new File(UriUtils.getPath(activity, data.getData()))));
         filesBean.setData(fileBeen);
-
+        LoadUtil.getInstance().onStartLoading(activity, "headuri");
         NetWork.getInstance(activity).doHttpRequsetWithFile(activity, "/user/addheadurl", filesBean, new OnNetWorkReqAdapter(activity) {
             @Override
             public void onNetWorkResult(boolean success, BaseResBean o) {
@@ -77,6 +78,7 @@ public class UserHeadNameFrag extends BaseServerFrag<UserHeadNameUIOpe, UserHead
                         UserBean userBean = (UserBean) o;
                         Value.userBean.setHeadurl(userBean.getHeadurl());
                         getP().getU().initInfo();
+                        LoadUtil.getInstance().onStopLoading("headuri");
                     }
                 });
             }

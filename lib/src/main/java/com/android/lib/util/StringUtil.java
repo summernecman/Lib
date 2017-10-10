@@ -163,7 +163,13 @@ public class StringUtil {
         }
         long m = second / 60;
         long s = second % 60;
-        return m + "分" + s + "秒";
+        if (m < 60) {
+            return m + "分" + s + "秒";
+        }
+
+        long h = m / 60;
+        long mm = m % 60;
+        return h + "时" + mm + "分" + s + "秒";
     }
 
 

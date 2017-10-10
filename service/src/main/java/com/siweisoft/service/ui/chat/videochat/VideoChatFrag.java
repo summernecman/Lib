@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.base.interf.OnLoadingInterf;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.StringUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.util.system.HandleUtil;
@@ -60,7 +62,7 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                         getP().getU().bind.btnCamera.setVisibility(View.GONE);
                         getP().getU().bind.btnSwitchvideo.setVisibility(View.GONE);
                     }
-
+                    getP().getU().setCallInfo(getP().getD().getVideoBean().getToUser());
 
                 }
             });
@@ -105,6 +107,7 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
     @Override
     public void onDestroy() {
         super.onDestroy();
+        getP().getD().getThreadUtil().stop();
         getP().getU().bind.surfaceview.release();
         getP().getD().setEnd(System.currentTimeMillis());
         if (getP().getD().getVideoBean() == null) {
@@ -152,17 +155,18 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                     ToastUtil.getInstance().showShort(activity, "对方恢复了音频");
                     break;
                 case DISCONNECTED:
-                    ToastUtil.getInstance().showShort(activity, "对方结束了通话");
+                    ToastUtil.getInstance().showShort(activity, "通话已结束");
                     try {
                         EMClient.getInstance().callManager().endCall();
                     } catch (EMNoActiveCallException e) {
                         e.printStackTrace();
                     }
-                    FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
+                    FragmentUtil2.getInstance().removeTop(activity, Value.FULLSCREEN);
                     break;
                 case ACCEPTED:
                     LogUtil.E("接受到录音指令2");
                     getP().getD().setAccept(true);
+                    getP().getU().hideCallInfo();
                     //建立通话后 视频发起者 并且 非视频信息发送者 将录制视频
                     if (getP().getD().getVideoBean().getFromUser().getPhone().equals(Value.userBean.getPhone()) && !getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getToUser())) {
                         ToastUtil.getInstance().showLong(activity, "3s后开始录制");
@@ -175,6 +179,25 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                             }
                         }, 3000);
                     }
+
+                    getP().getD().getThreadUtil().run(1000, new OnLoadingInterf() {
+                        @Override
+                        public Void onStarLoading(Object o) {
+                            getP().getU().bind.tvTime.setText(StringUtil.secondToMinute((int) o));
+                            if ((int) o == 300) {
+                                //非发送视频信息方将录制视频
+                                if (!getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getToUser())) {
+                                    ToastUtil.getInstance().showShort(activity, "已经视频超过5分钟,为了保证网络不好的情况下视频文件的传输,建议结束当前视频，重新发起视频");
+                                }
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        public Void onStopLoading(Object o) {
+                            return null;
+                        }
+                    });
                     break;
             }
         }
@@ -189,7 +212,7 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                 } catch (EMNoActiveCallException e) {
                     e.printStackTrace();
                 }
-                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
+                FragmentUtil2.getInstance().removeTop(activity, Value.FULLSCREEN);
                 break;
             case R.id.btn_switchvideo:
                 EMClient.getInstance().callManager().switchCamera();

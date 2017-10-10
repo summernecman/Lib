@@ -59,6 +59,7 @@ public class CrashHander implements Thread.UncaughtExceptionHandler {
 //            }
             uncaughtExceptionHandler.uncaughtException(thread, ex);
             restart(thread, ex);
+            Thread.setDefaultUncaughtExceptionHandler(null);
         }
     }
 
@@ -70,8 +71,10 @@ public class CrashHander implements Thread.UncaughtExceptionHandler {
         if (context instanceof BaseActivity) {
             BaseActivity activity = (BaseActivity) context;
             libAplication = (LibAplication) activity.getApplication();
+            libAplication.exit();
         } else if (context instanceof LibAplication) {
             libAplication = (LibAplication) context;
+            libAplication.exit();
         } else {
             uncaughtExceptionHandler.uncaughtException(thread, ex);
         }

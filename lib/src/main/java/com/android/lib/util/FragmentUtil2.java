@@ -207,5 +207,32 @@ public class FragmentUtil2 {
         transaction.commitAllowingStateLoss();
     }
 
+    public void initClear(FragmentActivity fragmentActivity) {
+        ArrayList<Fragment> fragments = (ArrayList<Fragment>) fragmentActivity.getSupportFragmentManager().getFragments();
+        FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+        for (int i = 0; fragments != null && i < fragments.size(); i++) {
+            try {
+                transaction.remove(fragments.get(i));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            transaction.commitAllowingStateLoss();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void print() {
+        Iterator i = fragMap.keySet().iterator();
+        while (i.hasNext()) {
+            Integer in = (Integer) i.next();
+            ArrayList<Fragment> fragments = fragMap.get(in);
+            for (int j = 0; j < fragments.size(); j++) {
+                LogUtil.E(fragments.get(j).getClass().getName());
+            }
+
+        }
+    }
 }

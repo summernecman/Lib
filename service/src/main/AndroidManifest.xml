@@ -69,6 +69,11 @@
         <service android:name=".util.RecordService" />
 
 
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="297cd844a85cfab4f298413a" /> <!--  </>值来自开发者平台取得的AppKey-->
+
+
     </application>
 
     <uses-permission android:name="android.permission.RESTART_PACKAGES" />

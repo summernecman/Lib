@@ -1,4 +1,4 @@
-package com.siweisoft.service.ui.user.regist;
+package com.siweisoft.service.ui.user.resetpwd;
 
 //by summer on 2017-07-10.
 
@@ -15,7 +15,7 @@ import cn.jpush.sms.SMSSDK;
 import cn.jpush.sms.listener.SmscheckListener;
 import cn.jpush.sms.listener.SmscodeListener;
 
-public class RegistDAOpe extends BaseDAOpe {
+public class ReSetPwdDAOpe extends BaseDAOpe {
 
     UserBean userBean = new UserBean();
 
@@ -23,7 +23,7 @@ public class RegistDAOpe extends BaseDAOpe {
 
     private ThreadUtil threadUtil = new ThreadUtil();
 
-    public RegistDAOpe(Context context) {
+    public ReSetPwdDAOpe(Context context) {
         super(context);
         userI = new UserNetOpe(context);
     }
@@ -36,11 +36,11 @@ public class RegistDAOpe extends BaseDAOpe {
         this.userBean = userBean;
     }
 
-    public void regist(UserBean userBean, OnFinishListener onFinishListener) {
+    public void resetPwd(UserBean userBean, OnFinishListener onFinishListener) {
         if (userI == null) {
             userI = new UserNetOpe(context);
         }
-        userI.regist(userBean, onFinishListener);
+        userI.resetPwd(userBean, onFinishListener);
     }
 
     public void sendCode(String phone, final OnFinishListener onFinishListener) {
@@ -58,7 +58,7 @@ public class RegistDAOpe extends BaseDAOpe {
     }
 
     public void checkCode(String phone, String code, final OnFinishListener onFinishListener) {
-        SMSSDK.getInstance().checkSmsCodeAsyn(phone, code, new SmscheckListener() {
+        SMSSDK.getInstance().checkSmsCode(phone, code, new SmscheckListener() {
             @Override
             public void checkCodeSuccess(String s) {
                 onFinishListener.onFinish(true);

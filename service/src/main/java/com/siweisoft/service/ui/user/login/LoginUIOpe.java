@@ -4,7 +4,9 @@ package com.siweisoft.service.ui.user.login;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.Editable;
 
+import com.android.lib.base.listener.BaseTextWather;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.StatusBarUtil;
@@ -19,6 +21,17 @@ public class LoginUIOpe extends BaseUIOpe<FragLoginBinding> {
     public LoginUIOpe(Context context) {
         super(context);
         StatusBarUtil.getInstance().setStatusBarColorResId((Activity) context, R.color.color_base_nurse);
+
+    }
+
+    public void initIp() {
+        bind.etServer.addTextChangedListener(new BaseTextWather() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                super.afterTextChanged(s);
+                Value.initNetUrl(context, s.toString());
+            }
+        });
     }
 
     public void initImage(String url) {

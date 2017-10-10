@@ -54,7 +54,7 @@ public class LoginDAOpe extends BaseDAOpe {
                     LoadUtil.getInstance().onStopLoading("login");
                     return;
                 }
-                EMClient.getInstance().login(res.getPhone(), res.getPwd(), new EMCallBack() {//回调
+                EMClient.getInstance().login(res.getPhone(), "111111", new EMCallBack() {//回调
                     @Override
                     public void onSuccess() {
                         EMClient.getInstance().groupManager().loadAllGroups();

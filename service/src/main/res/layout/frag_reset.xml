@@ -4,7 +4,7 @@
     <data>
 
         <variable
-            name="regist"
+            name="resetpwd"
             type="com.siweisoft.service.netdb.user.UserBean" />
     </data>
 
@@ -46,7 +46,7 @@
                 android:layout_marginLeft="10dp"
                 android:background="@null"
                 android:gravity="center_vertical|left"
-                android:text="@={regist.phone}"
+                android:text="@={resetpwd.phone}"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
@@ -67,7 +67,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="   密码:"
+                android:text="新密码:"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
@@ -79,7 +79,7 @@
                 android:layout_marginLeft="10dp"
                 android:background="@null"
                 android:gravity="center_vertical|left"
-                android:text="@={regist.pwd}"
+                android:text="@={resetpwd.pwd}"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
@@ -126,41 +126,6 @@
         </LinearLayout>
 
 
-        <RadioGroup
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/radio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:checked="true"
-                android:id="@+id/rb_customer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="客户" />
-
-            <RadioButton
-                android:id="@+id/rb_server"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="客服" />
-
-            <RadioButton
-                android:id="@+id/rb_engineer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="工程师" />
-        </RadioGroup>
-
         <Button
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -168,7 +133,7 @@
             android:id="@+id/onRegist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="注册" />
+            android:text="重置密码" />
 
         <TextView
             android:layout_marginTop="10dp"
