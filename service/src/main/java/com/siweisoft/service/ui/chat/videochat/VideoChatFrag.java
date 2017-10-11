@@ -11,10 +11,10 @@ import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.NullUtil;
 import com.android.lib.util.StringUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.util.data.DateFormatUtil;
-import com.android.lib.util.system.HandleUtil;
 import com.android.lib.view.bottommenu.MessageEvent;
 import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
@@ -41,7 +41,7 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
         super.doThing();
         getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(Value.DATA_DATA));
         //发起者
-        if (getP().getD().getVideoBean().getFromUser().getPhone().equals(Value.userBean.getPhone())) {
+        if (getP().getD().isFromUser(getP().getD().getVideoBean())) {
             //发起视频者先创建一条视频记录
             getP().getD().insert_and_getid_fromvieo(getP().getD().getVideoBean(), new OnFinishListener() {
                 @Override
@@ -55,7 +55,7 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                         e.printStackTrace();
                     }
 
-                    if (getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getToUser())) {
+                    if (getP().getD().isSendVideo(getP().getD().getVideoBean())) {
                         EMClient.getInstance().callManager().setSurfaceView(getP().getU().bind.surfaceview, null);
                     } else {
                         EMClient.getInstance().callManager().setSurfaceView(null, getP().getU().bind.surfaceview);
@@ -66,7 +66,6 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
 
                 }
             });
-
         } else {
             //接受者
             try {
@@ -75,30 +74,28 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                 e.printStackTrace();
             }
 
-            if (getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getToUser())) {
+            if (getP().getD().isSendVideo(getP().getD().getVideoBean())) {
                 EMClient.getInstance().callManager().setSurfaceView(getP().getU().bind.surfaceview, null);
             } else {
                 EMClient.getInstance().callManager().setSurfaceView(null, getP().getU().bind.surfaceview);
                 getP().getU().bind.btnCamera.setVisibility(View.GONE);
                 getP().getU().bind.btnSwitchvideo.setVisibility(View.GONE);
             }
-
-            getP().getD().setAccept(true);
-            LogUtil.E("接受到录音指令3");
-            getP().getD().setStart(System.currentTimeMillis());
-            //非发送视频信息方将录制视频
-            if (!getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getToUser())) {
-                ToastUtil.getInstance().showLong(activity, "3s后开始录制");
-                HandleUtil.getInstance().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        getP().getD().setStart(System.currentTimeMillis());
-                        EMClient.getInstance().callManager().getVideoCallHelper().startVideoRecord(VideoValue.getRecordFileDir().getPath());
-                        ToastUtil.getInstance().showLong(activity, "开始录制");
-                    }
-                }, 3000);
-            }
-
+//            getP().getD().setAccept(true);
+//            LogUtil.E("接受到录音指令3");
+//            getP().getD().setStart(System.currentTimeMillis());
+//            //非发送视频信息方将录制视频
+//            if (!getP().getD().isSendVideo(getP().getD().getVideoBean())) {
+//                ToastUtil.getInstance().showLong(activity, "3s后开始录制");
+//                HandleUtil.getInstance().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        getP().getD().setStart(System.currentTimeMillis());
+//                        EMClient.getInstance().callManager().getVideoCallHelper().startVideoRecord(VideoValue.getRecordFileDir().getPath());
+//                        ToastUtil.getInstance().showLong(activity, "开始录制");
+//                    }
+//                }, 3000);
+//            }
         }
     }
 
@@ -106,21 +103,15 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         getP().getD().getThreadUtil().stop();
-        getP().getU().bind.surfaceview.release();
         getP().getD().setEnd(System.currentTimeMillis());
         if (getP().getD().getVideoBean() == null) {
             return;
         }
-        if (!getP().getD().isAccept()) {
-            return;
-        }
         //录制方
-        if (!getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getToUser())) {
-            String s = EMClient.getInstance().callManager().getVideoCallHelper().stopVideoRecord();
-            LogUtil.E(s);
-            getP().getD().getVideoBean().setFile(s);
+        if (!getP().getD().isSendVideo(getP().getD().getVideoBean())) {
+            LogUtil.E(getP().getD().getPath());
+            getP().getD().getVideoBean().setFile(getP().getD().getPath());
             getP().getD().getVideoBean().setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
             getP().getD().getVideoBean().setTimenum(getP().getD().getMinute());
         } else {
@@ -133,13 +124,15 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
         remarkFrag.setArguments(new Bundle());
         remarkFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, getP().getD().getVideoBean());
         FragmentUtil2.getInstance().add(activity, Value.ROOTID_TWO, remarkFrag);
+        getP().getU().bind.surfaceview.release();
+        super.onDestroy();
     }
 
 
     @Override
     public void dealMesage(MessageEvent event) {
         super.dealMesage(event);
-        if (VideoChatListener.class.getName().equals(event.sender)) {
+        if (VideoChatListener.class.getName().equals(event.sender) && VideoChatFrag.class.getName().equals(event.dealer)) {
             final EMCallStateChangeListener.CallState state = (EMCallStateChangeListener.CallState) event.data;
             switch (state) {
                 case VIDEO_PAUSE:
@@ -155,6 +148,10 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                     ToastUtil.getInstance().showShort(activity, "对方恢复了音频");
                     break;
                 case DISCONNECTED:
+                    String s = EMClient.getInstance().callManager().getVideoCallHelper().stopVideoRecord();
+                    if (!NullUtil.isStrEmpty(s)) {
+                        getP().getD().setPath(s);
+                    }
                     ToastUtil.getInstance().showShort(activity, "通话已结束");
                     try {
                         EMClient.getInstance().callManager().endCall();
@@ -165,19 +162,19 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                     break;
                 case ACCEPTED:
                     LogUtil.E("接受到录音指令2");
-                    getP().getD().setAccept(true);
                     getP().getU().hideCallInfo();
-                    //建立通话后 视频发起者 并且 非视频信息发送者 将录制视频
-                    if (getP().getD().getVideoBean().getFromUser().getPhone().equals(Value.userBean.getPhone()) && !getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getToUser())) {
-                        ToastUtil.getInstance().showLong(activity, "3s后开始录制");
-                        HandleUtil.getInstance().postDelayed(new Runnable() {
+                    //建立通话后
+                    if (!getP().getD().isSendVideo(getP().getD().getVideoBean())) {
+                        ToastUtil.getInstance().showLong(activity, "开始录制");
+                        activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 getP().getD().setStart(System.currentTimeMillis());
+                                EMClient.getInstance().callManager().getVideoCallHelper().stopVideoRecord();
                                 EMClient.getInstance().callManager().getVideoCallHelper().startVideoRecord(VideoValue.getRecordFileDir().getPath());
                                 ToastUtil.getInstance().showLong(activity, "开始录制");
                             }
-                        }, 3000);
+                        });
                     }
 
                     getP().getD().getThreadUtil().run(1000, new OnLoadingInterf() {
@@ -207,12 +204,13 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
     public void onClickEvent(View v) {
         switch (v.getId()) {
             case R.id.endCall:
+//                String s= EMClient.getInstance().callManager().getVideoCallHelper().stopVideoRecord();
+//                getP().getD().setPath(s);
                 try {
                     EMClient.getInstance().callManager().endCall();
                 } catch (EMNoActiveCallException e) {
                     e.printStackTrace();
                 }
-                FragmentUtil2.getInstance().removeTop(activity, Value.FULLSCREEN);
                 break;
             case R.id.btn_switchvideo:
                 EMClient.getInstance().callManager().switchCamera();

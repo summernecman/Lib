@@ -41,13 +41,13 @@ public class VideoChatListener implements EMCallStateChangeListener {
 
 
         switch (callState) {
-            case ACCEPTED: // 电话接通成功
             case DISCONNECTED: // 电话断了
                 MessageEvent v = new MessageEvent();
                 v.sender = VideoChatListener.class.getName();
                 v.dealer = ReceiptFrag.class.getName();
                 v.data = callState;
                 EventBus.getDefault().post(v);
+            case ACCEPTED: // 电话接通成功
             case VIDEO_PAUSE:
             case VOICE_PAUSE:
             case VIDEO_RESUME:

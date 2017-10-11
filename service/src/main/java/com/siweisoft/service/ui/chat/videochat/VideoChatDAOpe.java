@@ -13,6 +13,7 @@ import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.netdb.video.VideoI;
 import com.siweisoft.service.netdb.video.VideoOpe;
+import com.siweisoft.service.ui.Constant.Value;
 
 public class VideoChatDAOpe extends BaseDAOpe {
 
@@ -27,6 +28,8 @@ public class VideoChatDAOpe extends BaseDAOpe {
     private boolean accept = false;
 
     private ThreadUtil threadUtil = new ThreadUtil();
+
+    private String path = "";
 
     public VideoChatDAOpe(Context context) {
         super(context);
@@ -124,5 +127,53 @@ public class VideoChatDAOpe extends BaseDAOpe {
 
     public void setThreadUtil(ThreadUtil threadUtil) {
         this.threadUtil = threadUtil;
+    }
+
+    public boolean isFromUser(VideoBean videoBean) {
+        if (Value.userBean.getPhone().equals(videoBean.getFromUser().getPhone())) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public boolean isSendVideo(VideoBean videoBean) {
+        boolean isfrom = isFromUser(videoBean);
+        if (isfrom) {
+            switch (videoBean.getFromUser().getUsertype()) {
+                case UserBean.SERVER:
+                    return false;
+                case UserBean.CUSTOME:
+                    return true;
+                case UserBean.ENGINEER:
+                    if (videoBean.getToUser().getUsertype() == UserBean.SERVER) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+            }
+        } else {
+            switch (videoBean.getToUser().getUsertype()) {
+                case UserBean.SERVER:
+                    return false;
+                case UserBean.CUSTOME:
+                    return true;
+                case UserBean.ENGINEER:
+                    if (videoBean.getFromUser().getUsertype() == UserBean.SERVER) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+            }
+        }
+        return true;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }
