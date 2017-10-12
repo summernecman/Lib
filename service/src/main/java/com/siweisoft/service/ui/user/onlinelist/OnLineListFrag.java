@@ -164,6 +164,11 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
     @Override
     public void dealMesage(MessageEvent event) {
         super.dealMesage(event);
-        initData2();
+        if (event.data instanceof Integer) {
+            getP().getU().refresh();
+        } else {
+            initData2();
+        }
+
     }
 }

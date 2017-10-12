@@ -62,6 +62,7 @@ public class UserInfoDAOpe extends BaseDAOpe {
         if (commentI == null) {
             commentI = new CommentOpe(context);
         }
+
         commentI.getCommentByUserIdWithMyOptionWithLimit(commentBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {

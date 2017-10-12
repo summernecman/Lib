@@ -2,8 +2,6 @@ package com.siweisoft.service.ui.chat.remark;
 
 //by summer on 17-08-24.
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.android.lib.base.interf.OnFinishListener;
@@ -15,6 +13,7 @@ import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.util.system.SystemUtil;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
+import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
@@ -23,9 +22,16 @@ import com.siweisoft.service.ui.dialog.DialogFrag;
 
 public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
 
+
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onStart() {
+        super.onStart();
+        getActivity().findViewById(R.id.ftv_right).setOnClickListener(this);
+    }
+
+
+    @Override
+    public void doThing() {
         getP().getU().setFront(activity);
         getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
         setTitleBean(new TitleBean("返回", "评论", "", "确定"));
@@ -71,19 +77,18 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                 }
             }
         });
-
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        getActivity().findViewById(R.id.ftv_right).setOnClickListener(this);
-    }
-
-
-    @Override
-    public void doThing() {
-        getP().getU().initTips(getP().getD().getData());
+    public void initData() {
+        super.initData();
+        getP().getD().getTips(new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getP().getD().setTipsBean((TipsBean) o);
+                getP().getU().initTips(getP().getD().getTipsBean());
+            }
+        });
     }
 
     @Override
@@ -97,7 +102,7 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                 commentBean.setTouser(getP().getD().getVideoBean().getOthername());
                 commentBean.setRate(getP().getD().ratingbar);
                 commentBean.setRemark(getP().getU().getRemark());
-                commentBean.setTips(GsonUtil.getInstance().toJson(getP().getD().getData()));
+                commentBean.setTips(GsonUtil.getInstance().toJson(getP().getD().getTipsBean()));
                 commentBean.setVideoname(getP().getD().getVideoBean().getFile());
                 commentBean.setFromid(Value.userBean.getId());
                 commentBean.setToid(getP().getD().getVideoBean().getOtherUser().getId());

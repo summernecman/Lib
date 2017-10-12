@@ -12,6 +12,7 @@ import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.NullUtil;
+import com.android.lib.util.SPUtil;
 import com.android.lib.util.StringUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.util.data.DateFormatUtil;
@@ -54,7 +55,7 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-
+                    SPUtil.getInstance().saveInt(getP().getD().getVideoBean().getToUser().getPhone(), 0);
                     if (getP().getD().isSendVideo(getP().getD().getVideoBean())) {
                         EMClient.getInstance().callManager().setSurfaceView(getP().getU().bind.surfaceview, null);
                     } else {
@@ -99,12 +100,10 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
         }
     }
 
-
-
-    @Override
-    public void onDestroy() {
+    public void finish() {
         getP().getD().getThreadUtil().stop();
         getP().getD().setEnd(System.currentTimeMillis());
+        getP().getU().bind.surfaceview.release();
         if (getP().getD().getVideoBean() == null) {
             return;
         }
@@ -120,13 +119,14 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
             getP().getD().getVideoBean().setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
             getP().getD().getVideoBean().setTimenum(getP().getD().getMinute());
         }
-        RemarkFrag remarkFrag = new RemarkFrag();
-        remarkFrag.setArguments(new Bundle());
-        remarkFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, getP().getD().getVideoBean());
-        FragmentUtil2.getInstance().add(activity, Value.ROOTID_TWO, remarkFrag);
-        getP().getU().bind.surfaceview.release();
-        super.onDestroy();
+        if (getP().getD().isAccept()) {
+            RemarkFrag remarkFrag = new RemarkFrag();
+            remarkFrag.setArguments(new Bundle());
+            remarkFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, getP().getD().getVideoBean());
+            FragmentUtil2.getInstance().add(activity, Value.ROOTID_TWO, remarkFrag);
+        }
     }
+
 
 
     @Override
@@ -158,11 +158,13 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                     } catch (EMNoActiveCallException e) {
                         e.printStackTrace();
                     }
+                    finish();
                     FragmentUtil2.getInstance().removeTop(activity, Value.FULLSCREEN);
                     break;
                 case ACCEPTED:
                     LogUtil.E("接受到录音指令2");
                     getP().getU().hideCallInfo();
+                    getP().getD().setAccept(true);
                     //建立通话后
                     if (!getP().getD().isSendVideo(getP().getD().getVideoBean())) {
                         ToastUtil.getInstance().showLong(activity, "开始录制");

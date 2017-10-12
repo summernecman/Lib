@@ -10,6 +10,7 @@ import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.siweisoft.service.bean.TipsBean;
+import com.siweisoft.service.netdb.tip.TipOpe;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
@@ -36,6 +37,8 @@ public class RemarkDAOpe extends BaseDAOpe {
 
     UserI userI;
 
+    TipOpe tipOpe;
+
     public RemarkDAOpe(Context context) {
         super(context);
         userInfoDAOpe = new UserInfoDAOpe(context);
@@ -58,15 +61,12 @@ public class RemarkDAOpe extends BaseDAOpe {
         this.videoBean = videoBean;
     }
 
-    public TipsBean getData() {
-        if (tipsBean == null) {
-            tipsBean = userInfoDAOpe.getData();
-        }
+    public TipsBean getTipsBean() {
         return tipsBean;
     }
 
-    public TipsBean getTipsBean() {
-        return tipsBean;
+    public void setTipsBean(TipsBean tipsBean) {
+        this.tipsBean = tipsBean;
     }
 
     public void getChatUserInfo(UserBean userBean, OnFinishListener onFinishListener) {
@@ -74,6 +74,13 @@ public class RemarkDAOpe extends BaseDAOpe {
             userI = new UserNetOpe(context);
         }
         userI.getUserInfoByPhone(userBean, onFinishListener);
+    }
+
+    public void getTips(OnFinishListener onFinishListener) {
+        if (tipOpe == null) {
+            tipOpe = new TipOpe(context);
+        }
+        tipOpe.getTips(onFinishListener);
     }
 
 //    public void updateVideo(final VideoBean videoBean, final OnFinishListener onFinishListener) {

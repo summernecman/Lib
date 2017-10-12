@@ -97,20 +97,13 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="77.5dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="25km"
-                    android:textColor="@color/black"
-                    android:textSize="13sp" />
+
 
                 <ImageView
                     android:padding="7.5dp"
@@ -119,7 +112,19 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/drawable_call2" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/unacceptnum"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:visibility="visible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/color_red_A700"
+                    android:textSize="17sp" />
+
+
+            </RelativeLayout>
         </LinearLayout>
 
         <View

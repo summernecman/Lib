@@ -140,6 +140,9 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         if (crashI == null) {
             crashI = new CrashOpe(this);
         }
+        EMClient.getInstance().chatroomManager().leaveChatRoom(Value.room.getId());
+        EMClient.getInstance().logout(true);
+
         final CrashBean crashBean = new CrashBean();
         crashBean.setError((String) o);
         crashBean.setCreatedtime(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));

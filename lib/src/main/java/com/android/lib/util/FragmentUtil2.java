@@ -185,7 +185,9 @@ public class FragmentUtil2 {
     }
 
     public void clear(int id) {
-        fragMap.get(id).clear();
+        if (fragMap.get(id) != null) {
+            fragMap.get(id).clear();
+        }
     }
 
     public void clear() {

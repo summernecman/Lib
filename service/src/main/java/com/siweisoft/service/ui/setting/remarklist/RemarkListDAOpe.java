@@ -10,6 +10,7 @@ import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.comment.CommentI;
 import com.siweisoft.service.netdb.comment.CommentOpe;
 import com.siweisoft.service.netdb.user.UserBean;
+import com.siweisoft.service.ui.Constant.Value;
 
 import java.util.ArrayList;
 
@@ -31,13 +32,23 @@ public class RemarkListDAOpe extends BaseDAOpe {
         if (commentI == null) {
             commentI = new CommentOpe(context);
         }
-        commentI.getCommentByUserIdWithLimit(userBean, new OnFinishListener() {
-            @Override
-            public void onFinish(Object o) {
-                ArrayList<CommentBean> res = (ArrayList<CommentBean>) o;
-                onFinishListener.onFinish(res);
-            }
-        });
+        if (Value.userBean.getUsertype() == UserBean.USER_TYPE_CUSTOMER) {
+            commentI.getCommentByUserIdWithLimit(userBean, new OnFinishListener() {
+                @Override
+                public void onFinish(Object o) {
+                    ArrayList<CommentBean> res = (ArrayList<CommentBean>) o;
+                    onFinishListener.onFinish(res);
+                }
+            });
+        } else {
+            commentI.getCommentByUserIdWithLimit(userBean, new OnFinishListener() {
+                @Override
+                public void onFinish(Object o) {
+                    ArrayList<CommentBean> res = (ArrayList<CommentBean>) o;
+                    onFinishListener.onFinish(res);
+                }
+            });
+        }
 
     }
 

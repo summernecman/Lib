@@ -90,12 +90,6 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
         });
         getP().getU().initHead(getP().getD().getUserBean());
 
-        getP().getD().getUserRateIfNull(getP().getD().getUserBean(), new OnFinishListener() {
-            @Override
-            public void onFinish(Object o) {
-                getP().getD().getUserBean().setAvg((Float) o);
-            }
-        });
     }
 
 

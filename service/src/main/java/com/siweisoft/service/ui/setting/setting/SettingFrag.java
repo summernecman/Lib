@@ -4,7 +4,6 @@ package com.siweisoft.service.ui.setting.setting;
 
 import android.view.View;
 
-import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.FragmentUtil2;
 import com.hyphenate.chat.EMClient;
 import com.siweisoft.service.R;
@@ -30,16 +29,11 @@ public class SettingFrag extends BaseServerFrag<SettingUIOpe, SettingDAOpe> {
                     return;
                 }
                 EMClient.getInstance().chatroomManager().leaveChatRoom(Value.room.getId());
-                getP().getD().userI.loginOut(Value.userBean, new OnFinishListener() {
-                    @Override
-                    public void onFinish(Object o) {
-                        EMClient.getInstance().logout(true);
-                        FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
-                        FragmentUtil2.getInstance().clear();
-                        FragmentUtil2.getInstance().initClear(activity);
-                        ((ServieApp) activity.getApplication()).exit();
-                    }
-                });
+                EMClient.getInstance().logout(true);
+                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+                FragmentUtil2.getInstance().clear();
+                FragmentUtil2.getInstance().initClear(activity);
+                ((ServieApp) activity.getApplication()).exit();
                 break;
         }
 

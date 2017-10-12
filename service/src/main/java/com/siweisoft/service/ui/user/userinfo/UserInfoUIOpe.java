@@ -98,7 +98,7 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
     }
 
     public void initHead(UserBean userBean) {
-        bind.ratingbar.setStar(userBean.getAvg());
+        bind.ratingbar.setStar(userBean.getRate());
         bind.tvName.setText(NullUtil.isStrEmpty(userBean.getName()) ? userBean.getPhone() : StringUtil.getStr(userBean.getName()));
         bind.tvPhone.setText(userBean.getPhone());
         GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + userBean.getHeadurl()).into(bind.ivHead11);

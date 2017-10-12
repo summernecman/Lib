@@ -12,6 +12,7 @@ import com.android.lib.bean.AppViewHolder;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.NullUtil;
+import com.android.lib.util.SPUtil;
 import com.android.lib.util.StringUtil;
 import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.siweisoft.service.BR;
@@ -28,6 +29,12 @@ public class OnLineListUIOpe extends BaseUIOpe<FragOnlinelistBinding> {
 
     public OnLineListUIOpe(Context context) {
         super(context);
+    }
+
+    public void refresh() {
+        if (bind.recycle.getAdapter() != null) {
+            bind.recycle.getAdapter().notifyDataSetChanged();
+        }
     }
 
     public void initList(final ArrayList<UserBean> data, final View.OnClickListener onClickListener) {
@@ -54,7 +61,7 @@ public class OnLineListUIOpe extends BaseUIOpe<FragOnlinelistBinding> {
                 viewDataBinding.ivCall.setTag(R.id.data, data.get(position));
                 viewDataBinding.ivCall.setOnClickListener(this);
                 viewDataBinding.tvName.setText(NullUtil.isStrEmpty(data.get(position).getName()) ? data.get(position).getPhone() : StringUtil.getStr(data.get(position).getName()));
-                viewDataBinding.ratingbar.setStar(data.get(position).getAvg());
+                viewDataBinding.ratingbar.setStar(data.get(position).getRate());
                 GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
                 if (data.get(position).getState() == UserBean.STATE_OFFLINE) {
                     viewDataBinding.getRoot().setAlpha(0.3f);
@@ -75,6 +82,9 @@ public class OnLineListUIOpe extends BaseUIOpe<FragOnlinelistBinding> {
                         GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_server.png").into(viewDataBinding.ivHeadType);
                         break;
                 }
+
+                int num = SPUtil.getInstance().getInt(data.get(position).getPhone());
+                viewDataBinding.unacceptnum.setText(num == 0 ? "" : "" + num);
             }
         });
     }

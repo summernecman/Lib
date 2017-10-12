@@ -30,35 +30,36 @@
 
             <ImageView
                 android:id="@+id/btn_speak"
-                android:layout_width="40dp"
+                android:layout_width="100dp"
                 android:layout_height="fill_parent"
                 android:background="@drawable/button_background"
                 android:src="@drawable/drawable_speak" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/trans_white" />
-
-            <ImageView
+            <LinearLayout
                 android:layout_gravity="center"
-                android:src="@drawable/icon_end"
                 android:gravity="center"
-                android:id="@+id/endCall"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:textSize="23sp" />
+                android:textSize="23sp">
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/trans_white" />
+                <ImageView
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_end"
+                    android:gravity="center"
+                    android:id="@+id/endCall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="23sp" />
+            </LinearLayout>
+
 
 
             <ImageView
                 android:id="@+id/btn_camera"
-                android:layout_width="40dp"
+                android:layout_width="100dp"
                 android:layout_height="fill_parent"
                 android:background="@drawable/button_background"
                 android:src="@drawable/drawable_camera" />
