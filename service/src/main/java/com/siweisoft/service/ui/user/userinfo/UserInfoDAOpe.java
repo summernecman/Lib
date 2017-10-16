@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.util.FragmentUtil2;
 import com.siweisoft.service.bean.AllUserBean;
 import com.siweisoft.service.bean.TipBean;
 import com.siweisoft.service.bean.TipsBean;
@@ -19,6 +20,7 @@ import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.user.UserI;
 import com.siweisoft.service.netdb.user.UserNetOpe;
 import com.siweisoft.service.ui.Constant.Value;
+import com.siweisoft.service.ui.user.onlinelist.OnLineListFrag;
 import com.siweisoft.service.ui.user.usercenter.UserCenterDAOpe;
 
 import java.util.ArrayList;
@@ -160,6 +162,14 @@ public class UserInfoDAOpe extends BaseDAOpe {
 
     public void setCommentBeen(ArrayList<CommentBean> commentBeen) {
         this.commentBeen = commentBeen;
+    }
+
+    public boolean isOnline(String phone) {
+        OnLineListFrag onLineListFrag = (OnLineListFrag) FragmentUtil2.getInstance().getFragment(OnLineListFrag.class);
+        if (onLineListFrag != null) {
+            return onLineListFrag.getP().getD().isOnline(phone);
+        }
+        return false;
     }
 
 }

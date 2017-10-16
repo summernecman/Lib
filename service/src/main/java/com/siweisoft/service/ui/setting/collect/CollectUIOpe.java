@@ -41,13 +41,15 @@ public class CollectUIOpe extends BaseUIOpe<FragCollectBinding> {
                 ItemVideorecordBinding itemVideorecordBinding = (ItemVideorecordBinding) holder.viewDataBinding;
                 holder.viewDataBinding.getRoot().findViewById(R.id.play).setTag(com.android.lib.R.id.data, data.get(position));
                 holder.viewDataBinding.getRoot().findViewById(R.id.play).setOnClickListener(this);
+                holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setTag(com.android.lib.R.id.position, position);
+                holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setOnClickListener(this);
                 ((ItemVideorecordBinding) holder.viewDataBinding).tvTimes.setText("" + data.get(position).getTimenum() + "秒");
                 if (Value.userBean.getPhone().equals(data.get(position).getFromUser().getPhone())) {
                     itemVideorecordBinding.ivWay.setSelected(false);
-                    GlideApp.with(context).asBitmap().centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getToUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
+                    GlideApp.with(context).asBitmap().placeholder(R.drawable.icon_head1).centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getToUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
                 } else {
                     itemVideorecordBinding.ivWay.setSelected(true);
-                    GlideApp.with(context).asBitmap().placeholder(R.drawable.icon_head1).placeholder(R.drawable.icon_head1).centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
+                    GlideApp.with(context).asBitmap().placeholder(R.drawable.icon_head1).centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
                 }
             }
         });

@@ -119,6 +119,7 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
             getP().getD().getVideoBean().setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
             getP().getD().getVideoBean().setTimenum(getP().getD().getMinute());
         }
+        FragmentUtil2.fragMap.isEmpty();
         if (getP().getD().isAccept()) {
             RemarkFrag remarkFrag = new RemarkFrag();
             remarkFrag.setArguments(new Bundle());

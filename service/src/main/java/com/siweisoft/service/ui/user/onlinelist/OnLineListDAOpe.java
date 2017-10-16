@@ -25,6 +25,11 @@ public class OnLineListDAOpe extends BaseDAOpe {
 
     private EMChatRoom emChatRoom;
 
+    private OnlineChangeListener onlineChangeListener = new OnlineChangeListener();
+
+    private ArrayList<UserBean> onlines = new ArrayList<>();
+
+
     public OnLineListDAOpe(Context context) {
         super(context);
     }
@@ -101,5 +106,28 @@ public class OnLineListDAOpe extends BaseDAOpe {
 
     public void setEmChatRoom(EMChatRoom emChatRoom) {
         this.emChatRoom = emChatRoom;
+    }
+
+    public OnlineChangeListener getOnlineChangeListener() {
+        return onlineChangeListener;
+    }
+
+    public ArrayList<UserBean> getOnlines() {
+        return onlines;
+    }
+
+    public void setOnlines(ArrayList<UserBean> onlines) {
+        this.onlines = onlines;
+    }
+
+    public boolean isOnline(String phone) {
+        for (int i = 0; i < getOnlines().size(); i++) {
+            if (getOnlines().get(i).getPhone().equals(phone)) {
+                if (getOnlines().get(i).getState() == UserBean.STATE_ONLINE) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

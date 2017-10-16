@@ -119,7 +119,7 @@ public class MaterialRefreshLayout extends FrameLayout {
         progressTextColor = t.getColor(R.styleable.MaterialRefreshLayout_progress_text_color, Color.BLACK);
         progressValue = t.getInteger(R.styleable.MaterialRefreshLayout_progress_value, 0);
         progressMax = t.getInteger(R.styleable.MaterialRefreshLayout_progress_max_value, 100);
-        showProgressBg = t.getBoolean(R.styleable.MaterialRefreshLayout_progress_show_circle_backgroud, false);
+        showProgressBg = t.getBoolean(R.styleable.MaterialRefreshLayout_progress_show_circle_backgroud, true);
         progressBg = t.getColor(R.styleable.MaterialRefreshLayout_progress_backgroud_color, CircleProgressBar.DEFAULT_CIRCLE_BG_LIGHT);
         progressSizeType = t.getInt(R.styleable.MaterialRefreshLayout_progress_size_type, 0);
         if (progressSizeType == 0) {

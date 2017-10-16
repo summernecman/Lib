@@ -14,7 +14,6 @@ import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.bean.TitleBean;
-import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
@@ -62,12 +61,10 @@ public class CollecFrag extends BaseServerFrag<CollectUIOpe, CollectDAOpe> imple
                         playFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, (Serializable) v.getTag(R.id.data));
                         FragmentUtil2.getInstance().add(activity, Value.ROOTID_THREE, playFrag);
                         break;
-                    default:
+                    case R.id.iv_head:
                         UserInfoFrag userInfoFrag = new UserInfoFrag();
                         userInfoFrag.setArguments(new Bundle());
-                        UserBean userBean = new UserBean();
-                        userBean.setPhone(getP().getD().getVideos().get((Integer) v.getTag(R.id.position)).getOthername());
-                        userInfoFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, userBean);
+                        userInfoFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, getP().getD().getVideos().get((Integer) v.getTag(R.id.position)).getOtherUser());
                         FragmentUtil2.getInstance().add(activity, Value.ROOTID_THREE, userInfoFrag);
                         break;
                 }

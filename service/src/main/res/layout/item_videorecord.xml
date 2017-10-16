@@ -21,7 +21,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.android.lib.view.image.RoundCricleImageView
+            <ImageView
                 android:background="@drawable/drawable_press_black_while"
                 android:id="@+id/iv_head"
                 android:layout_width="70dp"

@@ -5,6 +5,7 @@ package com.siweisoft.service.netdb.video;
 import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.base.netadapter.DelayUINetAdapter;
 import com.android.lib.base.netadapter.UINetAdapter;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.android.lib.bean.FileBean;
@@ -209,7 +210,7 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
     public void getVideosByBothUserIdWithLimit(ContactBean contactBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(contactBean));
-        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/getVideosByBothUserIdWithLimit", baseReqBean, new UINetAdapter(context) {
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/getVideosByBothUserIdWithLimit", baseReqBean, new DelayUINetAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 ArrayList<VideoBean> videos = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<VideoBean>>() {

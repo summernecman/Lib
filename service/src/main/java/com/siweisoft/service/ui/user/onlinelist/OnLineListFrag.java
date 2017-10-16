@@ -57,7 +57,7 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
                     EMClient.getInstance().chatroomManager().joinChatRoom(rooms.get(i).getId(), new EMValueCallBack<EMChatRoom>() {
                         @Override
                         public void onSuccess(EMChatRoom value) {
-                            EMClient.getInstance().chatroomManager().addChatRoomChangeListener(new OnlineChangeListener());
+                            EMClient.getInstance().chatroomManager().addChatRoomChangeListener(getP().getD().getOnlineChangeListener());
                             initData2();
                         }
 
@@ -88,7 +88,8 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
                 getP().getD().getOtherUsersInfoByPhone(value.getData(), new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
-                        getP().getU().initList((ArrayList<UserBean>) o, OnLineListFrag.this);
+                        getP().getD().setOnlines((ArrayList<UserBean>) o);
+                        getP().getU().initList(getP().getD().getOnlines(), OnLineListFrag.this);
                     }
                 });
             }
@@ -155,6 +156,7 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
     @Override
     public void onDestroy() {
         super.onDestroy();
+        EMClient.getInstance().chatroomManager().removeChatRoomListener(getP().getD().getOnlineChangeListener());
         if (getP().getD().getEmChatRoom() == null) {
             return;
         }
@@ -169,6 +171,5 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
         } else {
             initData2();
         }
-
     }
 }

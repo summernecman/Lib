@@ -8,10 +8,12 @@ import android.widget.TextView;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.listener.ViewListener;
+import com.android.lib.constant.UrlConstant;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.StringUtil;
 import com.android.lib.util.ToastUtil;
+import com.android.lib.view.image.ImageFrag;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.hyphenate.EMValueCallBack;
@@ -89,7 +91,7 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
             }
         });
         getP().getU().initHead(getP().getD().getUserBean());
-
+        getP().getU().initOnline(getP().getD().isOnline(getP().getD().getUserBean().getPhone()));
     }
 
 
@@ -112,7 +114,7 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
 
     }
 
-    @OnClick({R.id.call, R.id.tv_phone})
+    @OnClick({R.id.call, R.id.tv_phone, R.id.iv_head11})
     public void onClickEvent(View v) {
         switch (v.getId()) {
             case R.id.call:
@@ -153,6 +155,18 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
                 break;
             case R.id.tv_phone:
                 //PhoneUtil.getInstance().Call(activity,getP().getD().getUserBean().getPhone());
+                break;
+            case R.id.iv_head11:
+                ImageFrag imageFrag = new ImageFrag();
+                imageFrag.setArguments(new Bundle());
+                imageFrag.getArguments().putString(Value.DATA_DATA, UrlConstant.fileUrl + "/" + getP().getD().getUserBean().getHeadurl());
+                imageFrag.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FragmentUtil2.getInstance().removeTop(activity, Value.FULLSCREEN);
+                    }
+                });
+                FragmentUtil2.getInstance().add(activity, Value.FULLSCREEN, imageFrag);
                 break;
         }
     }

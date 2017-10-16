@@ -33,6 +33,19 @@ public class FragmentUtil2 {
         return instance;
     }
 
+    public Fragment getFragment(Class c) {
+        Iterator<Integer> keys = fragMap.keySet().iterator();
+        while (keys.hasNext()) {
+            int k = keys.next();
+            for (int i = 0; fragMap.get(k) != null && i < fragMap.get(k).size(); i++) {
+                if (fragMap.get(k).get(i).getClass().getName().equals(c.getName())) {
+                    return fragMap.get(k).get(i);
+                }
+            }
+        }
+        return null;
+    }
+
 
     public void add(final FragmentActivity fragmentActivity, int id, Fragment now) {
         if (fragMap.get(id) == null) {

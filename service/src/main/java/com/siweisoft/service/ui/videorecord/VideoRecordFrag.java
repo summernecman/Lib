@@ -41,7 +41,8 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
         getP().getD().getVideosByBothUserIdWithLimit(contactBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getD().setVideos((ArrayList<VideoBean>) o);
+                getP().getD().getVideos().clear();
+                getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
                 getP().getU().initList(getP().getD().getVideos(), VideoRecordFrag.this);
                 getP().getU().bind.refresh.finishRefresh();
                 getP().getD().setPageindex(getP().getD().getPageindex() + 1);

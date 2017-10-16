@@ -5,6 +5,7 @@ package com.siweisoft.service.ui.user.userinfo;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.listener.ViewListener;
@@ -102,11 +103,14 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
         bind.tvName.setText(NullUtil.isStrEmpty(userBean.getName()) ? userBean.getPhone() : StringUtil.getStr(userBean.getName()));
         bind.tvPhone.setText(userBean.getPhone());
         GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + userBean.getHeadurl()).into(bind.ivHead11);
-
     }
 
 
     public void initRefresh(MaterialRefreshListener refreshListener) {
         bind.refresh.setMaterialRefreshListener(refreshListener);
+    }
+
+    public void initOnline(boolean online) {
+        bind.call.setVisibility(online ? View.VISIBLE : View.GONE);
     }
 }

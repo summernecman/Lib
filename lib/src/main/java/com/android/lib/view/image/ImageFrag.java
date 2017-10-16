@@ -17,12 +17,16 @@ import com.lzy.imagepicker.ImagePicker;
 import uk.co.senab.photoview.PhotoView;
 
 
-public class ImageFrag extends BaseFrg implements View.OnLongClickListener {
+public class ImageFrag extends BaseFrg implements View.OnLongClickListener, View.OnClickListener {
 
 
     PhotoView photoView;
 
     String url;
+
+    View.OnLongClickListener onLongClickListener;
+
+    View.OnClickListener onClickListener;
 
     @Nullable
     @Override
@@ -42,6 +46,8 @@ public class ImageFrag extends BaseFrg implements View.OnLongClickListener {
             ImagePicker.getInstance().getImageLoader().displayImage(getActivity(), url, photoView, 0, 0);
         }
         photoView.setOnLongClickListener(this);
+        photoView.setOnClickListener(this);
+        getView().findViewById(R.id.tv_back).setOnClickListener(this);
     }
 
     @Override
@@ -52,9 +58,25 @@ public class ImageFrag extends BaseFrg implements View.OnLongClickListener {
 //        }
 //        ToastUtil.getInstance().showShort(activity, "开始保存");
 //        BitmapUtil.saveImage(activity, url);
+        if (onLongClickListener != null) {
+            onLongClickListener.onLongClick(v);
+        }
         return true;
     }
 
 
+    @Override
+    public void onClick(View v) {
+        if (onClickListener != null) {
+            onClickListener.onClick(v);
+        }
+    }
 
+    public void setOnLongClickListener(View.OnLongClickListener onLongClickListener) {
+        this.onLongClickListener = onLongClickListener;
+    }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
 }

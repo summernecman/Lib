@@ -20,7 +20,7 @@ public class VideoRecordDAOpe extends BaseDAOpe {
 
     VideoI videoI = new VideoOpe(context);
 
-    ArrayList<VideoBean> videos;
+    ArrayList<VideoBean> videos = new ArrayList<>();
 
     private HistoryBean historyBean;
 

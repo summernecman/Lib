@@ -59,11 +59,12 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         callReceiver = new CallReceiver();
         registerReceiver(callReceiver, callFilter);
 
-        EMClient.getInstance().callManager().addCallStateChangeListener(new VideoChatListener(activity));
-        EMClient.getInstance().chatManager().addMessageListener(new EMMsgListener());
-        EMClient.getInstance().addConnectionListener(new ChatConnectListener(activity));
+        EMClient.getInstance().callManager().addCallStateChangeListener(getP().getD().getVideoChatListener());
+        EMClient.getInstance().chatManager().addMessageListener(getP().getD().getEmMsgListener());
+        EMClient.getInstance().addConnectionListener(getP().getD().getChatConnectListener());
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -109,6 +110,9 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         if (Value.room == null) {
             return;
         }
+        EMClient.getInstance().callManager().removeCallStateChangeListener(getP().getD().getVideoChatListener());
+        EMClient.getInstance().chatManager().removeMessageListener(getP().getD().getEmMsgListener());
+        EMClient.getInstance().removeConnectionListener(getP().getD().getChatConnectListener());
         EMClient.getInstance().chatroomManager().leaveChatRoom(Value.room.getId());
     }
 
