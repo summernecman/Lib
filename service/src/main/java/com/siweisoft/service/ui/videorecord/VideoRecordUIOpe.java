@@ -43,14 +43,14 @@ public class VideoRecordUIOpe extends BaseUIOpe<FragVideorecordBinding> {
                 public void onBindViewHolder(AppViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
                     ItemVideorecordBinding itemVideorecordBinding = (ItemVideorecordBinding) holder.viewDataBinding;
-                    itemVideorecordBinding.tvUpload.setVisibility(Value.userBean.getUsertype() == UserBean.USER_TYPE_CUSTOMER ? View.GONE : data.get(position).getUploaded() == 1 ? View.GONE : View.VISIBLE);
+                    itemVideorecordBinding.tvUpload.setVisibility(Value.getUserInfo().getUsertype() == UserBean.USER_TYPE_CUSTOMER ? View.GONE : data.get(position).getUploaded() == 1 ? View.GONE : View.VISIBLE);
                     holder.viewDataBinding.getRoot().findViewById(R.id.play).setTag(com.android.lib.R.id.data, data.get(position));
                     holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setTag(com.android.lib.R.id.data, data.get(position));
                     holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setTag(com.android.lib.R.id.position, position);
                     holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setOnClickListener(this);
                     holder.viewDataBinding.getRoot().findViewById(R.id.play).setOnClickListener(this);
                     ((ItemVideorecordBinding) holder.viewDataBinding).tvTimes.setText(StringUtil.secondToMinute(data.get(position).getTimenum()));
-                    if (Value.userBean.getPhone().equals(data.get(position).getFromUser().getPhone())) {
+                    if (Value.getUserInfo().getPhone().equals(data.get(position).getFromUser().getPhone())) {
                         itemVideorecordBinding.ivWay.setSelected(false);
                         GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getToUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
                     } else {

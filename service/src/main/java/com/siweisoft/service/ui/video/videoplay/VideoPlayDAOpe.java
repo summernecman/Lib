@@ -69,7 +69,7 @@ public class VideoPlayDAOpe extends BaseDAOpe {
         if (commentI == null) {
             commentI = new CommentOpe(context);
         }
-        videoBean.setToUser(Value.userBean);
+        videoBean.setToUser(Value.getUserInfo());
         commentI.getVideoCommentByVideoIdAndFrom(videoBean, onFinishListener);
     }
 
@@ -78,7 +78,7 @@ public class VideoPlayDAOpe extends BaseDAOpe {
             collectionI = new CollectionOpe(context);
         }
         CollectionBean collectionBean = new CollectionBean();
-        collectionBean.setUserid(Value.userBean.getId());
+        collectionBean.setUserid(Value.getUserInfo().getId());
         collectionBean.setVideoid(videoBean.getId());
         collectionI.isCollectedByVideoIdAndUserId(collectionBean, onFinishListener);
     }
@@ -87,7 +87,7 @@ public class VideoPlayDAOpe extends BaseDAOpe {
         if (collectionI == null) {
             collectionI = new CollectionOpe(context);
         }
-        if (Value.userBean.getId() == videoBean.getFromUser().getId()) {
+        if (Value.getUserInfo().getId() == videoBean.getFromUser().getId()) {
             collectionBean.setUserid(videoBean.getFromUser().getId());
         } else {
             collectionBean.setUserid(videoBean.getToUser().getId());
@@ -99,7 +99,7 @@ public class VideoPlayDAOpe extends BaseDAOpe {
         if (collectionI == null) {
             collectionI = new CollectionOpe(context);
         }
-        if (Value.userBean.getId() == videoBean.getFromUser().getId()) {
+        if (Value.getUserInfo().getId() == videoBean.getFromUser().getId()) {
             collectionBean.setUserid(videoBean.getFromUser().getId());
         } else {
             collectionBean.setUserid(videoBean.getToUser().getId());

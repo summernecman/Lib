@@ -98,13 +98,13 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
             case R.id.ftv_right2:
                 CommentBean commentBean = new CommentBean();
                 commentBean.setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
-                commentBean.setFromuser(Value.userBean.getPhone());
+                commentBean.setFromuser(Value.getUserInfo().getPhone());
                 commentBean.setTouser(getP().getD().getVideoBean().getOthername());
                 commentBean.setRate(getP().getD().ratingbar);
                 commentBean.setRemark(getP().getU().getRemark());
                 commentBean.setTips(GsonUtil.getInstance().toJson(getP().getD().getTipsBean()));
                 commentBean.setVideoname(getP().getD().getVideoBean().getFile());
-                commentBean.setFromid(Value.userBean.getId());
+                commentBean.setFromid(Value.getUserInfo().getId());
                 commentBean.setToid(getP().getD().getVideoBean().getOtherUser().getId());
                 commentBean.setVideoid(getP().getD().getVideoBean().getId());
                 getP().getD().videoI.commentVideo(commentBean, new OnFinishListener() {

@@ -41,7 +41,7 @@ public class HistoryDAOpe extends BaseDAOpe {
     }
 
     public void getVideos(final OnFinishListener onFinishListener) {
-        videoI.getByContacts(Value.userBean, new OnFinishListener() {
+        videoI.getByContacts(Value.getUserInfo(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 onFinishListener.onFinish(o);
@@ -50,7 +50,7 @@ public class HistoryDAOpe extends BaseDAOpe {
     }
 
     public void getUnUploadVideoNum(final OnFinishListener onFinishListener) {
-        videoI.getUnUploadVideoNum(Value.userBean, onFinishListener);
+        videoI.getUnUploadVideoNum(Value.getUserInfo(), onFinishListener);
     }
 
     public void getArrayUsersInfoByPhone(ArrayList<ArrayList<UserBean>> data, OnFinishListener onFinishListener) {

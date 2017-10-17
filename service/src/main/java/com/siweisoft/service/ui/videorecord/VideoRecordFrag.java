@@ -33,7 +33,7 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
         setTitleBean(new TitleBean("返回", "录像", ""));
         getP().getD().setHistoryBean((HistoryBean) getArguments().getSerializable(Value.DATA_DATA));
         ContactBean contactBean = new ContactBean();
-        contactBean.setFromid(Value.userBean.getId());
+        contactBean.setFromid(Value.getUserInfo().getId());
         contactBean.setPagesize(5);
         getP().getD().setPageindex(0);
         contactBean.setPagestart(getP().getD().getPageindex());
@@ -55,7 +55,7 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
     public void initData2() {
         super.initData();
         ContactBean contactBean = new ContactBean();
-        contactBean.setFromid(Value.userBean.getId());
+        contactBean.setFromid(Value.getUserInfo().getId());
         contactBean.setPagesize(5);
         contactBean.setPagestart(getP().getD().getPageindex());
         contactBean.setToid(getP().getD().getHistoryBean().getUserBean().getId());

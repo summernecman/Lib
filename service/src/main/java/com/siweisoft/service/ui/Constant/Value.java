@@ -7,6 +7,7 @@ import android.os.Environment;
 
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.constant.ValueConstant;
+import com.android.lib.util.GsonUtil;
 import com.android.lib.util.SPUtil;
 import com.hyphenate.chat.EMChatRoom;
 import com.siweisoft.service.R;
@@ -30,12 +31,42 @@ public class Value extends ValueConstant {
 
     public static EMChatRoom room;
 
+    public static String ROOM;
+
+    public static void saveRoom(EMChatRoom o) {
+        SPUtil.getInstance().saveStr(ROOM, GsonUtil.getInstance().toJson(o));
+        room = o;
+    }
+
+    public static EMChatRoom getRoom() {
+        if (room == null) {
+            room = GsonUtil.getInstance().fromJson(SPUtil.getInstance().getStr(ROOM), EMChatRoom.class);
+        }
+        return room;
+    }
+
     public static int position = 0;
 
     public static String CACHE_FILE = "videocache";
 
     public static ArrayList<Integer> root = new ArrayList<>();
-    public static UserBean userBean = new UserBean();
+
+    private static UserBean userBean;
+
+    public static final String USERBEAN = "userbean";
+
+
+    public static void saveUserInfo(UserBean o) {
+        SPUtil.getInstance().saveStr(USERBEAN, GsonUtil.getInstance().toJson(o));
+        userBean = o;
+    }
+
+    public static UserBean getUserInfo() {
+        if (userBean == null) {
+            userBean = GsonUtil.getInstance().fromJson(SPUtil.getInstance().getStr(USERBEAN), UserBean.class);
+        }
+        return userBean;
+    }
 
     static {
         root.add(ROOTID_ONE);
@@ -44,6 +75,12 @@ public class Value extends ValueConstant {
     }
 
     public static Integer getNowRoot() {
+        if (root.size() < 3) {
+            root.clear();
+            root.add(ROOTID_ONE);
+            root.add(ROOTID_TWO);
+            root.add(ROOTID_THREE);
+        }
         return root.get(position);
     }
 

@@ -186,7 +186,7 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                             getP().getU().bind.tvTime.setText(StringUtil.secondToMinute((int) o));
                             if ((int) o == 300) {
                                 //非发送视频信息方将录制视频
-                                if (!getP().getD().isLocalSendVideo(Value.userBean, getP().getD().getVideoBean().getToUser())) {
+                                if (!getP().getD().isLocalSendVideo(Value.getUserInfo(), getP().getD().getVideoBean().getToUser())) {
                                     ToastUtil.getInstance().showShort(activity, "已经视频超过5分钟,为了保证网络不好的情况下视频文件的传输,建议结束当前视频，重新发起视频");
                                 }
                             }

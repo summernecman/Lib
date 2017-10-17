@@ -107,13 +107,13 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         super.onDestroy();
         //unregisterReceiver(loginInfoBroadCast);
         unregisterReceiver(callReceiver);
-        if (Value.room == null) {
+        if (Value.getRoom() == null) {
             return;
         }
         EMClient.getInstance().callManager().removeCallStateChangeListener(getP().getD().getVideoChatListener());
         EMClient.getInstance().chatManager().removeMessageListener(getP().getD().getEmMsgListener());
         EMClient.getInstance().removeConnectionListener(getP().getD().getChatConnectListener());
-        EMClient.getInstance().chatroomManager().leaveChatRoom(Value.room.getId());
+        EMClient.getInstance().chatroomManager().leaveChatRoom(Value.getRoom().getId());
     }
 
 
@@ -144,19 +144,19 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         if (crashI == null) {
             crashI = new CrashOpe(this);
         }
-        EMClient.getInstance().chatroomManager().leaveChatRoom(Value.room.getId());
+        EMClient.getInstance().chatroomManager().leaveChatRoom(Value.getRoom().getId());
         EMClient.getInstance().logout(true);
 
         final CrashBean crashBean = new CrashBean();
         crashBean.setError((String) o);
         crashBean.setCreatedtime(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
-        crashBean.setUserBean(Value.userBean);
+        crashBean.setUserBean(Value.getUserInfo());
         crashI.sendCrash(crashBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 EMClient.getInstance().logout(true);
-                if (Value.room != null) {
-                    EMClient.getInstance().chatroomManager().leaveChatRoom(Value.room.getId());
+                if (Value.getRoom() != null) {
+                    EMClient.getInstance().chatroomManager().leaveChatRoom(Value.getRoom().getId());
                 }
                 FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
                 ((ServieApp) activity.getApplication()).exit();
@@ -235,4 +235,28 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
 
         }
     }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        if (crashI == null) {
+            crashI = new CrashOpe(this);
+        }
+        final CrashBean crashBean = new CrashBean();
+        crashBean.setError("onLowMemory:" + ":" + FragmentUtil2.getInstance().print());
+        crashBean.setCreatedtime(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
+        crashBean.setUserBean(Value.getUserInfo());
+        crashI.sendCrash(crashBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+//                EMClient.getInstance().logout(true);
+//                if (Value.getRoom() != null) {
+//                    EMClient.getInstance().chatroomManager().leaveChatRoom(Value.getRoom().getId());
+//                }
+//                FragmentUtil2.getInstance().clear();
+//                ((ServieApp) activity.getApplication()).exit();
+            }
+        });
+    }
+
 }

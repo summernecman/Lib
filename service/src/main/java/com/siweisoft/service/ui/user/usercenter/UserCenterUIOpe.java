@@ -71,13 +71,13 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
                 return;
             }
         }
-        LogUtil.E(Value.userBean.getHeadurl());
-        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + Value.userBean.getHeadurl()).into(bind.head);
-        bind.setVariable(BR.frag_usercenter, Value.userBean);
-        if (Value.userBean == null || Value.userBean.getUsertype() == null) {
+        LogUtil.E(Value.getUserInfo().getHeadurl());
+        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + Value.getUserInfo().getHeadurl()).into(bind.head);
+        bind.setVariable(BR.frag_usercenter, Value.getUserInfo());
+        if (Value.getUserInfo() == null || Value.getUserInfo().getUsertype() == null) {
             return;
         }
-        switch (Value.userBean.getUsertype()) {
+        switch (Value.getUserInfo().getUsertype()) {
             case UserBean.CUSTOME:
                 GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_customer.png").into(bind.type);
                 break;
@@ -89,8 +89,8 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
                 break;
         }
 
-        bind.tvUnit.setText(StringUtil.getStr(Value.userBean.getUnit().getUnitname()));
-        if (Value.userBean.getUsertype() != UserBean.USER_TYPE_CUSTOMER) {
+        bind.tvUnit.setText(StringUtil.getStr(Value.getUserInfo().getUnit().getUnitname()));
+        if (Value.getUserInfo().getUsertype() != UserBean.USER_TYPE_CUSTOMER) {
             bind.llUnit.setVisibility(View.GONE);
         }
     }

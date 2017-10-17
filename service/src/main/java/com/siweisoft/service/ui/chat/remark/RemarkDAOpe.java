@@ -189,7 +189,7 @@ public class RemarkDAOpe extends BaseDAOpe {
     }
 
     public UserBean getOtherUser(VideoBean videoBean) {
-        if (Value.userBean.getPhone().equals(videoBean.getFromUser().getPhone())) {
+        if (Value.getUserInfo().getPhone().equals(videoBean.getFromUser().getPhone())) {
             return videoBean.getToUser();
         }
         return videoBean.getFromUser();

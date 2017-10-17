@@ -76,7 +76,7 @@ public class UserHeadNameFrag extends BaseServerFrag<UserHeadNameUIOpe, UserHead
                     @Override
                     public void onFinish(Object o) {
                         UserBean userBean = (UserBean) o;
-                        Value.userBean.setHeadurl(userBean.getHeadurl());
+                        Value.getUserInfo().setHeadurl(userBean.getHeadurl());
                         getP().getU().initInfo();
                         LoadUtil.getInstance().onStopLoading("headuri");
                     }

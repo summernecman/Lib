@@ -32,7 +32,7 @@ public class VideoRecordDAOpe extends BaseDAOpe {
     }
 
     public void getHistory(OnFinishListener onFinishListener) {
-        videoI.getHistoryVideos(Value.userBean, onFinishListener);
+        videoI.getHistoryVideos(Value.getUserInfo(), onFinishListener);
     }
 
     public ArrayList<VideoBean> getVideos() {

@@ -41,7 +41,7 @@ public class CollecFrag extends BaseServerFrag<CollectUIOpe, CollectDAOpe> imple
     public void initData() {
         super.initData();
         setTitleBean(new TitleBean("返回", "收藏", ""));
-        getP().getD().getCollection(Value.userBean, new OnFinishListener() {
+        getP().getD().getCollection(Value.getUserInfo(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 getP().getD().setVideos((ArrayList<VideoBean>) o);

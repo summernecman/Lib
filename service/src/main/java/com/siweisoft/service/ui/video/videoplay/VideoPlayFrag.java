@@ -178,7 +178,7 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                         }
                         UserBean userBean1 = (UserBean) o;
                         ShareBean shareBean = new ShareBean();
-                        shareBean.setSendid(Value.userBean.getId());
+                        shareBean.setSendid(Value.getUserInfo().getId());
                         shareBean.setReceiptid(userBean1.getId());
                         shareBean.setVideoid(getP().getD().getVideoBean().getId());
                         getP().getD().share(shareBean, new OnFinishListener() {

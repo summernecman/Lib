@@ -20,18 +20,18 @@ public class UnitFrag extends BaseServerFrag<UnitUIOpe, UnitDAOpe> {
     public void doThing() {
         super.doThing();
         setTitleBean(new TitleBean("返回", "更改单位", ""));
-        getP().getU().initUnit(Value.userBean.getUnit());
+        getP().getU().initUnit(Value.getUserInfo().getUnit());
     }
 
     @OnClick({R.id.button})
     public void onClickEvent(View v) {
         switch (v.getId()) {
             case R.id.button:
-                Value.userBean.getUnit().setUnitname(getP().getU().bind.etInput.getText().toString());
-                getP().getD().updateUnitInfo(Value.userBean, new OnFinishListener() {
+                Value.getUserInfo().getUnit().setUnitname(getP().getU().bind.etInput.getText().toString());
+                getP().getD().updateUnitInfo(Value.getUserInfo(), new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
-                        Value.userBean = (UserBean) o;
+                        Value.saveUserInfo((UserBean) o);
                         FragmentUtil2.getInstance().removeTop(activity, Value.ROOTID_THREE);
                     }
                 });

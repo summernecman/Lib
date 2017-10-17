@@ -53,7 +53,7 @@ public class EMChatOpe extends BaseDAOpe {
         cmdMsg.setChatType(EMMessage.ChatType.Chat);
         String action = file;//action可以自定义
         EMCmdMessageBody cmdBody = new EMCmdMessageBody(action);
-        cmdMsg.setFrom(Value.userBean.getPhone());
+        cmdMsg.setFrom(Value.getUserInfo().getPhone());
         cmdMsg.setTo(to);
         cmdMsg.addBody(cmdBody);
         EMClient.getInstance().chatManager().sendMessage(cmdMsg);

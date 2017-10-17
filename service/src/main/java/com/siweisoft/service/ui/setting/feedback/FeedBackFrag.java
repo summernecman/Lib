@@ -44,7 +44,7 @@ public class FeedBackFrag extends BaseServerFrag<FeedBAckUIOpe, FeedBackDAOpe> i
             case R.id.ftv_right2:
                 FeedBackBean feedBackBean = new FeedBackBean();
                 feedBackBean.setCreate(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
-                feedBackBean.setUserid(Value.userBean.getId());
+                feedBackBean.setUserid(Value.getUserInfo().getId());
                 feedBackBean.setRate(getP().getD().getRate());
                 feedBackBean.setRemark(getP().getU().bind.input.getText().toString());
                 getP().getD().sendFeedBack(feedBackBean, new OnFinishListener() {

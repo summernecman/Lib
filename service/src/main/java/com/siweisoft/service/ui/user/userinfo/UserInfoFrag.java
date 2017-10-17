@@ -72,7 +72,7 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
         getP().getD().getUserBean().setPagestart(0);
         getP().getD().getUserBean().setPagestart(getP().getD().getUserBean().getPagestart());
         getP().getD().getCommentBeen().clear();
-        CommentBean commentBean = getP().getD().getCommentReq(Value.userBean, getP().getD().getUserBean());
+        CommentBean commentBean = getP().getD().getCommentReq(Value.getUserInfo(), getP().getD().getUserBean());
         getP().getD().getRemarks(commentBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
@@ -97,7 +97,7 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
 
     public void initData2() {
         getP().getD().getUserBean().setPagestart(getP().getD().getUserBean().getPagestart());
-        CommentBean commentBean = getP().getD().getCommentReq(Value.userBean, getP().getD().getUserBean());
+        CommentBean commentBean = getP().getD().getCommentReq(Value.getUserInfo(), getP().getD().getUserBean());
         getP().getD().getRemarks(commentBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
@@ -118,10 +118,11 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
     public void onClickEvent(View v) {
         switch (v.getId()) {
             case R.id.call:
-                if (Value.room == null) {
+                if (Value.getRoom() == null) {
                     ToastUtil.getInstance().showShort(activity, "对方不在线");
+                    return;
                 }
-                EMClient.getInstance().chatroomManager().asyncFetchChatRoomMembers(Value.room.getId(), null, 100, new EMValueCallBack<EMCursorResult<String>>() {
+                EMClient.getInstance().chatroomManager().asyncFetchChatRoomMembers(Value.getRoom().getId(), null, 100, new EMValueCallBack<EMCursorResult<String>>() {
                     @Override
                     public void onSuccess(EMCursorResult<String> value) {
                         getP().getD().getOtherUsersInfoByPhone(getP().getD().getUserBean(), value.getData(), new OnFinishListener() {
@@ -130,8 +131,8 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
                                 if ((Boolean) o) {
                                     VideoBean videoBean = new VideoBean();
                                     videoBean.setToUser(getP().getD().getUserBean());
-                                    videoBean.setFromUser(Value.userBean);
-                                    videoBean.setFromphone(Value.userBean.getPhone());
+                                    videoBean.setFromUser(Value.getUserInfo());
+                                    videoBean.setFromphone(Value.getUserInfo().getPhone());
                                     videoBean.setTophone(getP().getD().getUserBean().getPhone());
 
                                     VideoChatFrag videoChatFrag = new VideoChatFrag();
@@ -139,7 +140,7 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
                                     videoChatFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, videoBean);
                                     FragmentUtil2.getInstance().add(fragment.getActivity(), Value.FULLSCREEN, videoChatFrag);
                                 } else {
-                                    if (Value.room == null) {
+                                    if (Value.getRoom() == null) {
                                         ToastUtil.getInstance().showShort(activity, "对方不在线");
                                     }
                                 }
@@ -180,7 +181,7 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
                         final CommentBean commentBean = (CommentBean) v.getTag(R.id.data);
                         AgreeBean agreeBean = new AgreeBean();
                         agreeBean.setCommentid(commentBean.getId());
-                        agreeBean.setAgreeid(Value.userBean.getId());
+                        agreeBean.setAgreeid(Value.getUserInfo().getId());
                         getP().getD().clickAgree(agreeBean, new OnFinishListener() {
                             @Override
                             public void onFinish(Object o) {

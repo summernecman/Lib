@@ -51,7 +51,7 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
             public void onSuccess(EMCursorResult<EMChatRoom> value) {
                 List<EMChatRoom> rooms = value.getData();
                 for (int i = 0; i < rooms.size(); i++) {
-                    Value.room = rooms.get(i);
+                    Value.saveRoom(rooms.get(i));
                     getP().getD().setEmChatRoom(rooms.get(i));
                     LogUtil.E(rooms.get(i).getId() + "" + rooms.get(i).getName());
                     EMClient.getInstance().chatroomManager().joinChatRoom(rooms.get(i).getId(), new EMValueCallBack<EMChatRoom>() {
@@ -102,14 +102,14 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
 
 
         //ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
-//        getP().getD().getUnTypeUserList(Value.userBean, new OnFinishListener() {
+//        getP().getD().getUnTypeUserList(Value.getUserInfo(), new OnFinishListener() {
 //            @Override
 //            public void onFinish(Object o) {
 //                getP().getU().initList((ArrayList<UserBean>) o, OnLineListFrag.this);
 //                //ChatInit.getInstance().getAnyChatSDK().SetVideoCallEvent(new AnyChatVideoCallEventImp(fragment));
 //            }
 //        });
-//        getP().getD().getOtherUsersInfoByPhone(new AllUserBean(Value.userBean,ChatInit.getInstance().getUserList()), new OnFinishListener() {
+//        getP().getD().getOtherUsersInfoByPhone(new AllUserBean(Value.getUserInfo(),ChatInit.getInstance().getUserList()), new OnFinishListener() {
 //            @Override
 //            public void onFinish(Object o) {
 //                getP().getU().initList((ArrayList<UserBean>) o, OnLineListFrag.this);
@@ -136,8 +136,8 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
                 }
                 VideoBean videoBean = new VideoBean();
                 videoBean.setToUser(userBean);
-                videoBean.setFromUser(Value.userBean);
-                videoBean.setFromphone(Value.userBean.getPhone());
+                videoBean.setFromUser(Value.getUserInfo());
+                videoBean.setFromphone(Value.getUserInfo().getPhone());
                 videoBean.setTophone(userBean.getPhone());
 
                 VideoChatFrag videoChatFrag = new VideoChatFrag();

@@ -239,15 +239,18 @@ public class FragmentUtil2 {
         }
     }
 
-    public void print() {
+    public String print() {
+        String s = "";
         Iterator i = fragMap.keySet().iterator();
         while (i.hasNext()) {
             Integer in = (Integer) i.next();
             ArrayList<Fragment> fragments = fragMap.get(in);
             for (int j = 0; j < fragments.size(); j++) {
+                s += fragments.get(j).getClass().getName();
                 LogUtil.E(fragments.get(j).getClass().getName());
             }
 
         }
+        return s;
     }
 }

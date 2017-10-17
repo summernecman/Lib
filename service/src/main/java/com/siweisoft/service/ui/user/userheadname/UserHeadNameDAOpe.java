@@ -21,7 +21,7 @@ public class UserHeadNameDAOpe extends BaseDAOpe {
     }
 
     public void setHead(UserBean userBean, OnFinishListener onFinishListener) {
-        userBean.setPhone(Value.userBean.getPhone());
+        userBean.setPhone(Value.getUserInfo().getPhone());
         userI.setHeadUrl(userBean, onFinishListener);
     }
 }

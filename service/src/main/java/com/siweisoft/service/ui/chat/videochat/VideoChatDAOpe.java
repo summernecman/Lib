@@ -130,7 +130,7 @@ public class VideoChatDAOpe extends BaseDAOpe {
     }
 
     public boolean isFromUser(VideoBean videoBean) {
-        if (Value.userBean.getPhone().equals(videoBean.getFromUser().getPhone())) {
+        if (Value.getUserInfo().getPhone().equals(videoBean.getFromUser().getPhone())) {
             return true;
         }
         return false;

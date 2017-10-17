@@ -46,7 +46,7 @@ public class HistoryFrag extends BaseServerFrag<HistoryUIOpe, HistoryDAOpe> impl
                 getP().getU().initList((ArrayList<HistoryBean>) o, HistoryFrag.this);
             }
         });
-        if (Value.userBean.getUsertype() != UserBean.USER_TYPE_CUSTOMER) {
+        if (Value.getUserInfo().getUsertype() != UserBean.USER_TYPE_CUSTOMER) {
             getP().getD().getUnUploadVideoNum(new OnFinishListener() {
                 @Override
                 public void onFinish(Object o) {

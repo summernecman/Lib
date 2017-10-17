@@ -11,7 +11,6 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.util.FragmentUtil2;
-import com.android.lib.util.GsonUtil;
 import com.android.lib.util.NullUtil;
 import com.android.lib.util.SPUtil;
 import com.android.lib.util.ToastUtil;
@@ -41,8 +40,7 @@ public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
             Value.initNetUrl(activity, SPUtil.getInstance().init(activity).getStr("url-1"));
             EMClient.getInstance().chatManager().loadAllConversations();
             EMClient.getInstance().groupManager().loadAllGroups();
-            Value.userBean = GsonUtil.getInstance().fromJson(SPUtil.getInstance().init(activity).getStr(Value.DATA_DATA), UserBean.class);
-            if (Value.userBean == null || NullUtil.isStrEmpty(Value.userBean.getPhone())) {
+            if (Value.getUserInfo() == null || NullUtil.isStrEmpty(Value.getUserInfo().getPhone())) {
                 return;
             }
             Intent intent = new Intent(activity, MainAct.class);
@@ -68,8 +66,7 @@ public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
                         if (!res.isException()) {
                             EMClient.getInstance().chatManager().loadAllConversations();
                             EMClient.getInstance().groupManager().loadAllGroups();
-                            Value.userBean = (UserBean) res.getData();
-                            SPUtil.getInstance().init(activity).saveStr(Value.DATA_DATA, GsonUtil.getInstance().toJson(Value.userBean));
+                            Value.saveUserInfo((UserBean) res.getData());
                             SPUtil.getInstance().init(activity).saveStr(Value.DATA_INTENT2, UrlConstant.NETSTART);
                             Intent intent = new Intent(activity, MainAct.class);
                             activity.startActivity(intent);

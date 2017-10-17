@@ -26,11 +26,11 @@ public class SettingFrag extends BaseServerFrag<SettingUIOpe, SettingDAOpe> {
     public void onClickEvent(View view) {
         switch (view.getId()) {
             case R.id.ll_set:
-                if (Value.room == null) {
+                if (Value.getRoom() == null) {
                     return;
                 }
                 LogUtil.E(1);
-                EMClient.getInstance().chatroomManager().leaveChatRoom(Value.room.getId());
+                EMClient.getInstance().chatroomManager().leaveChatRoom(Value.getRoom().getId());
                 LogUtil.E(2);
                 EMClient.getInstance().logout(true);
                 LogUtil.E(3);

@@ -19,9 +19,9 @@ public class UserHeadNameUIOpe extends BaseUIOpe<FragUserheadnameBinding> {
     }
 
     public void initInfo() {
-        bind.setUserheadname(Value.userBean);
-        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + Value.userBean.getHeadurl()).into(bind.ivHead);
-        LogUtil.E(Value.userBean.getHeadurl());
+        bind.setUserheadname(Value.getUserInfo());
+        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + Value.getUserInfo().getHeadurl()).into(bind.ivHead);
+        LogUtil.E(Value.getUserInfo().getHeadurl());
     }
 
 

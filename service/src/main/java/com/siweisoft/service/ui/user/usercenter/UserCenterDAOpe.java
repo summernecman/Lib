@@ -62,7 +62,7 @@ public class UserCenterDAOpe extends BaseDAOpe {
             userI = new UserNetOpe(context);
         }
         UserBean userBean = new UserBean();
-        userBean.setPhone(Value.userBean.getPhone());
+        userBean.setPhone(Value.getUserInfo().getPhone());
         userI.getUserCallInfo(userBean, onFinishListener);
     }
 

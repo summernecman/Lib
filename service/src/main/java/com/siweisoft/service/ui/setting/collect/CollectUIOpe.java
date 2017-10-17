@@ -44,7 +44,7 @@ public class CollectUIOpe extends BaseUIOpe<FragCollectBinding> {
                 holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setTag(com.android.lib.R.id.position, position);
                 holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setOnClickListener(this);
                 ((ItemVideorecordBinding) holder.viewDataBinding).tvTimes.setText("" + data.get(position).getTimenum() + "秒");
-                if (Value.userBean.getPhone().equals(data.get(position).getFromUser().getPhone())) {
+                if (Value.getUserInfo().getPhone().equals(data.get(position).getFromUser().getPhone())) {
                     itemVideorecordBinding.ivWay.setSelected(false);
                     GlideApp.with(context).asBitmap().placeholder(R.drawable.icon_head1).centerCrop().load(UrlConstant.fileUrl + "/" + data.get(position).getToUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
                 } else {

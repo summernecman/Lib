@@ -44,7 +44,7 @@ public class ShareListFrag extends BaseServerFrag<ShareListUIOpe, ShareListDAOpe
         super.initData();
         setTitleBean(new TitleBean("返回", "分享", ""));
         ShareBean shareBean = new ShareBean();
-        shareBean.setReceiptid(Value.userBean.getId());
+        shareBean.setReceiptid(Value.getUserInfo().getId());
         getP().getD().getSharesByReceipt(shareBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {

@@ -37,9 +37,9 @@ public class RemarkListFrag extends BaseServerFrag<RemarkListUIOpe, RemarkListDA
         super.initData();
         setTitleBean(new TitleBean("返回", "评论列表", ""));
         getP().getD().setPageindex(0);
-        Value.userBean.setPagesize(getP().getD().getPagesize());
-        Value.userBean.setPagestart(getP().getD().getPageindex());
-        getP().getD().getRemarks(Value.userBean, new OnFinishListener() {
+        Value.getUserInfo().setPagesize(getP().getD().getPagesize());
+        Value.getUserInfo().setPagestart(getP().getD().getPageindex());
+        getP().getD().getRemarks(Value.getUserInfo(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 getP().getD().setList((ArrayList<CommentBean>) o);
@@ -52,9 +52,9 @@ public class RemarkListFrag extends BaseServerFrag<RemarkListUIOpe, RemarkListDA
 
     public void initData2() {
         setTitleBean(new TitleBean("返回", "评论列表", ""));
-        Value.userBean.setPagesize(getP().getD().getPagesize());
-        Value.userBean.setPagestart(getP().getD().getPageindex());
-        getP().getD().getRemarks(Value.userBean, new OnFinishListener() {
+        Value.getUserInfo().setPagesize(getP().getD().getPagesize());
+        Value.getUserInfo().setPagestart(getP().getD().getPageindex());
+        getP().getD().getRemarks(Value.getUserInfo(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 ArrayList<CommentBean> list = (ArrayList<CommentBean>) o;

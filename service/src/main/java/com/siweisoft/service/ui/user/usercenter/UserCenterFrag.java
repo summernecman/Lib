@@ -54,21 +54,21 @@ public class UserCenterFrag extends BaseServerFrag<UserCenterUIOpe, UserCenterDA
             }
         });
 
-        getP().getD().getUserTips(Value.userBean, new OnFinishListener() {
+        getP().getD().getUserTips(Value.getUserInfo(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 getP().getU().initTips(getP().getD().mapTolist((HashMap<Integer, TipBean>) o));
             }
         });
 
-        getP().getD().getCommentNumByUserName(Value.userBean, new OnFinishListener() {
+        getP().getD().getCommentNumByUserName(Value.getUserInfo(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 getP().getU().initCommentNum((String) o);
             }
         });
 
-        getP().getD().getShareNumByUserPhone(Value.userBean, new OnFinishListener() {
+        getP().getD().getShareNumByUserPhone(Value.getUserInfo(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 getP().getU().initShareNum((String) o);
@@ -76,7 +76,7 @@ public class UserCenterFrag extends BaseServerFrag<UserCenterUIOpe, UserCenterDA
         });
 
 
-        getP().getD().getCollectionNumByUserId(Value.userBean, new OnFinishListener() {
+        getP().getD().getCollectionNumByUserId(Value.getUserInfo(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 getP().getU().initCollectNum((String) o);

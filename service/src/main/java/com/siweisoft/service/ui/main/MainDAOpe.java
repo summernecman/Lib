@@ -45,7 +45,7 @@ public class MainDAOpe extends BaseDAOpe {
     }
 
     public void getLoginInfo(OnFinishListener onFinishListener) {
-        userI.getLoginInfo(Value.userBean, onFinishListener);
+        userI.getLoginInfo(Value.getUserInfo(), onFinishListener);
     }
 
     public VideoChatListener getVideoChatListener() {

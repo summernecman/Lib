@@ -32,7 +32,7 @@ public class RemarkListDAOpe extends BaseDAOpe {
         if (commentI == null) {
             commentI = new CommentOpe(context);
         }
-        if (Value.userBean.getUsertype() == UserBean.USER_TYPE_CUSTOMER) {
+        if (Value.getUserInfo().getUsertype() == UserBean.USER_TYPE_CUSTOMER) {
             commentI.getCommentByUserIdWithLimit(userBean, new OnFinishListener() {
                 @Override
                 public void onFinish(Object o) {

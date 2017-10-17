@@ -42,7 +42,7 @@ public class ShareListUIOpe extends BaseUIOpe<FragRemarklistBinding> {
                 holder.viewDataBinding.getRoot().findViewById(R.id.play).setTag(com.android.lib.R.id.data, data.get(position));
                 holder.viewDataBinding.getRoot().findViewById(R.id.play).setOnClickListener(this);
                 ((ItemVideorecordBinding) holder.viewDataBinding).tvTimes.setText("" + data.get(position).getTimenum() + "秒");
-                if (Value.userBean.getPhone().equals(data.get(position).getFromUser().getPhone())) {
+                if (Value.getUserInfo().getPhone().equals(data.get(position).getFromUser().getPhone())) {
                     itemVideorecordBinding.ivWay.setSelected(false);
                     GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getToUser().getHeadurl()).into(itemVideorecordBinding.ivHead);
                 } else {

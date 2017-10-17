@@ -33,7 +33,7 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
 
     public void initUpload(VideoBean videoBean, View.OnClickListener onClickListener) {
         bind.tvUpload.setOnClickListener(onClickListener);
-        if (Value.userBean.getUsertype() == UserBean.USER_TYPE_CUSTOMER) {
+        if (Value.getUserInfo().getUsertype() == UserBean.USER_TYPE_CUSTOMER) {
             bind.tvUpload.setVisibility(View.GONE);
             return;
         }

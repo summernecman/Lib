@@ -82,7 +82,7 @@ public class OnLineListDAOpe extends BaseDAOpe {
         }
         AllUserBean allUserBean = new AllUserBean();
         allUserBean.setOther(userBeen);
-        allUserBean.setMe(Value.userBean);
+        allUserBean.setMe(Value.getUserInfo());
         userI.getOtherUsersInfoByPhone(allUserBean, onFinishListener);
     }
 
