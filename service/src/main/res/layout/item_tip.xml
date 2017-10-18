@@ -26,8 +26,8 @@
             android:padding="3dp"
             android:singleLine="true"
             android:text='@{item_tip.tip+"("+item_tip.num+")"}'
-            android:textColor="@color/gray"
-            android:textSize="13sp" />
+            android:textColor="@color/white"
+            android:textSize="12sp" />
 
         </RelativeLayout>
     </RelativeLayout>

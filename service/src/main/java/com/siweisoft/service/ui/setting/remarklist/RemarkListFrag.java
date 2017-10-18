@@ -4,6 +4,7 @@ package com.siweisoft.service.ui.setting.remarklist;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.ToastUtil;
+import com.android.lib.view.recyclerview.MyRecyclerView;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.siweisoft.service.base.BaseServerFrag;
@@ -43,7 +44,12 @@ public class RemarkListFrag extends BaseServerFrag<RemarkListUIOpe, RemarkListDA
             @Override
             public void onFinish(Object o) {
                 getP().getD().setList((ArrayList<CommentBean>) o);
-                getP().getU().initRemarks(getP().getD().getList());
+                getP().getU().initRemarks(getP().getD().getList(), new MyRecyclerView.OnScroll() {
+                    @Override
+                    public void onScrollToEnd(MyRecyclerView myRecyclerView) {
+                        initData2();
+                    }
+                });
                 getP().getD().setPageindex(getP().getD().getPageindex() + 1);
                 getP().getU().bind.refresh.finishRefreshingDelay();
             }

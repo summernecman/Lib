@@ -14,6 +14,7 @@ import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.StringUtil;
 import com.android.lib.util.ToastUtil;
 import com.android.lib.view.image.ImageFrag;
+import com.android.lib.view.recyclerview.MyRecyclerView;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.hyphenate.EMValueCallBack;
@@ -79,7 +80,12 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
                 ArrayList<CommentBean> a = (ArrayList<CommentBean>) o;
                 getP().getD().getCommentBeen().addAll(a);
                 getP().getD().setCommentBeen(getP().getD().getCommentBeen());
-                getP().getU().initRemarks(getP().getD().getCommentBeen(), UserInfoFrag.this);
+                getP().getU().initRemarks(getP().getD().getCommentBeen(), UserInfoFrag.this, new MyRecyclerView.OnScroll() {
+                    @Override
+                    public void onScrollToEnd(MyRecyclerView myRecyclerView) {
+                        initData2();
+                    }
+                });
                 getP().getD().getUserBean().setPagestart(getP().getD().getUserBean().getPagestart() + 1);
             }
         });
@@ -115,13 +121,17 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
     }
 
     @OnClick({R.id.call, R.id.tv_phone, R.id.iv_head11})
-    public void onClickEvent(View v) {
+    public void onClickEvent(final View v) {
+        if (getP().getD().getUserBean() == null) {
+            return;
+        }
         switch (v.getId()) {
             case R.id.call:
                 if (Value.getRoom() == null) {
                     ToastUtil.getInstance().showShort(activity, "对方不在线");
                     return;
                 }
+                v.setEnabled(false);
                 EMClient.getInstance().chatroomManager().asyncFetchChatRoomMembers(Value.getRoom().getId(), null, 100, new EMValueCallBack<EMCursorResult<String>>() {
                     @Override
                     public void onSuccess(EMCursorResult<String> value) {
@@ -144,13 +154,14 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
                                         ToastUtil.getInstance().showShort(activity, "对方不在线");
                                     }
                                 }
+                                v.setEnabled(true);
                             }
                         });
                     }
 
                     @Override
                     public void onError(int error, String errorMsg) {
-
+                        v.setEnabled(true);
                     }
                 });
                 break;

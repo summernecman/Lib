@@ -4,7 +4,7 @@
     <color name="color_base_dark">#4CAF50</color>
     <color name="color_base_statusbar">#76BC55</color>
     <color name="color_base_bottommenu">#76BC55</color>
-    <color name="color_base_graybg">#EEEEEE</color>
+    <color name="color_base_graybg">@color/color_grey_100</color>
     <color name="color_base_txt_black">@color/black</color>
 
     <color name="color_base_txt_gray">@color/color_grey_600</color>

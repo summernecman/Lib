@@ -9,6 +9,7 @@ import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.constant.UrlConstant;
+import com.android.lib.view.recyclerview.MyRecyclerView;
 import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.GlideApp;
@@ -26,7 +27,7 @@ public class RemarkListUIOpe extends BaseUIOpe<FragRemarklistBinding> {
         super(context);
     }
 
-    public void initRemarks(final ArrayList<CommentBean> data) {
+    public void initRemarks(final ArrayList<CommentBean> data, MyRecyclerView.OnScroll onScroll) {
         bind.recycle.setLayoutManager(new LinearLayoutManager(context));
         bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_remark, BR.item_remark, data) {
             @Override
@@ -36,6 +37,7 @@ public class RemarkListUIOpe extends BaseUIOpe<FragRemarklistBinding> {
                 GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemRemarkBinding.ivHead);
             }
         });
+        bind.recycle.setOnScroll(onScroll);
     }
 
     public void refreshRemarks(final ArrayList<CommentBean> data) {

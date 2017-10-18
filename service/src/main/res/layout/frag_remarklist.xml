@@ -31,7 +31,7 @@
             app:wave_height_type="normal"
             app:wave_show="false">
 
-            <android.support.v7.widget.RecyclerView
+            <com.android.lib.view.recyclerview.MyRecyclerView
                 android:id="@+id/recycle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

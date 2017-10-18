@@ -15,6 +15,7 @@ import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.NullUtil;
 import com.android.lib.util.StringUtil;
+import com.android.lib.view.recyclerview.MyRecyclerView;
 import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.GlideApp;
@@ -39,6 +40,7 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
         super(context);
 
     }
+
 
     public void initTips(final HashMap<Integer, TipBean> data) {
         if (data == null || data.keySet() == null || data.keySet().size() == 0) {
@@ -70,7 +72,7 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
         }
     }
 
-    public void initRemarks(final ArrayList<CommentBean> data, ViewListener viewListener) {
+    public void initRemarks(final ArrayList<CommentBean> data, ViewListener viewListener, MyRecyclerView.OnScroll onScroll) {
         bind.remarklist.setLayoutManager(new LinearLayoutManager(context));
         bind.remarklist.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_remark, BR.item_remark, data, viewListener) {
             @Override
@@ -84,6 +86,7 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
                 GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemRemarkBinding.ivHead);
             }
         });
+        bind.remarklist.setOnScroll(onScroll);
     }
 
     public void refreshRemarks() {

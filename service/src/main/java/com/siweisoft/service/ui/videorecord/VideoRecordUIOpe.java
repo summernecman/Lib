@@ -3,7 +3,6 @@ package com.siweisoft.service.ui.videorecord;
 //by summer on 17-08-23.
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -13,7 +12,7 @@ import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.StringUtil;
-import com.android.lib.view.ItemDecoration.MyItemDecoration;
+import com.android.lib.view.recyclerview.MyRecyclerView;
 import com.android.lib.view.refreshlayout.MaterialRefreshListener;
 import com.siweisoft.service.BR;
 import com.siweisoft.service.GlideApp;
@@ -34,10 +33,9 @@ public class VideoRecordUIOpe extends BaseUIOpe<FragVideorecordBinding> {
     }
 
 
-    public void initList(final List<VideoBean> data, ViewListener viewListener) {
+    public void initList(final List<VideoBean> data, ViewListener viewListener, MyRecyclerView.OnScroll onScroll) {
         if (bind.recycle.getAdapter() == null) {
             bind.recycle.setLayoutManager(new LinearLayoutManager(context));
-            bind.recycle.addItemDecoration(new MyItemDecoration(context, 1, Color.GRAY));
             bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_videorecord, BR.item_videorecord, data, viewListener) {
                 @Override
                 public void onBindViewHolder(AppViewHolder holder, int position) {
@@ -59,6 +57,7 @@ public class VideoRecordUIOpe extends BaseUIOpe<FragVideorecordBinding> {
                     }
                 }
             });
+            bind.recycle.setOnScroll(onScroll);
         } else {
             bind.recycle.getAdapter().notifyDataSetChanged();
         }

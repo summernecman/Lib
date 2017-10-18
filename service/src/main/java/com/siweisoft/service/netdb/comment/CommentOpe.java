@@ -5,6 +5,7 @@ package com.siweisoft.service.netdb.comment;
 import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
+import com.android.lib.base.netadapter.UINetAdapter;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.android.lib.network.NetWork;
 import com.android.lib.network.bean.req.BaseReqBean;
@@ -57,7 +58,7 @@ public class CommentOpe extends BaseDAOpe implements CommentI {
     public void getCommentByUserIdWithLimit(UserBean userBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
-        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/comment/getCommentByUserIdWithLimit", baseReqBean, new OnNetWorkReqAdapter(context) {
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/comment/getCommentByUserIdWithLimit", baseReqBean, new UINetAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 ArrayList<CommentBean> res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<CommentBean>>() {
@@ -85,7 +86,7 @@ public class CommentOpe extends BaseDAOpe implements CommentI {
     public void getCommentByUserIdWithMyOptionWithLimit(CommentBean commentBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(commentBean));
-        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/comment/getCommentByUserIdWithMyOptionWithLimit", baseReqBean, new OnNetWorkReqAdapter(context) {
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/comment/getCommentByUserIdWithMyOptionWithLimit", baseReqBean, new UINetAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 ArrayList<CommentBean> res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<CommentBean>>() {

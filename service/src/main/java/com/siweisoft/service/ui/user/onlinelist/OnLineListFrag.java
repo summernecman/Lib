@@ -23,7 +23,6 @@ import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
-import com.siweisoft.service.ui.setting.collect.CollecFrag;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
 
 import java.util.ArrayList;
@@ -43,7 +42,7 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
             }
         });
 
-        setTitleBean(new TitleBean("", "联系人", "", "收藏"));
+        setTitleBean(new TitleBean("", "联系人", "", ""));
         getP().getU().initList(new ArrayList<UserBean>(), null);
 
         EMClient.getInstance().chatroomManager().asyncFetchPublicChatRoomsFromServer(1, null, new EMValueCallBack<EMCursorResult<EMChatRoom>>() {
@@ -123,6 +122,7 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
     public void onClick(View v) {
         super.onClick(v);
         final UserBean userBean = (UserBean) v.getTag(R.id.data);
+        v.setEnabled(false);
         switch (v.getId()) {
             case R.id.iv_head:
                 UserInfoFrag userInfoFrag = new UserInfoFrag();
@@ -148,9 +148,10 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
                 //ChatInit.getInstance().getAnyChatSDK().VideoCallControl(AnyChatDefine.BRAC_VIDEOCALL_EVENT_REQUEST, Integer.parseInt(userBean.getChatid()), 0, 0, 0, GsonUtil.getInstance().toJson(videoBean));
                 break;
             case R.id.ftv_right2:
-                FragmentUtil2.getInstance().add(activity, Value.ROOTID_TWO, new CollecFrag());
+                //FragmentUtil2.getInstance().add(activity, Value.ROOTID_TWO, new CollecFrag());
                 break;
         }
+        v.setEnabled(true);
     }
 
     @Override

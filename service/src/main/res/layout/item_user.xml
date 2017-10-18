@@ -18,11 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:background="@drawable/drawable_press_black_while">
+            android:orientation="horizontal">
 
             <RelativeLayout
-
                 android:layout_width="70dp"
                 android:layout_height="70dp">
 

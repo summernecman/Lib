@@ -27,8 +27,8 @@ public class ServieApp extends LibAplication {
         UrlConstant.NETSTART = "106.14.161.168";
         //UrlConstant.NETSTART = "192.168.20.175";
 
-        UrlConstant.URI = UrlConstant.HTTP + UrlConstant.NETSTART + ":8079/server";
-        UrlConstant.fileUrl = UrlConstant.HTTP + UrlConstant.NETSTART + ":8079/files";
+        UrlConstant.URI = UrlConstant.HTTP + UrlConstant.NETSTART + "/server";
+        UrlConstant.fileUrl = UrlConstant.HTTP + UrlConstant.NETSTART + "/files";
 
         SPUtil.getInstance().init(this);
 

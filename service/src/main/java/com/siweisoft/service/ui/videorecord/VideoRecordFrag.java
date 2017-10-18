@@ -10,6 +10,7 @@ import com.android.lib.base.listener.ViewListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.ToastUtil;
+import com.android.lib.view.recyclerview.MyRecyclerView;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.siweisoft.service.R;
@@ -43,7 +44,12 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
             public void onFinish(Object o) {
                 getP().getD().getVideos().clear();
                 getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
-                getP().getU().initList(getP().getD().getVideos(), VideoRecordFrag.this);
+                getP().getU().initList(getP().getD().getVideos(), VideoRecordFrag.this, new MyRecyclerView.OnScroll() {
+                    @Override
+                    public void onScrollToEnd(MyRecyclerView myRecyclerView) {
+                        initData2();
+                    }
+                });
                 getP().getU().bind.refresh.finishRefresh();
                 getP().getD().setPageindex(getP().getD().getPageindex() + 1);
             }

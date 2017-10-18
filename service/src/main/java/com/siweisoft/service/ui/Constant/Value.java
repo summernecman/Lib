@@ -98,8 +98,8 @@ public class Value extends ValueConstant {
 
     public static void initNetUrl(Context context, String url) {
         UrlConstant.NETSTART = url;
-        UrlConstant.URI = UrlConstant.HTTP + UrlConstant.NETSTART + ":8079/server";
-        UrlConstant.fileUrl = UrlConstant.HTTP + UrlConstant.NETSTART + ":8079/files";
+        UrlConstant.URI = UrlConstant.HTTP + UrlConstant.NETSTART + "/server";
+        UrlConstant.fileUrl = UrlConstant.HTTP + UrlConstant.NETSTART + "/files";
 
         SPUtil.getInstance().init(context).saveStr("url-1", url);
     }
