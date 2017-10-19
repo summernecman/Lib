@@ -15,6 +15,9 @@ public class ThreadUtil {
     Handler handler = new Handler();
     private boolean stop = false;
 
+    Thread thread;
+    ;
+
     public void run(final long time, final OnLoadingInterf listener) {
         stop = false;
         max = 0;
@@ -45,6 +48,33 @@ public class ThreadUtil {
                 listener.onStopLoading(max);
             }
         }.execute();
+    }
+
+    public void run2(final long time, final OnLoadingInterf listener) {
+        stop = false;
+        max = 0;
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!stop) {
+                    max++;
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.onStarLoading(max);
+                        }
+                    });
+                    try {
+                        Thread.sleep(time);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                listener.onStopLoading(max);
+            }
+        });
+        thread.run();
     }
 
     public void stop() {

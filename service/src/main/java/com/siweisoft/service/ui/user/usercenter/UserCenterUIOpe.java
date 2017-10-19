@@ -79,13 +79,13 @@ public class UserCenterUIOpe extends BaseUIOpe<FragUsercenterBinding> {
         }
         switch (Value.getUserInfo().getUsertype()) {
             case UserBean.CUSTOME:
-                GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_customer.png").into(bind.type);
+                GlideApp.with(context).asDrawable().load(R.drawable.icon_customer).into(bind.type);
                 break;
             case UserBean.ENGINEER:
-                GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_engineer.png").into(bind.type);
+                GlideApp.with(context).asDrawable().load(R.drawable.icon_engineer).into(bind.type);
                 break;
             case UserBean.SERVER:
-                GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_server.png").into(bind.type);
+                GlideApp.with(context).asDrawable().load(R.drawable.icon_server).into(bind.type);
                 break;
         }
 

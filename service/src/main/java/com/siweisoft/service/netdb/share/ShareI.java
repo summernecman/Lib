@@ -12,4 +12,6 @@ public interface ShareI {
     public void getShareNumByUserPhone(UserBean userBean, OnFinishListener onFinishListener);
 
     public void getSharesByReceipt(ShareBean shareBean, OnFinishListener onFinishListener);
+
+    public void getSharesByReceiptWithLimit(ShareBean shareBean, OnFinishListener onFinishListener);
 }

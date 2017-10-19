@@ -77,6 +77,7 @@ public class CrashHander implements Thread.UncaughtExceptionHandler {
             libAplication.exit();
         } else {
             uncaughtExceptionHandler.uncaughtException(thread, ex);
+            uncaughtExceptionHandler = null;
         }
 //        Intent intent = new Intent(context, IndexActivity.class);
 //        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_CANCEL_CURRENT);

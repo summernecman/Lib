@@ -19,7 +19,6 @@ import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
 import com.siweisoft.service.databinding.FragVideorecordBinding;
 import com.siweisoft.service.databinding.ItemVideorecordBinding;
-import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 
@@ -41,7 +40,7 @@ public class VideoRecordUIOpe extends BaseUIOpe<FragVideorecordBinding> {
                 public void onBindViewHolder(AppViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
                     ItemVideorecordBinding itemVideorecordBinding = (ItemVideorecordBinding) holder.viewDataBinding;
-                    itemVideorecordBinding.tvUpload.setVisibility(Value.getUserInfo().getUsertype() == UserBean.USER_TYPE_CUSTOMER ? View.GONE : data.get(position).getUploaded() == 1 ? View.GONE : View.VISIBLE);
+                    itemVideorecordBinding.tvUpload.setVisibility(data.get(position).getUploaded() == 1 ? View.GONE : View.VISIBLE);
                     holder.viewDataBinding.getRoot().findViewById(R.id.play).setTag(com.android.lib.R.id.data, data.get(position));
                     holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setTag(com.android.lib.R.id.data, data.get(position));
                     holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setTag(com.android.lib.R.id.position, position);

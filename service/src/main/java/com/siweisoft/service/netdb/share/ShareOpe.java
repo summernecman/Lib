@@ -63,4 +63,18 @@ public class ShareOpe extends BaseDAOpe implements ShareI {
             }
         });
     }
+
+    @Override
+    public void getSharesByReceiptWithLimit(ShareBean shareBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(shareBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/share/getSharesByReceiptWithLimit", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                ArrayList<VideoBean> res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<VideoBean>>() {
+                }.getType());
+                onFinishListener.onFinish(res);
+            }
+        });
+    }
 }

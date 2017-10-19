@@ -18,9 +18,9 @@ import com.siweisoft.service.R;
 import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.databinding.FragVideoplayBinding;
 import com.siweisoft.service.netdb.comment.CommentBean;
-import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
+import com.siweisoft.service.ui.chat.videochat.VideoChatDAOpe;
 
 
 public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
@@ -32,13 +32,20 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
     }
 
     public void initUpload(VideoBean videoBean, View.OnClickListener onClickListener) {
-        bind.tvUpload.setOnClickListener(onClickListener);
-        if (Value.getUserInfo().getUsertype() == UserBean.USER_TYPE_CUSTOMER) {
-            bind.tvUpload.setVisibility(View.GONE);
-            return;
-        }
+
+
+//        if (Value.getUserInfo().getUsertype() == UserBean.USER_TYPE_CUSTOMER) {
+//            bind.tvUpload.setVisibility(View.GONE);
+//            return;
+//        }
         if (videoBean.getUploaded() == 0) {
             bind.tvUpload.setVisibility(View.VISIBLE);
+            if (VideoChatDAOpe.isRecordVideo(videoBean)) {
+                bind.tvUpload.setText("本地未上传");
+                bind.tvUpload.setOnClickListener(onClickListener);
+            } else {
+                bind.tvUpload.setText("对方未上传");
+            }
         } else {
             bind.tvUpload.setVisibility(View.GONE);
         }
@@ -122,15 +129,24 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
     }
 
     public void initTips(TipsBean data) {
+
         bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
-        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, data.getTipBeen()));
+        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip5, BR.item_tip5, data.getTipBeen()) {
+
+        });
     }
 
     public void initInfo(CommentBean commentBean) {
         bind.ratingbar.setStar(commentBean.getRate());
         bind.remark.setText(commentBean.getRemark() + "");
         TipsBean tipsBean = GsonUtil.getInstance().fromJson(commentBean.getTips(), TipsBean.class);
-        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipsBean.getTipBeen()));
+        for (int i = 0; tipsBean != null && tipsBean.getTipBeen() != null && i < tipsBean.getTipBeen().size(); i++) {
+            if (tipsBean.getTipBeen().get(i).getNum() == 0) {
+                tipsBean.getTipBeen().remove(i);
+                i--;
+            }
+        }
+        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip5, BR.item_tip5, tipsBean.getTipBeen()));
     }
 
     public void initTxt(VideoBean videoBean, boolean show) {

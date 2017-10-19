@@ -17,7 +17,11 @@ public class CollectDAOpe extends BaseDAOpe {
 
     CollectionI collectionI;
 
-    ArrayList<VideoBean> videos;
+    ArrayList<VideoBean> videos = new ArrayList<>();
+
+    private int pagesize = 5;
+
+    private int pagestart = 0;
 
     public CollectDAOpe(Context context) {
         super(context);
@@ -27,7 +31,7 @@ public class CollectDAOpe extends BaseDAOpe {
         if (collectionI == null) {
             collectionI = new CollectionOpe(context);
         }
-        collectionI.getCollectionVideosByUserId(userBean, onFinishListener);
+        collectionI.getCollectionVideosByUserIdWithLimit(userBean, onFinishListener);
     }
 
     public ArrayList<VideoBean> getVideos() {
@@ -36,5 +40,21 @@ public class CollectDAOpe extends BaseDAOpe {
 
     public void setVideos(ArrayList<VideoBean> videos) {
         this.videos = videos;
+    }
+
+    public int getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(int pagesize) {
+        this.pagesize = pagesize;
+    }
+
+    public int getPagestart() {
+        return pagestart;
+    }
+
+    public void setPagestart(int pagestart) {
+        this.pagestart = pagestart;
     }
 }

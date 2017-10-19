@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
+import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.ToastUtil;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
@@ -132,10 +133,18 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                 getP().getD().uploadVideo(getP().getD().getVideoBean(), new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
-                        v.setVisibility(View.GONE);
+                        if (o instanceof BaseResBean) {
+                            BaseResBean baseResBean = (BaseResBean) o;
+                            if (baseResBean.isException()) {
+                                ToastUtil.getInstance().showShort(activity, "" + baseResBean.getErrorMessage());
+                            } else {
+                                v.setVisibility(View.GONE);
+                                ToastUtil.getInstance().showShort(activity, "上传成功");
+                                v.setEnabled(false);
+                            }
+                        }
                     }
                 });
-                v.setEnabled(false);
                 break;
             case R.id.ftv_right:
                 TextView textView = (TextView) v;

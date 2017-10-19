@@ -12,8 +12,13 @@ import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.LoadUtil;
 import com.android.lib.util.StringUtil;
 import com.android.lib.util.ToastUtil;
+import com.android.lib.view.bottommenu.MessageEvent;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
+import com.siweisoft.service.netdb.user.UserBean;
+import com.siweisoft.service.ui.user.login.LoginFrag;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.OnClick;
 
@@ -47,6 +52,11 @@ public class ReSetPwdFrag extends BaseServerFrag<ReSetPwdUIOpe, ReSetPwdDAOpe> {
                                         public void onFinish(Object o) {
                                             if (o instanceof Boolean) {
                                                 ToastUtil.getInstance().showShort(activity, "重置成功");
+                                                UserBean userBean = new UserBean();
+                                                userBean.setPhone(getP().getU().bind.etAccount.getText().toString());
+                                                userBean.setPwd(getP().getU().bind.etPwd.getText().toString());
+                                                MessageEvent m = new MessageEvent(ReSetPwdFrag.class.getName(), LoginFrag.class.getName(), userBean);
+                                                EventBus.getDefault().post(m);
                                                 FragmentUtil2.getInstance().removeTop(activity, R.id.act_base_root);
                                             } else {
                                                 ToastUtil.getInstance().showShort(activity, StringUtil.getStr(o));

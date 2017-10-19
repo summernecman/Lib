@@ -20,6 +20,7 @@
             android:layout_height="@dimen/dimens_base_title" />
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/ll_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,6 +28,9 @@
             android:orientation="horizontal">
 
             <EditText
+                android:singleLine="true"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20dp"
                 android:id="@+id/et_input"
                 android:paddingRight="10dp"
                 android:layout_width="0dp"

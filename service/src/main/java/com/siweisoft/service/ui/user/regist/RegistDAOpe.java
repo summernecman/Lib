@@ -44,7 +44,7 @@ public class RegistDAOpe extends BaseDAOpe {
     }
 
     public void sendCode(String phone, final OnFinishListener onFinishListener) {
-        SMSSDK.getInstance().getSmsCodeAsyn(phone, "1", new SmscodeListener() {
+        SMSSDK.getInstance().getSmsCode(phone, "1", new SmscodeListener() {
             @Override
             public void getCodeSuccess(String s) {
                 onFinishListener.onFinish(s);
@@ -55,10 +55,11 @@ public class RegistDAOpe extends BaseDAOpe {
 
             }
         });
+
     }
 
     public void checkCode(String phone, String code, final OnFinishListener onFinishListener) {
-        SMSSDK.getInstance().checkSmsCodeAsyn(phone, code, new SmscheckListener() {
+        SMSSDK.getInstance().checkSmsCode(phone, code, new SmscheckListener() {
             @Override
             public void checkCodeSuccess(String s) {
                 onFinishListener.onFinish(true);

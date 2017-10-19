@@ -7,6 +7,7 @@ import android.os.Environment;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.util.NullUtil;
 import com.siweisoft.service.netdb.collection.CollectionBean;
 import com.siweisoft.service.netdb.collection.CollectionI;
@@ -118,6 +119,13 @@ public class VideoPlayDAOpe extends BaseDAOpe {
         videoBean.setFile(file.getPath());
         if (videoi == null) {
             videoi = new VideoOpe(context);
+        }
+        if (!file.exists()) {
+            BaseResBean o = new BaseResBean();
+            o.setException(true);
+            o.setErrorMessage("文件不存在");
+            onFinishListener.onFinish(o);
+            return;
         }
         videoi.updateVideo(videoBean, new OnFinishListener() {
             @Override

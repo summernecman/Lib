@@ -9,6 +9,8 @@ public interface CollectionI {
 
     public void getCollectionVideosByUserId(UserBean userBean, OnFinishListener onFinishListener);
 
+    public void getCollectionVideosByUserIdWithLimit(UserBean userBean, OnFinishListener onFinishListener);
+
     public void isCollectedByVideoIdAndUserId(CollectionBean collectionBean, OnFinishListener onFinishListener);
 
     public void getCollectionNumByUserId(UserBean userBean, OnFinishListener onFinishListener);

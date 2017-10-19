@@ -44,7 +44,7 @@ public class VideoChatDAOpe extends BaseDAOpe {
     }
 
 
-    public boolean isLocalSendVideo(UserBean local, UserBean remove) {
+    public static boolean isLocalSendVideo(UserBean local, UserBean remove) {
         switch (local.getUsertype()) {
             case UserBean.SERVER:
                 return false;
@@ -129,15 +129,21 @@ public class VideoChatDAOpe extends BaseDAOpe {
         this.threadUtil = threadUtil;
     }
 
-    public boolean isFromUser(VideoBean videoBean) {
+    public static boolean isFromUser(VideoBean videoBean) {
         if (Value.getUserInfo().getPhone().equals(videoBean.getFromUser().getPhone())) {
             return true;
         }
         return false;
     }
 
+    public static boolean isRecordVideo(VideoBean videoBean) {
+        return !isSendVideo(videoBean);
+    }
 
-    public boolean isSendVideo(VideoBean videoBean) {
+    /**
+     * 发送视频信号方 非录制视频方   目前非发送视频信号方 将录制视频
+     */
+    public static boolean isSendVideo(VideoBean videoBean) {
         boolean isfrom = isFromUser(videoBean);
         if (isfrom) {
             switch (videoBean.getFromUser().getUsertype()) {
@@ -168,6 +174,9 @@ public class VideoChatDAOpe extends BaseDAOpe {
         }
         return true;
     }
+
+
+
 
     public String getPath() {
         return path;

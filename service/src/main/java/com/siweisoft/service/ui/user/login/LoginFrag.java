@@ -14,6 +14,7 @@ import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.NullUtil;
 import com.android.lib.util.SPUtil;
 import com.android.lib.util.ToastUtil;
+import com.android.lib.view.bottommenu.MessageEvent;
 import com.hyphenate.chat.EMClient;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
@@ -89,5 +90,16 @@ public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
                 FragmentUtil2.getInstance().add(activity, R.id.act_base_root, new ReSetPwdFrag());
                 break;
         }
+    }
+
+    @Override
+    public void dealMesage(MessageEvent event) {
+        super.dealMesage(event);
+        UserBean userBean = (UserBean) event.data;
+        getP().getD().getUserBean().setPhone(userBean.getPhone());
+        getP().getD().getUserBean().setPwd(userBean.getPwd());
+        getP().getU().bind.setLogin(getP().getD().getUserBean());
+
+
     }
 }

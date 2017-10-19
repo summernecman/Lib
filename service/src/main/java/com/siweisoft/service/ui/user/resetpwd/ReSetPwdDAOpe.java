@@ -44,7 +44,7 @@ public class ReSetPwdDAOpe extends BaseDAOpe {
     }
 
     public void sendCode(String phone, final OnFinishListener onFinishListener) {
-        SMSSDK.getInstance().getSmsCodeAsyn(phone, "1", new SmscodeListener() {
+        SMSSDK.getInstance().getSmsCode(phone, "1", new SmscodeListener() {
             @Override
             public void getCodeSuccess(String s) {
                 onFinishListener.onFinish(s);

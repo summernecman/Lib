@@ -9,6 +9,7 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.listener.ViewListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.view.recyclerview.MyRecyclerView;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.siweisoft.service.R;
@@ -31,7 +32,11 @@ public class CollecFrag extends BaseServerFrag<CollectUIOpe, CollectDAOpe> imple
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
                 initData();
-                materialRefreshLayout.finishRefreshingDelay();
+            }
+
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                initData2();
             }
         });
 
@@ -41,11 +46,38 @@ public class CollecFrag extends BaseServerFrag<CollectUIOpe, CollectDAOpe> imple
     public void initData() {
         super.initData();
         setTitleBean(new TitleBean("返回", "收藏", ""));
+        getP().getD().setPagestart(0);
+        getP().getD().setPagesize(5);
+        Value.getUserInfo().setPagesize(getP().getD().getPagesize());
+        Value.getUserInfo().setPagestart(getP().getD().getPagestart());
         getP().getD().getCollection(Value.getUserInfo(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getD().setVideos((ArrayList<VideoBean>) o);
-                getP().getU().initList(getP().getD().getVideos(), CollecFrag.this);
+                getP().getD().getVideos().clear();
+                getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                getP().getU().initList(getP().getD().getVideos(), CollecFrag.this, new MyRecyclerView.OnScroll() {
+                    @Override
+                    public void onScrollToEnd(MyRecyclerView myRecyclerView) {
+                        initData2();
+                    }
+                });
+                getP().getD().setPagestart(getP().getD().getPagestart() + 1);
+                getP().getU().bind.refresh.finishRefreshingDelay();
+            }
+        });
+    }
+
+
+    public void initData2() {
+        Value.getUserInfo().setPagesize(getP().getD().getPagesize());
+        Value.getUserInfo().setPagestart(getP().getD().getPagestart());
+        getP().getD().getCollection(Value.getUserInfo(), new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                getP().getU().loadMore();
+                getP().getD().setPagestart(getP().getD().getPagestart() + 1);
+                getP().getU().bind.refresh.finishRefreshLoadMore();
             }
         });
     }

@@ -18,7 +18,11 @@ public class ShareListDAOpe extends BaseDAOpe {
 
     ShareI shareI;
 
-    ArrayList<VideoBean> videos;
+    ArrayList<VideoBean> videos = new ArrayList<>();
+
+    private int pagesize = 5;
+
+    private int pagestart = 0;
 
     public ShareListDAOpe(Context context) {
         super(context);
@@ -29,7 +33,7 @@ public class ShareListDAOpe extends BaseDAOpe {
         if (shareI == null) {
             shareI = new ShareOpe(context);
         }
-        shareI.getSharesByReceipt(shareBean, onFinishListener);
+        shareI.getSharesByReceiptWithLimit(shareBean, onFinishListener);
     }
 
     public ArrayList<VideoBean> getVideos() {
@@ -38,5 +42,21 @@ public class ShareListDAOpe extends BaseDAOpe {
 
     public void setVideos(ArrayList<VideoBean> videos) {
         this.videos = videos;
+    }
+
+    public int getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(int pagesize) {
+        this.pagesize = pagesize;
+    }
+
+    public int getPagestart() {
+        return pagestart;
+    }
+
+    public void setPagestart(int pagestart) {
+        this.pagestart = pagestart;
     }
 }

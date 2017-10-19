@@ -79,8 +79,8 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginLeft="5dp"
                                     android:id="@+id/type"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp" />
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp" />
                                 <TextView
                                     android:id="@+id/tv_name"
                                     android:layout_width="wrap_content"
@@ -103,8 +103,8 @@
 
                                 <ImageView
                                     android:id="@+id/imageView5"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginLeft="5dp"
                                     android:src="@drawable/icon_phone" />
@@ -240,7 +240,7 @@
                                 android:layout_width="22dp"
                                 android:layout_height="22dp"
                                 android:layout_marginLeft="8dp"
-                                android:src="@drawable/icon_comment" />
+                                android:src="@drawable/icon_depart" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -486,7 +486,7 @@
                                 android:layout_width="22dp"
                                 android:layout_height="22dp"
                                 android:layout_marginLeft="8dp"
-                                android:src="@drawable/icon_fb" />
+                                android:src="@drawable/icon_feedback" />
 
                             <TextView
                                 android:layout_width="wrap_content"

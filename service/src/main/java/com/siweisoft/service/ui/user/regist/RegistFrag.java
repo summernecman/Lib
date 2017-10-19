@@ -9,10 +9,16 @@ import android.view.View;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.interf.OnLoadingInterf;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.LoadUtil;
 import com.android.lib.util.StringUtil;
 import com.android.lib.util.ToastUtil;
+import com.android.lib.view.bottommenu.MessageEvent;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
+import com.siweisoft.service.netdb.user.UserBean;
+import com.siweisoft.service.ui.user.login.LoginFrag;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.OnClick;
 
@@ -39,6 +45,7 @@ public class RegistFrag extends BaseServerFrag<RegistUIOpe, RegistDAOpe> {
                     ToastUtil.getInstance().showShort(activity, "信息未填写完整");
                     return;
                 }
+                LoadUtil.getInstance().onStartLoading(activity, "regist");
                 getP().getD().checkCode(getP().getU().bind.etAccount.getText().toString(), getP().getU().bind.etCode.getText().toString(), new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
@@ -46,8 +53,14 @@ public class RegistFrag extends BaseServerFrag<RegistUIOpe, RegistDAOpe> {
                             getP().getD().regist(getP().getD().getUserBean(), new OnFinishListener() {
                                 @Override
                                 public void onFinish(Object o) {
+                                    LoadUtil.getInstance().onStopLoading("regist");
                                     if (o instanceof Boolean) {
                                         ToastUtil.getInstance().showShort(activity, "注册成功");
+                                        UserBean userBean = new UserBean();
+                                        userBean.setPhone(getP().getU().bind.etAccount.getText().toString());
+                                        userBean.setPwd(getP().getU().bind.etPwd.getText().toString());
+                                        MessageEvent m = new MessageEvent(RegistFrag.class.getName(), LoginFrag.class.getName(), userBean);
+                                        EventBus.getDefault().post(m);
                                         FragmentUtil2.getInstance().removeTop(activity, R.id.act_base_root);
                                     } else {
                                         ToastUtil.getInstance().showShort(activity, StringUtil.getStr(o));
@@ -56,6 +69,7 @@ public class RegistFrag extends BaseServerFrag<RegistUIOpe, RegistDAOpe> {
                             });
                         } else {
                             ToastUtil.getInstance().showShort(activity, "短信验证码失败");
+                            LoadUtil.getInstance().onStartLoading(activity, "regist");
                         }
                     }
                 });
@@ -65,6 +79,12 @@ public class RegistFrag extends BaseServerFrag<RegistUIOpe, RegistDAOpe> {
                 break;
             case R.id.tv_getcode:
                 getP().getU().bind.tvGetcode.setEnabled(false);
+                getP().getD().sendCode(getP().getU().bind.etAccount.getText().toString(), new OnFinishListener() {
+                    @Override
+                    public void onFinish(Object o) {
+
+                    }
+                });
                 getP().getD().getThreadUtil().run(1000, new OnLoadingInterf() {
                     @Override
                     public Void onStarLoading(Object o) {
@@ -80,12 +100,6 @@ public class RegistFrag extends BaseServerFrag<RegistUIOpe, RegistDAOpe> {
                     @Override
                     public Void onStopLoading(Object o) {
                         return null;
-                    }
-                });
-                getP().getD().sendCode(getP().getU().bind.etAccount.getText().toString(), new OnFinishListener() {
-                    @Override
-                    public void onFinish(Object o) {
-
                     }
                 });
                 break;
