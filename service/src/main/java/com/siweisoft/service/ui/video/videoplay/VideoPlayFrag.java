@@ -8,8 +8,10 @@ import android.widget.TextView;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
+import com.android.lib.network.NetWork;
 import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.StringUtil;
 import com.android.lib.util.ToastUtil;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
@@ -24,6 +26,7 @@ import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userlist.UserListFrag;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -45,7 +48,8 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
         getP().getU().initTips(getP().getD().userInfoDAOpe.getData());
         getP().getD().getCollectionBean().setVideoid(getP().getD().getVideoBean().getId());
         getP().getU().initUpload(getP().getD().getVideoBean(), this);
-        getP().getU().play(getP().getD().getVideoBean(), new OnFinishListener() {
+        getP().getU().initDownload(getP().getD().getVideoBean(), this);
+        getP().getU().play(getP().getD().getVideoBean(), getP().getD().getLoadFile(getP().getD().getVideoBean()), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 getP().getU().initTxt(getP().getD().getVideoBean(), (boolean) o);
@@ -129,7 +133,42 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
     public void onClick(final View v) {
         super.onClick(v);
         switch (v.getId()) {
+            case R.id.iv_download:
+                if (!v.isSelected()) {
+                    v.setEnabled(false);
+
+                    getP().getD().downloadFile(getP().getD().getVideoBean(), new NetWork.MyFileDownloadCallBack<File>() {
+                        @Override
+                        public void onLoading(long total, long current, boolean isDownloading) {
+                            super.onLoading(total, current, isDownloading);
+                            getP().getU().bind.tvProgress.setText((current * 100 / total) + "%");
+                        }
+
+                        @Override
+                        public void onSuccess(final File result) {
+                            super.onSuccess(result);
+                            v.setEnabled(true);
+                            v.setSelected(true);
+                            getP().getU().bind.tvProgress.setText("");
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ToastUtil.getInstance().showShort(activity, result.getParent());
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(Throwable ex, boolean isOnCallback) {
+                            super.onError(ex, isOnCallback);
+                            v.setEnabled(true);
+                            getP().getU().bind.tvProgress.setText("error");
+                        }
+                    });
+                }
+                break;
             case R.id.tv_upload:
+                v.setEnabled(false);
                 getP().getD().uploadVideo(getP().getD().getVideoBean(), new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
@@ -143,6 +182,11 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                                 v.setEnabled(false);
                             }
                         }
+                    }
+                }, new OnFinishListener() {
+                    @Override
+                    public void onFinish(Object o) {
+                        getP().getU().bind.tvUpload.setText(StringUtil.getStr(o) + "%");
                     }
                 });
                 break;

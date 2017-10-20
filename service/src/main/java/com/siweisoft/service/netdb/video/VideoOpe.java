@@ -118,7 +118,7 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
     }
 
     @Override
-    public void updateVideo(VideoBean videoBean, final OnFinishListener onFinishListener) {
+    public void updateVideo(VideoBean videoBean, final OnFinishListener onFinishListener, final OnFinishListener onFinishListener2) {
 
 
         FilesBean filesBean = new FilesBean();
@@ -126,13 +126,19 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
         fileBeen.add(new FileBean(new File(videoBean.getFile())));
         filesBean.setData(fileBeen);
 
-        NetWork.getInstance(context).doHttpRequsetWithFile(context, "/server/uploadvideo", filesBean, new OnNetWorkReqAdapter(context) {
+        NetWork.getInstance(context).doHttpRequsetWithFileProgress(context, "/server/uploadvideo", filesBean, new OnNetWorkReqAdapter(context) {
             @Override
             public void onNetWorkResult(boolean success, BaseResBean o) {
                 LogUtil.E(o);
                 ArrayList<String> files = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<String>>() {
                 }.getType());
                 onFinishListener.onFinish(files);
+            }
+
+            @Override
+            public void onNetWorkProgress(long total, long current) {
+                super.onNetWorkProgress(total, current);
+                onFinishListener2.onFinish(current * 100 / total);
             }
         });
     }

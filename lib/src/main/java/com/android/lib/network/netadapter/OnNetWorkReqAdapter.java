@@ -43,4 +43,10 @@ public abstract class OnNetWorkReqAdapter implements OnNetWorkReqInterf {
 
     public abstract void onNetWorkResult(boolean success, BaseResBean o);
 
+    public void onNetWorkProgress(long total, long current) {
+
+    }
+
+    ;
+
 }

@@ -49,7 +49,7 @@ public class ReSetPwdFrag extends BaseServerFrag<ReSetPwdUIOpe, ReSetPwdDAOpe> {
                                 if ((Boolean) o) {
                                     getP().getD().resetPwd(getP().getD().getUserBean(), new OnFinishListener() {
                                         @Override
-                                        public void onFinish(Object o) {
+                                        public void onFinish(final Object o) {
                                             if (o instanceof Boolean) {
                                                 ToastUtil.getInstance().showShort(activity, "重置成功");
                                                 UserBean userBean = new UserBean();
@@ -59,14 +59,24 @@ public class ReSetPwdFrag extends BaseServerFrag<ReSetPwdUIOpe, ReSetPwdDAOpe> {
                                                 EventBus.getDefault().post(m);
                                                 FragmentUtil2.getInstance().removeTop(activity, R.id.act_base_root);
                                             } else {
-                                                ToastUtil.getInstance().showShort(activity, StringUtil.getStr(o));
+                                                activity.runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        ToastUtil.getInstance().showShort(activity, StringUtil.getStr(o));
+                                                    }
+                                                });
                                             }
                                             LoadUtil.getInstance().onStopLoading("@#$");
                                         }
                                     });
                                 } else {
-                                    ToastUtil.getInstance().showShort(activity, "短信验证码失败");
-                                    LoadUtil.getInstance().onStopLoading("@#$");
+                                    activity.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            ToastUtil.getInstance().showShort(activity, "短信验证码失败");
+                                            LoadUtil.getInstance().onStopLoading("@#$");
+                                        }
+                                    });
                                 }
                             }
                         });

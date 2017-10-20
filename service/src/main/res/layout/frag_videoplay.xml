@@ -35,15 +35,14 @@
                 android:layout_height="wrap_content"
                 android:text="评分:"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <com.hedgehog.ratingbar.RatingBar
+                android:layout_marginLeft="5dp"
                 android:id="@+id/ratingbar"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:gravity="center"
                 hedgehog:clickable="false"
                 hedgehog:halfstart="true"
@@ -55,6 +54,10 @@
                 hedgehog:starImagePadding="10dp"
                 hedgehog:starImageWidth="30dp" />
 
+            <View
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp" />
             <TextView
                 android:layout_marginRight="5dp"
                 android:id="@+id/tv_upload"
@@ -64,6 +67,32 @@
                 android:textColor="@color/color_red_A400"
                 android:textSize="18sp" />
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="57%"
+                    android:src="@drawable/drawable_download"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/iv_download"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/tv_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+            </RelativeLayout>
 
         </LinearLayout>
 

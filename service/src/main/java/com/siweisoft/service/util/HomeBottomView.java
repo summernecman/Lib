@@ -58,7 +58,9 @@ public class HomeBottomView extends LinearLayout implements View.OnLongClickList
         addView(view, new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         ButterKnife.bind(this, this);
         onClick(tabViews.get(0));
-        findViewById(R.id.ll_check).setOnLongClickListener(this);
+        for (int i = 0; i < tabViews.size(); i++) {
+            tabViews.get(i).setOnLongClickListener(this);
+        }
     }
 
     @Optional

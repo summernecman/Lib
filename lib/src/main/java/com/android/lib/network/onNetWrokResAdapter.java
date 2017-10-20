@@ -22,4 +22,9 @@ public class onNetWrokResAdapter<T extends BaseResBean> implements OnNetWorkReqI
     public void onNetWorkResult(boolean success, T o) {
 
     }
+
+    @Override
+    public void onNetWorkProgress(long total, long current) {
+
+    }
 }

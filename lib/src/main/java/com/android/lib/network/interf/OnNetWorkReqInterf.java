@@ -24,5 +24,7 @@ public interface OnNetWorkReqInterf<T extends BaseResBean> {
      */
     void onNetWorkResult(boolean success, T o);
 
+    void onNetWorkProgress(long total, long current);
+
 
 }

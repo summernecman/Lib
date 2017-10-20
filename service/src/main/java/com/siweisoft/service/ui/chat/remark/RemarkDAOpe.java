@@ -185,6 +185,11 @@ public class RemarkDAOpe extends BaseDAOpe {
                     });
                 }
             }
+        }, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+
+            }
         });
     }
 

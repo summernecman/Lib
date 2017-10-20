@@ -455,6 +455,87 @@ public class NetWork {
     }
 
 
+    public void doHttpRequsetWithFileProgress(Context context, final String model, FilesBean data, final OnNetWorkReqInterf reqInterf) {
+        LogUtil.E(UrlConstant.URI + model);
+        final String jsonstr = gson.toJson(data);
+        LogUtil.E(jsonstr);
+        if (!reqInterf.onNetWorkReqStart(UrlConstant.URI + model, jsonstr)) {
+            BaseResBean res = new BaseResBean();
+            res.setErrorCode(ValueConstant.ERROR_CODE_NET_NO_CONNETCT);
+            res.setErrorMessage(ValueConstant.ERROR_STR_NET_NO_CONNETCT);
+            // res.setData(jsonstr);
+            reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, res);
+            return;
+        }
+
+        LogUtil.E(UrlConstant.URI + model + "---" + ValueConstant.cookieFromResponse);
+        RequestParams requestParams = new RequestParams(UrlConstant.URI + model);
+
+
+        List<KeyValue> list = new ArrayList<>();
+        for (int i = 0; i < data.getData().size(); i++) {
+            list.add(new KeyValue("file", data.getData().get(i).getFile()));
+            //requestParams.addBodyParameter("file"+i, data.getData().get(i).getFile(),null);
+        }
+        MultipartBody body = new MultipartBody(list, "UTF-8");
+        requestParams.setRequestBody(body);
+        requestParams.setMultipart(true);
+
+        x.http().post(requestParams, new Callback.ProgressCallback<String>() {
+            @Override
+            public void onSuccess(String response) {
+                LogUtil.E("gson", "" + response);
+                if (response == null) {
+                    BaseResBean res = new BaseResBean();
+                    res.setErrorCode(ValueConstant.ERROR_CODE_RES_NULL);
+                    res.setErrorMessage(ValueConstant.ERROR_STR_RES_NULL);
+                    reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, res);
+                } else {
+                    BaseResBean baseResBean = gson.fromJson(response.toString(), BaseResBean.class);
+                    reqInterf.onNetWorkReqFinish(true, UrlConstant.URI + model, baseResBean);
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                BaseResBean baseResBean = new BaseResBean();
+                baseResBean.setErrorCode(ValueConstant.ERROR_CODE_VOLLEY_FAIL);
+                baseResBean.setErrorMessage(ex.getMessage() == null ? "" : ex.getMessage());
+                baseResBean.setException(true);
+                reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, baseResBean);
+                LogUtil.E(ex == null ? "" : ex.getMessage());
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public void onWaiting() {
+
+            }
+
+            @Override
+            public void onStarted() {
+
+            }
+
+            @Override
+            public void onLoading(long total, long current, boolean isDownloading) {
+                reqInterf.onNetWorkProgress(total, current);
+            }
+        });
+    }
+
+
+
+
 
 //    @Deprecated
 //    public void doHttpRequsetWithS(final Context context, final String url, final String req, final OnNetWorkReqInterf reqInterf) {
@@ -545,4 +626,47 @@ public class NetWork {
 //    }
 //
 
+    public void download(String neturl, String loadurl, final Callback.ProgressCallback callback) {
+        RequestParams params = new RequestParams(neturl);
+        params.setSaveFilePath(loadurl);
+        x.http().get(params, callback);
+    }
+
+    public static class MyFileDownloadCallBack<ResultType> implements Callback.ProgressCallback<ResultType> {
+
+        @Override
+        public void onWaiting() {
+
+        }
+
+        @Override
+        public void onStarted() {
+
+        }
+
+        @Override
+        public void onLoading(long total, long current, boolean isDownloading) {
+
+        }
+
+        @Override
+        public void onSuccess(ResultType result) {
+
+        }
+
+        @Override
+        public void onError(Throwable ex, boolean isOnCallback) {
+
+        }
+
+        @Override
+        public void onCancelled(CancelledException cex) {
+
+        }
+
+        @Override
+        public void onFinished() {
+
+        }
+    }
 }

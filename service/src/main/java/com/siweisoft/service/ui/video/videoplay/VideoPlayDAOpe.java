@@ -7,6 +7,7 @@ import android.os.Environment;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.network.NetWork;
 import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.util.NullUtil;
 import com.siweisoft.service.netdb.collection.CollectionBean;
@@ -109,7 +110,7 @@ public class VideoPlayDAOpe extends BaseDAOpe {
     }
 
 
-    public void uploadVideo(final VideoBean videoBean, final OnFinishListener onFinishListener) {
+    public void uploadVideo(final VideoBean videoBean, final OnFinishListener onFinishListener, final OnFinishListener onFinishListener2) {
         final String f = videoBean.getFile();
         if (NullUtil.isStrEmpty(videoBean.getFile())) {
             return;
@@ -133,7 +134,7 @@ public class VideoPlayDAOpe extends BaseDAOpe {
                 videoBean.setFile(f);
                 videoi.setVideoUploaded(videoBean, onFinishListener);
             }
-        });
+        }, onFinishListener2);
     }
 
 
@@ -144,6 +145,36 @@ public class VideoPlayDAOpe extends BaseDAOpe {
         shareI.share(shareBean, onFinishListener);
     }
 
+
+    public void downloadFile(VideoBean videoBean, NetWork.MyFileDownloadCallBack callBack) {
+        String[] ss = videoBean.getFile().split("/");
+        if (ss.length > 0) {
+            String name = ss[ss.length - 1];
+            File file = new File(Value.getCacheFile(), name);
+            NetWork.getInstance(context).download(videoBean.getFile(), file.getPath(), callBack);
+        }
+
+    }
+
+    public static String getLoadFile(VideoBean videoBean) {
+        String[] ss = videoBean.getFile().split("/");
+        if (ss.length > 0) {
+            String name = ss[ss.length - 1];
+            File file = new File(Value.getCacheFile(), name);
+            return file.getPath();
+        }
+        return "";
+    }
+
+    public static boolean isLoadFileExit(VideoBean videoBean) {
+        String[] ss = videoBean.getFile().split("/");
+        if (ss.length > 0) {
+            String name = ss[ss.length - 1];
+            File file = new File(Value.getCacheFile(), name);
+            return file.exists();
+        }
+        return false;
+    }
 
 
     public UserBean getUserBean() {

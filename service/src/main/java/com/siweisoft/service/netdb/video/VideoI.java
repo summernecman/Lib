@@ -21,7 +21,7 @@ public interface VideoI {
 
     public void commentVideo(CommentBean commentBean, OnFinishListener onFinishListener);
 
-    public void updateVideo(VideoBean videoBean, OnFinishListener onFinishListener);
+    public void updateVideo(VideoBean videoBean, OnFinishListener onFinishListener, OnFinishListener onFinishListener2);
 
     public void updateVideoById(VideoBean videoBean, OnFinishListener onFinishListener);
 

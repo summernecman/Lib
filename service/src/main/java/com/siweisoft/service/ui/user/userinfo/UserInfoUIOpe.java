@@ -21,7 +21,6 @@ import com.siweisoft.service.BR;
 import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.R;
 import com.siweisoft.service.bean.TipBean;
-import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.databinding.FragUserinfoBinding;
 import com.siweisoft.service.databinding.ItemRemarkBinding;
 import com.siweisoft.service.netdb.comment.CommentBean;
@@ -43,14 +42,14 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
 
 
     public void initTips(final HashMap<Integer, TipBean> data) {
-        if (data == null || data.keySet() == null || data.keySet().size() == 0) {
-            UserInfoDAOpe userInfoDAOpe = new UserInfoDAOpe(context);
-            final TipsBean tipsBean = userInfoDAOpe.getData();
-            bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
-            bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipsBean.getTipBeen()) {
-            });
-            return;
-        }
+//        if (data == null || data.keySet() == null || data.keySet().size() == 0) {
+//            UserInfoDAOpe userInfoDAOpe = new UserInfoDAOpe(context);
+//            final TipsBean tipsBean = userInfoDAOpe.getData();
+//            bind.recycle.setLayoutManager(new GridLayoutManager(context, 4));
+//            bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_tip, BR.item_tip, tipsBean.getTipBeen()) {
+//            });
+//            return;
+//        }
         ArrayList<TipBean> tipBeen = new ArrayList<>();
         Iterator<Integer> iterator = data.keySet().iterator();
         while (iterator.hasNext()) {

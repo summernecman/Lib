@@ -11,6 +11,7 @@ import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.util.GsonUtil;
+import com.android.lib.util.NullUtil;
 import com.shuyu.gsyvideoplayer.listener.LockClickListener;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.siweisoft.service.BR;
@@ -21,6 +22,8 @@ import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.videochat.VideoChatDAOpe;
+
+import java.io.File;
 
 
 public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
@@ -51,8 +54,33 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
         }
     }
 
-    public void play(VideoBean videoBean, final OnFinishListener onFinishListener) {
-        bind.videoplayer.setUp(videoBean.getFile(), true, Value.getCacheFile(), videoBean.getCreated());
+    public void initDownload(VideoBean videoBean, View.OnClickListener onClickListener) {
+        bind.ivDownload.setOnClickListener(onClickListener);
+        if (videoBean.getUploaded() == 0) {
+            bind.ivDownload.setVisibility(View.GONE);
+        } else {
+            bind.ivDownload.setVisibility(View.VISIBLE);
+            String[] ss = videoBean.getFile().split("/");
+            if (ss.length > 0) {
+                String name = ss[ss.length - 1];
+                File file = new File(Value.getCacheFile(), name);
+                if (file.exists()) {
+                    bind.ivDownload.setSelected(true);
+                } else {
+                    bind.ivDownload.setSelected(false);
+                }
+            }
+        }
+
+    }
+
+    public void play(VideoBean videoBean, String local, final OnFinishListener onFinishListener) {
+        File file = new File(local);
+        if (NullUtil.isStrEmpty(local) || !file.exists()) {
+            bind.videoplayer.setUp(videoBean.getFile(), true, Value.getCacheFile(), videoBean.getCreated());
+        } else {
+            bind.videoplayer.setUp(file.getPath(), true, Value.getCacheFile(), videoBean.getCreated());
+        }
         //外部辅助的旋转，帮助全屏
         orientationUtils = new OrientationUtils((Activity) context, bind.videoplayer);
         //初始化不打开外部的旋转
@@ -64,11 +92,12 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
 
 
         //关闭自动旋转
-        bind.videoplayer.setRotateViewAuto(false);
+        bind.videoplayer.setRotateViewAuto(true);
         bind.videoplayer.setLockLand(false);
         bind.videoplayer.setShowFullAnimation(false);
         bind.videoplayer.setNeedLockFull(true);
         bind.videoplayer.setSeekRatio(1);
+        bind.videoplayer.setRotateWithSystem(true);
         //detailPlayer.setOpenPreView(false);
         bind.videoplayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
             @Override
