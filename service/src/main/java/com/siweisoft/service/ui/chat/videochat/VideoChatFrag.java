@@ -203,9 +203,18 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
         }
     }
 
-    @OnClick({R.id.endCall, R.id.btn_switchvideo, R.id.btn_speak, R.id.btn_camera})
+    @OnClick({R.id.endCall, R.id.btn_switchvideo, R.id.btn_speak, R.id.btn_camera, R.id.surfaceview})
     public void onClickEvent(View v) {
         switch (v.getId()) {
+            case R.id.surfaceview:
+                if (getP().getU().bind.llMenu.getVisibility() == View.VISIBLE) {
+                    getP().getU().bind.llMenu.setVisibility(View.GONE);
+                    getP().getU().bind.btnSwitchvideo.setVisibility(View.GONE);
+                } else {
+                    getP().getU().bind.llMenu.setVisibility(View.VISIBLE);
+                    getP().getU().bind.btnSwitchvideo.setVisibility(View.VISIBLE);
+                }
+                break;
             case R.id.endCall:
 //                String s= EMClient.getInstance().callManager().getVideoCallHelper().stopVideoRecord();
 //                getP().getD().setPath(s);

@@ -38,18 +38,34 @@ public class BaseServerFrag<A extends BaseUIOpe, B extends BaseDAOpe> extends Ba
 
     public void setTitleBean(TitleBean titleBean) {
         this.titleBean = titleBean;
-        TextView textView1 = (TextView) getView().findViewById(R.id.ftv_back);
-        textView1.setText(titleBean.getLeftTxt());
-        textView1.setOnClickListener(this);
-        TextView textView2 = (TextView) getView().findViewById(R.id.ftv_title);
-        textView2.setText(titleBean.getMidTxt());
-        textView2.setOnClickListener(this);
-        TextView textView3 = (TextView) getView().findViewById(R.id.ftv_right);
-        textView3.setText(titleBean.getRightTxt());
-        textView3.setOnClickListener(this);
-        TextView textView4 = (TextView) getView().findViewById(R.id.ftv_right2);
-        textView4.setText(titleBean.getRightTxt2());
-        textView4.setOnClickListener(this);
+        View v1 = getView().findViewById(R.id.ftv_back);
+        if (v1 instanceof TextView) {
+            TextView textView1 = (TextView) v1;
+            textView1.setText(titleBean.getLeftTxt());
+            textView1.setOnClickListener(this);
+        }
+
+        View v2 = getView().findViewById(R.id.ftv_title);
+        if (v2 instanceof TextView) {
+            TextView textView2 = (TextView) v2;
+            textView2.setText(titleBean.getMidTxt());
+            textView2.setOnClickListener(this);
+        }
+
+        View v3 = getView().findViewById(R.id.ftv_right);
+        if (v3 instanceof TextView) {
+            TextView textView3 = (TextView) v3;
+            textView3.setText(titleBean.getRightTxt());
+            textView3.setOnClickListener(this);
+        }
+
+
+        View v4 = getView().findViewById(R.id.ftv_right2);
+        if (v4 instanceof TextView) {
+            TextView textView4 = (TextView) v4;
+            textView4.setText(titleBean.getRightTxt2());
+            textView4.setOnClickListener(this);
+        }
     }
 
 

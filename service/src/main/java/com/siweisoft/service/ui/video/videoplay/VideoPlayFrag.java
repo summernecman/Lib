@@ -4,7 +4,6 @@ package com.siweisoft.service.ui.video.videoplay;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
@@ -43,6 +42,7 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
     @Override
     public void doThing() {
         setTitleBean(new TitleBean("返回", "视频播放", ""));
+        getP().getU().initTitle(this);
         getP().getD().setType(getArguments().getInt(ValueConstant.DATA_TYPE, 0));
         getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
         getP().getU().initTips(getP().getD().userInfoDAOpe.getData());
@@ -73,8 +73,10 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                     @Override
                     public void onFinish(Object o) {
                         if (o == null) {
+                            getP().getU().setCollect(false);
                             setTitleBean(new TitleBean("返回", "视频播放", "收藏", "分享"));
                         } else {
+                            getP().getU().setCollect(true);
                             CollectionBean collectionBean = (CollectionBean) o;
                             getP().getD().getCollectionBean().setId(collectionBean.getId());
                             setTitleBean(new TitleBean("返回", "视频播放", "已收藏", "分享"));
@@ -89,8 +91,10 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                     @Override
                     public void onFinish(Object o) {
                         if (o == null) {
+                            getP().getU().setCollect(false);
                             setTitleBean(new TitleBean("返回", "视频播放", "收藏", "分享"));
                         } else {
+                            getP().getU().setCollect(true);
                             CollectionBean collectionBean = (CollectionBean) o;
                             getP().getD().getCollectionBean().setId(collectionBean.getId());
                             setTitleBean(new TitleBean("返回", "视频播放", "已收藏", "分享"));
@@ -191,31 +195,28 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                 });
                 break;
             case R.id.ftv_right:
-                TextView textView = (TextView) v;
-                if (!textView.getText().toString().equals("收藏")) {
-                    if (textView.getText().toString().equals("已收藏")) {
-                        getP().getD().disCollect(getP().getD().getCollectionBean(), new OnFinishListener() {
-                            @Override
-                            public void onFinish(Object o) {
-                                if ((Boolean) o) {
-                                    ToastUtil.getInstance().showShort(activity, "取消收藏");
-                                    setTitleBean(new TitleBean("返回", "视频播放", "收藏", "分享"));
-                                }
+                if (getP().getU().bind.ftvRight.isSelected()) {
+                    getP().getD().disCollect(getP().getD().getCollectionBean(), new OnFinishListener() {
+                        @Override
+                        public void onFinish(Object o) {
+                            if ((Boolean) o) {
+                                ToastUtil.getInstance().showShort(activity, "取消收藏");
+                                getP().getU().setCollect(false);
                             }
-                        });
-                    }
-                    return;
-                }
-                getP().getD().collect(getP().getD().getCollectionBean(), new OnFinishListener() {
-                    @Override
-                    public void onFinish(Object o) {
-                        if (o instanceof CollectionBean) {
-                            ToastUtil.getInstance().showShort(activity, "收藏成功");
-                            setTitleBean(new TitleBean("返回", "视频播放", "已收藏", "分享"));
-                            getP().getD().getCollectionBean().setId(((CollectionBean) o).getId());
                         }
-                    }
-                });
+                    });
+                } else {
+                    getP().getD().collect(getP().getD().getCollectionBean(), new OnFinishListener() {
+                        @Override
+                        public void onFinish(Object o) {
+                            if (o instanceof CollectionBean) {
+                                ToastUtil.getInstance().showShort(activity, "收藏成功");
+                                getP().getU().setCollect(true);
+                                getP().getD().getCollectionBean().setId(((CollectionBean) o).getId());
+                            }
+                        }
+                    });
+                }
                 break;
             case R.id.ftv_right2:
                 final UserBean userBean = new UserBean();

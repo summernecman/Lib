@@ -43,7 +43,6 @@ public class EMChatOpe extends BaseDAOpe {
 //        EMClient.getInstance().callManager().getCallOptions().setVideoResolution(360,640);
 //        EMClient.getInstance().callManager().getCallOptions().setMinVideoKbps(400);
 //        EMClient.getInstance().callManager().getCallOptions().setMaxVideoKbps(1000);
-
         EMClient.getInstance().callManager().getVideoCallHelper().setPreferMovFormatEnable(true);
     }
 

@@ -258,5 +258,4 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
             }
         });
     }
-
 }

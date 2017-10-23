@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.interf.OnFinishListener;
@@ -92,9 +93,9 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
 
 
         //关闭自动旋转
-        bind.videoplayer.setRotateViewAuto(true);
-        bind.videoplayer.setLockLand(false);
-        bind.videoplayer.setShowFullAnimation(false);
+        bind.videoplayer.setRotateViewAuto(false);
+        bind.videoplayer.setLockLand(true);
+        bind.videoplayer.setShowFullAnimation(true);
         bind.videoplayer.setNeedLockFull(true);
         bind.videoplayer.setSeekRatio(1);
         bind.videoplayer.setRotateWithSystem(true);
@@ -102,12 +103,12 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
         bind.videoplayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clearPreviousSetting((Activity) context);
                 //直接横屏
-                //orientationUtils.resolveByClick();
+                orientationUtils.resolveByClick();
+
                 //第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
-                ((Activity) context).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
                 bind.videoplayer.startWindowFullscreen(context, true, true);
-                onFinishListener.onFinish(false);
             }
         });
 
@@ -116,7 +117,7 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
             public void onPrepared(String url, Object... objects) {
                 super.onPrepared(url, objects);
                 //开始播放了才能旋转和全屏
-                orientationUtils.setEnable(true);
+                orientationUtils.setEnable(false);
             }
 
             @Override
@@ -132,11 +133,12 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
             @Override
             public void onQuitFullscreen(String url, Object... objects) {
                 super.onQuitFullscreen(url, objects);
+                com.android.lib.util.StatusBarUtil.getInstance().setStatusBarColorResId((Activity) context, R.color.color_base_nurse);
                 if (orientationUtils != null) {
                     orientationUtils.backToProtVideo();
                 }
                 ((Activity) context).getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
-                onFinishListener.onFinish(true);
+                onFinishListener.onFinish(false);
             }
         });
 
@@ -145,12 +147,13 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
             public void onClick(View view, boolean lock) {
                 if (orientationUtils != null) {
                     //配合下方的onConfigurationChanged
-                    orientationUtils.setEnable(!lock);
+                    orientationUtils.setEnable(false);
                 }
             }
         });
         //bind.videoplayer.setUp(videoBean.getFile(), JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, videoBean.getCreated());
         //bind.videoplayer.thumbImageView.setImage("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640");
+
     }
 
     public void initRating(float rate) {
@@ -186,6 +189,16 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
         return orientationUtils;
     }
 
+    public void setCollect(boolean collect) {
+        bind.ftvRight.setSelected(collect);
+    }
+
+    public void initTitle(View.OnClickListener onClickListener) {
+        bind.ftvRight.setOnClickListener(onClickListener);
+        bind.ftvRight2.setOnClickListener(onClickListener);
+    }
+
+
 
 //    public void initShare(int vis, String txt, View.OnClickListener onClickListener) {
 //        MainAct act = (MainAct) context;
@@ -193,4 +206,14 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
 //        act.getP().getU().bind.tophead.ftvRight2.setText(txt);
 //        act.getP().getU().bind.tophead.ftvRight2.setOnClickListener(onClickListener);
 //    }
+
+    private static void clearPreviousSetting(Activity activity) {
+        ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
+        View fakeStatusBarView = decorView.findViewById(com.jaeger.library.R.id.statusbarutil_fake_status_bar_view);
+        if (fakeStatusBarView != null) {
+            decorView.removeView(fakeStatusBarView);
+            ViewGroup rootView = (ViewGroup) ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
+            rootView.setPadding(0, 0, 0, 0);
+        }
+    }
 }

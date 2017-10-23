@@ -99,4 +99,5 @@ dependencies {
     compile 'com.hedgehog.ratingbar:app:1.1.2'
     compile 'com.shuyu:GSYVideoPlayer:2.0.6'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.jaeger.statusbarutil:library:1.4.0'
 }

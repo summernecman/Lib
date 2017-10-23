@@ -41,6 +41,15 @@ public class StatusBarUtil {
         tintManager.setStatusBarTintEnabled(true);
         tintManager.setNavigationBarTintEnabled(true);
         tintManager.setStatusBarTintResource(resId);
+        tintManager.setStatusBarAlpha(1);
+    }
+
+    public void enableStatusBarColorResId(Activity activity) {
+        SystemBarTintManager tintManager = new SystemBarTintManager(activity);
+        tintManager.setStatusBarTintEnabled(true);
+        tintManager.setNavigationBarTintEnabled(true);
+        tintManager.setStatusBarTintResource(android.R.color.transparent);
+        tintManager.setStatusBarAlpha(0);
     }
 
     /**

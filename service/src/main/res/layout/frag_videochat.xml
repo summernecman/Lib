@@ -9,10 +9,10 @@
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         android:orientation="vertical">
 
         <com.hyphenate.media.EMCallSurfaceView
-            android:layout_marginBottom="50dp"
             android:focusableInTouchMode="false"
             android:clickable="false"
             android:id="@+id/surfaceview"
@@ -20,20 +20,20 @@
             android:layout_height="match_parent" />
 
         <LinearLayout
+            android:id="@+id/ll_menu"
             android:layout_alignParentBottom="true"
-            android:layout_width="fill_parent"
+            android:layout_width="383dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom|right"
-            android:background="#7f7f7f"
+            android:background="@color/transparent"
             android:orientation="horizontal">
 
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/btn_speak"
-                android:layout_width="100dp"
+                android:layout_width="50dp"
                 android:layout_height="fill_parent"
-                android:background="@drawable/button_background"
-                android:src="@drawable/drawable_speak" />
+                android:background="@drawable/drawable_speak" />
 
             <LinearLayout
                 android:layout_gravity="center"
@@ -43,11 +43,11 @@
                 android:layout_weight="1"
                 android:textSize="23sp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/icon_end"
+                    android:background="@drawable/icon_end"
                     android:gravity="center"
                     android:id="@+id/endCall"
                     android:layout_width="wrap_content"
@@ -56,24 +56,21 @@
             </LinearLayout>
 
 
-
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/btn_camera"
-                android:layout_width="100dp"
+                android:layout_width="50dp"
                 android:layout_height="fill_parent"
-                android:background="@drawable/button_background"
-                android:src="@drawable/drawable_camera" />
+                android:background="@drawable/drawable_camera" />
         </LinearLayout>
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:layout_gravity="right"
             android:id="@+id/btn_switchvideo"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/button_background"
-            android:src="@drawable/switchvideo" />
+            android:background="@drawable/switchvideo" />
 
         <TextView
             android:id="@+id/tv_time"
