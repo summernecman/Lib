@@ -77,10 +77,15 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
 
     public void play(VideoBean videoBean, String local, final OnFinishListener onFinishListener) {
         File file = new File(local);
+        String[] ss = videoBean.getFile().split("/");
+        String s = videoBean.getCreated();
+        if (ss.length > 0) {
+            s = ss[ss.length - 1];
+        }
         if (NullUtil.isStrEmpty(local) || !file.exists()) {
-            bind.videoplayer.setUp(videoBean.getFile(), true, Value.getCacheFile(), videoBean.getCreated());
+            bind.videoplayer.setUp(videoBean.getFile(), true, Value.getCacheFile(), s);
         } else {
-            bind.videoplayer.setUp(file.getPath(), true, Value.getCacheFile(), videoBean.getCreated());
+            bind.videoplayer.setUp(file.getPath(), true, Value.getCacheFile(), s);
         }
         //外部辅助的旋转，帮助全屏
         orientationUtils = new OrientationUtils((Activity) context, bind.videoplayer);
@@ -103,7 +108,6 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
         bind.videoplayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearPreviousSetting((Activity) context);
                 //直接横屏
                 orientationUtils.resolveByClick();
 
@@ -133,7 +137,6 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
             @Override
             public void onQuitFullscreen(String url, Object... objects) {
                 super.onQuitFullscreen(url, objects);
-                com.android.lib.util.StatusBarUtil.getInstance().setStatusBarColorResId((Activity) context, R.color.color_base_nurse);
                 if (orientationUtils != null) {
                     orientationUtils.backToProtVideo();
                 }

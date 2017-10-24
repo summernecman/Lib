@@ -58,4 +58,6 @@ dependencies {
     compile project(':lib')
     compile 'com.hyphenate:hyphenate-sdk:3.3.4'
     compile files('libs/jsms_android-1.1.0.jar')
+    compile files('libs/jcore-android-1.1.7.jar')
+    compile files('libs/jpush-android-3.0.9.jar')
 }

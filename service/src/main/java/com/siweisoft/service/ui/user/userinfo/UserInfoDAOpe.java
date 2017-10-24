@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
+import com.android.lib.network.NetWork;
 import com.android.lib.util.FragmentUtil2;
 import com.siweisoft.service.bean.AllUserBean;
 import com.siweisoft.service.bean.TipBean;
@@ -23,6 +24,7 @@ import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.onlinelist.OnLineListFrag;
 import com.siweisoft.service.ui.user.usercenter.UserCenterDAOpe;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +60,16 @@ public class UserInfoDAOpe extends BaseDAOpe {
         tipBeen.add(new TipBean(5, "态度差", 0));
         tipsBean.setTipBeen(tipBeen);
         return tipsBean;
+    }
+
+
+    public void getUserInfo(int id, OnFinishListener onFinishListener) {
+        if (userI == null) {
+            userI = new UserNetOpe(context);
+        }
+        UserBean u = new UserBean();
+        u.setId(id);
+        userI.getUserInfoById(u, onFinishListener);
     }
 
     public void getRemarks(CommentBean commentBean, final OnFinishListener onFinishListener) {
@@ -100,6 +112,27 @@ public class UserInfoDAOpe extends BaseDAOpe {
                 onFinishListener.onFinish(false);
             }
         });
+    }
+
+
+    public void downloadFile(String path, NetWork.MyFileDownloadCallBack callBack) {
+        String[] ss = path.split("/");
+        if (ss.length > 0) {
+            String name = ss[ss.length - 1];
+            File file = new File(Value.getCacheFile(), name);
+            NetWork.getInstance(context).download(path, file.getPath(), callBack);
+        }
+
+    }
+
+    public boolean isFileExit(String path) {
+        String[] ss = path.split("/");
+        if (ss.length > 0) {
+            String name = ss[ss.length - 1];
+            File file = new File(Value.getCacheFile(), name);
+            return file.exists();
+        }
+        return false;
     }
 
 

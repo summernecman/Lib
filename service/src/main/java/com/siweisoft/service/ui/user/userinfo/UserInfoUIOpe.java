@@ -78,6 +78,8 @@ public class UserInfoUIOpe extends BaseUIOpe<FragUserinfoBinding> {
             public void onBindViewHolder(AppViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 ItemRemarkBinding itemRemarkBinding = (ItemRemarkBinding) holder.viewDataBinding;
+                itemRemarkBinding.ivHead.setOnClickListener(this);
+                itemRemarkBinding.ivHead.setTag(R.id.data, data.get(position));
                 itemRemarkBinding.ivAgree.setOnClickListener(this);
                 itemRemarkBinding.ivAgree.setTag(R.id.data, data.get(position));
                 itemRemarkBinding.ivAgree.setTag(R.id.data1, itemRemarkBinding.tvNum);

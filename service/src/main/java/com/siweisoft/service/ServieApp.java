@@ -5,20 +5,27 @@ package com.siweisoft.service;
 import android.content.Intent;
 
 import com.android.lib.aplication.LibAplication;
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.UrlConstant;
+import com.android.lib.exception.exception.CrashHander;
 import com.android.lib.service.main.AppService;
 import com.android.lib.util.SPUtil;
+import com.android.lib.util.data.DateFormatUtil;
+import com.hyphenate.chat.EMClient;
+import com.siweisoft.service.netdb.crash.CrashBean;
 import com.siweisoft.service.netdb.crash.CrashOpe;
+import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.videochat.EMChatOpe;
 
 import org.xutils.x;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.jpush.sms.SMSSDK;
 
 
-public class ServieApp extends LibAplication {
+public class ServieApp extends LibAplication implements OnFinishListener {
 
-    CrashOpe crashOpe;
+    CrashOpe crashI;
 
     @Override
     public void onCreate() {
@@ -30,6 +37,10 @@ public class ServieApp extends LibAplication {
         UrlConstant.URI = UrlConstant.HTTP + UrlConstant.NETSTART + "/server";
         UrlConstant.fileUrl = UrlConstant.HTTP + UrlConstant.NETSTART + "/files";
 
+
+        CrashHander.getInstance().init(this, this);
+
+
         SPUtil.getInstance().init(this);
 
         x.Ext.init(this);
@@ -37,6 +48,7 @@ public class ServieApp extends LibAplication {
 
 //        JCVideoPlayer.ACTION_BAR_EXIST = false;
 //        JCVideoPlayer.TOOL_BAR_EXIST = false;
+
 
         startService(new Intent(this, AppService.class));
 
@@ -49,11 +61,39 @@ public class ServieApp extends LibAplication {
         SMSSDK.getInstance().initSdk(this);
         //SMSSDK.getInstance().setIntervalTime(5000);
         SMSSDK.getInstance().setDebugMode(true);
+
+        JPushInterface.init(this);
+        JPushInterface.setDebugMode(true);
+
+
     }
 
 
     @Override
     public void exit() {
         super.exit();
+    }
+
+
+    @Override
+    public void onFinish(Object o) {
+        if (crashI == null) {
+            crashI = new CrashOpe(this);
+        }
+        if (Value.getRoom() != null) {
+            EMClient.getInstance().chatroomManager().leaveChatRoom(Value.getRoom().getId());
+            EMClient.getInstance().logout(true);
+        }
+
+        final CrashBean crashBean = new CrashBean();
+        crashBean.setError((String) o);
+        crashBean.setCreatedtime(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
+        crashBean.setUserBean(Value.getUserInfo());
+        crashI.sendCrash(crashBean, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                exit();
+            }
+        });
     }
 }

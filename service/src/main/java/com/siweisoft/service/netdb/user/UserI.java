@@ -36,6 +36,8 @@ public interface UserI {
 
     public void getUserInfoByPhone(UserBean userBean, OnFinishListener onFinishListener);
 
+    public void getUserInfoById(UserBean userBean, OnFinishListener onFinishListener);
+
     public void getUsersInfoByPhone(ArrayList<UserBean> userBeen, OnFinishListener onFinishListener);
 
     public void getArrayUsersInfoByPhone(ArrayList<ArrayList<UserBean>> userBeen, OnFinishListener onFinishListener);

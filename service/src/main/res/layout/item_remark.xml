@@ -22,6 +22,7 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:background="@drawable/drawable_press_black_while"
                 android:id="@+id/iv_head"
                 android:layout_width="35dp"
                 android:layout_height="35dp"

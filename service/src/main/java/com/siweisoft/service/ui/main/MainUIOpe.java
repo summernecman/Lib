@@ -2,7 +2,6 @@ package com.siweisoft.service.ui.main;
 
 //by summer on 2017-07-03.
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,8 +13,6 @@ import com.android.lib.base.interf.view.OnAppItemSelectListener;
 import com.android.lib.base.listener.BaseOnPagerChangeListener;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.util.FragmentUtil2;
-import com.android.lib.util.StatusBarUtil;
-import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.databinding.ActMainBinding;
 import com.siweisoft.service.ui.Constant.Value;
@@ -25,7 +22,7 @@ import java.util.ArrayList;
 public class MainUIOpe extends BaseUIOpe<ActMainBinding> {
     public MainUIOpe(Context context) {
         super(context);
-        StatusBarUtil.getInstance().setStatusBarColorResId((Activity) context, R.color.color_base_nurse);
+        //StatusBarUtil.getInstance().setStatusBarColorResId((Activity) context, R.color.color_base_nurse);
     }
 
 

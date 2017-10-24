@@ -44,7 +44,6 @@ public abstract class BaseUIActivity<A extends BaseUIOpe, B extends BaseDAOpe> e
     protected void onCreate(Bundle savedInstanceState) {
         isFullScreen(isFullScreen());
         super.onCreate(savedInstanceState);
-//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         setContentView(R.layout.layout_baseui_withouttitle);
 //        StatusBarUtil.getInstance().setStatusBarColor(activity, ColorConstant.COLOR_STATUS);
 //        StatusBarUtil.getInstance().hideNavigationBar(activity);

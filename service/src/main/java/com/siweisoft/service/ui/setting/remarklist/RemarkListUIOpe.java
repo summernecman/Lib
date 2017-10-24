@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
+import com.android.lib.base.listener.ViewListener;
 import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.constant.UrlConstant;
@@ -27,13 +28,15 @@ public class RemarkListUIOpe extends BaseUIOpe<FragRemarklistBinding> {
         super(context);
     }
 
-    public void initRemarks(final ArrayList<CommentBean> data, MyRecyclerView.OnScroll onScroll) {
+    public void initRemarks(final ArrayList<CommentBean> data, MyRecyclerView.OnScroll onScroll, ViewListener listener) {
         bind.recycle.setLayoutManager(new LinearLayoutManager(context));
-        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_remark, BR.item_remark, data) {
+        bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_remark, BR.item_remark, data, listener) {
             @Override
             public void onBindViewHolder(AppViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 ItemRemarkBinding itemRemarkBinding = (ItemRemarkBinding) holder.viewDataBinding;
+                itemRemarkBinding.ivHead.setOnClickListener(this);
+                itemRemarkBinding.ivHead.setTag(R.id.data, data.get(position));
                 GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getFromUser().getHeadurl()).into(itemRemarkBinding.ivHead);
             }
         });

@@ -198,6 +198,19 @@ public class UserNetOpe extends BaseDAOpe implements UserI {
     }
 
     @Override
+    public void getUserInfoById(UserBean userBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(userBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/user/getUserInfoById", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                UserBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), UserBean.class);
+                onFinishListener.onFinish(res);
+            }
+        });
+    }
+
+    @Override
     public void getUsersInfoByPhone(ArrayList<UserBean> userBeen, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(userBeen));

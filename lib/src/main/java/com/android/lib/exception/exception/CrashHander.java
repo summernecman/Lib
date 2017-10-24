@@ -58,8 +58,8 @@ public class CrashHander implements Thread.UncaughtExceptionHandler {
 //                e.printStackTrace();
 //            }
             uncaughtExceptionHandler.uncaughtException(thread, ex);
-            restart(thread, ex);
             Thread.setDefaultUncaughtExceptionHandler(null);
+            restart(thread, ex);
         }
     }
 

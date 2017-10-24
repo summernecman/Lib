@@ -28,6 +28,7 @@ public class ImageFrag extends BaseFrg implements View.OnLongClickListener, View
 
     View.OnClickListener onClickListener;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,8 +48,11 @@ public class ImageFrag extends BaseFrg implements View.OnLongClickListener, View
         }
         photoView.setOnLongClickListener(this);
         photoView.setOnClickListener(this);
+        view.findViewById(R.id.iv_download).setOnClickListener(this);
         getView().findViewById(R.id.tv_back).setOnClickListener(this);
+        getView().findViewById(R.id.iv_download).setVisibility(getArguments().getBoolean(ValueConstant.DATA_POSITION) ? View.GONE : View.VISIBLE);
     }
+
 
     @Override
     public boolean onLongClick(View v) {

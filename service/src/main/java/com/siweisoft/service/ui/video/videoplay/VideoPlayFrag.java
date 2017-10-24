@@ -157,7 +157,7 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                             activity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    ToastUtil.getInstance().showShort(activity, result.getParent());
+                                    ToastUtil.getInstance().showShort(activity, result.getPath());
                                 }
                             });
                         }

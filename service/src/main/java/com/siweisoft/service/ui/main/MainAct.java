@@ -12,11 +12,11 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.android.lib.base.activity.BaseUIActivity;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
-import com.android.lib.exception.exception.CrashHander;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.util.system.UUUIDUtil;
@@ -48,12 +48,14 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         getP().getU().initViewPager(getSupportFragmentManager(), getP().getD().getFragment());
         loginInfoBroadCast = new LoginInfoBroadCast();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(getPackageName() + ValueConstant.ACITON_GLOB_CAST);
         //registerReceiver(loginInfoBroadCast, intentFilter);
-        CrashHander.getInstance().init(this, this);
+        //CrashHander.getInstance().init(this, this);
 
         IntentFilter callFilter = new IntentFilter(EMClient.getInstance().callManager().getIncomingCallBroadcastAction());
         callReceiver = new CallReceiver();
@@ -144,8 +146,10 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         if (crashI == null) {
             crashI = new CrashOpe(this);
         }
-        EMClient.getInstance().chatroomManager().leaveChatRoom(Value.getRoom().getId());
-        EMClient.getInstance().logout(true);
+        if (Value.getRoom() != null) {
+            EMClient.getInstance().chatroomManager().leaveChatRoom(Value.getRoom().getId());
+            EMClient.getInstance().logout(true);
+        }
 
         final CrashBean crashBean = new CrashBean();
         crashBean.setError((String) o);
@@ -154,11 +158,6 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         crashI.sendCrash(crashBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                EMClient.getInstance().logout(true);
-                if (Value.getRoom() != null) {
-                    EMClient.getInstance().chatroomManager().leaveChatRoom(Value.getRoom().getId());
-                }
-                FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
                 ((ServieApp) activity.getApplication()).exit();
             }
         });

@@ -24,7 +24,6 @@ public class LoginAct extends BaseUIActivity<BaseUIOpe, BaseDAOpe> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         String[] permissions = new String[]{
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.VIBRATE,
