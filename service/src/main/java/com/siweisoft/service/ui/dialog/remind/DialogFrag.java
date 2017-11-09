@@ -1,4 +1,4 @@
-package com.siweisoft.service.ui.dialog;
+package com.siweisoft.service.ui.dialog.remind;
 
 //by summer on 17-09-11.
 
@@ -12,7 +12,7 @@ import com.siweisoft.service.base.BaseServerFrag;
 
 import butterknife.OnClick;
 
-public class DialogFrag extends BaseServerFrag<DialogtUIOpe, DialogDAOpe> {
+public class DialogFrag extends BaseServerFrag<DialogUIOpe, DialogDAOpe> {
 
     OnFinishListener onFinishListener;
 
@@ -22,6 +22,8 @@ public class DialogFrag extends BaseServerFrag<DialogtUIOpe, DialogDAOpe> {
         if (SystemUtil.isBackground(activity)) {
             IntentUtil.getInstance().IntentTo(activity, activity.getPackageName());
         }
+        getP().getU().bind.tvRefuse.setSelected(true);
+        getP().getU().bind.tvRefuse.setSelected(false);
     }
 
     @OnClick({R.id.tv_receipt, R.id.tv_refuse})

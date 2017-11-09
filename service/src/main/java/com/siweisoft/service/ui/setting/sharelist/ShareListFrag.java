@@ -20,7 +20,7 @@ import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
-import com.siweisoft.service.ui.video.videoplay.VideoPlayFrag;
+import com.siweisoft.service.ui.video.videocontainer.VideoContainerFrag;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -94,7 +94,7 @@ public class ShareListFrag extends BaseServerFrag<ShareListUIOpe, ShareListDAOpe
             case ViewListener.TYPE_ONCLICK:
                 switch (v.getId()) {
                     case R.id.play:
-                        VideoPlayFrag playFrag = new VideoPlayFrag();
+                        VideoContainerFrag playFrag = new VideoContainerFrag();
                         playFrag.setArguments(new Bundle());
                         playFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, (Serializable) v.getTag(R.id.data));
                         FragmentUtil2.getInstance().add(activity, Value.ROOTID_THREE, playFrag);

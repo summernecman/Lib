@@ -21,8 +21,8 @@ import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.databinding.FragVideoplayBinding;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
+import com.siweisoft.service.netdb.videodetail.VideoDetailBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.chat.videochat.VideoChatDAOpe;
 
 import java.io.File;
 
@@ -35,16 +35,16 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
         super(context);
     }
 
-    public void initUpload(VideoBean videoBean, View.OnClickListener onClickListener) {
+    public void initUpload(VideoDetailBean vv, View.OnClickListener onClickListener) {
 
 
 //        if (Value.getUserInfo().getUsertype() == UserBean.USER_TYPE_CUSTOMER) {
 //            bind.tvUpload.setVisibility(View.GONE);
 //            return;
 //        }
-        if (videoBean.getUploaded() == 0) {
+        if (vv.getUploaded() == 0) {
             bind.tvUpload.setVisibility(View.VISIBLE);
-            if (VideoChatDAOpe.isRecordVideo(videoBean)) {
+            if (Value.getUserInfo().getId() == vv.getUserid()) {
                 bind.tvUpload.setText("本地未上传");
                 bind.tvUpload.setOnClickListener(onClickListener);
             } else {
@@ -55,35 +55,31 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
         }
     }
 
-    public void initDownload(VideoBean videoBean, View.OnClickListener onClickListener) {
+    public void initDownload(VideoDetailBean videoDetailBean, View.OnClickListener onClickListener) {
         bind.ivDownload.setOnClickListener(onClickListener);
-        if (videoBean.getUploaded() == 0) {
+        if (videoDetailBean.getUploaded() == 0) {
             bind.ivDownload.setVisibility(View.GONE);
         } else {
             bind.ivDownload.setVisibility(View.VISIBLE);
-            String[] ss = videoBean.getFile().split("/");
-            if (ss.length > 0) {
-                String name = ss[ss.length - 1];
-                File file = new File(Value.getCacheFile(), name);
-                if (file.exists()) {
-                    bind.ivDownload.setSelected(true);
-                } else {
-                    bind.ivDownload.setSelected(false);
-                }
+            File file = new File(VideoPlayDAOpe.getLoadFile(videoDetailBean));
+            if (file.exists()) {
+                bind.ivDownload.setSelected(true);
+            } else {
+                bind.ivDownload.setSelected(false);
             }
         }
 
     }
 
-    public void play(VideoBean videoBean, String local, final OnFinishListener onFinishListener) {
+    public void play(VideoDetailBean vv, String local, final OnFinishListener onFinishListener) {
         File file = new File(local);
-        String[] ss = videoBean.getFile().split("/");
-        String s = videoBean.getCreated();
+        String[] ss = vv.getUrl().split("/");
+        String s = vv.getCtime().toString();
         if (ss.length > 0) {
             s = ss[ss.length - 1];
         }
         if (NullUtil.isStrEmpty(local) || !file.exists()) {
-            bind.videoplayer.setUp(videoBean.getFile(), true, Value.getCacheFile(), s);
+            bind.videoplayer.setUp(vv.getUrl(), true, Value.getCacheFile(), s);
         } else {
             bind.videoplayer.setUp(file.getPath(), true, Value.getCacheFile(), s);
         }

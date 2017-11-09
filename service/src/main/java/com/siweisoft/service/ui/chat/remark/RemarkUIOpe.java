@@ -37,6 +37,7 @@ public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
                 onFinishListener.onFinish(RatingCount);
             }
         });
+        bind.ratingbar.setStar(5f);
     }
 
 
@@ -85,6 +86,10 @@ public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
     public void initTop(UserBean userBean) {
         GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + userBean.getHeadurl()).into(bind.imageView2);
         bind.tvName.setText(StringUtil.getStr(userBean.getName()));
+    }
+
+    public void initOnclick(View.OnClickListener listener) {
+        bind.llVideotips.setOnClickListener(listener);
     }
 
 

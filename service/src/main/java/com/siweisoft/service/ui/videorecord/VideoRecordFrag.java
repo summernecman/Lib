@@ -21,7 +21,7 @@ import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
-import com.siweisoft.service.ui.video.videoplay.VideoPlayFrag;
+import com.siweisoft.service.ui.video.videocontainer.VideoContainerFrag;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -103,7 +103,7 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
             case ViewListener.TYPE_ONCLICK:
                 switch (v.getId()) {
                     case R.id.play:
-                        VideoPlayFrag playFrag = new VideoPlayFrag();
+                        VideoContainerFrag playFrag = new VideoContainerFrag();
                         playFrag.setArguments(new Bundle());
                         playFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, (Serializable) v.getTag(R.id.data));
                         FragmentUtil2.getInstance().add(activity, Value.ROOTID_ONE, playFrag);

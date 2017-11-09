@@ -1,9 +1,11 @@
 package com.android.lib.aplication;
 
 import android.app.Application;
+import android.support.v4.app.FragmentActivity;
 
 import com.android.lib.R;
 import com.android.lib.constant.ValueConstant;
+import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.SPUtil;
 import com.android.lib.util.ScreenUtil;
 import com.android.lib.util.activity.ActivityUtil;
@@ -12,6 +14,8 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
 
 import org.xutils.x;
+
+import java.util.List;
 
 
 /**
@@ -72,8 +76,13 @@ public class LibAplication extends Application {
      * 退出结束所有界面
      */
     public void exit() {
+        List<FragmentActivity> list = ActivityUtil.getInstance().getActList();
+        for (int i = 0; i < list.size(); i++) {
+            //FragmentUtil2.getInstance().initClear(list.get(i));
+            FragmentUtil2.getInstance().clear();
+        }
         ActivityUtil.getInstance().destoryActs();
-        System.gc();
+        //System.gc();
     }
 
 }

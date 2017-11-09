@@ -57,6 +57,7 @@ public class ReceiptFrag extends BaseServerFrag<ReceiptUIOpe, ReceiptDAOpe> {
         SPUtil.getInstance().saveInt(getP().getD().getVideoBean().getFromUser().getPhone(), 0);
         switch (v.getId()) {
             case R.id.tv_receipt:
+                getP().getD().updateCallState(getP().getD().getVideoBean(), VideoBean.CALL_STATE_SUCCESS);
                 VideoChatFrag videoChatFrag = new VideoChatFrag();
                 videoChatFrag.setArguments(new Bundle());
                 videoChatFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, getArguments().getSerializable(Value.DATA_DATA));
@@ -65,6 +66,7 @@ public class ReceiptFrag extends BaseServerFrag<ReceiptUIOpe, ReceiptDAOpe> {
                 FragmentUtil2.getInstance().add(activity, Value.FULLSCREEN, videoChatFrag);
                 break;
             case R.id.tv_refuse:
+                getP().getD().updateCallState(getP().getD().getVideoBean(), VideoBean.CALL_STATE_REJECT);
                 try {
                     EMClient.getInstance().callManager().rejectCall();
                 } catch (EMNoActiveCallException e) {

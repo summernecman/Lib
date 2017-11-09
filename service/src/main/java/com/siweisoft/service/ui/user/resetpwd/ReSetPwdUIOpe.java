@@ -21,4 +21,8 @@ public class ReSetPwdUIOpe extends BaseUIOpe<FragResetBinding> {
     public boolean vevify() {
         return !NullUtil.isStrEmpty(bind.etAccount.getText().toString()) && !NullUtil.isStrEmpty(bind.etPwd.getText().toString()) && !NullUtil.isStrEmpty(bind.etCode.getText().toString());
     }
+
+    public boolean vevifyPhone() {
+        return !NullUtil.isStrEmpty(bind.etAccount.getText().toString());
+    }
 }

@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:label,android:theme">
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTask"
             android:name=".ui.user.login.LoginAct"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
@@ -26,7 +27,7 @@
 
         <activity
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize|stateVisible|stateAlwaysHidden"
             android:launchMode="singleTask"
             android:name=".ui.main.MainAct"
             android:exported="true"
@@ -42,7 +43,9 @@
             android:name=".ui.chat.videochat.VideoChatFrag"
             android:launchMode="singleTask" />
         <service android:name="com.android.lib.service.main.AppService" />
-
+        <service
+            android:name=".AppServer"
+            android:stopWithTask="false" />
 
         <!-- 设置环信应用的AppKey -->
         <meta-data
@@ -70,7 +73,7 @@
         </receiver>
 
 
-        <service android:name=".util.RecordService" />
+        <!-- <service android:name=".util.RecordService" />-->
 
 
         <meta-data

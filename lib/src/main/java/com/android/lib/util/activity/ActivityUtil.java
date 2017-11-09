@@ -1,6 +1,8 @@
 package com.android.lib.util.activity;
 
+
 import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,12 +18,12 @@ public class ActivityUtil {
     /**
      * 键值对存储activity
      */
-    private HashMap<String, Activity> actMap = new HashMap<>();
+    private HashMap<String, FragmentActivity> actMap = new HashMap<>();
 
     /**
      * 列表存储activity
      */
-    private ArrayList<Activity> actList = new ArrayList<>();
+    private ArrayList<FragmentActivity> actList = new ArrayList<>();
 
     public static ActivityUtil getInstance() {
         if (instance == null) {
@@ -30,12 +32,20 @@ public class ActivityUtil {
         return instance;
     }
 
-    public HashMap<String, Activity> getActMap() {
+    public HashMap<String, FragmentActivity> getActMap() {
         return actMap;
     }
 
-    public ArrayList<Activity> getActList() {
+    public ArrayList<FragmentActivity> getActList() {
         return actList;
+    }
+
+    public void removeAct(Activity activity) {
+        actMap.remove(activity.getClass().getSimpleName());
+        for (int i = 0; i < actList.size(); i++) {
+            actList.remove(activity);
+        }
+        activity.finish();
     }
 
     /**
@@ -45,5 +55,7 @@ public class ActivityUtil {
         for (int i = 0; i < actList.size(); i++) {
             actList.get(i).finish();
         }
+        actList.clear();
+        actMap.clear();
     }
 }

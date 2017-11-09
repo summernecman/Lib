@@ -9,15 +9,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 
 import com.android.lib.base.activity.BaseUIActivity;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.LogUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.util.system.UUUIDUtil;
 import com.hyphenate.chat.EMClient;
@@ -31,6 +34,7 @@ import com.siweisoft.service.netdb.crash.CrashOpe;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.recept.ReceiptFrag;
+import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
 
 import butterknife.OnClick;
 import butterknife.Optional;
@@ -48,8 +52,15 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(getResources().getColor(R.color.color_base_nurse));
+        }
         getP().getU().initViewPager(getSupportFragmentManager(), getP().getD().getFragment());
         loginInfoBroadCast = new LoginInfoBroadCast();
         IntentFilter intentFilter = new IntentFilter();
@@ -64,7 +75,6 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         EMClient.getInstance().callManager().addCallStateChangeListener(getP().getD().getVideoChatListener());
         EMClient.getInstance().chatManager().addMessageListener(getP().getD().getEmMsgListener());
         EMClient.getInstance().addConnectionListener(getP().getD().getChatConnectListener());
-
     }
 
 
@@ -75,9 +85,9 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         }
 
 
-        if (FragmentUtil2.fragMap.get(Value.FULLSCREEN) != null
-                && FragmentUtil2.fragMap.get(Value.FULLSCREEN).size() >= 1
-                && FragmentUtil2.fragMap.get(Value.FULLSCREEN).get(FragmentUtil2.fragMap.get(Value.FULLSCREEN).size() - 1).getClass().getName().equals(ReceiptFrag.class.getName())) {
+        if (FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN) != null
+                && FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN).size() >= 1
+                && FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN).get(FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN).size() - 1).getClass().getName().equals(ReceiptFrag.class.getName())) {
             FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
             try {
                 EMClient.getInstance().callManager().rejectCall();
@@ -89,13 +99,21 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
             return;
         }
 
+        if (FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN) != null
+                && FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN).size() >= 1
+                && FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN).get(FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN).size() - 1).getClass().getName().equals(VideoChatFrag.class.getName())) {
+            FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
 
-        if (FragmentUtil2.fragMap.get(Value.FULLSCREEN) != null && FragmentUtil2.fragMap.get(Value.FULLSCREEN).size() == 1) {
+            return;
+        }
+
+
+        if (FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN) != null && FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN).size() == 1) {
             FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
             return;
         }
 
-        if (FragmentUtil2.fragMap.get(Value.getNowRoot()).size() == 1) {
+        if (FragmentUtil2.getInstance().getFragMap().get(Value.getNowRoot()).size() == 1) {
             FragmentUtil2.getInstance().clear();
             //ToastUtil.getInstance().showShort(activity, "请从设置里退出");
             this.finish();
@@ -256,5 +274,11 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
 //                ((ServieApp) activity.getApplication()).exit();
             }
         });
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        LogUtil.E("finish");
     }
 }

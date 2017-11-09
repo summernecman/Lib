@@ -4,7 +4,6 @@ package com.siweisoft.service.ui.setting.setting;
 
 import android.view.View;
 
-import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.LogUtil;
 import com.hyphenate.chat.EMClient;
 import com.siweisoft.service.R;
@@ -36,7 +35,6 @@ public class SettingFrag extends BaseServerFrag<SettingUIOpe, SettingDAOpe> {
                 LogUtil.E(3);
                 //FragmentUtil2.getInstance().initClear(activity);
                 LogUtil.E(4);
-                FragmentUtil2.getInstance().clear();
                 LogUtil.E(5);
                 ((ServieApp) activity.getApplication()).exit();
                 LogUtil.E(6);

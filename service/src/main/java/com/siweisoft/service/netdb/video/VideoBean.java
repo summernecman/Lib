@@ -5,7 +5,10 @@ import android.databinding.Bindable;
 
 import com.android.lib.bean.BaseBean;
 import com.siweisoft.service.netdb.user.UserBean;
+import com.siweisoft.service.netdb.videodetail.VideoDetailBean;
 import com.siweisoft.service.ui.Constant.Value;
+
+import java.util.ArrayList;
 
 /**
  * Created by SWSD on 17-08-24.
@@ -48,6 +51,18 @@ public class VideoBean extends BaseBean {
     private UserBean toUser;
 
     private int uploaded;
+
+    private boolean isfrom = false;
+
+    private int callstate;
+
+    public static final int CALL_STATE_SUCCESS = 1;
+
+    public static final int CALL_STATE_FAIL = 0;
+
+    public static final int CALL_STATE_REJECT = 2;
+
+    private ArrayList<VideoDetailBean> videodetail;
 
     @Bindable
     public int getId() {
@@ -199,6 +214,50 @@ public class VideoBean extends BaseBean {
         this.uploaded = uploaded;
     }
 
+    public boolean isIsfrom() {
+        return isfrom;
+    }
+
+    public void setIsfrom(boolean isfrom) {
+        this.isfrom = isfrom;
+    }
+
+    public int getCallstate() {
+        return callstate;
+    }
+
+    public void setCallstate(int callstate) {
+        this.callstate = callstate;
+    }
+
+    public VideoBean getSame() {
+        VideoBean videoBean = new VideoBean();
+        videoBean.setCreated(getCreated());
+        videoBean.setFile(getFile());
+        videoBean.setFromchatid(getFromchatid());
+        videoBean.setFromid(getFromid());
+        videoBean.setFromphone(getFromphone());
+        videoBean.setFromUser(getFromUser());
+        videoBean.setId(getId());
+        videoBean.setIsfrom(isIsfrom());
+        videoBean.setTimenum(getTimenum());
+        videoBean.setTochatid(getTochatid());
+        videoBean.setToid(getToid());
+        videoBean.setTophone(getTophone());
+        videoBean.setToUser(getToUser());
+        videoBean.setUploaded(getUploaded());
+        videoBean.setVideodetail(getVideodetail());
+        return videoBean;
+    }
+
+    public ArrayList<VideoDetailBean> getVideodetail() {
+        return videodetail;
+    }
+
+    public void setVideodetail(ArrayList<VideoDetailBean> videodetail) {
+        this.videodetail = videodetail;
+    }
+
     @Override
     public String toString() {
         return "VideoBean{" +
@@ -217,6 +276,8 @@ public class VideoBean extends BaseBean {
                 ", fromUser=" + fromUser +
                 ", toUser=" + toUser +
                 ", uploaded=" + uploaded +
+                ", isfrom=" + isfrom +
+                ", videodetail=" + videodetail +
                 '}';
     }
 }

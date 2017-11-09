@@ -9,6 +9,7 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.exception.exception.CrashHander;
 import com.android.lib.service.main.AppService;
+import com.android.lib.util.LogUtil;
 import com.android.lib.util.SPUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.hyphenate.chat.EMClient;
@@ -31,8 +32,8 @@ public class ServieApp extends LibAplication implements OnFinishListener {
     public void onCreate() {
         super.onCreate();
         UrlConstant.HTTP = "http://";
-        UrlConstant.NETSTART = "106.14.161.168";
-        //UrlConstant.NETSTART = "192.168.20.175";
+        UrlConstant.NETSTART = "106.14.161.168:8079";
+        //UrlConstant.NETSTART = "192.168.20.187:8079";
 
         UrlConstant.URI = UrlConstant.HTTP + UrlConstant.NETSTART + "/server";
         UrlConstant.fileUrl = UrlConstant.HTTP + UrlConstant.NETSTART + "/files";
@@ -51,7 +52,7 @@ public class ServieApp extends LibAplication implements OnFinishListener {
 
 
         startService(new Intent(this, AppService.class));
-
+        startService(new Intent(getBaseContext(), com.siweisoft.service.AppServer.class));
 
         new EMChatOpe(this).initEM(this);
 
@@ -60,17 +61,22 @@ public class ServieApp extends LibAplication implements OnFinishListener {
 
         SMSSDK.getInstance().initSdk(this);
         //SMSSDK.getInstance().setIntervalTime(5000);
-        SMSSDK.getInstance().setDebugMode(true);
+        SMSSDK.getInstance().setDebugMode(false);
 
         JPushInterface.init(this);
-        JPushInterface.setDebugMode(true);
-
+        JPushInterface.setDebugMode(false);
+        LogUtil.CAN_LOGIN = true;
 
     }
 
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+    }
 
     @Override
     public void exit() {
+        LogUtil.E("exit");
         super.exit();
     }
 

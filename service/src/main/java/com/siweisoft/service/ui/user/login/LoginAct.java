@@ -23,6 +23,8 @@ public class LoginAct extends BaseUIActivity<BaseUIOpe, BaseDAOpe> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         String[] permissions = new String[]{
                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -98,9 +100,9 @@ public class LoginAct extends BaseUIActivity<BaseUIOpe, BaseDAOpe> {
 
     @Override
     public void onBackPressed() {
-        if (FragmentUtil2.fragMap.get(R.id.act_base_root) == null) {
+        if (FragmentUtil2.getInstance().getFragMap().get(R.id.act_base_root) == null) {
             finish();
-        } else if (FragmentUtil2.fragMap.get(R.id.act_base_root).size() == 1) {
+        } else if (FragmentUtil2.getInstance().getFragMap().get(R.id.act_base_root).size() == 1) {
             FragmentUtil2.getInstance().clear();
             this.finish();
         } else {

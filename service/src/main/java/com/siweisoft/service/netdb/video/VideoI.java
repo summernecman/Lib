@@ -41,5 +41,10 @@ public interface VideoI {
 
     public void getUnUploadVideoNum(UserBean userBean, OnFinishListener onFinishListener);
 
+    public void updateCallState(VideoBean videoBean, OnFinishListener onFinishListener);
+
+    public void updateVideoCallTimeNum(VideoBean videoBean, OnFinishListener onFinishListener);
+
+
 
 }

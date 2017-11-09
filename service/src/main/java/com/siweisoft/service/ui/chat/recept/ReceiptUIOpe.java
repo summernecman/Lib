@@ -25,4 +25,6 @@ public class ReceiptUIOpe extends BaseUIOpe<FragReceiptBinding> {
         ViewAnimator.animate(bind.tvReceipt).shake().interpolator(new LinearInterpolator()).duration(10000).start();
         ViewAnimator.animate(bind.tvRefuse).shake().interpolator(new LinearInterpolator()).duration(10000).start();
     }
+
+
 }

@@ -6,6 +6,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.android.lib.appthread.AppThread;
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.interf.OnFinishWithObjI;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.LogUtil;
@@ -18,6 +19,12 @@ public class AppService extends Service {
 
 
     int index = -1;
+
+    private OnFinishListener onFinishListener;
+//
+//    public AppService(OnFinishListener onFinishListener) {
+//        this.onFinishListener = onFinishListener;
+//    }
 
     @Override
     public void onCreate() {
@@ -49,5 +56,17 @@ public class AppService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        super.onTaskRemoved(rootIntent);
+        if (onFinishListener != null) {
+            onFinishListener.onFinish(null);
+        }
+    }
+
+    public void setOnFinishListener(OnFinishListener onFinishListener) {
+        this.onFinishListener = onFinishListener;
     }
 }

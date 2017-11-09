@@ -22,6 +22,7 @@ import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.share.ShareBean;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
+import com.siweisoft.service.netdb.videodetail.VideoDetailBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userlist.UserListFrag;
 
@@ -45,16 +46,20 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
         getP().getU().initTitle(this);
         getP().getD().setType(getArguments().getInt(ValueConstant.DATA_TYPE, 0));
         getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
+        getP().getD().setVideoDetailBean((VideoDetailBean) getArguments().getSerializable(ValueConstant.DATA_DATA2));
+        getP().getD().getVideoBean().setFile(getP().getD().getVideoDetailBean().getUrl());
         getP().getU().initTips(getP().getD().userInfoDAOpe.getData());
         getP().getD().getCollectionBean().setVideoid(getP().getD().getVideoBean().getId());
-        getP().getU().initUpload(getP().getD().getVideoBean(), this);
-        getP().getU().initDownload(getP().getD().getVideoBean(), this);
-        getP().getU().play(getP().getD().getVideoBean(), getP().getD().getLoadFile(getP().getD().getVideoBean()), new OnFinishListener() {
+        getP().getU().initUpload(getP().getD().getVideoDetailBean(), this);
+        getP().getU().initDownload(getP().getD().getVideoDetailBean(), this);
+        getP().getU().play(getP().getD().getVideoDetailBean(), getP().getD().getLoadFile(getP().getD().getVideoDetailBean()), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getU().initTxt(getP().getD().getVideoBean(), (boolean) o);
+
             }
         });
+
+
         getP().getD().getComment(getP().getD().getVideoBean(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
@@ -129,7 +134,7 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
     public void onDestroy() {
         super.onDestroy();
         GSYVideoPlayer.releaseAllVideos();
-        getP().getU().getOrientationUtils().releaseListener();
+        //getP().getU().getOrientationUtils().releaseListener();
     }
 
 
@@ -141,7 +146,7 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                 if (!v.isSelected()) {
                     v.setEnabled(false);
 
-                    getP().getD().downloadFile(getP().getD().getVideoBean(), new NetWork.MyFileDownloadCallBack<File>() {
+                    getP().getD().downloadFile(getP().getD().getVideoDetailBean(), new NetWork.MyFileDownloadCallBack<File>() {
                         @Override
                         public void onLoading(long total, long current, boolean isDownloading) {
                             super.onLoading(total, current, isDownloading);
@@ -173,7 +178,7 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                 break;
             case R.id.tv_upload:
                 v.setEnabled(false);
-                getP().getD().uploadVideo(getP().getD().getVideoBean(), new OnFinishListener() {
+                getP().getD().uploadVideo(getP().getD().getVideoBean(), getP().getD().getVideoDetailBean(), new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
                         if (o instanceof BaseResBean) {
@@ -184,6 +189,7 @@ public class VideoPlayFrag extends BaseServerFrag<VideoPlayUIOpe, VideoPlayDAOpe
                                 v.setVisibility(View.GONE);
                                 ToastUtil.getInstance().showShort(activity, "上传成功");
                                 v.setEnabled(false);
+                                getP().getD().getVideoDetailBean().setUploaded(1);
                             }
                         }
                     }

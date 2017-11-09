@@ -3,7 +3,6 @@ package com.siweisoft.service.ui.video.videoplay;
 //by summer on 17-08-24.
 
 import android.content.Context;
-import android.os.Environment;
 
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
@@ -13,7 +12,6 @@ import com.android.lib.util.NullUtil;
 import com.siweisoft.service.netdb.collection.CollectionBean;
 import com.siweisoft.service.netdb.collection.CollectionI;
 import com.siweisoft.service.netdb.collection.CollectionOpe;
-import com.siweisoft.service.netdb.comment.CommentI;
 import com.siweisoft.service.netdb.comment.CommentOpe;
 import com.siweisoft.service.netdb.share.ShareBean;
 import com.siweisoft.service.netdb.share.ShareI;
@@ -22,6 +20,8 @@ import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.netdb.video.VideoI;
 import com.siweisoft.service.netdb.video.VideoOpe;
+import com.siweisoft.service.netdb.videodetail.VideoDetailBean;
+import com.siweisoft.service.netdb.videodetail.VideoDetailOpe;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userinfo.UserInfoDAOpe;
 
@@ -33,7 +33,7 @@ public class VideoPlayDAOpe extends BaseDAOpe {
 
     UserInfoDAOpe userInfoDAOpe;
 
-    CommentI commentI;
+    CommentOpe commentI;
 
     CollectionI collectionI;
 
@@ -45,9 +45,12 @@ public class VideoPlayDAOpe extends BaseDAOpe {
 
     private int type = 0;
 
+    private VideoDetailBean videoDetailBean;
+
     CollectionBean collectionBean = new CollectionBean();
 
 
+    VideoDetailOpe videoDetailI;
 
     public VideoPlayDAOpe(Context context) {
         super(context);
@@ -110,13 +113,13 @@ public class VideoPlayDAOpe extends BaseDAOpe {
     }
 
 
-    public void uploadVideo(final VideoBean videoBean, final OnFinishListener onFinishListener, final OnFinishListener onFinishListener2) {
+    public void uploadVideo(final VideoBean videoBean, final VideoDetailBean vv, final OnFinishListener onFinishListener, final OnFinishListener onFinishListener2) {
         final String f = videoBean.getFile();
         if (NullUtil.isStrEmpty(videoBean.getFile())) {
             return;
         }
         final String[] ss = videoBean.getFile().split("/");
-        File file = new File(Environment.getExternalStorageDirectory() + "/videorecord", ss[ss.length - 1]);
+        File file = new File(Value.getCacheFile(), ss[ss.length - 1]);
         videoBean.setFile(file.getPath());
         if (videoi == null) {
             videoi = new VideoOpe(context);
@@ -132,7 +135,10 @@ public class VideoPlayDAOpe extends BaseDAOpe {
             @Override
             public void onFinish(Object o) {
                 videoBean.setFile(f);
-                videoi.setVideoUploaded(videoBean, onFinishListener);
+                if (videoDetailI == null) {
+                    videoDetailI = new VideoDetailOpe(context);
+                }
+                videoDetailI.updateUpload(vv, onFinishListener);
             }
         }, onFinishListener2);
     }
@@ -146,36 +152,29 @@ public class VideoPlayDAOpe extends BaseDAOpe {
     }
 
 
-    public void downloadFile(VideoBean videoBean, NetWork.MyFileDownloadCallBack callBack) {
-        String[] ss = videoBean.getFile().split("/");
-        if (ss.length > 0) {
-            String name = ss[ss.length - 1];
-            File file = new File(Value.getCacheFile(), name);
-            NetWork.getInstance(context).download(videoBean.getFile(), file.getPath(), callBack);
-        }
+    public void downloadFile(VideoDetailBean videoDetailBean, NetWork.MyFileDownloadCallBack callBack) {
+
+        NetWork.getInstance(context).download(videoDetailBean.getUrl(), VideoPlayDAOpe.getLoadFile(videoDetailBean), callBack);
 
     }
 
-    public static String getLoadFile(VideoBean videoBean) {
-        String[] ss = videoBean.getFile().split("/");
-        if (ss.length > 0) {
-            String name = ss[ss.length - 1];
-            File file = new File(Value.getCacheFile(), name);
-            return file.getPath();
+    public static String getLoadFile(VideoDetailBean videoDetailBean) {
+        String[] ss = videoDetailBean.getUrl().split("/");
+        if (ss.length == 0) {
+            return "";
         }
-        return "";
+        File file = new File(Value.getCacheFile(), ss[ss.length - 1]);
+        return file.getPath();
     }
 
-    public static boolean isLoadFileExit(VideoBean videoBean) {
-        String[] ss = videoBean.getFile().split("/");
-        if (ss.length > 0) {
-            String name = ss[ss.length - 1];
-            File file = new File(Value.getCacheFile(), name);
-            return file.exists();
-        }
-        return false;
+
+    public VideoDetailBean getVideoDetailBean() {
+        return videoDetailBean;
     }
 
+    public void setVideoDetailBean(VideoDetailBean videoDetailBean) {
+        this.videoDetailBean = videoDetailBean;
+    }
 
     public UserBean getUserBean() {
         return userBean;

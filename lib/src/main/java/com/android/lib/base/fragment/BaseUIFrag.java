@@ -175,6 +175,7 @@ public abstract class BaseUIFrag<A extends BaseUIOpe, B extends BaseDAOpe> exten
     public void dealMesage(MessageEvent event) {
         LogUtil.E(event.dealer + ":" + getClass().getName());
         if (!event.dealer.equals(getClass().getName())) {
+            event.isme = false;
             return;
         }
     }

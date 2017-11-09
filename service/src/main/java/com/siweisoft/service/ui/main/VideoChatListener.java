@@ -26,7 +26,7 @@ public class VideoChatListener implements EMCallStateChangeListener {
 
     @Override
     public void onCallStateChanged(CallState callState, CallError error) {
-        LogUtil.E(callState);
+        LogUtil.E("callstate" + callState.name() + ":" + error.name());
         switch (error) {
             case ERROR_BUSY:
                 ToastUtil.getInstance().showShort(context, "对方正忙");
@@ -36,6 +36,12 @@ public class VideoChatListener implements EMCallStateChangeListener {
                 break;
             case REJECTED:
                 ToastUtil.getInstance().showShort(context, "对方已挂断");
+                break;
+            case ERROR_UNAVAILABLE:
+                ToastUtil.getInstance().showShort(context, "无法连接对方,对方可能不在线");
+                break;
+            default:
+                //ToastUtil.getInstance().showShort(context, ""+error.toString());
                 break;
         }
 

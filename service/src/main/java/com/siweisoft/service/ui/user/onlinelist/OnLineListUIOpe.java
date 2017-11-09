@@ -62,7 +62,7 @@ public class OnLineListUIOpe extends BaseUIOpe<FragOnlinelistBinding> {
                 viewDataBinding.ivCall.setOnClickListener(this);
                 viewDataBinding.tvName.setText(NullUtil.isStrEmpty(data.get(position).getName()) ? data.get(position).getPhone() : StringUtil.getStr(data.get(position).getName()));
                 viewDataBinding.ratingbar.setStar(data.get(position).getRate());
-                GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
+                GlideApp.with(context).asBitmap().centerInside().placeholder(R.drawable.icon_head1).placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/" + data.get(position).getHeadurl()).into(viewDataBinding.ivHead);
                 if (data.get(position).getState() == UserBean.STATE_OFFLINE) {
                     viewDataBinding.getRoot().setAlpha(0.3f);
                     viewDataBinding.ivHead1.setSelected(false);
@@ -73,13 +73,13 @@ public class OnLineListUIOpe extends BaseUIOpe<FragOnlinelistBinding> {
 
                 switch (data.get(position).getUsertype()) {
                     case UserBean.CUSTOME:
-                        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_customer.png").into(viewDataBinding.ivHeadType);
+                        GlideApp.with(context).asBitmap().centerInside().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_customer.png").into(viewDataBinding.ivHeadType);
                         break;
                     case UserBean.ENGINEER:
-                        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_engineer.png").into(viewDataBinding.ivHeadType);
+                        GlideApp.with(context).asBitmap().centerInside().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_engineer.png").into(viewDataBinding.ivHeadType);
                         break;
                     case UserBean.SERVER:
-                        GlideApp.with(context).asBitmap().centerCrop().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_server.png").into(viewDataBinding.ivHeadType);
+                        GlideApp.with(context).asBitmap().centerInside().placeholder(R.drawable.icon_head1).load(UrlConstant.fileUrl + "/usertype/icon_server.png").into(viewDataBinding.ivHeadType);
                         break;
                 }
 

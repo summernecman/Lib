@@ -1,6 +1,8 @@
 package com.android.lib.util;
 
+import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -22,7 +24,7 @@ public class FragmentUtil2 {
 
     //public static ArrayList<Fragment> fragments = new ArrayList<>();
 
-    public static HashMap<Integer, ArrayList<Fragment>> fragMap = new HashMap<>();
+    private HashMap<Integer, ArrayList<Fragment>> fragMap = new HashMap<>();
 
     Handler handler = new Handler();
 
@@ -222,25 +224,36 @@ public class FragmentUtil2 {
         transaction.commitAllowingStateLoss();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void initClear(FragmentActivity fragmentActivity) {
+        LogUtil.E(1);
+        if (fragmentActivity == null) {
+            return;
+        }
         ArrayList<Fragment> fragments = (ArrayList<Fragment>) fragmentActivity.getSupportFragmentManager().getFragments();
+        LogUtil.E(2);
         FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
+        LogUtil.E(3);
         for (int i = 0; fragments != null && i < fragments.size(); i++) {
-            try {
-                transaction.remove(fragments.get(i));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            LogUtil.E(4);
+            transaction.remove(fragments.get(i));
+            LogUtil.E(5);
         }
-        try {
-            transaction.commitAllowingStateLoss();
-        } catch (Exception e) {
-            e.printStackTrace();
+        LogUtil.E(6);
+        if (fragmentActivity == null || fragmentActivity.isDestroyed()) {
+            return;
         }
+        transaction.commitAllowingStateLoss();
+        LogUtil.E(7);
+        LogUtil.E(8);
+    }
+
+    public HashMap<Integer, ArrayList<Fragment>> getFragMap() {
+        return fragMap;
     }
 
     public String print() {
-        String s = "";
+        String s = "print";
         Iterator i = fragMap.keySet().iterator();
         while (i.hasNext()) {
             Integer in = (Integer) i.next();

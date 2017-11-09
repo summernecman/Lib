@@ -127,12 +127,15 @@
 
 
         <Button
+            android:background="@drawable/drawable_press_maincolor_gray_radious"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
             android:id="@+id/onRegist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:textColor="@color/white"
+            android:textSize="17sp"
             android:text="重置密码" />
 
         <TextView

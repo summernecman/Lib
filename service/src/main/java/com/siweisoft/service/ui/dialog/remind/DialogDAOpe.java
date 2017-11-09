@@ -1,4 +1,4 @@
-package com.siweisoft.service.ui.dialog;
+package com.siweisoft.service.ui.dialog.remind;
 
 //by summer on 17-09-11.
 

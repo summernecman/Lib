@@ -3,7 +3,7 @@ apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
     useLibrary 'org.apache.http.legacy'
     //android 6.0 之后 取消支持 Apache HTTP 客户端，要继续使用 Apache HTTP API，您必须先在 build.gradle 文件中声明以下编译时依赖项：
     defaultConfig {
@@ -81,8 +81,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
-    compile 'com.jakewharton:butterknife:8.6.0'//状态栏设置
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'//注解
+    compile 'com.jakewharton:butterknife:8.4.0'//状态栏设置
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'//注解
     compile 'com.github.florent37:viewanimator:1.0.5'//动画帮助
     compile 'org.greenrobot:eventbus:3.0.0'//消息总线处理
     compile 'com.lzy.widget:imagepicker:0.5.5'//图片选择

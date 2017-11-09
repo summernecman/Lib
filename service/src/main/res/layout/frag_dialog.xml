@@ -12,13 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
+
         android:orientation="vertical">
 
         <LinearLayout
             android:elevation="1dp"
             android:layout_centerInParent="true"
             android:layout_margin="20dp"
-            android:background="@drawable/drawable_border_round"
+            android:background="@color/white"
             android:padding="20dp"
             android:gravity="center"
             android:layout_gravity="center"
@@ -46,9 +47,9 @@
 
                 <TextView
                     android:id="@+id/tv_receipt"
-                    android:background="@drawable/drawable_border_round"
-                    android:textColor="@color/red"
-                    android:textSize="20sp"
+                    android:background="@drawable/drawable_press_maincolor_gray_radious"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
                     android:gravity="center"
                     android:text="现在上传"
                     android:layout_width="100dp"
@@ -57,9 +58,9 @@
                 <TextView
                     android:id="@+id/tv_refuse"
                     android:layout_marginLeft="20dp"
-                    android:background="@drawable/drawable_border_round"
-                    android:textColor="@color/red"
-                    android:textSize="20sp"
+                    android:background="@drawable/drawable_radious_white2"
+                    android:textColor="@color/color_black_white"
+                    android:textSize="16sp"
                     android:gravity="center"
                     android:text="以后上传"
                     android:layout_width="100dp"

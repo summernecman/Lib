@@ -13,6 +13,7 @@ import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.netdb.video.VideoI;
 import com.siweisoft.service.netdb.video.VideoOpe;
+import com.siweisoft.service.netdb.videodetail.VideoDetailOpe;
 import com.siweisoft.service.ui.Constant.Value;
 
 public class VideoChatDAOpe extends BaseDAOpe {
@@ -30,6 +31,14 @@ public class VideoChatDAOpe extends BaseDAOpe {
     private ThreadUtil threadUtil = new ThreadUtil();
 
     private String path = "";
+
+    private String voicestr = "";
+
+    private String videostr = "";
+
+    public int sw = 0;
+
+    private VideoDetailOpe videoDetailI;
 
     public VideoChatDAOpe(Context context) {
         super(context);
@@ -113,6 +122,7 @@ public class VideoChatDAOpe extends BaseDAOpe {
         });
     }
 
+
     public boolean isAccept() {
         return accept;
     }
@@ -129,6 +139,15 @@ public class VideoChatDAOpe extends BaseDAOpe {
         this.threadUtil = threadUtil;
     }
 
+
+    public void updateCallState(VideoBean v, int state) {
+        if (videoI == null) {
+            videoI = new VideoOpe(context.getApplicationContext());
+        }
+        v.setCallstate(state);
+        videoI.updateCallState(v, null);
+    }
+
     public static boolean isFromUser(VideoBean videoBean) {
         if (Value.getUserInfo().getPhone().equals(videoBean.getFromUser().getPhone())) {
             return true;
@@ -136,9 +155,6 @@ public class VideoChatDAOpe extends BaseDAOpe {
         return false;
     }
 
-    public static boolean isRecordVideo(VideoBean videoBean) {
-        return !isSendVideo(videoBean);
-    }
 
     /**
      * 发送视频信号方 非录制视频方   目前非发送视频信号方 将录制视频
@@ -175,6 +191,13 @@ public class VideoChatDAOpe extends BaseDAOpe {
         return true;
     }
 
+    public static boolean isRecordVideo() {
+        if (Value.getUserInfo().getUsertype() == UserBean.CUSTOME) {
+            return false;
+        }
+        return true;
+    }
+
 
 
 
@@ -185,4 +208,23 @@ public class VideoChatDAOpe extends BaseDAOpe {
     public void setPath(String path) {
         this.path = path;
     }
+
+    public String getVoicestr() {
+        return voicestr;
+    }
+
+    public void setVoicestr(String voicestr) {
+        this.voicestr = voicestr;
+    }
+
+    public String getVideostr() {
+        return videostr;
+    }
+
+    public void setVideostr(String videostr) {
+        this.videostr = videostr;
+    }
+
+
+
 }

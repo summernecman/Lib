@@ -1,9 +1,10 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
 
+    <style name="Theme.AppCompat.Light.NoActionBar1" parent="@style/Theme.AppCompat.Light">
+        <item name="android:windowNoTitle">true</item>
     </style>
-
 
     <style name="swdialog" parent="android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>

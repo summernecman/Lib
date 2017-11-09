@@ -82,7 +82,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:padding="1dp"
-                android:src="@drawable/drawable_setting" />
+                android:src="@drawable/drawable_setting1" />
 
             <TextView
                 android:id="@+id/tv_check"

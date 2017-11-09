@@ -54,6 +54,13 @@ public class UserHeadNameFrag extends BaseServerFrag<UserHeadNameUIOpe, UserHead
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        getP().getU().initInfo();
+    }
+
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data == null) {
             return;

@@ -26,7 +26,6 @@ import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.Constant.VideoValue;
 import com.siweisoft.service.ui.chat.remark.RemarkFrag;
 import com.siweisoft.service.ui.main.VideoChatListener;
 
@@ -72,24 +71,16 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
 
     public void finish() {
         getP().getD().getThreadUtil().stop();
-        getP().getD().setEnd(System.currentTimeMillis());
-        getP().getU().bind.surfaceview.release();
+        getP().getU().bind.surfaceviewremove.release();
+        getP().getU().bind.surfaceviewlocal.release();
         if (getP().getD().getVideoBean() == null) {
             return;
         }
-        //录制方
-        if (!getP().getD().isSendVideo(getP().getD().getVideoBean())) {
-            LogUtil.E(getP().getD().getPath());
-            getP().getD().getVideoBean().setFile(getP().getD().getPath());
-            getP().getD().getVideoBean().setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
-            getP().getD().getVideoBean().setTimenum(getP().getD().getMinute());
-        } else {
-            //非录制方
-            getP().getD().getVideoBean().setFile("");
-            getP().getD().getVideoBean().setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
-            getP().getD().getVideoBean().setTimenum(getP().getD().getMinute());
-        }
-        FragmentUtil2.fragMap.isEmpty();
+        getP().getD().getVideoBean().setFile(getP().getD().getPath());
+        getP().getD().getVideoBean().setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
+        getP().getD().getVideoBean().setTimenum(getP().getD().getMinute());
+        FragmentUtil2.getInstance().getFragMap().isEmpty();
+        ToastUtil.getInstance().showShort(activity, getP().getD().getPath());
         if (getP().getD().isAccept()) {
             RemarkFrag remarkFrag = new RemarkFrag();
             remarkFrag.setArguments(new Bundle());
@@ -107,22 +98,27 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
             final EMCallStateChangeListener.CallState state = (EMCallStateChangeListener.CallState) event.data;
             switch (state) {
                 case VIDEO_PAUSE:
-                    ToastUtil.getInstance().showShort(activity, "对方关闭了视频");
+                    // ToastUtil.getInstance().showShort(activity, "对方关闭了视频");
+                    getP().getD().setVideostr("对方关闭了视频");
                     break;
                 case VOICE_PAUSE:
-                    ToastUtil.getInstance().showShort(activity, "对方关闭了音频");
+                    // ToastUtil.getInstance().showShort(activity, "对方关闭了音频");
+                    getP().getD().setVoicestr("对方关闭了音频");
                     break;
                 case VIDEO_RESUME:
-                    ToastUtil.getInstance().showShort(activity, "对方恢复了视频");
+                    //ToastUtil.getInstance().showShort(activity, "对方恢复了视频");
+                    getP().getD().setVideostr("对方恢复了视频");
                     break;
                 case VOICE_RESUME:
-                    ToastUtil.getInstance().showShort(activity, "对方恢复了音频");
+                    //ToastUtil.getInstance().showShort(activity, "对方恢复了音频");
+                    getP().getD().setVoicestr("对方恢复了音频");
                     break;
                 case DISCONNECTED:
                     String s = EMClient.getInstance().callManager().getVideoCallHelper().stopVideoRecord();
                     if (!NullUtil.isStrEmpty(s)) {
                         getP().getD().setPath(s);
                     }
+                    getP().getD().setEnd(System.currentTimeMillis());
                     ToastUtil.getInstance().showShort(activity, "通话已结束");
                     try {
                         EMClient.getInstance().callManager().endCall();
@@ -136,29 +132,28 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                     LogUtil.E("接受到录音指令2");
                     getP().getU().hideCallInfo();
                     getP().getD().setAccept(true);
+                    EMClient.getInstance().callManager().setSurfaceView(getP().getU().bind.surfaceviewlocal, getP().getU().bind.surfaceviewremove);
 
-
-                    if (getP().getD().isSendVideo(getP().getD().getVideoBean())) {
-                        EMClient.getInstance().callManager().setSurfaceView(getP().getU().bind.surfaceview, null);
-                        getP().getU().bind.btnCamera.setVisibility(View.VISIBLE);
-                        getP().getU().bind.btnSwitchvideo.setVisibility(View.VISIBLE);
-                    } else {
-                        EMClient.getInstance().callManager().setSurfaceView(null, getP().getU().bind.surfaceview);
-                        getP().getU().bind.btnCamera.setVisibility(View.GONE);
-                        getP().getU().bind.btnSwitchvideo.setVisibility(View.GONE);
-                    }
-
+//                    if (getP().getD().isSendVideo(getP().getD().getVideoBean())) {
+//                        EMClient.getInstance().callManager().setSurfaceView(getP().getU().bind.surfaceviewlocal, getP().getU().bind.surfaceviewremove);
+//                        getP().getU().bind.btnCamera.setVisibility(View.VISIBLE);
+//                        getP().getU().bind.btnSwitchvideo.setVisibility(View.VISIBLE);
+//                    } else {
+//                        EMClient.getInstance().callManager().setSurfaceView(getP().getU().bind.surfaceviewlocal, getP().getU().bind.surfaceviewremove);
+//                        getP().getU().bind.btnCamera.setVisibility(View.GONE);
+//                        getP().getU().bind.btnSwitchvideo.setVisibility(View.GONE);
+//                    }
 
 
                     //建立通话后
-                    if (!getP().getD().isSendVideo(getP().getD().getVideoBean())) {
+                    getP().getD().setStart(System.currentTimeMillis());
+                    if (getP().getD().isRecordVideo()) {
                         ToastUtil.getInstance().showLong(activity, "开始录制");
                         activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                getP().getD().setStart(System.currentTimeMillis());
                                 EMClient.getInstance().callManager().getVideoCallHelper().stopVideoRecord();
-                                EMClient.getInstance().callManager().getVideoCallHelper().startVideoRecord(VideoValue.getRecordFileDir().getPath());
+                                EMClient.getInstance().callManager().getVideoCallHelper().startVideoRecord(Value.getCacheFile().getPath());
                                 ToastUtil.getInstance().showLong(activity, "开始录制");
                             }
                         });
@@ -184,19 +179,35 @@ public class VideoChatFrag extends BaseServerFrag<VideoChatUIOpe, VideoChatDAOpe
                     });
                     break;
             }
+            switch (state) {
+                case VIDEO_PAUSE:
+                case VOICE_PAUSE:
+                case VIDEO_RESUME:
+                case VOICE_RESUME:
+                    ToastUtil.getInstance().showShort(activity, getP().getD().getVideostr() + "  " + getP().getD().getVoicestr());
+                    break;
+            }
         }
     }
 
-    @OnClick({R.id.endCall, R.id.btn_switchvideo, R.id.btn_speak, R.id.btn_camera, R.id.surfaceview})
+    @OnClick({R.id.endCall, R.id.btn_switchvideo, R.id.btn_speak, R.id.btn_camera, R.id.surfaceviewlocal, R.id.removeview})
     public void onClickEvent(View v) {
         switch (v.getId()) {
-            case R.id.surfaceview:
+            case R.id.removeview:
+                getP().getD().sw++;
+                if (getP().getD().sw % 2 == 1) {
+                    EMClient.getInstance().callManager().setSurfaceView(getP().getU().bind.surfaceviewremove, getP().getU().bind.surfaceviewlocal);
+                } else {
+                    EMClient.getInstance().callManager().setSurfaceView(getP().getU().bind.surfaceviewlocal, getP().getU().bind.surfaceviewremove);
+                }
+                break;
+            case R.id.surfaceviewlocal:
                 if (getP().getU().bind.llMenu.getVisibility() == View.VISIBLE) {
                     getP().getU().bind.llMenu.setVisibility(View.GONE);
-                    getP().getU().bind.btnSwitchvideo.setVisibility(View.GONE);
+                    getP().getU().bind.rlSwitchvideo.setVisibility(View.GONE);
                 } else {
                     getP().getU().bind.llMenu.setVisibility(View.VISIBLE);
-                    getP().getU().bind.btnSwitchvideo.setVisibility(View.VISIBLE);
+                    getP().getU().bind.rlSwitchvideo.setVisibility(View.VISIBLE);
                 }
                 break;
             case R.id.endCall:

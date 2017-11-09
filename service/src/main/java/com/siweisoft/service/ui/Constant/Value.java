@@ -9,12 +9,16 @@ import com.android.lib.constant.UrlConstant;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.GsonUtil;
 import com.android.lib.util.SPUtil;
+import com.google.gson.reflect.TypeToken;
 import com.hyphenate.chat.EMChatRoom;
 import com.siweisoft.service.R;
 import com.siweisoft.service.netdb.user.UserBean;
+import com.siweisoft.service.netdb.videotip.VideoTipBean;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class Value extends ValueConstant {
 
@@ -31,7 +35,44 @@ public class Value extends ValueConstant {
 
     public static EMChatRoom room;
 
+    public static String roomid;
+
     public static String ROOM;
+
+    public static String VIDEO_TIPS = "VIDEO_TIPS";
+
+    public static HashMap<Integer, VideoTipBean> videotips;
+
+
+    public static void saveVideoTips(String videotips) {
+        SPUtil.getInstance().saveStr(VIDEO_TIPS, videotips);
+
+        Value.videotips = GsonUtil.getInstance().fromJson(videotips, new TypeToken<HashMap<Integer, VideoTipBean>>() {
+        }.getType());
+    }
+
+    public static HashMap<Integer, VideoTipBean> getVideotips() {
+        if (videotips == null) {
+            videotips = GsonUtil.getInstance().fromJson(SPUtil.getInstance().getStr(VIDEO_TIPS), new TypeToken<HashMap<Integer, VideoTipBean>>() {
+            }.getType());
+        }
+        return videotips;
+    }
+
+    public static ArrayList<VideoTipBean> getVideotipsList() {
+        HashMap<Integer, VideoTipBean> data = getVideotips();
+        ArrayList<VideoTipBean> list = new ArrayList<>();
+        if (data.keySet() != null) {
+            Iterator<Integer> iterator = data.keySet().iterator();
+            while (iterator.hasNext()) {
+                list.add(data.get(iterator.next()));
+            }
+            return list;
+        }
+        return new ArrayList<>();
+    }
+
+
 
     public static void saveRoom(EMChatRoom o) {
         SPUtil.getInstance().saveStr(ROOM, GsonUtil.getInstance().toJson(o));

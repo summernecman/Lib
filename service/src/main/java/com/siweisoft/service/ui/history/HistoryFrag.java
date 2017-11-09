@@ -9,7 +9,6 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.listener.ViewListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
-import com.android.lib.util.StringUtil;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
 import com.siweisoft.service.R;
@@ -47,12 +46,12 @@ public class HistoryFrag extends BaseServerFrag<HistoryUIOpe, HistoryDAOpe> impl
             }
         });
         if (Value.getUserInfo().getUsertype() != UserBean.USER_TYPE_CUSTOMER) {
-            getP().getD().getUnUploadVideoNum(new OnFinishListener() {
-                @Override
-                public void onFinish(Object o) {
-                    setTitleBean(new TitleBean("", "呼叫历史", StringUtil.getStr(o).equals("0") ? "" : StringUtil.getStr(o)));
-                }
-            });
+//            getP().getD().getUnUploadVideoNum(new OnFinishListener() {
+//                @Override
+//                public void onFinish(Object o) {
+//                    setTitleBean(new TitleBean("", "呼叫历史", StringUtil.getStr(o).equals("0") ? "" : StringUtil.getStr(o)));
+//                }
+//            });
         }
     }
 

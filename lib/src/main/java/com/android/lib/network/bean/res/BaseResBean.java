@@ -8,6 +8,7 @@ import java.io.Serializable;
  */
 public class BaseResBean implements Serializable {
 
+    private Object other;
 
     private boolean isException = false;
 
@@ -54,10 +55,19 @@ public class BaseResBean implements Serializable {
         this.data = data;
     }
 
+    public Object getOther() {
+        return other;
+    }
+
+    public void setOther(Object other) {
+        this.other = other;
+    }
+
     @Override
     public String toString() {
         return "BaseResBean{" +
-                "isException=" + isException +
+                "other=" + other +
+                ", isException=" + isException +
                 ", errorCode=" + errorCode +
                 ", errorMessage='" + errorMessage + '\'' +
                 ", data=" + data +

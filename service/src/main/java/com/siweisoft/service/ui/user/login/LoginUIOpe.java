@@ -2,12 +2,15 @@ package com.siweisoft.service.ui.user.login;
 
 //by summer on 2017-07-03.
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
 
 import com.android.lib.base.listener.BaseTextWather;
 import com.android.lib.base.ope.BaseUIOpe;
+import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.LogUtil;
+import com.jaeger.library.StatusBarUtil;
 import com.siweisoft.service.GlideApp;
 import com.siweisoft.service.databinding.FragLoginBinding;
 import com.siweisoft.service.ui.Constant.Value;
@@ -18,7 +21,7 @@ public class LoginUIOpe extends BaseUIOpe<FragLoginBinding> {
     public LoginUIOpe(Context context) {
         super(context);
         //StatusBarUtil.getInstance().setStatusBarColorResId((Activity) context, R.color.color_base_nurse);
-
+        StatusBarUtil.setTranslucentForImageView((Activity) context, null);
     }
 
     public void initIp() {
@@ -29,6 +32,7 @@ public class LoginUIOpe extends BaseUIOpe<FragLoginBinding> {
                 Value.initNetUrl(context, s.toString());
             }
         });
+        bind.etServer.setText(UrlConstant.NETSTART);
     }
 
     public void initImage(String url) {

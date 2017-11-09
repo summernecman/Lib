@@ -88,6 +88,9 @@ public class RegistFrag extends BaseServerFrag<RegistUIOpe, RegistDAOpe> {
                 FragmentUtil2.getInstance().removeTop(activity, R.id.act_base_root);
                 break;
             case R.id.tv_getcode:
+                if (!getP().getU().vevifyPhone()) {
+                    return;
+                }
                 getP().getU().bind.tvGetcode.setEnabled(false);
                 getP().getD().sendCode(getP().getU().bind.etAccount.getText().toString(), new OnFinishListener() {
                     @Override
@@ -115,6 +118,12 @@ public class RegistFrag extends BaseServerFrag<RegistUIOpe, RegistDAOpe> {
                 break;
         }
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getP().getD().getThreadUtil().stop();
     }
 
 }

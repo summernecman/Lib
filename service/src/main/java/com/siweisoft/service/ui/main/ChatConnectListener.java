@@ -11,6 +11,7 @@ import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.siweisoft.service.ServieApp;
+import com.siweisoft.service.ui.Constant.Value;
 
 public class ChatConnectListener implements EMConnectionListener {
 
@@ -40,8 +41,11 @@ public class ChatConnectListener implements EMConnectionListener {
                 s = "未知的server异常";
                 break;
             default:
-                s = "应用断开了链接";
+                s = "应用断开了连接";
                 break;
+        }
+        if (Value.getRoom() != null) {
+            EMClient.getInstance().chatroomManager().leaveChatRoom(Value.getRoom().getId());
         }
         EMClient.getInstance().logout(true);
         LogUtil.E("onDisconnected2");

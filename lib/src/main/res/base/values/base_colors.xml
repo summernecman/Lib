@@ -15,7 +15,8 @@
 
     <color name="color_dark_red">#f59f9f</color>
 
-    <color name="color_base_nurse">@color/color_light_blue_500</color>
+    <color name="color_base_nurse">#10c55b</color>
+
 
     <color name="color_divide_line">#aaaaaa</color>
 

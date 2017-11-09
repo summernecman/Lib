@@ -4,7 +4,6 @@ package com.siweisoft.service.ui.videorecord;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.listener.ViewListener;
@@ -40,7 +39,6 @@ public class VideoRecordUIOpe extends BaseUIOpe<FragVideorecordBinding> {
                 public void onBindViewHolder(AppViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
                     ItemVideorecordBinding itemVideorecordBinding = (ItemVideorecordBinding) holder.viewDataBinding;
-                    itemVideorecordBinding.tvUpload.setVisibility(data.get(position).getUploaded() == 1 ? View.GONE : View.VISIBLE);
                     holder.viewDataBinding.getRoot().findViewById(R.id.play).setTag(com.android.lib.R.id.data, data.get(position));
                     holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setTag(com.android.lib.R.id.data, data.get(position));
                     holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setTag(com.android.lib.R.id.position, position);

@@ -253,4 +253,32 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
             }
         });
     }
+
+    @Override
+    public void updateCallState(VideoBean videoBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(videoBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/updateCallState", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                if (onFinishListener != null) {
+                    onFinishListener.onFinish(o);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void updateVideoCallTimeNum(VideoBean videoBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(videoBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/updateVideoCallTimeNum", baseReqBean, new OnNetWorkReqAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                if (onFinishListener != null) {
+                    onFinishListener.onFinish(o);
+                }
+            }
+        });
+    }
 }

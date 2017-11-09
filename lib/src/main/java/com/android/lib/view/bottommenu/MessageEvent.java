@@ -12,6 +12,8 @@ public class MessageEvent {
 
     public Object id;
 
+    public boolean isme = true;
+
     public MessageEvent() {
     }
 

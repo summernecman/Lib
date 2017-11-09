@@ -39,16 +39,16 @@ public class LoginDAOpe extends BaseDAOpe {
     }
 
     public void login(UserBean userBean, final OnFinishListener onFinishListener) {
-
+        LoadUtil.getInstance().onStartLoading(context, "login");
         userI.login(userBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 final BaseResBean baseResBean = (BaseResBean) o;
                 if (baseResBean.isException()) {
+                    LoadUtil.getInstance().onStopLoading("login");
                     onFinishListener.onFinish(baseResBean);
                     return;
                 }
-                LoadUtil.getInstance().onStartLoading(context, "login");
                 final UserBean res = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(baseResBean.getData()), UserBean.class);
                 if (res == null) {
                     LoadUtil.getInstance().onStopLoading("login");

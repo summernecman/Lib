@@ -9,6 +9,7 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.listener.ViewListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.ToastUtil;
 import com.android.lib.view.recyclerview.MyRecyclerView;
 import com.android.lib.view.refreshlayout.MaterialRefreshLayout;
 import com.android.lib.view.refreshlayout.MaterialRefreshListenerAdpter;
@@ -18,7 +19,7 @@ import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
-import com.siweisoft.service.ui.video.videoplay.VideoPlayFrag;
+import com.siweisoft.service.ui.video.videocontainer.VideoContainerFrag;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -74,7 +75,11 @@ public class CollecFrag extends BaseServerFrag<CollectUIOpe, CollectDAOpe> imple
         getP().getD().getCollection(Value.getUserInfo(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                ArrayList<VideoBean> a = (ArrayList<VideoBean>) o;
+                if (a == null || a.size() == 0) {
+                    ToastUtil.getInstance().showShort(activity, "加载完毕");
+                }
+                getP().getD().getVideos().addAll(a);
                 getP().getU().loadMore();
                 getP().getD().setPagestart(getP().getD().getPagestart() + 1);
                 getP().getU().bind.refresh.finishRefreshLoadMore();
@@ -88,7 +93,7 @@ public class CollecFrag extends BaseServerFrag<CollectUIOpe, CollectDAOpe> imple
             case ViewListener.TYPE_ONCLICK:
                 switch (v.getId()) {
                     case R.id.play:
-                        VideoPlayFrag playFrag = new VideoPlayFrag();
+                        VideoContainerFrag playFrag = new VideoContainerFrag();
                         playFrag.setArguments(new Bundle());
                         playFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, (Serializable) v.getTag(R.id.data));
                         FragmentUtil2.getInstance().add(activity, Value.ROOTID_THREE, playFrag);

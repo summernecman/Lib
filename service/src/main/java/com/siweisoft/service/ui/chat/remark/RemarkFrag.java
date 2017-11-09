@@ -2,6 +2,7 @@ package com.siweisoft.service.ui.chat.remark;
 
 //by summer on 17-08-24.
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.android.lib.base.interf.OnFinishListener;
@@ -17,8 +18,10 @@ import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
+import com.siweisoft.service.netdb.videodetail.VideoDetailBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.dialog.DialogFrag;
+import com.siweisoft.service.ui.dialog.list.DialogListFrag;
+import com.siweisoft.service.ui.dialog.remind.DialogFrag;
 
 public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
 
@@ -41,22 +44,25 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                 getP().getD().ratingbar = (float) o;
             }
         });
-
+        getP().getU().initOnclick(this);
         getP().getU().initTop(getP().getD().getOtherUser(getP().getD().getVideoBean()));
         getP().getU().bind.tvName.setText(getP().getD().getOtherUser(getP().getD().getVideoBean()).getName());
-
+        getP().getD().updateVideoCallTimeNum(getP().getD().getVideoBean());
         //收到文件内容为空 == 录像不是我录的
         if (NullUtil.isStrEmpty(getP().getD().getVideoBean().getFile())) {
             //FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
             return;
         }
-        getP().getD().updateVideo(getP().getD().getVideoBean(), new OnFinishListener() {
+
+        getP().getD().renameFile(getP().getD().getVideoBean());
+
+        getP().getD().insetVideo(getP().getD().getVideoBean(), new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                final VideoBean videoBean = (VideoBean) o;
+                final VideoDetailBean videoBean = (VideoDetailBean) o;
                 getActivity().findViewById(R.id.ftv_right).setVisibility(View.VISIBLE);
                 if (SystemUtil.isWiFi(activity)) {
-                    getP().getD().uploadVideo(videoBean);
+                    getP().getD().uploadVideo(getP().getD().getVideoBean(), videoBean);
                 } else {
                     DialogFrag dialogFrag = new DialogFrag();
                     FragmentUtil2.getInstance().add(activity, Value.FULLSCREEN, dialogFrag);
@@ -65,7 +71,7 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                         public void onFinish(Object o) {
                             switch (((View) o).getId()) {
                                 case R.id.tv_receipt:
-                                    getP().getD().uploadVideo(videoBean);
+                                    getP().getD().uploadVideo(getP().getD().getVideoBean(), videoBean);
                                     break;
                                 case R.id.tv_refuse:
 
@@ -111,6 +117,20 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                     @Override
                     public void onFinish(Object o) {
                         FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+                    }
+                });
+
+                break;
+            case R.id.ll_videotips:
+                DialogListFrag dialogListFrag = new DialogListFrag();
+                dialogListFrag.setArguments(new Bundle());
+                dialogListFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, Value.getVideotipsList());
+                FragmentUtil2.getInstance().add(activity, Value.ROOTID_TWO, dialogListFrag);
+                dialogListFrag.setOnFinishListener(new OnFinishListener() {
+                    @Override
+                    public void onFinish(Object o) {
+                        getP().getU().bind.tvVideotips.setText(o + "");
+                        FragmentUtil2.getInstance().removeTopRightNow(activity, Value.ROOTID_TWO);
                     }
                 });
                 break;

@@ -51,6 +51,7 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
                 List<EMChatRoom> rooms = value.getData();
                 for (int i = 0; i < rooms.size(); i++) {
                     Value.saveRoom(rooms.get(i));
+                    Value.roomid = rooms.get(i).getId();
                     getP().getD().setEmChatRoom(rooms.get(i));
                     LogUtil.E(rooms.get(i).getId() + "" + rooms.get(i).getName());
                     EMClient.getInstance().chatroomManager().joinChatRoom(rooms.get(i).getId(), new EMValueCallBack<EMChatRoom>() {
@@ -167,7 +168,7 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
     @Override
     public void dealMesage(MessageEvent event) {
         super.dealMesage(event);
-        if (event.data instanceof Integer) {
+        if (event.isme && event.data instanceof Integer) {
             getP().getU().refresh();
         } else {
             initData2();

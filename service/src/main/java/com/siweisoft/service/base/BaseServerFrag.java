@@ -38,6 +38,9 @@ public class BaseServerFrag<A extends BaseUIOpe, B extends BaseDAOpe> extends Ba
 
     public void setTitleBean(TitleBean titleBean) {
         this.titleBean = titleBean;
+        if (getView() == null) {
+            return;
+        }
         View v1 = getView().findViewById(R.id.ftv_back);
         if (v1 instanceof TextView) {
             TextView textView1 = (TextView) v1;
@@ -78,8 +81,8 @@ public class BaseServerFrag<A extends BaseUIOpe, B extends BaseDAOpe> extends Ba
             case R.id.ftv_title:
                 break;
             case R.id.ftv_back:
-                if (FragmentUtil2.fragMap != null && FragmentUtil2.fragMap.get(Value.getNowRoot()) != null) {
-                    if (FragmentUtil2.fragMap.get(Value.getNowRoot()).size() <= 1) {
+                if (FragmentUtil2.getInstance().getFragMap() != null && FragmentUtil2.getInstance().getFragMap().get(Value.getNowRoot()) != null) {
+                    if (FragmentUtil2.getInstance().getFragMap().get(Value.getNowRoot()).size() <= 1) {
                         return;
                     }
                 }

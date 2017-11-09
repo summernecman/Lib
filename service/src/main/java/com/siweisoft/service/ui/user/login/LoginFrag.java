@@ -11,6 +11,7 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.network.bean.res.BaseResBean;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.GsonUtil;
 import com.android.lib.util.NullUtil;
 import com.android.lib.util.SPUtil;
 import com.android.lib.util.ToastUtil;
@@ -68,6 +69,7 @@ public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
                             EMClient.getInstance().chatManager().loadAllConversations();
                             EMClient.getInstance().groupManager().loadAllGroups();
                             Value.saveUserInfo((UserBean) res.getData());
+                            Value.saveVideoTips(GsonUtil.getInstance().toJson(res.getOther()));
                             SPUtil.getInstance().init(activity).saveStr(Value.DATA_INTENT2, UrlConstant.NETSTART);
                             Intent intent = new Intent(activity, MainAct.class);
                             activity.startActivity(intent);
