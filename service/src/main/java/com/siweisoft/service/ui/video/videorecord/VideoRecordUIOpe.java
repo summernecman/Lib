@@ -1,4 +1,4 @@
-package com.siweisoft.service.ui.videorecord;
+package com.siweisoft.service.ui.video.videorecord;
 
 //by summer on 17-08-23.
 
@@ -39,6 +39,7 @@ public class VideoRecordUIOpe extends BaseUIOpe<FragVideorecordBinding> {
                 public void onBindViewHolder(AppViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
                     ItemVideorecordBinding itemVideorecordBinding = (ItemVideorecordBinding) holder.viewDataBinding;
+                    itemVideorecordBinding.tvVideotips.setText(StringUtil.getStr(data.get(position).getVideotips()));
                     holder.viewDataBinding.getRoot().findViewById(R.id.play).setTag(com.android.lib.R.id.data, data.get(position));
                     holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setTag(com.android.lib.R.id.data, data.get(position));
                     holder.viewDataBinding.getRoot().findViewById(R.id.iv_head).setTag(com.android.lib.R.id.position, position);

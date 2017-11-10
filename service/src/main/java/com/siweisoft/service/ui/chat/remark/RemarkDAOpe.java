@@ -8,6 +8,7 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.base.ope.BaseDAOpe;
 import com.android.lib.constant.UrlConstant;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.NullUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.netdb.tip.TipOpe;
@@ -17,8 +18,11 @@ import com.siweisoft.service.netdb.user.UserNetOpe;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.netdb.video.VideoI;
 import com.siweisoft.service.netdb.video.VideoOpe;
+import com.siweisoft.service.netdb.videocomment.VideoCommentBean;
+import com.siweisoft.service.netdb.videocomment.VideoCommentOpe;
 import com.siweisoft.service.netdb.videodetail.VideoDetailBean;
 import com.siweisoft.service.netdb.videodetail.VideoDetailOpe;
+import com.siweisoft.service.netdb.videotip.VideoTipBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userinfo.UserInfoDAOpe;
 
@@ -42,6 +46,10 @@ public class RemarkDAOpe extends BaseDAOpe {
     TipOpe tipOpe;
 
     VideoDetailOpe videoDetailI;
+
+    VideoCommentOpe videoCommentI;
+
+    private VideoTipBean videoTipBean;
 
     public RemarkDAOpe(Context context) {
         super(context);
@@ -167,6 +175,18 @@ public class RemarkDAOpe extends BaseDAOpe {
         });
     }
 
+    public void addVideoComment(VideoCommentBean v, OnFinishListener listener) {
+        if (videoCommentI == null) {
+            videoCommentI = new VideoCommentOpe(context);
+        }
+        videoCommentI.addVideoComment(v, listener);
+    }
+
+    public boolean isRecord() {
+        return !NullUtil.isStrEmpty(getVideoBean().getFile());
+    }
+
+
 
     public String getUrlFromLocal(String ff) {
         File file = new File(ff);
@@ -232,7 +252,11 @@ public class RemarkDAOpe extends BaseDAOpe {
         return videoBean.getFromUser();
     }
 
-    public void addVideoComment() {
+    public VideoTipBean getVideoTipBean() {
+        return videoTipBean;
+    }
 
+    public void setVideoTipBean(VideoTipBean videoTipBean) {
+        this.videoTipBean = videoTipBean;
     }
 }

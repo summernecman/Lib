@@ -17,7 +17,7 @@ import com.siweisoft.service.bean.HistoryBean;
 import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.ui.Constant.Value;
-import com.siweisoft.service.ui.videorecord.VideoRecordFrag;
+import com.siweisoft.service.ui.video.videorecord.VideoRecordFrag;
 
 import java.io.Serializable;
 import java.util.ArrayList;

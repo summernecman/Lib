@@ -37,6 +37,8 @@ public interface VideoI {
 
     public void getVideosByBothUserIdWithLimit(ContactBean contactBean, OnFinishListener onFinishListener);
 
+    public void getVideosByBothUserIdWithLimitAndSeach(ContactBean contactBean, OnFinishListener onFinishListener);
+
     public void getByContacts(UserBean userBean, OnFinishListener onFinishListener);
 
     public void getUnUploadVideoNum(UserBean userBean, OnFinishListener onFinishListener);

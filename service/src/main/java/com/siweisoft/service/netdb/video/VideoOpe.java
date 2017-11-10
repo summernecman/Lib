@@ -108,7 +108,7 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
     public void commentVideo(CommentBean commentBean, final OnFinishListener onFinishListener) {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(commentBean));
-        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/commentVideos", baseReqBean, new OnNetWorkReqAdapter(context) {
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/commentVideos", baseReqBean, new UINetAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 LogUtil.E(GsonUtil.getInstance().toJson(o.getData()));
@@ -217,6 +217,20 @@ public class VideoOpe extends BaseDAOpe implements VideoI {
         BaseReqBean baseReqBean = new BaseReqBean();
         baseReqBean.setData(GsonUtil.getInstance().toJson(contactBean));
         NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/getVideosByBothUserIdWithLimit", baseReqBean, new DelayUINetAdapter(context) {
+            @Override
+            public void onNetWorkResult(boolean b, BaseResBean o) {
+                ArrayList<VideoBean> videos = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<VideoBean>>() {
+                }.getType());
+                onFinishListener.onFinish(videos);
+            }
+        });
+    }
+
+    @Override
+    public void getVideosByBothUserIdWithLimitAndSeach(ContactBean contactBean, final OnFinishListener onFinishListener) {
+        BaseReqBean baseReqBean = new BaseReqBean();
+        baseReqBean.setData(GsonUtil.getInstance().toJson(contactBean));
+        NetWork.getInstance(context).doHttpRequsetWithSession(context, "/server/getVideosByBothUserIdWithLimitAndSeach", baseReqBean, new DelayUINetAdapter(context) {
             @Override
             public void onNetWorkResult(boolean b, BaseResBean o) {
                 ArrayList<VideoBean> videos = GsonUtil.getInstance().fromJson(GsonUtil.getInstance().toJson(o.getData()), new TypeToken<ArrayList<VideoBean>>() {

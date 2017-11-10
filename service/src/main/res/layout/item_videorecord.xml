@@ -6,6 +6,7 @@
         <variable
             name="item_videorecord"
             type="com.siweisoft.service.netdb.video.VideoBean" />
+
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,29 +35,18 @@
                 android:src="@drawable/ic_launcher_round" />
             </RelativeLayout>
             <LinearLayout
-                android:layout_marginTop="7.5dp"
-                android:layout_marginBottom="7.5dp"
+                android:layout_marginTop="5dp"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:paddingLeft="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:text='@{item_videorecord.fromphone+"---"+item_videorecord.tophone}'
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:visibility="gone" />
 
                 <LinearLayout
                     android:gravity="center_vertical"
-                    android:layout_weight="1"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp">
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/iv_way"
@@ -84,15 +74,25 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/color_red_A400"
                         android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@={item_videorecord.created}"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_videotips"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="@={item_videorecord.created}"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/gray"
                     android:textSize="15sp" />
+
+
             </LinearLayout>
 
             <RelativeLayout

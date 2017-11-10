@@ -50,7 +50,9 @@ public class MyRecyclerView extends RecyclerView {
 
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
+                    if (recyclerView.getLayoutManager().getChildCount() == 0) {
+                        return;
+                    }
                     //得到当前显示的最后一个item的view
                     View lastChildView = recyclerView.getLayoutManager().getChildAt(recyclerView.getLayoutManager().getChildCount() - 1);
                     //得到lastChildView的bottom坐标值

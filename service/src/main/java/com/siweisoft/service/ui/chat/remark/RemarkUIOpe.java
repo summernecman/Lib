@@ -92,5 +92,10 @@ public class RemarkUIOpe extends BaseUIOpe<FragRemarkBinding> {
         bind.llVideotips.setOnClickListener(listener);
     }
 
+    public void ifNoRecordVideo(boolean record) {
+        bind.llVideotips.setVisibility(record ? View.VISIBLE : View.GONE);
+        bind.videodetail.setVisibility(record ? View.VISIBLE : View.GONE);
+    }
+
 
 }

@@ -106,7 +106,9 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
             @Override
             public void onFinish(Object o) {
                 ArrayList<CommentBean> a = (ArrayList<CommentBean>) o;
-                getP().getD().getCommentBeen().addAll(a);
+                if (a != null) {
+                    getP().getD().getCommentBeen().addAll(a);
+                }
                 getP().getD().setCommentBeen(getP().getD().getCommentBeen());
                 getP().getU().initRemarks(getP().getD().getCommentBeen(), UserInfoFrag.this, new MyRecyclerView.OnScroll() {
                     @Override
@@ -143,7 +145,9 @@ public class UserInfoFrag extends BaseServerFrag<UserInfoUIOpe, UserInfoDAOpe> i
                 if (a == null || a.size() == 0) {
                     ToastUtil.getInstance().showShort(activity, "已经加载完了");
                 }
-                getP().getD().getCommentBeen().addAll(a);
+                if (a != null) {
+                    getP().getD().getCommentBeen().addAll(a);
+                }
                 getP().getU().refreshRemarks();
                 getP().getD().getUserBean().setPagestart(getP().getD().getUserBean().getPagestart() + 1);
             }

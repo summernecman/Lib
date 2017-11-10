@@ -3,7 +3,7 @@ package com.siweisoft.service.ui.dialog.list;
 //by summer on 17-09-11.
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 
 import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.listener.ViewListener;
@@ -22,7 +22,7 @@ public class DialogListUIOpe extends BaseUIOpe<FragDialoglistBinding> {
     }
 
     public void initList(List l, ViewListener listener) {
-        bind.recycle.setLayoutManager(new LinearLayoutManager(context));
+        bind.recycle.setLayoutManager(new GridLayoutManager(context, 3));
         bind.recycle.setAdapter(new AppsDataBindingAdapter(context, R.layout.item_text, BR.item_text, l, listener));
     }
 

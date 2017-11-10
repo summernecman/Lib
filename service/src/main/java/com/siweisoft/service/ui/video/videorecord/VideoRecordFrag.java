@@ -1,4 +1,4 @@
-package com.siweisoft.service.ui.videorecord;
+package com.siweisoft.service.ui.video.videorecord;
 
 //by summer on 17-08-23.
 
@@ -21,6 +21,8 @@ import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.user.userinfo.UserInfoFrag;
+import com.siweisoft.service.ui.video.seach.SeachBean;
+import com.siweisoft.service.ui.video.seach.SeachFrag;
 import com.siweisoft.service.ui.video.videocontainer.VideoContainerFrag;
 
 import java.io.Serializable;
@@ -31,7 +33,7 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
     @Override
     public void initData() {
         super.initData();
-        setTitleBean(new TitleBean("返回", "录像", ""));
+        setTitleBean(new TitleBean("返回", "录像", "", "搜索"));
         getP().getD().setHistoryBean((HistoryBean) getArguments().getSerializable(Value.DATA_DATA));
         ContactBean contactBean = new ContactBean();
         contactBean.setFromid(Value.getUserInfo().getId());
@@ -39,11 +41,14 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
         getP().getD().setPageindex(0);
         contactBean.setPagestart(getP().getD().getPageindex());
         contactBean.setToid(getP().getD().getHistoryBean().getUserBean().getId());
+
         getP().getD().getVideosByBothUserIdWithLimit(contactBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
                 getP().getD().getVideos().clear();
-                getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                if (o != null) {
+                    getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                }
                 getP().getU().initList(getP().getD().getVideos(), VideoRecordFrag.this, new MyRecyclerView.OnScroll() {
                     @Override
                     public void onScrollToEnd(MyRecyclerView myRecyclerView) {
@@ -72,7 +77,9 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
                 if (a == null || a.size() == 0) {
                     ToastUtil.getInstance().showShort(activity, "加载完毕");
                 }
-                getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                if (o != null) {
+                    getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                }
                 getP().getU().loadmore();
                 getP().getD().setPageindex(getP().getD().getPageindex() + 1);
                 getP().getU().bind.refresh.finishRefreshLoadMore();
@@ -80,6 +87,7 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
         });
 
     }
+
 
     @Override
     public void doThing() {
@@ -95,6 +103,29 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
             }
         });
 
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()) {
+            case R.id.ftv_right2:
+                final SeachFrag seachFrag = new SeachFrag();
+                seachFrag.setArguments(new Bundle());
+                seachFrag.getArguments().putSerializable(ValueConstant.DATA_DATA, getP().getD().getSeachBean());
+                FragmentUtil2.getInstance().add(activity, Value.ROOTID_ONE, seachFrag);
+                seachFrag.setOnFinishListener(new OnFinishListener() {
+                    @Override
+                    public void onFinish(Object o) {
+                        FragmentUtil2.getInstance().removeTop(activity, Value.ROOTID_ONE);
+                        getP().getD().setSeachBean((SeachBean) o);
+
+
+                    }
+                });
+                break;
+        }
     }
 
     @Override

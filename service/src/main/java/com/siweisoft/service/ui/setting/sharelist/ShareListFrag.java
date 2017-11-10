@@ -58,7 +58,9 @@ public class ShareListFrag extends BaseServerFrag<ShareListUIOpe, ShareListDAOpe
             @Override
             public void onFinish(Object o) {
                 getP().getD().getVideos().clear();
-                getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                if (o != null) {
+                    getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                }
                 getP().getU().initList(getP().getD().getVideos(), ShareListFrag.this, new MyRecyclerView.OnScroll() {
                     @Override
                     public void onScrollToEnd(MyRecyclerView myRecyclerView) {
@@ -80,7 +82,9 @@ public class ShareListFrag extends BaseServerFrag<ShareListUIOpe, ShareListDAOpe
         getP().getD().getSharesByReceipt(shareBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                if (o != null) {
+                    getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                }
                 getP().getU().loadMore();
                 getP().getD().setPagestart(getP().getD().getPagestart() + 1);
                 getP().getU().bind.refresh.finishRefreshLoadMore();

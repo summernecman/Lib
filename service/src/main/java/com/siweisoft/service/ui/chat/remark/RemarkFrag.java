@@ -9,7 +9,8 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.GsonUtil;
-import com.android.lib.util.NullUtil;
+import com.android.lib.util.StringUtil;
+import com.android.lib.util.ToastUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.util.system.SystemUtil;
 import com.siweisoft.service.R;
@@ -18,7 +19,9 @@ import com.siweisoft.service.bean.TipsBean;
 import com.siweisoft.service.bean.TitleBean;
 import com.siweisoft.service.netdb.comment.CommentBean;
 import com.siweisoft.service.netdb.video.VideoBean;
+import com.siweisoft.service.netdb.videocomment.VideoCommentBean;
 import com.siweisoft.service.netdb.videodetail.VideoDetailBean;
+import com.siweisoft.service.netdb.videotip.VideoTipBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.dialog.list.DialogListFrag;
 import com.siweisoft.service.ui.dialog.remind.DialogFrag;
@@ -38,6 +41,7 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
         getP().getU().setFront(activity);
         getP().getD().setVideoBean((VideoBean) getArguments().getSerializable(ValueConstant.DATA_DATA));
         setTitleBean(new TitleBean("返回", "评论", "", "确定"));
+        getP().getU().ifNoRecordVideo(getP().getD().isRecord());
         getP().getU().initRatingBar(new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
@@ -49,7 +53,7 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
         getP().getU().bind.tvName.setText(getP().getD().getOtherUser(getP().getD().getVideoBean()).getName());
         getP().getD().updateVideoCallTimeNum(getP().getD().getVideoBean());
         //收到文件内容为空 == 录像不是我录的
-        if (NullUtil.isStrEmpty(getP().getD().getVideoBean().getFile())) {
+        if (!getP().getD().isRecord()) {
             //FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
             return;
         }
@@ -83,6 +87,7 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                 }
             }
         });
+
     }
 
     @Override
@@ -102,6 +107,14 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.ftv_right2:
+                if (getP().getD().isRecord()) {
+                    if (getP().getD().getVideoTipBean() == null) {
+                        ToastUtil.getInstance().showShort(activity, "请选择视频分类");
+                        return;
+                    }
+                }
+
+
                 CommentBean commentBean = new CommentBean();
                 commentBean.setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
                 commentBean.setFromuser(Value.getUserInfo().getPhone());
@@ -116,9 +129,24 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                 getP().getD().videoI.commentVideo(commentBean, new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
-                        FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+                        if (getP().getD().isRecord()) {
+                            VideoCommentBean vv = new VideoCommentBean();
+                            vv.setCallid(getP().getD().getVideoBean().getId());
+                            vv.setTxt(getP().getU().bind.videodetail.getText().toString());
+                            vv.setType(StringUtil.getStr(getP().getD().getVideoTipBean().getType()));
+                            vv.setUserid(Value.getUserInfo().getId());
+                            getP().getD().addVideoComment(vv, new OnFinishListener() {
+                                @Override
+                                public void onFinish(Object o) {
+                                    FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+                                }
+                            });
+                        } else {
+                            FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
+                        }
                     }
                 });
+
 
                 break;
             case R.id.ll_videotips:
@@ -129,7 +157,9 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                 dialogListFrag.setOnFinishListener(new OnFinishListener() {
                     @Override
                     public void onFinish(Object o) {
-                        getP().getU().bind.tvVideotips.setText(o + "");
+                        VideoTipBean v = (VideoTipBean) o;
+                        getP().getD().setVideoTipBean(v);
+                        getP().getU().bind.tvVideotips.setText(StringUtil.getStr(v.getTxt()));
                         FragmentUtil2.getInstance().removeTopRightNow(activity, Value.ROOTID_TWO);
                     }
                 });

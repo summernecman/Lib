@@ -41,29 +41,29 @@ public class Value extends ValueConstant {
 
     public static String VIDEO_TIPS = "VIDEO_TIPS";
 
-    public static HashMap<Integer, VideoTipBean> videotips;
+    public static HashMap<String, VideoTipBean> videotips;
 
 
     public static void saveVideoTips(String videotips) {
         SPUtil.getInstance().saveStr(VIDEO_TIPS, videotips);
 
-        Value.videotips = GsonUtil.getInstance().fromJson(videotips, new TypeToken<HashMap<Integer, VideoTipBean>>() {
+        Value.videotips = GsonUtil.getInstance().fromJson(videotips, new TypeToken<HashMap<String, VideoTipBean>>() {
         }.getType());
     }
 
-    public static HashMap<Integer, VideoTipBean> getVideotips() {
-        if (videotips == null) {
-            videotips = GsonUtil.getInstance().fromJson(SPUtil.getInstance().getStr(VIDEO_TIPS), new TypeToken<HashMap<Integer, VideoTipBean>>() {
+    public static HashMap<String, VideoTipBean> getVideotips() {
+        if (Value.videotips == null) {
+            Value.videotips = GsonUtil.getInstance().fromJson(SPUtil.getInstance().getStr(VIDEO_TIPS), new TypeToken<HashMap<String, VideoTipBean>>() {
             }.getType());
         }
-        return videotips;
+        return Value.videotips;
     }
 
     public static ArrayList<VideoTipBean> getVideotipsList() {
-        HashMap<Integer, VideoTipBean> data = getVideotips();
+        HashMap<String, VideoTipBean> data = getVideotips();
         ArrayList<VideoTipBean> list = new ArrayList<>();
         if (data.keySet() != null) {
-            Iterator<Integer> iterator = data.keySet().iterator();
+            Iterator<String> iterator = data.keySet().iterator();
             while (iterator.hasNext()) {
                 list.add(data.get(iterator.next()));
             }

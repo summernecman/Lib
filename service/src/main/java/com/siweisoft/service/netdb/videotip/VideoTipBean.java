@@ -18,6 +18,8 @@ public class VideoTipBean extends BaseBean {
 
     private int enable;
 
+    private boolean select;
+
     public int getId() {
         return id;
     }
@@ -64,5 +66,13 @@ public class VideoTipBean extends BaseBean {
 
     public void setEnable(int enable) {
         this.enable = enable;
+    }
+
+    public boolean isSelect() {
+        return select;
+    }
+
+    public void setSelect(boolean select) {
+        this.select = select;
     }
 }

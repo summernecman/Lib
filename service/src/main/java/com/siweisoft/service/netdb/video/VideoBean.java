@@ -5,6 +5,7 @@ import android.databinding.Bindable;
 
 import com.android.lib.bean.BaseBean;
 import com.siweisoft.service.netdb.user.UserBean;
+import com.siweisoft.service.netdb.videocomment.VideoCommentBean;
 import com.siweisoft.service.netdb.videodetail.VideoDetailBean;
 import com.siweisoft.service.ui.Constant.Value;
 
@@ -63,6 +64,10 @@ public class VideoBean extends BaseBean {
     public static final int CALL_STATE_REJECT = 2;
 
     private ArrayList<VideoDetailBean> videodetail;
+
+    private ArrayList<VideoCommentBean> videoCommentBeans;
+
+    private String videotips;
 
     @Bindable
     public int getId() {
@@ -258,6 +263,22 @@ public class VideoBean extends BaseBean {
         this.videodetail = videodetail;
     }
 
+    public ArrayList<VideoCommentBean> getVideoCommentBeans() {
+        return videoCommentBeans;
+    }
+
+    public void setVideoCommentBeans(ArrayList<VideoCommentBean> videoCommentBeans) {
+        this.videoCommentBeans = videoCommentBeans;
+    }
+
+    public String getVideotips() {
+        return videotips;
+    }
+
+    public void setVideotips(String videotips) {
+        this.videotips = videotips;
+    }
+
     @Override
     public String toString() {
         return "VideoBean{" +
@@ -277,7 +298,10 @@ public class VideoBean extends BaseBean {
                 ", toUser=" + toUser +
                 ", uploaded=" + uploaded +
                 ", isfrom=" + isfrom +
+                ", callstate=" + callstate +
                 ", videodetail=" + videodetail +
+                ", videoCommentBeans=" + videoCommentBeans +
+                ", videotips='" + videotips + '\'' +
                 '}';
     }
 }

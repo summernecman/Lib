@@ -55,7 +55,9 @@ public class CollecFrag extends BaseServerFrag<CollectUIOpe, CollectDAOpe> imple
             @Override
             public void onFinish(Object o) {
                 getP().getD().getVideos().clear();
-                getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                if (o != null) {
+                    getP().getD().getVideos().addAll((ArrayList<VideoBean>) o);
+                }
                 getP().getU().initList(getP().getD().getVideos(), CollecFrag.this, new MyRecyclerView.OnScroll() {
                     @Override
                     public void onScrollToEnd(MyRecyclerView myRecyclerView) {
@@ -79,7 +81,9 @@ public class CollecFrag extends BaseServerFrag<CollectUIOpe, CollectDAOpe> imple
                 if (a == null || a.size() == 0) {
                     ToastUtil.getInstance().showShort(activity, "加载完毕");
                 }
-                getP().getD().getVideos().addAll(a);
+                if (a != null) {
+                    getP().getD().getVideos().addAll(a);
+                }
                 getP().getU().loadMore();
                 getP().getD().setPagestart(getP().getD().getPagestart() + 1);
                 getP().getU().bind.refresh.finishRefreshLoadMore();

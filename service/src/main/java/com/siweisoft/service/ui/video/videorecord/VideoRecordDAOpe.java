@@ -1,4 +1,4 @@
-package com.siweisoft.service.ui.videorecord;
+package com.siweisoft.service.ui.video.videorecord;
 
 //by summer on 17-08-23.
 
@@ -12,6 +12,7 @@ import com.siweisoft.service.netdb.video.VideoBean;
 import com.siweisoft.service.netdb.video.VideoI;
 import com.siweisoft.service.netdb.video.VideoOpe;
 import com.siweisoft.service.ui.Constant.Value;
+import com.siweisoft.service.ui.video.seach.SeachBean;
 
 import java.util.ArrayList;
 
@@ -26,9 +27,13 @@ public class VideoRecordDAOpe extends BaseDAOpe {
 
     private int pageindex = 0;
 
+    private SeachBean seachBean = new SeachBean();
+
 
     public VideoRecordDAOpe(Context context) {
         super(context);
+        seachBean.setTxt("");
+        seachBean.setData(Value.getVideotipsList());
     }
 
     public void getHistory(OnFinishListener onFinishListener) {
@@ -55,11 +60,24 @@ public class VideoRecordDAOpe extends BaseDAOpe {
         videoI.getVideosByBothUserIdWithLimit(contactBean, onFinishListener);
     }
 
+
+    public void getVideosByBothUserIdWithLimitAndSeach(ContactBean contactBean, OnFinishListener onFinishListener) {
+        videoI.getVideosByBothUserIdWithLimitAndSeach(contactBean, onFinishListener);
+    }
+
     public int getPageindex() {
         return pageindex;
     }
 
     public void setPageindex(int pageindex) {
         this.pageindex = pageindex;
+    }
+
+    public SeachBean getSeachBean() {
+        return seachBean;
+    }
+
+    public void setSeachBean(SeachBean seachBean) {
+        this.seachBean = seachBean;
     }
 }

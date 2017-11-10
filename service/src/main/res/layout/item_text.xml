@@ -5,7 +5,7 @@
 
         <variable
             name="item_text"
-            type="String" />
+            type="com.siweisoft.service.netdb.videotip.VideoTipBean" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,8 +26,8 @@
                 android:gravity="center"
                 android:padding="3dp"
                 android:singleLine="true"
-                android:text="@{item_text}"
-                android:textColor="@color/black"
+                android:text="@{item_text.txt}"
+                android:textColor="@color/gray"
                 android:textSize="12sp" />
 
         </RelativeLayout>

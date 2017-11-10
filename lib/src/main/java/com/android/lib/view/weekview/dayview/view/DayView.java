@@ -254,7 +254,9 @@ public class DayView extends View {
 
     public void setPlanTipBeen(ArrayList<PlanTipBean> p) {
         this.planTipBeen.clear();
-        this.planTipBeen.addAll(p);
+        if (p != null) {
+            this.planTipBeen.addAll(p);
+        }
         planTipRect.clear();
         int w = 0;
         for (int i = 0; i < planTipBeen.size(); i++) {

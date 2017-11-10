@@ -9,6 +9,7 @@ import com.android.lib.base.listener.ViewListener;
 import com.android.lib.constant.ValueConstant;
 import com.siweisoft.service.R;
 import com.siweisoft.service.base.BaseServerFrag;
+import com.siweisoft.service.bean.TitleBean;
 
 public class DialogListFrag extends BaseServerFrag<DialogListUIOpe, DialogListDAOpe> implements ViewListener {
 
@@ -17,6 +18,7 @@ public class DialogListFrag extends BaseServerFrag<DialogListUIOpe, DialogListDA
     @Override
     public void doThing() {
         super.doThing();
+        setTitleBean(new TitleBean("返回", "搜索", "", ""));
         getP().getD().setList(getArguments().getStringArrayList(ValueConstant.DATA_DATA));
         getP().getU().initList(getP().getD().getList(), this);
     }
