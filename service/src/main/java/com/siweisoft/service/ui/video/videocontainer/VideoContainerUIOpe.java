@@ -37,6 +37,12 @@ public class VideoContainerUIOpe extends BaseUIOpe<FragVideocontainerBinding> {
         });
     }
 
+    public void initClick(View.OnClickListener listener) {
+        bind.ivCollect.setOnClickListener(listener);
+        bind.ivShare.setOnClickListener(listener);
+        bind.ftvRight2.setOnClickListener(listener);
+    }
+
     public void switchFragment() {
         bind.vpVp.setCurrentItem(1 - bind.vpVp.getCurrentItem(), true);
     }
@@ -48,4 +54,9 @@ public class VideoContainerUIOpe extends BaseUIOpe<FragVideocontainerBinding> {
             bind.ftvRight2.setVisibility(View.GONE);
         }
     }
+
+    public void setCollect(boolean collect) {
+        bind.ivCollect.setSelected(collect);
+    }
+
 }

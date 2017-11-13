@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.android.lib.R;
 import com.android.lib.util.thread.ThreadUtil;
+import com.wang.avi.AVLoadingIndicatorView;
 
 /**
  * Created by ${viwmox} on 2017-02-23.
@@ -27,6 +28,8 @@ public class MyRefreshHeadView extends RelativeLayout implements MaterialHeadLis
     View view;
     int[] colors = new int[]{Color.RED, Color.BLUE, Color.YELLOW, Color.MAGENTA};
     ThreadUtil threadUtil = null;
+
+    AVLoadingIndicatorView av;
 
     public MyRefreshHeadView(Context context) {
         super(context);
@@ -46,11 +49,14 @@ public class MyRefreshHeadView extends RelativeLayout implements MaterialHeadLis
         view = LayoutInflater.from(context).inflate(R.layout.layout_refresh_head, null);
         addView(view, params);
         txtTV = (TextView) findViewById(R.id.tv_txt);
+        av = (AVLoadingIndicatorView) findViewById(R.id.av);
     }
 
     @Override
     public void onComlete(MaterialRefreshLayout br) {
         txtTV.setText("刷新成功");
+        txtTV.setVisibility(View.VISIBLE);
+        av.setVisibility(View.INVISIBLE);
         //threadUtil.stop();
 //        txtTV.getLayoutParams().height = 0;
 //        txtTV.requestLayout();
@@ -71,6 +77,9 @@ public class MyRefreshHeadView extends RelativeLayout implements MaterialHeadLis
     @Override
     public void onBegin(MaterialRefreshLayout br) {
         txtTV.setText("下拉刷新");
+        txtTV.setVisibility(View.VISIBLE);
+        av.setVisibility(View.INVISIBLE);
+        av.smoothToHide();
     }
 
     @Override
@@ -89,6 +98,7 @@ public class MyRefreshHeadView extends RelativeLayout implements MaterialHeadLis
     public void onRefreshing(MaterialRefreshLayout br) {
         final String s = "正在刷新";
         final SpannableStringBuilder builder = new SpannableStringBuilder("正在刷新");
+
 //        threadUtil = new ThreadUtil();
 //        threadUtil.run(300, new OnLoadingInterf() {
 //            @Override
@@ -108,6 +118,10 @@ public class MyRefreshHeadView extends RelativeLayout implements MaterialHeadLis
 //            }
 //        });
         txtTV.setText(s);
+        txtTV.setVisibility(View.INVISIBLE);
+        av.setVisibility(View.VISIBLE);
+        av.smoothToShow();
+
         // AnimUtil.getInstance().startAnim(context,txtTV,R.anim.anim_rotate);
 //        LogUtil.E("onRefreshing");
 //        txtTV.getLayoutParams().height = (int) (Util.dip2px(getContext(), DefaulHeadHeight));

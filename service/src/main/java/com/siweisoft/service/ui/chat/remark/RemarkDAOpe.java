@@ -37,7 +37,7 @@ public class RemarkDAOpe extends BaseDAOpe {
 
     VideoI videoI;
 
-    float ratingbar;
+    private float ratingbar = 5f;
 
     TipsBean tipsBean;
 
@@ -131,6 +131,15 @@ public class RemarkDAOpe extends BaseDAOpe {
 //            }
 //        });
 //    }
+
+
+    public float getRatingbar() {
+        return ratingbar;
+    }
+
+    public void setRatingbar(float ratingbar) {
+        this.ratingbar = ratingbar;
+    }
 
     public static void renameFile(VideoBean videoBean) {
         File file = new File(videoBean.getFile());

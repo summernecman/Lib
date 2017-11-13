@@ -41,7 +41,6 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
         getP().getD().setPageindex(0);
         contactBean.setPagestart(getP().getD().getPageindex());
         contactBean.setToid(getP().getD().getHistoryBean().getUserBean().getId());
-
         getP().getD().getVideosByBothUserIdWithLimit(contactBean, new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
@@ -120,8 +119,7 @@ public class VideoRecordFrag extends BaseServerFrag<VideoRecordUIOpe, VideoRecor
                     public void onFinish(Object o) {
                         FragmentUtil2.getInstance().removeTop(activity, Value.ROOTID_ONE);
                         getP().getD().setSeachBean((SeachBean) o);
-
-
+                        initData();
                     }
                 });
                 break;

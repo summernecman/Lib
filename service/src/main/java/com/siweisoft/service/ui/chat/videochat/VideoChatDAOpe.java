@@ -192,9 +192,9 @@ public class VideoChatDAOpe extends BaseDAOpe {
     }
 
     public static boolean isRecordVideo() {
-        if (Value.getUserInfo().getUsertype() == UserBean.CUSTOME) {
-            return false;
-        }
+//        if (Value.getUserInfo().getUsertype() == UserBean.CUSTOME) {
+//            return false;
+//        }
         return true;
     }
 

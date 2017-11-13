@@ -9,4 +9,6 @@ public interface VideoDetailI {
     public void insertVideo(VideoDetailBean v, OnFinishListener onFinishListener);
 
     public void updateUpload(VideoDetailBean v, OnFinishListener onFinishListener);
+
+    public void getCommentToType(VideoDetailBean v, OnFinishListener onFinishListener);
 }

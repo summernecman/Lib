@@ -12,7 +12,7 @@ public class VideoTipBean extends BaseBean {
 
     private Timestamp utime;
 
-    private int type;
+    private String type;
 
     private String txt;
 
@@ -44,11 +44,11 @@ public class VideoTipBean extends BaseBean {
         this.utime = utime;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 

@@ -27,7 +27,7 @@
 
         <activity
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
-            android:windowSoftInputMode="adjustResize|stateVisible|stateAlwaysHidden"
+            android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTask"
             android:name=".ui.main.MainAct"
             android:exported="true"

@@ -1,5 +1,6 @@
 package com.android.lib.view.refreshlayout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -81,6 +82,7 @@ public class MaterialRefreshLayout extends FrameLayout {
         init(context, attrs, defStyleAttr);
     }
 
+    @SuppressLint("ResourceAsColor")
     private void init(Context context, AttributeSet attrs, int defstyleAttr) {
         if (isInEditMode()) {
             return;
@@ -559,8 +561,8 @@ public class MaterialRefreshLayout extends FrameLayout {
         if (mChildView != null) {
             final ViewPropertyAnimatorCompat viewPropertyAnimatorCompat = ViewCompat.animate(mChildView);
             viewPropertyAnimatorCompat.setDuration(200);
-            viewPropertyAnimatorCompat.y(ViewCompat.getTranslationY(mChildView));
-            viewPropertyAnimatorCompat.translationY(0);
+            //viewPropertyAnimatorCompat.y(ViewCompat.getTranslationY(mChildView));
+
             viewPropertyAnimatorCompat.setInterpolator(new DecelerateInterpolator());
             if (mMaterialHeaderView != null) {
                 mMaterialHeaderView.onComlete(MaterialRefreshLayout.this);
@@ -574,9 +576,10 @@ public class MaterialRefreshLayout extends FrameLayout {
             HandleUtil.getInstance().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    viewPropertyAnimatorCompat.start();
+                    viewPropertyAnimatorCompat.translationY(0);
+                    //viewPropertyAnimatorCompat.start();
                 }
-            }, 1000);
+            }, 500);
         }
         isRefreshing = false;
         progressValue = 0;

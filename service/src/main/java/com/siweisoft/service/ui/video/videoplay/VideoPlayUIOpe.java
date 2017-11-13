@@ -167,6 +167,10 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
         });
     }
 
+    public void initVideoDetail(String str) {
+        bind.videodetail.setText(str);
+    }
+
     public void initInfo(CommentBean commentBean) {
         bind.ratingbar.setStar(commentBean.getRate());
         bind.remark.setText(commentBean.getRemark() + "");
@@ -188,13 +192,12 @@ public class VideoPlayUIOpe extends BaseUIOpe<FragVideoplayBinding> {
         return orientationUtils;
     }
 
-    public void setCollect(boolean collect) {
-        bind.ftvRight.setSelected(collect);
-    }
 
-    public void initTitle(View.OnClickListener onClickListener) {
-        bind.ftvRight.setOnClickListener(onClickListener);
-        bind.ftvRight2.setOnClickListener(onClickListener);
+    public void hildComment() {
+        bind.ratingbar.setVisibility(View.INVISIBLE);
+        bind.recycle.setVisibility(View.INVISIBLE);
+        bind.remark.setVisibility(View.INVISIBLE);
+        bind.tvPf.setVisibility(View.INVISIBLE);
     }
 
 

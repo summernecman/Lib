@@ -69,6 +69,8 @@ public class VideoBean extends BaseBean {
 
     private String videotips;
 
+    private int commentid;
+
     @Bindable
     public int getId() {
         return id;
@@ -252,6 +254,8 @@ public class VideoBean extends BaseBean {
         videoBean.setToUser(getToUser());
         videoBean.setUploaded(getUploaded());
         videoBean.setVideodetail(getVideodetail());
+        videoBean.setVideoCommentBeans(getVideoCommentBeans());
+        videoBean.setVideotips(getVideotips());
         return videoBean;
     }
 
@@ -303,5 +307,13 @@ public class VideoBean extends BaseBean {
                 ", videoCommentBeans=" + videoCommentBeans +
                 ", videotips='" + videotips + '\'' +
                 '}';
+    }
+
+    public int getCommentid() {
+        return commentid;
+    }
+
+    public void setCommentid(int commentid) {
+        this.commentid = commentid;
     }
 }

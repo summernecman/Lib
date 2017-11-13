@@ -75,7 +75,7 @@ public class VideoPlayDAOpe extends BaseDAOpe {
             commentI = new CommentOpe(context);
         }
         videoBean.setToUser(Value.getUserInfo());
-        commentI.getVideoCommentByVideoIdAndFrom(videoBean, onFinishListener);
+        commentI.getVideoCommentByVideoIdAndCommentId(videoBean, onFinishListener);
     }
 
     public void isCollectedByVideoIdAndUserId(VideoBean videoBean, OnFinishListener onFinishListener) {
@@ -112,6 +112,15 @@ public class VideoPlayDAOpe extends BaseDAOpe {
         collectionI.disCollect(collectionBean, onFinishListener);
     }
 
+    public String getVideoComment(VideoDetailBean videoDetailBean, VideoBean videoBean) {
+        for (int i = 0; videoBean.getVideoCommentBeans() != null && i < videoBean.getVideoCommentBeans().size(); i++) {
+            if (videoDetailBean.getUserid() == videoBean.getVideoCommentBeans().get(i).getUserid()) {
+                return videoBean.getVideoCommentBeans().get(i).getTxt();
+            }
+        }
+        return "";
+    }
+
 
     public void uploadVideo(final VideoBean videoBean, final VideoDetailBean vv, final OnFinishListener onFinishListener, final OnFinishListener onFinishListener2) {
         final String f = videoBean.getFile();
@@ -143,6 +152,23 @@ public class VideoPlayDAOpe extends BaseDAOpe {
         }, onFinishListener2);
     }
 
+
+    public void isCommentToCustomer(VideoDetailBean vv, final OnFinishListener onFinishListener) {
+        if (videoDetailI == null) {
+            videoDetailI = new VideoDetailOpe(context);
+        }
+        videoDetailI.getCommentToType(vv, new OnFinishListener() {
+            @Override
+            public void onFinish(Object o) {
+                UserBean u = (UserBean) o;
+                if (u != null && u.getUsertype() == UserBean.CUSTOME) {
+                    onFinishListener.onFinish(true);
+                } else {
+                    onFinishListener.onFinish(false);
+                }
+            }
+        });
+    }
 
     public void share(ShareBean shareBean, OnFinishListener onFinishListener) {
         if (shareI == null) {
@@ -195,4 +221,6 @@ public class VideoPlayDAOpe extends BaseDAOpe {
     public CollectionBean getCollectionBean() {
         return collectionBean;
     }
+
+
 }

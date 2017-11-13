@@ -2,6 +2,8 @@ package com.siweisoft.service.bean;
 
 import com.android.lib.bean.BaseBean;
 
+import java.util.ArrayList;
+
 public class ContactBean extends BaseBean {
 
     private int id;
@@ -13,6 +15,11 @@ public class ContactBean extends BaseBean {
     private int pagesize;
 
     private int pagestart;
+
+    private String txt;
+
+    private ArrayList<String> type;
+
 
     public int getId() {
         return id;
@@ -52,5 +59,21 @@ public class ContactBean extends BaseBean {
 
     public void setPagestart(int pagestart) {
         this.pagestart = pagestart;
+    }
+
+    public String getTxt() {
+        return txt;
+    }
+
+    public void setTxt(String txt) {
+        this.txt = txt;
+    }
+
+    public ArrayList<String> getType() {
+        return type;
+    }
+
+    public void setType(ArrayList<String> type) {
+        this.type = type;
     }
 }

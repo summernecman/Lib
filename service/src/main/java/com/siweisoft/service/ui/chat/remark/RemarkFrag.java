@@ -45,7 +45,7 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
         getP().getU().initRatingBar(new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
-                getP().getD().ratingbar = (float) o;
+                getP().getD().setRatingbar((float) o);
             }
         });
         getP().getU().initOnclick(this);
@@ -119,7 +119,7 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
                 commentBean.setCreated(DateFormatUtil.getNowStr(DateFormatUtil.YYYY_MM_DD_HH_MM_SS));
                 commentBean.setFromuser(Value.getUserInfo().getPhone());
                 commentBean.setTouser(getP().getD().getVideoBean().getOthername());
-                commentBean.setRate(getP().getD().ratingbar);
+                commentBean.setRate(getP().getD().getRatingbar());
                 commentBean.setRemark(getP().getU().getRemark());
                 commentBean.setTips(GsonUtil.getInstance().toJson(getP().getD().getTipsBean()));
                 commentBean.setVideoname(getP().getD().getVideoBean().getFile());

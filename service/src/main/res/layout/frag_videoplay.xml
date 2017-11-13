@@ -26,7 +26,16 @@
             android:layout_width="match_parent"
             android:layout_height="250dp" />
 
-
+                <TextView
+                    android:id="@+id/videodetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:enabled="false"
+                    android:gravity="start" />
                 <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,6 +43,7 @@
             android:padding="5dp">
 
             <TextView
+                android:id="@+id/tv_pf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="评分:"
@@ -104,41 +114,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-                <LinearLayout
-                    android:layout_gravity="right"
-                    android:gravity="center_vertical|right"
-                    android:paddingBottom="2.5dp"
-                    android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:paddingTop="2.5dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-
-                        android:background="@drawable/drawable_collection"
-                        android:id="@+id/ftv_right"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:textColor="@color/color_title_select"
-                        android:visibility="visible" />
-
-                    <ImageView
-                        android:layout_marginLeft="7dp"
-                        android:id="@+id/ftv_right2"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/icon_share"
-                        android:textColor="@color/color_title_select"
-                        android:visibility="visible" />
-                </LinearLayout>
         <EditText
             android:id="@+id/remark"
             android:layout_width="match_parent"

@@ -34,4 +34,6 @@ public interface CommentI {
 
     public void getVideoCommentByVideoIdAndFrom(VideoBean videoBean, OnFinishListener onFinishListener);
 
+    public void getVideoCommentByVideoIdAndCommentId(VideoBean videoBean, OnFinishListener onFinishListener);
+
 }

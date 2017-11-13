@@ -57,7 +57,13 @@ public class VideoRecordDAOpe extends BaseDAOpe {
     }
 
     public void getVideosByBothUserIdWithLimit(ContactBean contactBean, OnFinishListener onFinishListener) {
-        videoI.getVideosByBothUserIdWithLimit(contactBean, onFinishListener);
+        if (getSeachBean().isCan()) {
+            contactBean.setType(getSeachBean().getType());
+            contactBean.setTxt(getSeachBean().getTxt());
+            videoI.getVideosByBothUserIdWithLimitAndSeach(contactBean, onFinishListener);
+        } else {
+            videoI.getVideosByBothUserIdWithLimit(contactBean, onFinishListener);
+        }
     }
 
 

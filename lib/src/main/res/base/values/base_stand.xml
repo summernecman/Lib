@@ -6,7 +6,7 @@
     <dimen name="dimen_ll_paddmar_bottom_stand">13sp</dimen>
     <dimen name="dimen_ll_paddmar_left_stand">10sp</dimen>
     <dimen name="dimen_ll_paddmar_right_stand">10sp</dimen>
-    <dimen name="dimens_base_title">40dp</dimen>
+    <dimen name="dimens_base_title">38dp</dimen>
     <dimen name="dimens_base_bottom">54dp</dimen>
     <dimen name="dimens_base_item">38dp</dimen>
     <dimen name="dimen_1">1dp</dimen>

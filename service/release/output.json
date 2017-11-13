@@ -1,0 +1,18 @@
+[
+  {
+    "outputType": {
+      "type": "APK"
+    },
+    "apkInfo": {
+      "type": "MAIN",
+      "splits": [],
+      "versionCode": 1
+    },
+    "path": "service-release.apk",
+    "properties": {
+      "packageId": "com.siweisoft.service",
+      "split": "",
+      "minSdkVersion": "16"
+    }
+  }
+]
