@@ -13,6 +13,7 @@ public class OneHoursAreaRender extends HoursAreaRender {
         super(context);
         color = context.getResources().getColor(R.color.color_brown_500);
         paint.setColor(color);
+        radious = 25;
     }
 
 
@@ -29,19 +30,26 @@ public class OneHoursAreaRender extends HoursAreaRender {
         return (DateFormatUtil.getHours() * 360 / 24f) + DateFormatUtil.getMin() * ((360 / 24f) / 60f);
     }
 
+    public float getDegree(int h, int m) {
+        return (h * 360 / 24f) + m * ((360 / 24f) / 60f);
+    }
+
+
+
+
     public double get2X() {
-        return (getA() + mw * 30) * Math.cos(Math.toRadians(getDegree(getPos()))) + getXL();
+        return (getA() + mw * radious) * Math.cos(Math.toRadians(getDegree(getPos()))) + getXL();
     }
 
     public double get2Y() {
-        return (getB() + mw * 30) * Math.sin(Math.toRadians(getDegree(getPos()))) + getYL();
+        return (getB() + mw * radious) * Math.sin(Math.toRadians(getDegree(getPos()))) + getYL();
     }
 
     public double get2X(float degree) {
-        return (getA() + mw * 30) * Math.cos(Math.toRadians(degree)) + getXL();
+        return (getA() + mw * radious) * Math.cos(Math.toRadians(degree)) + getXL();
     }
 
     public double get2Y(float degree) {
-        return (getB() + mw * 30) * Math.sin(Math.toRadians(degree)) + getYL();
+        return (getB() + mw * radious) * Math.sin(Math.toRadians(degree)) + getYL();
     }
 }

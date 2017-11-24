@@ -13,16 +13,16 @@ public class InnerBackRender extends HoursBackRender {
 
     private Path path = new Path();
 
-    private double radious = 0;
 
     public InnerBackRender(Context context) {
         super(context);
+        radious = 60;
         paint.setColor(context.getResources().getColor(R.color.color_blue_300));
     }
 
 
     @Override
     public RectF getRectF() {
-        return new RectF(50 * mw, 50 * mw, ScreenUtil.w - 50 * mw, ScreenUtil.h - 50 * mw);
+        return new RectF(radious * mw, radious * mw, ScreenUtil.w - radious * mw, ScreenUtil.h - radious * mw);
     }
 }

@@ -13,13 +13,14 @@ public class MinBackRender extends HoursBackRender {
 
     public MinBackRender(Context context) {
         super(context);
+        radious = 25;
         paint.setColor(context.getResources().getColor(R.color.color_purple_100));
     }
 
 
     @Override
     public RectF getRectF() {
-        return new RectF(30 * mw, 30 * mw, ScreenUtil.w - 30 * mw, ScreenUtil.h - 30 * mw);
+        return new RectF(radious * mw, radious * mw, ScreenUtil.w - radious * mw, ScreenUtil.h - radious * mw);
     }
 
     protected float getDegree(int pos) {

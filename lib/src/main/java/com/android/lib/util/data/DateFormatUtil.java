@@ -7,6 +7,7 @@ import com.android.lib.util.NullUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -204,6 +205,18 @@ public class DateFormatUtil {
         }
     }
 
+    public static int getHours() {
+        return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+    }
+
+    public static int getMin() {
+        return Calendar.getInstance().get(Calendar.MINUTE);
+    }
+
+    public static int getSec() {
+        return Calendar.getInstance().get(Calendar.SECOND);
+    }
+
     public static int getDay(int year, int month) {
         int day = 30;
         boolean flag = false;
@@ -323,6 +336,31 @@ public class DateFormatUtil {
             e.printStackTrace();
             return "";
         }
+    }
+
+    public static ArrayList<int[]> getTimeLevels(int sh, int sm, int eh, int em) {
+        ArrayList<int[]> floats = new ArrayList<>();
+        if ((sh * 60 + sm) > (eh * 60 + em)) {//跨0
+            eh += 24;
+        }
+        int level = eh - sh + 1;
+        switch (level) {
+            case 1:
+                floats.add(new int[]{sm, em});
+                break;
+            case 2:
+                floats.add(new int[]{sm, 60});
+                floats.add(new int[]{0, em});
+                break;
+            default:
+                floats.add(new int[]{sm, 60});
+                for (int i = (sh + 1); i < eh; i++) {
+                    floats.add(new int[]{0, 60});
+                }
+                floats.add(new int[]{0, em});
+                break;
+        }
+        return floats;
     }
 
 }

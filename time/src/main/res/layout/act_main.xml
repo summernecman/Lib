@@ -32,9 +32,9 @@
                 android:layout_height="match_parent" />
         </RelativeLayout>
 
-        <com.summer.time.ui.main.thingview.ThingView
+        <com.summer.time.ui.main.thingview.ThingViewPager
             android:layout_margin="52dp"
-            android:id="@+id/recycle"
+            android:id="@+id/vp_vp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

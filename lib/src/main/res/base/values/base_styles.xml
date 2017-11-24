@@ -2,6 +2,7 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
 
+    <style name="baseTheme" parent="Theme.AppCompat.Light.NoActionBar" />
     <style name="Theme.AppCompat.Light.NoActionBar1" parent="@style/Theme.AppCompat.Light">
         <item name="android:windowNoTitle">true</item>
     </style>

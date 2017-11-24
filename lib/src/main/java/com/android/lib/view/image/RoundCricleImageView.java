@@ -13,6 +13,7 @@ import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.ScreenUtil;
 
 public class RoundCricleImageView extends ImageView {
     public RoundCricleImageView(Context context, @Nullable AttributeSet attrs) {
@@ -22,7 +23,7 @@ public class RoundCricleImageView extends ImageView {
                 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void getOutline(View view, Outline outline) {
-                    outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), view.getWidth() / 6);
+                    outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), ScreenUtil.mw * 4);
                     LogUtil.E("getoutline");
                 }
             });

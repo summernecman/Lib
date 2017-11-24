@@ -17,6 +17,7 @@ public class MinRender extends HourRender {
     protected void init0() {
         all = 60;
         textsize = mw * 8;
+        radious = 25;
     }
 
     protected void init2() {
@@ -39,19 +40,19 @@ public class MinRender extends HourRender {
     }
 
     protected float getInnerALength() {
-        return sw / 2 - 40 * mw;
+        return getOutALength() - 10 * mw;
     }
 
     protected float getInnerBLength() {
-        return sh / 2 - 40 * mw;
+        return getOutBLength() - 10 * mw;
     }
 
     protected float getOutALength() {
-        return sw / 2 - 30 * mw;
+        return sw / 2 - radious * mw;
     }
 
     protected float getOutBLength() {
-        return sh / 2 - 30 * mw;
+        return sh / 2 - radious * mw;
     }
 
     protected float[] getCenterRotate(int i) {

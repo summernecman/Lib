@@ -172,5 +172,12 @@ public class StringUtil {
         return h + "时" + mm + "分" + s + "秒";
     }
 
+    public static String getAddZero(int i) {
+        if (i < 10) {
+            return "0" + i;
+        }
+        return "" + i;
+    }
+
 
 }

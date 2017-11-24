@@ -15,6 +15,7 @@ public class HoursAreaRender extends HoursBackRender {
         super(context);
         color = context.getResources().getColor(R.color.color_brown_300);
         paint.setColor(color);
+        radious = 25;
     }
 
     @Override
@@ -60,19 +61,20 @@ public class HoursAreaRender extends HoursBackRender {
     }
 
     public double getInnX() {
-        return (getA() - mw * 30) * Math.cos(Math.toRadians(getDegree(getPos()))) + getXL();
+        return (getA() - mw * radious) * Math.cos(Math.toRadians(getDegree(getPos()))) + getXL();
     }
 
     public double getInnY() {
-        return (getB() - mw * 30) * Math.sin(Math.toRadians(getDegree(getPos()))) + getYL();
+        return (getB() - mw * radious) * Math.sin(Math.toRadians(getDegree(getPos()))) + getYL();
     }
 
     public double getInnX(float degree) {
-        return (getA() - mw * 30) * Math.cos(Math.toRadians(degree)) + getXL();
+        return (getA() - mw * radious) * Math.cos(Math.toRadians(degree)) + getXL();
     }
 
     public double getInnY(float degree) {
-        return (getB() - mw * 30) * Math.sin(Math.toRadians(degree)) + getYL();
+        return (getB() - mw * radious) * Math.sin(Math.toRadians(degree)) + getYL();
     }
+
 
 }

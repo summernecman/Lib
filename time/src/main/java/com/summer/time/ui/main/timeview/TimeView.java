@@ -55,10 +55,12 @@ public class TimeView extends SurfaceView implements SurfaceHolder.Callback, Run
         drawIS.add(new HoursBackRender(getContext()));
         drawIS.add(new HoursAreaRender(getContext()));
         drawIS.add(new OneHoursAreaRender(getContext()));
-        drawIS.add(new ThingAreaRender(getContext()));
+        drawIS.add(new ThingHoursAreaRender(getContext()));
         drawIS.add(new MinBackRender(getContext()));
         drawIS.add(new MinAreaRender(getContext()));
         drawIS.add(new InnerBackRender(getContext()));
+        drawIS.add(new ThingMinAreaRender(getContext()));
+
         //drawIS.add(new CenterRender(getContext()));
         drawIS.add(new HourRender(getContext()));
         drawIS.add(new MinRender(getContext()));
@@ -105,7 +107,6 @@ public class TimeView extends SurfaceView implements SurfaceHolder.Callback, Run
     }
 
     private void myDraw(Canvas canvas) {
-        LogUtil.E("myDraw" + System.currentTimeMillis());
         //canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
         for (int i = 0; i < drawIS.size(); i++) {
@@ -117,9 +118,11 @@ public class TimeView extends SurfaceView implements SurfaceHolder.Callback, Run
         if (drawIS.size() < 4) {
             return;
         }
-        ThingAreaRender t = (ThingAreaRender) drawIS.get(4);
-        t.setStartAngel(sh, sm);
-        t.setEndAngel(eh, em);
+        ThingHoursAreaRender t = (ThingHoursAreaRender) drawIS.get(4);
+        t.setTime(sh, sm, eh, em);
+
+        ThingMinAreaRender m = (ThingMinAreaRender) drawIS.get(8);
+        m.setTime(sh, sm, eh, em);
         stop = true;
         canvas = holder.lockCanvas();
         if (canvas != null) {

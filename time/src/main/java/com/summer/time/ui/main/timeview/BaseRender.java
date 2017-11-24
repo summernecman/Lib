@@ -17,6 +17,8 @@ public abstract class BaseRender implements DrawI {
 
     protected float mw = ScreenUtil.mw;
 
+    protected float radious = 0;
+
 
     public BaseRender(Context context) {
         paint.setAntiAlias(true);
