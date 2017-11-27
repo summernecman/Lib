@@ -16,7 +16,7 @@ public class InnerBackRender extends HoursBackRender {
 
     public InnerBackRender(Context context) {
         super(context);
-        radious = 60;
+        radious = 50;
         paint.setColor(context.getResources().getColor(R.color.color_blue_300));
     }
 

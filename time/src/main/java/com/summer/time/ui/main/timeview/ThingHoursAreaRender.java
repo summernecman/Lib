@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 
 import com.android.lib.util.ScreenUtil;
+import com.summer.time.R;
 
 public class ThingHoursAreaRender extends OneHoursAreaRender {
 
@@ -17,6 +18,8 @@ public class ThingHoursAreaRender extends OneHoursAreaRender {
         super(context);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(getStrkeWidth());
+        color = context.getResources().getColor(R.color.color_brown_500);
+        paint.setColor(color);
     }
 
 
@@ -121,6 +124,9 @@ public class ThingHoursAreaRender extends OneHoursAreaRender {
         path.lineTo(areaxy[0], areaxy[1]);
         String area = getAreaIV(endxyin);
         String nextareaiv = area;
+        if ((getAreaIV(startxyout).equals(nextareaiv)) && getRule(new int[]{sth, eh})) {
+            nextareaiv = getNextAreaIV(nextareaiv);
+        }
         while (!getAreaIV(startxyout).equals(nextareaiv)) {
             float[] newxy = getAreaIVXY(nextareaiv);
             path.lineTo(newxy[0], newxy[1]);
@@ -133,6 +139,11 @@ public class ThingHoursAreaRender extends OneHoursAreaRender {
         path.lineTo(sw / 2, sh / 2);
         path.close();
         this.path = path;
+    }
+
+    private boolean getRule(int[] m) {
+        int max = 60 / 2;
+        return ((m[0] > m[1]) && (Math.abs(m[0] - m[1]) < max)) || ((m[0] < m[1]) && (Math.abs(m[0] - m[1]) > max));
     }
 
 }

@@ -12,4 +12,12 @@ public class NoteUIOpe extends BaseUIOpe<FragNoteBinding> {
     public NoteUIOpe(Context context) {
         super(context);
     }
+
+    public void switchEnable() {
+        if (bind.etTxt.isEnabled()) {
+            bind.etTxt.setEnabled(false);
+        } else {
+            bind.etTxt.setEnabled(true);
+        }
+    }
 }

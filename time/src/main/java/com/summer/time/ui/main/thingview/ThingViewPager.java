@@ -6,16 +6,16 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 
-import com.android.lib.base.activity.BaseActivity;
 import com.android.lib.base.adapter.AppBasePagerAdapter;
 import com.android.lib.base.fragment.BaseUIFrag;
 import com.android.lib.view.other.AppViewPager;
+import com.summer.time.ui.main.MainAct;
 
 import java.util.ArrayList;
 
 public class ThingViewPager extends AppViewPager {
 
-    BaseActivity baseActivity;
+    MainAct act;
 
     public ThingViewPager(Context context) {
         super(context);
@@ -27,8 +27,8 @@ public class ThingViewPager extends AppViewPager {
     }
 
     public void init(final ArrayList<BaseUIFrag> fragments) {
-        baseActivity = (BaseActivity) getContext();
-        setAdapter(new AppBasePagerAdapter(baseActivity.getSupportFragmentManager(), getContext()) {
+        act = (MainAct) getContext();
+        setAdapter(new AppBasePagerAdapter(act.getSupportFragmentManager(), getContext()) {
             @Override
             public Fragment getItem(int position) {
                 return fragments.get(position);

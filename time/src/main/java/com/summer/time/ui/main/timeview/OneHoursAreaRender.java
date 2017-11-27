@@ -11,7 +11,7 @@ public class OneHoursAreaRender extends HoursAreaRender {
 
     public OneHoursAreaRender(Context context) {
         super(context);
-        color = context.getResources().getColor(R.color.color_brown_500);
+        color = context.getResources().getColor(R.color.color_brown_300);
         paint.setColor(color);
         radious = 25;
     }

@@ -10,6 +10,7 @@ import com.android.lib.base.ope.BaseUIOpe;
 import com.android.lib.util.RandomUtil;
 import com.summer.time.R;
 import com.summer.time.databinding.FragThingBinding;
+import com.summer.time.ui.main.timeview.TimeBean;
 
 public class ThingUIOpe extends BaseUIOpe<FragThingBinding> {
 
@@ -22,6 +23,12 @@ public class ThingUIOpe extends BaseUIOpe<FragThingBinding> {
 
     public void initThing() {
         bind.thing.initData();
+    }
+
+    public void setOnScroll(final OnFinishListener onFinishListener) {
+        if (onFinishListener == null) {
+            return;
+        }
         bind.thing.setOnScroll(new OnFinishListener() {
             @Override
             public void onFinish(Object o) {
@@ -40,7 +47,8 @@ public class ThingUIOpe extends BaseUIOpe<FragThingBinding> {
                     eh -= 24;
                 }
                 int em = RandomUtil.getInstance().nextInt(59);
-                //bind.time.UpdateThingArea(sh, sm, eh, em);
+                TimeBean[] pos = new TimeBean[]{new TimeBean(sh, sm), new TimeBean(eh, em)};
+                onFinishListener.onFinish(pos);
             }
         });
     }

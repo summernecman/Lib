@@ -59,6 +59,7 @@ public class ThingMinAreaRender extends ThingHoursAreaRender {
                 for (int i = 0; i < floats.size() - 2; i++) {
                     //paths.add(new MyPath(false));
                 }
+                paths.add(new MyPath(false));
                 paths.add(getClipPath(floats.get(floats.size() - 1)));
                 break;
         }
@@ -91,6 +92,10 @@ public class ThingMinAreaRender extends ThingHoursAreaRender {
         path.lineTo(areaxy[0], areaxy[1]);
         String area = getAreaIV(endxyin);
         String nextareaiv = area;
+        if ((getAreaIV(startxyout).equals(nextareaiv)) && getRule(m)) {
+            nextareaiv = getNextAreaIV(nextareaiv);
+        }
+
         while (!getAreaIV(startxyout).equals(nextareaiv)) {
             float[] newxy = getAreaIVXY(nextareaiv);
             path.lineTo(newxy[0], newxy[1]);
@@ -103,6 +108,11 @@ public class ThingMinAreaRender extends ThingHoursAreaRender {
         path.lineTo(sw / 2, sh / 2);
         path.close();
         return path;
+    }
+
+    private boolean getRule(int[] m) {
+        int max = 60 / 2;
+        return ((m[0] > m[1]) && (Math.abs(m[0] - m[1]) < max)) || ((m[0] < m[1]) && (Math.abs(m[0] - m[1]) > max));
     }
 
 

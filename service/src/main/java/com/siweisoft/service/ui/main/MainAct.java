@@ -102,7 +102,11 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         if (FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN) != null
                 && FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN).size() >= 1
                 && FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN).get(FragmentUtil2.getInstance().getFragMap().get(Value.FULLSCREEN).size() - 1).getClass().getName().equals(VideoChatFrag.class.getName())) {
-            FragmentUtil2.getInstance().removeTopRightNow(activity, Value.FULLSCREEN);
+            try {
+                EMClient.getInstance().callManager().endCall();
+            } catch (EMNoActiveCallException e) {
+                e.printStackTrace();
+            }
 
             return;
         }

@@ -6,8 +6,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
-import com.android.lib.util.LogUtil;
-
 public class SecRender extends BaseRender {
 
     protected int sec = 0;
@@ -26,7 +24,7 @@ public class SecRender extends BaseRender {
 
     @Override
     public void onTimeDraw(Canvas canvas) {
-        LogUtil.E("myDraw" + System.currentTimeMillis());
+        //LogUtil.E("myDraw" + System.currentTimeMillis());
         canvas.save();
         //canvas.drawLine(sw/2,sh/2,getSx(),getSy(),paint);
         canvas.drawCircle(getSx(), getSy(), mw * 5, paint);

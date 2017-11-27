@@ -12,12 +12,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.summer.time.ui.main.thingview.ThingView
-            android:id="@+id/note"
+        <EditText
+            android:background="@color/transparent"
+            android:id="@+id/et_txt"
+            android:textColor="@color/black"
+            android:enabled="false"
+            android:text="fdsgiewpngieow房管局的萨克能够望魔法公鸡吗fdsgiewpngieow房管局的萨克能够望魔法公鸡吗fdsgiewpngieow房管局的萨克能够望魔法公鸡吗fdsgiewpngieow房管局的萨克能够望魔法公鸡吗fdsgiew克能够望魔法公鸡吗"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-
+        <ImageView
+            android:id="@+id/iv_edit"
+            android:src="@drawable/drawable_download"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
     </RelativeLayout>
 
 </layout>

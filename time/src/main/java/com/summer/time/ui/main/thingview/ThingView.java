@@ -13,6 +13,7 @@ import com.android.lib.base.adapter.AppsDataBindingAdapter;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.bean.AppViewHolder;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.RandomUtil;
 import com.android.lib.util.ScreenUtil;
 import com.summer.time.BR;
 import com.summer.time.R;
@@ -49,8 +50,10 @@ public class ThingView extends RecyclerView {
 
     public void initData() {
         ArrayList<String> strings = new ArrayList<>();
-        for (int i = 0; i < 300; i++) {
+        final ArrayList<Integer> integers = new ArrayList<>();
+        for (int i = 0; i < 25; i++) {
             strings.add("gjr43[qngh9tu4nv发的发生发的服务vgvdwgqi[rrrvjdkjfdkf1");
+            integers.add(50 + RandomUtil.getInstance().nextInt(100));
         }
         h = ScreenUtil.h - 104 * ScreenUtil.mw;
         hh = h * h;
@@ -60,9 +63,12 @@ public class ThingView extends RecyclerView {
             public void onBindViewHolder(AppViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.itemView.setTag(R.id.data, position);
+                holder.itemView.getLayoutParams().height = (int) (integers.get(position) * ScreenUtil.mw);
+                holder.itemView.requestLayout();
                 //holder.itemView.setScaleX((float) getScale(holder.itemView));
             }
         });
+//        new PagerSnapHelper().attachToRecyclerView(this);
         addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -77,7 +83,7 @@ public class ThingView extends RecyclerView {
 
                     if (isIn(recyclerView.getLayoutManager().getChildAt(i))) {
                         recyclerView.getLayoutManager().getChildAt(i).setSelected(true);
-                        LogUtil.E(pos + "::::" + recyclerView.getLayoutManager().getChildAt(i).getTag(R.id.data));
+                        //LogUtil.E(pos + "::::" + recyclerView.getLayoutManager().getChildAt(i).getTag(R.id.data));
                         if (onScroll != null && pos != ((int) recyclerView.getLayoutManager().getChildAt(i).getTag(R.id.data))) {
                             pos = ((int) recyclerView.getLayoutManager().getChildAt(i).getTag(R.id.data));
                             onScroll.onFinish(recyclerView.getLayoutManager().getChildAt(i));
