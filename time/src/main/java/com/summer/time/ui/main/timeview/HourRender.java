@@ -32,13 +32,13 @@ public class HourRender extends BaseRender {
 
     protected void init0() {
         all = 24;
-        textsize = mw * 8;
+        textsize = mw * 12;
     }
 
     protected void init() {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(textsize);
-        paint.setColor(Color.WHITE);
+        paint.setColor(Color.BLACK);
         for (int i = 0; i < all; i++) {
             double[] d = new double[]{(getOutALength() * Math.cos(Math.toRadians(getDegree(i))) + sw / 2), (getOutBLength() * Math.sin(Math.toRadians(getDegree(i))) + sh / 2),
                     (getInnerALength() * Math.cos(Math.toRadians(getDegree(i))) + sw / 2), (getInnerBLength() * Math.sin(Math.toRadians(getDegree(i))) + sh / 2)};
@@ -105,7 +105,7 @@ public class HourRender extends BaseRender {
             paint.setColor(Color.RED);
             paint.setTextSize(textsize * 2);
         } else {
-            paint.setColor(Color.WHITE);
+            paint.setColor(Color.BLACK);
             paint.setTextSize(textsize);
         }
     }

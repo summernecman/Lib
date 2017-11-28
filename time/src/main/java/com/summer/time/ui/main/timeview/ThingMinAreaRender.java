@@ -4,12 +4,12 @@ package com.summer.time.ui.main.timeview;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
 import com.android.lib.util.ScreenUtil;
 import com.android.lib.util.data.DateFormatUtil;
+import com.summer.time.R;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class ThingMinAreaRender extends ThingHoursAreaRender {
         super(context);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(getStrkeWidth());
-        colors = new int[]{Color.RED, Color.BLUE, Color.GREEN};
+        colors = new int[]{context.getResources().getColor(R.color.color_light_green_500), context.getResources().getColor(R.color.color_grey_900), context.getResources().getColor(R.color.color_light_green_500)};
         radious = 25;
     }
 
@@ -37,7 +37,11 @@ public class ThingMinAreaRender extends ThingHoursAreaRender {
     }
 
     public RectF getRectF(int level) {
-        return new RectF(level * getStrkeWidth() + radious * mw + getStrkeWidth() / 2, radious * mw + getStrkeWidth() / 2 + level * getStrkeWidth(), ScreenUtil.w - getStrkeWidth() / 2 - radious * mw - level * getStrkeWidth(), ScreenUtil.h - getStrkeWidth() / 2 - radious * mw - level * getStrkeWidth());
+        return new RectF(level * getCricleDis() + radious * mw + getStrkeWidth() / 2, radious * mw + getStrkeWidth() / 2 + level * getCricleDis(), ScreenUtil.w - getStrkeWidth() / 2 - radious * mw - level * getCricleDis(), ScreenUtil.h - getStrkeWidth() / 2 - radious * mw - level * getCricleDis());
+    }
+
+    public float getCricleDis() {
+        return 25 * ScreenUtil.mw;
     }
 
 
@@ -59,7 +63,7 @@ public class ThingMinAreaRender extends ThingHoursAreaRender {
                 for (int i = 0; i < floats.size() - 2; i++) {
                     //paths.add(new MyPath(false));
                 }
-                paths.add(new MyPath(false));
+                //paths.add(new MyPath(false));
                 paths.add(getClipPath(floats.get(floats.size() - 1)));
                 break;
         }
@@ -73,7 +77,12 @@ public class ThingMinAreaRender extends ThingHoursAreaRender {
             if (paths.get(i).isUsed()) {
                 canvas.clipPath(paths.get(i));
             }
-            paint.setColor(colors[i % colors.length]);
+            if (i == 0 || i == paths.size() - 1) {
+                paint.setColor(colors[0]);
+            } else {
+                paint.setColor(colors[1]);
+            }
+            //paint.setColor(colors[i % colors.length]);
             canvas.drawOval(getRectF(i), paint);
             canvas.restore();
         }

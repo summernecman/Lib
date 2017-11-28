@@ -38,6 +38,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <ImageView
+            android:id="@+id/iv_menu"
+            android:src="@drawable/drawable_download"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+        <ImageView
+            android:id="@+id/iv_cancel"
+            android:src="@drawable/drawable_download"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
 
     </RelativeLayout>
 

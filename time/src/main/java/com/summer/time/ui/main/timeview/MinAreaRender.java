@@ -13,7 +13,7 @@ public class MinAreaRender extends MinBackRender {
 
     public MinAreaRender(Context context) {
         super(context);
-        color = context.getResources().getColor(R.color.color_teal_300);
+        color = context.getResources().getColor(R.color.color_teal_700);
         paint.setColor(color);
     }
 

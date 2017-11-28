@@ -13,7 +13,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
+import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.util.LogUtil;
+import com.summer.time.ui.main.thingview.ThingBean;
 
 import java.util.ArrayList;
 
@@ -31,6 +33,8 @@ public class TimeView extends SurfaceView implements SurfaceHolder.Callback, Run
     private SurfaceHolder holder;
 
     ArrayList<DrawI> drawIS = new ArrayList<>();
+
+    OnFinishListener updateListener;
 
 
     public TimeView(Context context) {
@@ -59,11 +63,12 @@ public class TimeView extends SurfaceView implements SurfaceHolder.Callback, Run
         drawIS.add(new MinBackRender(getContext()));
         drawIS.add(new MinAreaRender(getContext()));
         drawIS.add(new InnerBackRender(getContext()));
-        drawIS.add(new ThingMinAreaRender(getContext()));
+        //drawIS.add(new ThingMinAreaRender(getContext()));
 
         //drawIS.add(new CenterRender(getContext()));
         drawIS.add(new HourRender(getContext()));
         drawIS.add(new MinRender(getContext()));
+        //drawIS.add(new SecSelectRender(getContext()));
         new Thread(this).start();
     }
 
@@ -95,6 +100,7 @@ public class TimeView extends SurfaceView implements SurfaceHolder.Callback, Run
                 canvas = holder.lockCanvas();
                 if (canvas != null) {
                     myDraw(canvas);
+                    updateListener.onFinish(null);
                 }
                 holder.unlockCanvasAndPost(canvas);
             }
@@ -114,15 +120,15 @@ public class TimeView extends SurfaceView implements SurfaceHolder.Callback, Run
         }
     }
 
-    public void UpdateThingArea(int sh, int sm, int eh, int em) {
+    public void UpdateThingArea(ThingBean thingBean) {
         if (drawIS.size() < 4) {
             return;
         }
         ThingHoursAreaRender t = (ThingHoursAreaRender) drawIS.get(4);
-        t.setTime(sh, sm, eh, em);
+        t.setTime(thingBean.getTimeArea().getStart().hour, thingBean.getTimeArea().getStart().minute, thingBean.getTimeArea().getEnd().hour, thingBean.getTimeArea().getEnd().minute);
 
-        ThingMinAreaRender m = (ThingMinAreaRender) drawIS.get(8);
-        m.setTime(sh, sm, eh, em);
+//        ThingMinAreaRender m = (ThingMinAreaRender) drawIS.get(8);
+//        m.setTime(thingBean.getTimeArea().getStart().hour,thingBean.getTimeArea().getStart().minute,thingBean.getTimeArea().getEnd().hour,thingBean.getTimeArea().getEnd().minute);
         stop = true;
         canvas = holder.lockCanvas();
         if (canvas != null) {
@@ -132,4 +138,37 @@ public class TimeView extends SurfaceView implements SurfaceHolder.Callback, Run
         stop = false;
     }
 
+
+    public void UpdateHourSelect() {
+        if (drawIS.size() < 4) {
+            return;
+        }
+        stop = true;
+        canvas = holder.lockCanvas();
+        if (canvas != null) {
+            myDraw(canvas);
+        }
+        holder.unlockCanvasAndPost(canvas);
+        stop = false;
+    }
+
+    public void setUpdateListener(OnFinishListener updateListener) {
+        this.updateListener = updateListener;
+    }
+
+    //    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        boolean b =((SecSelectRender)(drawIS.get(11))).ontouch(event);
+//        switch (event.getAction()){
+//            case MotionEvent.ACTION_DOWN:
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                UpdateHourSelect();
+//                break;
+//            case MotionEvent.ACTION_UP:
+//            case MotionEvent.ACTION_CANCEL:
+//                break;
+//        }
+//        return b;
+//    }
 }

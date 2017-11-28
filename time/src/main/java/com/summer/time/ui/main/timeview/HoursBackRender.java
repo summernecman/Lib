@@ -22,7 +22,7 @@ public class HoursBackRender extends BaseRender implements OvalI {
 
     public HoursBackRender(Context context) {
         super(context);
-        color = context.getResources().getColor(R.color.color_light_green_200);
+        color = context.getResources().getColor(R.color.color_light_green_50);
         paint.setColor(color);
         radious = (sw > sh / 2 ? sh / 4 : sw / 2);
     }

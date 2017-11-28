@@ -13,7 +13,7 @@ public class HoursAreaRender extends HoursBackRender {
 
     public HoursAreaRender(Context context) {
         super(context);
-        color = context.getResources().getColor(R.color.color_brown_300);
+        color = context.getResources().getColor(R.color.color_brown_700);
         paint.setColor(color);
         radious = 25;
     }

@@ -13,8 +13,8 @@ public class MinBackRender extends HoursBackRender {
 
     public MinBackRender(Context context) {
         super(context);
-        radious = 25;
-        paint.setColor(context.getResources().getColor(R.color.color_purple_100));
+        radious = 30;
+        paint.setColor(context.getResources().getColor(R.color.color_grey_50));
     }
 
 

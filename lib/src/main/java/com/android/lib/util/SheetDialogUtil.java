@@ -54,6 +54,7 @@ public class SheetDialogUtil {
             if (group.getChildAt(0) instanceof TextView) {
                 TextView textView = (TextView) group.getChildAt(0);
 //                LogUtil.E(textView.getText());
+                textView.setTag(R.id.position, i);
                 textView.setOnClickListener(onClickListener);
             }
         }

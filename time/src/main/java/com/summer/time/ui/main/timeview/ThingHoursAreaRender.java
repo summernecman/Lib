@@ -3,6 +3,8 @@ package com.summer.time.ui.main.timeview;
 //by summer on 2017-11-23.
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
@@ -18,8 +20,9 @@ public class ThingHoursAreaRender extends OneHoursAreaRender {
         super(context);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(getStrkeWidth());
-        color = context.getResources().getColor(R.color.color_brown_500);
+        color = context.getResources().getColor(R.color.color_light_green_500);
         paint.setColor(color);
+        paint.setTextSize(ScreenUtil.mw * 10);
     }
 
 
@@ -110,14 +113,14 @@ public class ThingHoursAreaRender extends OneHoursAreaRender {
         initPath();
     }
 
-
+    float[] startxyout = new float[]{0f, 0f}, startxyin = new float[]{0f, 0f}, endxyin = new float[]{0f, 0f}, endxyout = new float[]{0f, 0f};
     protected void initPath() {
         MyPath path = new MyPath();
         path.moveTo(sw / 2, sh / 2);
-        float[] startxyout = new float[]{(float) getX(getA(), -getStrkeWidth() / 2, sth, sm), (float) getY(getB(), -getStrkeWidth() / 2, sth, sm)};
-        float[] startxyin = new float[]{(float) getX(getA(), getStrkeWidth() / 2, sth, sm), (float) getY(getB(), getStrkeWidth() / 2, sth, sm)};
-        float[] endxyin = new float[]{(float) getX(getA(), getStrkeWidth() / 2, eh, em), (float) getY(getB(), getStrkeWidth() / 2, eh, em)};
-        float[] endxyout = new float[]{(float) getX(getA(), -getStrkeWidth() / 2, eh, em), (float) getY(getB(), -getStrkeWidth() / 2, eh, em)};
+        startxyout = new float[]{(float) getX(getA(), -getStrkeWidth() / 2, sth, sm), (float) getY(getB(), -getStrkeWidth() / 2, sth, sm)};
+        startxyin = new float[]{(float) getX(getA(), getStrkeWidth() / 2, sth, sm), (float) getY(getB(), getStrkeWidth() / 2, sth, sm)};
+        endxyin = new float[]{(float) getX(getA(), getStrkeWidth() / 2, eh, em), (float) getY(getB(), getStrkeWidth() / 2, eh, em)};
+        endxyout = new float[]{(float) getX(getA(), -getStrkeWidth() / 2, eh, em), (float) getY(getB(), -getStrkeWidth() / 2, eh, em)};
         path.lineTo(endxyin[0], endxyin[1]);
         path.lineTo(endxyout[0], endxyout[1]);
         float[] areaxy = getAreaIVXY(getAreaIV(endxyin));
@@ -139,6 +142,41 @@ public class ThingHoursAreaRender extends OneHoursAreaRender {
         path.lineTo(sw / 2, sh / 2);
         path.close();
         this.path = path;
+    }
+
+    @Override
+    public void onTimeDraw(Canvas canvas) {
+        canvas.save();
+        paint.setStrokeWidth(getStrkeWidth());
+        paint.setColor(color);
+        paint.setStyle(Paint.Style.STROKE);
+        initPath();
+        canvas.clipPath(path);
+        canvas.drawOval(getRectF(), paint);
+        canvas.restore();
+        canvas.save();
+        paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(1);
+        paint.setColor(Color.RED);
+        double degree = getDegree(sth, sm);
+        float[] f = getCenterRotate(startxyin, startxyout);
+        canvas.rotate((float) degree, f[0], f[1]);
+        canvas.translate(0, paint.getTextSize() / 2);
+        canvas.drawText(sm + "", f[0], f[1], paint);
+        canvas.restore();
+
+        canvas.save();
+        double degree2 = getDegree(eh, em);
+        ;
+        float[] f2 = getCenterRotate(endxyin, endxyout);
+        canvas.rotate((float) degree2, f2[0], f2[1]);
+        canvas.translate(0, paint.getTextSize() / 2);
+        canvas.drawText(em + "", f2[0], f2[1], paint);
+        canvas.restore();
+    }
+
+    public float[] getCenterRotate(float[] s, float[] e) {
+        return new float[]{(s[0] + e[0]) / 2f, (s[1] + e[1]) / 2f};
     }
 
     private boolean getRule(int[] m) {

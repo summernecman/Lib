@@ -16,8 +16,8 @@ public class MinRender extends HourRender {
 
     protected void init0() {
         all = 60;
-        textsize = mw * 8;
-        radious = 25;
+        textsize = mw * 9;
+        radious = 30;
     }
 
     protected void init2() {
@@ -64,7 +64,7 @@ public class MinRender extends HourRender {
             paint.setColor(Color.RED);
             paint.setTextSize(textsize * 2);
         } else {
-            paint.setColor(Color.WHITE);
+            paint.setColor(Color.BLACK);
             paint.setTextSize(textsize);
         }
     }

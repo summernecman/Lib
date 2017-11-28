@@ -39,6 +39,7 @@ public class SecRender extends BaseRender {
         return (float) (getInnerBLength() * Math.sin(Math.toRadians(getDegree())) + sh / 2);
     }
 
+
     public float getInnerALength() {
         return sw / 2 - 50 * mw;
     }
