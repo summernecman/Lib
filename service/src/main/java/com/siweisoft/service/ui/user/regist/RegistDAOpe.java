@@ -26,6 +26,7 @@ public class RegistDAOpe extends BaseDAOpe {
     public RegistDAOpe(Context context) {
         super(context);
         userI = new UserNetOpe(context);
+        userBean.setUsertype(UserBean.USER_TYPE_CUSTOMER);
     }
 
     public UserBean getUserBean() {

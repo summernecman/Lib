@@ -26,7 +26,7 @@ public class DialogListFrag extends BaseServerFrag<DialogListUIOpe, DialogListDA
 
     @Override
     public void onClick(View v) {
-
+        super.onClick(v);
     }
 
     public void setOnFinishListener(OnFinishListener onFinishListener) {

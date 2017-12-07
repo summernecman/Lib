@@ -32,10 +32,10 @@ public class ServieApp extends LibAplication implements OnFinishListener {
     public void onCreate() {
         super.onCreate();
         UrlConstant.HTTP = "http://";
-        UrlConstant.NETSTART = "106.14.161.168:8079";
+        UrlConstant.NETSTART = "sx.siweisoft.cn:8079";
         //UrlConstant.NETSTART = "192.168.20.187:8079";
 
-        UrlConstant.URI = UrlConstant.HTTP + UrlConstant.NETSTART + "/server";
+        UrlConstant.URI = UrlConstant.HTTP + UrlConstant.NETSTART + "/sx";
         UrlConstant.fileUrl = UrlConstant.HTTP + UrlConstant.NETSTART + "/files";
 
 
