@@ -38,7 +38,7 @@ public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
         getP().getU().bind.setLogin(getP().getD().getUserBean());
         getP().getU().initImage(getP().getD().getImageUril());
         getP().getU().bind.etServer.setText(SPUtil.getInstance().init(activity).getStr(Value.DATA_INTENT2));
-        if (EMClient.getInstance().isLoggedInBefore()) {
+        if (EMClient.getInstance().isLoggedInBefore() && SPUtil.getInstance().getBoolean(Value.autologin)) {
             Value.initNetUrl(activity, SPUtil.getInstance().init(activity).getStr("url-1"));
             EMClient.getInstance().chatManager().loadAllConversations();
             EMClient.getInstance().groupManager().loadAllGroups();
@@ -49,6 +49,7 @@ public class LoginFrag extends BaseServerFrag<LoginUIOpe, LoginDAOpe> {
             activity.startActivity(intent);
             activity.finish();
         }
+
         getP().getU().initIp();
         Value.initNetUrl(activity, getP().getU().bind.etServer.getText().toString());
     }

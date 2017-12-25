@@ -21,6 +21,7 @@ import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
 import com.android.lib.util.LogUtil;
+import com.android.lib.util.SPUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.util.system.UUUIDUtil;
 import com.hyphenate.chat.EMClient;
@@ -75,6 +76,8 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
         EMClient.getInstance().callManager().addCallStateChangeListener(getP().getD().getVideoChatListener());
         EMClient.getInstance().chatManager().addMessageListener(getP().getD().getEmMsgListener());
         EMClient.getInstance().addConnectionListener(getP().getD().getChatConnectListener());
+
+        SPUtil.getInstance().saveBoolean(Value.autologin, true);
     }
 
 

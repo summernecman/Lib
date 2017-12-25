@@ -43,13 +43,15 @@ public class Value extends ValueConstant {
 
     public static HashMap<String, VideoTipBean> videotips;
 
-
     public static void saveVideoTips(String videotips) {
         SPUtil.getInstance().saveStr(VIDEO_TIPS, videotips);
 
         Value.videotips = GsonUtil.getInstance().fromJson(videotips, new TypeToken<HashMap<String, VideoTipBean>>() {
         }.getType());
     }
+
+
+    public static final String autologin = "autologin";
 
     public static HashMap<String, VideoTipBean> getVideotips() {
         if (Value.videotips == null) {

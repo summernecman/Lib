@@ -8,7 +8,7 @@
         android:name=".ServieApp"
         android:allowBackup="true"
         android:icon="@drawable/icon_icon"
-        android:label="思伟通讯"
+        android:label="心服务"
         android:roundIcon="@drawable/icon_icon"
         android:theme="@style/AppTheme"
         tools:replace="android:label,android:theme">

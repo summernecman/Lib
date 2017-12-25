@@ -83,6 +83,7 @@ public class ServieApp extends LibAplication implements OnFinishListener {
 
     @Override
     public void onFinish(Object o) {
+        SPUtil.getInstance().saveBoolean(Value.autologin, false);
         if (crashI == null) {
             crashI = new CrashOpe(this);
         }

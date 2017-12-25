@@ -669,4 +669,66 @@ public class NetWork {
 
         }
     }
+
+
+    public void postData(final Context context, final String model, final BaseBean reqBean, final OnNetWorkReqInterf reqInterf) {
+        LogUtil.E("input-->" + UrlConstant.URI + model);
+        final String jsonstr = gson.toJson(reqBean);
+        LogUtil.E("input-->" + jsonstr);
+        if (!reqInterf.onNetWorkReqStart(UrlConstant.URI + model, jsonstr)) {
+            BaseResBean res = new BaseResBean();
+            res.setErrorCode(ValueConstant.ERROR_CODE_NET_NO_CONNETCT);
+            res.setErrorMessage(ValueConstant.ERROR_STR_NET_NO_CONNETCT);
+            // res.setData(jsonstr);
+            reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, res);
+            return;
+        }
+
+        RequestParams requestParams = new RequestParams(UrlConstant.URI + model);
+        requestParams.setUseCookie(true);
+        requestParams.setHeader("Cookie", SPUtil.getInstance().getStr(ValueConstant.cookieFromResponse));
+        Map<String, String> map = gson.fromJson(jsonstr, new TypeToken<Map<String, String>>() {
+        }.getType());
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            requestParams.addBodyParameter(entry.getKey(), entry.getValue());
+        }
+
+        x.http().post(requestParams, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String response) {
+                LogUtil.E("output-->" + response);
+                if (response == null) {
+                    BaseResBean res = new BaseResBean();
+                    res.setErrorCode(ValueConstant.ERROR_CODE_RES_NULL);
+                    res.setErrorMessage(ValueConstant.ERROR_STR_RES_NULL);
+                    reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, res);
+                } else {
+                    BaseResBean baseResBean = new BaseResBean();
+                    baseResBean.setException(false);
+                    baseResBean.setData(response.toString());
+                    reqInterf.onNetWorkReqFinish(true, UrlConstant.URI + model, baseResBean);
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                BaseResBean baseResBean = new BaseResBean();
+                baseResBean.setErrorCode(ValueConstant.ERROR_CODE_VOLLEY_FAIL);
+                baseResBean.setErrorMessage(ex.getMessage() == null ? "" : ex.getMessage());
+                baseResBean.setException(true);
+                reqInterf.onNetWorkReqFinish(false, UrlConstant.URI + model, baseResBean);
+                LogUtil.E(ex == null ? "Throwable" : "Throwable-->" + ex.getMessage());
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+                LogUtil.E("onCancelled-->" + cex);
+            }
+
+            @Override
+            public void onFinished() {
+                LogUtil.E("onFinished-->");
+            }
+        });
+    }
 }
