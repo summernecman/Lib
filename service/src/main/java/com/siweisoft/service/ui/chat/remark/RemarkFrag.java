@@ -57,7 +57,7 @@ public class RemarkFrag extends BaseServerFrag<RemarkUIOpe, RemarkDAOpe> {
             //FragmentUtil2.getInstance().removeTopRightNow(activity, Value.getNowRoot());
             return;
         }
-
+        getP().getD().setVideoTipBean(Value.getVideotipsList().get(0));
         getP().getD().renameFile(getP().getD().getVideoBean());
 
         getP().getD().insetVideo(getP().getD().getVideoBean(), new OnFinishListener() {
