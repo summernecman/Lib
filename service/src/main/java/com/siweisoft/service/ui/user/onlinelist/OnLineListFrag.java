@@ -44,7 +44,11 @@ public class OnLineListFrag extends BaseServerFrag<OnLineListUIOpe, OnLineListDA
 
         setTitleBean(new TitleBean("", "联系人", "", ""));
         getP().getU().initList(new ArrayList<UserBean>(), null);
+        addChatRoom();
 
+    }
+
+    public void addChatRoom() {
         EMClient.getInstance().chatroomManager().asyncFetchPublicChatRoomsFromServer(1, null, new EMValueCallBack<EMCursorResult<EMChatRoom>>() {
             @Override
             public void onSuccess(EMCursorResult<EMChatRoom> value) {

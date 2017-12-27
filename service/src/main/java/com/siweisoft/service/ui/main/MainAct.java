@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -20,10 +21,12 @@ import com.android.lib.base.activity.BaseUIActivity;
 import com.android.lib.base.interf.OnFinishListener;
 import com.android.lib.constant.ValueConstant;
 import com.android.lib.util.FragmentUtil2;
+import com.android.lib.util.LoadUtil;
 import com.android.lib.util.LogUtil;
 import com.android.lib.util.SPUtil;
 import com.android.lib.util.data.DateFormatUtil;
 import com.android.lib.util.system.UUUIDUtil;
+import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.EMNoActiveCallException;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
@@ -36,6 +39,9 @@ import com.siweisoft.service.netdb.user.UserBean;
 import com.siweisoft.service.ui.Constant.Value;
 import com.siweisoft.service.ui.chat.recept.ReceiptFrag;
 import com.siweisoft.service.ui.chat.videochat.VideoChatFrag;
+import com.siweisoft.service.ui.user.onlinelist.OnLineListFrag;
+
+import java.util.ArrayList;
 
 import butterknife.OnClick;
 import butterknife.Optional;
@@ -287,5 +293,50 @@ public class MainAct extends BaseUIActivity<MainUIOpe, MainDAOpe> implements OnF
     public void finish() {
         super.finish();
         LogUtil.E("finish");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (!EMClient.getInstance().isConnected()) {
+            reconnect();
+        }
+    }
+
+    public void reconnect() {
+        final String tag = "em";
+        LoadUtil.getInstance().onStartLoading(this, tag);
+        EMClient.getInstance().login(Value.getUserInfo().getPhone(), "111111", new EMCallBack() {//回调
+            @Override
+            public void onSuccess() {
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+
+
+                ArrayList<Fragment> fragments = FragmentUtil2.getInstance().getFragMap().get(Value.ROOTID_TWO);
+                if (fragments.size() == 0) {
+                    return;
+                }
+                for (int i = 0; i < fragments.size(); i++) {
+                    if (fragments.get(i) instanceof OnLineListFrag) {
+                        OnLineListFrag onLineListFrag = (OnLineListFrag) fragments.get(i);
+                        onLineListFrag.addChatRoom();
+
+                    }
+                }
+                LoadUtil.getInstance().onStopLoading(tag);
+            }
+
+            @Override
+            public void onError(int code, String error) {
+                LoadUtil.getInstance().onStopLoading(tag);
+                finish();
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+        });
     }
 }
